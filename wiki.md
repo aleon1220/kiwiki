@@ -40,6 +40,21 @@ Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
 
 # OSes
 ## Linux Ubuntu
+### Nautilus operations
+#### Show hidden files Keyboard shortcut
+CTRL + H
+#### Show Path Location Keyboard shortcut
+CTRL + L
+#### Switch between the Icons and List formats
+CTRL + 1 | CTRL + 2
+#### Search for files
+CTRL + F
+#### Delete File(s)
+CTRL + delete
+#### permanently delete
+Shift + Delete
+(You should never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in. Many personal system and program configurations are stored under your home directory.)
+
 
 ## Windows 10 (unfortunately)
 
