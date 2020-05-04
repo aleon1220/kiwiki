@@ -27,6 +27,7 @@ Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
 
 ### Open SSH
 (https://www.openssh.com/)
+(https://www.ssh.com/ssh/ssh-academy)|SSH Academy
 #### Great docs at (https://www.digitalocean.com/community/tutorials/how-to-configure-custom-connection-options-for-your-ssh-client#general-tweaks-and-connection-items)
 * Use a config ssh custom file to ease connectivity
 * Make sure you are clear PuTTY will create keys with a `priv.ppk` format in windows vs Linux Open SSH key `id_rsa`
