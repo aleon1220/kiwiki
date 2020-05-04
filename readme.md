@@ -25,6 +25,11 @@ Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
 (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
 
 
+### Open SSH
+(https://www.openssh.com/)
+#### Great docs at (https://www.digitalocean.com/community/tutorials/how-to-configure-custom-connection-options-for-your-ssh-client#general-tweaks-and-connection-items)
+* Use a config ssh custom file to ease connectivity
+* Make sure you are clear PuTTY will create keys with a `priv.ppk` format in windows vs Linux Open SSH key `id_rsa`
 
 
 # Programming Languages
