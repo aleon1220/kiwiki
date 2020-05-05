@@ -21,11 +21,13 @@ Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
 
 ### Networking
 
-#### Get your Public IP Address
+##### Get your Public IP Address
 (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
 
+#### VPN
+(OpenVPN set up in ubuntu|https://tecadmin.net/install-openvpn-client-on-ubuntu/)
 
-### Open SSH
+#### Open SSH
 (https://www.openssh.com/)
 (https://www.ssh.com/ssh/ssh-academy)|SSH Academy
 #### Great docs at (https://www.digitalocean.com/community/tutorials/how-to-configure-custom-connection-options-for-your-ssh-client#general-tweaks-and-connection-items)
