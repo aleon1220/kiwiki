@@ -15,6 +15,9 @@ It will have categories and then subcategories with functionalites.
 ## Bash
 
 ### Networking
+## Linux
+### Get listening ports
+`ss -tulwn`
 
 ## PowerShell 
 Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
@@ -48,6 +51,10 @@ Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
 
 # OSes
 ## Linux Ubuntu
+### System settings
+#### Get dimendions of Display
+`xdpyinfo | grep dim`
+
 ### Nautilus operations
 #### Show hidden files Keyboard shortcut
 CTRL + H
