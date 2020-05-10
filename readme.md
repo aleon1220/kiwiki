@@ -97,8 +97,10 @@ tree ~
 rescuetime &
 clear
 exit
-GROUP_NAME=common
-sudo chown :$GROUP_NAME *
+##### Change permissions of a file based on permissions of other file
+RFILE=reference_file ; sudo chmod --reference=$RFILE
+##### Change ownership of all files inside current dir to a given group
+GROUP_NAME=common ; sudo chown :$GROUP_NAME *
 
 ### Networking
 
