@@ -19,15 +19,6 @@ which pip
 sudo apt update
 sudo apt list | grep python
 sudo apt list --installed
-minikube version
-minikube status
-minikube update-check
-minikube update
-minikube upgrade
-kubectl version
-minikube start
-minikube status
-minikube stop
 kubectl get pods
 kubectl get deployments.apps --show-*
 kubectl get deployments.apps --show-labels 
@@ -94,8 +85,37 @@ tree ~
 # Terminals
 ## Bash
 #### start a process in the background
-rescuetime &
+COMMAND="rescuetime"
+$COMMAND &
+
+#### Create a file with content in a give path
+FILE_PATH=/home/ubuntu/.bash_functions
+
+sudo bash -c "cat > $FILE_PATH"<<EOF
+Lots of content
+foo
+bar
+EOF
+
+#### Create a function to show files in current dir
+FILE_PATH=/home/ubuntu/.bash_functions
+sudo bash -c "cat > $FILE_PATH"<<EOF
+function cl() {
+    DIR="$*";
+        # if no DIR given, go home
+        if [ $# -lt 1 ]; then
+                DIR=$HOME;
+    fi;
+    builtin cd "${DIR}" && \
+    # use your preferred ls command
+        ls -F --color=auto
+}
+EOF
+
+#### Clear Bash terminal
 clear
+
+#### exit from terminal
 exit
 ##### Change permissions of a file based on permissions of other file
 RFILE=reference_file ; sudo chmod --reference=$RFILE
@@ -187,3 +207,14 @@ docker-compose --verbose ps
 docker-compose --verbose stats
 
 # Kubernetes
+
+## Minikube
+minikube version
+minikube status
+minikube update-check
+minikube update
+minikube upgrade
+kubectl version
+minikube start
+minikube status
+minikube stop
