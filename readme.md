@@ -7,14 +7,10 @@ I still hope i can recover my file.
 Dont rely on the cloud 100%. Have local copies of your digital material.
 
 # To be Categorized
-cd $DIR1; $(COMMAND)
-
 curl localhost:80
 sudo mv $DIR1 $DIRDestiny
-stat --help
 echo "cd $PWD"
 history 5
-history | grep $STRING
 which pip
 sudo apt update
 sudo apt list | grep python
@@ -70,12 +66,27 @@ It will have categories and then subcategories with functionalites.
 
 # Linux
 ##### Get info about current user
-id
+`id`
+##### Get stats info about the system
+`stat --help`
+##### See who is connected and Display the load average (uptime output)
+`w -u`
+##### Get the user login history
+`last $USERNAME`
+##### print the user name who are all currently logged in the current host
+`users`
+##### print the loggedin user name
+`id -un`
+##### get the list of the usernames who are currently logged in.
+`who`
+##### get a list of all usernames that are currently logged
+`who | cut -d' ' -f1 | sort | uniq`
 ##### Launch file explorer Nautilus as super user admin
 `sudo nautilus`
 ##### Scan full disk and analyze it
 `sudo ncdu /`
-
+#### Search for execution of a command in the history
+`COMMAND=who ; history | grep $COMMAND`
 #### set max map count
 `sudo sysctl -w vm.max_map_count=262144`
 
@@ -88,8 +99,11 @@ tree ~
 COMMAND="rescuetime"
 $COMMAND &
 
-#### Create a file with content in a give path
+#### Create a file with content in a given path
 FILE_PATH=/home/ubuntu/.bash_functions
+
+#### Create a dir and run a command in 1 line
+cd $DIR1; $(COMMAND)
 
 sudo bash -c "cat > $FILE_PATH"<<EOF
 Lots of content
