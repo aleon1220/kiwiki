@@ -7,19 +7,19 @@ I still hope i can recover my file.
 Dont rely on the cloud 100%. Have local copies of your digital material.
 
 # To be Categorized
-htop
-nc -vvv $host $port
-df -h
-uname -a
-ls -l /var/lib/apt/periodic/update-stamp
-cat ~/.ssh/id_rsa.pub
-sudo apt --fix-broken install
-sudo apt-get purge unattended-upgrades
-cat /etc/apt/apt.conf.d/10periodic
-sudo visudo
-randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | base64 | tr /= _)
-APP_VERSION="vtest-"$(date +%F_%H%M)
-scp -r $RANQX_LO_LOCAL_PATH/sftp-shim ubuntu@$SFTPSHIM_SERVER_DNS:$SFTP_DEPLOYMENT_PATH
+
+`nc -vvv $host $port`
+`df -h`
+`uname -a`
+`ls -l /var/lib/apt/periodic/update-stamp`
+`cat ~/.ssh/id_rsa.pub`
+`sudo apt --fix-broken install`
+`sudo apt-get purge unattended-upgrades`
+`cat /etc/apt/apt.conf.d/10periodic`
+`sudo visudo`
+`randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | base64 | tr /= _)`
+`APP_VERSION="vtest-"$(date +%F_%H%M)`
+`scp -r $RANQX_LO_LOCAL_PATH/sftp-shim ubuntu@$SFTPSHIM_SERVER_DNS:$SFTP_DEPLOYMENT_PATH`
 curl localhost:80
 stat %A $DIR
 sudo mv $DIR1 $DIRDestiny
@@ -29,15 +29,8 @@ which pip
 sudo apt update
 sudo apt list | grep python
 sudo apt list --installed
-kubectl get pods
-kubectl get deployments.apps --show-*
-kubectl get deployments.apps --show-labels 
 clear
-kubectl create -f wishlist-deployment.yaml
 exit
-kubectl get rs
-kubectl get deployments
-helm install --name "wishlist-chart" -f values.yaml .
 xclip
 echo $XDG_CURRENT_DESKTOP
 sudo dpkg -i $DEBIAN_PKG
@@ -46,7 +39,7 @@ alias ee='cd /home/ws/01-inbox/02-projects/2019-ee/test-env/eenz'
 ee
 rm -rf DIR_PATH
 
-get text between quotes in a text file. Options
+#### get text between quotes in a text file. Options
 echo references-get-between-quoutes.txt | grep '".*"'
 echo references-get-between-quoutes.txt | grep '".*"' $
 echo references-get-between-quoutes.txt | grep '".*"' $?
@@ -58,21 +51,19 @@ echo references-get-between-quoutes.txt | grep '".*"'
 grep "'.*'" -o references-get-between-quoutes.txt > result_1855.txt
 PATTERN='".*"'
 grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt
-
-Recursively find inside pdfs
-find . -iname '*.pdf' -exec pdfgrep "An agent architecture for managing data " {} +
-
-pdfgrep -r "Title of PDF to find"
-PDF tool kit
-info pdftk
-pdftk 18.pdf dump_data_utf8 | grep InfoValue:
-
-sudo apt autoremove
-sudo apt upgrade
-ls -lth /var/log/ | sort --month-sort
-less /var/log/syslog
-touch new_empty_file.txt
-less /etc/X11/xorg.conf
+## PDF Operations
+### PDF tool kit
+##### Recursively find inside pdfs
+`find . -iname '*.pdf' -exec pdfgrep "An agent architecture for managing data " {} +`
+`pdfgrep -r "Title of PDF to find"`
+`info pdftk`
+`pdftk 18.pdf dump_data_utf8 | grep InfoValue:`
+`sudo apt autoremove`
+`sudo apt upgrade`
+`ls -lth /var/log/ | sort --month-sort`
+`less /var/log/syslog`
+`touch new_empty_file.txt`
+`less /etc/X11/xorg.conf`
 
 # Introduction
 2020-04-28 I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in github.
@@ -83,6 +74,8 @@ It will have categories and then subcategories with functionalites.
 `id`
 ##### Get stats info about the system
 `stat --help`
+##### interactive process viewer
+`htop`
 ##### See who is connected and Display the load average (uptime output)
 `w -u`
 ##### Get the user login history
@@ -181,8 +174,6 @@ git info
 
 # Programming Languages
 
-
-
 # DataBases
 ## MySQL
 
@@ -248,6 +239,14 @@ docker-compose --verbose ps
 docker-compose --verbose stats
 
 # Kubernetes
+## Kubectl commands frequently used
+`kubectl get pods`
+`kubectl get deployments.apps --show-*`
+`kubectl get deployments.apps --show-labels`
+`kubectl create -f wishlist-deployment.yaml`
+`kubectl get rs`
+`kubectl get deployments`
+`helm install --name "wishlist-chart" -f values.yaml .`
 
 ## Minikube
 `minikube version`
