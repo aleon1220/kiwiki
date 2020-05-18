@@ -222,6 +222,17 @@ docker version
 docker volume ls
 docker system df
 docker seach nagios
+#### Stop All Containers
+docker stop $(docker ps --quiet)
+#### Clean up Everything including volumes
+docker system prune --all --force --volumes
+#### List labels for a given docker container
+CONTAINER=ID or container name
+```docker inspect -f '{{ range $k, $v := .Config.Labels -}}
+{{ $k }}={{ $v }}
+{{ end -}}' $CONTAINER
+```
+
 
 # Docker-Compose
 docker-compose version
