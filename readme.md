@@ -7,7 +7,21 @@ I still hope i can recover my file.
 Dont rely on the cloud 100%. Have local copies of your digital material.
 
 # To be Categorized
+htop
+nc -vvv $host $port
+df -h
+uname -a
+ls -l /var/lib/apt/periodic/update-stamp
+cat ~/.ssh/id_rsa.pub
+sudo apt --fix-broken install
+sudo apt-get purge unattended-upgrades
+cat /etc/apt/apt.conf.d/10periodic
+sudo visudo
+randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | base64 | tr /= _)
+APP_VERSION="vtest-"$(date +%F_%H%M)
+scp -r $RANQX_LO_LOCAL_PATH/sftp-shim ubuntu@$SFTPSHIM_SERVER_DNS:$SFTP_DEPLOYMENT_PATH
 curl localhost:80
+stat %A $DIR
 sudo mv $DIR1 $DIRDestiny
 echo "cd $PWD"
 history 5
