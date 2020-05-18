@@ -218,21 +218,23 @@ Shift + Delete
 
 
 # Docker
-docker version
-docker volume ls
-docker system df
-docker seach nagios
+`docker version`
+`docker volume ls`
+`docker system df`
+#### Search for an app or project containing given strings
+`docker seach nagios`
 #### Stop All Containers
-docker stop $(docker ps --quiet)
+`docker stop $(docker ps --quiet)`
 #### Clean up Everything including volumes
-docker system prune --all --force --volumes
+`docker system prune --all --force --volumes`
 #### List labels for a given docker container
-CONTAINER=ID or container name
-```docker inspect -f '{{ range $k, $v := .Config.Labels -}}
-{{ $k }}={{ $v }}
-{{ end -}}' $CONTAINER
 ```
-
+CONTAINER=ID or container name
+docker inspect --format \
+    '{{ range $k, $v := .Config.Labels -}}
+    {{ $k }}={{ $v }}
+    {{ end -}}' $CONTAINER
+```
 
 # Docker-Compose
 docker-compose version
@@ -248,12 +250,12 @@ docker-compose --verbose stats
 # Kubernetes
 
 ## Minikube
-minikube version
-minikube status
-minikube update-check
-minikube update
-minikube upgrade
-kubectl version
-minikube start
-minikube status
-minikube stop
+`minikube version`
+`minikube status`
+`minikube update-check`
+`minikube update`
+`minikube upgrade`
+`kubectl version`
+`minikube start`
+`minikube status`
+`minikube stop`
