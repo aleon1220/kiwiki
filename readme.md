@@ -8,7 +8,7 @@ Dont rely on the cloud 100%. Have local copies of your digital material.
 
 # To be Categorized
 
-`nc -vvv $host $port`
+`nc -vvv $host $port` <br>
 `df -h`
 `uname -a`
 `ls -l /var/lib/apt/periodic/update-stamp`
@@ -20,37 +20,31 @@ Dont rely on the cloud 100%. Have local copies of your digital material.
 `randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | base64 | tr /= _)`
 `APP_VERSION="vtest-"$(date +%F_%H%M)`
 `scp -r $RANQX_LO_LOCAL_PATH/sftp-shim ubuntu@$SFTPSHIM_SERVER_DNS:$SFTP_DEPLOYMENT_PATH`
-curl localhost:80
-stat %A $DIR
-sudo mv $DIR1 $DIRDestiny
-echo "cd $PWD"
-history 5
-which pip
-sudo apt update
-sudo apt list | grep python
-sudo apt list --installed
-clear
-exit
-xclip
-echo $XDG_CURRENT_DESKTOP
-sudo dpkg -i $DEBIAN_PKG
-sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n
-alias ee='cd /home/ws/01-inbox/02-projects/2019-ee/test-env/eenz'
-ee
-rm -rf DIR_PATH
+`curl localhost:80`
+`stat %A $DIR`
+`sudo mv $DIR1 $DIRDestiny`
+`echo "cd $PWD"`
+`history 5`
+`which pip`
+`sudo apt update`
+`sudo apt list | grep python`
+`sudo apt list --installed`
+`clear`
+`exit`
+`xclip`
+`echo $XDG_CURRENT_DESKTOP`
+`sudo dpkg -i $DEBIAN_PKG`
+
+`sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n`
+##### Creat an alias
+`alias ee='cd /home/ws/01-inbox/02-projects/2019-ee/test-env/eenz'`
+`ee`
 
 #### get text between quotes in a text file. Options
-echo references-get-between-quoutes.txt | grep '".*"'
-echo references-get-between-quoutes.txt | grep '".*"' $
-echo references-get-between-quoutes.txt | grep '".*"' $?
-echo references-get-between-quoutes.txt | grep '".*"' ?
-echo references-get-between-quoutes.txt | grep '".*"' {}
-echo references-get-between-quoutes.txt | grep '".*"' {} +
-echo references-get-between-quoutes.txt | grep '".*"' .
-echo references-get-between-quoutes.txt | grep '".*"'
-grep "'.*'" -o references-get-between-quoutes.txt > result_1855.txt
-PATTERN='".*"'
-grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt
+`echo Source_File.txt | grep $REGEX_PATTERN`
+`grep "'.*'" -o references-get-between-quoutes.txt > result_1855.txt`
+`PATTERN='".*"'`
+`grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt`
 ## PDF Operations
 ### PDF tool kit
 ##### Recursively find inside pdfs
@@ -76,6 +70,8 @@ It will have categories and then subcategories with functionalites.
 `stat --help`
 ##### interactive process viewer
 `htop`
+##### Remove directory
+`rm -rf $DIR_PATH`
 ##### See who is connected and Display the load average (uptime output)
 `w -u`
 ##### Get the user login history
@@ -103,20 +99,23 @@ tree ~
 # Terminals
 ## Bash
 #### start a process in the background
-COMMAND="rescuetime"
-$COMMAND &
+`COMMAND="rescuetime"`
+`$COMMAND &`
 
 #### Create a file with content in a given path
-FILE_PATH=/home/ubuntu/.bash_functions
+`FILE_PATH=/home/ubuntu/.bash_functions`
 
 #### Create a dir and run a command in 1 line
-cd $DIR1; $(COMMAND)
+`cd $DIR1; $(COMMAND)`
 
+#### Create a file and add content to it
+```
 sudo bash -c "cat > $FILE_PATH"<<EOF
 Lots of content
 foo
 bar
 EOF
+```
 
 #### Create a function to show files in current dir
 FILE_PATH=/home/ubuntu/.bash_functions
@@ -167,15 +166,19 @@ Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
 * Make sure you are clear PuTTY will create keys with a `priv.ppk` format in windows vs Linux Open SSH key `id_rsa`
 
 # Git
-git clone git@github.com:elastic/stack-docker.git
-git status
-git branch
-git info
+`git clone git@github.com:elastic/stack-docker.git`
+`git status`
+`git branch`
+`git info`
 
 # Programming Languages
 
 # DataBases
 ## MySQL
+#### Connect to DB with mysql command utilities
+`HOST=localhost; USER=mysql`
+
+`mysql -h $HOST -u $USER -p`
 
 ## PostgreSQL
 
