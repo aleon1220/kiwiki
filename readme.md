@@ -8,16 +8,14 @@ Dont rely on the cloud 100%. Have local copies of your digital material.
 
 # To be Categorized
 
-`nc -vvv $host $port` <br>
-`df -h`
-`uname -a`
-`ls -l /var/lib/apt/periodic/update-stamp`
-`cat ~/.ssh/id_rsa.pub`
-`sudo apt --fix-broken install`
-`sudo apt-get purge unattended-upgrades`
-`cat /etc/apt/apt.conf.d/10periodic`
-`sudo visudo`
-`randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | base64 | tr /= _)`
+`df -h`<br>
+`uname -a` <br>
+`ls -l /var/lib/apt/periodic/update-stamp`<br>
+`cat ~/.ssh/id_rsa.pub`<br>
+`sudo apt --fix-broken install`<br>
+`sudo apt-get purge unattended-upgrades`<br>
+`cat /etc/apt/apt.conf.d/10periodic`<br>
+`sudo visudo`<br>
 `APP_VERSION="vtest-"$(date +%F_%H%M)`
 `scp -r $RANQX_LO_LOCAL_PATH/sftp-shim ubuntu@$SFTPSHIM_SERVER_DNS:$SFTP_DEPLOYMENT_PATH`
 `curl localhost:80`
@@ -33,8 +31,7 @@ Dont rely on the cloud 100%. Have local copies of your digital material.
 `exit`
 `xclip`
 `echo $XDG_CURRENT_DESKTOP`
-`sudo dpkg -i $DEBIAN_PKG`
-
+`sudo dpkg -i $DEBIAN_PKG`<br>
 `sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n`
 ##### Creat an alias
 `alias ee='cd /home/ws/01-inbox/02-projects/2019-ee/test-env/eenz'`
@@ -66,6 +63,8 @@ It will have categories and then subcategories with functionalites.
 # Linux
 ##### Get info about current user
 `id`
+##### Create a random password
+`randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | base64 | tr /= _)`<br>
 ##### Get stats info about the system
 `stat --help`
 ##### interactive process viewer
@@ -143,6 +142,8 @@ RFILE=reference_file ; sudo chmod --reference=$RFILE
 GROUP_NAME=common ; sudo chown :$GROUP_NAME *
 
 ### Networking
+#### Test connectivity to a port
+`nc -vvv $host $port` <br>
 
 ### Get listening ports
 `ss -tulwn`
