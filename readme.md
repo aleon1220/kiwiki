@@ -213,9 +213,9 @@ Shift + Delete
 
 
 # Docker
-`docker version`
-`docker volume ls`
-`docker system df`
+`docker version` <br>
+`docker volume ls` <br>
+`docker system df`<br>
 #### Search for an app or project containing given strings
 `docker seach nagios`
 #### Stop All Containers
@@ -230,35 +230,36 @@ docker inspect --format \
     {{ $k }}={{ $v }}
     {{ end -}}' $CONTAINER
 ```
-
+#### Get IP of a given container
+`docker inspect -f ‘{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}’ $CONTAINER_NAME_OR_ID` <br>
 # Docker-Compose
-docker-compose version
-docker-compose config
-docker-compose --verbose up -d
-docker-compose build 
-docker-compose images
-docker-compose -f setup.yml up --remove-orphans
-docker-compose --verbose top
-docker-compose --verbose ps
-docker-compose --verbose stats
+`docker-compose version` <br>
+`docker-compose config` <br>
+`docker-compose --verbose up -d` <br>
+`docker-compose build` <br>
+`docker-compose images` <br>
+`docker-compose -f setup.yml up --remove-orphans` <br>
+`docker-compose --verbose top` <br>
+`docker-compose --verbose ps` <br>
+`docker-compose --verbose stats` <br>
 
 # Kubernetes
 ## Kubectl commands frequently used
-`kubectl get pods`
-`kubectl get deployments.apps --show-*`
-`kubectl get deployments.apps --show-labels`
-`kubectl create -f wishlist-deployment.yaml`
-`kubectl get rs`
-`kubectl get deployments`
-`helm install --name "wishlist-chart" -f values.yaml .`
+`kubectl get pods` <br>
+`kubectl get deployments.apps --show-*` <br>
+`kubectl get deployments.apps --show-labels` <br>
+`kubectl create -f wishlist-deployment.yaml` <br>
+`kubectl get rs` <br>
+`kubectl get deployments` <br>
+`helm install --name "wishlist-chart" -f values.yaml .` <br>
 
 ## Minikube
-`minikube version`
-`minikube status`
-`minikube update-check`
-`minikube update`
-`minikube upgrade`
-`kubectl version`
-`minikube start`
-`minikube status`
-`minikube stop`
+`minikube version` <br>
+`minikube status` <br>
+`minikube update-check` <br>
+`minikube update` <br>
+`minikube upgrade` <br>
+`kubectl version` <br>
+`minikube start` <br>
+`minikube status` <br>
+`minikube stop` <br>
