@@ -7,41 +7,38 @@ I still hope i can recover my file.
 Dont rely on the cloud 100%. Have local copies of your digital material.
 
 # To be Categorized
-
 `df -h`<br>
 `uname -a` <br>
-`ls -l /var/lib/apt/periodic/update-stamp`<br>
 `cat ~/.ssh/id_rsa.pub`<br>
 `sudo apt --fix-broken install`<br>
 `sudo apt-get purge unattended-upgrades`<br>
 `cat /etc/apt/apt.conf.d/10periodic`<br>
 `sudo visudo`<br>
-`APP_VERSION="vtest-"$(date +%F_%H%M)`
-`scp -r $RANQX_LO_LOCAL_PATH/sftp-shim ubuntu@$SFTPSHIM_SERVER_DNS:$SFTP_DEPLOYMENT_PATH`
-`curl localhost:80`
-`stat %A $DIR`
-`sudo mv $DIR1 $DIRDestiny`
-`echo "cd $PWD"`
-`history 5`
-`which pip`
-`sudo apt update`
-`sudo apt list | grep python`
-`sudo apt list --installed`
-`clear`
-`exit`
-`xclip`
-`echo $XDG_CURRENT_DESKTOP`
+
+`scp -r $RANQX_LO_LOCAL_PATH/sftp-shim ubuntu@$SFTPSHIM_SERVER_DNS:$SFTP_DEPLOYMENT_PATH`<br>
+`curl localhost:80`<br>
+`stat %A $DIR`<br>
+`sudo mv $DIR1 $DIRDestiny`<br>
+`echo "cd $PWD"` <br>
+`which pip` <br>
+`sudo apt update` <br>
+`sudo apt list | grep python` <br>
+`sudo apt list --installed` <br>
+`clear` <br>
+`exit` <br>
+`xclip` <br>
+`echo $XDG_CURRENT_DESKTOP` <br>
 `sudo dpkg -i $DEBIAN_PKG`<br>
-`sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n`
-##### Creat an alias
-`alias ee='cd /home/ws/01-inbox/02-projects/2019-ee/test-env/eenz'`
+`sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n` <br>
+##### Creat an alias with a command to go to a specific directory
+`alias ee='cd /home/ws/01-inbox/02-projects/2019-ee/test-env/eenz' <br>
 `ee`
 
 #### get text between quotes in a text file. Options
-`echo Source_File.txt | grep $REGEX_PATTERN`
-`grep "'.*'" -o references-get-between-quoutes.txt > result_1855.txt`
-`PATTERN='".*"'`
-`grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt`
+`echo Source_File.txt | grep $REGEX_PATTERN`  <br>
+`grep "'.*'" -o references-get-between-quoutes.txt > result_1855.txt` <br>
+`PATTERN='".*"'` <br>
+`grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt` <br>
 ## PDF Operations
 ### PDF tool kit
 ##### Recursively find inside pdfs
@@ -63,6 +60,10 @@ It will have categories and then subcategories with functionalites.
 # Linux
 ##### Get info about current user
 `id`
+##### Check Timestamp for last updated packages in package manager apt
+`ls -l /var/lib/apt/periodic/update-stamp`<br>
+##### History of commands executed in the current session
+`history` <br>
 ##### Create a random password
 `randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | base64 | tr /= _)`<br>
 ##### Get stats info about the system
@@ -100,7 +101,8 @@ tree ~
 #### start a process in the background
 `COMMAND="rescuetime"`
 `$COMMAND &`
-
+#### Create a testing version with the date. No space in generated date
+`APP_VERSION="vtest-"$(date +%F_%H%M)`<br>
 #### Create a file with content in a given path
 `FILE_PATH=/home/ubuntu/.bash_functions`
 
@@ -232,6 +234,11 @@ docker inspect --format \
 ```
 #### Get IP of a given container
 `docker inspect -f ‘{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}’ $CONTAINER_NAME_OR_ID` <br>
+List commands used to create a given image
+```
+MY_IMG=
+docker history $MY_IMG | awk 'NR>1 {print $1}' | xargs docker inspect --format '{{ ((index .ContainerConfig.Cmd ) 0) }}'
+```
 # Docker-Compose
 `docker-compose version` <br>
 `docker-compose config` <br>
