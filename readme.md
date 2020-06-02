@@ -7,51 +7,15 @@ I still hope i can recover my file.
 Dont rely on the cloud 100%. Have local copies of your digital material.
 
 # To be Categorized
-`df -h`<br>
 `uname -a` <br>
-`cat ~/.ssh/id_rsa.pub`<br>
-`sudo apt --fix-broken install`<br>
-`sudo apt-get purge unattended-upgrades`<br>
 `cat /etc/apt/apt.conf.d/10periodic`<br>
 `sudo visudo`<br>
-
 `scp -r $RANQX_LO_LOCAL_PATH/sftp-shim ubuntu@$SFTPSHIM_SERVER_DNS:$SFTP_DEPLOYMENT_PATH`<br>
 `curl localhost:80`<br>
 `stat %A $DIR`<br>
-`sudo mv $DIR1 $DIRDestiny`<br>
 `echo "cd $PWD"` <br>
-`which pip` <br>
-`sudo apt update` <br>
-`sudo apt list | grep python` <br>
-`sudo apt list --installed` <br>
-`clear` <br>
-`exit` <br>
 `xclip` <br>
 `echo $XDG_CURRENT_DESKTOP` <br>
-`sudo dpkg -i $DEBIAN_PKG`<br>
-`sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n` <br>
-##### Creat an alias with a command to go to a specific directory
-`alias ee='cd /home/ws/01-inbox/02-projects/2019-ee/test-env/eenz' <br>
-`ee`
-
-#### get text between quotes in a text file. Options
-`echo Source_File.txt | grep $REGEX_PATTERN`  <br>
-`grep "'.*'" -o references-get-between-quoutes.txt > result_1855.txt` <br>
-`PATTERN='".*"'` <br>
-`grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt` <br>
-## PDF Operations
-### PDF tool kit
-##### Recursively find inside pdfs
-`find . -iname '*.pdf' -exec pdfgrep "An agent architecture for managing data " {} +`
-`pdfgrep -r "Title of PDF to find"`
-`info pdftk`
-`pdftk 18.pdf dump_data_utf8 | grep InfoValue:`
-`sudo apt autoremove`
-`sudo apt upgrade`
-`ls -lth /var/log/ | sort --month-sort`
-`less /var/log/syslog`
-`touch new_empty_file.txt`
-`less /etc/X11/xorg.conf`
 
 # Introduction
 2020-04-28 I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in github.
@@ -60,6 +24,44 @@ It will have categories and then subcategories with functionalites.
 # Linux
 ##### Get info about current user
 `id`
+##### Move DIR1 to DIRDestiny Path
+`sudo mv $DIR1 $DIRDestiny`<br>
+##### Find where the command is installed
+`which pip` <br>
+##### Creat an alias with a command to go to a specific directory
+```
+alias ee='cd /home/ws/01-inbox/02-projects/2019-ee/test-env/eenz' <br>
+ee
+```
+
+## Find Search operations
+`sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n` <br>
+
+## Package Management
+### APT
+#### Fetch packages from Repo
+`sudo apt update`
+#### Auto remove Obsolete packages
+`sudo apt autoremove`
+#### Upgrade packages
+`sudo apt upgrade`
+#### List a package by name. e.g. python
+`sudo apt list | grep python` <br>
+#### List a installed packages
+`sudo apt list --installed` <br>
+#### Fix broken install packages
+`sudo apt --fix-broken install`<br>
+#### Purge a package
+`sudo apt-get purge unattended-upgrades`<br>
+#### Install a Debian Package
+`sudo dpkg -i $DEBIAN_PKG`<br>
+
+#### Create a Symbolic Link
+```
+SOURCE_FILE=/home/ubuntu/.local/bin/docker-compose
+SYMBOLIC_LINK_PATH=/usr/bin/docker-compose
+sudo ln --symbolic $SOURCE_FILE $SYMBOLIC_LINK_PATH
+```
 ##### Check Timestamp for last updated packages in package manager apt
 `ls -l /var/lib/apt/periodic/update-stamp`<br>
 ##### History of commands executed in the current session
@@ -68,8 +70,15 @@ It will have categories and then subcategories with functionalites.
 `randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | base64 | tr /= _)`<br>
 ##### Get stats info about the system
 `stat --help`
+#### get text between quotes in a text file. Options
+`echo Source_File.txt | grep $REGEX_PATTERN`  <br>
+`grep "'.*'" -o references-get-between-quoutes.txt > result_1855.txt` <br>
+`PATTERN='".*"'` <br>
+`grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt` <br>
 ##### interactive process viewer
 `htop`
+#### Check Disk Usage
+`df -h`<br>
 ##### Remove directory
 `rm -rf $DIR_PATH`
 ##### See who is connected and Display the load average (uptime output)
@@ -112,7 +121,7 @@ tree ~
 #### Create a file and add content to it
 ```
 sudo bash -c "cat > $FILE_PATH"<<EOF
-Lots of content
+Lots of content and text
 foo
 bar
 EOF
@@ -134,14 +143,27 @@ function cl() {
 EOF
 
 #### Clear Bash terminal
-clear
-
+`clear` <br>
 #### exit from terminal
 exit
 ##### Change permissions of a file based on permissions of other file
 RFILE=reference_file ; sudo chmod --reference=$RFILE
 ##### Change ownership of all files inside current dir to a given group
 GROUP_NAME=common ; sudo chown :$GROUP_NAME *
+
+## PDF Operations
+### PDF tool kit
+##### Recursively find inside pdfs
+`find . -iname '*.pdf' -exec pdfgrep "Title of  File to search " {} +` <br>
+`pdfgrep -r "Title of PDF to find"` <br>
+#### Get info about the pdf toolkit
+`info pdftk` <br>
+#### Get info about PDF_FILE
+`pdftk $PDF_FILE.pdf dump_data_utf8 | grep InfoValue:` <br>
+`ls -lth /var/log/ | sort --month-sort` <br>
+`less /var/log/syslog` <br>
+`touch new_empty_file.txt` <br>
+`less /etc/X11/xorg.conf` <br>
 
 ### Networking
 #### Test connectivity to a port
@@ -161,12 +183,14 @@ Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
 #### VPN
 (OpenVPN set up in ubuntu|https://tecadmin.net/install-openvpn-client-on-ubuntu/)
 
-#### Open SSH
+### Open SSH
 (https://www.openssh.com/)
 (https://www.ssh.com/ssh/ssh-academy)|SSH Academy
 #### Great docs at (https://www.digitalocean.com/community/tutorials/how-to-configure-custom-connection-options-for-your-ssh-client#general-tweaks-and-connection-items)
 * Use a config ssh custom file to ease connectivity
 * Make sure you are clear PuTTY will create keys with a `priv.ppk` format in windows vs Linux Open SSH key `id_rsa`
+#### Get content of default name of Public Key
+`cat ~/.ssh/id_rsa.pub`<br>
 
 # Git
 `git clone git@github.com:elastic/stack-docker.git`
