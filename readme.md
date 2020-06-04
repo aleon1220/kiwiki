@@ -7,7 +7,6 @@ I still hope i can recover my file.
 Dont rely on the cloud 100%. Have local copies of your digital material.
 
 # To be Categorized
-`uname -a` <br>
 `cat /etc/apt/apt.conf.d/10periodic`<br>
 `sudo visudo`<br>
 `scp -r $RANQX_LO_LOCAL_PATH/sftp-shim ubuntu@$SFTPSHIM_SERVER_DNS:$SFTP_DEPLOYMENT_PATH`<br>
@@ -22,6 +21,10 @@ Dont rely on the cloud 100%. Have local copies of your digital material.
 It will have categories and then subcategories with functionalites.
 
 # Linux
+##### maintain symbolic links determining default commands. Show installed Apps
+update-alternatives --get-selections
+##### Info about system
+`uname -a` <br>
 ##### Get info about current user
 `id`
 ##### Move DIR1 to DIRDestiny Path
@@ -199,17 +202,29 @@ Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
 `git info`
 
 # Programming Languages
+## Java
+todo add short details description
+todo add main links
+### OpenJDK
+##### update-alternative set version for Java
+update-alternatives --config java
+
+### Oracle Java
+
+## Python
 
 # DataBases
-## MySQL
+## MariaDB (MySQL open source Fork)
+## Oracle MySQL 
 #### Connect to DB with mysql command utilities
-`HOST=localhost; USER=mysql`
-
-`mysql -h $HOST -u $USER -p`
+```HOST=localhost; USER=mysql
+mysql -h $HOST -u $USER -p
+```
+## AWS RDS MySQL engine
 
 ## PostgreSQL
 
-## Microsoft SQL Server 2016
+## Microsoft SQL Server
 
 # OSes
 ## Linux Ubuntu
@@ -236,7 +251,6 @@ Shift + Delete
 ## Windows 10 (unfortunately)
 
 ## Mac
-
 
 # Docker
 `docker version` <br>
