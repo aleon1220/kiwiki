@@ -4,17 +4,11 @@ Then a google docs file was inside of a google drive folder. I accidentally dele
 I got in touch with google support to no avail. 
 I still hope i can recover my file.
 
-Dont rely on the cloud 100%. Have local copies of your digital material.
+Don't rely on the cloud 100%. Have local copies of your digital material.
 
 # To be Categorized
-`cat /etc/apt/apt.conf.d/10periodic`<br>
-`sudo visudo`<br>
-`scp -r $RANQX_LO_LOCAL_PATH/sftp-shim ubuntu@$SFTPSHIM_SERVER_DNS:$SFTP_DEPLOYMENT_PATH`<br>
-`curl localhost:80`<br>
-`stat %A $DIR`<br>
-`echo "cd $PWD"` <br>
+`curl localhost:80` <br>
 `xclip` <br>
-`echo $XDG_CURRENT_DESKTOP` <br>
 
 # Introduction
 2020-04-28 I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in github.
@@ -27,6 +21,8 @@ update-alternatives --get-selections
 `uname -a` <br>
 ##### Get info about current user
 `id`
+##### Edit sudo users
+`sudo visudo`<br>
 ##### Move DIR1 to DIRDestiny Path
 `sudo mv $DIR1 $DIRDestiny`<br>
 ##### Find where the command is installed
@@ -36,6 +32,11 @@ update-alternatives --get-selections
 alias ee='cd /home/ws/01-inbox/02-projects/2019-ee/test-env/eenz' <br>
 ee
 ```
+#### Copy files from Local to Remote Server
+`scp -r $LOCAL_PATH/sftp-shim ubuntu@$REMOTE_HOST_SERVER:$REMOTE_SERVER_PATH`<br>
+`echo $XDG_CURRENT_DESKTOP` <br>
+`stat %A $DIR`<br>
+`echo "cd $PWD"` <br>
 
 ## Find Search operations
 `sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n` <br>
@@ -58,6 +59,12 @@ ee
 `sudo apt-get purge unattended-upgrades`<br>
 #### Install a Debian Package
 `sudo dpkg -i $DEBIAN_PKG`<br>
+#### Check if Periodic updates are enabled
+`cat /etc/apt/apt.conf.d/10periodic`<br>
+#### Get packages from repo and find given string
+`dpkg --get-selections | grep PACKAGE_TO_FIND`
+#### Snap list installed packages
+`snap list`
 
 #### Create a Symbolic Link
 ```
@@ -194,6 +201,12 @@ Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
 * Make sure you are clear PuTTY will create keys with a `priv.ppk` format in windows vs Linux Open SSH key `id_rsa`
 #### Get content of default name of Public Key
 `cat ~/.ssh/id_rsa.pub`<br>
+#### Read Public SSH key, ssh to $REMOTE_HOST with root user and run a command to create a directory ssh and add the public key to authorized_keys file
+```
+COMMAND="mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+cat ~/.ssh/id_rsa.pub | \
+ssh root@$REMOTE_HOST $COMMAND
+```
 
 # Git
 `git clone git@github.com:elastic/stack-docker.git`
