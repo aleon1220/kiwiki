@@ -1,5 +1,5 @@
 # Wiki Information Technology
-it happened in 2020-04-28. For years i have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, etc.
+It happened in 2020-04-28. For years i have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, etc.
 Then a google docs file was inside of a google drive folder. I accidentally deleted the folder and later on i emptied the bin. I truly dislike that. 
 I got in touch with google support to no avail. 
 I still hope i can recover my file.
@@ -7,7 +7,7 @@ I still hope i can recover my file.
 Don't rely on the cloud 100%. Have local copies of your digital material.
 
 # To be Categorized
-`curl localhost:80` <br>
+
 `xclip` <br>
 
 # Introduction
@@ -178,6 +178,8 @@ GROUP_NAME=common ; sudo chown :$GROUP_NAME *
 ### Networking
 #### Test connectivity to a port
 `nc -vvv $host $port` <br>
+#### Check Any URL and get output in Text
+`curl -l localhost:80` <br>
 
 ### Get listening ports
 `ss -tulwn`
