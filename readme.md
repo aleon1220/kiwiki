@@ -7,7 +7,7 @@ I still hope i can recover my file.
 Don't rely on the cloud 100%. Have local copies of your digital material.
 
 # To be Categorized
-
+#### Xclip to capture the clipboard when copying.
 `xclip` <br>
 
 # Introduction
