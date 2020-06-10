@@ -68,27 +68,26 @@ ee
 ## Debugging Linux Systems
 A very important set of skills when something goes wrong and is important to get quick info.
 This can become a small DIY project to manage desktop and cloud servers.
-
 ### Check System Logs Journal Control
-command for viewing logs collected by systemd.
+##### command for viewing logs collected by systemd.
 #### Obtain Log output with admin permissions
 `sudo journalctl`
 #### Obtain Log output from oldest to newest.
 `journalctl -r`
 #### Monitor New Log Messages
-journalctl -f
-Show Logs within a Time Range
+`journalctl -f`
+#### Show Logs within a Time Range
 ```
 journalctl --since "2018-08-30 14:10:10"
 journalctl --until "2018-09-02 12:05:50"
 ```
-Show Logs for a Specific Boot
-journalctl -b
-journalctl --list-boots
-Show Logs for a systemd Service
-journalctl -u $SERVICE_NAME
-View Kernel Messages
-journalctl -k
+#### Show Logs for a Specific Boot
+`journalctl -b`
+`journalctl --list-boots`
+#### Show Logs for a systemd Service
+`journalctl -u $SERVICE_NAME`
+#### View Kernel Messages
+`journalctl -k`
 # change Output Format to json-pretty
 `journalctl -o json-pretty`
 ### Manually Clean Up Archived Logs
