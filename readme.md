@@ -37,8 +37,19 @@ ee
 `echo $XDG_CURRENT_DESKTOP` <br>
 `stat %A $DIR`<br>
 `echo "cd $PWD"` <br>
-
 ## Find Search operations
+#### Find files containing specific text
+`grep -iRl "TEXT-TO-FIND" ./`
+#### Switches:
+```
+-i - ignore text case
+-R - recursively search files in subdirectories.
+-l - show file names instead of file contents portions.
+```
+`./` As the last parameter, the path to the folder containing files you want to search for text. 
+You can use the full path of the folder.
+`grep -iRl "TEXT" /home/user/Documents`
+#### Find local git repos
 `sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n` <br>
 
 ## Package Management
