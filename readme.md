@@ -277,7 +277,7 @@ Shift + Delete
 `docker stop $(docker ps --quiet)`
 #### Clean up Everything including volumes
 `docker system prune --all --force --volumes`
-#### List labels for a given docker container
+#### List labels for a given docker container source: https://gist.github.com/steve-jansen
 ```
 CONTAINER=ID or container name
 docker inspect --format \
