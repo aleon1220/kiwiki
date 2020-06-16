@@ -37,8 +37,19 @@ ee
 `echo $XDG_CURRENT_DESKTOP` <br>
 `stat %A $DIR`<br>
 `echo "cd $PWD"` <br>
-
 ## Find Search operations
+#### Find files containing specific text
+`grep -iRl "TEXT-TO-FIND" ./`
+#### Switches:
+```
+-i - ignore text case
+-R - recursively search files in subdirectories.
+-l - show file names instead of file contents portions.
+```
+`./` As the last parameter, the path to the folder containing files you want to search for text. 
+You can use the full path of the folder.
+`grep -iRl "TEXT" /home/user/Documents`
+#### Find local git repos
 `sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n` <br>
 
 ## Package Management
@@ -65,7 +76,36 @@ ee
 `dpkg --get-selections | grep PACKAGE_TO_FIND`
 #### Snap list installed packages
 `snap list`
-
+## Debugging Linux Systems
+A very important set of skills when something goes wrong and is important to get quick info.
+This can become a small DIY project to manage desktop and cloud servers.
+### Check System Logs Journal Control
+##### command for viewing logs collected by systemd.
+#### Obtain Log output with admin permissions
+`sudo journalctl`
+#### Obtain Log output from oldest to newest.
+`journalctl -r`
+#### Monitor New Log Messages
+`journalctl -f`
+#### Show Logs within a Time Range
+```
+journalctl --since "2018-08-30 14:10:10"
+journalctl --until "2018-09-02 12:05:50"
+```
+#### Show Logs for a Specific Boot
+`journalctl -b`
+`journalctl --list-boots`
+#### Show Logs for a systemd Service
+`journalctl -u $SERVICE_NAME`
+#### View Kernel Messages
+`journalctl -k`
+# change Output Format to json-pretty
+`journalctl -o json-pretty`
+### Manually Clean Up Archived Logs
+#### Reduce the size of your journals to 2GiB:
+`journalctl --vacuum-size=2G`
+#### Remove archived journal files with dates older than the specified relative time.
+`journalctl --vacuum-time=1years`
 #### Create a Symbolic Link
 ```
 SOURCE_FILE=/home/ubuntu/.local/bin/docker-compose
