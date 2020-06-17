@@ -9,6 +9,17 @@ Don't rely on the cloud 100%. Have local copies of your digital material.
 # To be Categorized
 #### Xclip to capture the clipboard when copying.
 `xclip` <br>
+#### nohup runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
+`nohup $COMMAND_OR_SCRIPT > out_$(date).txt`
+#### Equivelance of commands in bash
+```
+echo -e 'FROM busybox\nRUN echo "hello world"' | docker build -
+
+docker build -<<EOF
+FROM busybox
+RUN echo "hello world"
+EOF
+```
 
 # Introduction
 2020-04-28 I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in github.
