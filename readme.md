@@ -7,6 +7,7 @@ I still hope i can recover my file.
 Don't rely on the cloud 100%. Have local copies of your digital material.
 
 # To be Categorized
+
 #### Xclip to capture the clipboard when copying.
 `xclip` <br>
 #### nohup runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
@@ -285,6 +286,12 @@ update-alternatives --config java
 #### Connect to DB with mysql command utilities
 ```HOST=localhost; USER=mysql
 mysql -h $HOST -u $USER -p
+```
+#### To check the default character set for a particular database DB_NAME
+```
+SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME
+       FROM INFORMATION_SCHEMA.SCHEMATA
+       WHERE SCHEMA_NAME='DB_NAME';
 ```
 ## AWS RDS MySQL engine
 
