@@ -335,6 +335,8 @@ Shift + Delete
 `docker stop $(docker ps --quiet)`
 #### Clean up Everything including volumes
 `docker system prune --all --force --volumes`
+#### Show containers that have an exposed port then sort
+`docker ps --filter expose=0-65535/tcp | sort -u -k7`
 #### List labels for a given docker container source: https://gist.github.com/steve-jansen
 ```
 CONTAINER=ID or container name
@@ -345,7 +347,7 @@ docker inspect --format \
 ```
 #### Get IP of a given container
 `docker inspect -f ‘{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}’ $CONTAINER_NAME_OR_ID` <br>
-List commands used to create a given image
+#### List commands used to create a given image
 ```
 MY_IMG=
 docker history $MY_IMG | awk 'NR>1 {print $1}' | xargs docker inspect --format '{{ ((index .ContainerConfig.Cmd ) 0) }}'
