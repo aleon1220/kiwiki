@@ -9,12 +9,11 @@ The `.` matches any one character followed or preceded by any character in the c
 2. list what you want to achive
 3. build each list of the goals with the regex grammar
 
-example:
+Example:
 Here we are essentially saying:
 Find any matching character in the word forest.
 Grab a single character followed by that matching character.
 Match zero or more occurrences of (1) and (2)
-
 
 ## References
 https://medium.com/better-programming/breaking-down-a-complex-regex-73b6c795a2be

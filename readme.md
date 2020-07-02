@@ -7,6 +7,44 @@ I still hope i can recover my file.
 Don't rely on the cloud 100%. Have local copies of your digital material.
 
 # To be Categorized
+## Systemd Systemctl
+Check status
+
+sudo systemctl status application
+#Example
+sudo systemctl status nginx
+Check if active
+
+If you’re using a monitoring service like Zabbix and need to check if a service is active, you can use:
+
+# systemctl is-active nginx
+
+List all loaded units
+
+systemctl list-units -all | grep loaded | awk '{print $1;}'
+
+List all enabled units
+
+systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt
+
+Most of the time, we need to make sure that all the services we use are in the startup script.
+List all loaded services
+
+systemctl list-units -all | grep service | grep loaded | awk '{print $1;}'
+
+List all enabled services
+
+systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
+
+To find the list of services that are loaded but not enabled, we can do the following:
+
+systemctl list-units -all | grep service | grep loaded | awk '{print $1;}' > loaded.txt
+systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
+diff -y loaded.txt enabled.txt
+#If you want a quick glance of missing ones you can also use
+diff -y loaded.txt enabled.txt | grep '<'
+
+
 
 #### Xclip to capture the clipboard when copying.
 `xclip` <br>
