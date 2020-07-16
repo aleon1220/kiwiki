@@ -360,6 +360,8 @@ Shift + Delete
 
 
 ## Windows 10 (unfortunately)
+### Clean-up network devices
+`netcfg -d`
 
 ## Mac
 
