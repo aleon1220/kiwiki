@@ -265,6 +265,11 @@ GROUP_NAME=common ; sudo chown :$GROUP_NAME *
 `touch new_empty_file.txt` <br>
 `less /etc/X11/xorg.conf` <br>
 
+#### extract a range of pages from a pdf file
+`pdftk source.pdf cat 5-10 output ExtractedOutput_p5-10.pdf`
+#### split specific pages from the source file, for example page 5, page 6, and page 10
+`pdftk source.pdf cat 5 6 10 output SplittedOutput.pdf`
+
 ### Networking
 #### Test connectivity to a port
 `nc -vvv $host $port` <br>
