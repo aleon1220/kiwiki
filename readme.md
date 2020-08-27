@@ -6,7 +6,8 @@ I still hope i can recover my file.
 
 Don't rely on the cloud 100%. Have local copies of your digital material.
 
-# To be Categorized
+# To be Categorized Inbox
+
 ## Systemd Systemctl
 Check status
 
@@ -44,6 +45,34 @@ diff -y loaded.txt enabled.txt
 #If you want a quick glance of missing ones you can also use
 diff -y loaded.txt enabled.txt | grep '<'
 
+# Linux Stuff
+# Generate SSH Key pair
+# Add a SSH key to ssh-agent 
+ssh-add -k ~/.ssh/id_rsa
+ssh-keygen -t rsa
+grep -Eri health_url .
+cat ~/multi/ui-pages/env-index.json | jq
+popd
+pushd
+cat ~/multi/ui-pages/env-index.json | jq -R | grep 2
+cat ~/multi/ui-pages/env-index.json | jq -C '.' | less -R
+ps xfa | less
+find . -maxdepth 1 -type d -mtime +15  -printf '%f\n'
+HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
+git diff --histogram
+# AWS EC2 API interactions
+TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/
+curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/security-groups
+curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/public-hostname
+curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/profile
+exec env TERM='dumb' INSIDE_EMACS='26.1,tramp:2.3.3.26.1' ENV='' HISTFILE=~/.tramp_history PROMPT_COMMAND='' PS1=\#\$\  PS2='' PS3='' /bin/sh
+aws cloudformation describe-stack-events --stack-name ranqx-loan-testing-sandbox-cloudwatch | jq lenght
+cat ~/.ssh/id_rsa.pub | xclip -sel clip
+# Basic Git config set up
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+## Analyse Logs. 3 to 31.gz month. Month like Feb 2020 and print
+zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | less
 
 
 #### Xclip to capture the clipboard when copying.
