@@ -259,7 +259,7 @@ GROUP_NAME=common ; sudo chown :$GROUP_NAME *
 #### Get info about the pdf toolkit
 `info pdftk` <br>
 #### Get info about PDF_FILE
-`pdftk $PDF_FILE.pdf dump_data_utf8 | grep InfoValue:` <br>
+`pdftk $PDF_FILE.pdf dump_data_utf8 | grep InfoValue:`<br>
 `ls -lth /var/log/ | sort --month-sort` <br>
 `less /var/log/syslog` <br>
 `touch new_empty_file.txt` <br>
