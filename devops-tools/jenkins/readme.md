@@ -19,10 +19,12 @@ setting the Java system property (JAVA_OPTS) `-Dhudson.footerURL=http://example.
  Jenkins home directory= `/var/lib/jenkins`
  Jenkins log file= `/var/log/jenkins`
 
-
 ## Jenkins Docker Container
 https://hub.docker.com/r/jenkins/jenkins/
 [Run Jenkins in Docker Container](https://www.jenkins.io/doc/book/installing/#downloading-and-running-jenkins-in-docker)
 
 # Jenkins Kubernetes Helm Chart
 [Helm chart for Jenkins](https://github.com/helm/charts/tree/master/stable/jenkins)
+
+## Jenkins Glossary
+see [jenkins.io book](https://www.jenkins.io/doc/book/glossary/)
