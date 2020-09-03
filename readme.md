@@ -6,6 +6,10 @@ I still hope i can recover my file.
 
 Don't rely on the cloud 100%. Have local copies of your digital material.
 
+The wiki is going to be divided into subcategories. This main Wiki will redirect to the others but will contain main commands for the OS Linux, Windows (Powershell) and Mac (terminal bash
+
+# Linux Bash Commands
+
 # To be Categorized Inbox
 
 ## Systemd Systemctl
@@ -37,17 +41,18 @@ List all enabled services
 
 systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
 
-To find the list of services that are loaded but not enabled, we can do the following:
-
+### To find the list of services that are loaded but not enabled, we can do the following:
+```
 systemctl list-units -all | grep service | grep loaded | awk '{print $1;}' > loaded.txt
 systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
 diff -y loaded.txt enabled.txt
 #If you want a quick glance of missing ones you can also use
 diff -y loaded.txt enabled.txt | grep '<'
+```
 
-# Linux Stuff
 # Generate SSH Key pair
 # Add a SSH key to ssh-agent 
+```
 ssh-add -k ~/.ssh/id_rsa
 ssh-keygen -t rsa
 grep -Eri health_url .
@@ -60,6 +65,8 @@ ps xfa | less
 find . -maxdepth 1 -type d -mtime +15  -printf '%f\n'
 HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
 git diff --histogram
+```
+
 # AWS EC2 API interactions
 TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/
 curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/security-groups
@@ -73,7 +80,6 @@ git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 ## Analyse Logs. 3 to 31.gz month. Month like Feb 2020 and print
 zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | less
-
 
 #### Xclip to capture the clipboard when copying.
 `xclip` <br>
@@ -93,7 +99,6 @@ EOF
 2020-04-28 I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in github.
 It will have categories and then subcategories with functionalites.
 
-# Linux
 ##### maintain symbolic links determining default commands. Show installed Apps
 update-alternatives --get-selections
 ##### Info about system
@@ -236,6 +241,16 @@ tree ~
 
 # Terminals
 ## Bash
+### most used commands in History
+history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
+
+### script to list files, directories, executables, and links from a given Workspace directory
+#### with `find`
+`find . -maxdepth 1 -type f -print`
+
+#### Script usage=  `lsf` lists files, `lsd` lists directories, `lsx` lists executables,  `lsl` lists links.
+[Bash Section](/devops-tools/bash)
+
 #### start a process in the background
 `COMMAND="rescuetime"`
 `$COMMAND &`
@@ -271,7 +286,7 @@ function cl() {
 }
 EOF
 
-#### Clear Bash terminal
+#### Clear Bash terminal Screen
 `clear` <br>
 #### exit from terminal
 exit
@@ -328,6 +343,7 @@ Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
 #### Get content of default name of Public Key
 `cat ~/.ssh/id_rsa.pub`<br>
 #### Read Public SSH key, ssh to $REMOTE_HOST with root user and run a command to create a directory ssh and add the public key to authorized_keys file
+
 ```
 COMMAND="mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
 cat ~/.ssh/id_rsa.pub | \
@@ -335,6 +351,7 @@ ssh root@$REMOTE_HOST $COMMAND
 ```
 
 # Git
+### Clone a Git Repo
 `git clone git@github.com:elastic/stack-docker.git`
 `git status`
 `git branch`
@@ -392,12 +409,9 @@ CTRL + delete
 Shift + Delete
 (You should never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in. Many personal system and program configurations are stored under your home directory.)
 
-
-## Windows 10 (unfortunately)
+## Windows 10 (unfortunately) with Powershell
 ### Clean-up network devices
 `netcfg -d`
-
-## Mac
 
 # Docker
 `docker version` <br>
@@ -457,3 +471,5 @@ docker history $MY_IMG | awk 'NR>1 {print $1}' | xargs docker inspect --format '
 `minikube start` <br>
 `minikube status` <br>
 `minikube stop` <br>
+
+# Mac Terminal
