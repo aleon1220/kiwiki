@@ -241,6 +241,21 @@ tree ~
 
 # Terminals
 ## Bash
+### Some tips
+- `Up arrow` to recall previous commands
+- `Tab` completion
+- `Ctrl + U` to cancel current input
+- `Ctrl + R` to reverse search through history
+- `Ctrl + A` to go to the beginning of a line
+- `#*` and `##*` for prefix manipulation
+- `%` and `%%` for suffix manipulation
+- `^^` for pattern substitution of previous command
+- Ctrl + L to clear screen (instead of typing "clear").
+- sudo !! to run previous command with sudo privileges.
+- grep -Ev '^#|^$' <file> will display file content without comments or empty lines."
+
+source: [opensource.com](https://opensource.com/article/20/1/linux-terminal-trick)
+
 ### most used commands in History
 history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
 
