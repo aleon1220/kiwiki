@@ -1,7 +1,7 @@
 # Wiki Information Technology
 It happened in 2020-04-28. For years i have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, etc.
-Then a google docs file was inside of a google drive folder. I accidentally deleted the folder and later on i emptied the bin. I truly dislike that. 
-I got in touch with google support to no avail. 
+Then a google docs file was inside of a google drive folder. I accidentally deleted the folder and later on i emptied the bin. I truly dislike that.
+I got in touch with google support to no avail.
 I still hope i can recover my file.
 
 Don't rely on the cloud 100%. Have local copies of your digital material.
@@ -11,12 +11,20 @@ The wiki is going to be divided into subcategories. This main Wiki will redirect
 # Linux Bash Commands
 
 # To be Categorized Inbox
+netsh int ipv6 reset reset.log
+Disable any active virtual private network (VPN) connection.
+ restore the firewall defaults
+Disable the IP Helper service (Windows). This features attempts to manage some aspects of IPv6 connectivity. To disable it:
 
+Press Windows key+R, then type services.msc in the displayed Run box, and select OK.
+This opens a list of Windows system services. Scroll through the list and locate the service named IP Helper, then right-click the service name and choose Properties.
+In the Startup type drop-down list, choose Disabled, then select OK.
+Restart your system, then check to see if the IPv6 connection now works as expected.
 ## Systemd Systemctl
 Check status
 
 sudo systemctl status application
-#Example
+# Example
 sudo systemctl status nginx
 Check if active
 
@@ -24,22 +32,22 @@ If you’re using a monitoring service like Zabbix and need to check if a servic
 
 # systemctl is-active nginx
 
-List all loaded units
+### List all loaded units
 
-systemctl list-units -all | grep loaded | awk '{print $1;}'
+`systemctl list-units -all | grep loaded | awk '{print $1;}'`
 
-List all enabled units
+### List all enabled units
 
-systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt
+`systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt`
 
 Most of the time, we need to make sure that all the services we use are in the startup script.
-List all loaded services
+### List all loaded services
 
-systemctl list-units -all | grep service | grep loaded | awk '{print $1;}'
+`systemctl list-units -all | grep service | grep loaded | awk '{print $1;}'`
 
-List all enabled services
+### List all enabled services
 
-systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
+`systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt`
 
 ### To find the list of services that are loaded but not enabled, we can do the following:
 ```
@@ -330,6 +338,8 @@ GROUP_NAME=common ; sudo chown :$GROUP_NAME *
 `pdftk source.pdf cat 5 6 10 output SplittedOutput.pdf`
 
 ### Networking
+##### Check this awesome Cheat sheet
+[CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
 #### Test connectivity to a port
 `nc -vvv $host $port` <br>
 #### Check Any URL and get output in Text
@@ -424,9 +434,19 @@ CTRL + delete
 Shift + Delete
 (You should never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in. Many personal system and program configurations are stored under your home directory.)
 
-## Windows 10 (unfortunately) with Powershell
+## Windows - Server and win10 (unfortunately) with Powershell
 ### Clean-up network devices
 `netcfg -d`
+# Extracted from some old notes
+attrib = configurations for files and folders
+netstat -nao = network statistics
+	netsat -ano | find str "PID"
+sc = services command
+	sc delete "serviceName"
+sfc /scannow || System File Checker
+nslookup "host" || verify that DNS name resolution is working correctly
+pathping  "ip" || determine whether the router is performing slowly or dropping packets.
+fciv.exe [Commands] <Options> || File Checksum Integrity Verifier install as plugin first.
 
 # Docker
 `docker version` <br>
@@ -455,6 +475,14 @@ docker inspect --format \
 MY_IMG=
 docker history $MY_IMG | awk 'NR>1 {print $1}' | xargs docker inspect --format '{{ ((index .ContainerConfig.Cmd ) 0) }}'
 ```
+
+### yq for yaml processing
+```
+echo 'yq() {
+  docker run --rm -i -v "${PWD}":/workdir mikefarah/yq yq "$@"
+}' | tee -a ~/.bashrc && source ~/.bashrc
+```
+
 # Docker-Compose
 `docker-compose version` <br>
 `docker-compose config` <br>
