@@ -1,5 +1,9 @@
 # AWS CLI commands
 
+export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
+export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r '.region')
+
+
 Use cases for AWS CLI
 obtained from This wonderful [Medium post by circuit People](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1)
 ## When was my AWS user account created?
