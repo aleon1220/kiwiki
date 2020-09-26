@@ -1,4 +1,9 @@
-# Wiki Information Technology
+<h1> Wiki Information Technology </h1>
+
+## Introduction
+2020-04-28 I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in github.
+It will have categories and then subcategories with functionalites.
+
 It happened in 2020-04-28. For years i have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, etc.
 Then a google docs file was inside of a google drive folder. I accidentally deleted the folder and later on i emptied the bin. I truly dislike that.
 I got in touch with google support to no avail.
@@ -103,9 +108,16 @@ RUN echo "hello world"
 EOF
 ```
 
-# Introduction
-2020-04-28 I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in github.
-It will have categories and then subcategories with functionalites.
+## Image operations with [Image Magick](https://imagemagick.org/index.php)
+### easily-resize-images
+``` bash
+# percentage
+convert  -resize 50% source.png dest.jpg
+
+# Specific size
+SIZE="1024X768"
+convert -resize $SIZE source.png destination.jpg
+``` 
 
 ##### maintain symbolic links determining default commands. Show installed Apps
 update-alternatives --get-selections
