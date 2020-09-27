@@ -29,25 +29,21 @@ Restart your system, then check to see if the IPv6 connection now works as expec
 Check status
 
 sudo systemctl status application
-# Example
-sudo systemctl status nginx
-Check if active
+## Example
+`sudo systemctl status nginx`
 
+## Check if active
 If you’re using a monitoring service like Zabbix and need to check if a service is active, you can use:
-
-# systemctl is-active nginx
+`systemctl is-active nginx`
 
 ### List all loaded units
-
 `systemctl list-units -all | grep loaded | awk '{print $1;}'`
 
 ### List all enabled units
-
 `systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt`
 
 Most of the time, we need to make sure that all the services we use are in the startup script.
 ### List all loaded services
-
 `systemctl list-units -all | grep service | grep loaded | awk '{print $1;}'`
 
 ### List all enabled services
@@ -55,7 +51,7 @@ Most of the time, we need to make sure that all the services we use are in the s
 `systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt`
 
 ### To find the list of services that are loaded but not enabled, we can do the following:
-```
+``` bash
 systemctl list-units -all | grep service | grep loaded | awk '{print $1;}' > loaded.txt
 systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
 diff -y loaded.txt enabled.txt
@@ -65,7 +61,7 @@ diff -y loaded.txt enabled.txt | grep '<'
 
 # Generate SSH Key pair
 # Add a SSH key to ssh-agent 
-```
+``` bash
 ssh-add -k ~/.ssh/id_rsa
 ssh-keygen -t rsa
 grep -Eri health_url .
@@ -79,6 +75,37 @@ find . -maxdepth 1 -type d -mtime +15  -printf '%f\n'
 HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
 git diff --histogram
 ```
+
+## CURL Client URL
+### Download a file and save it with a custom name
+`curl -o custom_file.tar.gz https://testdomain.com/testfile.tar.gz`
+
+### Get HTTP headers. use the `-I` or the `— head` option
+`curl -I https://www.google.com`
+
+### Ignore invalid certs `-k or --insecure`
+`curl -k https://localhost/my_test_endpoint`
+
+### Make a POST request. JSON `-H 'Content-Type: application/json'`
+`curl --data "param1=test1&param2=test2" http://test.com`
+
+###  Specify the type of request
+``` bash
+# updating the value of param2 to be test 3 on the record id 
+curl -X 'PUT' -d '{"param1":"test1","param2":"test3"}' \http://test.com/1
+```
+
+### Include the Basic Auth:
+`curl -u <user:password> https://my-test-api.com/endpoint1`
+
+### Update name resolution
+`curl --resolve www.test.com:80:localhost http://www.test.com/`
+
+### Upload a file
+`curl -F @field_name=@path/to/local_file <upload_URL>`
+
+### Timing Curl connection
+`curl -w "%{time_total}\n" -o /dev/null -s www.test.com`
 
 # AWS EC2 API interactions
 TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/
