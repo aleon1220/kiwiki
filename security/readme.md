@@ -27,11 +27,15 @@ openssl pkcs8 -in $1.pem -topk8 -outform DER -out $1.pk8 -passout stdin
 
 In cryptography, X.509 is a standard defining the format of public key certificates.
 
+## Convert from Private Key `.pk8` to .PEM
+`openssl pkcs8 -in $PRIV_KEY_NAME.pk8 -inform DER -nocrypt -out $NEW_PRIV_KEY_UNENCRYPTED.pem`
+
+
 **Certificate filename extensions**
 
 There are several commonly used filename extensions for X.509 certificates. Unfortunately, some of these extensions are also used for other data such as private keys.
 
-.pem – (Privacy-enhanced Electronic Mail) Base64 encoded DER certificate, enclosed between "-----BEGIN CERTIFICATE-----" and "-----END CERTIFICATE-----"
+.pem – (Privacy-enhanced Electronic Mail) Base64 encoded DER certificate, enclosed between "-----BEGIN CERTIFICATE-----" and "-----END CERTIFICATE-----" <br>
 .cer, .crt, .der – usually in binary DER form, but Base64-encoded certificates are common too (see .pem above)
 .p7b, .p7c – PKCS#7 SignedData structure without data, just certificate(s) or CRL(s)
 .p12 – PKCS#12, may contain certificate(s) (public) and private keys (password protected)
