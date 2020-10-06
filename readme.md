@@ -74,6 +74,16 @@ ps xfa | less
 find . -maxdepth 1 -type d -mtime +15  -printf '%f\n'
 HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
 git diff --histogram
+### Get info about commits for a given user
+git_user=pwebb
+git_date="Sat Aug 30 2019"
+git log --oneline -5 --author $git_user --before $git_date
+
+### prints out just the subject line
+git log --oneline
+
+###  groups commits by user, again showing just the subject line for concision
+`git shortlog`
 ```
 
 ## CURL Client URL
@@ -523,6 +533,13 @@ echo 'yq() {
 ```
 
 # Docker-Compose
+## Get docker compose version
+
+```
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
 `docker-compose version` <br>
 `docker-compose config` <br>
 `docker-compose --verbose up -d` <br>
