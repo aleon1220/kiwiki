@@ -29,6 +29,22 @@ alias update='sudo apt-get update && sudo apt-get upgrade'
 alias update='yum update'
 alias updatey='yum -y update'
 
+## Create dirs from 1990-2020
+``` shell
+years=30
+from=1990
+for i in {0..30}; do
+      echo "mkdir $from the value of i=$i"
+      from=$(( $from + 1 ))
+done
+```
+
+## Rename lots of files to trim annoying unwanted strings "ANNOYING_STRING-". Use rename if you want it to operate faster
+``` shell
+for file in * ; do
+    echo mv -v "$file" "${file#*ANNOYING_STRING-}"
+done
+```
 
 ## Quick set up
 - From this directory copy the resources to your $HOME/
