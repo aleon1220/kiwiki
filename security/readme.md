@@ -7,7 +7,7 @@ here is some info i have found on my quest after using some openssl commands fro
 ``` bash
 #!/bin/bash
 
-AUTH='/C=NO/ST=Egersund/L=Nyaskaiveien 2/O=Android/OU=Android/CN=Android/emailAddress=navico.service@navico.com'
+AUTH='/C=NZ/ST=Auckland/L=Locality 2/O=Android/OU=Android/CN=Android/emailAddress=user@email.com'
 if [ "$1" == "" ]; then
         echo "Create a test certificate key."
         echo "Usage: $0 NAME"
