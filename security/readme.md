@@ -44,6 +44,8 @@ PKCS#12 evolved from the personal information exchange (PFX) standard and is use
 - Taken from [mkssoftware](https://www.mkssoftware.com/docs/man1/openssl_pkcs8.1.asp)
 - Digicert post on [Certificate and CA management](https://www.digicert.com/kb/ssl-support/openssl-quick-reference-guide.htm)
 - OpenSSL [FreecodeCamp CheatSheet](https://www.freecodecamp.org/news/openssl-command-cheatsheet-b441be1e8c4a/)
+- Great ssl.com [Post on conversions](https://www.ssl.com/guide/pem-der-crt-and-cer-x-509-encodings-and-conversions/)
+- Simple explanation about formats GPG, OpenSSL and OpenSSH [at](https://blog.programster.org/key-file-formats)
 
 - Old 2009 tool java based UI keytool-iui but still relevant. Link to [old google code](https://code.google.com/archive/p/keytool-iui/)
 
@@ -52,6 +54,8 @@ PKCS#12 evolved from the personal information exchange (PFX) standard and is use
 `openssl rsa -in My_KEY.pem -check`
 ## Check certificate
 `openssl x509 -in certificate.x509.pem -text -noout`
+## metadata of certificate and key
+`openssl x509 -text -in CERTIFICATE.pem`
 
 ## Convert a private from traditional to PKCS#5 v2.0 format using triple DES:
 `openssl pkcs8 -in key.pem -topk8 -v2 des3 -out enckey.pem`
@@ -98,6 +102,121 @@ In cryptography, X.509 is a standard defining the format of public key certifica
 
 ## Convert from Private Key `.pk8` to .PEM
 `openssl pkcs8 -in $PRIV_KEY_NAME.pk8 -inform DER -nocrypt -out $NEW_PRIV_KEY_UNENCRYPTED.pem`
+
+## From JKS --> .p12 --> .PEM
+read the [blog](http://www.gnudeveloper.com/groups/cyber_security/Cryptography_RSA_Key_Exchange_works_in_realtime_using_Keytool_openSSL%20.html)
+``` bash
+keytool -genkey -alias gdalias   -keystore www_gnudeveloper_com.jks  -keyalg RSA   -keysize 512 
+-storepass gnudevpwd   
+keytool -importkeystore   -srcstoretype JKS  -deststoretype PKCS12  -srckeystore   www_gnudeveloper_com.jks 
+-destkeystore  www_gnudeveloper_com.p12     -storepass gnudevpwd 
+ 
+openssl pkcs12 -in www_gnudeveloper_com.p12  -out www_gnudeveloper_com.pem
+```
+
+### Convert keys between GnuPG, OpenSsh and OpenSSL [website](http://sysmic.org/dotclear/index.php?post/2010/03/24/Convert-keys-betweens-GnuPG%2C-OpenSsh-and-OpenSSL)
+
+#### OpenSSH to OpenSSL
+OpenSSH private keys are directly understable by OpenSSL. You can test for example:
+
+``` bash
+openssl rsa -in ~/.ssh/id_rsa -text
+openssl dsa -in ~/.ssh/id_dsa -text
+```
+
+### You can also convert then to PEM format easily (notice, format for SSH private keys and PEM is very close):
+``` bash
+openssl rsa -in ~/.ssh/id_rsa -out key_rsa.pem
+openssl dsa -in ~/.ssh/id_dsa -out key_dsa.pem
+```
+
+So, you can directly use it to create a certification request:
+
+openssl req -new -key ~/.ssh/id_dsa -out myid.csr
+You can also use your ssh key to create a sef-signed certificate:
+
+openssl x509 -req -days 3650 -in myid.csr -signkey ~/.ssh/id_rsa -out myid.crt
+Notice I have not found how to manipulate ssh public key with OpenSSL
+
+OpenSSL to OpenSSH
+Private keys format is same between OpenSSL and OpenSSH. So you just a have to rename your OpenSSL key:
+
+ cp myid.key id_rsa
+In OpenSSL, there is no specific file for public key (public keys are generally embeded in certificates). However, you extract public key from private key file:
+
+ssh-keygen -y -f  myid.key > id_rsa.pub
+GnuPG to OpenSSH
+First, you need to know fingerprint of your RSA key. You can use:
+
+  gpg --list-secret-keys --keyid-format short
+Next, you can use openpgp2ssh tool distributed in with monkeyshpere project:
+
+ gpg --export-secret-keys 01234567 | openpgp2ssh 01234567 > id_rsa
+A few notes are necessary:
+
+01234567 must be fingerprint of a RSA key (or subkey)
+gpg --export-secret-keys also accept finger print of global key (in this case, it exports all sub-keys). However, openpgp2ssh only accept finger print of an RSA key
+If no arguments are provided, openpgp2ssh export RSA keys it find
+You can now extract ssh public key using:
+
+ssh-keygen -y -f id_rsa > id_rsa.pub
+GnuPG to OpenSSL
+We already saw all steps. Extract key as for ssh:
+
+  gpg --list-secret-keys --keyid-format short
+  gpg --export-secret-keys 01234567 | openpgp2ssh 01234567 > myid.ke
+You can can convert this key to PEM format:
+
+ openssl rsa -in myid.key -out myid.pem
+You can create a certification request:
+
+openssl req -new -key myid.key -out myid.csr
+You can create a sef-signed certificate:
+
+openssl x509 -req -days 3650 -in myid.csr -signkey myid.key -out myid.crt
+GnuPG S/MIME to OpenSSL
+
+##### Gpgsm utility can exports keys and certificate in PCSC12:
+``` bash
+gpgsm -o  secret-gpg-key.p12 --export-secret-key-p12 0xXXXXXXXX
+```
+
+You have to extract Key and Certificates separatly:
+``` bash
+openssl pkcs12 -in secret-gpg-key.p12 -nocerts -out gpg-key.pem
+openssl pkcs12 -in secret-gpg-key.p12 -nokeys -out gpg-certs.pem
+```
+You can now use it in OpenSSL.
+
+You can also do similar thing with GnuPG public keys. There will be only certificates output.
+
+OpenSSL to GnuPG S/MIME
+Invert process:
+
+```
+openssl pkcs12 -export -in gpg-certs.pem -inkey gpg-key.pem -out gpg-key.p12
+gpgsm --import gpg-key.p12
+GnuPG S/MIME to OpenSSH
+Now, chain processes:
+
+gpgsm -o  secret-gpg-key.p12 --export-secret-key-p12 0xXXXXXXXX
+openssl pkcs12 -in secret-gpg-key.p12 -nocerts -out gpg-key.pem
+We need to protect key, else ssh refuse it.
+
+chmod 600 gpg-key.pem
+cp gpg-key.pem ~/.ssh/id_rsa
+ssh-keygen -y -f gpg-key.pem > ~/.ssh/id_rsa.pub
+OpenSSH to GnuPG S/MIME
+First we need to create a certificate (self-signed) for our ssh key:
+
+openssl req -new -x509 -key ~/.ssh/id_rsa -out ssh-cert.pem
+We can now import it in GnuPG
+
+openssl pkcs12 -export -in ssh-certs.pem -inkey ~/.ssh/id_rsa -out ssh-key.p12
+gpgsm --import ssh-key.p12
+Notice you cannot import/export DSA ssh keys to/from GnuPG
+```
+##### GPG guide in Windows Subsystem for Linux WSL by [Jess Esquire](https://www.jessesquire.com/articles/2019/03/31/configure-github-activity-signing-with-wsl/)
 
 **Certificate filename extensions**
 
