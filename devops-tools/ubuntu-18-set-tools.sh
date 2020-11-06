@@ -21,6 +21,8 @@ ms-mssql.mssql
 # Install extensions
 code --install-extension $plugin_terraform  $plugin_powershell
 
+## code Android extensions suggested
+code --install-extension naco-siren.gradle-language mathiasfrohlich.Kotlin vscjava.vscode-java-pack
 ### verify https://code.visualstudio.com/docs/editor/extension-gallery#_command-line-extension-management
 code --list-extensions
 
@@ -32,12 +34,9 @@ sudo ./aws/install
 
 # Docker latest
 sudo apt-get update
-sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common
+sudo apt-get install -y \
+    apt-transport-https ca-certificates \
+    curl gnupg-agent software-properties-common
 
 ## Add Dockers PGP
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -50,7 +49,7 @@ sudo add-apt-repository \
    stable"
 ## Docker Engine
 sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 ## Post-install settings
 sudo groupadd docker
 sudo usermod -aG docker $USER

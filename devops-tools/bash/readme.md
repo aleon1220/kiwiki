@@ -1,10 +1,20 @@
 # Bash Cheat Sheet
 This section contains .bash_functions/ and .bash_aliases used and tested in Linux ubuntu 18.04
 
-The alias Command
-alias [name[=value]]
-Colorize Output
-# Colordiff may not be installed by default.  (sudo apt-get -y colordiff to install on Ubuntu systems.)
+## Bash options
+``` bash
+set -o errexit
+set -o nounset
+set -o pipefail
+set -o xtrace
+```
+
+### The alias Command
+`alias [name[=value]]`
+### Colorize Output
+### Colordiff may not be installed by default.  (sudo apt-get -y colordiff to install on Ubuntu systems.)
+
+``` bash
 alias diff='colordiff'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -20,7 +30,10 @@ Confirmation When Copying, Linking, or Deleting
 alias cp='cp -i'
 alias ln='ln -i'
 alias mv='mv -i'
-System Updates
+```
+
+## System Updates
+
 # Debian / Ubuntu:
 alias apt-get="sudo apt-get"
 alias updatey="sudo apt-get -y"

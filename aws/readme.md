@@ -1,16 +1,18 @@
 # AWS CLI commands
-
+## Get account Id and region of current EC2 instance
+``` bash
 export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
 export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r '.region')
+```
 
-
-Use cases for AWS CLI
+## Use cases for AWS CLI
 obtained from This wonderful [Medium post by circuit People](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1)
+
 ## When was my AWS user account created?
 `aws iam get-user | jq -r ".User.CreateDate[:4]"` 
 
 ## Which AWS Services am I using?
-```
+``` bash
 aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01" -d "-1 Month"),End=$(date --date="$(date +'%Y-%m-01') - 1 second" -I) --granularity MONTHLY --metrics UsageQuantity --group-by Type=DIMENSION,Key=SERVICE | jq '.ResultsByTime[].Groups[] | select(.Metrics.UsageQuantity.Amount > 0) | .Keys[0]'
 ```
 
@@ -48,7 +50,7 @@ aws lambda list-functions | jq ".Functions | group_by(.Runtime)|[.[]|{ runtime:.
 ```
 aws lambda list-functions | jq -r '[.Functions[]|{name: .FunctionName, env: .Environment.Variables}]|.[]|select(.env|length > 0)'
 ```
-
+## AWS EC2 Elastic Compute Cloud
 ### Creating EC2 Instances…
 Quickly create EC2 instances.
 
@@ -76,17 +78,18 @@ export INSTANCE_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --ou
 #### Step 6: SSH and profit:
 `ssh -i keypair.pem ec2-user@$INSTANCE_IP`
 
-## What are my RDS Instance Endpoints?
+## AWS RDS Databases
+### What are my RDS Instance Endpoints?
 ```
 aws rds describe-db-instances | jq -r '.DBInstances[] | { (.DBInstanceIdentifier):(.Endpoint.Address + ":" + (.Endpoint.Port|tostring))}'
 ```
-
+## General AWS
 ## How Many Services does AWS Have?
 ```
 curl -s https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json | jq -r '.partitions[0].services | keys[]' | wc -l
 ```
-
-## How Many CloudFormation Stacks do I have in each Status?
+## AWs Cloud Formation Infrastructure as a configuration
+### How Many CloudFormation Stacks do I have in each Status?
 ```
 aws cloudformation list-stacks | jq  '.StackSummaries | [ group_by(.StackStatus)[] | { "status": .[0].StackStatus, "count": (. | length) }
 ]'
@@ -142,3 +145,20 @@ for bucket in $(aws s3api list-buckets --query "Buckets[].Name" --output text); 
 for bucket in $(aws s3api list-buckets --query "Buckets[].Name" --output text --profile eleven-prod); do aws cloudwatch get-metric-statistics --namespace AWS/S3 --metric-name BucketSizeBytes --dimensions Name=BucketName,Value=$bucket Name=StorageType,Value=StandardStorage --start-time $(date --iso-8601)T00:00 --end-time $(date --iso-8601)T23:59 --period 86400 --statistic Maximum --profile eleven-prod | echo $bucket: \$$(jq -r "(.Datapoints[0].Maximum //
  0) * .023 / (1024*1024*1024) * 100.0 | floor / 100.0"); done;
  ```
+
+## AWS Secret Manager
+### Create a secret with a binary file in this case a java keystore JKS
+``` bash
+SECRET_ID=arn:12312312:xxxxx
+aws secretsmanager put-secret-value --secret-id $SECRET_ID --secret-binary fileb://mykeystore.jks
+```
+
+### Create a secret as a key and value format from a json file
+```bash
+AWS_SECRET_COMMAND="aws secretsmanager put-secret-value --secret-id $SECRET_ID --secret-string file://secret.json"
+```
+
+### Obtain a secret that contains JSON data as a SecretString and list the JSON keys
+```bash
+$SECRET_NAME=my-aws-secret
+aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r '.SecretString' | jq -r 'keys[]'```

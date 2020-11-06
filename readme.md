@@ -13,6 +13,9 @@ Don't rely on the cloud 100%. Have local copies of your digital material.
 
 The wiki is going to be divided into subcategories. This main Wiki will redirect to the others but will contain main commands for the OS Linux, Windows (Powershell) and Mac (terminal bash
 
+### REgular expresion
+#### find after `:` symbol all the numbers until the end of the line
+`:[0-9]*.*`
 # Linux Bash Commands
 
 # To be Categorized Inbox
@@ -64,27 +67,44 @@ diff -y loaded.txt enabled.txt | grep '<'
 ``` bash
 ssh-add -k ~/.ssh/id_rsa
 ssh-keygen -t rsa
+```
+### use of pushd and popd to jump between directories
+``` shell
+pushd $DIR
+popd
+```
+### Random commands to categorize
+```
 grep -Eri health_url .
 cat ~/multi/ui-pages/env-index.json | jq
-popd
-pushd
 cat ~/multi/ui-pages/env-index.json | jq -R | grep 2
 cat ~/multi/ui-pages/env-index.json | jq -C '.' | less -R
 ps xfa | less
 find . -maxdepth 1 -type d -mtime +15  -printf '%f\n'
 HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
-git diff --histogram
+```
+
 ### Get info about commits for a given user
+```
 git_user=pwebb
 git_date="Sat Aug 30 2019"
 git log --oneline -5 --author $git_user --before $git_date
+```
+
+### Get git global info
+`git config --global --list`
+
+### Ger a histogram for a gitdiff
+`git diff --histogram`
 
 ### prints out just the subject line
 git log --oneline
 
 ###  groups commits by user, again showing just the subject line for concision
 `git shortlog`
-```
+
+#### Find the process that consumes more CPU
+`ps -eo pid,%cpu,%mem,args --sort -%cpu`
 
 ## CURL Client URL
 ### Download a file and save it with a custom name
@@ -126,19 +146,23 @@ exec env TERM='dumb' INSIDE_EMACS='26.1,tramp:2.3.3.26.1' ENV='' HISTFILE=~/.tra
 aws cloudformation describe-stack-events --stack-name ranqx-loan-testing-sandbox-cloudwatch | jq lenght
 cat ~/.ssh/id_rsa.pub | xclip -sel clip
 # Basic Git config set up
+``` bash
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
+```
+
 ## Analyse Logs. 3 to 31.gz month. Month like Feb 2020 and print
+```
 zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | less
+```
 
 #### Xclip to capture the clipboard when copying.
 `xclip` <br>
 #### nohup runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
 `nohup $COMMAND_OR_SCRIPT > out_$(date).txt`
 #### Equivelance of commands in bash
-```
+``` bash
 echo -e 'FROM busybox\nRUN echo "hello world"' | docker build -
-
 docker build -<<EOF
 FROM busybox
 RUN echo "hello world"
@@ -278,6 +302,42 @@ sudo ln --symbolic $SOURCE_FILE $SYMBOLIC_LINK_PATH
 `last $USERNAME`
 ##### print the user name who are all currently logged in the current host
 `users`
+
+#### List Users in Linux
+``` bash
+less /etc/passwd
+
+# Each line in the file has seven fields delimited by colons that contain the following information:
+User name.:Encrypted password (x means that the password is stored in the /etc/shadow file).
+User ID number (UID).:User’s group ID number (GID).
+Full name of the user (GECOS).:User home directory.
+Login shell (defaults to /bin/bash).
+
+# display only the username
+awk -F: '{ print $1}' /etc/passwd
+cut -d: -f1 /etc/passwd
+
+# Get a List of all Users
+getent passwd
+getent passwd | cut -d: -f1
+
+Each user has a numeric user ID called UID. If not specified when creating a new user with the useradd command, the UID will be automatically selected from the /etc/login.defs file depending on the UID_MIN and UID_MIN values.
+
+To check the UID_MIN and UID_MIN values on your system, you can use the following command:
+
+grep -E '^UID_MIN|^UID_MAX' /etc/login.defs
+
+
+#### The command below will list all normal users in our Linux system:
+getent passwd {1000..60000}
+
+#### generic version of command above
+eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)}
+
+#### print only the usernames
+eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1
+
+```
 ##### print the loggedin user name
 `id -un`
 ##### get the list of the usernames who are currently logged in.

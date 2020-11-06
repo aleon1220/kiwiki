@@ -21,8 +21,35 @@ Setting the Java system property (JAVA_OPTS) `-Dhudson.footerURL=http://example.
  Jenkins log file= `/var/log/jenkins`
 
 ## Jenkins Docker Container
-https://hub.docker.com/r/jenkins/jenkins/
+[Docker Hub for jenkins:lts](https://hub.docker.com/r/jenkins/jenkins/)
 [Run Jenkins in Docker Container](https://www.jenkins.io/doc/book/installing/#downloading-and-running-jenkins-in-docker)
+[Jenkins project readme in Github](https://github.com/jenkinsci/docker/blob/master/README.md)
+
+``` bash
+    docker run --name docker-jenkins-test --detach -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+```
+
+### Run Jenkins from a Docker Container and install plugins from a list
+
+```
+# create docker file
+sudo bash -c "cat > $PWD/Dockerfile" <<EOF
+FROM jenkins/jenkins:lts
+COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+EOF
+
+# build the Docker image
+docker build --tag jenkins-lts:neon-plugins .
+
+# Start the container based on the built image
+docker run --name docker-jenkins-test -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins-lts:neon-plugins
+```
+
+### Use the jenkins-plugin-cli to install
+```
+jenkins-plugin-cli --plugins <List of plugins with version or just the name>
+```
 
 # Jenkins Kubernetes Helm Chart
 [Helm chart for Jenkins](https://github.com/helm/charts/tree/master/stable/jenkins)
@@ -34,10 +61,10 @@ see [jenkins.io book](https://www.jenkins.io/doc/book/glossary/)
 From [EDX Jenkins](https://learning.edx.org/course/course-v1:LinuxFoundationX+LFS167x+2T2020/block-v1:LinuxFoundationX+LFS167x+2T2020+type@sequential+block@6074ebbee1a94de5963c3dbe2d021d4c/block-v1:LinuxFoundationX+LFS167x+2T2020+type@vertical+block@99c7f23e787749e4bb1734ee825be29a)
 Before we deep dive into distributed build architecture, let’s quickly review some terminology related it.
 
-Master= A machine where Jenkins is installed. It centrally stores all the configurations, loads plugins and renders the Jenkins UI.
-Agent= A machine which connects to the Jenkins master and performs various operations as directed by the Jenkins master.
-Node= A machine that can allocate an executor and run Jenkins Pipelines. Examples are Jenkins masters and Agents. You will notice that nodes and agents are sometimes used synonymously.
-Executor= A Jenkins executor is one of the basic building blocks which allows a build to run on a node. You can configure more than one executor for every node. The number of executors is set based on the number of CPUs, IO performance and other hardware characteristics of a node and the type of builds you have configured to run. The number of executors determines the number of concurrent builds that can be run at any given point in time.
+- Master= A machine where Jenkins is installed. It centrally stores all the configurations, loads plugins and renders the Jenkins UI.
+- Agent= A machine which connects to the Jenkins master and performs various operations as directed by the Jenkins master.
+- Node= A machine that can allocate an executor and run Jenkins Pipelines. Examples are Jenkins masters and Agents. You will notice that nodes and agents are sometimes used synonymously.
+- Executor= A Jenkins executor is one of the basic building blocks which allows a build to run on a node. You can configure more than one executor for every node. The number of executors is set based on the number of CPUs, IO performance and other hardware characteristics of a node and the type of builds you have configured to run. The number of executors determines the number of concurrent builds that can be run at any given point in time.
 
 It is Jenkins security best practice to set the number of executors to 0 on the Jenkins master, and not run any builds on it.
 
