@@ -1,24 +1,26 @@
 <h1> Wiki Information Technology </h1>
 
 ## Introduction
-2020-04-28 I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in github.
-It will have categories and then subcategories with functionalites.
+- 2020-04-28 I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in this github repo; It will have categories and then subcategories with functionalites.
 
 It happened in 2020-04-28. For years i have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, etc.
-Then a google docs file was inside of a google drive folder. I accidentally deleted the folder and later on i emptied the bin. I truly dislike that.
+Then a google docs file was inside of a google drive folder. I accidentally deleted the folder and later on I emptied the bin. I truly dislike that.
 I got in touch with google support to no avail.
-I still hope i can recover my file.
+I still hope I can recover my file.
 
 Don't rely on the cloud 100%. Have local copies of your digital material.
+- 2020-11-10=I lost my google docs wiki file. I should have been more careful.
 
+# Real README
 The wiki is going to be divided into subcategories. This main Wiki will redirect to the others but will contain main commands for the OS Linux, Windows (Powershell) and Mac (terminal bash
 
-### REgular expresion
+### Regular expresion
 #### find after `:` symbol all the numbers until the end of the line
 `:[0-9]*.*`
 # Linux Bash Commands
 
 # To be Categorized Inbox
+```
 netsh int ipv6 reset reset.log
 Disable any active virtual private network (VPN) connection.
  restore the firewall defaults
@@ -28,14 +30,16 @@ Press Windows key+R, then type services.msc in the displayed Run box, and select
 This opens a list of Windows system services. Scroll through the list and locate the service named IP Helper, then right-click the service name and choose Properties.
 In the Startup type drop-down list, choose Disabled, then select OK.
 Restart your system, then check to see if the IPv6 connection now works as expected.
+```
+
 ## Systemd Systemctl
 Check status
 
 sudo systemctl status application
-## Example
+#### Example
 `sudo systemctl status nginx`
 
-## Check if active
+#### Check if service is active
 If you’re using a monitoring service like Zabbix and need to check if a service is active, you can use:
 `systemctl is-active nginx`
 
@@ -62,8 +66,8 @@ diff -y loaded.txt enabled.txt
 diff -y loaded.txt enabled.txt | grep '<'
 ```
 
-# Generate SSH Key pair
-# Add a SSH key to ssh-agent 
+### Generate SSH Key pair
+#### Add a SSH key to ssh-agent 
 ``` bash
 ssh-add -k ~/.ssh/id_rsa
 ssh-keygen -t rsa
@@ -94,11 +98,11 @@ git log --oneline -5 --author $git_user --before $git_date
 ### Get git global info
 `git config --global --list`
 
-### Ger a histogram for a gitdiff
+### Get a histogram for a gitdiff
 `git diff --histogram`
 
 ### prints out just the subject line
-git log --oneline
+`git log --oneline`
 
 ###  groups commits by user, again showing just the subject line for concision
 `git shortlog`
@@ -138,20 +142,23 @@ curl -X 'PUT' -d '{"param1":"test1","param2":"test3"}' \http://test.com/1
 `curl -w "%{time_total}\n" -o /dev/null -s www.test.com`
 
 # AWS EC2 API interactions
-TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/
+```bash
+TOKEN=curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/
 curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/security-groups
 curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/public-hostname
 curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/profile
 exec env TERM='dumb' INSIDE_EMACS='26.1,tramp:2.3.3.26.1' ENV='' HISTFILE=~/.tramp_history PROMPT_COMMAND='' PS1=\#\$\  PS2='' PS3='' /bin/sh
 aws cloudformation describe-stack-events --stack-name ranqx-loan-testing-sandbox-cloudwatch | jq lenght
 cat ~/.ssh/id_rsa.pub | xclip -sel clip
+```
+
 # Basic Git config set up
-``` bash
+```bash
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 ```
 
-## Analyse Logs. 3 to 31.gz month. Month like Feb 2020 and print
+#### Analyse Logs. Logs named 3 to 31.gz month. Month like Feb 2020 and print
 ```
 zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | less
 ```
@@ -169,7 +176,7 @@ RUN echo "hello world"
 EOF
 ```
 
-## Image operations with [Image Magick](https://imagemagick.org/index.php)
+### Image operations with [Image Magick](https://imagemagick.org/index.php)
 ### easily-resize-images
 ``` bash
 # percentage
@@ -205,7 +212,7 @@ ee
 ## Find Search operations
 #### Find files containing specific text
 `grep -iRl "TEXT-TO-FIND" ./`
-#### Switches:
+##### Switches:
 ```
 -i - ignore text case
 -R - recursively search files in subdirectories.
@@ -215,8 +222,8 @@ ee
 You can use the full path of the folder.
 `grep -iRl "TEXT" /home/user/Documents`
 #### Find local git repos
-`sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n` <br>
-
+`sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n`
+<br>
 ## Package Management
 ### APT
 #### Fetch packages from Repo
@@ -241,7 +248,10 @@ You can use the full path of the folder.
 `dpkg --get-selections | grep PACKAGE_TO_FIND`
 #### Snap list installed packages
 `snap list`
-## Debugging Linux Systems
+
+----
+
+## Debugging Linux Systems (mostly Ubuntu)
 A very important set of skills when something goes wrong and is important to get quick info.
 This can become a small DIY project to manage desktop and cloud servers.
 ### Check System Logs Journal Control
@@ -253,7 +263,7 @@ This can become a small DIY project to manage desktop and cloud servers.
 #### Monitor New Log Messages
 `journalctl -f`
 #### Show Logs within a Time Range
-```
+``` bash
 journalctl --since "2018-08-30 14:10:10"
 journalctl --until "2018-09-02 12:05:50"
 ```
@@ -264,7 +274,7 @@ journalctl --until "2018-09-02 12:05:50"
 `journalctl -u $SERVICE_NAME`
 #### View Kernel Messages
 `journalctl -k`
-# change Output Format to json-pretty
+#### change Output Format to json-pretty
 `journalctl -o json-pretty`
 ### Manually Clean Up Archived Logs
 #### Reduce the size of your journals to 2GiB:
@@ -272,7 +282,7 @@ journalctl --until "2018-09-02 12:05:50"
 #### Remove archived journal files with dates older than the specified relative time.
 `journalctl --vacuum-time=1years`
 #### Create a Symbolic Link
-```
+``` bash
 SOURCE_FILE=/home/ubuntu/.local/bin/docker-compose
 SYMBOLIC_LINK_PATH=/usr/bin/docker-compose
 sudo ln --symbolic $SOURCE_FILE $SYMBOLIC_LINK_PATH
@@ -306,38 +316,51 @@ sudo ln --symbolic $SOURCE_FILE $SYMBOLIC_LINK_PATH
 #### List Users in Linux
 ``` bash
 less /etc/passwd
+```
 
-# Each line in the file has seven fields delimited by colons that contain the following information:
-User name.:Encrypted password (x means that the password is stored in the /etc/shadow file).
-User ID number (UID).:User’s group ID number (GID).
-Full name of the user (GECOS).:User home directory.
-Login shell (defaults to /bin/bash).
+##### Info in `/etc/passwd`
+Each line in the file has seven fields delimited by colons that contain the following information:
+- User name:Encrypted password (x means that the
+- password is stored in the /etc/shadow file).
+- User ID number (UID).:User’s group ID number (GID)
+- Full name of the user (GECOS)
+- User home directory.
+- Login shell (defaults to /bin/bash).
 
-# display only the username
+### Display only the username
+```
 awk -F: '{ print $1}' /etc/passwd
 cut -d: -f1 /etc/passwd
+```
 
 # Get a List of all Users
+```
 getent passwd
 getent passwd | cut -d: -f1
+```
 
 Each user has a numeric user ID called UID. If not specified when creating a new user with the useradd command, the UID will be automatically selected from the /etc/login.defs file depending on the UID_MIN and UID_MIN values.
 
-To check the UID_MIN and UID_MIN values on your system, you can use the following command:
-
+#### To check the UID_MIN and UID_MIN values on your system, you can use the following command:
+``` bash
 grep -E '^UID_MIN|^UID_MAX' /etc/login.defs
-
+```
 
 #### The command below will list all normal users in our Linux system:
+``` bash
 getent passwd {1000..60000}
+```
 
 #### generic version of command above
+``` bash
 eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)}
+```
 
 #### print only the usernames
-eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1
-
 ```
+eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1
+```
+
 ##### print the loggedin user name
 `id -un`
 ##### get the list of the usernames who are currently logged in.
@@ -376,12 +399,13 @@ source: [opensource.com](https://opensource.com/article/20/1/linux-terminal-tric
 ### most used commands in History
 history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
 
-### script to list files, directories, executables, and links from a given Workspace directory
+#### Script to list files, directories, executables, and links from a given Workspace directory
 #### with `find`
 `find . -maxdepth 1 -type f -print`
 
 #### Script usage=  `lsf` lists files, `lsd` lists directories, `lsx` lists executables,  `lsl` lists links.
-[Bash Section](/devops-tools/bash)
+
+# - [Bash Section](/devops-tools/bash)
 
 #### start a process in the background
 `COMMAND="rescuetime"`
@@ -404,6 +428,7 @@ EOF
 ```
 
 #### Create a function to show files in current dir
+```bash
 FILE_PATH=/home/ubuntu/.bash_functions
 sudo bash -c "cat > $FILE_PATH"<<EOF
 function cl() {
@@ -417,9 +442,10 @@ function cl() {
         ls -F --color=auto
 }
 EOF
+```
 
 #### Clear Bash terminal Screen
-`clear` <br>
+`clear`<br>
 #### exit from terminal
 exit
 ##### Change permissions of a file based on permissions of other file
@@ -457,21 +483,42 @@ GROUP_NAME=common ; sudo chown :$GROUP_NAME *
 ### Get listening ports
 `ss -tulwn`
 
-## PowerShell 
+---
+# Windows products (micro$oft)
+## Windows - Server and win10 (unfortunately) Powershell
+
 Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
-
 ### Networking
-
 ##### Get your Public IP Address
-(Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
+`(Invoke-WebRequest -uri "http://ifconfig.me/ip").Content`
+### Clean-up network devices
+`netcfg -d`
+#### Verify that DNS name resolution is working correctly
+`nslookup "host"`
+##### Extracted from some old notes
+```powershell
+attrib = configurations for files and folders
+netstat -nao = network statistics
+	netsat -ano | find str "PID"
+sc = services command
+	sc delete "serviceName"
+sfc /scannow || System File Checker
+pathping  "ip" || determine whether the router is performing slowly or dropping packets.
+fciv.exe [Commands] <Options> || File Checksum Integrity Verifier install as plugin first.
+```
 
+### Windows Nice [Terminal](https://docs.microsoft.com/en-us/windows/terminal/get-started#installation)
+#### Windows terminal with vertical panes. 2nd pane is WSL
+`wt split-pane --vertical wsl`
+
+---
 #### VPN
-(OpenVPN set up in ubuntu|https://tecadmin.net/install-openvpn-client-on-ubuntu/)
+OpenVPN set [up in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
 
 ### Open SSH
-(https://www.openssh.com/)
-(https://www.ssh.com/ssh/ssh-academy)|SSH Academy
-#### Great docs at (https://www.digitalocean.com/community/tutorials/how-to-configure-custom-connection-options-for-your-ssh-client#general-tweaks-and-connection-items)
+- [official OpenSSH](https://www.openssh.com/)
+- [SSH Academy](https://www.ssh.com/ssh/ssh-academy)
+#### Great docs at [Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-configure-custom-connection-options-for-your-ssh-client#general-tweaks-and-connection-items)
 * Use a config ssh custom file to ease connectivity
 * Make sure you are clear PuTTY will create keys with a `priv.ppk` format in windows vs Linux Open SSH key `id_rsa`
 #### Get content of default name of Public Key
@@ -522,7 +569,7 @@ SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME
 
 ## Microsoft SQL Server
 
-# OSes
+# Operating Systems
 ## Linux Ubuntu
 ### System settings
 #### Get dimendions of Display
@@ -530,32 +577,18 @@ SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME
 
 ### Nautilus operations
 #### Show hidden files Keyboard shortcut
-CTRL + H
+`CTRL + H`
 #### Show Path Location Keyboard shortcut
-CTRL + L
+`CTRL + L`
 #### Switch between the Icons and List formats
-CTRL + 1 | CTRL + 2
+`CTRL + 1 | CTRL + 2`
 #### Search for files
-CTRL + F
+`CTRL + F`
 #### Delete File(s)
-CTRL + delete
+`CTRL + delete`
 #### permanently delete
-Shift + Delete
+`Shift + Delete`
 (You should never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in. Many personal system and program configurations are stored under your home directory.)
-
-## Windows - Server and win10 (unfortunately) with Powershell
-### Clean-up network devices
-`netcfg -d`
-# Extracted from some old notes
-attrib = configurations for files and folders
-netstat -nao = network statistics
-	netsat -ano | find str "PID"
-sc = services command
-	sc delete "serviceName"
-sfc /scannow || System File Checker
-nslookup "host" || verify that DNS name resolution is working correctly
-pathping  "ip" || determine whether the router is performing slowly or dropping packets.
-fciv.exe [Commands] <Options> || File Checksum Integrity Verifier install as plugin first.
 
 # Docker
 `docker version` <br>
