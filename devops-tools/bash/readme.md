@@ -95,7 +95,9 @@ ln -s lsd lsx
 ```
 ## [JSON](https://www.json.org/json-en.html) in bash
 ### JQ
-[source](https://www.howtogeek.com/529219/how-to-parse-json-files-on-the-linux-command-line-with-jq/)
+- [source JQ Manual](https://stedolan.github.io/jq/manual/)
+- [source How to Geek](https://www.howtogeek.com/529219/how-to-parse-json-files-on-the-linux-command-line-with-jq/)
+
 ##### pipe json to console, find a string and output colorized JSON values
 ```bash
 cat ~/path/to/env-index.json | jq
