@@ -520,13 +520,20 @@ cut -d: -f1 /etc/passwd
 ```
 
 #### Get a List of all Users
+Each user has a numeric user ID called UID. If not specified when creating a new user with the useradd command, the UID will be automatically selected from the /etc/login.defs file depending on the UID_MIN and UID_MIN values.
 
 ```bash
 getent passwd
 getent passwd | cut -d: -f1
 ```
 
-Each user has a numeric user ID called UID. If not specified when creating a new user with the useradd command, the UID will be automatically selected from the /etc/login.defs file depending on the UID_MIN and UID_MIN values.
+#### Set a new password Root
+```bash
+sudo passwd $USERNAME
+```
+
+#### Set a new password Your own
+`passwd`
 
 #### To check the UID_MIN and UID_MIN values on your system, you can use the following command:
 
