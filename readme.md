@@ -4,8 +4,9 @@
 
 <!-- code_chunk_output -->
 
-  - [Introduction](#introduction)
-- [Real README](#real-readme)
+  - [Introduction and complains](#introduction-and-complains)
+- [About Wiki Project](#about-wiki-project)
+  - [Categories](#categories)
     - [Regular expresion](#regular-expresion)
 - [Linux Bash Commands](#linux-bash-commands)
 - [To be Categorized Inbox](#to-be-categorized-inbox)
@@ -59,22 +60,27 @@
 
 <!-- /code_chunk_output -->
 
-## Introduction
+## Introduction and complains
 
-- 2020-04-28 I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in this github repo; It will have categories and then subcategories with functionalites.
-
-It happened in 2020-04-28. For years i have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, etc.
+- **2020-04-28=** I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in this github repo; It will have categories and then subcategories with functionalites.
+For years i have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, etc.
 Then a google docs file was inside of a google drive folder. I accidentally deleted the folder and later on I emptied the bin. I truly dislike that.
-I got in touch with google support to no avail.
+I got in touch with google support to no avail. :-(
 I still hope I can recover my file.
 
 Don't rely on the cloud 100%. Have local copies of your digital material.
 
-- 2020-11-10=I totally confirm that i lost my google docs wiki file. I should have been more careful.
+- **2020-11-10=** I totally confirm that i lost my google docs wiki file. I should have been more careful.
 
-# Real README
+# About Wiki Project
 
-The wiki is going to be divided into subcategories. This main Wiki will redirect to the others but will contain main commands for the OS Linux, Windows (Powershell) and Mac (terminal bash
+The wiki is going to be divided into subcategories. This main Wiki will redirect to the others but will contain main commands for the OS Linux, Windows (Powershell) and Mac terminal commands.
+
+## Categories
+
+1. [AWS](./aws/readme.md)
+
+
 
 ### Regular expresion
 

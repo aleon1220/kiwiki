@@ -1,61 +1,62 @@
+
 # AWS CLI commands
-## Get account Id and region of current EC2 instance
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [AWS CLI commands](#aws-cli-commands)
+    - [Use cases for AWS CLI](#use-cases-for-aws-cli)
+  - [General AWS](#general-aws)
+  - [AWS EC2 Elastic Compute Cloud](#aws-ec2-elastic-compute-cloud)
+    - [Creating EC2 Instances](#creating-ec2-instances)
+    - [AWS EC2 Volumes](#aws-ec2-volumes)
+  - [AWS IAM](#aws-iam)
+  - [AWS VPC](#aws-vpc)
+  - [AWS Lambda](#aws-lambda)
+  - [AWS RDS Databases](#aws-rds-databases)
+  - [AWS CF Cloud Formation](#aws-cf-cloud-formation)
+  - [AWS CloudWatch](#aws-cloudwatch)
+  - [AWS CloudWatch Logs set to 30 days](#aws-cloudwatch-logs-set-to-30-days)
+  - [AWS S3](#aws-s3)
+
+<!-- /code_chunk_output -->
+
+### Use cases for AWS CLI
+source obtained from this wonderful [Medium post by circuit People](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1)
+
+## General AWS
+#### Get current configs. 
+File is usually located at `$HOME/.aws/config`
+`aws configure list`
+
+#### How Many Services does AWS Have?
+```bash
+curl -s https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json | jq -r '.partitions[0].services | keys[]' | wc -l
+```
+
+## AWS EC2 Elastic Compute Cloud
+#### Get account Id and region of current EC2 instance
 ``` bash
 export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
 export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r '.region')
 ```
 
-## Use cases for AWS CLI
-obtained from This wonderful [Medium post by circuit People](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1)
-
-## When was my AWS user account created?
-`aws iam get-user | jq -r ".User.CreateDate[:4]"` 
-
-## Which AWS Services am I using?
-``` bash
-aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01" -d "-1 Month"),End=$(date --date="$(date +'%Y-%m-01') - 1 second" -I) --granularity MONTHLY --metrics UsageQuantity --group-by Type=DIMENSION,Key=SERVICE | jq '.ResultsByTime[].Groups[] | select(.Metrics.UsageQuantity.Amount > 0) | .Keys[0]'
+#### List EC2 key pairs
+```bash
+aws ec2 describe-key-pairs | jq -r '.KeyPairs[].KeyName'
 ```
 
-## What is each service costing me?
-```
-aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01"),End=$(date --date="$(date +'%Y-%m-01') + 1 month  - 1 second" -I) --granularity MONTHLY --metrics USAGE_QUANTITY BLENDED_COST  --group-by Type=DIMENSION,Key=SERVICE | jq '[ .ResultsByTime[].Groups[] | select(.Metrics.BlendedCost.Amount > "0") | { (.Keys[0]): .Metrics.BlendedCost } ] | sort_by(.Amount) | add'
-```
-
-## How many instances of each type do I have, and in what states?
-```
+#### How many instances of each type do I have, and in what states?
+```bash
 aws ec2 describe-instances | jq -r "[[.Reservations[].Instances[]|{ state: .State.Name, type: .InstanceType }]|group_by(.state)|.[]|{state: .[0].state, types: [.[].type]|[group_by(.)|.[]|{type: .[0], count: ([.[]]|length)}] }]"
 ```
 
-## What CIDRs have Ingress Access to which Ports?
-```
-aws ec2 describe-security-groups | jq '[ .SecurityGroups[].IpPermissions[] as $a | { "ports": [($a.FromPort|tostring),($a.ToPort|tostring)]|unique, "cidr": $a.IpRanges[].CidrIp } ] | [group_by(.cidr)[] | { (.[0].cidr): [.[].ports|join("-")]|unique }] | add'
-```
-
-## How do I Create a CodeCommit Repository and Clone It?
-```
-
-export REPO_URL=$(aws codecommit create-repository --repository-name <name> | jq -r ".repositoryMetadata.cloneUrlHttp")
-
-git clone $REPO_URL <name> && cd <name>
-
-```
-
-## Which Lambda Functions Runtimes am I Using?
-```
-aws lambda list-functions | jq ".Functions | group_by(.Runtime)|[.[]|{ runtime:.[0].Runtime, functions:[.[]|.FunctionName] }
-]"
-```
-
-## Are you exposing secrets in variables? Have a typo in a key?
-```
-aws lambda list-functions | jq -r '[.Functions[]|{name: .FunctionName, env: .Environment.Variables}]|.[]|select(.env|length > 0)'
-```
-## AWS EC2 Elastic Compute Cloud
-### Creating EC2 Instances…
+### Creating EC2 Instances
 Quickly create EC2 instances.
 
 #### Step 1: Find the right AMI
-```
+```bash
 export AMI_ID=$(aws ec2 describe-images --owners amazon | jq -r ".Images[] | { id: .ImageId, desc: .Description } | select(.desc?) | select(.desc | contains(\"Amazon Linux 2\")) | select(.desc | contains(\".NET Core 2.1\")) | .id")
 ```
 
@@ -63,7 +64,7 @@ export AMI_ID=$(aws ec2 describe-images --owners amazon | jq -r ".Images[] | { i
 `aws ec2 create-key-pair --key-name aurora-test-keypair > keypair.pem`
 
 #### Step 3: Create the instance using the AMI and the key pair, and hold onto the result in a file:
-```
+```bash
 aws ec2 run-instances --instance-type t2.micro --image-id $AMI_ID --region us-east-1 --subnet-id <your_subnet_id> --key-name keypair --count 1 > instance.json
 ```
 
@@ -75,90 +76,140 @@ aws ec2 run-instances --instance-type t2.micro --image-id $AMI_ID --region us-ea
 export INSTANCE_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --output text --query 'Reservations[*].Instances[*].PublicIpAddress')
 ```
 
-#### Step 6: SSH and profit:
+#### Step 6: SSH and profit AWS
 `ssh -i keypair.pem ec2-user@$INSTANCE_IP`
 
-## AWS RDS Databases
-### What are my RDS Instance Endpoints?
+### AWS EC2 Volumes
+
+#### How Many Gigabytes of Volumes do I have, by Status?
+```bash
+aws ec2 describe-volumes | jq -r '.Volumes | [ group_by(.State)[] | { (.[0].State): ([.[].Size] | add) } ] | add'
 ```
+
+#### How many Snapshots do I have?
+`aws ec2 describe-snapshots --owner-ids self | jq '.Snapshots | length'`
+
+#### how large are the snapshot in total?
+`aws ec2 describe-snapshots --owner-ids self | jq '[.Snapshots[].VolumeSize] | add'`
+
+#### how do they breakdown by the volume used to create them?
+```bash
+aws ec2 describe-snapshots --owner-ids self | jq '.Snapshots | [ group_by(.VolumeId)[] | { (.[0].VolumeId): { "count": (.[] | length), "size": ([.[].VolumeSize] | add) } } ] | add'
+```
+
+## AWS IAM
+#### When was my AWS user account created?
+`aws iam get-user | jq -r ".User.CreateDate[:4]"` 
+
+#### Which AWS Services am I using?
+```bash
+aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01" -d "-1 Month"),End=$(date --date="$(date +'%Y-%m-01') - 1 second" -I) --granularity MONTHLY --metrics UsageQuantity --group-by Type=DIMENSION,Key=SERVICE | jq '.ResultsByTime[].Groups[] | select(.Metrics.UsageQuantity.Amount > 0) | .Keys[0]'
+```
+
+#### What is each service costing me?
+```bash
+aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01"),End=$(date --date="$(date +'%Y-%m-01') + 1 month  - 1 second" -I) --granularity MONTHLY --metrics USAGE_QUANTITY BLENDED_COST  --group-by Type=DIMENSION,Key=SERVICE | jq '[ .ResultsByTime[].Groups[] | select(.Metrics.BlendedCost.Amount > "0") | { (.Keys[0]): .Metrics.BlendedCost } ] | sort_by(.Amount) | add'
+```
+
+## AWS VPC
+#### What CIDRs have Ingress Access to which Ports?
+```bash
+aws ec2 describe-security-groups | jq '[ .SecurityGroups[].IpPermissions[] as $a | { "ports": [($a.FromPort|tostring),($a.ToPort|tostring)]|unique, "cidr": $a.IpRanges[].CidrIp } ] | [group_by(.cidr)[] | { (.[0].cidr): [.[].ports|join("-")]|unique }] | add'
+```
+
+#### How do I Create a CodeCommit Repository and Clone It?
+```bash
+export REPO_URL=$(aws codecommit create-repository --repository-name <name> | jq -r ".repositoryMetadata.cloneUrlHttp")
+
+git clone $REPO_URL <name> && cd <name>
+```
+## AWS Lambda
+#### Which Lambda Functions Runtimes am I Using?
+```bash
+aws lambda list-functions | jq ".Functions | group_by(.Runtime)|[.[]|{ runtime:.[0].Runtime, functions:[.[]|.FunctionName] }
+]"
+```
+
+#### Are you exposing secrets in variables? Have a typo in a key?
+```bash
+aws lambda list-functions | jq -r '[.Functions[] |{name: .FunctionName, env: .Environment.Variables}] | .[] | select(.env|length > 0)'
+```
+
+#### What logs does my Lambda Function generate when I run it?
+```bash
+aws lambda invoke --function-name <function name> --payload '{}' --log-type Tail - | jq -r '{ "StatusCode": .StatusCode, "LogResult": (.LogResult|@base64d)}'
+```
+
+## AWS RDS Databases
+#### What are my RDS Instance Endpoints?
+```bash
 aws rds describe-db-instances | jq -r '.DBInstances[] | { (.DBInstanceIdentifier):(.Endpoint.Address + ":" + (.Endpoint.Port|tostring))}'
 ```
-## General AWS
-## How Many Services does AWS Have?
-```
-curl -s https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json | jq -r '.partitions[0].services | keys[]' | wc -l
-```
-## AWs Cloud Formation Infrastructure as a configuration
-### How Many CloudFormation Stacks do I have in each Status?
+
+## AWS CF Cloud Formation 
+Infrastructure as a configuration
+#### How Many CloudFormation Stacks do I have in each Status?
 ```
 aws cloudformation list-stacks | jq  '.StackSummaries | [ group_by(.StackStatus)[] | { "status": .[0].StackStatus, "count": (. | length) }
 ]'
 ```
 
-## Which EC2 Instances were created by Stacks?
-```
+#### Which EC2 Instances were created by AWS CF Stacks?
+```bash
 for stack in $(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE UPDATE_COMPLETE | jq -r '.StackSummaries[].StackName'); do aws cloudformation describe-stack-resources --stack-name $stack | jq -r '.StackResources[] | select (.ResourceType=="AWS::EC2::Instance")|.PhysicalResourceId'; done;
 ```
 
-## How Many Gigabytes of Volumes do I have, by Status?
-`aws ec2 describe-volumes | jq -r '.Volumes | [ group_by(.State)[] | { (.[0].State): ([.[].Size] | add) } ] | add'`
-
-## How many Snapshots do I have?
-`aws ec2 describe-snapshots --owner-ids self | jq '.Snapshots | length'`
-
-## how large are the snapshot in total?
-`aws ec2 describe-snapshots --owner-ids self | jq '[.Snapshots[].VolumeSize] | add'`
-
-### how do they breakdown by the volume used to create them?
-```
-aws ec2 describe-snapshots --owner-ids self | jq '.Snapshots | [ group_by(.VolumeId)[] | { (.[0].VolumeId): { "count": (.[] | length), "size": ([.[].VolumeSize] | add) } } ] | add'
-```
-# AWS CloudWatch
-## What’s happening in my Log Streams?
+## AWS CloudWatch
+#### What’s happening in my Log Streams?
 `logs=$(aws logs describe-log-groups | jq -r '.logGroups[].logGroupName')`
 
-##  The first log stream for each
+#### Get the first log stream 
+```bash
+for each
 for group in $logs; do echo $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 | jq -r '.logStreams[0].logStreamName + " "'); done
-
-## loop through the groups and streams and get the last 10 messages since midnight
 ```
+
+#### loop through the groups and streams and get the last 10 messages since midnight
+```bash
 for group in $logs; do for stream in $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 | jq -r '[ .logStreams[0].logStreamName + " "] | add'); do echo ">>>"; echo GROUP: $group; echo STREAM: $stream; aws logs get-log-events --limit 10 --log-group-name $group --log-stream-name $stream --start-time $(date -d 'today 00:00:00' '+%s%N' | cut -b1-13) | jq -r ".events[].message"; done; done
 ```
 
 ## AWS CloudWatch Logs set to 30 days
-```
+```bash
 for group in $(aws logs describe-log-groups --query "logGroups[].[logGroupName]" --output text --no-paginate); do aws logs put-retention-policy --log-group-name $group --retention-in-days 30; done;
 ```
 
-## What logs does my Lambda Function generate when I run it?
-```
-aws lambda invoke --function-name <function name> --payload '{}' --log-type Tail - | jq -r '{ "StatusCode": .StatusCode, "LogResult": (.LogResult|@base64d)}'
-```
-
-## How Much Data is in Each of my Buckets?
-```
+## AWS S3
+#### How Much Data is in Each of my Buckets?
+```bash
 for bucket in $(aws s3api list-buckets --query "Buckets[].Name" --output text); do aws cloudwatch get-metric-statistics --namespace AWS/S3 --metric-name BucketSizeBytes --dimensions Name=BucketName,Value=$bucket Name=StorageType,Value=StandardStorage --start-time $(date --iso-8601)T00:00 --end-time $(date --iso-8601)T23:59 --period 86400 --statistic Maximum | echo $bucket: $(numfmt --to si $(jq -r ".Datapoints[0].Maximum // 0")); done;
 ```
 
-### Prefer to have that is dollars per month?
-```
+#### Prefer to have that is dollars per month?
+```bash
 for bucket in $(aws s3api list-buckets --query "Buckets[].Name" --output text --profile eleven-prod); do aws cloudwatch get-metric-statistics --namespace AWS/S3 --metric-name BucketSizeBytes --dimensions Name=BucketName,Value=$bucket Name=StorageType,Value=StandardStorage --start-time $(date --iso-8601)T00:00 --end-time $(date --iso-8601)T23:59 --period 86400 --statistic Maximum --profile eleven-prod | echo $bucket: \$$(jq -r "(.Datapoints[0].Maximum //
  0) * .023 / (1024*1024*1024) * 100.0 | floor / 100.0"); done;
  ```
 
 ## AWS Secret Manager
-### Create a secret with a binary file in this case a java keystore JKS
-``` bash
-SECRET_ID=arn:12312312:xxxxx
-aws secretsmanager put-secret-value --secret-id $SECRET_ID --secret-binary fileb://mykeystore.jks
-```
+#### Create a secret with a binary file in this case a java keystore JKS
 
-### Create a secret as a key and value format from a json file
 ```bash
-AWS_SECRET_COMMAND="aws secretsmanager put-secret-value --secret-id $SECRET_ID --secret-string file://secret.json"
+SECRET_ID="arn:12312312:xxxxx"
+BINARY_FILE="mykeystore.jks"
+
+aws secretsmanager put-secret-value --secret-id $SECRET_ID --secret-binary fileb://$BINARY_FILE
 ```
 
-### Obtain a secret that contains JSON data as a SecretString and list the JSON keys
+#### Create a secret as a key and value format from a json file
+```bash
+aws secretsmanager put-secret-value --secret-id $SECRET_ID --secret-string file://secret.json
+```
+
+#### Obtain a secret that contains JSON data as a SecretString and list the JSON keys
 ```bash
 $SECRET_NAME=my-aws-secret
-aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r '.SecretString' | jq -r 'keys[]'```
+aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r '.SecretString' | jq -r 'keys[]'
+```
+
+[Back to top](#)
