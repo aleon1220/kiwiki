@@ -23,7 +23,6 @@
   - [Debugging Linux Systems (mostly Ubuntu)](#debugging-linux-systems-mostly-ubuntu)
 - [Terminals](#terminals)
   - [Bash Section](#bash-sectiondevops-toolsbash)
-    - [Some tips](#some-tips)
   - [PDF Operations](#pdf-operations)
     - [PDF tool kit](#pdf-tool-kit)
     - [Networking](#networking)
@@ -252,7 +251,8 @@ zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | l
 
 `xclip` <br>
 
-#### nohup runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
+#### nohup execution
+`nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
 
 `nohup $COMMAND_OR_SCRIPT > out_$(date).txt`
 
@@ -598,23 +598,8 @@ eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID
 # Terminals
 
 ## [Bash Section](/devops-tools/bash)
-### Some tips
 
-- `Up arrow` to recall previous commands
-- `Tab` completion
-- `Ctrl + U` to cancel current input
-- `Ctrl + R` to reverse search through history
-- `Ctrl + A` to go to the beginning of a line
-- `#*` and `##*` for prefix manipulation
-- `%` and `%%` for suffix manipulation
-- `^^` for pattern substitution of previous command
-- `Ctrl + L` to clear screen (instead of typing "clear").
-- `sudo !!` to run previous command with sudo privileges.
-- `grep -Ev '^#|^\$' $file` will display file content without comments or empty lines."
-
-source [opensource.com](https://opensource.com/article/20/1/linux-terminal-trick)
-
-#### most used commands in History
+#### most used commands in Bash History
 ```bash
 history | \
 awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count\*100 "% " a;}' | \
