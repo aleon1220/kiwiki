@@ -11,7 +11,6 @@
   - [General Linux Bash Commands](#general-linux-bash-commands)
     - [Get OS info](#get-os-info)
   - [Systemd Systemctl](#systemd-systemctl)
-- [AWS EC2 API interactions](#aws-ec2-api-interactions)
   - [Find/Search operations](#findsearch-operations)
   - [Package Management](#package-management)
     - [APT](#apt)
@@ -65,7 +64,8 @@
 ```bash
 grep -Eri health_url .
 ps xfa | less
-find . -maxdepth 1 -type d -mtime +15  -printf '%f\n'
+#### Find directories modified within the past 10 days
+find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
 HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
 ```
 ---
@@ -156,21 +156,9 @@ diff -y loaded.txt enabled.txt | grep '<'
 
 #### `pushd` and `popd` to jump between directories
 
-```shell
+```bash
 pushd $DIR
 popd
-```
-
-# AWS EC2 API interactions
-
-```bash
-TOKEN=curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/
-curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/security-groups
-curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/public-hostname
-curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/profile
-exec env TERM='dumb' INSIDE_EMACS='26.1,tramp:2.3.3.26.1' ENV='' HISTFILE=~/.tramp_history PROMPT_COMMAND='' PS1=\#\$\  PS2='' PS3='' /bin/sh
-aws cloudformation describe-stack-events --stack-name ranqx-loan-testing-sandbox-cloudwatch | jq lenght
-cat ~/.ssh/id_rsa.pub | xclip -sel clip
 ```
 
 #### Analyse Logs. Logs named 3 to 31.gz month. Month like Feb 2020 and print
@@ -180,8 +168,8 @@ zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | l
 ```
 
 #### Xclip to capture the clipboard when copying.
-
-`xclip` <br>
+`cat ~/.ssh/id_rsa.pub | xclip -sel clip`<br>
+`xclip`
 
 #### nohup execution
 `nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.

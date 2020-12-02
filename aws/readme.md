@@ -9,6 +9,7 @@
     - [Use cases for AWS CLI](#use-cases-for-aws-cli)
   - [General AWS](#general-aws)
   - [AWS EC2 Elastic Compute Cloud](#aws-ec2-elastic-compute-cloud)
+    - [AWS EC2 metadata API interactions](#aws-ec2-metadata-api-interactions)
     - [Creating EC2 Instances](#creating-ec2-instances)
     - [AWS EC2 Volumes](#aws-ec2-volumes)
   - [AWS IAM](#aws-iam)
@@ -50,6 +51,23 @@ aws ec2 describe-key-pairs | jq -r '.KeyPairs[].KeyName'
 #### How many instances of each type do I have, and in what states?
 ```bash
 aws ec2 describe-instances | jq -r "[[.Reservations[].Instances[]|{ state: .State.Name, type: .InstanceType }]|group_by(.state)|.[]|{state: .[0].state, types: [.[].type]|[group_by(.)|.[]|{type: .[0], count: ([.[]]|length)}] }]"
+```
+
+### AWS EC2 metadata API interactions
+
+```bash
+#### Get AWS EC2 metadata info
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600") && \
+curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/
+
+#### Get security groups from AWS EC2
+curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/security-groups
+
+#### Get public hostname
+curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/public-hostname
+
+#### Get profile
+curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/profile
 ```
 
 ### Creating EC2 Instances
@@ -148,10 +166,17 @@ aws rds describe-db-instances | jq -r '.DBInstances[] | { (.DBInstanceIdentifier
 
 ## AWS CF Cloud Formation 
 Infrastructure as a configuration
+
 #### How Many CloudFormation Stacks do I have in each Status?
-```
+```bash
 aws cloudformation list-stacks | jq  '.StackSummaries | [ group_by(.StackStatus)[] | { "status": .[0].StackStatus, "count": (. | length) }
 ]'
+```
+
+#### Number of cloudformation stack objects
+```bash
+exec env TERM='dumb' INSIDE_EMACS='26.1,tramp:2.3.3.26.1' ENV='' HISTFILE=~/.tramp_history PROMPT_COMMAND='' PS1=\#\$\  PS2='' PS3='' /bin/sh
+aws cloudformation describe-stack-events --stack-name $MY_CLOUDFORMATION_STACKNAME | jq lenght
 ```
 
 #### Which EC2 Instances were created by AWS CF Stacks?
