@@ -4,25 +4,22 @@
 
 <!-- code_chunk_output -->
 
-  - [Introduction and complains](#introduction-and-complains)
-- [About Wiki Project](#about-wiki-project)
-  - [Categories](#categories)
-    - [Regular expresion](#regular-expresion)
-- [Linux Bash Commands](#linux-bash-commands)
 - [To be Categorized Inbox](#to-be-categorized-inbox)
+  - [Introduction and complains](#introduction-and-complains)
+- [About WiKiw-IT Project](#about-wikiw-it-project)
+  - [Categories](#categories)
+  - [General Linux Bash Commands](#general-linux-bash-commands)
+    - [Get OS info](#get-os-info)
   - [Systemd Systemctl](#systemd-systemctl)
-    - [SSH](#ssh)
-  - [CURL Client URL](#curl-client-url)
 - [AWS EC2 API interactions](#aws-ec2-api-interactions)
-- [Git](#git)
-  - [Basic Git config set up](#basic-git-config-set-up)
-    - [Image operations with Image Magick](#image-operations-with-image-magickhttpsimagemagickorgindexphp)
   - [Find/Search operations](#findsearch-operations)
   - [Package Management](#package-management)
     - [APT](#apt)
   - [Debugging Linux Systems (mostly Ubuntu)](#debugging-linux-systems-mostly-ubuntu)
+    - [Logs](#logs)
 - [Terminals](#terminals)
-  - [Bash Section](#bash-sectiondevops-toolsbash)
+    - [more in the Bash Section](#more-in-the-bash-sectiondevops-toolsbash)
+  - [CURL Client URL](#curl-client-url)
   - [PDF Operations](#pdf-operations)
     - [PDF tool kit](#pdf-tool-kit)
     - [Networking](#networking)
@@ -32,8 +29,12 @@
     - [Disable the IP Helper service](#disable-the-ip-helper-service)
     - [Windows Nice Terminal](#windows-nice-terminalhttpsdocsmicrosoftcomen-uswindowsterminalget-startedinstallation)
     - [Open SSH](#open-ssh)
-- [Git](#git-1)
-    - [Clone a Git Repo](#clone-a-git-repo)
+  - [SSH Key Management](#ssh-key-management)
+    - [Key generation](#key-generation)
+- [Git](#git)
+  - [Git Administration/Operation](#git-administrationoperation)
+    - [Git operations](#git-operations)
+    - [Git Analysis](#git-analysis)
 - [Programming Languages](#programming-languages)
   - [Java](#java)
     - [OpenJDK](#openjdk)
@@ -50,15 +51,24 @@
     - [System settings](#system-settings)
     - [Nautilus operations](#nautilus-operations)
 - [Docker](#docker)
-    - [yq for yaml processing](#yq-for-yaml-processing)
+    - [YQ for yaml processing](#yq-for-yaml-processing)
   - [Docker-Compose](#docker-compose)
 - [Kubernetes](#kubernetes)
   - [Kubectl commands frequently used](#kubectl-commands-frequently-used)
   - [Minikube](#minikube)
-- [Mac Terminal](#mac-terminal)
+  - [Image Magick](#image-magickhttpsimagemagickorgindexphp)
+    - [Image operations with ImageMagick](#image-operations-with-imagemagick)
 
 <!-- /code_chunk_output -->
-
+---
+# To be Categorized Inbox
+```bash
+grep -Eri health_url .
+ps xfa | less
+find . -maxdepth 1 -type d -mtime +15  -printf '%f\n'
+HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
+```
+---
 ## Introduction and complains
 
 - **2020-04-28=** I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in this github repo; It will have categories and then subcategories with functionalites.
@@ -71,38 +81,45 @@ Don't rely on the cloud 100%. Have local copies of your digital material.
 
 - **2020-11-10=** I totally confirm that i lost my google docs wiki file. I should have been more careful.
 
-# About Wiki Project
+# About WiKiw-IT Project
+
+This project is a collection of CLI commands.
 
 The wiki is going to be divided into subcategories. This main Wiki will redirect to the others but will contain main commands for the OS Linux, Windows (Powershell) and Mac terminal commands.
 
 ## Categories
 
 1. [AWS](./aws/readme.md)
+2. devops-tools
+3. productivity-tools
+   - rescueTime
+   - VsCode
+4. regex
+5. security
 
+## General Linux Bash Commands
 
+### Get OS info
+#### get info about linux version
+`cat /etc/os-release`
 
-### Regular expresion
+#### get pretty print version
+`less /etc/issue`
 
-#### find after `:` symbol all the numbers until the end of the line
-
-`:[0-9]*.*`
-
-# Linux Bash Commands
-
-# To be Categorized Inbox
+#### Debian/ubuntu get version
 ```bash
-grep -Eri health_url .
-ps xfa | less
-find . -maxdepth 1 -type d -mtime +15  -printf '%f\n'
-HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
+lsb_release -a
+hostnamectl
 ```
+
+##### Info about system
+`uname -a` <br>
 
 ## Systemd Systemctl
 
 #### Check status
-`sudo systemctl status application`
-
-#### Example
+`sudo systemctl status APP_SERVICE`
+#### Example system control status nginx
 `sudo systemctl status nginx`
 
 #### Check if service is active
@@ -137,90 +154,12 @@ diff -y loaded.txt enabled.txt
 diff -y loaded.txt enabled.txt | grep '<'
 ```
 
-### SSH
-#### Generate SSH Key pair
-
-#### Add a SSH key to ssh-agent
-
-```bash
-ssh-add -k ~/.ssh/id_rsa
-ssh-keygen -t rsa
-```
-
-#### use of pushd and popd to jump between directories
+#### `pushd` and `popd` to jump between directories
 
 ```shell
 pushd $DIR
 popd
 ```
-
-#### Get info about commits for a given user
-
-```
-git_user=pwebb
-git_date="Sat Aug 30 2019"
-git log --oneline -5 --author $git_user --before $git_date
-```
-
-#### Get git global info
-`git config --global --list`
-
-#### Get a histogram for a gitdiff
-
-`git diff --histogram`
-
-#### prints out just the subject line
-
-`git log --oneline`
-
-#### groups commits by user, again showing just the subject line for concision
-
-`git shortlog`
-
-#### Find the process that consumes more CPU
-
-`ps -eo pid,%cpu,%mem,args --sort -%cpu`
-
-## CURL Client URL
-
-#### Download a file and save it with a custom name
-
-`curl -o custom_file.tar.gz https://testdomain.com/testfile.tar.gz`
-
-#### Get HTTP headers. use the `-I` or the `— head` option
-
-`curl -I https://www.google.com`
-
-#### Ignore invalid certs `-k or --insecure`
-
-`curl -k https://localhost/my_test_endpoint`
-
-#### Make a POST request. JSON `-H 'Content-Type: application/json'`
-
-`curl --data "param1=test1&param2=test2" http://test.com`
-
-#### Specify the type of request
-
-```bash
-# updating the value of param2 to be test 3 on the record id
-curl -X 'PUT' -d '{"param1":"test1","param2":"test3"}' \http://test.com/1
-```
-
-#### Include the Basic Auth:
-
-`curl -u <user:password> https://my-test-api.com/endpoint1`
-
-#### Update name resolution
-
-`curl --resolve www.test.com:80:localhost http://www.test.com/`
-
-#### Upload a file
-
-`curl -F @field_name=@path/to/local_file <upload_URL>`
-
-#### Timing Curl connection
-
-`curl -w "%{time_total}\n" -o /dev/null -s www.test.com`
 
 # AWS EC2 API interactions
 
@@ -232,13 +171,6 @@ curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta
 exec env TERM='dumb' INSIDE_EMACS='26.1,tramp:2.3.3.26.1' ENV='' HISTFILE=~/.tramp_history PROMPT_COMMAND='' PS1=\#\$\  PS2='' PS3='' /bin/sh
 aws cloudformation describe-stack-events --stack-name ranqx-loan-testing-sandbox-cloudwatch | jq lenght
 cat ~/.ssh/id_rsa.pub | xclip -sel clip
-```
-# Git
-## Basic Git config set up
-
-```bash
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
 ```
 
 #### Analyse Logs. Logs named 3 to 31.gz month. Month like Feb 2020 and print
@@ -256,7 +188,8 @@ zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | l
 
 `nohup $COMMAND_OR_SCRIPT > out_$(date).txt`
 
-#### Equivelance of commands in bash
+#### echo a string an pipe it to a command
+In this case the content of a `DockerFile` is echoed first then piped to `docker build` to create a docker image.
 
 ```bash
 echo -e 'FROM busybox\nRUN echo "hello world"' | docker build -
@@ -266,25 +199,9 @@ RUN echo "hello world"
 EOF
 ```
 
-### Image operations with [Image Magick](https://imagemagick.org/index.php)
-
-#### easily-resize-images
-
-```bash
-# percentage
-convert  -resize 50% source.png dest.jpg
-
-# Specific size
-SIZE="1024X768"
-convert -resize $SIZE source.png destination.jpg
-```
 
 ##### maintain symbolic links determining default commands. Show installed Apps
 `update-alternatives --get-selections`
-
-##### Info about system
-
-`uname -a` <br>
 
 ##### Get info about current user
 
@@ -333,11 +250,6 @@ ee
 `./` As the last parameter, the path to the folder containing files you want to search for text.
 You can use the full path of the folder.
 `grep -iRl "TEXT" /home/user/Documents`
-
-#### Find local git repos
-
-`sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n`
-<br>
 
 ## Package Management
 
@@ -394,6 +306,16 @@ You can use the full path of the folder.
 A very important set of skills when something goes wrong and is important to get quick info.
 This can become a small DIY project to manage desktop and cloud servers.
 
+`ls -lth /var/log/ | sort --month-sort` <br>
+`less /var/log/syslog` <br>
+`touch new_empty_file.txt` <br>
+`less /etc/X11/xorg.conf` <br>
+
+#### Find the process that consumes more CPU
+
+`ps -eo pid,%cpu,%mem,args --sort -%cpu`
+
+### Logs
 #### Check System Logs Journal Control
 
 ##### command for viewing logs collected by systemd.
@@ -462,11 +384,15 @@ sudo ln --symbolic $SOURCE_FILE $SYMBOLIC_LINK_PATH
 
 ##### Create a random password
 
-`randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | base64 | tr /= _)`<br>
+```bash
+randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | \
+base64 | tr /= _)
+```
 
 ##### Get stats info about the system
 
 `stat --help`
+`stat $FILE`
 
 #### get text between quotes in a text file. Options
 ```bash
@@ -484,10 +410,6 @@ grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt
 #### Check Disk Usage
 
 `df -h`<br>
-
-##### Remove directory
-
-`rm -rf $DIR_PATH`
 
 ##### See who is connected and Display the load average (uptime output)
 
@@ -585,6 +507,9 @@ eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID
 
 `sudo ncdu /`
 
+##### Remove directory
+`rm -rf $DIR_PATH`
+
 #### Search for execution of a command in the history
 
 `COMMAND=who ; history | grep $COMMAND`
@@ -597,14 +522,14 @@ eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID
 
 # Terminals
 
-## [Bash Section](/devops-tools/bash)
+### more in the [Bash Section](/devops-tools/bash)
 
 #### most used commands in Bash History
 ```bash
 history | \
 awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count\*100 "% " a;}' | \
-grep -v "./" | column -c3 -s " " -t | sort -nr \
-| nl | head -n10
+grep -v "./" | column -c3 -s " " -t | \
+sort -nr | nl | head -n10
 ```
 
 #### Script to list files, directories, executables, and links from a given Workspace directory
@@ -672,6 +597,47 @@ EOF
 ##### Change ownership of all files inside current dir to a given group
 `GROUP_NAME=common ; sudo chown :\$GROUP_NAME \*`
 
+## CURL Client URL
+
+#### Download a file and save it with a custom name
+
+`curl -o custom_file.tar.gz https://testdomain.com/testfile.tar.gz`
+
+#### Get HTTP headers. use the `-I` or the `— head` option
+
+`curl -I https://www.google.com`
+
+#### Ignore invalid certs `-k or --insecure`
+
+`curl -k https://localhost/my_test_endpoint`
+
+#### Make a POST request. JSON `-H 'Content-Type: application/json'`
+
+`curl --data "param1=test1&param2=test2" http://test.com`
+
+#### Specify the type of request
+
+```bash
+# updating the value of param2 to be test 3 on the record id
+curl -X 'PUT' -d '{"param1":"test1","param2":"test3"}' \http://test.com/1
+```
+
+#### Include the Basic Auth:
+
+`curl -u <user:password> https://my-test-api.com/endpoint1`
+
+#### Update name resolution
+
+`curl --resolve www.test.com:80:localhost http://www.test.com/`
+
+#### Upload a file
+
+`curl -F @field_name=@path/to/local_file <upload_URL>`
+
+#### Timing Curl connection
+
+`curl -w "%{time_total}\n" -o /dev/null -s www.test.com`
+
 ## PDF Operations
 
 ### PDF tool kit
@@ -688,10 +654,6 @@ EOF
 #### Get info about PDF_FILE
 
 `pdftk $PDF_FILE.pdf dump_data_utf8 | grep InfoValue:`<br>
-`ls -lth /var/log/ | sort --month-sort` <br>
-`less /var/log/syslog` <br>
-`touch new_empty_file.txt` <br>
-`less /etc/X11/xorg.conf` <br>
 
 #### extract a range of pages from a pdf file
 
@@ -706,6 +668,9 @@ EOF
 ##### Check this awesome Cheat sheet
 
 [CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
+
+#### netstat statistics
+`netstat --statistics`
 
 #### Test connectivity to a port
 
@@ -789,11 +754,25 @@ OpenVPN set [up in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu
 - Use a config ssh custom file to ease connectivity
 - Make sure you are clear PuTTY will create keys with a `priv.ppk` format in windows vs Linux Open SSH key `id_rsa`
 
+## SSH Key Management
+
+### Key generation
+
+#### Generate SSH Key pair
+
+#### Add a SSH key to ssh-agent
+
+```bash
+ssh-add -k ~/.ssh/id_rsa
+ssh-keygen -t rsa
+```
+
 #### Get content of default name of Public Key
 
 `cat ~/.ssh/id_rsa.pub`<br>
 
-#### Read Public SSH key, ssh to \$REMOTE_HOST with root user and run a command to create a directory ssh and add the public key to authorized_keys file
+#### Add an SSH key to a remote Server
+Read Public SSH key, ssh to \$REMOTE_HOST with root user and run a command to create a directory ssh and add the public key to authorized_keys file
 
 ```bash
 COMMAND="mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
@@ -803,12 +782,52 @@ ssh root@$REMOTE_HOST $COMMAND
 
 # Git
 
-### Clone a Git Repo
+## Git Administration/Operation
+
+#### Find local GIT repos
+
+`sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n`
+<br>
+
+### Git operations
+#### Clone a Git Repo
 
 `git clone git@github.com:elastic/stack-docker.git`
 `git status`
 `git branch`
 `git info`
+
+#### Basic Git config set up
+
+```bash
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+```
+
+### Git Analysis
+
+#### Get git global info
+`git config --global --list`
+
+#### Get info about commits for a given user
+
+```bash
+git_user=pwebb
+git_date="Sat Aug 30 2019"
+git log --oneline -5 --author $git_user --before $git_date
+```
+
+#### Get a histogram for a gitdiff
+
+`git diff --histogram`
+
+#### prints out just the subject line
+
+`git log --oneline`
+
+#### groups commits by user, again showing just the subject line for concision
+
+`git shortlog`
 
 # Programming Languages
 
@@ -932,7 +951,7 @@ MY_IMG=
 docker history $MY_IMG | awk 'NR>1 {print $1}' | xargs docker inspect --format '{{ ((index .ContainerConfig.Cmd ) 0) }}'
 ```
 
-### yq for yaml processing
+### YQ for yaml processing
 
 ```bash
 echo 'yq() {
@@ -987,4 +1006,17 @@ sudo chmod +x /usr/local/bin/docker-compose
 `minikube status` <br>
 `minikube stop` <br>
 
-# Mac Terminal
+
+## [Image Magick](https://imagemagick.org/index.php)
+### Image operations with ImageMagick
+
+#### easily-resize-images
+
+```bash
+# percentage
+convert  -resize 50% source.png dest.jpg
+
+# Specific size
+SIZE="1024X768"
+convert -resize $SIZE source.png destination.jpg
+```

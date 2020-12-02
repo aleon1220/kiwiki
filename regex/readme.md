@@ -15,6 +15,13 @@ Find any matching character in the word forest.
 Grab a single character followed by that matching character.
 Match zero or more occurrences of (1) and (2)
 
+### Regular expresion
+
+#### find after `:` symbol all the numbers until the end of the line
+
+`:[0-9]*.*`
+
+---
 ## References
 https://medium.com/better-programming/breaking-down-a-complex-regex-73b6c795a2be
 https://aubreeabril.wordpress.com/2018/08/23/pig-latinizer-using-regex/
