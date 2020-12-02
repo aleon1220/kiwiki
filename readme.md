@@ -17,12 +17,12 @@
     - [APT](#apt)
   - [Debugging Linux Systems (mostly Ubuntu)](#debugging-linux-systems-mostly-ubuntu)
     - [Logs](#logs)
+    - [Networking](#networking)
 - [Terminals](#terminals)
     - [more in the Bash Section](#more-in-the-bash-sectiondevops-toolsbash)
   - [CURL Client URL](#curl-client-url)
-  - [PDF Operations](#pdf-operations)
+  - [PDF Operations Tools](#pdf-operations-tools)
     - [PDF tool kit](#pdf-tool-kit)
-    - [Networking](#networking)
 - [Windows products (micro\$oft)](#windows-products-microoft)
   - [Windows - & WinServer](#windows-winserver)
     - [Networking](#networking-1)
@@ -366,6 +366,30 @@ journalctl --until "2018-09-02 12:05:50"
 
 `journalctl --vacuum-time=1years`
 
+### Networking
+
+##### Check this awesome Cheat sheet
+
+[CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
+
+#### inspect TCP socket states e.g. 443
+`ss -nta '( dport = :443 )'`
+
+#### netstat statistics
+`netstat --statistics`
+
+#### Test connectivity to a port
+
+`nc -vvv $host $port` <br>
+
+#### Check Any URL and get output in Text
+
+`curl -l localhost:80` <br>
+
+#### Get listening ports
+
+`ss -tulwn`
+
 #### Create a Symbolic Link
 
 ```bash
@@ -389,7 +413,7 @@ randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | \
 base64 | tr /= _)
 ```
 
-##### Get stats info about the system
+##### Get stats info about a file
 
 `stat --help`
 `stat $FILE`
@@ -638,8 +662,7 @@ curl -X 'PUT' -d '{"param1":"test1","param2":"test3"}' \http://test.com/1
 
 `curl -w "%{time_total}\n" -o /dev/null -s www.test.com`
 
-## PDF Operations
-
+## PDF Operations Tools
 ### PDF tool kit
 
 ##### Recursively find inside pdfs
@@ -662,28 +685,6 @@ curl -X 'PUT' -d '{"param1":"test1","param2":"test3"}' \http://test.com/1
 #### split specific pages from the source file, for example page 5, page 6, and page 10
 
 `pdftk source.pdf cat 5 6 10 output SplittedOutput.pdf`
-
-### Networking
-
-##### Check this awesome Cheat sheet
-
-[CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
-
-#### netstat statistics
-`netstat --statistics`
-
-#### Test connectivity to a port
-
-`nc -vvv $host $port` <br>
-
-#### Check Any URL and get output in Text
-
-`curl -l localhost:80` <br>
-
-#### Get listening ports
-
-`ss -tulwn`
-
 ---
 
 # Windows products (micro\$oft)
