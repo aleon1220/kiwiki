@@ -67,6 +67,21 @@ ps xfa | less
 #### Find directories modified within the past 10 days
 find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
 HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
+##### make sure you have mounted loop device kernel module
+lsmod | grep loop
+
+##### info about mount the loop device kernel module
+modprobe loop
+
+##### mount an ISO file as loop device 
+mount -o loop -t iso9660 <path/to/iso/file> /media/cdrom
+
+## Check status of important services
+timedatectl status
+sudo systemctl edit --full cron.service
+sudo systemctl status nginx supervisor php7.2-fpm
+sudo service jenkins status
+
 ```
 ---
 ## Introduction and complains
@@ -817,6 +832,44 @@ git log --oneline -5 --author $git_user --before $git_date
 #### groups commits by user, again showing just the subject line for concision
 
 `git shortlog`
+
+#### switch to previous branch
+`git checkout -`
+
+#### Add small patches to a commit
+`git add -p`
+
+#### find the last working commit by basically using binary search.
+```bash
+git bisect start
+
+# for a commit that you know is working correctly
+git bisect good
+
+# for a commit that you know is NOT working correctly
+git bisect bad
+```
+
+#### Ammend a commit
+```bash
+git commit --amend
+
+git push -f
+```
+
+#### change a commit message that was made way before
+```bash
+#n is the number of commits to go back
+git rebase -i HEAD~n
+
+# best to use git cherry-pick
+
+## then 
+edit
+
+git push -f
+```
+
 
 # Programming Languages
 

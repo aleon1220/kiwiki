@@ -185,6 +185,17 @@ for stack in $(aws cloudformation list-stacks --stack-status-filter CREATE_COMPL
 ```
 
 ## AWS CloudWatch
+### CloudWatch Agent info in EC2
+#### Log Location
+```bash
+/opt/aws/amazon-cloudwatch-agent/etc/
+/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log
+```
+
+#### log config file 
+`amazon-cloudwatch-agent.json`
+
+### Cloudwatch Logs
 #### What’s happening in my Log Streams?
 `logs=$(aws logs describe-log-groups | jq -r '.logGroups[].logGroupName')`
 
@@ -194,7 +205,7 @@ for each
 for group in $logs; do echo $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 | jq -r '.logStreams[0].logStreamName + " "'); done
 ```
 
-#### loop through the groups and streams and get the last 10 messages since midnight
+#### loop through the groups and streams to get the last 10 messages since midnight
 ```bash
 for group in $logs; do for stream in $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 | jq -r '[ .logStreams[0].logStreamName + " "] | add'); do echo ">>>"; echo GROUP: $group; echo STREAM: $stream; aws logs get-log-events --limit 10 --log-group-name $group --log-stream-name $stream --start-time $(date -d 'today 00:00:00' '+%s%N' | cut -b1-13) | jq -r ".events[].message"; done; done
 ```
