@@ -32,6 +32,17 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip awscliv2.zip
 sudo ./aws/install
 
+## AWS CLI command completion
+echo $SHELL
+which aws_completer
+# Add the completer's folder to your path
+export PATH=/usr/local/bin:$PATH
+ source ~/.bashrc
+# source ~/.bash_profile
+
+# Enable command completion
+complete -C '/usr/local/bin/aws_completer' aws
+
 # Docker latest
 sudo apt-get update
 sudo apt-get install -y \

@@ -111,6 +111,9 @@ ln -s lsd lsf
 ln -s lsd lsx
 ```
 
+there is a built-in command called `complete`. Example to execute the auto complete feature for AWSCLI
+`complete -C '/usr/local/bin/aws_completer' aws`
+
 ### [JSON JQ](https://www.json.org/json-en.html) in bash
 ### JQ
 - [source JQ Manual](https://stedolan.github.io/jq/manual/)

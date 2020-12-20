@@ -274,7 +274,7 @@ You can use the full path of the folder.
 
 `sudo apt list | grep python` <br>
 
-#### List a installed packages
+#### List installed packages
 
 `sudo apt list --installed` <br>
 
@@ -319,6 +319,19 @@ This can become a small DIY project to manage desktop and cloud servers.
 `ps -eo pid,%cpu,%mem,args --sort -%cpu`
 
 ### Logs
+#### commong logs in linux
+`/var/log/message`
+Contains global system messages, including the messages that are logged during system startup. Includes mail, cron, daemon, kern, auth, etc.
+
+`/var/log/auth.log`
+Authenication logs
+
+`/var/log/kern.log`
+Kernel logs
+
+`/var/log/cron.log`
+Crond logs
+
 #### Check System Logs Journal Control
 
 ##### command for viewing logs collected by systemd.

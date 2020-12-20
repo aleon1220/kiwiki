@@ -12,12 +12,15 @@
     - [AWS EC2 metadata API interactions](#aws-ec2-metadata-api-interactions)
     - [Creating EC2 Instances](#creating-ec2-instances)
     - [AWS EC2 Volumes](#aws-ec2-volumes)
+    - [Inventory questions about EC2 instances](#inventory-questions-about-ec2-instances)
   - [AWS IAM](#aws-iam)
   - [AWS VPC](#aws-vpc)
   - [AWS Lambda](#aws-lambda)
   - [AWS RDS Databases](#aws-rds-databases)
   - [AWS CF Cloud Formation](#aws-cf-cloud-formation)
   - [AWS CloudWatch](#aws-cloudwatch)
+    - [CloudWatch Agent info in EC2](#cloudwatch-agent-info-in-ec2)
+    - [Cloudwatch Logs](#cloudwatch-logs)
   - [AWS CloudWatch Logs set to 30 days](#aws-cloudwatch-logs-set-to-30-days)
   - [AWS S3](#aws-s3)
 
@@ -25,6 +28,9 @@
 
 ### Use cases for AWS CLI
 source obtained from this wonderful [Medium post by circuit People](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1)
+
+#### installation AWS CLI2
+follow [Install AWS CLI2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html)
 
 ## General AWS
 #### Get current configs. 
@@ -115,6 +121,45 @@ aws ec2 describe-volumes | jq -r '.Volumes | [ group_by(.State)[] | { (.[0].Stat
 aws ec2 describe-snapshots --owner-ids self | jq '.Snapshots | [ group_by(.VolumeId)[] | { (.[0].VolumeId): { "count": (.[] | length), "size": ([.[].VolumeSize] | add) } } ] | add'
 ```
 
+#### get the information like: InstanceID, InstanceType and the value of the Name tag
+```bash
+INST_ID=""
+aws ec2 describe-instances --instance-ids $INST_ID --output text --query 'Reservations[].Instances[].[InstanceId, InstanceType, [Tags[?Key==Name].Value] [0][0] ]'
+```
+
+#### extracting Tag values
+```bash
+ aws ec2 describe-instances \
+--output text \
+--query 'Reservations[].Instances[].[InstanceId, InstanceType, ImageId,
+KeyName, State.Name, LaunchTime, Placement.AvailabilityZone, Placement.Tenancy,
+PrivateIpAddress, PrivateDnsName, PublicDnsName, PublicIpAddress, SubnetId, VpcId,
+[Tags[?Key==Name].Value] [0][0], [Tags[?Key==Environment].Value] [0][0] ]'
+```
+
+#### Describing volumes
+```bash
+aws ec2 describe-volumes \
+--output text \
+--filters "Name=status,Values=in-use" \
+--query 'Volumes[*].[Attachments[0].InstanceId,VolumeId,Attachments[0].State,
+AvailabilityZone,Size,State,Iops,VolumeType]'
+```
+
+#### region
+`ec2 describe-regions --output text --query 'Regions[].[RegionName]'`
+
+### Inventory questions about EC2 instances
+- how many are running in each region?
+- how many instances there are with a certain Tag name and value combination?
+- how many instances there are for Production, Staging or Development environments?
+- examine certain instance types and check if some of them, combined with a certain environment, are running -longer than expected
+-  total amount of Volumes attached to an instance and what the total volume size for each instance is.
+
+
+
+
+
 ## AWS IAM
 #### When was my AWS user account created?
 `aws iam get-user | jq -r ".User.CreateDate[:4]"` 
@@ -130,6 +175,10 @@ aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01"),End=$(date --d
 ```
 
 ## AWS VPC
+
+#### What are my VPCs in table format
+`aws ec2 describe-vpcs --output table`
+
 #### What CIDRs have Ingress Access to which Ports?
 ```bash
 aws ec2 describe-security-groups | jq '[ .SecurityGroups[].IpPermissions[] as $a | { "ports": [($a.FromPort|tostring),($a.ToPort|tostring)]|unique, "cidr": $a.IpRanges[].CidrIp } ] | [group_by(.cidr)[] | { (.[0].cidr): [.[].ports|join("-")]|unique }] | add'
@@ -249,3 +298,7 @@ aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r '.SecretStr
 ```
 
 [Back to top](#)
+
+---
+#### REFERENCES
+- https://superadmins.com/creating-ec2-inventory-with-aws-cli/
