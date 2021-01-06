@@ -11,7 +11,7 @@
   - [AWS EC2 Elastic Compute Cloud](#aws-ec2-elastic-compute-cloud)
     - [AWS EC2 metadata API interactions](#aws-ec2-metadata-api-interactions)
     - [Creating EC2 Instances](#creating-ec2-instances)
-    - [AWS EC2 Volumes](#aws-ec2-volumes)
+    - [AWS EC2 Volumes AWS CLI reference](#aws-ec2-volumes-aws-cli-referencehttpsdocsawsamazoncomclilatestreferenceec2describe-volumeshtml)
     - [Inventory questions about EC2 instances](#inventory-questions-about-ec2-instances)
   - [AWS IAM](#aws-iam)
   - [AWS VPC](#aws-vpc)
@@ -103,7 +103,22 @@ export INSTANCE_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --ou
 #### Step 6: SSH and profit AWS
 `ssh -i keypair.pem ec2-user@$INSTANCE_IP`
 
-### AWS EC2 Volumes
+### AWS EC2 Volumes [AWS CLI reference](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html)
+
+#### List value associated with the 'Name' tag, Instance ID & EBS Volume ID
+``` bash
+aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value,InstanceId,BlockDeviceMappings[*].Ebs.VolumeId]' --output text
+```
+
+#### Details about EC2 instance and volume block
+``` bash
+aws ec2 describe-instances --query 'Reservations[*].Instances[*].{Name:ImageId,InstanceId:InstanceId,VolumeInfo:BlockDeviceMappings}' --output json
+```
+
+####  list all stopped instances and associated volumes for a clean up of cloud resources and cost savings.
+``` bash
+aws ec2 describe-instances --filters "Name=instance-state-name,Values=stopped" --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value,InstanceId,BlockDeviceMappings[*].Ebs.VolumeId]' --output text
+```
 
 #### How Many Gigabytes of Volumes do I have, by Status?
 ```bash
@@ -117,12 +132,12 @@ aws ec2 describe-volumes | jq -r '.Volumes | [ group_by(.State)[] | { (.[0].Stat
 `aws ec2 describe-snapshots --owner-ids self | jq '[.Snapshots[].VolumeSize] | add'`
 
 #### how do they breakdown by the volume used to create them?
-```bash
+``` bash
 aws ec2 describe-snapshots --owner-ids self | jq '.Snapshots | [ group_by(.VolumeId)[] | { (.[0].VolumeId): { "count": (.[] | length), "size": ([.[].VolumeSize] | add) } } ] | add'
 ```
 
 #### get the information like: InstanceID, InstanceType and the value of the Name tag
-```bash
+``` bash
 INST_ID=""
 aws ec2 describe-instances --instance-ids $INST_ID --output text --query 'Reservations[].Instances[].[InstanceId, InstanceType, [Tags[?Key==Name].Value] [0][0] ]'
 ```
@@ -138,7 +153,7 @@ PrivateIpAddress, PrivateDnsName, PublicDnsName, PublicIpAddress, SubnetId, VpcI
 ```
 
 #### Describing volumes
-```bash
+``` bash
 aws ec2 describe-volumes \
 --output text \
 --filters "Name=status,Values=in-use" \
@@ -146,19 +161,27 @@ aws ec2 describe-volumes \
 AvailabilityZone,Size,State,Iops,VolumeType]'
 ```
 
+#### describe volumes that are attached to a specific instance in another region
+``` bash
+aws ec2 describe-volumes \
+    --region ap-southeast-1 \
+    --filters \
+    Name=attachment.instance-id,Values=i-1234567890abcdef0  \
+    Name=attachment.delete-on-termination,Values=true
+```
 #### region
 `ec2 describe-regions --output text --query 'Regions[].[RegionName]'`
 
 ### Inventory questions about EC2 instances
 - how many are running in each region?
 - how many instances there are with a certain Tag name and value combination?
+``` bash
+### ALL EC2 resources in environment Staging NZ
+aws ec2 describe-tags --filters Name="tag:environment:staging",Values="NZ" --output table
+```
 - how many instances there are for Production, Staging or Development environments?
 - examine certain instance types and check if some of them, combined with a certain environment, are running -longer than expected
 -  total amount of Volumes attached to an instance and what the total volume size for each instance is.
-
-
-
-
 
 ## AWS IAM
 #### When was my AWS user account created?
