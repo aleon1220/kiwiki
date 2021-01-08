@@ -11,7 +11,7 @@
   - [AWS EC2 Elastic Compute Cloud](#aws-ec2-elastic-compute-cloud)
     - [AWS EC2 metadata API interactions](#aws-ec2-metadata-api-interactions)
     - [Creating EC2 Instances](#creating-ec2-instances)
-    - [AWS EC2 Volumes AWS CLI reference](#aws-ec2-volumes-aws-cli-referencehttpsdocsawsamazoncomclilatestreferenceec2describe-volumeshtml)
+    - [AWS EC2 Volumes EBS AWS CLI reference](#aws-ec2-volumes-ebs-aws-cli-referencehttpsdocsawsamazoncomclilatestreferenceec2describe-volumeshtml)
     - [Inventory questions about EC2 instances](#inventory-questions-about-ec2-instances)
   - [AWS IAM](#aws-iam)
   - [AWS VPC](#aws-vpc)
@@ -103,7 +103,28 @@ export INSTANCE_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --ou
 #### Step 6: SSH and profit AWS
 `ssh -i keypair.pem ec2-user@$INSTANCE_IP`
 
-### AWS EC2 Volumes [AWS CLI reference](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html)
+### AWS EC2 Volumes EBS [AWS CLI reference](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html)
+
+- [AWS Premium questions](https://aws.amazon.com/premiumsupport/knowledge-center/ebs-volume-snapshot-ec2-instance/)
+
+#### Find all snapshots over 1 month old
+$ aws ec2 describe-snapshots --owner self --output json | jq '.Snapshots[] | select(.StartTime < "'$(date --date='-1 month' '+%Y-%m-%d')'") | [.Description, .StartTime, .SnapshotId]'
+
+#### List snapshots over 1 month old in all Regions
+$ for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-snapshots --owner self --region $REGION --output json | jq '.Snapshots[] | select(.StartTime < "'$(date --date='-1 month' '+%Y-%m-%d')'") | [.Description, .StartTime, .SnapshotId]' ; done
+
+#### Find all publicly available snapshots in an AWS account in all Regions
+$ for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo "$REGION:"; for snap in $(aws ec2 describe-snapshots --owner self --output json --region $REGION --query 'Snapshots[*].SnapshotId' | jq -r '.[]'); do aws ec2 describe-snapshot-attribute --snapshot-id $snap --region $REGION --output json --attribute createVolumePermission --query '[SnapshotId,CreateVolumePermissions[?Group == `all`]]' | jq -r '.[]'; done; echo; done
+
+#### Get the status of all volumes currently in the optimizing stage (after volume modification) in all Regions
+$ for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-volumes-modifications --query 'VolumesModifications[].{VolumeID:VolumeId,TargetSize:TargetSize,OriginalSize:OriginalSize,Progress:Progress,OriginalIops:OriginalIops,TargetIops:TargetIops}' --output json --filter 'Name=modification-state,Values=optimizing' --region $REGION; done
+
+#### Find all volumes not attached to any instance in all Regions
+$ for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-volumes --filter "Name=status,Values=available" --query 'Volumes[*].{VolumeID:VolumeId,Size:Size,Type:VolumeType,AvailabilityZone:AvailabilityZone}' --region $REGION; done
+
+#### Find all volumes in the "error" state in all Regions
+$ for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-volumes --filter "Name=status,Values=error" --query 'Volumes[*].{VolumeID:VolumeId,Size:Size,Type:VolumeType,AvailabilityZone:AvailabilityZone}' --region $REGION; done
+
 
 #### List value associated with the 'Name' tag, Instance ID & EBS Volume ID
 ``` bash
