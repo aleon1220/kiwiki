@@ -96,7 +96,7 @@ aws ec2 run-instances --instance-type t2.micro --image-id $AMI_ID --region us-ea
 `export INSTANCE_ID=$(jq -r .Instances[].InstanceId instance.json)`
 
 #### Step 5: Wait for the instance to spin-up, then grab it’s IP address and hold onto it in an environment variable:
-```
+``` bash
 export INSTANCE_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --output text --query 'Reservations[*].Instances[*].PublicIpAddress')
 ```
 
@@ -108,10 +108,14 @@ export INSTANCE_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --ou
 - [AWS Premium questions](https://aws.amazon.com/premiumsupport/knowledge-center/ebs-volume-snapshot-ec2-instance/)
 
 #### Find all snapshots over 1 month old
-$ aws ec2 describe-snapshots --owner self --output json | jq '.Snapshots[] | select(.StartTime < "'$(date --date='-1 month' '+%Y-%m-%d')'") | [.Description, .StartTime, .SnapshotId]'
+``` bash
+aws ec2 describe-snapshots --owner self --output json | jq '.Snapshots[] | select(.StartTime < "'$(date --date='-1 month' '+%Y-%m-%d')'") | [.Description, .StartTime, .SnapshotId]'
+```
 
 #### List snapshots over 1 month old in all Regions
-$ for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-snapshots --owner self --region $REGION --output json | jq '.Snapshots[] | select(.StartTime < "'$(date --date='-1 month' '+%Y-%m-%d')'") | [.Description, .StartTime, .SnapshotId]' ; done
+``` bash
+for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-snapshots --owner self --region $REGION --output json | jq '.Snapshots[] | select(.StartTime < "'$(date --date='-1 month' '+%Y-%m-%d')'") | [.Description, .StartTime, .SnapshotId]' ; done
+```
 
 #### Find all publicly available snapshots in an AWS account in all Regions
 $ for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo "$REGION:"; for snap in $(aws ec2 describe-snapshots --owner self --output json --region $REGION --query 'Snapshots[*].SnapshotId' | jq -r '.[]'); do aws ec2 describe-snapshot-attribute --snapshot-id $snap --region $REGION --output json --attribute createVolumePermission --query '[SnapshotId,CreateVolumePermissions[?Group == `all`]]' | jq -r '.[]'; done; echo; done
@@ -316,7 +320,7 @@ for bucket in $(aws s3api list-buckets --query "Buckets[].Name" --output text); 
 
 #### Prefer to have that is dollars per month?
 ```bash
-for bucket in $(aws s3api list-buckets --query "Buckets[].Name" --output text --profile eleven-prod); do aws cloudwatch get-metric-statistics --namespace AWS/S3 --metric-name BucketSizeBytes --dimensions Name=BucketName,Value=$bucket Name=StorageType,Value=StandardStorage --start-time $(date --iso-8601)T00:00 --end-time $(date --iso-8601)T23:59 --period 86400 --statistic Maximum --profile eleven-prod | echo $bucket: \$$(jq -r "(.Datapoints[0].Maximum //
+AWS_PROFILE_USE=name-of-aws-profile for bucket in $(aws s3api list-buckets --query "Buckets[].Name" --output text --profile $AWS_PROFILE_USE); do aws cloudwatch get-metric-statistics --namespace AWS/S3 --metric-name BucketSizeBytes --dimensions Name=BucketName,Value=$bucket Name=StorageType,Value=StandardStorage --start-time $(date --iso-8601)T00:00 --end-time $(date --iso-8601)T23:59 --period 86400 --statistic Maximum --profile $AWS_PROFILE_USE | echo $bucket: \$$(jq -r "(.Datapoints[0].Maximum //
  0) * .023 / (1024*1024*1024) * 100.0 | floor / 100.0"); done;
  ```
 

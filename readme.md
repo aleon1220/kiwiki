@@ -34,6 +34,7 @@
   - [Git Administration/Operation](#git-administrationoperation)
     - [Git operations](#git-operations)
     - [Git Analysis](#git-analysis)
+  - [Git implementations: Bitbucket](#git-implementations-bitbucket)
 - [Programming Languages](#programming-languages)
   - [Java](#java)
     - [OpenJDK](#openjdk)
@@ -105,12 +106,13 @@ The wiki is going to be divided into subcategories. This main Wiki will redirect
 ## Categories
 
 1. [AWS](./aws/readme.md)
-2. devops-tools
-3. productivity-tools
+1. [Azure](./azure/readme.md)
+1. devops-tools
+1. productivity-tools
    - rescueTime
    - VsCode
-4. regex
-5. security
+1. Regular [expressions](./regex/readme.md)
+1. security
 
 ## General Linux Bash Commands
 
@@ -161,7 +163,7 @@ Most of the time, we need to make sure that all the services we use are in the s
 
 #### Find the list of services that are loaded but not enabled
 
-```bash
+``` bash
 systemctl list-units -all | grep service | grep loaded | awk '{print $1;}' > loaded.txt
 systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
 diff -y loaded.txt enabled.txt
@@ -171,7 +173,7 @@ diff -y loaded.txt enabled.txt | grep '<'
 
 #### `pushd` and `popd` to jump between directories
 
-```bash
+``` bash
 pushd $DIR
 popd
 ```
@@ -194,14 +196,13 @@ zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | l
 #### echo a string an pipe it to a command
 In this case the content of a `DockerFile` is echoed first then piped to `docker build` to create a docker image.
 
-```bash
+``` bash
 echo -e 'FROM busybox\nRUN echo "hello world"' | docker build -
 docker build -<<EOF
 FROM busybox
 RUN echo "hello world"
 EOF
 ```
-
 
 ##### maintain symbolic links determining default commands. Show installed Apps
 `update-alternatives --get-selections`
@@ -626,7 +627,8 @@ EOF
 ```
 
 #### Clear Bash terminal Screen
-`clear`<br>
+ - `clear`
+ - `CTRL + L`
 
 #### exit from terminal
 `exit`
@@ -738,12 +740,13 @@ This features attempts to manage some aspects of IPv6 connectivity. To disable i
 
 ##### Extracted from some old notes
 
-```powershell
+``` powershell
 attrib = configurations for files and folders
 netstat -nao = network statistics
-	netsat -ano | find str "PID"
+netsat -ano | find str "PID"
+
 sc = services command
-	sc delete "serviceName"
+sc delete "serviceName"
 sfc /scannow || System File Checker
 pathping  "ip" || determine whether the router is performing slowly or dropping packets.
 fciv.exe [Commands] <Options> || File Checksum Integrity Verifier install as plugin first.
@@ -779,7 +782,7 @@ OpenVPN set [up in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu
 
 #### Add a SSH key to ssh-agent
 
-```bash
+``` bash
 ssh-add -k ~/.ssh/id_rsa
 ssh-keygen -t rsa
 ```
@@ -877,12 +880,19 @@ git rebase -i HEAD~n
 
 # best to use git cherry-pick
 
-## then 
+## then
 edit
 
 git push -f
 ```
 
+## Git implementations: Bitbucket
+ Atlassian support [docs](https://support.atlassian.com/bitbucket-cloud/docs/change-the-remote-url-to-your-repository/)
+
+- get the remote info first
+`git remote -v`
+- Update the remote URL with git remote set-url using the current and new remote URLs.
+`git remote set-url origin git@bitbucket.org:tutorials/tutorials.git`
 
 # Programming Languages
 
