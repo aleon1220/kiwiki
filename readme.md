@@ -804,6 +804,9 @@ ssh root@$REMOTE_HOST $COMMAND
 
 ## Git Administration/Operation
 
+#### show GPG signatures used in a repo
+git log --show-signature
+
 #### Find local GIT repos
 
 `sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n`
@@ -823,6 +826,15 @@ ssh root@$REMOTE_HOST $COMMAND
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 ```
+
+#### Instruct Git to use gpg2 instead of gpg as the signing program
+`git config --global gpg.program gpg2`
+
+#### Test by signing some text with `gpg` and `gpg2`
+`echo "test" | gpg2 --clearsign`
+
+#### set variable for GPG and terminal usage
+`export GPG_TTY=$(tty)`
 
 ### Git Analysis
 

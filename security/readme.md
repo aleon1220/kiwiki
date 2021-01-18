@@ -297,12 +297,15 @@ ssh-keygen -y -f gpg-key.pem > ~/.ssh/id_rsa.pub
 # OpenSSH to GnuPG S/MIME
 # First we need to create a certificate (self-signed) for our ssh key:
 
-openssl req -new -x509 -key ~/.ssh/id_rsa -out ssh-cert.pem
+`openssl req -new -x509 -key ~/.ssh/id_rsa -out ssh-cert.pem`
 We can now import it in GnuPG
+#### Format 12 compatible with java JKS
+`openssl pkcs12 -export -in ssh-certs.pem -inkey ~/.ssh/id_rsa -out ssh-key.p12`
+#### import created key above
+`gpgsm --import ssh-key.p12`
 
-openssl pkcs12 -export -in ssh-certs.pem -inkey ~/.ssh/id_rsa -out ssh-key.p12
-gpgsm --import ssh-key.p12
 Notice you cannot import/export DSA ssh keys to/from GnuPG
+
 ```
 ### GPG in Windows Subsystem Linux WSL
 GPG guide in Windows Subsystem for Linux WSL by [Jess Esquire](https://www.jessesquire.com/articles/2019/03/31/configure-github-activity-signing-with-wsl/)
