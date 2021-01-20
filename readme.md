@@ -5,6 +5,7 @@
 <!-- code_chunk_output -->
 
 - [To be Categorized Inbox](#to-be-categorized-inbox)
+  - [Check status of important services](#check-status-of-important-services)
   - [Introduction and complains](#introduction-and-complains)
 - [About WiKiw-IT Project](#about-wikiw-it-project)
   - [Categories](#categories)
@@ -65,25 +66,31 @@
 ```bash
 grep -Eri health_url .
 ps xfa | less
+```
+
 #### Find directories modified within the past 10 days
+``` bash
 find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
 HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
+```
+
 ##### make sure you have mounted loop device kernel module
-lsmod | grep loop
+`lsmod | grep loop`
 
 ##### info about mount the loop device kernel module
-modprobe loop
+`modprobe loop`
 
 ##### mount an ISO file as loop device 
 mount -o loop -t iso9660 <path/to/iso/file> /media/cdrom
 
 ## Check status of important services
+``` bash
 timedatectl status
 sudo systemctl edit --full cron.service
 sudo systemctl status nginx supervisor php7.2-fpm
 sudo service jenkins status
-
 ```
+
 ---
 ## Introduction and complains
 
@@ -140,10 +147,9 @@ hostnamectl
 `sudo systemctl status nginx`
 
 #### Check if service is active
-If you’re using a monitoring service like Zabbix and need to check if a service is active, you can use:
 `systemctl is-active nginx`
 
-#### List all loaded units
+#### List all loaded service units
 
 `systemctl list-units -all | grep loaded | awk '{print $1;}'`
 
@@ -188,6 +194,12 @@ zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | l
 `cat ~/.ssh/id_rsa.pub | xclip -sel clip`<br>
 `xclip`
 
+#### X window var
+`echo $XDG_CURRENT_DESKTOP` <br>
+
+#### check a dir with a parameter. Double check `info stat`
+`stat %A $DIR`<br>
+
 #### nohup execution
 `nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
 
@@ -225,17 +237,17 @@ EOF
 
 ##### Create an alias with a command to go to a specific directory
 
-```
+``` bash
 alias ee='cd /home/ws/01-inbox/02-projects/2019-ee/test-env/eenz' <br>
 ee
 ```
 
 #### Copy files from Local to Remote Server
-
-`scp -r $LOCAL_PATH/sftp-shim ubuntu@$REMOTE_HOST_SERVER:$REMOTE_SERVER_PATH`<br>
-`echo $XDG_CURRENT_DESKTOP` <br>
-`stat %A $DIR`<br>
-`echo "cd $PWD"` <br>
+define the local and remote paths in env vars. Perform the copy
+``` bash
+scp -r $LOCAL_PATH/sftp-shim ubuntu@$REMOTE_HOST_SERVER:$REMOTE_SERVER_PATH
+echo "cd $PWD"
+```
 
 ## Find/Search operations
 
@@ -794,7 +806,7 @@ ssh-keygen -t rsa
 #### Add an SSH key to a remote Server
 Read Public SSH key, ssh to \$REMOTE_HOST with root user and run a command to create a directory ssh and add the public key to authorized_keys file
 
-```bash
+``` bash
 COMMAND="mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
 cat ~/.ssh/id_rsa.pub | \
 ssh root@$REMOTE_HOST $COMMAND
@@ -803,9 +815,84 @@ ssh root@$REMOTE_HOST $COMMAND
 # Git
 
 ## Git Administration/Operation
+use `@` instead of `HEAD`
+
+GitOps from a [medium post @omar Shakari](https://medium.com/better-programming/git-commands-to-live-by-349ab1fe3139)
+
+#### Delete Remote Branches
+git push <remote> -d <branch> or git push <remote> :<branch>
+git push origin :my-awesome-feature
+
+#### change remote URL if you change your repository’s name
+Command: git remote set-url <remote> <newurl>
+Example: git remote set-url origin github.com/myusername/my-repo
+
+##### Stash Individual Files
+`git stash push -- <filepath(s)>`
+Example: `git stash push -- src/index.js README.md`
+
+##### Show Content of Most Recent Stash
+Command: git stash show -p [stash@{<n>}]
+Explanation:
+-p says that we want to see the actual content of the stash. Omitting it will show only the file names.
+stash@{<n>} allows us to specify a certain stash, denoted by n (0 being the most recent one).
+Example: git stash show -p stash@{1}
+
+#### Check Out File From Another Branch
+Command: git checkout <branch> -- <path(s)>
+Example: git checkout my-awesome-feature src/lasers.js
+
+#### work with 2 branches
+Command: git worktree add <path> <branch>
+And when you no longer need it, run:
+git worktree remove [-f] <path>
+Example:
+1.git worktree add my-other-awesome-feature ../my-other-awesome-feature
+2. git worktree remove ../my-other-awesome-feature
+Explanation: Creates a linked working tree (i.e., another directory on the file system associated with the repo) called my-other-awesome-feature, one level above your current working directory, with the specified branch checked out.
+
+#### Show Commit Content shows changes introduced by a commit
+Command: git show <commit>
+Alternatively, to see the changes between two specific commits run
+git diff <commit-a> <commit-b>
+Example: git diff HEAD~ HEAD
+
+#### Compare Files Between Branches/Commits
+Command: git diff <commit-a> <commit-b> -- <path(s)>
+Example: git diff 0659bdc e6c7c0d -- src/flair.py
+
+#### Reset a Single File to Most Recent Commit
+Command: git checkout [<commit>] -- <path(s)>
+Example: git checkout -- README.md
+
+#### Change Last Commit Message
+Command: git commit --amend [-m '<message>']
+If the old commit had already been pushed, you’ll need to additionally run
+git push --force-with-lease <remote> <branch>.
+Note: As a general rule, and especially if you’re working with others, it’s important to be careful when making any changes to already pushed commits.
+
+#### Change a Specific Commit Message
+Command: git rebase -i <commit>
+Example (see demo below): git rebase -i HEAD~3
+
+#### Delete Last Commit but Keep the Changes
+`git reset HEAD^`
+
+#### Unstage a File
+`git reset HEAD <path>`
+
+#### Remove Ignored Files From Remote
+later decided to .gitignore them, the files will nevertheless persist in your remote repository. To remedy this, git rm is the tool for the job.
+
+Command: git rm [-r] [-n] --cached <path(s)>.
+Then, simply add, commit, and push.
+
+
+
+`git reset --hard `
 
 #### show GPG signatures used in a repo
-git log --show-signature
+`git log --show-signature`
 
 #### Find local GIT repos
 
