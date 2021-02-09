@@ -419,6 +419,9 @@ journalctl --until "2018-09-02 12:05:50"
 
 `ss -tulwn`
 
+#### Get a report with nmap. install it first `sudo snap install nmap`
+`nmap -sV -p- localhost`
+
 #### Create a Symbolic Link
 
 ```bash
