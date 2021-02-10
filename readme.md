@@ -104,7 +104,7 @@ Don't rely on the cloud 100%. Have local copies of your digital material.
 
 - **2020-11-10=** I totally confirm that i lost my google docs wiki file. I should have been more careful.
 
-# About WiKiw-IT Project
+# About KIWIKI Project
 
 This project is a collection of CLI commands.
 
@@ -397,6 +397,8 @@ journalctl --until "2018-09-02 12:05:50"
 
 ### Networking
 
+commands and useful cheat sheet used in networking
+
 ##### Check this awesome Cheat sheet
 
 [CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
@@ -424,7 +426,7 @@ journalctl --until "2018-09-02 12:05:50"
 
 #### Create a Symbolic Link
 
-```bash
+``` bash
 SOURCE_FILE=/home/ubuntu/.local/bin/docker-compose
 SYMBOLIC_LINK_PATH=/usr/bin/docker-compose
 sudo ln --symbolic $SOURCE_FILE $SYMBOLIC_LINK_PATH
@@ -451,7 +453,7 @@ base64 | tr /= _)
 `stat $FILE`
 
 #### get text between quotes in a text file. Options
-```bash
+``` bash
 echo Source_File.txt | grep $REGEX_PATTERN
 grep "'.*'" -o references-get-between-quoutes.txt > result_1855.txt
 
@@ -481,7 +483,7 @@ grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt
 
 #### List Users in Linux
 
-```bash
+``` bash
 less /etc/passwd
 ```
 

@@ -35,5 +35,5 @@ sudo mv terraform $(which terraform) || $terraform_path_UBUNTU
 `terraform destroy`
 
 # AWS Provider
-Configuration process creates a file at ~/.aws/credentials
+Configuration process creates a file at `~/.aws/credentials`
 
