@@ -67,6 +67,8 @@
 grep -Eri health_url .
 ps xfa | less
 ```
+#### Sort processes by memory
+`$ ps aux --sort=-%mem`
 
 #### Find directories modified within the past 10 days
 ``` bash
@@ -327,10 +329,23 @@ This can become a small DIY project to manage desktop and cloud servers.
 `touch new_empty_file.txt` <br>
 `less /etc/X11/xorg.conf` <br>
 
-#### Find the process that consumes more CPU
+Article [medium.com Troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
 
+#### lists all open files belonging to all active processes.
+`lsof`
+
+#### lists open files for current user
+`lsof -u $USER`
+
+#### End all user processes
+`kill -9 $(lsof -t -u $TARGET_USER)`
+#### Retrieve processes running on a specified range
+`lsof -i :8090-9090`
+#### Find the process that consumes more CPU
 `ps -eo pid,%cpu,%mem,args --sort -%cpu`
 
+#### read from a file in a specific line e.g. 4
+`less +4 -N show-time.sh`
 ### Logs
 #### commong logs in linux
 `/var/log/message`
@@ -406,12 +421,28 @@ commands and useful cheat sheet used in networking
 #### inspect TCP socket states e.g. 443
 `ss -nta '( dport = :443 )'`
 
+`netstat` is a great tool for monitoring network connections.
 #### netstat statistics
 `netstat --statistics`
+#### Find ports in use
+``` bash
+netstat -tulpn
+# The -t option checks for TCP connections.
+# The -u option checks for UDP connections.
+# The -l option tells netstat to list only LISTENING connections. If you want to see all connections, use the -a option instead.
+# The -p option shows the PID id of the process.
+# The -n option shows numerical addresses, instead of trying to resolve host, port, or user names.
+```
+
+#### Find user behind a process
+`sudo netstat -tulpe | grep 8090`
 
 #### Test connectivity to a port
 
 `nc -vvv $host $port` <br>
+
+#### Check server status
+`sudo netstat -tuple | grep smtp`
 
 #### Check Any URL and get output in Text
 
@@ -688,6 +719,9 @@ curl -X 'PUT' -d '{"param1":"test1","param2":"test3"}' \http://test.com/1
 #### Update name resolution
 
 `curl --resolve www.test.com:80:localhost http://www.test.com/`
+
+#### Check service health
+`curl -Is http://www.google.com`
 
 #### Upload a file
 
