@@ -1072,6 +1072,15 @@ SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME
 ## AWS RDS MySQL engine
 
 ## PostgreSQL
+#### Access the PostgreSQL server from psql with a specific user:
+`psql -U [username]`
+
+> Once in the console:
+
+#### Check version
+`SELECT version();`
+
+
 
 ## Microsoft SQL Server
 
