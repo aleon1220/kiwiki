@@ -418,6 +418,8 @@ commands and useful cheat sheet used in networking
 
 [CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
 
+#### Flush DNS by resetting the network DEBIAN based
+`sudo /etc/init.d/networking restart`
 #### inspect TCP socket states e.g. 443
 `ss -nta '( dport = :443 )'`
 
