@@ -27,10 +27,10 @@
 I was to generate some security keys to sign an android package!
 Info i have found on my quest after using some openssl commands from [this guide](https://wladimir-tm4pda.github.io/porting/release_keys.html)
 
-##### 2020-09-25 Security Task for Android
+#### 2020-09-25 Security Task for Android
 i was given a security task: Generate some security encryption keys to sign an android package!
 
-Here is some info i have found on my quest after using some openssl commands from this guide [Android release keys](https://wladimir-tm4pda.github.io/porting/release_keys.html)
+Here is some info i have found on my quest after using some `openssl` commands from this guide [Android release keys](https://wladimir-tm4pda.github.io/porting/release_keys.html)
 
 ``` bash
 #!/bin/bash
@@ -132,8 +132,8 @@ Import process completed.
 Done
 done.
 ```
-
-#### Test SSL certificate of particular URL
+### TLS validations
+- #### Test SSL certificate of particular URL
 `openssl s_client -connect yoururl.com:443 –showcerts`
 
 ### Check if SSL V2 or V3 is accepted on URL
@@ -141,15 +141,17 @@ done.
 #### To check SSL V2
 `openssl s_client -connect secureurl.com:443 -ssl2`
 
-To Check SSL V3
+#### To Check SSL V3
 
-openssl s_client -connect secureurl.com:443 –ssl3
-To Check TLS 1.0
+`openssl s_client -connect secureurl.com:443 –ssl3`
 
-openssl s_client -connect secureurl.com:443 –tls1
-To Check TLS 1.1
+#### To Check TLS 1.0
 
-openssl s_client -connect secureurl.com:443 –tls1_1
+`openssl s_client -connect secureurl.com:443 –tls1`
+
+#### To Check TLS 1.1
+
+`openssl s_client -connect secureurl.com:443 –tls1_1`
 
 
 #### To Check TLS 1.2
@@ -158,31 +160,39 @@ openssl s_client -connect secureurl.com:443 –tls1_1
 #### Verify if the particular cipher is accepted on URL
 `openssl s_client -cipher 'ECDHE-ECDSA-AES256-SHA' -connect secureurl:443`
 
-
-#### Convert from Private Key `.pk8` to `.PEM`
+#### Convert from Private Key `.pk8 ` to `.PEM`
 `openssl pkcs8 -in $PRIV_KEY_NAME.pk8 -inform DER -nocrypt -out $NEW_PRIV_KEY_UNENCRYPTED.pem`
 
+### Java Key Store
 #### From JKS --> .p12 --> .PEM
 read the [blog](http://www.gnudeveloper.com/groups/cyber_security/Cryptography_RSA_Key_Exchange_works_in_realtime_using_Keytool_openSSL%20.html)
+
+#### Generate JKS
 ``` bash
-keytool -genkey -alias gdalias   -keystore www_gnudeveloper_com.jks  -keyalg RSA   -keysize 512 
--storepass gnudevpwd   
-keytool -importkeystore   -srcstoretype JKS  -deststoretype PKCS12  -srckeystore   www_gnudeveloper_com.jks 
--destkeystore  www_gnudeveloper_com.p12     -storepass gnudevpwd 
+keytool -genkey -alias gdalias \
+  -keystore www_gnudeveloper_com.jks \
+  -keyalg RSA   -keysize 512 \
+  -storepass gnudevpwd \
  
 openssl pkcs12 -in www_gnudeveloper_com.p12  -out www_gnudeveloper_com.pem
 ```
-## Encryption
-### Java Key Store
-#### single line command to generate a .keystore or .jks
-`echo y | keytool -genkeypair -dname "cn=Mark Jones, ou=JavaSoft, o=Sun, c=US" -alias business -keypass kpi135 -keystore /working/android.keystore -storepass ab987c -validity 20000`
 
-#### Add a website certificate in `.pem` to the JKS
-```bash
-keytool -import -alias marine.net.int -keystore ${JAVA_CERTS} -file cloudbuilder.pem -storepass changeit -noprompt
+#### Import JKS
+``` bash
+keytool -importkeystore \
+  -srcstoretype JKS \
+  -deststoretype PKCS12 \
+  -srckeystore www_gnudeveloper_com.jks \
+  -destkeystore www_gnudeveloper_com.p12 \
+  -storepass gnudevpwd
 ```
+#### Command to generate a `.keystore ` or ` .jks`
+``` bash
+echo y | keytool -genkeypair -dname "cn=Mark Jones, ou=JavaSoft, o=Sun, c=US" -alias business -keypass kpi135 -keystore /working/android.keystore -storepass ab987c -validity 20000
+```
+##### Flags explanation for command to generate KeyStores
+<br>
 
-##### Flags explanation
 - `dname=`is a unique identifier for the application in the .keystore. It includes
     - `cn=`the full name of the person or organization that generates the .keystore
     - `ou=`Organizational Unit that creates the project, its a subdivision of the Organization that creates it. Ex. android.google.com
@@ -194,8 +204,14 @@ keypass=Password for protecting that specific alias.
 - `keystore=`Path where the .keystore file shall be created (the standard extension is actually .ks)
 - `storepass=`Password for protecting the whole .keystore content.
 - `validity=`Amount of days the app will be valid with this `.keystore`
+#### Add a website certificate in `.pem` to the JKS
+``` bash
+keytool -import -alias marine.net.int -keystore ${JAVA_CERTS} -file PEM_FILE_Name.pem -storepass $ADD_PASS -noprompt
+```
 
-#### Convert keys between GnuPG, OpenSsh and OpenSSL [website](http://sysmic.org/dotclear/index.php?post/2010/03/24/Convert-keys-betweens-GnuPG%2C-OpenSsh-and-OpenSSL)
+[Oracle Docs for JKS: PEM to JKS conversion](https://docs.oracle.com/cd/E35976_01/server.740/es_admin/src/tadm_ssl_convert_pem_to_jks.html)
+
+### Convert keys between GnuPG, OpenSsh and OpenSSL [website](http://sysmic.org/dotclear/index.php?post/2010/03/24/Convert-keys-betweens-GnuPG%2C-OpenSsh-and-OpenSSL)
 
 ### OpenSSH to OpenSSL
 OpenSSH private keys are directly understable by OpenSSL. You can test for example:
@@ -212,12 +228,14 @@ openssl dsa -in ~/.ssh/id_dsa -out key_dsa.pem
 ```
 
 So, you can directly use it to create a certification request:
+
 `openssl req -new -key ~/.ssh/id_dsa -out myid.csr`
 
 You can also use your ssh key to create a sef-signed certificate:
+
 `openssl x509 -req -days 3650 -in myid.csr -signkey ~/.ssh/id_rsa -out myid.crt`
 
-Notice: I have not found how to manipulate ssh public key with OpenSSL
+> **Notice:** I have not found how to manipulate ssh public key with OpenSSL
 
 ### OpenSSL to OpenSSH
 Private keys format is same between OpenSSL and OpenSSH. So you just a have to rename your OpenSSL key:
@@ -245,7 +263,7 @@ You can now extract ssh public key using:
 ### GnuPG to OpenSSL
 We already saw all steps. Extract key as for ssh:
 
-```bash
+``` bash
 gpg --list-secret-keys --keyid-format short
 
 gpg --export-secret-keys 01234567 | openpgp2ssh 01234567 > myid.ke
@@ -314,9 +332,17 @@ GPG guide in Windows Subsystem for Linux WSL by [Jess Esquire](https://www.jesse
 
 There are several commonly used filename extensions for X.509 certificates. Unfortunately, some of these extensions are also used for other data such as private keys.
 
-`.pem` – (Privacy-enhanced Electronic Mail) Base64 encoded DER certificate, enclosed between "-----BEGIN CERTIFICATE-----" and "-----END CERTIFICATE-----" <br>
+`.pem` – (Privacy-enhanced Electronic Mail) Base64 encoded DER certificate, enclosed between `"-----BEGIN CERTIFICATE-----"` and `"-----END CERTIFICATE-----"`
+<br>
+
 `.cer`, `.crt`, `.der` – usually in binary DER form, but Base64-encoded certificates are common too (see .pem above)
+
 `.p7b`, `.p7c` – PKCS#7 SignedData structure without data, just certificate(s) or CRL(s)
+
 `.p12` – `PKCS#12`, may contain certificate(s) (public) and private keys (password protected)
+
 `.pfx` – PFX, predecessor of PKCS#12 (usually contains data in PKCS#12 format, e.g., with PFX files generated in IIS)
-`PKCS#7` is a standard for signing or encrypting (officially called "enveloping") data. Since the certificate is needed to verify signed data, it is possible to include them in the SignedData structure. A `.P7C` file is a degenerated SignedData structure, without any data to sign. PKCS#12 evolved from the personal information exchange (PFX) standard and is used to exchange public and private objects in a single file.
+
+`PKCS#7` is a standard for signing or encrypting (officially called "enveloping") data. Since the certificate is needed to verify signed data, it is possible to include them in the SignedData structure.
+
+`.P7C` file is a degenerated SignedData structure, without any data to sign. PKCS#12 evolved from the personal information exchange (PFX) standard and is used to exchange public and private objects in a single file.

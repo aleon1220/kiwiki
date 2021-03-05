@@ -1,5 +1,6 @@
 # Gradle for Android and Java
 
+## 2021-03-05
 - closures=values are respected. values can be passed around.
 - use of groovy syntax. groovy automatically creates getters and setters
 ### tasks
@@ -14,4 +15,5 @@ task myTask {
 }
 
 ```
-- 
+- todo explore $GRADLE_PATH
+`GRADLE_PATH=/home/devops/code/UDACITY/Graddle-course/ud867/`
