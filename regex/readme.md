@@ -21,6 +21,9 @@ Match zero or more occurrences of (1) and (2)
 
 `:[0-9]*.*`
 
+#### find extensions that start after string dash at the end of line
+`-m[\w].$`
+
 ---
 ## References
 https://medium.com/better-programming/breaking-down-a-complex-regex-73b6c795a2be

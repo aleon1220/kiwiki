@@ -418,6 +418,65 @@ commands and useful cheat sheet used in networking
 
 [CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
 
+Accessing a service
+`whois` servers 
+`dig DOMAIN` DNS queries and shows associated records
+`nslookup` alternative to dig. It doesnt use the system local DNS. 
+`traceroute DOMAIN` packets hop
+
+### Network Probing
+
+which tcp or UDP ports are open.
+Can i open a TCP connection to this destination?
+
+`nmap -sS localhost` port scanning TCP,UDP ports open or closed
+`ping/ping6` sends ICMP pings. checks latency
+`netcat` `nc -l 80` test ports
+`telnet` a complete protocol
+
+tcdump -i eth0 icmp
+
+### Traffic capture
+`tcpdump` traffic capture uses bpf filters
+`tcpdump -i eth0 -vvv -d dst $IP`
+wireshark
+### Network management
+`ifconfig` see info about interfaces. get your IP address
+
+`route -n` routing info. Routing table
+
+`arp` check arp cache
+`arp -a`
+
+`ip` see neighbor table. add routes
+
+answers questions
+what are the net interfaces, ips, subnets, broadcast address??
+how do i add routes?
+
+### Load testing
+`tcpreplay` replays traffic from packet capture fire
+```bash
+tcpdump -i eth0 -w traffic.pcap
+tcpreplay -i eth0 httptraffic.pcap
+```
+
+`wrk2` Send Http load
+`wrk2 -t1 -c10 -d60 -R100 -L http://$IP` threads connections duration Requests 
+`iperf3`Send TCP or UDP traffic. Similar to wrk2 but allows UDP
+`nuttcp`
+
+### Benchmarking
+`siege`
+
+BPF/eBPF potentical for new programs
+
+
+
+source: Digital ocean talk Handy Linux networking tools
+
+#### Flush DNS by resetting the network DEBIAN based
+`sudo /etc/init.d/networking restart`
 #### inspect TCP socket states e.g. 443
 `ss -nta '( dport = :443 )'`
 
@@ -1072,6 +1131,15 @@ SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME
 ## AWS RDS MySQL engine
 
 ## PostgreSQL
+#### Access the PostgreSQL server from psql with a specific user:
+`psql -U [username]`
+
+> Once in the console:
+
+#### Check version
+`SELECT version();`
+
+
 
 ## Microsoft SQL Server
 
