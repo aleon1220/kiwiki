@@ -826,6 +826,19 @@ Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
 ##### Get your Public IP Address
 
 `(Invoke-WebRequest -uri "http://ifconfig.me/ip").Content`
+
+#### Flush DNS and restart networking
+Open a terminal or powershell window as Admin
+```dotnetcli
+ipconfig /flushdns
+ipconfig /registerdns
+ipconfig /release
+ipconfig /renew
+netsh winsock reset
+
+echo " Restart the computer "
+```
+
 ##### Restart Network IPV6 associated
 `netsh int ipv6 reset reset.log`
 - Disable any active virtual private network (VPN) connection.
