@@ -313,6 +313,9 @@ for group in $(aws logs describe-log-groups --query "logGroups[].[logGroupName]"
 ```
 
 ## AWS S3
+
+#### Copy directories/files to S3 given bucket excuding .git files
+`aws s3 cp /tmp/foo s3://bucket/ --recursive --exclude ".git/*"`
 #### How Much Data is in Each of my Buckets?
 ```bash
 for bucket in $(aws s3api list-buckets --query "Buckets[].Name" --output text); do aws cloudwatch get-metric-statistics --namespace AWS/S3 --metric-name BucketSizeBytes --dimensions Name=BucketName,Value=$bucket Name=StorageType,Value=StandardStorage --start-time $(date --iso-8601)T00:00 --end-time $(date --iso-8601)T23:59 --period 86400 --statistic Maximum | echo $bucket: $(numfmt --to si $(jq -r ".Datapoints[0].Maximum // 0")); done;
