@@ -924,26 +924,35 @@ ssh root@$REMOTE_HOST $COMMAND
 ```
 
 # Git
-
+system to manage and store source code
 ## Git Administration/Operation
 use `@` instead of `HEAD`
 
 GitOps from a [medium post @omar Shakari](https://medium.com/better-programming/git-commands-to-live-by-349ab1fe3139)
 
 #### Delete Remote Branches
-git push <remote> -d <branch> or git push <remote> :<branch>
-git push origin :my-awesome-feature
+`git push <remote> -d <branch>`
+
+ or 
+
+`git push <remote> :<branch>`
+
+`git push origin :my-awesome-feature`
 
 #### change remote URL if you change your repository’s name
-Command: git remote set-url <remote> <newurl>
-Example: git remote set-url origin github.com/myusername/my-repo
+`Command: `git remote set-url <remote> <newurl>`
+
+`git remote set-url origin github.com/myusername/my-repo`
 
 ##### Stash Individual Files
 `git stash push -- <filepath(s)>`
+
 Example: `git stash push -- src/index.js README.md`
 
 ##### Show Content of Most Recent Stash
-Command: git stash show -p [stash@{<n>}]
+
+`git stash show -p [stash@{<n>}]`
+
 Explanation:
 -p says that we want to see the actual content of the stash. Omitting it will show only the file names.
 stash@{<n>} allows us to specify a certain stash, denoted by n (0 being the most recent one).
@@ -998,8 +1007,6 @@ later decided to .gitignore them, the files will nevertheless persist in your re
 Command: git rm [-r] [-n] --cached <path(s)>.
 Then, simply add, commit, and push.
 
-
-
 `git reset --hard `
 
 #### show GPG signatures used in a repo
@@ -1011,6 +1018,11 @@ Then, simply add, commit, and push.
 <br>
 
 ### Git operations
+
+#### Get help with any git command
+`git init --help`
+
+- use any command `git COMMAND --help`
 #### Clone a Git Repo
 
 `git clone git@github.com:elastic/stack-docker.git`
@@ -1035,7 +1047,6 @@ git config --global user.name "Your Name"
 `export GPG_TTY=$(tty)`
 
 ### Git Analysis
-
 #### Get git global info
 `git config --global --list`
 
@@ -1084,6 +1095,7 @@ git push -f
 ```
 
 #### change a commit message that was made way before
+
 ```bash
 #n is the number of commits to go back
 git rebase -i HEAD~n
@@ -1095,15 +1107,44 @@ edit
 
 git push -f
 ```
+#### list of common commands
+``` bash
+git init
+git clone
+git branch
+git checkout
+git status
+git fetch
+git pull
+git add
+git commit
+git push
+git remote
+git merge
+git log
+git stash
+git reset
+git config
+```
 
 ## Git implementations: Bitbucket
  Atlassian support [docs](https://support.atlassian.com/bitbucket-cloud/docs/change-the-remote-url-to-your-repository/)
 
-- get the remote info first
-`git remote -v`
+- get detailed info
+`git remote --verbose`
+
+- get extra info about remote
+
+`git remote show origin`
+
 - Update the remote URL with git remote set-url using the current and new remote URLs.
 `git remote set-url origin git@bitbucket.org:tutorials/tutorials.git`
 
+#### see the list of git stashes
+`git stash list`
+
+#### reset the current HEAD or changes of your local branch to a specific state.
+`git reset [FILE_PATH]`
 # Programming Languages
 
 ## Java
