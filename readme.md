@@ -471,8 +471,6 @@ tcpreplay -i eth0 httptraffic.pcap
 
 BPF/eBPF potentical for new programs
 
-
-
 source: Digital ocean talk Handy Linux networking tools
 
 #### Flush DNS by resetting the network DEBIAN based
@@ -492,13 +490,12 @@ netstat -tulpn
 # The -p option shows the PID id of the process.
 # The -n option shows numerical addresses, instead of trying to resolve host, port, or user names.
 ```
-
 #### Find user behind a process
 `sudo netstat -tulpe | grep 8090`
 
 #### Test connectivity to a port
 
-`nc -vvv $host $port` <br>
+`nc -vvz $host $port` <br>
 
 #### Check server status
 `sudo netstat -tuple | grep smtp`
@@ -513,6 +510,17 @@ netstat -tulpn
 
 #### Get a report with nmap. install it first `sudo snap install nmap`
 `nmap -sV -p- localhost`
+
+### The `ip` command
+- Show / manipulate routing
+`ip route show`
+`ip route list`
+- Show / manipulate devices
+`cat /etc/network/interfaces`
+- Policy routing
+- Tunnels
+
+
 
 #### Create a Symbolic Link
 
