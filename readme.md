@@ -83,23 +83,6 @@ find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
 HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
 ```
 
-##### make sure you have mounted loop device kernel module
-`lsmod | grep loop`
-
-##### info about mount the loop device kernel module
-`modprobe loop`
-
-##### mount an ISO file as loop device 
-mount -o loop -t iso9660 <path/to/iso/file> /media/cdrom
-
-## Check status of important services
-``` bash
-timedatectl status
-sudo systemctl edit --full cron.service
-sudo systemctl status nginx supervisor php7.2-fpm
-sudo service jenkins status
-```
-
 ---
 ## Introduction and complains
 
@@ -119,7 +102,7 @@ This project is a collection of CLI commands.
 
 The wiki is going to be divided into subcategories. This main Wiki will redirect to the others but will contain main commands for the OS Linux, Windows (Powershell) and Mac terminal commands.
 
-## Categories
+## Repository Categories
 
 1. [AWS](./aws/readme.md)
 1. [Azure](./azure/readme.md)
@@ -130,6 +113,60 @@ The wiki is going to be divided into subcategories. This main Wiki will redirect
 1. Regular [expressions](./regex/readme.md)
 1. security
 
+A Computer as a tool has a CPU processor, memory RAM, storage in form of a drive, connectivity via network card or wifi, graphics visualization via a monitor. The operating system has tools to manage and interact with all the described above.
+
+The categories are:
+
+1. Processing
+1. Memory
+1. Storage
+1. Netowrking
+1. Graphics
+
+## Storage
+Hard drives, volumes, SSDs, mounts, filesystem, etc
+
+####  view your available disk devices and their mount points (if applicable) to help you determine the correct device name to use
+`lsblk`
+
+#### get information about all of the devices attached to the instance
+`sudo lsblk -f`
+
+#### get information about a specific device, such as its file system type.  If the output shows simply data, there is no filesystem in the device.
+```bash
+DEVICE_CHECK="/dev/xvdf"
+sudo file -s DEVICE_CHECK
+```
+##### make sure you have mounted loop device kernel module
+`lsmod | grep loop`
+
+##### info about mount the loop device kernel module
+`modprobe loop`
+
+#### Show Id of devices
+```bash
+sudo blkid
+
+# ubuntu
+sudo lsblk -o +UUID
+
+```
+
+##### mount an ISO file as loop device 
+`mount -o loop -t iso9660 <path/to/iso/file> /media/cdrom`
+
+#### Mount all filesystems
+`sudo mount -a`
+
+## Check status of important services
+``` bash
+timedatectl status
+sudo systemctl edit --full cron.service
+sudo systemctl status nginx supervisor php7.2-fpm
+sudo service jenkins status
+```
+
+The file that keeps track of mounted devices is `/etc/fstab`
 ## General Linux Bash Commands
 
 ### Get OS info
