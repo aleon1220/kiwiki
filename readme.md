@@ -5,10 +5,11 @@
 <!-- code_chunk_output -->
 
 - [To be Categorized Inbox](#to-be-categorized-inbox)
-  - [Check status of important services](#check-status-of-important-services)
   - [Introduction and complains](#introduction-and-complains)
-- [About WiKiw-IT Project](#about-wikiw-it-project)
-  - [Categories](#categories)
+- [About KIWIKI Project](#about-kiwiki-project)
+  - [Repository Categories](#repository-categories)
+  - [Storage](#storage)
+  - [Check status of important services](#check-status-of-important-services)
   - [General Linux Bash Commands](#general-linux-bash-commands)
     - [Get OS info](#get-os-info)
   - [Systemd Systemctl](#systemd-systemctl)
@@ -18,6 +19,12 @@
   - [Debugging Linux Systems (mostly Ubuntu)](#debugging-linux-systems-mostly-ubuntu)
     - [Logs](#logs)
     - [Networking](#networking)
+    - [Network Probing](#network-probing)
+    - [Traffic capture](#traffic-capture)
+    - [Network management](#network-management)
+    - [Load testing](#load-testing)
+    - [Benchmarking](#benchmarking)
+    - [The `ip` command](#the-ip-command)
 - [Terminals](#terminals)
     - [more in the Bash Section](#more-in-the-bash-sectiondevops-toolsbash)
   - [CURL Client URL](#curl-client-url)
@@ -61,7 +68,11 @@
     - [Image operations with ImageMagick](#image-operations-with-imagemagick)
 
 <!-- /code_chunk_output -->
+
 ---
+> END of Table of contents
+---
+
 # To be Categorized Inbox
 Os hillman website. Iframe to include in website
 ```html
@@ -132,8 +143,16 @@ Hard drives, volumes, SSDs, mounts, filesystem, etc
 #### get information about all of the devices attached to the instance
 `sudo lsblk -f`
 
+#### Get manufacturer details for the device
+`lsblk -io NAME,TYPE,SIZE,MOUNtPOINT,FSTYPE,MODEL`
+
+#### DMI table decoder
+`dmidecode | grep UUID`
+
+#### get/set SATA/IDE device parameters
+`DEVICE="/dev/nvme1n1" hdparm -tT --direct DEVICE`
 #### get information about a specific device, such as its file system type.  If the output shows simply data, there is no filesystem in the device.
-```bash
+``` bash
 DEVICE_CHECK="/dev/xvdf"
 sudo file -s DEVICE_CHECK
 ```
@@ -497,7 +516,6 @@ wireshark
 answers questions
 what are the net interfaces, ips, subnets, broadcast address??
 how do i add routes?
-
 ### Load testing
 `tcpreplay` replays traffic from packet capture fire
 ```bash
@@ -563,8 +581,9 @@ netstat -tulpn
 `cat /etc/network/interfaces`
 - Policy routing
 - Tunnels
-
-
+- 
+#### Restart Name Service Cache Process
+`sudo service nscd restart`
 
 #### Create a Symbolic Link
 
@@ -1236,7 +1255,11 @@ SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME
 
 ## AWS RDS MySQL engine
 
+
 ## PostgreSQL
+#### Check this super [PostgreSQL Cheat sheet](https://www.postgresqltutorial.com/postgresql-cheat-sheet/)
+
+
 #### Access the PostgreSQL server from psql with a specific user:
 `psql -U [username]`
 
@@ -1255,7 +1278,7 @@ SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME
 
 ### System settings
 
-#### Get dimendions of Display
+#### **Get** dimendions of Display
 
 `xdpyinfo | grep dim`
 
@@ -1272,6 +1295,7 @@ SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME
 #### Switch between the Icons and List formats
 
 `CTRL + 1 | CTRL + 2`
+
 
 #### Search for files
 
@@ -1338,7 +1362,6 @@ echo 'yq() {
 
 ## Docker-Compose
 Orchestrates docker containers.
-
 
 #### Install Docker-Compose
 ```bash
