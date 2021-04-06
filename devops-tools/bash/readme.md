@@ -119,6 +119,12 @@ there is a built-in command called `complete`. Example to execute the auto compl
 - [source JQ Manual](https://stedolan.github.io/jq/manual/)
 - [source How to Geek](https://www.howtogeek.com/529219/how-to-parse-json-files-on-the-linux-command-line-with-jq/)
 
+one of the nicest things to do is to output JSON to less and see the JSON output in nice colouring.
+for that do
+
+#### colorize json data with jq and less
+`JSON="your.json" cat JSON | jq . --color-output | less --RAW-CONTROL-CHARS`
+`# for the impatient \ cat your.json | jq . -C | less -R`
 ##### pipe json to console, find a string and colorize output
 ```bash
 cat ~/path/to/env-index.json | jq

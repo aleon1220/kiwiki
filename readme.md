@@ -153,7 +153,7 @@ Hard drives, volumes, SSDs, mounts, filesystem, etc
 `DEVICE="/dev/nvme1n1" hdparm -tT --direct DEVICE`
 #### get information about a specific device, such as its file system type.  If the output shows simply data, there is no filesystem in the device.
 ``` bash
-DEVICE_CHECK="/dev/xvdf"
+DEVICE_CHECK="/dev/xvdf"*
 sudo file -s DEVICE_CHECK
 ```
 ##### make sure you have mounted loop device kernel module
@@ -739,6 +739,8 @@ eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID
 ##### Show contents in tree view
 `tree ~`
 
+#### If using GIO Gnome Input/Output
+`gio tree`
 # Terminals
 
 ### more in the [Bash Section](/devops-tools/bash)
