@@ -73,40 +73,13 @@
 > END of Table of contents
 ---
 
-# To be Categorized Inbox
+## To be Categorized Inbox
 Os hillman website. Iframe to include in website
 ```html
 <iframe src="http://www.marketplaceleaders.org/a/" style="overflow:hidden" marginheight="0" marginwidth="0" frameborder="0" width="100%" height="100%"></iframe>
 Read more: http://www.marketplaceleaders.org/tgif/api/#ixzz6pzkOZ8Wi
 ```
-
-```bash
-
-grep -Eri health_url .
-ps xfa | less
-```
-#### Sort processes by memory
-`$ ps aux --sort=-%mem`
-
-#### Find directories modified within the past 10 days
-``` bash
-find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
-HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
-```
-
 ---
-## Introduction and complains
-
-- **2020-04-28=** I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in this github repo; It will have categories and then subcategories with functionalites.
-For years i have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, etc.
-Then a google docs file was inside of a google drive folder. I accidentally deleted the folder and later on I emptied the bin. I truly dislike that.
-I got in touch with google support to no avail. :-(
-I still hope I can recover my file.
-
-Don't rely on the cloud 100%. Have local copies of your digital material.
-
-- **2020-11-10=** I totally confirm that i lost my google docs wiki file. I should have been more careful.
-
 # About KIWIKI Project
 
 This project is a collection of CLI commands.
@@ -124,6 +97,26 @@ The wiki is going to be divided into subcategories. This main Wiki will redirect
 1. Regular [expressions](./regex/readme.md)
 1. security
 
+## Introduction and complains
+
+- **2020-04-28=** I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in this github repo; It will have categories and then subcategories with functionalites.
+For years i have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, etc.
+Then a google docs file was inside of a google drive folder. I accidentally deleted the folder and later on I emptied the bin. I truly dislike that.
+I got in touch with google support to no avail. :-(
+I still hope I can recover my file.
+
+Don't rely on the cloud 100%. Have local copies of your digital material.
+
+- **2020-11-10=** I totally confirm that i lost my google docs wiki file. I should have been more careful.
+- **2021-04-07=** processing inbox category. Moved intro below About Project
+
+you will interact with the computer through the Command Line Interface CLI shell.
+## CLI Shell keyboard shortcuts
+
+
+
+
+
 A Computer as a tool has a CPU processor, memory RAM, storage in form of a drive, connectivity via network card or wifi, graphics visualization via a monitor. The operating system has tools to manage and interact with all the described above.
 
 The categories are:
@@ -133,7 +126,6 @@ The categories are:
 1. Storage
 1. Netowrking
 1. Graphics
-
 ## Storage
 Hard drives, volumes, SSDs, mounts, filesystem, etc
 
@@ -332,6 +324,14 @@ echo "cd $PWD"
 You can use the full path of the folder.
 `grep -iRl "TEXT" /home/user/Documents`
 
+#### searches for ????
+grep -Eri health_url .
+#### Find directories modified within the past 10 days
+``` bash
+find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
+HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
+```
+
 ## Package Management
 
 ### APT
@@ -404,8 +404,19 @@ Article [medium.com Troubleshooting](https://medium.com/better-programming/5-pow
 `kill -9 $(lsof -t -u $TARGET_USER)`
 #### Retrieve processes running on a specified range
 `lsof -i :8090-9090`
+
+### Explore System Processes
+
 #### Find the process that consumes more CPU
 `ps -eo pid,%cpu,%mem,args --sort -%cpu`
+
+#### Sort processes by memory
+`ps aux --sort=-%mem`
+
+#### a very unuseful view with a process tree
+``` bash
+ps xfa | less
+```
 
 #### read from a file in a specific line e.g. 4
 `less +4 -N show-time.sh`
@@ -497,7 +508,7 @@ Can i open a TCP connection to this destination?
 `netcat` `nc -l 80` test ports
 `telnet` a complete protocol
 
-tcdump -i eth0 icmp
+`tcdump -i eth0 icmp`
 
 ### Traffic capture
 `tcpdump` traffic capture uses bpf filters
