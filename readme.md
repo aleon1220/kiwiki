@@ -112,20 +112,36 @@ Don't rely on the cloud 100%. Have local copies of your digital material.
 
 you will interact with the computer through the Command Line Interface CLI shell.
 ## CLI Shell keyboard shortcuts
+- `ctrl + a`  moves cursor to beginning of line (a alphabet or first letter)
+- `ctrl + e`  moves cursor to end of line (Is also kinda close to letter `a` in the US keyboard)
+- `ctrl + w`  cuts the word to the left of the cursor.
+- `alt  + d`  cuts the word to the right of the cursor.
+- `ctrl + k`  cuts everything to the right of the cursor.
+- `ctrl + u`  cuts everything to the left of the cursor.
+- `ctrl + y`  pastes back what you have just cut.
+- `ctrl + e + x`  explanation below
+
+``` bash
+Type a Long command, e.g. add loops or some complex parsing logic. You need more editing power so you press
 
 
+                      ctrl + e + x
 
 
+Editors VIM(or Nano or VI etc.) opens with your command you had typed so far already in the buffer
+```
+
+## The Computer as a modern day to day tool
 
 A Computer as a tool has a CPU processor, memory RAM, storage in form of a drive, connectivity via network card or wifi, graphics visualization via a monitor. The operating system has tools to manage and interact with all the described above.
 
 The categories are:
 
 1. Processing
-1. Memory
-1. Storage
-1. Netowrking
-1. Graphics
+2. Memory
+3. Storage
+4. Netowrking
+5. Graphics
 ## Storage
 Hard drives, volumes, SSDs, mounts, filesystem, etc
 
