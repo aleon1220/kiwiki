@@ -351,9 +351,8 @@ HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]gi
 ## Package Management
 
 ### APT
-
+ubuntu package manager
 #### Fetch packages from Repo
-
 `sudo apt update`
 
 #### Auto remove Obsolete packages
