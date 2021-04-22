@@ -1297,7 +1297,16 @@ SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME
 #### Check version
 `SELECT version();`
 
+#### dump DB and create the DB in the script
+`pg_dump -U postgres -W -C -d example_backups > ~/db_backup.sql`
 
+#### back up my entire PostgreSQL cluster and save it in the entire_cluster.sql file
+`pg_dumpall -U postgres -W -f ~/Example_Dumps/Cluster_Dumps/entire_cluster.sql`
+
+> avoid system asking for too many pass by using ~/`.pgpass file.`
+
+syntax
+`hostname:port:database:username:password`
 
 ## Microsoft SQL Server
 
