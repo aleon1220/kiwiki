@@ -1,7 +1,7 @@
 # LDAP Implementations
 Lightweight Directory Access Protocol
 
-details about LDAP and micro$soft Active directory. 
+details about LDAP and micro$soft Active directory.
 
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
