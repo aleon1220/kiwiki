@@ -179,7 +179,7 @@ sudo lsblk -o +UUID
 
 ```
 
-##### mount an ISO file as loop device 
+##### mount an ISO file as loop device
 `mount -o loop -t iso9660 <path/to/iso/file> /media/cdrom`
 
 #### Mount all filesystems
@@ -508,9 +508,9 @@ commands and useful cheat sheet used in networking
 [CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
 
 Accessing a service
-`whois` servers 
+`whois` servers
 `dig DOMAIN` DNS queries and shows associated records
-`nslookup` alternative to dig. It doesnt use the system local DNS. 
+`nslookup` alternative to dig. It doesnt use the system local DNS.
 `traceroute DOMAIN` packets hop
 
 ### Network Probing
@@ -550,8 +550,11 @@ tcpreplay -i eth0 httptraffic.pcap
 ```
 
 `wrk2` Send Http load
-`wrk2 -t1 -c10 -d60 -R100 -L http://$IP` threads connections duration Requests 
+
+`wrk2 -t1 -c10 -d60 -R100 -L http://$IP` threads connections duration Requests
+
 `iperf3`Send TCP or UDP traffic. Similar to wrk2 but allows UDP
+
 `nuttcp`
 
 ### Benchmarking
@@ -559,7 +562,7 @@ tcpreplay -i eth0 httptraffic.pcap
 
 BPF/eBPF potentical for new programs
 
-source: Digital ocean talk Handy Linux networking tools
+**source:** Digital ocean talk Handy Linux networking tools
 
 #### Flush DNS by resetting the network DEBIAN based
 `sudo /etc/init.d/networking restart`
@@ -607,7 +610,6 @@ netstat -tulpn
 `cat /etc/network/interfaces`
 - Policy routing
 - Tunnels
-- 
 #### Restart Name Service Cache Process
 `sudo service nscd restart`
 
@@ -1023,76 +1025,94 @@ ssh root@$REMOTE_HOST $COMMAND
 ```
 
 # Git
-system to manage and store source code
+system to manage and store source code. Keeps track of changes to the files. Text files only.
 ## Git Administration/Operation
-use `@` instead of `HEAD`
+- use `@` instead of `HEAD`
 
-GitOps from a [medium post @omar Shakari](https://medium.com/better-programming/git-commands-to-live-by-349ab1fe3139)
+GitOps reading from a [medium post @omar Shakari](https://medium.com/better-programming/git-commands-to-live-by-349ab1fe3139)
 
 #### Delete Remote Branches
 `git push <remote> -d <branch>`
 
- or 
+OR
 
 `git push <remote> :<branch>`
 
 `git push origin :my-awesome-feature`
 
-#### change remote URL if you change your repository’s name
-`Command: `git remote set-url <remote> <newurl>`
+#### Change remote URL if you change your repository’s name
+`git remote set-url <remote> <newurl>`
 
 `git remote set-url origin github.com/myusername/my-repo`
 
 ##### Stash Individual Files
 `git stash push -- <filepath(s)>`
 
-Example: `git stash push -- src/index.js README.md`
+Example:
+
+`git stash push -- src/index.js README.md`
 
 ##### Show Content of Most Recent Stash
 
 `git stash show -p [stash@{<n>}]`
 
-Explanation:
--p says that we want to see the actual content of the stash. Omitting it will show only the file names.
-stash@{<n>} allows us to specify a certain stash, denoted by n (0 being the most recent one).
-Example: git stash show -p stash@{1}
+**Explanation:**
+
+`-p` to see the actual content of the stash. Omitting it will show only the file names.
+
+`stash@{<n>}` allows us to specify a certain stash, denoted by `n` ( 0 being the most recent one ).
+
+`git stash show -p stash@{1}`
 
 #### Check Out File From Another Branch
-Command: git checkout <branch> -- <path(s)>
-Example: git checkout my-awesome-feature src/lasers.js
+`git checkout <branch> -- <path(s)>`
 
-#### work with 2 branches
-Command: git worktree add <path> <branch>
-And when you no longer need it, run:
-git worktree remove [-f] <path>
-Example:
-1.git worktree add my-other-awesome-feature ../my-other-awesome-feature
-2. git worktree remove ../my-other-awesome-feature
-Explanation: Creates a linked working tree (i.e., another directory on the file system associated with the repo) called my-other-awesome-feature, one level above your current working directory, with the specified branch checked out.
+`git checkout another-branch src/file.js`
+
+#### Working with 2 branches
+`git worktree add <path> <branch>`
+
+- when you no longer need the branch:
+`git worktree remove [-f] <path>`
+
+**Example:**
+1. `git worktree add my-other-awesome-feature ../my-other-awesome-feature`
+1. `git worktree remove ../my-other-awesome-feature`
+
+**Explanation:** Creates a linked working tree (i.e., another directory on the file system associated with the repo) called `my-other-awesome-feature`, one level above your current working directory, with the specified branch checked out.
 
 #### Show Commit Content shows changes introduced by a commit
-Command: git show <commit>
+`git show COMMIT`
+
 Alternatively, to see the changes between two specific commits run
-git diff <commit-a> <commit-b>
-Example: git diff HEAD~ HEAD
+
+`git diff COMMIT_A COMMIT_B`
+
+`git diff HEAD~ HEAD`
 
 #### Compare Files Between Branches/Commits
-Command: git diff <commit-a> <commit-b> -- <path(s)>
-Example: git diff 0659bdc e6c7c0d -- src/flair.py
+
+`git diff <commit-a> <commit-b> -- <path(s)>`
+`git diff 0659bdc e6c7c0d -- src/flair.py`
 
 #### Reset a Single File to Most Recent Commit
-Command: git checkout [<commit>] -- <path(s)>
-Example: git checkout -- README.md
+`git checkout [<commit>] -- <path(s)>`
+
+`git checkout -- README.md`
 
 #### Change Last Commit Message
-Command: git commit --amend [-m '<message>']
+`git commit --amend [-m '<message>']`
+
 If the old commit had already been pushed, you’ll need to additionally run
-git push --force-with-lease <remote> <branch>.
-Note: As a general rule, and especially if you’re working with others, it’s important to be careful when making any changes to already pushed commits.
+
+`git push --force-with-lease <remote> <branch>`
+
+**Note:** As a general rule, and especially if you’re working with others, it’s important to be careful when making any changes to already pushed commits.
 
 #### Change a Specific Commit Message
-Command: git rebase -i <commit>
-Example (see demo below): git rebase -i HEAD~3
+`git rebase -i COMMIT`
+
+`git rebase -i HEAD~3`
 
 #### Delete Last Commit but Keep the Changes
 `git reset HEAD^`
@@ -1101,11 +1121,17 @@ Example (see demo below): git rebase -i HEAD~3
 `git reset HEAD <path>`
 
 #### Remove Ignored Files From Remote
-later decided to .gitignore them, the files will nevertheless persist in your remote repository. To remedy this, git rm is the tool for the job.
+later decided to `.gitignore` them, the files will nevertheless persist in your remote repository. To remedy this
 
-Command: git rm [-r] [-n] --cached <path(s)>.
-Then, simply add, commit, and push.
+`git rm`
 
+is the tool for the job.
+
+`git rm [-r] [-n] --cached <path(s)>`
+
+Then, simply add, commit, and push
+
+#### Hard reset of branch
 `git reset --hard `
 
 #### show GPG signatures used in a repo
@@ -1116,12 +1142,10 @@ Then, simply add, commit, and push.
 `sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n`
 <br>
 
-### Git operations
-
 #### Get help with any git command
 `git init --help`
 
-- use any command `git COMMAND --help`
+`git COMMAND --help`
 #### Clone a Git Repo
 
 `git clone git@github.com:elastic/stack-docker.git`
@@ -1131,29 +1155,29 @@ Then, simply add, commit, and push.
 
 #### Basic Git config set up
 
-```bash
+``` bash
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 ```
 
-#### Instruct Git to use gpg2 instead of gpg as the signing program
+#### Instruct Git to use GPG2 instead of GPG as the signing program
 `git config --global gpg.program gpg2`
 
 #### Test by signing some text with `gpg` and `gpg2`
 `echo "test" | gpg2 --clearsign`
 
-#### set variable for GPG and terminal usage
+#### Set variable for GPG and terminal usage
 `export GPG_TTY=$(tty)`
 
-### Git Analysis
+### Git Analysis/Reporting
 #### Get git global info
 `git config --global --list`
 
 #### Get info about commits for a given user
 
-```bash
-git_user=pwebb
-git_date="Sat Aug 30 2019"
+``` bash
+git_user="git_user"
+git_date="Sat Aug 30 2021"
 git log --oneline -5 --author $git_user --before $git_date
 ```
 
@@ -1161,22 +1185,22 @@ git log --oneline -5 --author $git_user --before $git_date
 
 `git diff --histogram`
 
-#### prints out just the subject line
+#### Prints out just the subject line
 
 `git log --oneline`
 
-#### groups commits by user, again showing just the subject line for concision
+#### Groups commits by user, again showing just the subject line for concision
 
 `git shortlog`
 
-#### switch to previous branch
+#### Switch to previous branch
 `git checkout -`
 
 #### Add small patches to a commit
 `git add -p`
 
-#### find the last working commit by basically using binary search.
-```bash
+#### Find the last working commit by basically using binary search.
+``` bash
 git bisect start
 
 # for a commit that you know is working correctly
@@ -1193,9 +1217,9 @@ git commit --amend
 git push -f
 ```
 
-#### change a commit message that was made way before
+#### Change a commit message that was made
 
-```bash
+``` bash
 #n is the number of commits to go back
 git rebase -i HEAD~n
 
@@ -1206,7 +1230,7 @@ edit
 
 git push -f
 ```
-#### list of common commands
+#### List of common commands
 ``` bash
 git init
 git clone
@@ -1248,8 +1272,8 @@ git config
 
 ## Java
 
-todo add short details description
-todo add main links
+- todo add short details description
+- todo add main links
 
 ### OpenJDK
 
