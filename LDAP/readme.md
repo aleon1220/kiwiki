@@ -45,7 +45,7 @@ the queries were executed in Apache Directory Studio. It makes life easier to qu
 |                         |               |
 |-------------------------|---------------|
 | Filter                  | (objectClass=person) |
-| Returning<br>Attributes | department    |
+| Returning<br>Attributes | **department** |
 
 
 **Returns**
@@ -64,22 +64,22 @@ the queries were executed in Apache Directory Studio. It makes life easier to qu
 |                         |               |
 |-------------------------|---------------|
 | Filter                  |  (objectClass=person)    |
-| Returning<br>Attributes | mailNickname, department |
+| Returning<br>Attributes | **mailNickname, department** |
 
 #### userID, mail and department for people whame start with Alexander
 |                         |               |
 |-------------------------|---------------|
-| Filter                  | `(|(sAMAccountName=Alexander.*))`  |
-| Returning<br>Attributes | sAMAccountName, mailNickname, department |
+| Filter                  | `(\|(sAMAccountName=Alexander.*))`  |
+| Returning<br>Attributes | **sAMAccountName, mailNickname, department** |
 
 #### emailID and department of 2 given users (can add more if needed) uses estrict matching
 |                         |               |
 |-------------------------|---------------|
-| Filter                  | (&(objectClass=person)(mailNickname="john.doe", "another.user")) |
-| Returning<br>Attributes |  mailNickname, department |
+| Filter                  | `(\&(objectClass=person)(mailNickname="john.doe", "another.user"))` |
+| Returning<br>Attributes | **mailNickname, department** |
 
 #### sAMAccountName, emailID and department of 2 given users (add more users if needed) uses OR `|` matching. It will bring an empty data column if it doesnt match
 |                         |               |
 |-------------------------|---------------|
-| Filter                  | (|(objectClass=person)(mailNickname="john.doe", "another.user")) |
-| Returning<br>Attributes | sAMAccountName, mailNickname, department |
+| Filter                  | `(\|(objectClass=person)(mailNickname="john.doe", "another.user"))` |
+| Returning<br>Attributes | **sAMAccountName, mailNickname, department** |
