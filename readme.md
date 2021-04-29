@@ -1173,6 +1173,11 @@ git config --global user.name "Your Name"
 #### Get git global info
 `git config --global --list`
 
+#### List all remote branches
+`git branch -r`
+
+#### List remote active branches
+`git ls-remote --heads origin`
 #### Get info about commits for a given user
 
 ``` bash
@@ -1200,7 +1205,7 @@ git log --oneline -5 --author $git_user --before $git_date
 `git add -p`
 
 #### Find the last working commit by basically using binary search.
-``` bash
+``` BASH
 git bisect start
 
 # for a commit that you know is working correctly
@@ -1293,13 +1298,14 @@ update-alternatives --config java
 
 #### Connect to DB with mysql command utilities
 
-```HOST=localhost; USER=mysql
+``` BASH
+HOST=localhost; USER=mysql
 mysql -h $HOST -u $USER -p
 ```
 
 #### To check the default character set for a particular database DB_NAME
 
-```
+``` SQL
 SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME
        FROM INFORMATION_SCHEMA.SCHEMATA
        WHERE SCHEMA_NAME='DB_NAME';
