@@ -74,6 +74,15 @@
 ---
 
 ## To be Categorized Inbox
+
+#### Rename ZIP_HASH to FILE_HASH & ZIP_SIZE to FILE_SIZE
+jq '[ . | .["ZIP_HASH"] = .FILE_HASH | .["ZIP_SIZE"] = .FILE_SIZE | del(.ZIP_HASH, .ZIP_SIZE)]' "${OTA_ARTIFACTS_OUT_DIR}/temp0.json" > "${TA_ARTIFACTS_OUT_DIR}/temp1.json"
+##### remove OTA_URL_PREFIX and REL_NOTE
+jq "del(.OTA_URL_PREFIX, .REL_NOTE)" "${OTA_ARTIFACTS_OUT_DIR}/temp1.json" > "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}-metadata.json"
+set -xeu -o pipefail # print exec and fail exec
+zip -r "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}.upd" "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}-metadata.json" "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}.zip"
+
+ls -xl ${AOSP_OUT_DIR} #extension
 Os hillman website. Iframe to include in website
 ```html
 <iframe src="http://www.marketplaceleaders.org/a/" style="overflow:hidden" marginheight="0" marginwidth="0" frameborder="0" width="100%" height="100%"></iframe>
