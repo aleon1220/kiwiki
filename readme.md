@@ -1458,7 +1458,23 @@ sudo chmod +x /usr/local/bin/docker-compose
 `docker-compose --verbose ps` <br>
 `docker-compose --verbose stats` <br>
 
-# Kubernetes
+
+``` bash
+DOCKER_COMPOSE_FILE=/opt/docker-compose.yaml
+SERVICE_NAME="NameInsideDockerCompose"
+```
+
+#### check status of the cocker-compose stack
+`docker-compose -f $DOCKER_COMPOSE_FILE ps`
+
+#### check logs
+`docker-compose -f $DOCKER_COMPOSE_FILE logs`
+#### tail/get  log in format log-yyy-mm-dd. The log lives in a special path in the container. Piped to `less`
+`docker-compose -f $DOCKER_COMPOSE_FILE exec SERVICE_NAME cat "logs/log-$(env TZ="NZT" date +%Y-%m-%d).php" | less`
+
+#### pipe contents of a supervisord.log to `less` from within the container to the host shell 
+`docker-compose -f $DOCKER_COMPOSE_FILE exec SERVICE_NAME cat "logs/supervisord.log" | less`
+# Kubernetes K8S
 
 ## Kubectl commands frequently used
 
