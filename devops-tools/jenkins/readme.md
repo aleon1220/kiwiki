@@ -1,6 +1,15 @@
 # jenkins
 jenkins.io
 
+## Useful functions and tools
+### Variables
+Using env-vars.html
+open `${YOUR_JENKINS_HOST}/env-vars.html` page on your Jenkins master server to get a list of all environment variables listed on an HTML page.
+
+### Test Groovy code
+use the following URL to test groovy snippets
+
+`$JENKINS_URL/script`
 ### Use a Linter to validate Jenkins File
 [linter for Jenkins](https://www.jenkins.io/doc/book/pipeline/development/#linter)
 
@@ -30,7 +39,7 @@ Jenkins log file       = `/var/log/jenkins`
 - [Jenkins project readme in Github](https://github.com/jenkinsci/docker/blob/master/README.md)
 
 ``` bash
-    docker run --name docker-jenkins-test --detach -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+docker run --name docker-jenkins-test --detach -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
 ```
 
 #### Run Jenkins from a Docker Container and install plugins from a list
