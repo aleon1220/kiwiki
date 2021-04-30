@@ -196,6 +196,19 @@ function to interrogate the JSON and see whether an object has a particular key 
 check a specific object, you include its index position in the array filter
 `jq '.[678] | has("nametype")' $FileName.json`
 
+#### Rename JSON Keys
+``` bash
+# ZIP_HASH to FILE_HASH & ZIP_SIZE to FILE_SIZE
+jq '[ . | .["ZIP_HASH"] = .FILE_HASH | .["ZIP_SIZE"] = .FILE_SIZE | del(.ZIP_HASH, .ZIP_SIZE)]' "${OTA_ARTIFACTS_OUT_DIR}/temp0.json" > "${TA_ARTIFACTS_OUT_DIR}/temp1.json"
+```
+##### Remove JSON Keys
+``` bash
+# remove OTA_URL_PREFIX and REL_NOTE
+jq "del(.OTA_URL_PREFIX, .REL_NOTE)" "${OTA_ARTIFACTS_OUT_DIR}/temp1.json" > "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}-metadata.json"
+set -xeu -o pipefail # print exec and fail exec
+zip -r "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}.upd" "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}-metadata.json" "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}.zip"
+```
+
 ### Some tips
 
 - `Up arrow` to recall previous commands
