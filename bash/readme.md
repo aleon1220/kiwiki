@@ -213,13 +213,14 @@ zip -r "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}.upd" "${OTA_ARTIFACTS_OUT_DIR}/${BU
 
 - `Up arrow` to recall previous commands
 - `Tab` completion
-- `Ctrl + U` to cancel current input
-- `Ctrl + R` to reverse search through history
 - `Ctrl + A` to go to the beginning of a line
+- `Ctrl + L` to clear screen (instead of typing "clear").
+- `Ctrl + R` to reverse search through history
+- `Ctrl + U` to cancel current input
 - `#*` and `##*` for prefix manipulation
 - `%` and `%%` for suffix manipulation
 - `^^` for pattern substitution of previous command
-- `Ctrl + L` to clear screen (instead of typing "clear").
+
 - `sudo !!` to run previous command with sudo privileges.
 - `grep -Ev '^#|^\$' $file` will display file content without comments or empty lines."
 
