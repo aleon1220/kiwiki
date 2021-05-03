@@ -78,11 +78,16 @@
 > END of Table of contents
 ---
 
-## To be Categorized Inbox
+# Inbox
 Os hillman website. Iframe to include in website
 ```html
 <iframe src="http://www.marketplaceleaders.org/a/" style="overflow:hidden" marginheight="0" marginwidth="0" frameborder="0" width="100%" height="100%"></iframe>
 Read more: http://www.marketplaceleaders.org/tgif/api/#ixzz6pzkOZ8Wi
+```
+
+``` bash
+BUCKET_NAME=< enter bucket Name >
+sed -i -r "s/^BUCKET_NAME=.*/BUCKET_NAME=$BUCKET_NAME/" /home/ubuntu/sftp-shim.config
 ```
 ---
 # About KIWIKI Project
