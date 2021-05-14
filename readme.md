@@ -89,6 +89,19 @@ Read more: http://www.marketplaceleaders.org/tgif/api/#ixzz6pzkOZ8Wi
 BUCKET_NAME=< enter bucket Name >
 sed -i -r "s/^BUCKET_NAME=.*/BUCKET_NAME=$BUCKET_NAME/" /home/ubuntu/sftp-shim.config
 ```
+
+sudo systemctl enable zfs-import-scan.service
+zpool get cachefile
+ fix zfs-import-cache service not starting run the below commands:
+zpool set cachefile=/etc/zfs/zpool.cache <pool>
+systemctl restart zfs-import-cache.service
+
+To ensure the zfs module is installed for the running kernel run the below command:
+modinfo zfs
+
+To ensure the zfs module is running, run the below command:
+lsmod | grep zfs
+
 ---
 # About KIWIKI Project
 
@@ -154,6 +167,25 @@ The categories are:
 5. Graphics
 ## Storage
 Hard drives, volumes, SSDs, mounts, filesystem, etc
+
+
+### Process for Linux + LVM + ext3
+Example: LVM volume group myvg, mounted volume name uservol1, and disk device in Linux is /dev/sdf
+
+Allocate the disk to the VM. (in Amazon Management Console, Create the EBS volume, write down its ID, and allocate it to the instance)
+
+The EC2 instance should have some udev rules for creating the device node. So you should see a new disk in /dev/sd* ... Log in on the instance and check that the EBS volume is visible, eg fdisk -l /dev/sdf, cat /proc/partitions, run blkid.
+
+Create partition table if needed: fdisk / sfdisk
+
+Initialize for LVM use: pvcreate /dev/sdf
+
+Add the disk (physical volume) to the LVM volume group vgextend
+myvg /dev/sdf
+
+Grow the Volume size: lvextend -L +1024G /dev/myvg/uservol1
+Grow the ext3/ext4 file system: resize2fs /dev/myvg/uservol1
+Check (df -h) and you should see that the mounted file system now have more space.
 
 ####  view your available disk devices and their mount points (if applicable) to help you determine the correct device name to use
 `lsblk`
@@ -331,6 +363,10 @@ define the local and remote paths in env vars. Perform the copy
 scp -r $LOCAL_PATH/sftp-shim ubuntu@$REMOTE_HOST_SERVER:$REMOTE_SERVER_PATH
 echo "cd $PWD"
 ```
+## Compression/Decompression of files
+`tar -czvf name-of-archive.tar.gz /path/to/directory-or-file`
+
+`zip -r compressedFileName.zip file1 file2 dir1/ file3 `
 
 ## Find/Search operations
 
@@ -1390,12 +1426,20 @@ syntax
 `Shift + Delete`
 (You should never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in. Many personal system and program configurations are stored under your home directory.)
 
-# Docker
+### YQ for YAML processing
+
+```bash
+echo 'yq() {
+  docker run --rm -i -v "${PWD}":/workdir mikefarah/yq yq "$@"
+}' | tee -a ~/.bashrc && source ~/.bashrc
+```
+
+# Docker Containers
 `docker version` <br>
 `docker volume ls` <br>
 `docker system df`<br>
 
-#### Search for an app or project containing given strings
+#### Docker Hub Search for an app or project containing given strings
 
 `docker search nagios`
 
@@ -1403,6 +1447,11 @@ syntax
 
 `docker stop $(docker ps --quiet)`
 
+#### List all containers that exited
+`docker ps --filter "status=exited"`
+
+#### Inspect Exitcode by container ID
+`docker inspect <container-id> --format='{{.State.ExitCode}}'`
 #### Clean up Everything including volumes
 
 `docker system prune --all --force --volumes`
@@ -1432,13 +1481,14 @@ MY_IMG=
 docker history $MY_IMG | awk 'NR>1 {print $1}' | xargs docker inspect --format '{{ ((index .ContainerConfig.Cmd ) 0) }}'
 ```
 
-### YQ for yaml processing
+### Docker Exit Codes
+Common exit codes associated with docker containers are:
+- Exit `Code 0`: Absence of an attached foreground process
+- Exit `Code 1`: Indicates failure due to application error
+- Exit `Code 137`: Indicates failure as container received SIGKILL (Manual intervention or ‘oom-killer’ [OUT-OF-MEMORY])
+- Exit `Code 139`: Indicates failure as container received SIGSEGV
+- Exit `Code 143`: Indicates failure as container received SIGTERM
 
-```bash
-echo 'yq() {
-  docker run --rm -i -v "${PWD}":/workdir mikefarah/yq yq "$@"
-}' | tee -a ~/.bashrc && source ~/.bashrc
-```
 
 ## Docker-Compose
 Orchestrates docker containers.
