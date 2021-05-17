@@ -212,7 +212,7 @@ sudo file -s DEVICE_CHECK
 ##### info about mount the loop device kernel module
 `modprobe loop`
 
-#### Show Id of devices
+#### Show ID of devices
 ```bash
 sudo blkid
 
@@ -236,6 +236,105 @@ sudo service jenkins status
 ```
 
 The file that keeps track of mounted devices is `/etc/fstab`
+
+### ZFS File System
+ZFS is a complex ayet powerful FileSystem
+
+**Pool Related Commands**
+
+# zpool create datapool c0t0d0	Create a basic pool named datapool
+# zpool create -f datapool c0t0d0	Force the creation of a pool
+# zpool create -m /data datapool c0t0d0	Create a pool with a different mount point than the default.
+# zpool create datapool raidz c3t0d0 c3t1d0 c3t2d0	Create RAID-Z vdev pool
+# zpool add datapool raidz c4t0d0 c4t1d0 c4t2d0	Add RAID-Z vdev to pool datapool
+# zpool create datapool raidz1 c0t0d0 c0t1d0 c0t2d0 c0t3d0 c0t4d0 c0t5d0	Create RAID-Z1 pool
+# zpool create datapool raidz2 c0t0d0 c0t1d0 c0t2d0 c0t3d0 c0t4d0 c0t5d0	Create RAID-Z2 pool
+# zpool create datapool mirror c0t0d0 c0t5d0	Mirror c0t0d0 to c0t5d0
+# zpool create datapool mirror c0t0d0 c0t5d0 mirror c0t2d0 c0t4d0	disk c0t0d0 is mirrored with c0t5d0 and disk c0t2d0 is mirrored withc0t4d0
+# zpool add datapool mirror c3t0d0 c3t1d0	Add new mirrored vdev to datapool
+# zpool add datapool spare c1t3d0	Add spare device c1t3d0 to the datapool
+## zpool create -n geekpool c1t3d0	Do a dry run on pool creation
+Show Pool Information
+# zpool status -x	Show pool status
+# zpool status -v datapool	Show individual pool status in verbose mode
+# zpool list	Show all the pools
+# zpool list -o name,size	Show particular properties of all the pools (here, name and size)
+# zpool list -Ho name	Show all pools without headers and columns
+File-system/Volume related commands
+# zfs create datapool/fs1	Create file-system fs1 under datapool
+# zfs create -V 1gb datapool/vol01	Create 1 GB volume (Block device) in datapool
+# zfs destroy -r datapool	destroy datapool and all datasets under it.
+# zfs destroy -fr datapool/data	destroy file-system or volume (data) and all related snapshots
+Set ZFS file system properties
+# zfs set quota=1G datapool/fs1	Set quota of 1 GB on filesystem fs1
+# zfs set reservation=1G datapool/fs1	Set Reservation of 1 GB on filesystem fs1
+# zfs set mountpoint=legacy datapool/fs1	Disable ZFS auto mounting and enable mounting through /etc/vfstab.
+# zfs set sharenfs=on datapool/fs1	Share fs1 as NFS
+# zfs set compression=on datapool/fs1	Enable compression on fs1
+File-system/Volume related commands
+# zfs create datapool/fs1	Create file-system fs1 under datapool
+# zfs create -V 1gb datapool/vol01	Create 1 GB volume (Block device) in datapool
+# zfs destroy -r datapool	destroy datapool and all datasets under it.
+# zfs destroy -fr datapool/data	destroy file-system or volume (data) and all related snapshots
+Show file system info
+# zfs list	List all ZFS file system
+# zfs get all datapool”	List all properties of a ZFS file system
+Mount/Umount Related Commands
+# zfs set mountpoint=/data datapool/fs1	Set the mount-point of file system fs1 to /data
+# zfs mount datapool/fs1	Mount fs1 file system
+# zfs umount datapool/fs1	Umount ZFS file system fs1
+# zfs mount -a	Mount all ZFS file systems
+# zfs umount -a	Umount all ZFS file systems
+ZFS I/O performance
+# zpool iostat 2	Display ZFS I/O Statistics every 2 seconds
+# zpool iostat -v 2	Display detailed ZFS I/O statistics every 2 seconds
+ZFS maintenance commands
+# zpool scrub datapool	Run scrub on all file systems under data pool
+# zpool offline -t datapool c0t0d0	Temporarily offline a disk (until next reboot)
+# zpool online	Online a disk to clear error count
+# zpool clear	Clear error count without a need to the disk
+Import/Export Commands
+# zpool import	List pools available for import
+# zpool import -a	Imports all pools found in the search directories
+# zpool import -d	To search for pools with block devices not located in /dev/dsk
+# zpool import -d /zfs datapool	Search for a pool with block devices created in /zfs
+# zpool import oldpool newpool	Import a pool originally named oldpool under new name newpool
+# zpool import 3987837483	Import pool using pool ID
+# zpool export datapool	Deport a ZFS pool named mypool
+# zpool export -f datapool	Force the unmount and deport of a ZFS pool
+Snapshot Commands
+# zfs snapshot datapool/fs1@12jan2014	Create a snapshot named 12jan2014 of the fs1 filesystem
+# zfs list -t snapshot	List snapshots
+# zfs rollback -r datapool/fs1@10jan2014	Roll back to 10jan2014 (recursively destroy intermediate snapshots)
+# zfs rollback -rf datapool/fs1@10jan2014	Roll back must and force unmount and remount
+# zfs destroy datapool/fs1@10jan2014	Destroy snapshot created earlier
+# zfs send datapool/fs1@oct2013 &gt /geekpool/fs1/oct2013.bak	Take a backup of ZFS snapshot locally
+# zfs receive anotherpool/fs1 &lt /geekpool/fs1/oct2013.bak	Restore from the snapshot backup backup taken
+# zfs send datapool/fs1@oct2013 | zfs receive anotherpool/fs1	Combine the send and receive operation
+# zfs send datapool/fs1@oct2013 | ssh node02 “zfs receive testpool/testfs”	Send the snapshot to a remote system node02
+Clone Commands
+# zfs clone datapool/fs1@10jan2014 /clones/fs1	Clone an existing snapshot
+# zfs destroy datapool/fs1@10jan2014	Destroy clone
+
+ZFS References
+Solaris ZFS command line reference (Cheat sheet) https://www.thegeekdiary.com/solaris-zfs-command-line-reference-cheat-sheet/
+Solaris ZFS : How to replace a failed disk in rpool (x86) https://www.thegeekdiary.com/solaris-zfs-how-to-replace-a-failed-disk-in-rpool-x86/
+Solaris ZFS : How to Offline / Online / Detach / Replace device in a storage pool https://www.thegeekdiary.com/solaris-zfs-how-to-offline-online-detach-replace-device-in-a-storage-pool/
+How to Backup and Restore ZFS root pool in Solaris 10 https://www.thegeekdiary.com/how-to-backup-and-restore-zfs-root-pool-in-solaris-10/
+Solaris ZFS : How to Create / Rename / Rollback / Destroy a ZFS Snapshot https://www.thegeekdiary.com/solaris-zfs-how-to-create-rename-rollback-destroy-a-zfs-snapshot/
+How to replace a disk under ZFS in Solaris https://www.thegeekdiary.com/how-to-replace-a-disk-under-zfs-in-solaris/
+Solaris ZFS : How to Create and Manage Mirrored Storage Pools https://www.thegeekdiary.com/solaris-zfs-how-to-create-and-manage-mirrored-storage-pools/
+How To Increase rpool Size On Solaris 11 (Requires a Reboot) https://www.thegeekdiary.com/how-to-increase-rpool-size-on-solaris-11-requires-a-reboot/
+How to Configure iSCSI targets on Solaris 10 https://www.thegeekdiary.com/how-to-configure-iscsi-targets-on-a-solaris-10/
+How To Use ‘zpool split’ to Split rpool in solaris 11 (x86/x64) https://www.thegeekdiary.com/how-to-use-zpool-split-to-split-rpool-in-solaris-11-x86x64/
+How to mount the zfs rpool while booted from CD [SPARC] https://www.thegeekdiary.com/how-to-mount-the-zfs-rpool-while-booted-from-cd-sparc/
+
+
+`zfs list|grep tank`
+
+`/sbin/zfs mount -a`
+
+zfs mount -O -a
 ## General Linux Bash Commands
 
 ### Get OS info
