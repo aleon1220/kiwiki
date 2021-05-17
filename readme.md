@@ -914,6 +914,11 @@ EOF
 
 `curl --data "param1=test1&param2=test2" http://test.com`
 
+#### get the HTTP headers and verbose mode
+`curl --head --verbose HOST`
+
+#### simplified view
+curl --list-only $HOST
 #### Specify the type of request
 
 ```bash
