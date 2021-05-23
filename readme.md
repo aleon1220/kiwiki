@@ -467,6 +467,9 @@ echo "cd $PWD"
 
 `zip -r compressedFileName.zip file1 file2 dir1/ file3 `
 
+#### Create a parent directory with 2 directories inside (Single line)
+`mkdir -p $HOME/example.com/server1/{httpd,dnsqmasq}`
+
 ## Find/Search operations
 
 #### Find files containing specific text
