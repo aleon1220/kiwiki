@@ -676,6 +676,14 @@ Can i open a TCP connection to this destination?
 
 `tcdump -i eth0 icmp`
 
+#### Simulate traffic in IPV4 and IPV6
+``` bash
+socat TCP4-LISTEN:8080,fork /dev/null&
+socat TCP6-LISTEN:8080,ipv6only=1,fork /dev/null&
+```
+
+`socat` can listen on any available port on a system, so any port from 0 to 65535 is a valid parameter for the socket option.
+
 ### Traffic capture
 `tcpdump` traffic capture uses bpf filters
 `tcpdump -i eth0 -vvv -d dst $IP`
@@ -1315,6 +1323,13 @@ Then, simply add, commit, and push
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 ```
+
+#### Git TLS Certificates
+Git uses a file named ca-bundle.crt to list all the trusted certificates. We can find that file by typing the following in a terminal window:
+
+`git config --list --show-origin`
+
+`git config --global http.sslCAInfo`
 
 #### Instruct Git to use GPG2 instead of GPG as the signing program
 `git config --global gpg.program gpg2`
