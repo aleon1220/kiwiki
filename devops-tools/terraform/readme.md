@@ -4,13 +4,15 @@ You may follow the steps in order
 ## Installation
 ```bash
 #### Set gpg keys and repo access
+``` bash
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+```
 
 #### Get the terraform binary
 wget https://releases.hashicorp.com/terraform/0.14.6/terraform_0.14.6_linux_amd64.zip
 unzip terraform_0.14.6_linux_amd64.zip
-# get it with a cli step
+# Get it with a CLI step
 version="0.15.0"
 wget https://releases.hashicorp.com/terraform/$version/terraform_${version}_linux_amd64.zip
 
@@ -48,3 +50,4 @@ sudo mv terraform $(which terraform) || $terraform_path_UBUNTU
 # AWS Provider
 Configuration process creates a file at `~/.aws/credentials`
 
+## Terraform CheatSheet

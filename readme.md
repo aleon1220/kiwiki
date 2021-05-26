@@ -676,6 +676,27 @@ Can i open a TCP connection to this destination?
 
 `tcdump -i eth0 icmp`
 
+#### examine the IPv4 TCP-based sockets that are listening for connections on your system
+`ss -4 -tln`
+
+#### Examine the IPv6 TCP-based sockets that are listening for connections on your system
+`ss -6 -tln`
+
+#### Creating Unix Domain Sockets
+``` bash
+socat unix-listen:/tmp/stream.sock,fork /dev/null&
+socat unix-recvfrom:/tmp/datagram.sock,fork /dev/null&
+```
+
+#### examine unix domain sockets
+`ss -xln`
+
+#### connect to an unix socket
+nc -U -z /tmp/stream.sock
+The -U tells netcat that it is connecting to a Unix Domain Socket.
+The -z option ensures that netcat only connects to a socket, without sending any data.
+The /tmp/stream.sock is the address of the socket on the filesystem.
+
 #### Simulate traffic in IPV4 and IPV6
 ``` bash
 socat TCP4-LISTEN:8080,fork /dev/null&
@@ -1574,6 +1595,7 @@ echo 'yq() {
 
 #### Inspect Exitcode by container ID
 `docker inspect <container-id> --format='{{.State.ExitCode}}'`
+
 #### Clean up Everything including volumes
 
 `docker system prune --all --force --volumes`
@@ -1611,7 +1633,10 @@ Common exit codes associated with docker containers are:
 - Exit `Code 139`: Indicates failure as container received SIGSEGV
 - Exit `Code 143`: Indicates failure as container received SIGTERM
 
+#### Perform security scan on Docker file with third party Snyk
+docker scan --file Dockerfile --exclude-base docker-scan:e2e
 
+source (https://docs.docker.com/engine/scan/?utm_source=docker&utm_medium=inproductad&utm_campaign=totw-docker-scan#how-to-scan-images)
 ## Docker-Compose
 Orchestrates docker containers.
 
