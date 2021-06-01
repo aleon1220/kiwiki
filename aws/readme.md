@@ -58,6 +58,14 @@ aws ec2 describe-key-pairs | jq -r '.KeyPairs[].KeyName'
 aws ec2 describe-instances | jq -r "[[.Reservations[].Instances[]|{ state: .State.Name, type: .InstanceType }]|group_by(.state)|.[]|{state: .[0].state, types: [.[].type]|[group_by(.)|.[]|{type: .[0], count: ([.[]]|length)}] }]"
 ```
 
+#### Find EC2 instance ID by instance Name
+``` bash
+INSTANCE_NAME="ec2-rnd-prd-bitbucket-monolith"
+
+aws ec2 describe-instances --filters "Name=tag:Name,Values=*$INSTANCE_NAME*" \ 
+    --output text --query 'Reservations[*].Instances[*].InstanceId'
+```
+
 ### AWS EC2 metadata API interactions
 
 ```bash
@@ -117,21 +125,31 @@ for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[Regio
 ```
 
 #### Find all publicly available snapshots in an AWS account in all Regions
-$ for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo "$REGION:"; for snap in $(aws ec2 describe-snapshots --owner self --output json --region $REGION --query 'Snapshots[*].SnapshotId' | jq -r '.[]'); do aws ec2 describe-snapshot-attribute --snapshot-id $snap --region $REGION --output json --attribute createVolumePermission --query '[SnapshotId,CreateVolumePermissions[?Group == `all`]]' | jq -r '.[]'; done; echo; done
+``` bash
+for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo "$REGION:"; 
+  for snap in $(aws ec2 describe-snapshots --owner self --output json --region $REGION --query 'Snapshots[*].SnapshotId' | jq -r '.[]';
+   do aws ec2 describe-snapshot-attribute --snapshot-id $snap --region $REGION --output json --attribute createVolumePermission --query '[SnapshotId,CreateVolumePermissions[?Group == `all`]]' | jq -r '.[]';
+   done; 
+   echo; 
+   done
+```
 
 #### Get the status of all volumes currently in the optimizing stage (after volume modification) in all Regions
-$ for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-volumes-modifications --query 'VolumesModifications[].{VolumeID:VolumeId,TargetSize:TargetSize,OriginalSize:OriginalSize,Progress:Progress,OriginalIops:OriginalIops,TargetIops:TargetIops}' --output json --filter 'Name=modification-state,Values=optimizing' --region $REGION; done
-
+``` bash
+for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-volumes-modifications --query 'VolumesModifications[].{VolumeID:VolumeId,TargetSize:TargetSize,OriginalSize:OriginalSize,Progress:Progress,OriginalIops:OriginalIops,TargetIops:TargetIops}' --output json --filter 'Name=modification-state,Values=optimizing' --region $REGION; done
+```
 #### Find all volumes not attached to any instance in all Regions
-$ for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-volumes --filter "Name=status,Values=available" --query 'Volumes[*].{VolumeID:VolumeId,Size:Size,Type:VolumeType,AvailabilityZone:AvailabilityZone}' --region $REGION; done
-
+``` bash
+for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-volumes --filter "Name=status,Values=available" --query 'Volumes[*].{VolumeID:VolumeId,Size:Size,Type:VolumeType,AvailabilityZone:AvailabilityZone}' --region $REGION; done
+```
 #### Find all volumes in the "error" state in all Regions
-$ for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-volumes --filter "Name=status,Values=error" --query 'Volumes[*].{VolumeID:VolumeId,Size:Size,Type:VolumeType,AvailabilityZone:AvailabilityZone}' --region $REGION; done
-
+``` bash
+for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-volumes --filter "Name=status,Values=error" --query 'Volumes[*].{VolumeID:VolumeId,Size:Size,Type:VolumeType,AvailabilityZone:AvailabilityZone}' --region $REGION; done
+```
 
 #### List value associated with the 'Name' tag, Instance ID & EBS Volume ID
 ``` bash
-aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value,InstanceId,BlockDeviceMappings[*].Ebs.VolumeId]' --output text
+aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value, InstanceId, BlockDeviceMappings[*].Ebs.VolumeId]' --output text
 ```
 
 #### Details about EC2 instance and volume block
@@ -139,7 +157,7 @@ aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[?Key==`Na
 aws ec2 describe-instances --query 'Reservations[*].Instances[*].{Name:ImageId,InstanceId:InstanceId,VolumeInfo:BlockDeviceMappings}' --output json
 ```
 
-####  list all stopped instances and associated volumes for a clean up of cloud resources and cost savings.
+####  List all stopped instances and associated volumes for a clean up of cloud resources and cost savings.
 ``` bash
 aws ec2 describe-instances --filters "Name=instance-state-name,Values=stopped" --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value,InstanceId,BlockDeviceMappings[*].Ebs.VolumeId]' --output text
 ```
@@ -185,7 +203,7 @@ aws ec2 describe-volumes \
 AvailabilityZone,Size,State,Iops,VolumeType]'
 ```
 
-#### describe volumes that are attached to a specific instance in another region
+#### Describe volumes that are attached to a specific instance in another region
 ``` bash
 aws ec2 describe-volumes \
     --region ap-southeast-1 \
@@ -197,15 +215,17 @@ aws ec2 describe-volumes \
 `ec2 describe-regions --output text --query 'Regions[].[RegionName]'`
 
 ### Inventory questions about EC2 instances
-- how many are running in each region?
-- how many instances there are with a certain Tag name and value combination?
+- How many EC2 are running in each region?
+- How many instances there are with a certain Tag name and value combination?
+
 ``` bash
 ### ALL EC2 resources in environment Staging NZ
 aws ec2 describe-tags --filters Name="tag:environment:staging",Values="NZ" --output table
 ```
-- how many instances there are for Production, Staging or Development environments?
-- examine certain instance types and check if some of them, combined with a certain environment, are running -longer than expected
--  total amount of Volumes attached to an instance and what the total volume size for each instance is.
+
+- How many instances there are for Production, Staging or Development environments?
+- Examine certain instance types and check if some of them, combined with a certain environment, are running -longer than expected
+- Total amount of Volumes attached to an instance and what the total volume size for each instance is.
 
 ## AWS EC2 Elastic Load balancer
 #### List Load balancers by name
