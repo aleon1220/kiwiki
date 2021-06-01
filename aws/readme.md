@@ -1,4 +1,3 @@
-
 # AWS CLI commands
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
@@ -207,6 +206,10 @@ aws ec2 describe-tags --filters Name="tag:environment:staging",Values="NZ" --out
 - how many instances there are for Production, Staging or Development environments?
 - examine certain instance types and check if some of them, combined with a certain environment, are running -longer than expected
 -  total amount of Volumes attached to an instance and what the total volume size for each instance is.
+
+## AWS EC2 Elastic Load balancer
+#### List Load balancers by name
+`aws elbv2 describe-load-balancers | jq .LoadBalancers[].LoadBalancerName`
 
 ## AWS IAM
 #### When was my AWS user account created?
