@@ -12,6 +12,7 @@
     - [Creating EC2 Instances](#creating-ec2-instances)
     - [AWS EC2 Volumes EBS AWS CLI reference](#aws-ec2-volumes-ebs-aws-cli-referencehttpsdocsawsamazoncomclilatestreferenceec2describe-volumeshtml)
     - [Inventory questions about EC2 instances](#inventory-questions-about-ec2-instances)
+  - [AWS EC2 Elastic Load balancer](#aws-ec2-elastic-load-balancer)
   - [AWS IAM](#aws-iam)
   - [AWS VPC](#aws-vpc)
   - [AWS Lambda](#aws-lambda)
@@ -28,7 +29,7 @@
 ### Use cases for AWS CLI
 source obtained from this wonderful [Medium post by circuit People](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1)
 
-#### installation AWS CLI2
+#### Installing AWS CLI2
 follow [Install AWS CLI2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html)
 
 ## General AWS
@@ -60,7 +61,7 @@ aws ec2 describe-instances | jq -r "[[.Reservations[].Instances[]|{ state: .Stat
 
 #### Find EC2 instance ID by instance Name
 ``` bash
-INSTANCE_NAME="ec2-rnd-prd-bitbucket-monolith"
+INSTANCE_NAME="ec2-rnd-prd-ec2-name"
 
 aws ec2 describe-instances --filters "Name=tag:Name,Values=*$INSTANCE_NAME*" \ 
     --output text --query 'Reservations[*].Instances[*].InstanceId'
@@ -184,8 +185,8 @@ INST_ID=""
 aws ec2 describe-instances --instance-ids $INST_ID --output text --query 'Reservations[].Instances[].[InstanceId, InstanceType, [Tags[?Key==Name].Value] [0][0] ]'
 ```
 
-#### extracting Tag values
-```bash
+#### Extracting Tag values
+``` bash
  aws ec2 describe-instances \
 --output text \
 --query 'Reservations[].Instances[].[InstanceId, InstanceType, ImageId,
@@ -211,8 +212,10 @@ aws ec2 describe-volumes \
     Name=attachment.instance-id,Values=i-1234567890abcdef0  \
     Name=attachment.delete-on-termination,Values=true
 ```
-#### region
-`ec2 describe-regions --output text --query 'Regions[].[RegionName]'`
+#### AWS Regions
+Describe AWS regions where you have access
+
+`aws ec2 describe-regions --output text --query 'Regions[].[RegionName]'`
 
 ### Inventory questions about EC2 instances
 - How many EC2 are running in each region?
@@ -228,9 +231,46 @@ aws ec2 describe-tags --filters Name="tag:environment:staging",Values="NZ" --out
 - Total amount of Volumes attached to an instance and what the total volume size for each instance is.
 
 ## AWS EC2 Elastic Load balancer
+A Load balancer has rules. The rules point to target groups.
+Target groups reference AWS EC2 instances.
+The EC2 instance has a security group / Firewall
 #### List Load balancers by name
 `aws elbv2 describe-load-balancers | jq .LoadBalancers[].LoadBalancerName`
 
+#### Obtain the AWS ARN of a given LoadBalancer name
+``` bash
+LOAD_BALANCER_NAME="networklb-dev-internal"
+
+aws elbv2 describe-load-balancers --names $LOAD_BALANCER_NAME --query 'LoadBalancers[*].LoadBalancerArn' --output text
+```
+#### List target groups names part of a load balancer
+[AWS CLI target groups docs](https://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-target-groups.html)
+``` bash
+LB_ARN="LB ARN"
+
+aws elbv2 describe-target-groups \
+    --load-balancer-arn $LB_ARN  \
+    --query 'TargetGroups[*].TargetGroupName' | jq
+
+aws elbv2 describe-target-groups \
+    --load-balancer-arn $LB_ARN | jq
+```
+
+#### Get Target Groups ARNs part of a load balancer
+``` bash
+aws elbv2 describe-target-groups     \
+--load-balancer-arn $LB_ARN      \
+--query 'TargetGroups[*].TargetGroupArn' | jq
+```
+
+#### Register an EC2 instance in a target group
+``` bash
+TG_ARN="arn:aws:elasticloadbalancing:us-east-1:1234567890:targetgroup/tg-dev-app-7999/122absljsdsd898"
+
+aws elbv2 register-targets \
+    --target-group-arn $TG_ARN \
+    --targets Id=$EC2_INSTANCE_ID
+```
 ## AWS IAM
 #### When was my AWS user account created?
 `aws iam get-user | jq -r ".User.CreateDate[:4]"` 
