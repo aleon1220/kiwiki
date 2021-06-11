@@ -608,6 +608,9 @@ Crond logs
 
 `sudo journalctl`
 
+#### Check system logs
+`journalctl -xe`
+
 #### Obtain Log output from oldest to newest.
 
 `journalctl -r`
@@ -1620,7 +1623,7 @@ docker inspect --format \
 
 #### List commands used to create a given image
 
-```bash
+``` bash
 MY_IMG=
 docker history $MY_IMG | awk 'NR>1 {print $1}' | xargs docker inspect --format '{{ ((index .ContainerConfig.Cmd ) 0) }}'
 ```
