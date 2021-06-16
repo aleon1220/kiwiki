@@ -1380,7 +1380,10 @@ git_user="git_user"
 git_date="Sat Aug 30 2021"
 git log --oneline -5 --author $git_user --before $git_date
 ```
-
+#### Create a local branch for testing
+``` bash
+git checkout -b devops/ID-01-functionality
+```
 #### Get a histogram for a gitdiff
 
 `git diff --histogram`
@@ -1627,6 +1630,20 @@ docker inspect --format \
 MY_IMG=
 docker history $MY_IMG | awk 'NR>1 {print $1}' | xargs docker inspect --format '{{ ((index .ContainerConfig.Cmd ) 0) }}'
 ```
+#### Before checking issues with the app, check issues with the docker engine
+```
+/var/log/daemon.log          = Debian distributions;
+/var/log/messages            = RHEL and Oracle Linux;
+journalctl -u docker.service = Ubuntu 16.04+ and CentOS 7/8
+/var/log/upstart/docker.log  = for Ubuntu distributions still using upstart;
+AppData/Local                = Windows operating systems;
+```
+#### Check logs of a container and choose a timeframe
+`docker logs CONTAINER --since 15m`
+
+#### Check logs since a given time until a given time
+`docker logs CONTAINER --since 2021-06-15T00:00 --until 2021-06-15T00:10 | less`
+
 
 ### Docker Exit Codes
 Common exit codes associated with docker containers are:
