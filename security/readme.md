@@ -32,15 +32,17 @@
       - [Verify if the particular cipher is accepted on URL](#verify-if-the-particular-cipher-is-accepted-on-url)
       - [Convert from Private Key `.pk8 ` to `.PEM`](#convert-from-private-key-pk8--to-pem)
     - [Java Key Store](#java-key-store)
-      - [From JKS --> .p12 --> .PEM](#from-jks----p12----pem)
       - [Generate JKS](#generate-jks)
       - [Import JKS](#import-jks)
       - [Command to generate a `.keystore ` or ` .jks`](#command-to-generate-a-keystore--or--jks)
         - [Flags explanation for command to generate KeyStores](#flags-explanation-for-command-to-generate-keystores)
       - [Add a website certificate in `.pem` to the JKS](#add-a-website-certificate-in-pem-to-the-jks)
+      - [List contents of a JKS](#list-contents-of-a-jks)
+    - [JKS conversions to OpenSSL](#jks-conversions-to-openssl)
     - [Convert keys between GnuPG, OpenSsh and OpenSSL website](#convert-keys-between-gnupg-openssh-and-openssl-website)
+      - [From JKS --> .p12 --> .PEM](#from-jks----p12----pem)
     - [OpenSSH to OpenSSL](#openssh-to-openssl)
-      - [You can also convert then to PEM format easily (notice, format for SSH private keys and PEM is very close):](#you-can-also-convert-then-to-pem-format-easily-notice-format-for-ssh-private-keys-and-pem-is-very-close)
+      - [Convert OpenSSH to PEM format ( format for SSH private keys and PEM is very close )](#convert-openssh-to-pem-format--format-for-ssh-private-keys-and-pem-is-very-close-)
     - [OpenSSL to OpenSSH](#openssl-to-openssh)
     - [GnuPG to OpenSSH](#gnupg-to-openssh)
     - [GnuPG to OpenSSL](#gnupg-to-openssl)
@@ -194,9 +196,7 @@ done.
 `openssl pkcs8 -in $PRIV_KEY_NAME.pk8 -inform DER -nocrypt -out $NEW_PRIV_KEY_UNENCRYPTED.pem`
 
 ### Java Key Store
-#### From JKS --> .p12 --> .PEM
-read the [blog](http://www.gnudeveloper.com/groups/cyber_security/Cryptography_RSA_Key_Exchange_works_in_realtime_using_Keytool_openSSL%20.html)
-
+There is a GUI tool to explore the [JKS store](http://keystore-explorer.org/downloads.html)
 #### Generate JKS
 ``` bash
 keytool -genkey -alias gdalias \
@@ -222,7 +222,6 @@ echo y | keytool -genkeypair -dname "cn=Mark Jones, ou=JavaSoft, o=Sun, c=US" -a
 ```
 ##### Flags explanation for command to generate KeyStores
 <br>
-
 - `dname=`is a unique identifier for the application in the .keystore. It includes
     - `cn=`the full name of the person or organization that generates the .keystore
     - `ou=`Organizational Unit that creates the project, its a subdivision of the Organization that creates it. Ex. android.google.com
@@ -236,36 +235,47 @@ keypass=Password for protecting that specific alias.
 - `validity=`Amount of days the app will be valid with this `.keystore`
 #### Add a website certificate in `.pem` to the JKS
 ``` bash
-keytool -import -alias marine.net.int -keystore ${JAVA_CERTS} -file PEM_FILE_Name.pem -storepass $ADD_PASS -noprompt
+keytool -import -alias mydomain.org.int -keystore ${JAVA_CERTS} -file PEM_FILE_Name.pem -storepass $ADD_PASS -noprompt
 ```
 
+#### List contents of a JKS
+``` bash
+keytool -list -keystore "C:\Program Files\Java\jdk1.8.0_152\jre\lib\security\cacerts"
+```
+
+
+### JKS conversions to OpenSSL
 [Oracle Docs for JKS: PEM to JKS conversion](https://docs.oracle.com/cd/E35976_01/server.740/es_admin/src/tadm_ssl_convert_pem_to_jks.html)
 
 ### Convert keys between GnuPG, OpenSsh and OpenSSL [website](http://sysmic.org/dotclear/index.php?post/2010/03/24/Convert-keys-betweens-GnuPG%2C-OpenSsh-and-OpenSSL)
 
+#### From JKS --> .p12 --> .PEM
+read the [blog](http://www.gnudeveloper.com/groups/cyber_security/Cryptography_RSA_Key_Exchange_works_in_realtime_using_Keytool_openSSL%20.html)
 ### OpenSSH to OpenSSL
 OpenSSH private keys are directly understable by OpenSSL. You can test for example:
 
-```bash
+``` bash
 openssl rsa -in ~/.ssh/id_rsa -text
 openssl dsa -in ~/.ssh/id_dsa -text
 ```
 
-#### You can also convert then to PEM format easily (notice, format for SSH private keys and PEM is very close):
+#### Convert OpenSSH to PEM format ( format for SSH private keys and PEM is very close )
 ``` bash
 openssl rsa -in ~/.ssh/id_rsa -out key_rsa.pem
 openssl dsa -in ~/.ssh/id_dsa -out key_dsa.pem
 ```
 
 So, you can directly use it to create a certification request:
-
-`openssl req -new -key ~/.ssh/id_dsa -out myid.csr`
+``` bash
+openssl req -new -key ~/.ssh/id_dsa -out myid.csr
+```
 
 You can also use your ssh key to create a sef-signed certificate:
+``` bash
+openssl x509 -req -days 3650 -in myid.csr -signkey ~/.ssh/id_rsa -out myid.crt
+```
 
-`openssl x509 -req -days 3650 -in myid.csr -signkey ~/.ssh/id_rsa -out myid.crt`
-
-> **Notice:** I have not found how to manipulate ssh public key with OpenSSL
+> **Notice:** I have not found how to manipulate Open SSH public keys with OpenSSL
 
 ### OpenSSL to OpenSSH
 Private keys format is same between OpenSSL and OpenSSH. So you just a have to rename your OpenSSL key:
@@ -280,7 +290,9 @@ You need to know fingerprint of your RSA key. You can use:
 `gpg --list-secret-keys --keyid-format short`
 
 use `openpgp2ssh` tool distributed in with monkeyshpere project:
-`gpg --export-secret-keys 01234567 | openpgp2ssh 01234567 > id_rsa`
+``` bash
+bash gpg --export-secret-keys 01234567 | openpgp2ssh 01234567 > id_rsa 
+```
 
 - A few notes are necessary:
 01234567 must be fingerprint of a RSA key (or subkey)
