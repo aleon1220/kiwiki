@@ -1543,7 +1543,7 @@ syntax
 
 ### System settings
 
-#### **Get** dimendions of Display
+#### **Get** dimensions of Display
 
 `xdpyinfo | grep dim`
 
@@ -1575,7 +1575,7 @@ syntax
 `Shift + Delete`
 (You should never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in. Many personal system and program configurations are stored under your home directory.)
 
-### YQ for YAML processing
+### Tool YQ for YAML processing
 
 ```bash
 echo 'yq() {
@@ -1588,13 +1588,19 @@ echo 'yq() {
 `docker volume ls` <br>
 `docker system df`<br>
 
+### List the containers of an instance and show 4 attributes in table format
+``` bash
+docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"
+```
+
 #### Docker Hub Search for an app or project containing given strings
 
 `docker search nagios`
 
-#### Stop All Containers
-
-`docker stop $(docker ps --quiet)`
+#### Stop All Containers quietly
+``` bash
+docker stop $(docker ps --quiet)
+```
 
 #### List all containers that exited
 `docker ps --filter "status=exited"`
@@ -1610,10 +1616,10 @@ echo 'yq() {
 
 `docker ps --filter expose=0-65535/tcp | sort -u -k7`
 
-#### List labels for a given docker container source: https://gist.github.com/steve-jansen
+#### List labels for a given docker container [source](https://gist.github.com/steve-jansen)
 
-```bash
-CONTAINER=ID or container name
+``` bash
+CONTAINER="ID or container name"
 docker inspect --format \
     '{{ range $k, $v := .Config.Labels -}}
     {{ $k }}={{ $v }}
@@ -1627,11 +1633,11 @@ docker inspect --format \
 #### List commands used to create a given image
 
 ``` bash
-MY_IMG=
+MY_IMG="ubuntu"
 docker history $MY_IMG | awk 'NR>1 {print $1}' | xargs docker inspect --format '{{ ((index .ContainerConfig.Cmd ) 0) }}'
 ```
 #### Before checking issues with the app, check issues with the docker engine
-```
+``` bash
 /var/log/daemon.log          = Debian distributions;
 /var/log/messages            = RHEL and Oracle Linux;
 journalctl -u docker.service = Ubuntu 16.04+ and CentOS 7/8
@@ -1661,7 +1667,7 @@ source (https://docs.docker.com/engine/scan/?utm_source=docker&utm_medium=inprod
 Orchestrates docker containers.
 
 #### Install Docker-Compose
-```bash
+``` bash
 sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 ```
@@ -1718,7 +1724,8 @@ SERVICE_NAME="NameInsideDockerCompose"
 `minikube start` <br>
 `minikube status` <br>
 `minikube stop` <br>
-
+#### Start minikube if using the Microsoft hyperV
+`minikube start --vm-driver=hyper`
 
 ## [Image Magick](https://imagemagick.org/index.php)
 ### Image operations with ImageMagick
