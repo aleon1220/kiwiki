@@ -89,19 +89,6 @@ Read more: http://www.marketplaceleaders.org/tgif/api/#ixzz6pzkOZ8Wi
 BUCKET_NAME=< enter bucket Name >
 sed -i -r "s/^BUCKET_NAME=.*/BUCKET_NAME=$BUCKET_NAME/" /home/ubuntu/sftp-shim.config
 ```
-
-sudo systemctl enable zfs-import-scan.service
-zpool get cachefile
- fix zfs-import-cache service not starting run the below commands:
-zpool set cachefile=/etc/zfs/zpool.cache <pool>
-systemctl restart zfs-import-cache.service
-
-To ensure the zfs module is installed for the running kernel run the below command:
-modinfo zfs
-
-To ensure the zfs module is running, run the below command:
-lsmod | grep zfs
-
 ---
 # About KIWIKI Project
 
@@ -218,7 +205,7 @@ sudo file -s DEVICE_CHECK
 ```bash
 sudo blkid
 
-# ubuntu
+# Ubuntu
 sudo lsblk -o +UUID
 
 ```
@@ -242,7 +229,20 @@ The file that keeps track of mounted devices is `/etc/fstab`
 ### ZFS File System
 ZFS is a complex ayet powerful FileSystem
 
-**Pool Related Commands**
+
+sudo systemctl enable zfs-import-scan.service
+zpool get cachefile fix zfs-import-cache 
+
+#### ZFS service not starting run the below commands:
+zpool set cachefile=/etc/zfs/zpool.cache <pool>
+systemctl restart zfs-import-cache.service
+
+#### To ensure the zfs module is installed for the running kernel run the below command:
+modinfo zfs
+
+To ensure the zfs module is running, run the below command:
+lsmod | grep zfs
+## `ZFS` **Pool Related Commands**
 
 # zpool create datapool c0t0d0	Create a basic pool named datapool
 # zpool create -f datapool c0t0d0	Force the creation of a pool
@@ -318,7 +318,32 @@ Clone Commands
 # zfs clone datapool/fs1@10jan2014 /clones/fs1	Clone an existing snapshot
 # zfs destroy datapool/fs1@10jan2014	Destroy clone
 
-ZFS References
+### Install [ZF on Linux](http://download.zfsonlinux.org/epel/zfs-release.el6.noarch.rpm)
+
+#### For RedHat and Fedora distros
+`yum install kernel-devel zfs`
+
+## ZFS management
+
+`zfs-stat -A`
+
+`rpm -aq | grep zfs`
+
+`zfs version`
+
+`zfs list`
+
+`cat /proc/spl/kstat/zfs/arcstats`
+
+`mount -t zfs /dev/xvdf /media/atl`
+
+`zfs mount`
+
+`zfs get all`
+
+`dmesg | grep -i zfs`
+
+### ZFS References
 Solaris ZFS command line reference (Cheat sheet) https://www.thegeekdiary.com/solaris-zfs-command-line-reference-cheat-sheet/
 Solaris ZFS : How to replace a failed disk in rpool (x86) https://www.thegeekdiary.com/solaris-zfs-how-to-replace-a-failed-disk-in-rpool-x86/
 Solaris ZFS : How to Offline / Online / Detach / Replace device in a storage pool https://www.thegeekdiary.com/solaris-zfs-how-to-offline-online-detach-replace-device-in-a-storage-pool/
