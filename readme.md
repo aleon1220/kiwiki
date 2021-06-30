@@ -170,11 +170,13 @@ Hard drives, volumes, SSDs, mounts, filesystem, etc
 
 
 ### Process for Linux + LVM + ext3
-Example: LVM volume group myvg, mounted volume name uservol1, and disk device in Linux is /dev/sdf
+Example: LVM volume group myvg, mounted volume name `uservol1` and disk device in Linux is `/dev/sdf`
 
-Allocate the disk to the VM. (in Amazon Management Console, Create the EBS volume, write down its ID, and allocate it to the instance)
+Allocate the disk to the VM. (In Amazon Management Console, Create the EBS volume, write down its ID, and allocate it to the instance)
 
-The EC2 instance should have some udev rules for creating the device node. So you should see a new disk in /dev/sd* ... Log in on the instance and check that the EBS volume is visible, eg fdisk -l /dev/sdf, cat /proc/partitions, run blkid.
+The EC2 instance should have some udev rules for creating the device node. So you should see a new disk in `/dev/sd*`
+
+Log in on the instance and check that the EBS volume is visible, eg fdisk -l `/dev/sdf`, `cat /proc/partitions`, run `blkid`
 
 Create partition table if needed: fdisk / sfdisk
 
@@ -1152,6 +1154,14 @@ ssh root@$REMOTE_HOST $COMMAND
 
 # Git
 system to manage and store source code. Keeps track of changes to the files. Text files only.
+
+## Git basic challenge
+/var/save/my-repo
+
+git init
+Initialized empty Git repository in /var/save/my-repo/.git/
+
+
 ## Git Administration/Operation
 - use `@` instead of `HEAD`
 
