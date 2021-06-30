@@ -1107,71 +1107,9 @@ curl -X 'PUT' -d '{"param1":"test1","param2":"test3"}' \http://test.com/1
 # Windows products (micro\$oft)
 ## Windows - & WinServer
 win10 (unfortunately) Powershell
-
 Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
-
-### Networking
-
-##### Get your Public IP Address
-
-`(Invoke-WebRequest -uri "http://ifconfig.me/ip").Content`
-
-#### Flush DNS and restart networking
-Open a terminal or powershell window as Admin
-```dotnetcli
-ipconfig /flushdns
-ipconfig /registerdns
-ipconfig /release
-ipconfig /renew
-netsh winsock reset
-
-echo " Restart the computer "
-```
-
-##### Restart Network IPV6 associated
-`netsh int ipv6 reset reset.log`
-- Disable any active virtual private network (VPN) connection.
-- Restore the firewall defaults
-
-### Disable the IP Helper service
-This features attempts to manage some aspects of IPv6 connectivity. To disable it:
-1. Press Windows key+R, then type services.msc in the displayed window Run box, and select OK.
-2. A list of Windows system services will be shown.
-3. Scroll through the list and locate the service named IP Helper > right-click the service name > Properties.
-4. In the Startup type drop-down list, choose Disabled, then select OK.
-5. Restart your system
-6. check to see if the IPv6 connection now works as expected.
-
-#### Clean-up network devices
-
-`netcfg -d`
-
-#### Verify that DNS name resolution is working correctly
-
-`nslookup "host"`
-
-##### Extracted from some old notes
-
-``` powershell
-attrib = configurations for files and folders
-netstat -nao = network statistics
-netsat -ano | find str "PID"
-
-sc = services command
-sc delete "serviceName"
-sfc /scannow || System File Checker
-pathping  "ip" || determine whether the router is performing slowly or dropping packets.
-fciv.exe [Commands] <Options> || File Checksum Integrity Verifier install as plugin first.
-```
-
-### Windows Nice [Terminal](https://docs.microsoft.com/en-us/windows/terminal/get-started#installation)
-
-#### Windows terminal with vertical panes. 2nd pane is WSL
-
-`wt split-pane --vertical wsl`
-
+Moved to [windows/readme](./windows/readme.md)
 ---
-
 #### VPN
 
 OpenVPN set [up in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
