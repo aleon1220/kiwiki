@@ -1,4 +1,4 @@
-# Terraform uses and cheat sheet
+# Terraform uses & cheat sheet
 You may follow the steps in order
 
 ## Installation
@@ -10,45 +10,47 @@ sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.rel
 ```
 
 #### Get the terraform binary
+``` bash
 wget https://releases.hashicorp.com/terraform/0.14.6/terraform_0.14.6_linux_amd64.zip
 unzip terraform_0.14.6_linux_amd64.zip
-# Get it with a CLI step
+```
+### Get Terraform with CLI copy/paste steps
+#### Define the version, get the binary
+``` bash
 version="0.15.0"
 wget https://releases.hashicorp.com/terraform/$version/terraform_${version}_linux_amd64.zip
-
-#### unzip the file
-unzip "terraform_${version}_linux_amd64.zip"
-
-#### install the binary
+```
+#### unzip the file and install the binary
 ``` bash
+unzip "terraform_${version}_linux_amd64.zip"
 terraform_path_UBUNTU="/usr/bin/terraform"
 printf "$(which terraform)\n"
 printf "$terraform_path_UBUNTU\n"
 sudo mv terraform $(which terraform) || $terraform_path_UBUNTU
 ```
 
-### Create a TerraformProject and access it
+#### Create a TerraformProject and access it
 `mkdir aTerraformProject && cd $_`
 
-## Init terraform repo
+#### Init terraform repo
 `terraform init`
 
-## Create a terraform plan, save it to a plan file and then show the plan
+#### Create a terraform plan, save it to a plan file and then show the plan
 `terraform plan -out $(date +%F-%H_%M)-a-terraform-plan.plan; terraform show`
 
-## Format and validate the configuration
+#### Format and validate the configuration
 `terraform fmt; terraform validate`
 
-## Apply the plan and provision the infrastructure
+#### Apply the plan and provision the infrastructure
 `terraform apply`
 
-## Graph the terraform plan and open it in [Webgraphviz](http://webgraphviz.com/)
+#### Graph the terraform plan and open it in [Webgraphviz](http://webgraphviz.com/)
 `terraform graph`
 
-## Destroy the infrastructure provisioned with terraform
+#### Destroy the infrastructure provisioned with terraform
 `terraform destroy`
 
-# AWS Provider
+## AWS Provider
 Configuration process creates a file at `~/.aws/credentials`
 
 ## Terraform CheatSheet
@@ -127,3 +129,17 @@ Terraform Cloud
 
 terraform login #obtain and save API token for Terraform cloud
 terraform logout #Log out of Terraform Cloud, defaults to hostname app.terraform.io
+
+## Docker Provider
+#### Lock the provder to a specific version
+``` terraform
+required_providers {
+# We recommend pinning to the specific version of the Docker Provider you're using
+# Since new versions are released frequently
+
+  docker = {
+    source  = "kreuzwerker/docker"
+    version = "2.8.0"
+  }
+}
+```
