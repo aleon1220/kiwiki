@@ -1285,6 +1285,11 @@ OR
 
 `git push origin :my-awesome-feature`
 
+#### Remove remote branches that were deleted (merged) on BitBucket
+``` bash
+git config fetch.prune true 
+```
+
 #### Change remote URL if you change your repository’s name
 `git remote set-url <remote> <newurl>`
 
