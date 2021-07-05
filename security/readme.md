@@ -37,6 +37,7 @@
       - [Command to generate a `.keystore ` or ` .jks`](#command-to-generate-a-keystore--or--jks)
         - [Flags explanation for command to generate KeyStores](#flags-explanation-for-command-to-generate-keystores)
       - [Add a website certificate in `.pem` to the JKS](#add-a-website-certificate-in-pem-to-the-jks)
+      - [Delete elements imported in the JKS](#delete-elements-imported-in-the-jks)
       - [List contents of a JKS](#list-contents-of-a-jks)
     - [JKS conversions to OpenSSL](#jks-conversions-to-openssl)
     - [Convert keys between GnuPG, OpenSsh and OpenSSL website](#convert-keys-between-gnupg-openssh-and-openssl-website)
@@ -49,7 +50,11 @@
     - [GnuPG S/MIME to OpenSSL](#gnupg-smime-to-openssl)
         - [Gpgsm utility can exports keys and certificate in PCSC12:](#gpgsm-utility-can-exports-keys-and-certificate-in-pcsc12)
     - [OpenSSL to GnuPG S/MIME](#openssl-to-gnupg-smime)
-    - [GPG in Windows Subsystem Linux WSL](#gpg-in-windows-subsystem-linux-wsl)
+    - [OpenSSH to GnuPG S/MIME](#openssh-to-gnupg-smime)
+      - [Format `.P12` compatible with java JKS](#format-p12-compatible-with-java-jks)
+      - [import created key (`ssh-key.p12`)](#import-created-key-ssh-keyp12)
+    - [Using GPG in Windows Subsystem Linux WSL](#using-gpg-in-windows-subsystem-linux-wsl)
+    - [Certificate filename extensions](#certificate-filename-extensions)
 
 <!-- /code_chunk_output -->
 ## Security and chryptography
@@ -238,6 +243,9 @@ keypass=Password for protecting that specific alias.
 keytool -import -alias mydomain.org.int -keystore ${JAVA_CERTS} -file PEM_FILE_Name.pem -storepass $ADD_PASS -noprompt
 ```
 
+#### Delete elements imported in the JKS
+
+
 #### List contents of a JKS
 ``` bash
 keytool -list -keystore "C:\Program Files\Java\jdk1.8.0_152\jre\lib\security\cacerts"
@@ -332,45 +340,57 @@ You have to extract Key and Certificates separatly:
 openssl pkcs12 -in secret-gpg-key.p12 -nocerts -out gpg-key.pem
 openssl pkcs12 -in secret-gpg-key.p12 -nokeys -out gpg-certs.pem
 ```
-You can now use it in OpenSSL.
 
-You can also do similar thing with GnuPG public keys. There will be only certificates output.
+- You can now use it in OpenSSL. You can also do similar thing with GnuPG public keys. There will be only certificates output.
 
 ### OpenSSL to GnuPG S/MIME
-Invert process:
+- Invert process:
 
-```bash
+``` bash
 openssl pkcs12 -export -in gpg-certs.pem -inkey gpg-key.pem -out gpg-key.p12
 gpgsm --import gpg-key.p12
 GnuPG S/MIME to OpenSSH
+```
 
-# Now, chain processes:
-
+- Now, chain processes:
+``` bash
 gpgsm -o  secret-gpg-key.p12 --export-secret-key-p12 0xXXXXXXXX
-openssl pkcs12 -in secret-gpg-key.p12 -nocerts -out gpg-key.pem
-We need to protect key, else ssh refuse it.
 
+openssl pkcs12 -in secret-gpg-key.p12 -nocerts -out gpg-key.pem
+```
+
+- We need to protect key with the right permissions, else ssh will refuse it.
+
+``` bash
 chmod 600 gpg-key.pem
 cp gpg-key.pem ~/.ssh/id_rsa
 ssh-keygen -y -f gpg-key.pem > ~/.ssh/id_rsa.pub
-
-# OpenSSH to GnuPG S/MIME
-# First we need to create a certificate (self-signed) for our ssh key:
-
-`openssl req -new -x509 -key ~/.ssh/id_rsa -out ssh-cert.pem`
-We can now import it in GnuPG
-#### Format 12 compatible with java JKS
-`openssl pkcs12 -export -in ssh-certs.pem -inkey ~/.ssh/id_rsa -out ssh-key.p12`
-#### import created key above
-`gpgsm --import ssh-key.p12`
-
-Notice you cannot import/export DSA ssh keys to/from GnuPG
-
 ```
-### GPG in Windows Subsystem Linux WSL
+
+### OpenSSH to GnuPG S/MIME
+- First we need to create a certificate (self-signed) for our ssh key:
+``` bash
+openssl req -new -x509 -key ~/.ssh/id_rsa -out ssh-cert.pem
+```
+
+- We can now import it in GnuPG
+#### Format `.P12` compatible with java JKS
+``` bash
+openssl pkcs12 -export -in ssh-certs.pem -inkey ~/.ssh/id_rsa -out ssh-key.p12
+```
+#### import created key (`ssh-key.p12`)
+``` bash
+gpgsm --import ssh-key.p12
+```
+
+**Notice you cannot import/export DSA ssh keys to/from GnuPG**
+
+### Using GPG in Windows Subsystem Linux WSL
 GPG guide in Windows Subsystem for Linux WSL by [Jess Esquire](https://www.jessesquire.com/articles/2019/03/31/configure-github-activity-signing-with-wsl/)
 
-**Certificate filename extensions**
+---
+
+### Certificate filename extensions
 
 There are several commonly used filename extensions for X.509 certificates. Unfortunately, some of these extensions are also used for other data such as private keys.
 
