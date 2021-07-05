@@ -37,11 +37,12 @@
       - [Command to generate a `.keystore ` or ` .jks`](#command-to-generate-a-keystore--or--jks)
         - [Flags explanation for command to generate KeyStores](#flags-explanation-for-command-to-generate-keystores)
       - [Add a website certificate in `.pem` to the JKS](#add-a-website-certificate-in-pem-to-the-jks)
+      - [default JKS locations in different OS](#default-jks-locations-in-different-os)
       - [Delete elements imported in the JKS](#delete-elements-imported-in-the-jks)
       - [List contents of a JKS](#list-contents-of-a-jks)
     - [JKS conversions to OpenSSL](#jks-conversions-to-openssl)
     - [Convert keys between GnuPG, OpenSsh and OpenSSL website](#convert-keys-between-gnupg-openssh-and-openssl-website)
-      - [From JKS --> .p12 --> .PEM](#from-jks----p12----pem)
+      - [From `JKS` --> `.p12` --> `.PEM`](#from-jks----p12----pem)
     - [OpenSSH to OpenSSL](#openssh-to-openssl)
       - [Convert OpenSSH to PEM format ( format for SSH private keys and PEM is very close )](#convert-openssh-to-pem-format--format-for-ssh-private-keys-and-pem-is-very-close-)
     - [OpenSSL to OpenSSH](#openssl-to-openssh)
@@ -242,22 +243,30 @@ keypass=Password for protecting that specific alias.
 ``` bash
 keytool -import -alias mydomain.org.int -keystore ${JAVA_CERTS} -file PEM_FILE_Name.pem -storepass $ADD_PASS -noprompt
 ```
+#### default JKS locations in different OS
+``` bash
+ORACLE_JDK_LINUX="/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/security/cacerts"
+OPEN_JDK_LINUX="/usr/lib/jvm/java-11-openjdk-amd64/lib/security/cacerts"
+ORACLE_JDK_WIN="C:\Program Files\Java\jdk1.8.0_152\jre\lib\security\cacerts"
+RED_HAT_JDK_WIN="C:\Program Files\RedHat\java-11-openjdk-11.0.9-3\lib\security\cacerts"
+```
 
 #### Delete elements imported in the JKS
-
+``` bash
+keytool -delete -noprompt -trustcacerts -alias "initcert" -keystore "$OPEN_JDK_LINUX"
+```
 
 #### List contents of a JKS
 ``` bash
-keytool -list -keystore "C:\Program Files\Java\jdk1.8.0_152\jre\lib\security\cacerts"
+keytool -list -keystore $ORACLE_JDK_LINUX
 ```
-
 
 ### JKS conversions to OpenSSL
 [Oracle Docs for JKS: PEM to JKS conversion](https://docs.oracle.com/cd/E35976_01/server.740/es_admin/src/tadm_ssl_convert_pem_to_jks.html)
 
 ### Convert keys between GnuPG, OpenSsh and OpenSSL [website](http://sysmic.org/dotclear/index.php?post/2010/03/24/Convert-keys-betweens-GnuPG%2C-OpenSsh-and-OpenSSL)
 
-#### From JKS --> .p12 --> .PEM
+#### From `JKS` --> `.p12` --> `.PEM`
 read the [blog](http://www.gnudeveloper.com/groups/cyber_security/Cryptography_RSA_Key_Exchange_works_in_realtime_using_Keytool_openSSL%20.html)
 ### OpenSSH to OpenSSL
 OpenSSH private keys are directly understable by OpenSSL. You can test for example:
