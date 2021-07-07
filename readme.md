@@ -26,9 +26,9 @@ sed -i -r "s/^BUCKET_NAME=.*/BUCKET_NAME=$BUCKET_NAME/" /home/ubuntu/sftp-shim.c
 ---
 # About KIWIKI Project
 
-This project is a collection of CLI commands.
+This project is a collection of CLI reusable commands.
 
-The wiki is going to be divided into subcategories. This main Wiki will redirect to the others but will contain main commands for the OS Linux, Windows (Powershell) and Mac terminal commands.
+The wiki is going to be divided into subcategories.
 
 ## Repository Categories
 
@@ -47,20 +47,20 @@ The wiki is going to be divided into subcategories. This main Wiki will redirect
 7. Regular [expressions](./regex/readme.md)
 8. security
 9.  windows
-## Introduction and complains
+## Introduction
 
-- **2020-04-28=** I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in this github repo; It will have categories and then subcategories with functionalites.
+- **2020-04-28=** I lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in this github repo; It will have categories and then subcategories with functionalites.
 For years i have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, etc.
-Then a google docs file was inside of a google drive folder. I accidentally deleted the folder and later on I emptied the bin. I truly dislike that.
+I used a `.txt` file, then a google docs file. I managed to delete the google docs file from its google drive folder. I accidentally deleted the folder and later on I emptied the bin. I truly dislike that...
+
 I got in touch with google support to no avail. :-(
-I still hope I can recover my file.
+I still hope I can recover my file (there was no way to recover the file)
 
 Don't rely on the cloud 100%. Have local copies of your digital material.
 
 - **2020-11-10=** I totally confirm that i lost my google docs wiki file. I should have been more careful.
 - **2021-04-07=** processing inbox category. Moved intro below About Project
 
-you will interact with the computer through the Command Line Interface CLI shell.
 ## CLI Shell keyboard shortcuts
 - `ctrl + a`  moves cursor to beginning of line (a alphabet or first letter)
 - `ctrl + e`  moves cursor to end of line (Is also kinda close to letter `a` in the US keyboard)
@@ -95,7 +95,6 @@ The categories are:
 ## Storage
 Hard drives, volumes, SSDs, mounts, filesystem, etc
 
-
 ### Process for Linux + LVM + ext3
 Example: LVM volume group myvg, mounted volume name `uservol1` and disk device in Linux is `/dev/sdf`
 
@@ -105,22 +104,28 @@ The EC2 instance should have some udev rules for creating the device node. So yo
 
 Log in on the instance and check that the EBS volume is visible, eg fdisk -l `/dev/sdf`, `cat /proc/partitions`, run `blkid`
 
-Create partition table if needed: fdisk / sfdisk
+Create partition table if needed: `fdisk / sfdisk`
 
-Initialize for LVM use: pvcreate /dev/sdf
+Initialize for LVM use: `pvcreate /dev/sdf`
 
 Add the disk (physical volume) to the LVM volume group vgextend
-myvg /dev/sdf
+`myvg /dev/sdf`
 
-Grow the Volume size: lvextend -L +1024G /dev/myvg/uservol1
-Grow the ext3/ext4 file system: resize2fs /dev/myvg/uservol1
-Check (df -h) and you should see that the mounted file system now have more space.
+Grow the Volume size
+`lvextend -L +1024G /dev/myvg/uservol1`
 
-####  view your available disk devices and their mount points (if applicable) to help you determine the correct device name to use
+Grow the `ext3/ext4` file system
+`resize2fs /dev/myvg/uservol1`
+
+Check system info and you should see that the mounted file system now have more space.
+`df -h`
+####  View your available disk devices and their mount points (if applicable) to help you determine the correct device name to use
 `lsblk`
 
 #### get information about all of the devices attached to the instance
-`sudo lsblk -f`
+``` bash
+sudo lsblk -f
+```
 
 #### Get manufacturer details for the device
 `lsblk -io NAME,TYPE,SIZE,MOUNtPOINT,FSTYPE,MODEL`
