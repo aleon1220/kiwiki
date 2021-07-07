@@ -1,78 +1,12 @@
 <h1>KIWIKI</h1> <br>
 <h2>Information Technology Wiki</h2> <br>
 
-> <h3> work by @aleon1220. A Colombian adopted by Kiwis since 2017</h3>
+> <h3> work by @aleon1220. A Colombian adopted by Kiwis since 206</h3>
 
 ---
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
 
-<!-- code_chunk_output -->
-
-- [To be Categorized Inbox](#to-be-categorized-inbox)
-  - [Introduction and complains](#introduction-and-complains)
-- [About KIWIKI Project](#about-kiwiki-project)
-  - [Repository Categories](#repository-categories)
-  - [Storage](#storage)
-  - [Check status of important services](#check-status-of-important-services)
-  - [General Linux Bash Commands](#general-linux-bash-commands)
-    - [Get OS info](#get-os-info)
-  - [Systemd Systemctl](#systemd-systemctl)
-  - [Find/Search operations](#findsearch-operations)
-  - [Package Management](#package-management)
-    - [APT](#apt)
-  - [Debugging Linux Systems (mostly Ubuntu)](#debugging-linux-systems-mostly-ubuntu)
-    - [Logs](#logs)
-    - [Networking](#networking)
-    - [Network Probing](#network-probing)
-    - [Traffic capture](#traffic-capture)
-    - [Network management](#network-management)
-    - [Load testing](#load-testing)
-    - [Benchmarking](#benchmarking)
-    - [The `ip` command](#the-ip-command)
-- [Terminals](#terminals)
-    - [more in the Bash Section](#more-in-the-bash-sectiondevops-toolsbash)
-  - [CURL Client URL](#curl-client-url)
-  - [PDF Operations Tools](#pdf-operations-tools)
-    - [PDF tool kit](#pdf-tool-kit)
-- [Windows products (micro\$oft)](#windows-products-microoft)
-  - [Windows - & WinServer](#windows-winserver)
-    - [Networking](#networking-1)
-    - [Disable the IP Helper service](#disable-the-ip-helper-service)
-    - [Windows Nice Terminal](#windows-nice-terminalhttpsdocsmicrosoftcomen-uswindowsterminalget-startedinstallation)
-    - [Open SSH](#open-ssh)
-  - [SSH Key Management](#ssh-key-management)
-    - [Key generation](#key-generation)
-- [Git](#git)
-  - [Git Administration/Operation](#git-administrationoperation)
-    - [Git operations](#git-operations)
-    - [Git Analysis](#git-analysis)
-  - [Git implementations: Bitbucket](#git-implementations-bitbucket)
-- [Programming Languages](#programming-languages)
-  - [Java](#java)
-    - [OpenJDK](#openjdk)
-    - [Oracle Java](#oracle-java)
-  - [Python](#python)
-- [DataBases](#databases)
-  - [MariaDB (MySQL open source Fork)](#mariadb-mysql-open-source-fork)
-  - [Oracle MySQL](#oracle-mysql)
-  - [AWS RDS MySQL engine](#aws-rds-mysql-engine)
-  - [PostgreSQL](#postgresql)
-  - [Microsoft SQL Server](#microsoft-sql-server)
-- [Operating Systems](#operating-systems)
-  - [Linux Ubuntu](#linux-ubuntu)
-    - [System settings](#system-settings)
-    - [Nautilus operations](#nautilus-operations)
-- [Docker](#docker)
-    - [YQ for yaml processing](#yq-for-yaml-processing)
-  - [Docker-Compose](#docker-compose)
-- [Kubernetes](#kubernetes)
-  - [Kubectl commands frequently used](#kubectl-commands-frequently-used)
-  - [Minikube](#minikube)
-  - [Image Magick](#image-magickhttpsimagemagickorgindexphp)
-    - [Image operations with ImageMagick](#image-operations-with-imagemagick)
-
-<!-- /code_chunk_output -->
 
 ---
 > END of Table of contents
@@ -101,12 +35,18 @@ The wiki is going to be divided into subcategories. This main Wiki will redirect
 1. [AWS](./aws/readme.md)
 1. [Azure](./azure/readme.md)
 1. devops-tools
-1. productivity-tools
+   - Jenkins
+   - Terraform
+2. gradle
+3. javascript
+4. LDAP
+5. productivity-tools
    - rescueTime
    - VsCode
-1. Regular [expressions](./regex/readme.md)
-1. security
-
+6. programming-languages
+7. Regular [expressions](./regex/readme.md)
+8. security
+9.  windows
 ## Introduction and complains
 
 - **2020-04-28=** I just lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in this github repo; It will have categories and then subcategories with functionalites.
