@@ -1,6 +1,33 @@
-# jenkins
-jenkins.io
+# Jenkins
+www.jenkins.io
 
+#### Upgrade Jenkins version in monolith servers
+- Get the latest stable version
+``` bash
+cd $HOME
+wget https://get.jenkins.io/war-stable/latest/jenkins.war
+```
+
+- Back up previous WAR file
+``` bash
+cp /usr/lib/jenkins/jenkins.war $HOME/jenkins.war.previous.version
+```
+
+- Copy new WAR to Jenkins location
+``` bash
+sudo cp $HOME/jenkins.war /usr/lib/jenkins/
+```
+
+- Restart services
+``` bash
+sudo systemctl restart jenkins
+```
+## Admin Tasks
+#### Get the version with the CLI
+``` bash
+JENKINS_URL="http://myjenkins.local:8080/"
+java -jar jenkins-cli.jar -s  $JENKINS_URL version
+```
 ## Useful functions and tools
 ### Variables
 Using env-vars.html
@@ -13,7 +40,7 @@ use the following URL to test groovy snippets
 ### Use a Linter to validate Jenkins File
 [linter for Jenkins](https://www.jenkins.io/doc/book/pipeline/development/#linter)
 
-### example of using startup flags
+### Example of using startup flags
 ```
 java -Dhudson.footerURL=http://example.org -jar jenkins.war \
 --httpPort=8083 --prefix=/ci --httpListenAddress=127.0.0.1
@@ -44,7 +71,7 @@ docker run --name docker-jenkins-test --detach -p 8080:8080 -p 50000:50000 -v je
 
 #### Run Jenkins from a Docker Container and install plugins from a list
 
-```bash
+``` bash
 # create docker file
 sudo bash -c "cat > $PWD/Dockerfile" 
 <<EOF
@@ -58,12 +85,12 @@ EOF
 `docker build --tag jenkins-lts:neon-plugins .`
 
 #### Start the container based on the built image
-```
+``` bash
 docker run --name docker-jenkins-test -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins-lts:neon-plugins
 ```
 
 ### Use the jenkins-plugin-cli to install
-```bash
+``` bash
 jenkins-plugin-cli --plugins <List of plugins with version or just the name>
 ```
 
