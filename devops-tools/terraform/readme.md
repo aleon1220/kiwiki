@@ -81,47 +81,49 @@ terraform validate -backend=false
 terraform init
 ```
 
-#initialize directory, do not download plugins
+#### Initialize directory, do not download plugins
 ``` bash
 terraform init -get-plugins=false
 ```
 
-#initialize directory, do not verify plugins for Hashicorp signature
+#### Initialize directory, do not verify plugins for Hashicorp signature
+``` bash
 terraform init -verify-plugins=false
+```
 
 ### Plan, Deploy and Cleanup Infrastructure
 
-#apply changes without being prompted to enter “yes”
+#### Apply changes without being prompted to enter “yes”
 ``` bash
 terraform apply --auto-approve
 ```
 
-#destroy/cleanup deployment without being prompted for “yes”
+#### Destroy/cleanup deployment without being prompted for “yes”
 ``` bash
 terraform destroy --auto-approve
 ```
 
-#output the deployment plan to plan.out
+#### output the deployment plan to plan.out
 ``` bash
 terraform plan -out plan.out
 ```
 
-#use the plan.out plan file to deploy infrastructure
+#### use the plan.out plan file to deploy infrastructure
 ``` bash
 terraform apply plan.out
 ```
 
-#outputs a destroy plan
+#### Outputs a destroy plan
 ``` bash
 terraform plan -destroy
 ```
 
-#only apply/deploy changes to the targeted resource
+#### Only apply/deploy changes to the target resource
 ``` bash
 terraform apply -target=aws_instance.my_ec2
 ```
 
-#pass a variable via command-line while applying a configuration
+#### pass a variable via command-line while applying a configuration
 ``` bash
 terraform apply -var my_region_variable=us-east-1
 ```
@@ -133,22 +135,22 @@ terraform apply -var my_region_variable=us-east-1
 terraform apply -lock=true
 ```
 
-# Do not reconcile state file with real-world resources(helpful with large complex deployments for saving deployment time)
+#### Do not reconcile state file with real-world resources(helpful with large complex deployments for saving deployment time)
 ``` bash
 terraform apply refresh=false
 ```
 
-#number of simultaneous resource operations
+#### Number of simultaneous resource operations
 ``` bash
 terraform apply --parallelism=5
 ```
 
-#reconcile the state in Terraform state file with real-world resources
+#### Reconcile the state in Terraform state file with real-world resources
 ``` bash
 terraform refresh
 ```
 
-#get information about providers used in current configuration
+#### Get information about providers used in current configuration
 ``` bash
 terraform providers
 ```
@@ -174,17 +176,17 @@ terraform workspace list
 terraform state show aws_instance.my_ec2
 ```
 
-#download and output terraform state to a file
+#### download and output terraform state to a file
 ``` bash
 terraform state pull > terraform.tfstate
 ```
 
-#move a resource tracked via state to different module
+#### Move a resource tracked via state to different module
 ``` bash
 terraform state mv aws_iam_role.my_ssm_role module.custom_module
 ```
 
-#replace an existing provider with another
+#### replace an existing provider with another
 ``` bash
 terraform state replace-provider hashicorp/aws registry.custom.com/aws
 ```
@@ -205,22 +207,22 @@ terraform state rm  aws_instance.myinstace
 terraform import aws_instance.new_ec2_instance i-abcd1234
 ```
 
-#same as above, imports a real-world resource into an instance of Terraform resource
+#### same as above, imports a real-world resource into an instance of Terraform resource
 ``` bash
 terraform import 'aws_instance.new_ec2_instance[0]' i-abcd1234
 ```
 
-#list all outputs as stated in code
+#### list all outputs as stated in code
 ``` bash
 terraform output
 ```
 
-# list out a specific declared output
+#### list out a specific declared output
 ``` bash
 terraform output instance_public_ip
 ```
 
-#list all outputs in JSON format
+#### list all outputs in JSON format
 ``` bash
 terraform output -json
 ```
@@ -230,7 +232,7 @@ terraform output -json
 ``` bash
 terraform version
 ```
-#download and update modules in the “root” module.
+#### download and update modules in the “root” module.
 ``` bash
 terraform get -update=true
 ```
@@ -240,44 +242,44 @@ terraform get -update=true
 ``` bash
 echo 'join(",",["foo","bar"])' | terraform console
 ```
-#Terraform console also has an interactive CLI just enter “terraform console”
+#### Terraform console also has an interactive CLI just enter “terraform console”
 ``` bash
 echo '1 + 5' | terraform console
 ```
 
-#display the Public IP against the “my_ec2” Terraform resource as seen in the Terraform state file
+#### display the Public IP against the “my_ec2” Terraform resource as seen in the Terraform state file
 ``` bash
 echo "aws_instance.my_ec2.public_ip" | terraform console
 ```
 ### Terraform Graph(Dependency Graphing)
-#produce a PNG diagrams showing relationship and dependencies between Terraform resource in your configuration/code
+#### produce a PNG diagrams showing relationship and dependencies between Terraform resource in your configuration/code
 ``` bash
 terraform graph | dot -Tpng > graph.png
 ```
 
 ### Terraform Taint/Untaint(mark/unmark resource for recreation -> delete and then recreate)
-#taints resource to be recreated on next apply
+#### taints resource to be recreated on next apply
 ``` bash
 terraform taint aws_instance.my_ec2
 ```
 
-#Remove taint from a resource
+#### Remove taint from a resource
 ``` bash
 terraform untaint aws_instance.my_ec2
 ```
 
-#forcefully unlock a locked state file, LOCK_ID provided when locking the State file beforehand
+#### forcefully unlock a locked state file, LOCK_ID provided when locking the State file beforehand
 ``` bash
 terraform force-unlock LOCK_ID
 ```
 
 ### [Terraform Cloud](https://app.terraform.io/app)
-#obtain and save API token for Terraform cloud
+#### obtain and save API token for Terraform cloud
 ``` bash
 terraform login
 ```
 
-#Log out of Terraform Cloud, defaults to hostname app.terraform.io
+#### Log out of Terraform Cloud, defaults to hostname app.terraform.io
 ``` bash
 terraform logout
 ```
