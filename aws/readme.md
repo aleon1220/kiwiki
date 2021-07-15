@@ -1,5 +1,4 @@
 # AWS CLI commands
-
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
 
 <!-- code_chunk_output -->
@@ -376,7 +375,17 @@ for group in $(aws logs describe-log-groups --query "logGroups[].[logGroupName]"
 ```
 
 ## AWS S3
+#### List objects and sort by `LastModified`
+``` bash
+DATE=$(date +%Y-%m-%d)
+aws s3api list-objects-v2 --bucket "$BUCKET" --query 'Contents[?contains(LastModified, `'"$DATE"'`)]'
+```
 
+#### List contents of a bucket and export to a text file
+``` bash
+BUCKET="your-bucket-name"
+aws s3api list-objects-v2 --bucket "$BUCKET" --output text > file.txt
+```
 #### Copy directories/files to S3 given bucket excuding .git files
 `aws s3 cp /tmp/foo s3://bucket/ --recursive --exclude ".git/*"`
 #### How Much Data is in Each of my Buckets?
