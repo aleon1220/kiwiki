@@ -1,5 +1,5 @@
 
-# Set my required Tools
+# Set Up my required Tools
 
 # VSCode
 ## Extensions
