@@ -33,6 +33,20 @@ java -jar jenkins-cli.jar -s  $JENKINS_URL version
 Using env-vars.html
 open `${YOUR_JENKINS_HOST}/env-vars.html` page on your Jenkins master server to get a list of all environment variables listed on an HTML page.
 
+### Validate the Jenkinsfile Pipeline
+If using vscode there is a nice linter/validator plugin
+- get the plugin
+``` bash
+janjoerke.jenkins-pipeline-linter-connector
+```
+- within the Jenkinsfile do `CTRL + P`
+- Type `Validate Jenkinsfile`
+- Enter the Jenkins File validation URL
+
+``` bash
+https://JENKINS_URL/pipeline-model-converter/validate
+```
+
 ### Test Groovy code
 use the following URL to test groovy snippets
 
