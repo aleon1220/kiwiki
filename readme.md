@@ -2505,7 +2505,7 @@ syntax
 ``` bash
 
 ```
-#### permanently delete
+#### Permanently delete
 
 `Shift + Delete`
 ``` bash
@@ -2552,6 +2552,14 @@ docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}
 
 ``` bash
 docker stop $(docker ps --quiet)
+```
+
+#### Copy a file from host machine path to Docker container path
+``` bash
+FILE_HOST_PATH="/home/ubuntu/InternalCertificate.crt"
+CONTAINER_PATH="/var/atlassian/application-data/bitbucket/"
+CONTAINER_NAME="my-docker-container"
+docker cp $FILE_HOST_PATH $CONTAINER_NAME:$CONTAINER_PATH
 ```
 
 #### Examples of running docker containers
