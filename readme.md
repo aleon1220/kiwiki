@@ -84,13 +84,37 @@ Editors VIM(or Nano or VI etc.) opens with your command you had typed so far alr
 A Computer as a tool has a CPU processor, memory RAM, storage in form of a drive, connectivity via network card or wifi, graphics visualization via a monitor. The operating system has tools to manage and interact with all the described above.
 
 The categories are:
-
+- **General Info**
 1. Processing
 2. Memory
 3. Storage
 4. Networking
 5. Graphics
 
+## General Info
+Get quick diagnostic about a server
+
+#### OS type, Local IP, hostname and Architecture type
+``` bash
+lsb_release -a ; hostname -I ; hostname ; getconf LONG_BIT
+```
+#### What are the services enabled and running?
+
+
+#### List of software installed from [A-Z]
+
+
+#### Check the hidden directories and files in the HOME dir
+``` bash
+todo $HOME
+```
+
+#### Check bash customizations in the current user
+``` bash
+id
+
+less ~/.bashrc
+```
 ## 3. Storage
 
 Hard drives, volumes, SSDs, mounts, filesystem, etc
