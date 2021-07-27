@@ -422,55 +422,69 @@ File-system/Volume related commands
 ``` bash
 
 ```
-#### zfs mount -a Mount all ZFS file systems
+#### Mount all ZFS file systems
 ``` bash
+zfs mount -a
 
+# Direct binary
+/sbin/zfs mount -a
 ```
-#### zfs umount -a Umount all ZFS file systems
-``` bash
 
+#### List `ZFS` Tanks
+``` bash
+zfs list | grep tank
+```
+
+#### Mount all with arguments
+``` bash
+zfs mount -O -a
+```
+
+#### Umount all ZFS file systems
+``` bash
+zfs umount -a
 ```
 ### `ZFS` I/O performance
 
-#### zpool iostat 2 Display ZFS I/O Statistics every 2 seconds
+#### Display ZFS I/O Statistics every 2 seconds
 ``` bash
-
+zpool iostat 2
 ```
-#### zpool iostat -v 2 Display detailed ZFS I/O statistics every 2 seconds
+#### Display detailed ZFS I/O statistics every 2 seconds
 ``` bash
-
+zpool iostat -v 2
 ```
 ### `ZFS` maintenance commands
-``` bash
 
+#### Run scrub on all file systems under data pool
+``` bash
+zpool scrub datapool
 ```
-#### zpool scrub datapool Run scrub on all file systems under data pool
-
-#### zpool offline -t datapool c0t0d0 Temporarily offline a disk (until next reboot)
+#### Temporarily offline a disk (until next reboot)
 ``` bash
-
+zpool offline -t datapool c0t0d0
 ```
-#### zpool online Online a disk to clear error count
+#### Online a disk to clear error count
 ``` bash
-
+zpool online
 ```
-#### zpool clear Clear error count without a need to the disk
+#### Clear error count without a need to the disk
 ``` bash
-
+zpool clear
 ```
 ### `ZFS` Import/Export Commands
 
-#### zpool import List pools available for import
+#### List pools available for import
 ``` bash
-
+zpool import
 ```
-#### zpool import -a Imports all pools found in the search directories
+#### Imports all pools found in the search directories
 ``` bash
-
+zpool import -a
 ```
-#### zpool import -d To search for pools with block devices not located in /dev/dsk
+#### Search for pools with block devices not located in /dev/dsk
 ``` bash
-
+zpool import -d
 ```
 #### zpool import -d /zfs datapool Search for a pool with block devices created in /zfs
 ``` bash
@@ -545,74 +559,61 @@ File-system/Volume related commands
 ### For Linux RedHat and Fedora distros
 #### Install `ZFS` Packages
 ``` bash
-
+yum install kernel-devel zfs
 ```
-`yum install kernel-devel zfs`
 
 ## ZFS management
+#### Get statistics of All
 ``` bash
-
+zfs-stat -A
 ```
-`zfs-stat -A`
 
-`rpm -aq | grep zfs`
 ``` bash
-
+rpm -aq | grep zfs
 ```
-`zfs version`
-``` bash
 
+``` bash
+zfs version
 ```
-`zfs list`
-``` bash
 
+
+``` bash
+zfs list
 ```
-`cat /proc/spl/kstat/zfs/arcstats`
-``` bash
 
+``` bash
+cat /proc/spl/kstat/zfs/arcstats
 ```
-`mount -t zfs /dev/xvdf /media/atl`
-``` bash
 
+``` bash
+mount -t zfs /dev/xvdf /media/atl
 ```
-`zfs mount`
-``` bash
 
+``` bash
+zfs mount
 ```
-`zfs get all`
-``` bash
 
+``` bash
+zfs get all
 ```
-`dmesg | grep -i zfs`
-``` bash
 
+``` bash
+dmesg | grep -i zfs
 ```
 
 ### ZFS References
-Solaris ZFS command line reference (Cheat sheet) <https://www.thegeekdiary.com/solaris-zfs-command-line-reference-cheat-sheet/>
-Solaris ZFS : How to replace a failed disk in rpool (x86) <https://www.thegeekdiary.com/solaris-zfs-how-to-replace-a-failed-disk-in-rpool-x86/>
-Solaris ZFS : How to Offline / Online / Detach / Replace device in a storage pool <https://www.thegeekdiary.com/solaris-zfs-how-to-offline-online-detach-replace-device-in-a-storage-pool/>
-How to Backup and Restore ZFS root pool in Solaris 10 <https://www.thegeekdiary.com/how-to-backup-and-restore-zfs-root-pool-in-solaris-10/>
-Solaris ZFS : How to Create / Rename / Rollback / Destroy a ZFS Snapshot <https://www.thegeekdiary.com/solaris-zfs-how-to-create-rename-rollback-destroy-a-zfs-snapshot/>
-How to replace a disk under ZFS in Solaris <https://www.thegeekdiary.com/how-to-replace-a-disk-under-zfs-in-solaris/>
-Solaris ZFS : How to Create and Manage Mirrored Storage Pools <https://www.thegeekdiary.com/solaris-zfs-how-to-create-and-manage-mirrored-storage-pools/>
-How To Increase rpool Size On Solaris 11 (Requires a Reboot) <https://www.thegeekdiary.com/how-to-increase-rpool-size-on-solaris-11-requires-a-reboot/>
-How to Configure iSCSI targets on Solaris 10 <https://www.thegeekdiary.com/how-to-configure-iscsi-targets-on-a-solaris-10/>
-How To Use ‘zpool split’ to Split rpool in solaris 11 (x86/x64) <https://www.thegeekdiary.com/how-to-use-zpool-split-to-split-rpool-in-solaris-11-x86x64/>
-How to mount the zfs rpool while booted from CD [SPARC] <https://www.thegeekdiary.com/how-to-mount-the-zfs-rpool-while-booted-from-cd-sparc/>
+- [Solaris ZFS command line reference (Cheat sheet)](https://www.thegeekdiary.com/solaris-zfs-command-line-reference-cheat-sheet/)
+- [Solaris ZFS : How to replace a failed disk in rpool (x86)](https://www.thegeekdiary.com/solaris-zfs-how-to-replace-a-failed-disk-in-rpool-x86/)
+- [Solaris ZFS : How to Offline / Online / Detach / Replace device in a storage pool](https://www.thegeekdiary.com/solaris-zfs-how-to-offline-online-detach-replace-device-in-a-storage-pool/)
+- [How to Backup and Restore ZFS root pool in Solaris 10](https://www.thegeekdiary.com/how-to-backup-and-restore-zfs-root-pool-in-solaris-10/)
+- [Solaris ZFS : How to Create / Rename / Rollback / Destroy a ZFS Snapshot](https://www.thegeekdiary.com/solaris-zfs-how-to-create-rename-rollback-destroy-a-zfs-snapshot/)
+- [How to replace a disk under ZFS in Solaris](https://www.thegeekdiary.com/how-to-replace-a-disk-under-zfs-in-solaris/)
+- [Solaris ZFS : How to Create and Manage Mirrored Storage Pools](https://www.thegeekdiary.com/solaris-zfs-how-to-create-and-manage-mirrored-storage-pools/)
+- [How To Increase rpool Size On Solaris 11 (Requires a Reboot)](https://www.thegeekdiary.com/how-to-increase-rpool-size-on-solaris-11-requires-a-reboot/)
+- [How to Configure iSCSI targets on Solaris 10](https://www.thegeekdiary.com/how-to-configure-iscsi-targets-on-a-solaris-10)
+- [How To Use ‘zpool split’ to Split rpool in solaris 11 (x86/x64)](https://www.thegeekdiary.com/how-to-use-zpool-split-to-split-rpool-in-solaris-11-x86x64/)
+- [How to mount the zfs rpool while booted from CD SPARC](https://www.thegeekdiary.com/how-to-mount-the-zfs-rpool-while-booted-from-cd-sparc/)
 
-`zfs list|grep tank`
-``` bash
-
-```
-`/sbin/zfs mount -a`
-``` bash
-
-```
-zfs mount -O -a
-``` bash
-
-```
 
 ## General Linux Bash Commands
 
