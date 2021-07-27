@@ -221,7 +221,6 @@ sudo blkid
 
 # Ubuntu
 sudo lsblk -o +UUID
-
 ```
 
 ##### Mount an ISO file as loop device
@@ -248,6 +247,41 @@ sudo service jenkins status
 
 ZFS is a complex and yet powerful storage FileSystem
 
+## ZFS management
+#### Get statistics of All
+``` bash
+zfs-stat -A
+```
+
+#### List `ZFS` Tanks
+``` bash
+zfs list | grep tank
+```
+
+#### Check if `ZFS` package is installed
+``` bash
+rpm -aq | grep zfs
+```
+
+``` bash
+zfs version
+```
+
+``` bash
+zfs list
+```
+
+``` bash
+cat /proc/spl/kstat/zfs/arcstats
+```
+
+``` bash
+zfs get all
+```
+
+``` bash
+dmesg | grep -i zfs
+```
 #### Enable ZFS functions and obtain ZFS info
 ``` bash
 sudo systemctl enable zfs-import-scan.service
@@ -376,51 +410,53 @@ zpool list -Ho name
 ``` bash
 
 ```
-#### zfs set compression=on datapool/fs1 Enable compression on fs1
+#### Enable compression on fs1
 ``` bash
-
+zfs set compression=on datapool/fs1
 ```
-File-system/Volume related commands
+### `ZFS` File-system/Volume related commands
 
-#### zfs create datapool/fs1 Create file-system fs1 under datapool
+#### Create file-system fs1 under datapool
 ``` bash
-
+zfs create datapool/fs1
 ```
-#### zfs create -V 1gb datapool/vol01 Create 1 GB volume (Block device) in datapool
+#### Create 1 GB volume (Block device) in datapool
 ``` bash
-
+zfs create -V 1gb datapool/vol01
 ```
-#### zfs destroy -r datapool destroy datapool and all datasets under it
+#### Destroy datapool and all datasets under it
 ``` bash
-
+zfs destroy -r datapool
 ```
-#### zfs destroy -fr datapool/data destroy file-system or volume (data) and all related snapshots
+#### Destroy file-system or volume (data) and all related snapshots
 ``` bash
-
+zfs destroy -fr datapool/data
 ```
-### Show file system info
-
-#### zfs list List all ZFS file system
+#### List all ZFS file system
 ``` bash
-
+zfs list
 ```
-#### zfs get all datapool” List all properties of a ZFS file system
+#### List all properties of a ZFS file system
 ``` bash
-
+zfs get all datapool
 ```
 ### `ZFS` Mount/Umount Related Commands
 
-#### zfs set mountpoint=/data datapool/fs1 Set the mount-point of file system fs1 to /data
+#### Set the mount-point of file system fs1 to /data
 ``` bash
-
+zfs set mountpoint=/data datapool/fs1
 ```
-#### zfs mount datapool/fs1 Mount fs1 file system
+#### Mount fs1 file system
 ``` bash
-
+zfs mount datapool/fs1
 ```
-#### zfs umount datapool/fs1 Umount ZFS file system fs1
+#### Mount with options todo_Add options explanation
 ``` bash
-
+mount -t zfs /dev/xvdf /media/atl
+```
+#### Unmount ZFS file system fs1
+``` bash
+zfs umount datapool/fs1 
 ```
 #### Mount all ZFS file systems
 ``` bash
@@ -428,11 +464,6 @@ zfs mount -a
 
 # Direct binary
 /sbin/zfs mount -a
-```
-
-#### List `ZFS` Tanks
-``` bash
-zfs list | grep tank
 ```
 
 #### Mount all with arguments
@@ -560,45 +591,6 @@ zpool import -d
 #### Install `ZFS` Packages
 ``` bash
 yum install kernel-devel zfs
-```
-
-## ZFS management
-#### Get statistics of All
-``` bash
-zfs-stat -A
-```
-
-``` bash
-rpm -aq | grep zfs
-```
-
-``` bash
-zfs version
-```
-
-
-``` bash
-zfs list
-```
-
-``` bash
-cat /proc/spl/kstat/zfs/arcstats
-```
-
-``` bash
-mount -t zfs /dev/xvdf /media/atl
-```
-
-``` bash
-zfs mount
-```
-
-``` bash
-zfs get all
-```
-
-``` bash
-dmesg | grep -i zfs
 ```
 
 ### ZFS References
