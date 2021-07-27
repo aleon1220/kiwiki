@@ -2527,13 +2527,13 @@ echo 'yq() {
 ``` bash
 
 ```
-`docker volume ls` <br>
+#### List Docker volumes
 ``` bash
-
+docker volume ls
 ```
-`docker system df`<br>
-``` bash
 
+``` bash
+docker system df
 ```
 
 ### List the containers of an instance and show 4 attributes in table format
@@ -2543,10 +2543,29 @@ docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}
 ```
 
 #### Docker Hub Search for an app or project containing given strings
-
-`docker search nagios`
 ``` bash
+docker search IMAGE_TO_SEARCH
+```
 
+#### Example of setting credentials for another Docker registry e.g. [Artifactory.com](https://www.jfrog.com/confluence/display/JFROG/Using+Docker+V1#UsingDockerV1-3.SettingUpAuthentication)
+``` bash
+vim ~/.docker/config.json
+```
+
+#### Modify the `config.json` settings
+``` json
+{
+    "auths" :{
+        "https://artprod.company.com" : {
+            "auth": "<USERNAME>:<PASSWORD> (converted to base 64)",
+                "email": "youremail@email.com"
+        },
+        "https://artdev.company.com" : {
+            "auth": "<USERNAME>:<PASSWORD> (converted to base 64)",
+                "email": "youremail@email.com"
+        }
+    }
+}
 ```
 #### Stop All Containers quietly
 
