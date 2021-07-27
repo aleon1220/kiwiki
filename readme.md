@@ -246,7 +246,7 @@ sudo service jenkins status
 
 ### ZFS File System
 
-ZFS is a complex and yet powerful FileSystem
+ZFS is a complex and yet powerful storage FileSystem
 
 #### Enable ZFS functions and obtain ZFS info
 ``` bash
@@ -260,91 +260,87 @@ zpool set cachefile=/etc/zfs/zpool.cache <pool>
 systemctl restart zfs-import-cache.service
 ```
 
-#### Ensure the zfs module is installed for the running Linux Kernel
+#### Make sure `ZFS` module is installed for the running Linux Kernel
 ``` bash
 modinfo zfs
 ```
 
-Ensure the ZFS module is running
+#### Ensure the ZFS module is running
 ``` bash
 lsmod | grep zfs
 ```
 
 ## `ZFS` **Pool Related Commands**
 
-#### zpool create datapool c0t0d0 Create a basic pool named datapool
+#### Create a basic pool named `c0t0d0`
 ``` bash
-
+zpool create datapool c0t0d0
 ```
-# zpool create -f datapool c0t0d0 Force the creation of a pool
+#### Force the creation of a pool
 ``` bash
-
+zpool create -f datapool c0t0d0
 ```
-# zpool create -m /data datapool c0t0d0 Create a pool with a different mount point than the default
+#### Create a pool with a different mount point than the default
 ``` bash
-
+zpool create -m /data datapool c0t0d0
 ```
-# zpool create datapool raidz c3t0d0 c3t1d0 c3t2d0 Create RAID-Z vdev pool
+#### Create RAID-Z vdev pool todo_ADD references
 ``` bash
-
+zpool create datapool raidz c3t0d0 c3t1d0 c3t2d0
 ```
-# zpool add datapool raidz c4t0d0 c4t1d0 c4t2d0 Add RAID-Z vdev to pool datapool
+#### Add RAID-Z vdev to pool datapool todo_ADD references
 ``` bash
-
+zpool add datapool raidz c4t0d0 c4t1d0 c4t2d0 
 ```
-# zpool create datapool raidz1 c0t0d0 c0t1d0 c0t2d0 c0t3d0 c0t4d0 c0t5d0 Create RAID-Z1 pool
+#### Create RAID-Z1 pool todo_ADD references
 ``` bash
-
+zpool create datapool raidz1 c0t0d0 c0t1d0 c0t2d0 c0t3d0 c0t4d0 c0t5d0
 ```
-# zpool create datapool raidz2 c0t0d0 c0t1d0 c0t2d0 c0t3d0 c0t4d0 c0t5d0 Create RAID-Z2 pool
+#### Create RAID-Z2 pool todo_ADD references
 ``` bash
-
+zpool create datapool raidz2 c0t0d0 c0t1d0 c0t2d0 c0t3d0 c0t4d0 c0t5d0
 ```
-# zpool create datapool mirror c0t0d0 c0t5d0 Mirror c0t0d0 to c0t5d0
+#### Mirror c0t0d0 to c0t5d0
 ``` bash
-
+zpool create datapool mirror c0t0d0 c0t5d0
 ```
-# zpool create datapool mirror c0t0d0 c0t5d0 mirror c0t2d0 c0t4d0 disk c0t0d0 is mirrored with c0t5d0 and disk c0t2d0 is mirrored withc0t4d0
+#### Mirrors=Disk c0t0d0 is mirrored with c0t5d0 and disk c0t2d0 is mirrored withc0t4d0
 ``` bash
-
+zpool create datapool mirror c0t0d0 c0t5d0 mirror c0t2d0 c0t4d0
 ```
-# zpool add datapool mirror c3t0d0 c3t1d0 Add new mirrored vdev to datapool
+#### Add new mirrored vdev to datapool
 ``` bash
-
+zpool add datapool mirror c3t0d0 c3t1d0
 ```
-# zpool add datapool spare c1t3d0 Add spare device c1t3d0 to the datapool
+#### Add spare device c1t3d0 to the datapool
 ``` bash
-
+zpool add datapool spare c1t3d0
 ```
-## zpool create -n geekpool c1t3d0 Do a dry run on pool creation
+#### Do a dry run on pool creation
 ``` bash
-
+zpool create -n geekpool c1t3d0
 ```
-#### Show Pool Information
+#### Show Pool Information status
 ``` bash
-
+zpool status -x
 ```
-# zpool status -x Show pool status
+#### Show individual pool status in verbose mode
 ``` bash
-
+zpool status -v datapool
 ```
-# zpool status -v datapool Show individual pool status in verbose mode
+#### Show all the pools
 ``` bash
-
+zpool list
 ```
-# zpool list Show all the pools
+#### Show particular properties of all the pools (name, size)
 ``` bash
-
+zpool list -o name,size
 ```
-# zpool list -o name,size Show particular properties of all the pools (here, name and size)
+#### Show all pools without headers and columns
 ``` bash
-
+zpool list -Ho name
 ```
-# zpool list -Ho name Show all pools without headers and columns
-``` bash
-
-```
-File-system/Volume related commands
+### File-system/Volume related commands
 
 # zfs create datapool/fs1 Create file-system fs1 under datapool
 ``` bash
@@ -366,187 +362,188 @@ File-system/Volume related commands
 ``` bash
 
 ```
-# zfs set quota=1G datapool/fs1 Set quota of 1 GB on filesystem fs1
+#### zfs set quota=1G datapool/fs1 Set quota of 1 GB on filesystem fs1
 
-# zfs set reservation=1G datapool/fs1 Set Reservation of 1 GB on filesystem fs1
+#### zfs set reservation=1G datapool/fs1 Set Reservation of 1 GB on filesystem fs1
 ``` bash
 
 ```
-# zfs set mountpoint=legacy datapool/fs1 Disable ZFS auto mounting and enable mounting through /etc/vfstab
+#### zfs set mountpoint=legacy datapool/fs1 Disable ZFS auto mounting and enable mounting through /etc/vfstab
 ``` bash
 
 ```
-# zfs set sharenfs=on datapool/fs1 Share fs1 as NFS
+#### zfs set sharenfs=on datapool/fs1 Share fs1 as NFS
 ``` bash
 
 ```
-# zfs set compression=on datapool/fs1 Enable compression on fs1
+#### zfs set compression=on datapool/fs1 Enable compression on fs1
 ``` bash
 
 ```
 File-system/Volume related commands
 
-# zfs create datapool/fs1 Create file-system fs1 under datapool
+#### zfs create datapool/fs1 Create file-system fs1 under datapool
 ``` bash
 
 ```
-# zfs create -V 1gb datapool/vol01 Create 1 GB volume (Block device) in datapool
+#### zfs create -V 1gb datapool/vol01 Create 1 GB volume (Block device) in datapool
 ``` bash
 
 ```
-# zfs destroy -r datapool destroy datapool and all datasets under it
+#### zfs destroy -r datapool destroy datapool and all datasets under it
 ``` bash
 
 ```
-# zfs destroy -fr datapool/data destroy file-system or volume (data) and all related snapshots
+#### zfs destroy -fr datapool/data destroy file-system or volume (data) and all related snapshots
 ``` bash
 
 ```
-Show file system info
+### Show file system info
 
-# zfs list List all ZFS file system
+#### zfs list List all ZFS file system
 ``` bash
 
 ```
-# zfs get all datapool” List all properties of a ZFS file system
+#### zfs get all datapool” List all properties of a ZFS file system
 ``` bash
 
 ```
-Mount/Umount Related Commands
+### `ZFS` Mount/Umount Related Commands
 
-# zfs set mountpoint=/data datapool/fs1 Set the mount-point of file system fs1 to /data
+#### zfs set mountpoint=/data datapool/fs1 Set the mount-point of file system fs1 to /data
 ``` bash
 
 ```
-# zfs mount datapool/fs1 Mount fs1 file system
+#### zfs mount datapool/fs1 Mount fs1 file system
 ``` bash
 
 ```
-# zfs umount datapool/fs1 Umount ZFS file system fs1
+#### zfs umount datapool/fs1 Umount ZFS file system fs1
 ``` bash
 
 ```
-# zfs mount -a Mount all ZFS file systems
+#### zfs mount -a Mount all ZFS file systems
 ``` bash
 
 ```
-# zfs umount -a Umount all ZFS file systems
+#### zfs umount -a Umount all ZFS file systems
 ``` bash
 
 ```
-ZFS I/O performance
+### `ZFS` I/O performance
 
-# zpool iostat 2 Display ZFS I/O Statistics every 2 seconds
+#### zpool iostat 2 Display ZFS I/O Statistics every 2 seconds
 ``` bash
 
 ```
-# zpool iostat -v 2 Display detailed ZFS I/O statistics every 2 seconds
+#### zpool iostat -v 2 Display detailed ZFS I/O statistics every 2 seconds
 ``` bash
 
 ```
-ZFS maintenance commands
+### `ZFS` maintenance commands
 ``` bash
 
 ```
-# zpool scrub datapool Run scrub on all file systems under data pool
+#### zpool scrub datapool Run scrub on all file systems under data pool
 
-# zpool offline -t datapool c0t0d0 Temporarily offline a disk (until next reboot)
+#### zpool offline -t datapool c0t0d0 Temporarily offline a disk (until next reboot)
 ``` bash
 
 ```
-# zpool online Online a disk to clear error count
+#### zpool online Online a disk to clear error count
 ``` bash
 
 ```
-# zpool clear Clear error count without a need to the disk
+#### zpool clear Clear error count without a need to the disk
 ``` bash
 
 ```
-Import/Export Commands
+### `ZFS` Import/Export Commands
 
-# zpool import List pools available for import
+#### zpool import List pools available for import
 ``` bash
 
 ```
-# zpool import -a Imports all pools found in the search directories
+#### zpool import -a Imports all pools found in the search directories
 ``` bash
 
 ```
-# zpool import -d To search for pools with block devices not located in /dev/dsk
+#### zpool import -d To search for pools with block devices not located in /dev/dsk
 ``` bash
 
 ```
-# zpool import -d /zfs datapool Search for a pool with block devices created in /zfs
+#### zpool import -d /zfs datapool Search for a pool with block devices created in /zfs
 ``` bash
 
 ```
-# zpool import oldpool newpool Import a pool originally named oldpool under new name newpool
+#### zpool import oldpool newpool Import a pool originally named oldpool under new name newpool
 ``` bash
 
 ```
-# zpool import 3987837483 Import pool using pool ID
+#### zpool import 3987837483 Import pool using pool ID
 ``` bash
 
 ```
-# zpool export datapool Deport a ZFS pool named mypool
+#### zpool export datapool Deport a ZFS pool named mypool
 ``` bash
 
 ```
-# zpool export -f datapool Force the unmount and deport of a ZFS pool
+#### zpool export -f datapool Force the unmount and deport of a ZFS pool
 ``` bash
 
 ```
-Snapshot Commands
+### `ZFS` Snapshot Commands
 
-# zfs snapshot datapool/fs1@12jan2014 Create a snapshot named 12jan2014 of the fs1 filesystem
+#### zfs snapshot datapool/fs1@12jan2014 Create a snapshot named 12jan2014 of the fs1 filesystem
 ``` bash
 
 ```
-# zfs list -t snapshot List snapshots
+#### zfs list -t snapshot List snapshots
 ``` bash
 
 ```
-# zfs rollback -r datapool/fs1@10jan2014 Roll back to 10jan2014 (recursively destroy intermediate snapshots)
+#### zfs rollback -r datapool/fs1@10jan2014 Roll back to 10jan2014 (recursively destroy intermediate snapshots)
 ``` bash
 
 ```
-# zfs rollback -rf datapool/fs1@10jan2014 Roll back must and force unmount and remount
+#### zfs rollback -rf datapool/fs1@10jan2014 Roll back must and force unmount and remount
 ``` bash
 
 ```
-# zfs destroy datapool/fs1@10jan2014 Destroy snapshot created earlier
+#### zfs destroy datapool/fs1@10jan2014 Destroy snapshot created earlier
 ``` bash
 
 ```
-# zfs send datapool/fs1@oct2013 &gt /geekpool/fs1/oct2013.bak Take a backup of ZFS snapshot locally
+#### zfs send datapool/fs1@oct2013 &gt /geekpool/fs1/oct2013.bak Take a backup of ZFS snapshot locally
 ``` bash
 
 ```
-# zfs receive anotherpool/fs1 &lt /geekpool/fs1/oct2013.bak Restore from the snapshot backup backup taken
+#### zfs receive anotherpool/fs1 &lt /geekpool/fs1/oct2013.bak Restore from the snapshot backup backup taken
 ``` bash
 
 ```
-# zfs send datapool/fs1@oct2013 | zfs receive anotherpool/fs1 Combine the send and receive operation
+#### zfs send datapool/fs1@oct2013 | zfs receive anotherpool/fs1 Combine the send and receive operation
 ``` bash
 
 ```
-# zfs send datapool/fs1@oct2013 | ssh node02 “zfs receive testpool/testfs” Send the snapshot to a remote system node02
+#### zfs send datapool/fs1@oct2013 | ssh node02 “zfs receive testpool/testfs” Send the snapshot to a remote system node02
 ``` bash
 
 ```
-### Clone Commands
+### `ZFS` Clone Commands
 
-# zfs clone datapool/fs1@10jan2014 /clones/fs1 Clone an existing snapshot
+#### zfs clone datapool/fs1@10jan2014 /clones/fs1 Clone an existing snapshot
 ``` bash
 
 ```
-# zfs destroy datapool/fs1@10jan2014 Destroy clone
+#### zfs destroy datapool/fs1@10jan2014 Destroy clone
 ``` bash
 
 ```
-### Install [ZF on Linux](http://download.zfsonlinux.org/epel/zfs-release.el6.noarch.rpm)
+### Install [ZFS on Linux](http://download.zfsonlinux.org/epel/zfs-release.el6.noarch.rpm)
 
-#### For RedHat and Fedora distros
+### For Linux RedHat and Fedora distros
+#### Install `ZFS` Packages
 ``` bash
 
 ```
