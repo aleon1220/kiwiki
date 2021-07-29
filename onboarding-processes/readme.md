@@ -25,3 +25,21 @@ The first week absorv as much as you can
 - Spend time getting familiar with the tools. Click everywhere. Skim through everything
 - Take things slowly. Only join different activities if the coworkers ask
 - For extroverts try to keep a low profile. For introverts try to speak up
+- Find a excuse to create a small purchase and see the process
+- Do they pay monthly or fort nightly
+- Do they have a system to see the payments and social security contributions
+- Dump lots of possibly important pages in Toby bookmarks
+
+Setting up dev laptop
+- If windows get admin priveleges ASAP
+- Set up WSL
+- Set up Docker
+- Set up virtual box and vagrant
+- Encryption set up GPG
+- set you SSH key with your work email
+- Add GPG and SSH keys from the new laptop to sites
+  - Github
+  - Gitlab
+  - Bitbucket
+- Set up your git commits with GPG signatures
+- Set up Toby bookmarks
