@@ -18,19 +18,7 @@ The first week absorv as much as you can
   - How fast paced does it feel?
   - Ask 3 questions daily
 
-### Second week
-- begin analysing what tools they have. Make a list of the name of the tools they use
-- Friday on the last day or perhaps saturday morning spend 1 hour creating a table with
-  - | tool name | tool description | tool link | ideas |
-- Spend time getting familiar with the tools. Click everywhere. Skim through everything
-- Take things slowly. Only join different activities if the coworkers ask
-- For extroverts try to keep a low profile. For introverts try to speak up
-- Find a excuse to create a small purchase and see the process
-- Do they pay monthly or fort nightly
-- Do they have a system to see the payments and social security contributions
-- Dump lots of possibly important pages in Toby bookmarks
-
-Setting up dev laptop
+## Setting up dev laptop
 - If windows get admin priveleges ASAP
 - Set up WSL
 - Set up Docker
@@ -43,3 +31,17 @@ Setting up dev laptop
   - Bitbucket
 - Set up your git commits with GPG signatures
 - Set up Toby bookmarks
+
+### Second week
+- begin analysing what tools they have. Make a list of the name of the tools they use
+- Friday on the last day or perhaps saturday morning spend 1 hour creating a table with
+  - | tool name | tool description | tool link | ideas |
+- Spend time getting familiar with the tools. Click everywhere. Skim through everything
+- Take things slowly. Only join different activities if the coworkers ask
+- For extroverts try to keep a low profile. For introverts try to speak up
+- Find a excuse to create a small purchase and see the process
+- Do they pay monthly or fort nightly
+- Do they have a system to see the payments and social security contributions
+- Dump lots of possibly important pages in Toby bookmarks
+
+# Analyze the Software Development Lifecyle and culture of a company
