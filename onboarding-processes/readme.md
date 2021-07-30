@@ -45,3 +45,7 @@ The first week absorv as much as you can
 - Dump lots of possibly important pages in Toby bookmarks
 
 # Analyze the Software Development Lifecyle and culture of a company
+1. check wikis
+1. ask questions
+1. try to find a document of where the process is defined
+1. Abstract the progress and make it simple to understand so that you can ask a simple question to clarify
