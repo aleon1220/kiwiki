@@ -4,8 +4,89 @@
 > <h4> work by @aleon1220. A Colombian adopted by Kiwis since 2016</h3>
 
 ---
-
-
+- [About KIWIKI Project](#about-kiwiki-project)
+  - [Repository Categories](#repository-categories)
+  - [Introduction](#introduction)
+  - [The Computer as a modern day to day tool](#the-computer-as-a-modern-day-to-day-tool)
+  - [The CLI Shell](#the-cli-shell)
+    - [CLI Shell keyboard shortcuts](#cli-shell-keyboard-shortcuts)
+  - [General Info](#general-info)
+  - [3. Storage](#3-storage)
+    - [Process for Linux + `LVM` + `ext3`](#process-for-linux--lvm--ext3)
+  - [ZFS File System](#zfs-file-system)
+    - [Install ZFS on Linux](#install-zfs-on-linux)
+    - [RedHat and Fedora distros](#redhat-and-fedora-distros)
+    - [ZFS management](#zfs-management)
+  - [`ZFS` **Pool Related Commands**](#zfs-pool-related-commands)
+    - [`ZFS` File-system/Volume related commands](#zfs-file-systemvolume-related-commands)
+    - [`ZFS` File-system/Volume related commands](#zfs-file-systemvolume-related-commands-1)
+    - [`ZFS` Mount/Umount Related Commands](#zfs-mountumount-related-commands)
+    - [`ZFS` I/O performance](#zfs-io-performance)
+    - [`ZFS` maintenance commands](#zfs-maintenance-commands)
+    - [`ZFS` Import/Export Commands](#zfs-importexport-commands)
+    - [`ZFS` Snapshot Commands](#zfs-snapshot-commands)
+    - [`ZFS` Clone Commands](#zfs-clone-commands)
+    - [ZFS References](#zfs-references)
+  - [General Linux Bash Commands](#general-linux-bash-commands)
+  - [Systemd Systemctl](#systemd-systemctl)
+  - [Compression/Decompression of files](#compressiondecompression-of-files)
+  - [Find/Search operations](#findsearch-operations)
+  - [Package Management](#package-management)
+    - [APT](#apt)
+  - [Debugging Linux Systems (mostly Ubuntu)](#debugging-linux-systems-mostly-ubuntu)
+    - [Explore System Processes](#explore-system-processes)
+    - [Logs](#logs)
+    - [Networking](#networking)
+    - [Network Probing](#network-probing)
+    - [Traffic capture](#traffic-capture)
+    - [Network management](#network-management)
+    - [Load testing](#load-testing)
+    - [Benchmarking](#benchmarking)
+- [todo explain the flags](#todo-explain-the-flags)
+    - [The `ip` command](#the-ip-command)
+- [Terminals](#terminals)
+    - [more in the Bash Section](#more-in-the-bash-section)
+  - [CURL Client URL](#curl-client-url)
+  - [PDF Operations Tools](#pdf-operations-tools)
+    - [PDF tool kit](#pdf-tool-kit)
+- [Windows products (micro\$oft)](#windows-products-microoft)
+  - [Windows - & WinServer](#windows----winserver)
+  - [Moved to windows/readme](#moved-to-windowsreadme)
+    - [Open SSH](#open-ssh)
+  - [SSH Key Management](#ssh-key-management)
+    - [Key generation](#key-generation)
+- [Git](#git)
+    - [Git basic challenge/Demo](#git-basic-challengedemo)
+  - [Git Administration/Operation](#git-administrationoperation)
+    - [Git Analysis/Reporting](#git-analysisreporting)
+  - [Git implementations: Bitbucket](#git-implementations-bitbucket)
+- [Programming Languages](#programming-languages)
+  - [Java](#java)
+    - [OpenJDK](#openjdk)
+    - [Oracle Java](#oracle-java)
+  - [Python](#python)
+- [DataBases](#databases)
+  - [MariaDB (MySQL open source Fork)](#mariadb-mysql-open-source-fork)
+  - [Oracle MySQL](#oracle-mysql)
+  - [AWS RDS MySQL engine](#aws-rds-mysql-engine)
+  - [PostgreSQL](#postgresql)
+  - [Microsoft SQL Server](#microsoft-sql-server)
+- [Operating Systems](#operating-systems)
+  - [Linux Ubuntu](#linux-ubuntu)
+    - [System settings](#system-settings)
+    - [Nautilus operations](#nautilus-operations)
+    - [Tool YQ for YAML processing](#tool-yq-for-yaml-processing)
+- [Docker Containers](#docker-containers)
+    - [List the containers of an instance and show 4 attributes in table format](#list-the-containers-of-an-instance-and-show-4-attributes-in-table-format)
+    - [Building Docker Images Dockerfile](#building-docker-images-dockerfile)
+    - [Docker Exit Codes](#docker-exit-codes)
+  - [Docker-Compose](#docker-compose)
+- [Kubernetes K8S](#kubernetes-k8s)
+  - [Kubectl commands frequently used](#kubectl-commands-frequently-used)
+  - [Minikube](#minikube)
+  - [Image Magick](#image-magick)
+    - [Image operations with ImageMagick](#image-operations-with-imagemagick)
+- [Inbox](#inbox)
 ---
 > **END of Table of contents**
 ---
@@ -226,7 +307,7 @@ The file that keeps track of mounted devices is `/etc/fstab`
 sudo mount -a
 ```
 
-## Check status of important services
+#### Check status of important services
 ``` bash
 timedatectl status
 sudo systemctl edit --full cron.service
@@ -234,11 +315,19 @@ sudo systemctl status nginx supervisor php7.2-fpm
 sudo service jenkins status
 ```
 
-### ZFS File System
+## ZFS File System
 
 ZFS is a complex and yet powerful storage FileSystem
 
-## ZFS management
+### Install [ZFS on Linux](http://download.zfsonlinux.org/epel/zfs-release.el6.noarch.rpm)
+
+### RedHat and Fedora distros
+#### Install `ZFS` Packages
+``` bash
+yum install kernel-devel zfs
+```
+
+### ZFS management
 #### Get statistics of All
 ``` bash
 zfs-stat -A
@@ -365,21 +454,21 @@ zpool list -o name,size
 ``` bash
 zpool list -Ho name
 ```
-### File-system/Volume related commands
+### `ZFS` File-system/Volume related commands
 
-# Create file-system fs1 under datapool
+#### Create file-system fs1 under datapool
 ``` bash
 zfs create datapool/fs1
 ```
-# Create 1 GB volume (Block device) in datapool
+#### Create 1 GB volume (Block device) in datapool
 ``` bash
 zfs create -V 1gb datapool/vol01
 ```
-# Destroy datapool and all datasets under it
+#### Destroy datapool and all datasets under it
 ``` bash
 zfs destroy -r datapool
 ```
-# Destroy file-system or volume (data) and all related snapshots
+#### Destroy file-system or volume (data) and all related snapshots
 ``` bash
 zfs destroy -fr datapool/data
 ```
@@ -578,14 +667,6 @@ zfs clone datapool/fs1@10jan2014 /clones/fs1
 zfs destroy datapool/fs1@10jan2020
 ```
 
-### Install [ZFS on Linux](http://download.zfsonlinux.org/epel/zfs-release.el6.noarch.rpm)
-
-### For Linux RedHat and Fedora distros
-#### Install `ZFS` Packages
-``` bash
-yum install kernel-devel zfs
-```
-
 ### ZFS References
 - [Solaris ZFS command line reference (Cheat sheet)](https://www.thegeekdiary.com/solaris-zfs-command-line-reference-cheat-sheet/)
 - [Solaris ZFS : How to replace a failed disk in rpool (x86)](https://www.thegeekdiary.com/solaris-zfs-how-to-replace-a-failed-disk-in-rpool-x86/)
@@ -602,9 +683,7 @@ yum install kernel-devel zfs
 
 ## General Linux Bash Commands
 
-### Get OS info
-
-#### get info about linux version
+#### Get info about linux version
 
 `cat /etc/os-release`
 ``` bash
@@ -2867,7 +2946,7 @@ SERVICE_NAME="NameInsideDockerCompose"
 
 ### Image operations with ImageMagick
 
-#### easily-resize-images with percentage
+#### Easily-resize-images with percentage
 
 ``` bash
 # percentage
