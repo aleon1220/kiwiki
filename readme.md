@@ -35,14 +35,13 @@
     - [APT](#apt)
   - [Debugging Linux Systems (mostly Ubuntu)](#debugging-linux-systems-mostly-ubuntu)
     - [Explore System Processes](#explore-system-processes)
-    - [Logs](#logs)
+    - [System Logs](#system-logs)
     - [Networking](#networking)
     - [Network Probing](#network-probing)
     - [Traffic capture](#traffic-capture)
     - [Network management](#network-management)
     - [Load testing](#load-testing)
     - [Benchmarking](#benchmarking)
-- [todo explain the flags](#todo-explain-the-flags)
     - [The `ip` command](#the-ip-command)
 - [Terminals](#terminals)
     - [more in the Bash Section](#more-in-the-bash-section)
@@ -685,15 +684,15 @@ zfs destroy datapool/fs1@10jan2020
 
 #### Get info about linux version
 
-`cat /etc/os-release`
-``` bash
 
+``` bash
+cat /etc/os-release
 ```
 #### get pretty print version
 
-`less /etc/issue`
-``` bash
 
+``` bash
+less /etc/issue
 ```
 #### Debian/ubuntu get version
 
@@ -703,75 +702,59 @@ hostnamectl
 ```
 
 ##### Info about system
-
-`uname -a` <br>
 ``` bash
-
+uname -a
 ```
 ## Systemd Systemctl
 
-#### Check status
-
-`sudo systemctl status APP_SERVICE`
+#### Check status of a Service
 ``` bash
+systemctl status APP_SERVICE
 
+# system control status nginx
+systemctl status nginx
 ```
-#### Example system control status nginx
-
-`sudo systemctl status nginx`
+#### Check if service is Active
 ``` bash
-
-```
-#### Check if service is active
-
-`systemctl is-active nginx`
-``` bash
-
+systemctl is-active nginx
 ```
 #### List all loaded service units
-
-`systemctl list-units -all | grep loaded | awk '{print $1;}'`
 ``` bash
-
+systemctl list-units -all | grep loaded | awk '{print $1;}'
 ```
 #### List all enabled units
-
-`systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt`
 ``` bash
-
+systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt
 ```
 
-Make sure that all the services we use are in the startup script.
 
 #### List all loaded services
+Make sure that all the services we use are in the startup script
 
-`systemctl list-units -all | grep service | grep loaded | awk '{print $1;}'`
 ``` bash
-
+systemctl list-units -all | grep service | grep loaded | awk '{print $1;}'
 ```
 #### List all enabled services
-
-`systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt`
 ``` bash
-
+systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
 ```
 #### Find the list of services that are loaded but not enabled
 
 ``` bash
 systemctl list-units -all | grep service | grep loaded | awk '{print $1;}' > loaded.txt
+
 systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
+
+# Diff the files
 diff -y loaded.txt enabled.txt
-#If you want a quick glance of missing ones you can also use
+```
+
+#### Diff the missing services. Quick glance of missing
+``` bash
 diff -y loaded.txt enabled.txt | grep '<'
 ```
 
-#### Diff the missing services
-``` bash
-
-```
-
 #### `pushd` and `popd` to jump between directories
-
 ``` bash
 pushd $DIR
 popd
@@ -784,40 +767,34 @@ zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | l
 ```
 
 #### Xclip to capture the clipboard when copying
-
-`cat ~/.ssh/id_rsa.pub | xclip -sel clip`<br>
 ``` bash
-
+cat ~/.ssh/id_rsa.pub | xclip -sel clip
 ```
-`xclip`
-``` bash
 
+``` bash
+xclip
 ```
 
 #### X windows var
-
-`echo $XDG_CURRENT_DESKTOP` <br>
 ``` bash
-
+echo $XDG_CURRENT_DESKTOP
 ```
 
-#### check a dir with a parameter. Double check `info stat`
-
-`stat %A $DIR`<br>
+#### Check a dir with a parameter. Double check `info stat`
 ``` bash
-
+stat %A $DIR
 ```
 
 #### nohup execution
 
 `nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
 
-`nohup $COMMAND_OR_SCRIPT > out_$(date).txt`
-``` bash
 
+``` bash
+nohup $COMMAND_OR_SCRIPT > out_$(date).txt
 ```
 
-#### echo a string an pipe it to a command
+#### Echo a string an pipe it to a command
 
 In this case the content of a `DockerFile` is echoed first then piped to `docker build` to create a docker image.
 
@@ -831,48 +808,42 @@ EOF
 
 ##### Maintain symbolic links determining default commands. Show installed Apps
 
-`update-alternatives --get-selections`
 ``` bash
-
+update-alternatives --get-selections
 ```
 
 ##### Get info about current user
-`id`
 ``` bash
-
+id
 ```
 
 ##### Edit sudo users
-
-`sudo visudo`<br>
 ``` bash
-
+sudo visudo
 ```
 
-##### Move DIR1 to DIRDestiny Path
-
-`sudo mv $DIR1 $DIRDestiny`<br>
+##### Move `DIR1` to `DIRDestiny`
 ``` bash
-
+sudo mv $DIR1 $DIRDestiny
 ```
 
 ##### Find where the command is installed
 
-`which pip` <br>
 ``` bash
+which COMMAND
 
+which pip
 ```
 
 ##### Create an alias with a command to go to a specific directory
-
 ``` bash
-alias ee='cd /home/ws/01-inbox/02-projects/2019-ee/test-env/eenz' <br>
+alias ee='cd /home/ws/02-projects/ee/test-env/eenz' <br>
+
 ee
 ```
 
 #### Copy files from Local to Remote Server
-
-define the local and remote paths in env vars. Perform the copy
+Define the local and remote paths in env vars. Perform the copy
 
 ``` bash
 scp -r $LOCAL_PATH/sftp-shim ubuntu@$REMOTE_HOST_SERVER:$REMOTE_SERVER_PATH
@@ -881,29 +852,27 @@ echo "cd $PWD"
 
 ## Compression/Decompression of files
 
-`tar -czvf name-of-archive.tar.gz /path/to/directory-or-file`
+#### With Tar
 ``` bash
-
+tar -czvf name-of-archive.tar.gz /path/to/directory-or-file
 ```
-`zip -r compressedFileName.zip file1 file2 dir1/ file3`
-``` bash
 
+#### With Zip
+
+``` bash
+zip -r compressedFileName.zip file1 file2 dir1/ file3
 ```
 #### Create a parent directory with 2 directories inside (Single line)
-
-`mkdir -p $HOME/example.com/server1/{httpd,dnsqmasq}`
 ``` bash
-
+mkdir -p $HOME/example.com/server1/{httpd,dnsqmasq}
 ```
 ## Find/Search operations
 
 #### Find files containing specific text
-
-`grep -iRl "TEXT-TO-FIND" ./`
 ``` bash
-
+grep -iRl "TEXT-TO-FIND" ./
 ```
-##### Switches
+##### Common Flags for `grep`
 
 ``` bash
 -i - ignore text case
@@ -912,8 +881,11 @@ echo "cd $PWD"
 ```
 
 `./` As the last parameter, the path to the folder containing files you want to search for text.
+
 You can use the full path of the folder.
-`grep -iRl "TEXT" /home/user/Documents`
+``` bash
+grep -iRl "TEXT" /home/user/Documents
+```
 
 #### Find the value of `THING_NAME` and replaces the value in a given config file
 ``` bash
@@ -921,19 +893,21 @@ THING_NAME=< enter bucket Name >
 sed -i -r "s/^THING_NAME=.*/THING_NAME=$THING_NAME/" /home/ubuntu/sftp-shim.config
 ```
 
-#### Searches for ????
+#### Searches for ???? in the current directory
 ``` bash
-
-```
 grep -Eri health_url .
-
+```
 #### Find directories modified within the past 10 days
-
 ``` bash
 find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
-HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
 ```
 
+#### It should find the HTTPD user in a web server. 
+`ps` command behaves weirdly
+
+``` bash
+HTTPDUSER=$(ps axo "user,comm" | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
+```
 ## Package Management
 
 ### APT
@@ -941,174 +915,139 @@ HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]gi
 ubuntu package manager
 
 #### Fetch packages from Repo
-
-`sudo apt update`
 ``` bash
-
+sudo apt update
 ```
 #### Auto remove Obsolete packages
-
-`sudo apt autoremove`
 ``` bash
-
+sudo apt autoremove
 ```
 #### Upgrade packages
-
-`sudo apt upgrade`
 ``` bash
-
+sudo apt upgrade --yes
 ```
 #### List a package by name. e.g. python
-
-`sudo apt list | grep python` <br>
 ``` bash
-
+sudo apt list | grep python
 ```
 #### List installed packages
-
-`sudo apt list --installed` <br>
 ``` bash
-
+sudo apt list --installed
 ```
 #### Fix broken install packages
-
-`sudo apt --fix-broken install`<br>
 ``` bash
-
+sudo apt --fix-broken install
 ```
 #### Purge a package
-
-`sudo apt-get purge unattended-upgrades`<br>
 ``` bash
-
+sudo apt-get purge unattended-upgrades
 ```
 #### Install a Debian Package
-
-`sudo dpkg -i $DEBIAN_PKG`<br>
 ``` bash
-
+sudo dpkg -i $DEBIAN_PKG
 ```
 #### Check if Periodic updates are enabled
-
-`cat /etc/apt/apt.conf.d/10periodic`<br>
 ``` bash
-
+cat /etc/apt/apt.conf.d/10periodic
 ```
 #### Get packages from repo and find given string
-
-`dpkg --get-selections | grep PACKAGE_TO_FIND`
 ``` bash
-
+dpkg --get-selections | grep PACKAGE_TO_FIND
 ```
-#### Snap list installed packages
-
-`snap list`
+#### list snap packages installed
 ``` bash
-
+snap list
 ```
----
-
 ## Debugging Linux Systems (mostly Ubuntu)
 
 A very important set of skills when something goes wrong and is important to get quick info.
 This can become a small DIY project to manage desktop and cloud servers.
 
-`ls -lth /var/log/ | sort --month-sort` <br>
-``` bash
 
+``` bash
+ls -lth /var/log/ | sort --month-sort
 ```
-`less /var/log/syslog` <br>
-``` bash
 
+#### Check the system log
+``` bash
+less /var/log/syslog
 ```
-`touch new_empty_file.txt` <br>
-``` bash
 
+#### Create empty file in given path
+``` bash
+touch /home/user/new_empty_file.txt
 ```
-`less /etc/X11/xorg.conf` <br>
-``` bash
 
+``` bash
+less /etc/X11/xorg.conf
 ```
 
 #### List directory with extensions
-
-`ls -xl ${DIR_PATH}`
 ``` bash
-
+ls -xl ${DIR_PATH}
 ```
 
-Article [medium.com Troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
+- Article [medium.com Troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
 
 #### lists all open files belonging to all active processes
-
-`lsof`
 ``` bash
-
+lsof
 ```
 
 #### lists open files for current user
-
-`lsof -u $USER`
 ``` bash
-
+lsof -u $USER
 ```
 
-#### End all user processes
-
-`kill -9 $(lsof -t -u $TARGET_USER)`
+#### End all processes for a target user
 ``` bash
-
+kill -9 $(lsof -t -u $TARGET_USER)
 ```
 
 #### Retrieve processes running on a specified range
-
-`lsof -i :8090-9090`
 ``` bash
-
+lsof -i :8090-9090
 ```
 
 ### Explore System Processes
 
 #### Find the process that consumes more CPU
-
-`ps -eo pid,%cpu,%mem,args --sort -%cpu`
 ``` bash
-
+ps -eo pid,%cpu,%mem,args --sort -%cpu
 ```
 
 #### Sort processes by memory
-
-`ps aux --sort=-%mem`
 ``` bash
-
+ps aux --sort=-%mem
 ```
 
-#### a very unuseful view with a process tree
-
+#### Unuseful view with a process tree
 ``` bash
 ps xfa | less
 ```
 
-#### read from a file in a specific line e.g. 4
-
-`less +4 -N show-time.sh`
+#### Read from a file in a specific line e.g. 4
 ``` bash
-
+less +4 -N show-time.sh
 ```
 
-### Logs
+### System Logs
 
 #### Commong logs in linux
-- Message = `/var/log/message`
+`/var/log/message`
+
 Contains global system messages, including the messages that are logged during system startup. Includes mail, cron, daemon, kern, auth, etc.
 
-- `/var/log/auth.log`
+`/var/log/auth.log`
+
 Authentication logs
 
 `/var/log/kern.log`
+
 Kernel logs
 
 `/var/log/cron.log`
+
 Crond logs
 
 #### Check System Logs Journal Control
@@ -1116,145 +1055,116 @@ Crond logs
 ##### command for viewing logs collected by systemd
 
 #### Obtain Log output with admin permissions
-
-`sudo journalctl`
 ``` bash
-
+sudo journalctl
 ```
 #### Check system logs
-
-`journalctl -xe`
 ``` bash
-
+journalctl -xe
 ```
 #### Obtain Log output from oldest to newest
-
-`journalctl -r`
 ``` bash
-
+journalctl -r
 ```
 #### Monitor New Log Messages
-
-`journalctl -f`
 ``` bash
-
+journalctl -f
 ```
 #### Show Logs within a Time Range
-
 ``` bash
 journalctl --since "2018-08-30 14:10:10"
 journalctl --until "2018-09-02 12:05:50"
 ```
 
+#### List boots in the System
+``` bash
+journalctl --list-boots
+```
+
 #### Show Logs for a Specific Boot
-
-`journalctl -b`
 ``` bash
-
+journalctl -b
 ```
-`journalctl --list-boots`
-``` bash
 
-```
 #### Show Logs for a systemd Service
-
-`journalctl -u $SERVICE_NAME`
 ``` bash
-
+journalctl -u $SERVICE_NAME
 ```
 #### View Kernel Messages
-
-`journalctl -k`
 ``` bash
-
+journalctl -k
 ```
 #### change Output Format to json-pretty
-
-`journalctl -o json-pretty`
 ``` bash
-
+journalctl -o json-pretty
 ```
 #### Manually Clean Up Archived Logs
 
 #### Reduce the size of your journals to 2GiB
-
-`journalctl --vacuum-size=2G`
 ``` bash
-
+journalctl --vacuum-size=2G
 ```
 #### Remove archived journal files with dates older than the specified relative time
-
-`journalctl --vacuum-time=1years`
 ``` bash
-
+journalctl --vacuum-time=1years
 ```
 ### Networking
 
-commands and useful cheat sheet used in networking
+Commands and useful cheat sheet used in networking
 
 ##### Check this awesome Cheat sheet
 
 [CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
 
 Accessing a service
-`whois` servers
-`dig DOMAIN` DNS queries and shows associated records
-`nslookup` alternative to dig. It doesnt use the system local DNS.
-`traceroute DOMAIN` packets hop
+`whois` = servers
+`dig DOMAIN` = DNS queries and shows associated records
+`nslookup` = alternative to dig. It doesnt use the system local DNS.
+`traceroute DOMAIN` = packets hop
 
 ### Network Probing
+Which TCP or UDP ports are open.
 
-Which tcp or UDP ports are open.
 Can i open a TCP connection to this destination?
 
-`nmap -sS localhost` port scanning TCP,UDP ports open or closed
+#### Port scanning TCP,UDP ports open or closed
 ``` bash
-
+nmap -sS localhost
 ```
-`ping/ping6` sends ICMP pings. checks latency
+#### Sends ICMP pings. checks latency
 ``` bash
-
+ping/ping6
 ```
-`netcat` `nc -l 80` test ports
+#### Test port 80 netcat
+
 ``` bash
-
+nc -lvz 80
 ```
+
 `telnet` a complete protocol
 ``` bash
-
-```
-
-`tcdump -i eth0 icmp`
-``` bash
-
+tcdump -i eth0 icmp
 ```
 
 #### Examine the IPv4 TCP-based sockets that are listening for connections on your system
-
-`ss -4 -tln`
 ``` bash
-
+ss -4 -tln
 ```
 
 #### Examine the IPv6 TCP-based sockets that are listening for connections on your system
-
-`ss -6 -tln`
 ``` bash
-
+ss -6 -tln
 ```
 
 #### Creating Unix Domain Sockets
-
 ``` bash
 socat unix-listen:/tmp/stream.sock,fork /dev/null&
 socat unix-recvfrom:/tmp/datagram.sock,fork /dev/null&
 ```
 
 #### examine unix domain sockets
-
-`ss -xln`
 ``` bash
-
+ss -xln
 ```
 #### Connect to an UNIX Socket
 ``` bash
@@ -1272,13 +1182,13 @@ socat TCP4-LISTEN:8080,fork /dev/null&
 socat TCP6-LISTEN:8080,ipv6only=1,fork /dev/null&
 ```
 
-`socat` can listen on any available port on a system, so any port from 0 to 65535 is a valid parameter for the socket option.
+- `socat` can listen on any available port on a system, so any port from 0 to 65535 is a valid parameter for the socket option.
 
 ### Traffic capture
 
 `tcpdump` traffic capture uses bpf filters
 `tcpdump -i eth0 -vvv -d dst $IP`
-wireshark
+`wireshark`
 
 ### Network management
 
@@ -1286,14 +1196,15 @@ wireshark
 
 `route -n` routing info. Routing table
 
-`arp` check arp cache
+#### Check arp cache
+
 ``` bash
 arp -a
 ```
 
 `ip` see neighbor table. add routes
 
-Answers questions
+- Answers questions
 what are the net interfaces, ips, subnets, broadcast address??
 how do i add routes?
 
@@ -1308,17 +1219,20 @@ tcpreplay -i eth0 httptraffic.pcap
 
 `wrk2` Send Http load
 
-`wrk2 -t1 -c10 -d60 -R100 -L http://$IP` threads connections duration Requests
-``` bash
+Threads connections duration Requests
 
+``` bash
+wrk2 -t1 -c10 -d60 -R100 -L http://$IP
 ```
-`iperf3`Send TCP or UDP traffic. Similar to wrk2 but allows UDP
-``` bash
 
+#### Send TCP or UDP traffic. Similar to wrk2 but allows UDP
+``` bash
+iperf3
 ```
-`nuttcp`
-``` bash
 
+#### ????
+``` bash
+nuttcp
 ```
 ### Benchmarking
 
@@ -1331,38 +1245,32 @@ BPF/eBPF potentical for new programs
 **source:** Digital ocean talk Handy Linux networking tools
 
 #### Flush DNS by resetting the network DEBIAN based
-
-`sudo /etc/init.d/networking restart`
 ``` bash
-
+sudo /etc/init.d/networking restart
 ```
 #### Inspect TCP socket states e.g. 443
-
-`ss -nta '( dport = :443 )'`
 ``` bash
-
+ss -nta '( dport = :443 )'
 ```
+
 `netstat` is a great tool for monitoring network connections.
 
-#### netstat statistics
-
-`netstat --statistics`
+#### Netstat statistics
 ``` bash
-
+netstat --statistics
 ```
 #### Find ports in use
-
 ``` bash
 netstat -tulpn
-# The -t option checks for TCP connections.
-# The -u option checks for UDP connections.
-# The -l option tells netstat to list only LISTENING connections. If you want to see all connections, use the -a option instead.
-# The -p option shows the PID id of the process.
-# The -n option shows numerical addresses, instead of trying to resolve host, port, or user names.
 ```
-# todo explain the flags
 
-#### Make sure the firewalld service is enabled
+- The `-t` option checks for TCP connections.
+- The `-u` option checks for UDP connections.
+- The `-l` option tells netstat to list only LISTENING connections. If you want to see all connections, use the -a option instead.
+- The `-p` option shows the PID id of the process.
+- The `-n` option shows numerical addresses, instead of trying to resolve host, port, or user names.
+
+#### Make sure the `firewalld` service is enabled
 ``` bash
 ll /usr/lib/systemd/system | grep firewalld
 
@@ -1374,9 +1282,9 @@ sudo systemctl restart firewalld
 sudo systemctl status firewalld
 ```
 
-`yum install -y nc`
+#### Install netcat in Fedora/Redhat
 ``` bash
-
+yum install -y nc
 ```
 #### CentOS Linux Open Port 8080 on the firewall
 ``` bash
@@ -1384,12 +1292,9 @@ sudo firewall-cmd --permanent --add-port=8080/tcp
 sudo firewall-cmd --reload
 ```
 
-
 #### Find user behind a process
-
-`sudo netstat -tulpe | grep 8090`
 ``` bash
-
+sudo netstat -tulpe | grep 8090
 ```
 #### Test connectivity to a port
 
@@ -2529,10 +2434,8 @@ SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME
 
 ```
 #### dump DB and create the DB in the script
-
-`pg_dump -U postgres -W -C -d example_backups > ~/db_backup.sql`
 ``` bash
-
+pg_dump -U postgres -W -C -d example_backups > ~/db_backup.sql
 ```
 #### back up my entire PostgreSQL cluster and save it in the entire_cluster.sql file
 
@@ -2586,16 +2489,12 @@ syntax
 
 ```
 #### Delete File(s)
-
-`CTRL + delete`
 ``` bash
-
+CTRL + delete
 ```
 #### Permanently delete
-
-`Shift + Delete`
 ``` bash
-
+Shift + Delete
 ```
 (You should never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in. Many personal system and program configurations are stored under your home directory.)
 
@@ -2841,10 +2740,8 @@ SERVICE_NAME="NameInsideDockerCompose"
 ```
 
 #### Check status of the docker-compose stack
-
-`docker-compose -f $DOCKER_COMPOSE_FILE ps`
 ``` bash
-
+docker-compose -f $DOCKER_COMPOSE_FILE ps
 ```
 #### Check logs
 
