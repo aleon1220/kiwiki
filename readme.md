@@ -42,12 +42,13 @@ The wiki is going to be divided into subcategories.
    - VsCode
 6. programming-languages
 7. Regular [expressions](./regex/readme.md)
-8. security
+8. Security
 9. windows
 
 ## Introduction
 
-- **2020-04-28=** I lost years of work on setting a nice Information Technology Wiki. Now i will start a new one in this github repo; It will have categories and then subcategories with functionalites.
+- **2020-04-28=** I lost years of work on setting a nice Information Technology Wiki. I am starting a new one here
+
 For years i have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, etc.
 I used a `.txt` file, then a google docs file. I managed to delete the google docs file from its google drive folder. I accidentally deleted the folder and later on I emptied the bin. I truly dislike that...
 
@@ -56,10 +57,25 @@ I still hope I can recover my file (there was no way to recover the file)
 
 Don't rely on the cloud 100%. Have local copies of your digital material.
 
-- **2020-11-10=** I totally confirm that i lost my google docs wiki file. I should have been more careful.
+- **2020-11-10=** I confirm that i lost my google docs wiki file. I should have been more careful.
 - **2021-04-07=** processing inbox category. Moved intro below About Project
 
-## CLI Shell keyboard shortcuts
+## The Computer as a modern day to day tool
+
+A Computer as a tool has a CPU processor, memory RAM, storage in form of a drive, connectivity via network card or wifi, graphics visualization via a monitor. The operating system has tools to manage and interact with all the described above.
+
+The categories are:
+- **General Info**
+1. Processing
+2. Memory
+3. Storage
+4. Networking
+5. Graphics
+
+## The CLI Shell
+there are many: bash, fish, Zshell
+
+### CLI Shell keyboard shortcuts
 
 - `ctrl + a`  moves cursor to beginning of line (a alphabet or first letter)
 - `ctrl + e`  moves cursor to end of line (Is also kinda close to letter `a` in the US keyboard)
@@ -78,19 +94,6 @@ Type a Long command, e.g. add loops or some complex parsing logic. You need more
 
 Editors VIM(or Nano or VI etc.) opens with your command you had typed so far already in the buffer
 ```
-
-## The Computer as a modern day to day tool
-
-A Computer as a tool has a CPU processor, memory RAM, storage in form of a drive, connectivity via network card or wifi, graphics visualization via a monitor. The operating system has tools to manage and interact with all the described above.
-
-The categories are:
-- **General Info**
-1. Processing
-2. Memory
-3. Storage
-4. Networking
-5. Graphics
-
 ## General Info
 Get quick diagnostic about a server
 
@@ -102,7 +105,6 @@ lsb_release -a ; hostname -I ; hostname ; getconf LONG_BIT
 
 
 #### List of software installed from [A-Z]
-
 
 #### Check the hidden directories and files in the HOME dir
 ``` bash
