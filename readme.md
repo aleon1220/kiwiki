@@ -1,24 +1,13 @@
 <h1>KIWIKI</h1> <br>
 <h2>Information Technology Wiki</h2> <br>
 
-> <h3> work by @aleon1220. A Colombian adopted by Kiwis since 2016</h3>
+> <h4> work by @aleon1220. A Colombian adopted by Kiwis since 2016</h3>
 
 ---
 
 
 ---
-> END of Table of contents
----
-
-# Inbox
-
-Os hillman website. Iframe to include in website
-
-``` html
-<iframe src="http://www.marketplaceleaders.org/a/" style="overflow:hidden" marginheight="0" marginwidth="0" frameborder="0" width="100%" height="100%"></iframe>
-Read more: http://www.marketplaceleaders.org/tgif/api/#ixzz6pzkOZ8Wi
-```
-
+> **END of Table of contents**
 ---
 
 # About KIWIKI Project
@@ -2540,16 +2529,14 @@ echo 'yq() {
 ```
 
 # Docker Containers
-
-`docker version` <br>
 ``` bash
-
+docker version
 ```
 #### List Docker volumes
 ``` bash
 docker volume ls
 ```
-
+#### Check Docker system disk usage
 ``` bash
 docker system df
 ```
@@ -2891,4 +2878,13 @@ convert -resize 50% source.png dest.jpg
 ``` bash
 SIZE="1024X768"
 convert -resize $SIZE source.png destination.jpg
+```
+---
+# Inbox
+
+Os hillman website. Iframe to include in website
+
+``` html
+<iframe src="http://www.marketplaceleaders.org/a/" style="overflow:hidden" marginheight="0" marginwidth="0" frameborder="0" width="100%" height="100%"></iframe>
+Read more: http://www.marketplaceleaders.org/tgif/api/#ixzz6pzkOZ8Wi
 ```
