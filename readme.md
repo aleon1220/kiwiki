@@ -2585,6 +2585,28 @@ vim ~/.docker/config.json
     }
 }
 ```
+
+### Building Docker Images Dockerfile
+#### Use docker cache busting
+Install latest version of a package in 1 layer
+``` bash
+RUN apt-get update && apt-get install -y \
+    nginx \
+    vim
+```
+
+#### Use docker cache busting and version pinning and clean up the `apt` cache 
+Gets specific package version with the latest minor releases
+
+`apt cache` is not stored in a layer so you obtain a smalley docker image size
+
+``` bash
+RUN apt-get update && apt-get install -y \
+    package-bar=2.5.* \
+    package-baz=5.0.* \
+    package-foo=1.3.* \
+&& rm -rf /var/lib/apt/lists/*
+```
 #### Stop All Containers quietly
 
 ``` bash
