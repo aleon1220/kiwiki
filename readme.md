@@ -340,7 +340,7 @@ zpool create datapool raidz2 c0t0d0 c0t1d0 c0t2d0 c0t3d0 c0t4d0 c0t5d0
 ``` bash
 zpool create datapool mirror c0t0d0 c0t5d0
 ```
-#### Mirrors=Disk c0t0d0 is mirrored with c0t5d0 and disk c0t2d0 is mirrored withc0t4d0
+#### Mirrors=Disk `c0t0d0` is mirrored with `c0t5d0` ; disk `c0t2d0` is mirrored with `c0t4d0`
 ``` bash
 zpool create datapool mirror c0t0d0 c0t5d0 mirror c0t2d0 c0t4d0
 ```
@@ -378,47 +378,48 @@ zpool list -Ho name
 ```
 ### File-system/Volume related commands
 
-# zfs create datapool/fs1 Create file-system fs1 under datapool
+# Create file-system fs1 under datapool
 ``` bash
-
+zfs create datapool/fs1
 ```
-# zfs create -V 1gb datapool/vol01 Create 1 GB volume (Block device) in datapool
+# Create 1 GB volume (Block device) in datapool
 ``` bash
-
+zfs create -V 1gb datapool/vol01
 ```
-# zfs destroy -r datapool destroy datapool and all datasets under it
+# Destroy datapool and all datasets under it
 ``` bash
-
+zfs destroy -r datapool
 ```
-# zfs destroy -fr datapool/data destroy file-system or volume (data) and all related snapshots
+# Destroy file-system or volume (data) and all related snapshots
 ``` bash
-
+zfs destroy -fr datapool/data
 ```
 #### Set ZFS file system properties
+
+#### Set quota of 1 GB on filesystem fs1
 ``` bash
-
+zfs set quota=1G datapool/fs1
 ```
-#### zfs set quota=1G datapool/fs1 Set quota of 1 GB on filesystem fs1
 
-#### zfs set reservation=1G datapool/fs1 Set Reservation of 1 GB on filesystem fs1
+#### Set Reservation of 1 GB on filesystem `fs1`
 ``` bash
-
+zfs set reservation=1G datapool/fs1
 ```
-#### zfs set mountpoint=legacy datapool/fs1 Disable ZFS auto mounting and enable mounting through /etc/vfstab
+#### Disable ZFS auto mounting and enable mounting through config file `/etc/vfstab`
 ``` bash
-
+zfs set mountpoint=legacy datapool/fs1
 ```
-#### zfs set sharenfs=on datapool/fs1 Share fs1 as NFS
+#### Share fs1 as NFS
 ``` bash
-
+zfs set sharenfs=on datapool/fs1
 ```
-#### Enable compression on fs1
+#### Enable compression on `fs1`
 ``` bash
 zfs set compression=on datapool/fs1
 ```
 ### `ZFS` File-system/Volume related commands
 
-#### Create file-system fs1 under datapool
+#### Create file-system `fs1` under datapool
 ``` bash
 zfs create datapool/fs1
 ```
@@ -515,78 +516,79 @@ zpool import
 ``` bash
 zpool import -a
 ```
-#### Search for pools with block devices not located in /dev/dsk
+#### Search for pools with block devices not located in `/dev/dsk`
 ``` bash
 zpool import -d
 ```
-#### zpool import -d /zfs datapool Search for a pool with block devices created in /zfs
+#### Search for a pool with block devices created in `/zfs`
 ``` bash
-
+zpool import -d /zfs datapool
 ```
-#### zpool import oldpool newpool Import a pool originally named oldpool under new name newpool
+#### Import a pool originally named oldpool under new name newpool
 ``` bash
-
+zpool import oldpool newpool
 ```
-#### zpool import 3987837483 Import pool using pool ID
+#### Import pool using `pool_ID`
 ``` bash
-
+zpool import 3987837483
 ```
-#### zpool export datapool Deport a ZFS pool named mypool
+#### Deport a ZFS pool named mypool
 ``` bash
-
+zpool export datapool
 ```
-#### zpool export -f datapool Force the unmount and deport of a ZFS pool
+#### Force the unmount and deport of a ZFS pool
 ``` bash
-
+zpool export -f datapool
 ```
 ### `ZFS` Snapshot Commands
 
-#### zfs snapshot datapool/fs1@12jan2014 Create a snapshot named 12jan2014 of the fs1 filesystem
+#### Create a snapshot named 12jan2014 of the fs1 filesystem
 ``` bash
-
+zfs snapshot datapool/fs1@12jan2014
 ```
-#### zfs list -t snapshot List snapshots
+#### List snapshots
 ``` bash
-
+zfs list -t snapshot
 ```
-#### zfs rollback -r datapool/fs1@10jan2014 Roll back to 10jan2014 (recursively destroy intermediate snapshots)
+#### Roll back to Jan 10 2020 (recursively destroy intermediate snapshots)
 ``` bash
-
+zfs rollback -r datapool/fs1@10jan2020
 ```
-#### zfs rollback -rf datapool/fs1@10jan2014 Roll back must and force unmount and remount
+#### Roll back: force unmount and remount
 ``` bash
-
+zfs rollback -rf datapool/fs1@10jan2020
 ```
-#### zfs destroy datapool/fs1@10jan2014 Destroy snapshot created earlier
+#### Destroy snapshot created earlier
 ``` bash
-
+zfs destroy datapool/fs1@10jan2020
 ```
-#### zfs send datapool/fs1@oct2013 &gt /geekpool/fs1/oct2013.bak Take a backup of ZFS snapshot locally
+#### Take a backup of ZFS snapshot locally
 ``` bash
-
+zfs send datapool/fs1@oct2019 &gt /geekpool/fs1/oct2019.bak
 ```
-#### zfs receive anotherpool/fs1 &lt /geekpool/fs1/oct2013.bak Restore from the snapshot backup backup taken
+#### Restore from the snapshot backup backup taken
 ``` bash
-
+zfs receive anotherpool/fs1 &lt /geekpool/fs1/oct2013.bak
 ```
-#### zfs send datapool/fs1@oct2013 | zfs receive anotherpool/fs1 Combine the send and receive operation
+#### Combine the `send` and `receive` operation
 ``` bash
-
+zfs send datapool/fs1@oct2019 | zfs receive anotherpool/fs1
 ```
-#### zfs send datapool/fs1@oct2013 | ssh node02 “zfs receive testpool/testfs” Send the snapshot to a remote system node02
+#### Send the snapshot to a remote system `node02`
 ``` bash
-
+zfs send datapool/fs1@oct2019 | ssh node02 “zfs receive testpool/testfs”
 ```
 ### `ZFS` Clone Commands
 
-#### zfs clone datapool/fs1@10jan2014 /clones/fs1 Clone an existing snapshot
+#### Clone an existing snapshot
 ``` bash
-
+zfs clone datapool/fs1@10jan2014 /clones/fs1
 ```
-#### zfs destroy datapool/fs1@10jan2014 Destroy clone
+#### Destroy clone
 ``` bash
-
+zfs destroy datapool/fs1@10jan2020
 ```
+
 ### Install [ZFS on Linux](http://download.zfsonlinux.org/epel/zfs-release.el6.noarch.rpm)
 
 ### For Linux RedHat and Fedora distros
