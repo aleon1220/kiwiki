@@ -1928,9 +1928,9 @@ git config fetch.prune true
 
 ```
 - when you no longer need the branch:
-`git worktree remove [-f] <path>`
-``` bash
 
+``` bash
+git worktree remove [-f] PATH_TO_MODIFY
 ```
 
 **Example:**
@@ -1941,10 +1941,8 @@ git config fetch.prune true
 **Explanation:** Creates a linked working tree (i.e., another directory on the file system associated with the repo) called `my-other-awesome-feature`, one level above your current working directory, with the specified branch checked out.
 
 #### Show Commit Content shows changes introduced by a commit
-
-`git show COMMIT`
 ``` bash
-
+git show COMMIT
 ```
 Alternatively, to see the changes between two specific commits run
 
