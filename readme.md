@@ -2,7 +2,6 @@
 <h2>Information Technology Wiki</h2> <br>
 
 > <h4> work by @aleon1220. A Colombian adopted by Kiwis since 2016</h3>
-
 ---
 - [About KIWIKI Project](#about-kiwiki-project)
   - [Repository Categories](#repository-categories)
@@ -867,6 +866,19 @@ zip -r compressedFileName.zip file1 file2 dir1/ file3
 mkdir -p $HOME/example.com/server1/{httpd,dnsqmasq}
 ```
 ## Find/Search operations
+``` bash
+find [where to start searching] [-options] [expression]
+```
+
+#### Search for the text ‘data’ within files that ends with md
+``` bash
+find ./ -type f -name "*.md" -exec grep 'data'  {} \;
+```
+
+#### Find the file ‘LICENSE’ in just the current directory and 1 subdirectory level
+``` bash
+find . -maxdepth 2 -name LICENSE
+```
 
 #### Find files containing specific text
 ``` bash
@@ -1196,7 +1208,7 @@ socat TCP6-LISTEN:8080,ipv6only=1,fork /dev/null&
 
 `route -n` routing info. Routing table
 
-#### Check arp cache
+#### Check ARP cache
 
 ``` bash
 arp -a
@@ -1209,7 +1221,6 @@ what are the net interfaces, ips, subnets, broadcast address??
 how do i add routes?
 
 ### Load testing
-
 `tcpreplay` replays traffic from packet capture fire
 
 ``` bash
@@ -1235,12 +1246,11 @@ iperf3
 nuttcp
 ```
 ### Benchmarking
-
-`siege`
 ``` bash
-
+info siege
 ```
-BPF/eBPF potentical for new programs
+
+BPF/eBPF potential for new programs
 
 **source:** Digital ocean talk Handy Linux networking tools
 
@@ -1297,10 +1307,8 @@ sudo firewall-cmd --reload
 sudo netstat -tulpe | grep 8090
 ```
 #### Test connectivity to a port
-
-`nc -vvz $host $port` <br>
 ``` bash
-
+nc -vvz $host $port
 ```
 #### Check server status
 
@@ -1581,11 +1589,9 @@ sort -nr | nl | head -n10
 
 #### Script to list files, directories, executables, and links from a given Workspace directory
 
-#### with `find`
-
-`find . -maxdepth 1 -type f -print`
+#### With `find`command
 ``` bash
-
+find . -maxdepth 1 -type f -print
 ```
 #### Script usage= `lsf` lists files, `lsd` lists directories, `lsx` lists executables, `lsl` lists links
 
@@ -1736,24 +1742,21 @@ curl -X 'PUT' -d '{"param1":"test1","param2":"test3"}' \http://test.com/1
 
 ```
 #### Timing Curl connection
-
-`curl -w "%{time_total}\n" -o /dev/null -s www.test.com`
 ``` bash
-
+curl -w "%{time_total}\n" -o /dev/null -s www.test.com
 ```
 ## PDF Operations Tools
 
 ### PDF tool kit
 
-##### Recursively find inside pdfs
-
-`find . -iname '*.pdf' -exec pdfgrep "Title of File to search " {} +` <br>
+##### Recursively find inside PDFs
 ``` bash
-
+find . -iname '*.pdf' -exec pdfgrep "Title of File to search " {} +
 ```
-`pdfgrep -r "Title of PDF to find"` <br>
-``` bash
 
+#### Using `pdfgrep`
+``` bash
+pdfgrep -r "Title of PDF to find"
 ```
 #### Get info about the pdf toolkit
 
@@ -2137,12 +2140,9 @@ Then, simply add, commit, and push
 
 ```
 #### Find local GIT repos
-
-`sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n`
 ``` bash
-
+sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n
 ```
-<br>
 
 #### Get help with any git command
 
@@ -2844,7 +2844,6 @@ docker-compose -f $DOCKER_COMPOSE_FILE ps
 ### Image operations with ImageMagick
 
 #### Easily-resize-images with percentage
-
 ``` bash
 # percentage
 convert -resize 50% source.png dest.jpg
