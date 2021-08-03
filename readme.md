@@ -43,7 +43,6 @@
     - [Benchmarking](#benchmarking)
     - [The `ip` command](#the-ip-command)
 - [Terminals](#terminals)
-    - [more in the Bash Section](#more-in-the-bash-section)
   - [CURL Client URL](#curl-client-url)
   - [PDF Operations Tools](#pdf-operations-tools)
     - [PDF tool kit](#pdf-tool-kit)
@@ -1241,7 +1240,7 @@ wrk2 -t1 -c10 -d60 -R100 -L http://$IP
 iperf3
 ```
 
-#### ????
+#### Network performance measurement tool
 ``` bash
 nuttcp
 ```
@@ -1311,57 +1310,44 @@ sudo netstat -tulpe | grep 8090
 nc -vvz $host $port
 ```
 #### Check server status
-
-`sudo netstat -tuple | grep smtp`
 ``` bash
-
+sudo netstat -tuple | grep smtp
 ```
 #### Check Any URL and get output in Text
-
-`curl -l localhost:80` <br>
 ``` bash
-
+curl -l localhost:80
 ```
 #### Get listening ports
-
-`ss -tulwn`
 ``` bash
-
+ss -tulwn
 ```
 #### Get a report with nmap. install it first `sudo snap install nmap`
-
-`nmap -sV -p- localhost`
 ``` bash
-
+nmap -sV -p- localhost
 ```
 ### The `ip` command
 
 - Show / manipulate routing
-`ip route show`
 ``` bash
-
+ip route show
 ```
-`ip route list`
+- Show List of routes
 ``` bash
-
+ip route list
 ```
 - Show / manipulate devices
-`cat /etc/network/interfaces`
 ``` bash
-
+cat /etc/network/interfaces
 ```
 - Policy routing
 - Tunnels
 
 #### Restart Name Service Cache Process
-
-`sudo service nscd restart`
 ``` bash
-
+sudo service nscd restart
 ```
 
 #### Create a Symbolic Link
-
 ``` bash
 SOURCE_FILE=/home/ubuntu/.local/bin/docker-compose
 SYMBOLIC_LINK_PATH=/usr/bin/docker-compose
@@ -1369,39 +1355,30 @@ sudo ln --symbolic $SOURCE_FILE $SYMBOLIC_LINK_PATH
 ```
 
 ##### Check Timestamp for last updated packages in package manager apt
-
-`ls -l /var/lib/apt/periodic/update-stamp`<br>
 ``` bash
-
+ls -l /var/lib/apt/periodic/update-stamp
 ```
 
 ##### History of commands executed in the current session
-
-`history` <br>
 ``` bash
-
+history
 ```
 
 ##### Create a random password
-
 ``` bash
 randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | \
 base64 | tr /= _)
 ```
 
 ##### Get stats info about a file
-
-`stat --help`
 ``` bash
+stat $FILE
 
-```
-`stat $FILE`
-``` bash
-
+# Help with the command
+stat --help
 ```
 
-#### get text between quotes in a text file. Options
-
+#### Get text between quotes in a text file. Options
 ``` bash
 echo Source_File.txt | grep $REGEX_PATTERN
 grep "'.*'" -o references-get-between-quoutes.txt > result_1855.txt
@@ -1411,50 +1388,32 @@ grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt
 ```
 
 ##### Interactive process viewer
-
-`htop`
 ``` bash
-
+htop
 ```
 
-#### Check Disk Usage
-
-`df -h`<br>
+#### Check System Disk Usage
 ``` bash
-
+df -h
 ```
 ##### See who is connected and Display the load average (uptime output)
-
-`w -u`
 ``` bash
-
+w -u
 ```
 ##### Get the user login history
-
-`last $USERNAME`
 ``` bash
-
+last $USERNAME
 ```
-##### print the user name who are all currently logged in the current host
-
-`users`
+##### Print the user name who are all currently logged in the current host
 ``` bash
-
+users
 ```
 #### List Users in Linux
-
 ``` bash
-less /etc/passwd
+sudo less /etc/passwd
 ```
 
-##### Info in `/etc/passwd`
-
-``` bash
-
-```
-
-Each line in the file has seven fields delimited by colons that contain the following information:
-
+Each line in the file `etc/passwd` has seven fields delimited by colons that contain the following information:
 - User name:Encrypted password (x means that the
 - password is stored in the /etc/shadow file).
 - User ID number (UID).:User’s group ID number (GID)
@@ -1469,7 +1428,7 @@ awk -F: '{ print $1}' /etc/passwd
 cut -d: -f1 /etc/passwd
 ```
 
-#### Get a List of all Users
+#### Get a List of all Users in a Linux System
 
 Each user has a numeric user ID called UID. If not specified when creating a new user with the useradd command, the UID will be automatically selected from the /etc/login.defs file depending on the UID_MIN and UID_MIN values.
 
@@ -1478,20 +1437,17 @@ getent passwd
 getent passwd | cut -d: -f1
 ```
 
-#### Set a new password Root
+#### Set a new password for user `root`
 
 ```bash
 sudo passwd $USERNAME
 ```
 
-#### Set a new password Your own
-
-`passwd`
+#### Set a new password for your own user
 ``` bash
-
+passwd
 ```
-#### To check the UID_MIN and UID_MIN values on your system, you can use the following command
-
+#### Check the UID_MIN and UID_MIN values on your system, you can use the following command
 ``` bash
 grep -E '^UID_MIN|^UID_MAX' /etc/login.defs
 ```
@@ -1502,83 +1458,63 @@ grep -E '^UID_MIN|^UID_MAX' /etc/login.defs
 getent passwd {1000..60000}
 ```
 
-#### generic version of command above
+#### Generic info about users from a Linux system
 
 ``` bash
 eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)}
 ```
 
-#### Print only the usernames
-
+#### Print only the usernames in a Linux System
 ``` bash
 eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1
 ```
 
-##### print the loggedin user name
-
-`id -un`
+##### Print the loggedin user name
 ``` bash
-
+id -un
 ```
-##### get the list of the usernames who are currently logged in
-
-`who`
+##### Get the list of the usernames who are currently logged in
 ``` bash
-
+who
 ```
 ##### get a list of all usernames that are currently logged
-
-`who | cut -d' ' -f1 | sort | uniq`
 ``` bash
-
+who | cut -d' ' -f1 | sort | uniq
 ```
 ##### Launch file explorer Nautilus as super user admin
-
-`sudo nautilus`
 ``` bash
-
+sudo nautilus
 ```
-##### Scan full disk and analyze it
-
-`sudo ncdu /`
+##### Scan full disk and analyze it using tool `ncdu`
 ``` bash
-
+sudo ncdu /
 ```
-##### Remove directory
-
-`rm -rf $DIR_PATH`
+##### Remove directory forcefully
 ``` bash
-
+rm -rf $DIR_PATH
 ```
-#### Search for execution of a command in the history
-
-`COMMAND=who ; history | grep $COMMAND`
+#### Search for execution of a given command in the history
 ``` bash
-
+COMMAND=who ; history | grep $COMMAND
 ```
-#### set max map count
-
-`sudo sysctl -w vm.max_map_count=262144`
+#### Set max map count
 ``` bash
-
+sudo sysctl -w vm.max_map_count=262144
 ```
 ##### Show contents in tree view
-
-`tree ~`
 ``` bash
-
+tree $HOME
 ```
-#### If using GIO Gnome Input/Output
+#### Sho contents of a directory in a tree format with `gio` Gnome Input/Output
 
-`gio tree`
 ``` bash
-
+gio tree
 ```
 # Terminals
 
-### more in the [Bash Section](/devops-tools/bash)
+> ## more in the [Bash Section](/devops-tools/bash)
 
-#### most used commands in Bash History
+#### Most used commands in Bash History
 
 ``` bash
 history | \
@@ -1589,41 +1525,31 @@ sort -nr | nl | head -n10
 
 #### Script to list files, directories, executables, and links from a given Workspace directory
 
-#### With `find`command
+#### List all files in a current directory
 ``` bash
 find . -maxdepth 1 -type f -print
 ```
 #### Script usage= `lsf` lists files, `lsd` lists directories, `lsx` lists executables, `lsl` lists links
 
 #### start a process in the background
-
-`COMMAND="rescuetime"`
-`$COMMAND &`
 ``` bash
-
+COMMAND="rescuetime"
+$COMMAND &
 ```
 
-#### Create a testing version with the date. No space in generated date
-
-`APP_VERSION="vtest-"$(date +%F_%H%M)`<br>
+#### Create a string with the current date in the format **YYYY-MM-DD_HHMM**
 ``` bash
-
+APP_VERSION="vtest-"$(date +%F_%H%M)
 ```
-#### Create a file with content in a given path
 
-`FILE_PATH=/home/ubuntu/.bash_functions`
-``` bash
-
-```
 #### Create a dir and run a command in 1 line
-
-`cd $DIR1; $(COMMAND)`
 ``` bash
-
+`cd $DIR1; $(COMMAND)`
 ```
 #### Create a file and add content to it
-
 ``` bash
+FILE_PATH=/home/ubuntu/.bash_functions
+
 sudo bash -c "cat > $FILE_PATH"<<EOF
 Lots of content and text
 foo
@@ -1632,7 +1558,6 @@ EOF
 ```
 
 #### Create a function to show files in current dir
-
 ``` bash
 FILE_PATH=/home/ubuntu/.bash_functions
 sudo bash -c "cat > $FILE_PATH"<<EOF
@@ -1654,86 +1579,62 @@ EOF
 - `clear`
 - `CTRL + L`
 
-#### exit from terminal
-
-`exit`
+#### Exit from terminal
 ``` bash
-
+exit
 ```
 ##### Change permissions of a file based on permissions of other file
-
-`RFILE=reference_file ; sudo chmod --reference=\$RFILE`
 ``` bash
-
+RFILE=reference_file ; sudo chmod --reference=\$RFILE
 ```
 ##### Change ownership of all files inside current dir to a given group
-
-`GROUP_NAME=common ; sudo chown :\$GROUP_NAME \*`
 ``` bash
-
+GROUP_NAME=common ; sudo chown :\$GROUP_NAME \*
 ```
 ## CURL Client URL
 
 #### Download a file and save it with a custom name
-
-`curl -o custom_file.tar.gz https://testdomain.com/testfile.tar.gz`
 ``` bash
-
+curl -o custom_file.tar.gz https://testdomain.com/testfile.tar.gz
 ```
 #### Get HTTP headers. use the `-I` or the `— head` option
-
-`curl -I https://www.google.com`
 ``` bash
-
+curl -I https://www.google.com
 ```
 #### Ignore invalid certs `-k or --insecure`
-
-`curl -k https://localhost/my_test_endpoint`
 ``` bash
-
+curl -k https://localhost/my_test_endpoint
 ```
-#### Make a POST request. JSON `-H 'Content-Type: application/json'`
-
-`curl --data "param1=test1&param2=test2" http://test.com`
+#### Make a POST request. 
+If using **JSON** `-H 'Content-Type: application/json'`
 ``` bash
-
+curl --data "param1=test1&param2=test2" http://test.com
 ```
 #### get the HTTP headers and verbose mode
-
-`curl --head --verbose HOST`
 ``` bash
-
+curl --head --verbose HOST
 ```
-#### simplified view
-
-curl --list-only $HOST
+#### Simplified view
 ``` bash
-
+curl --list-only $HOST
 ```
 #### Specify the type of request
-
 ``` bash
 # updating the value of param2 to be test 3 on the record id
 curl -X 'PUT' -d '{"param1":"test1","param2":"test3"}' \http://test.com/1
 ```
 
 #### Include the Basic Auth
-
-`curl -u <user:password> https://my-test-api.com/endpoint1`
 ``` bash
-
+curl -u <user:password> https://my-test-api.com/endpoint1
 ```
 #### Update name resolution
-
-`curl --resolve www.test.com:80:localhost http://www.test.com/`
 ``` bash
-
+curl --resolve www.test.com:80:localhost http://www.test.com/
 ```
 #### Check service health
-
-`curl -Is http://www.google.com`
 ``` bash
-
+curl -Is http://www.google.com
 ```
 #### Upload a file
 
