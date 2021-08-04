@@ -47,7 +47,6 @@
   - [PDF Operations Tools](#pdf-operations-tools)
     - [PDF tool kit](#pdf-tool-kit)
 - [Windows products (micro\$oft)](#windows-products-microoft)
-  - [Windows - & WinServer](#windows----winserver)
   - [Moved to windows/readme](#moved-to-windowsreadme)
     - [Open SSH](#open-ssh)
   - [SSH Key Management](#ssh-key-management)
@@ -74,6 +73,7 @@
     - [Nautilus operations](#nautilus-operations)
     - [Tool YQ for YAML processing](#tool-yq-for-yaml-processing)
 - [Docker Containers](#docker-containers)
+  - [Dockerfile Practices](#dockerfile-practices)
     - [List the containers of an instance and show 4 attributes in table format](#list-the-containers-of-an-instance-and-show-4-attributes-in-table-format)
     - [Building Docker Images Dockerfile](#building-docker-images-dockerfile)
     - [Docker Exit Codes](#docker-exit-codes)
@@ -1660,52 +1660,44 @@ find . -iname '*.pdf' -exec pdfgrep "Title of File to search " {} +
 pdfgrep -r "Title of PDF to find"
 ```
 #### Get info about the pdf toolkit
-
-`info pdftk` <br>
 ``` bash
-
+info pdftk
 ```
-#### Get info about PDF_FILE
-
-`pdftk $PDF_FILE.pdf dump_data_utf8 | grep InfoValue:`<br>
+#### Find string *InfoValue* in the metadata of `PDF_FILE`
 ``` bash
-
+PDF_FILE="a_pdf_file.pdf"
+pdftk $PDF_FILE.pdf dump_data_utf8 | grep InfoValue:
 ```
-#### extract a range of pages from a pdf file
-
-`pdftk source.pdf cat 5-10 output ExtractedOutput_p5-10.pdf`
+#### Extract a range of pages from a PDF file
 ``` bash
-
+pdftk source.pdf cat 5-10 output ExtractedOutput_p5-10.pdf
 ```
-#### split specific pages from the source file, for example page 5, page 6, and page 10
-
-`pdftk source.pdf cat 5 6 10 output SplittedOutput.pdf`
+#### Split specific pages from the source file, for example page 5, page 6, and page 10
 ``` bash
-
+pdftk source.pdf cat 5 6 10 output SplittedOutput.pdf
 ```
+
 ---
 
 # Windows products (micro\$oft)
-
-## Windows - & WinServer
-
-win10 (unfortunately) Powershell
-Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
+> ## Windows - & WinServer
+Use CMD or POWERSHELL
+- Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
 Moved to [windows/readme](./windows/readme.md)
 ---
 
 #### VPN
 
-OpenVPN set [up in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
+OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
 
 ### Open SSH
 
-- [official OpenSSH](https://www.openssh.com/)
+- [Official OpenSSH](https://www.openssh.com/)
 - [SSH Academy](https://www.ssh.com/ssh/ssh-academy)
 
 #### Great docs at [Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-configure-custom-connection-options-for-your-ssh-client#general-tweaks-and-connection-items)
 
-- Use a config ssh custom file to ease connectivity
+- Use a config `SSH` custom file to ease connectivity
 - Make sure you are clear PuTTY will create keys with a `priv.ppk` format in windows vs Linux Open SSH key `id_rsa`
 
 ## SSH Key Management
@@ -1715,20 +1707,16 @@ OpenVPN set [up in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu
 #### Generate SSH Key pair
 
 #### Add a SSH key to ssh-agent
-
 ``` bash
 ssh-add -k ~/.ssh/id_rsa
 ssh-keygen -t rsa
 ```
 
 #### Get content of default name of Public Key
-
-`cat ~/.ssh/id_rsa.pub`<br>
 ``` bash
-
+cat ~/.ssh/id_rsa.pub
 ```
 #### Add an SSH key to a remote Server
-
 Read Public SSH key, ssh to \$REMOTE_HOST with root user and run a command to create a directory ssh and add the public key to authorized_keys file
 
 ``` bash
@@ -1739,7 +1727,7 @@ ssh root@$REMOTE_HOST $COMMAND
 
 # Git
 
-system to manage and store source code. Keeps track of changes to the files. Text files only.
+System to manage and store source code. Keeps track of changes to the files. Text files only.
 
 ### Git basic challenge/Demo
 
@@ -1946,97 +1934,86 @@ git show COMMIT
 ```
 Alternatively, to see the changes between two specific commits run
 
-`git diff COMMIT_A COMMIT_B`
 ``` bash
-
+git diff COMMIT_A COMMIT_B
 ```
-`git diff HEAD~ HEAD`
-``` bash
 
+#### Git diff with remote HEAD
+``` bash
+git diff HEAD~ HEAD
 ```
 #### Compare Files Between Branches/Commits
-
-`git diff <commit-a> <commit-b> -- <path(s)>`
 ``` bash
-
+git diff COMMIT_A COMMIT_B -- PATH
 ```
-`git diff 0659bdc e6c7c0d -- src/flair.py`
-``` bash
 
+``` bash
+git diff 0659bdc e6c7c0d -- src/flair.py
 ```
 #### Reset a Single File to Most Recent Commit
-
-`git checkout [<commit>] -- <path(s)>`
 ``` bash
-
+git checkout [<commit>] -- <path(s)>
 ```
-`git checkout -- README.md`
-``` bash
 
+#### Reset a single file
+``` bash
+git checkout -- README.md
 ```
 #### Change Last Commit Message
-
-`git commit --amend [-m '<message>']`
 ``` bash
-
+git commit --amend [-m 'MESSAGE']
 ```
-If the old commit had already been pushed, you’ll need to additionally run
 
-`git push --force-with-lease <remote> <branch>`
+#### If the old commit had already been pushed, you’ll need to additionally run
 ``` bash
-
+git push --force-with-lease <remote> <branch>
 ```
-**Note:** As a general rule, and especially if you’re working with others, it’s important to be careful when making any changes to already pushed commits.
+**Note:** 
+- As a general rule, it’s important to be careful when making any changes to already pushed commits.
 
 #### Change a Specific Commit Message
-
-`git rebase -i COMMIT`
 ``` bash
-
+git rebase -i COMMIT
 ```
-`git rebase -i HEAD~3`
-``` bash
 
+``` bash
+git rebase -i HEAD~3
 ```
 #### Delete Last Commit but Keep the Changes
-
-`git reset HEAD^`
 ``` bash
-
+git reset HEAD^
 ```
 #### Unstage a File
-
-`git reset HEAD <path>`
 ``` bash
-
+git reset HEAD $PATH_OF_REPO
 ```
 #### Remove Ignored Files From Remote
 
-later decided to `.gitignore` them, the files will nevertheless persist in your remote repository. To remedy this
+later decided to `.gitignore` them, the files will nevertheless persist in your remote repository.
+To remedy this
 
-`git rm`
 ``` bash
-
+git rm
 ```
+
 is the tool for the job.
 
-`git rm [-r] [-n] --cached <path(s)>`
+#### Clean up git cache
 ``` bash
-
+`git rm [-r] [-n] --cached <path(s)>`
 ```
-Then, simply add, commit, and push
+
+Then, 
+- simply add
+- commit, and push
 
 #### Hard reset of branch
-
-`git reset --hard`
 ``` bash
-
+git reset --hard
 ```
 #### show GPG signatures used in a repo
-
-`git log --show-signature`
 ``` bash
-
+git log --show-signature
 ```
 #### Find local GIT repos
 ``` bash
@@ -2044,32 +2021,28 @@ sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf
 ```
 
 #### Get help with any git command
-
-`git init --help`
 ``` bash
-
+git init --help
 ```
-`git COMMAND --help`
-``` bash
 
+``` bash
+git COMMAND --help
 ```
 #### Clone a Git Repo
-
-`git clone git@github.com:elastic/stack-docker.git`
 ``` bash
-
+git clone git@github.com:elastic/stack-docker.git
 ```
-`git status`
-``` bash
 
+``` bash
+git status
 ```
-`git branch`
+#### List the fetched branches for a repository
 ``` bash
-
+git branch
 ```
-`git info`
-``` bash
 
+``` bash
+git info
 ```
 
 #### Basic Git config set up
@@ -2082,55 +2055,41 @@ git config --global user.name "Your Name"
 #### Git TLS Certificates
 
 Git uses a file named ca-bundle.crt to list all the trusted certificates. We can find that file by typing the following in a terminal window:
-
-`git config --list --show-origin`
 ``` bash
-
+git config --list --show-origin
 ```
-`git config --global http.sslCAInfo`
-``` bash
 
+#### Get TLS info
+``` bash
+git config --global http.sslCAInfo
 ```
 #### Instruct Git to use GPG2 instead of GPG as the signing program
-
-`git config --global gpg.program gpg2`
 ``` bash
-
+git config --global gpg.program gpg2
 ```
-#### Test by signing some text with `gpg` and `gpg2`
-
-`echo "test" | gpg2 --clearsign`
+#### Test by signing text with `gpg` or `gpg2`
 ``` bash
-
+echo "test" | gpg2 --clearsign
 ```
 #### Set variable for GPG and terminal usage
-
-`export GPG_TTY=$(tty)`
 ``` bash
-
+export GPG_TTY=$(tty)
 ```
 ### Git Analysis/Reporting
 
 #### Get git global info
-
-`git config --global --list`
 ``` bash
-
+git config --global --list
 ```
 #### List all remote branches
-
-`git branch -r`
 ``` bash
-
+git branch -r
 ```
 #### List remote active branches
-
-`git ls-remote --heads origin`
 ``` bash
-
+git ls-remote --heads origin
 ```
 #### Get info about commits for a given user
-
 ``` bash
 git_user="git_user"
 git_date="Sat Aug 30 2021"
@@ -2144,22 +2103,16 @@ git checkout -b devops/ID-01-functionality
 ```
 
 #### Get a histogram for a gitdiff
-
-`git diff --histogram`
 ``` bash
-
+git diff --histogram
 ```
 #### Prints out just the subject line
-
-`git log --oneline`
 ``` bash
-
+git log --oneline
 ```
 #### Groups commits by user, again showing just the subject line for concision
-
-`git shortlog`
 ``` bash
-
+git shortlog
 ```
 #### Switch to previous branch
 
@@ -2418,6 +2371,13 @@ docker volume ls
 docker system df
 ```
 
+
+## Dockerfile Practices
+#### Retry `apt-get` operation if it fails
+``` bash
+# Make sure apt-get retries on failures
+RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/80retries
+```
 ### List the containers of an instance and show 4 attributes in table format
 
 ``` bash
