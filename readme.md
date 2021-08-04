@@ -83,7 +83,7 @@
   - [Minikube](#minikube)
   - [Image Magick](#image-magick)
     - [Image operations with ImageMagick](#image-operations-with-imagemagick)
-- [Inbox](#inbox)
+- [Inbox items to processed](#inbox-items-to-processed)
 ---
 > **END of Table of contents**
 ---
@@ -2287,36 +2287,26 @@ hostname:port:database:username:password
 ### System settings
 
 #### **Get** dimensions of Display
-
-`xdpyinfo | grep dim`
 ``` bash
-
+xdpyinfo | grep dim
 ```
 ### Nautilus operations
 
 #### Show hidden files Keyboard shortcut
-
-`CTRL + H`
 ``` bash
-
+CTRL + H
 ```
 #### Show Path Location Keyboard shortcut
-
-`CTRL + L`
 ``` bash
-
+CTRL + L
 ```
 #### Switch between the Icons and List formats
-
-`CTRL + 1 | CTRL + 2`
 ``` bash
-
+CTRL + 1 | CTRL + 2
 ```
 #### Search for files
-
-`CTRL + F`
 ``` bash
-
+CTRL + F
 ```
 #### Delete File(s)
 ``` bash
@@ -2326,7 +2316,8 @@ CTRL + delete
 ``` bash
 Shift + Delete
 ```
-(You should never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in. Many personal system and program configurations are stored under your home directory.)
+(Never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
+Many personal system and program configurations are stored under your home directory.)
 
 ### Tool YQ for YAML processing
 
@@ -2349,7 +2340,6 @@ docker volume ls
 docker system df
 ```
 
-
 ## Dockerfile Practices
 #### Retry `apt-get` operation if it fails
 ``` bash
@@ -2357,7 +2347,6 @@ docker system df
 RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/80retries
 ```
 ### List the containers of an instance and show 4 attributes in table format
-
 ``` bash
 docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"
 ```
@@ -2410,7 +2399,6 @@ RUN apt-get update && apt-get install -y \
 && rm -rf /var/lib/apt/lists/*
 ```
 #### Stop All Containers quietly
-
 ``` bash
 docker stop $(docker ps --quiet)
 ```
@@ -2435,7 +2423,6 @@ docker run --name some-nginx -d -p 9080:80
 docker ps --filter "status=exited"
 ```
 
-
 #### Inspect Exitcode by container ID
 ``` bash
 docker inspect <container-id> --format='{{.State.ExitCode}}'
@@ -2446,14 +2433,11 @@ docker inspect <container-id> --format='{{.State.ExitCode}}'
 docker system prune --all --force --volumes
 ```
 
-#### Show containers that have an exposed port then sort
-
-`docker ps --filter expose=0-65535/tcp | sort -u -k7`
+#### Show containers that have an exposed port and sort
 ``` bash
-
+docker ps --filter expose=0-65535/tcp | sort -u -k7
 ```
 #### List labels for a given docker container [source](https://gist.github.com/steve-jansen)
-
 ``` bash
 CONTAINER="ID or container name"
 docker inspect --format \
@@ -2463,20 +2447,16 @@ docker inspect --format \
 ```
 
 #### Get IP of a given container
-
-`docker inspect -f ‘{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}’ $CONTAINER_NAME_OR_ID` <br>
 ``` bash
-
+docker inspect -f ‘{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}’ $CONTAINER_NAME_OR_ID
 ```
 #### List commands used to create a given image
-
 ``` bash
 MY_IMG="ubuntu"
 docker history $MY_IMG | awk 'NR>1 {print $1}' | xargs docker inspect --format '{{ ((index .ContainerConfig.Cmd ) 0) }}'
 ```
 
 #### Before checking issues with the app, check issues with the docker engine
-
 ``` bash
 /var/log/daemon.log          = Debian distributions;
 /var/log/messages            = RHEL and Oracle Linux;
@@ -2486,16 +2466,12 @@ AppData/Local                = Windows operating systems;
 ```
 
 #### Check logs of a container and choose a timeframe
-
-`docker logs CONTAINER --since 15m`
 ``` bash
-
+docker logs CONTAINER --since 15m
 ```
 #### Check logs since a given time until a given time
-
-`docker logs CONTAINER --since 2021-06-15T00:00 --until 2021-06-15T00:10 | less`
 ``` bash
-
+docker logs CONTAINER --since 2021-06-15T00:00 --until 2021-06-15T00:10 | less
 ```
 ### Docker Exit Codes
 
@@ -2508,12 +2484,10 @@ Common exit codes associated with docker containers are:
 - Exit `Code 143`: Indicates failure as container received SIGTERM
 
 #### Perform security scan on Docker file with third party Snyk
-
-docker scan --file Dockerfile --exclude-base docker-scan:e2e
 ``` bash
-
+docker scan --file Dockerfile --exclude-base docker-scan:e2e
 ```
-source (<https://docs.docker.com/engine/scan/?utm_source=docker&utm_medium=inproductad&utm_campaign=totw-docker-scan#how-to-scan-images>)
+[source](<https://docs.docker.com/engine/scan/?utm_source=docker&utm_medium=inproductad&utm_campaign=totw-docker-scan#how-to-scan-images>)
 
 ## Docker-Compose
 
@@ -2527,175 +2501,143 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ##### Get docker compose version
-
-`docker-compose version` <br>
 ``` bash
-
+docker-compose version
 ```
-##### Validate docker compose configuration
-
 ##### Validate config and Build docker-compose stack
-
-`docker-compose config` <br>
 ``` bash
+docker-compose config
 
+# Build the stack
+docker-compose build
 ```
-`docker-compose build` <br>
-``` bash
 
-```
 ##### Execute a docker-compose with verbosity
-
-`docker-compose --verbose up --detach` <br>
 ``` bash
-
+docker-compose --verbose up --detach
 ```
-`docker-compose images` <br>
+#### Show images for a stack
 ``` bash
-
-```
-`docker-compose -f setup.yml up --remove-orphans` <br>
-``` bash
-
-```
-`docker-compose --verbose top` <br>
-``` bash
-
-```
-`docker-compose --verbose ps` <br>
-``` bash
-
-```
-`docker-compose --verbose stats` <br>
-``` bash
-
+docker-compose images
 ```
 
+#### Remove orphan containers from a stack
+``` bash
+docker-compose -f setup.yml up --remove-orphans
+```
+#### Check process info of stack with verbosity
+``` bash
+docker-compose --verbose top
+```
+
+#### Check running containers in a stack
+``` bash
+docker-compose --verbose ps
+```
+
+#### Check logs of a service
 ``` bash
 DOCKER_COMPOSE_FILE=/opt/docker-compose.yaml
 SERVICE_NAME="NameInsideDockerCompose"
-```
 
-#### Check status of the docker-compose stack
-``` bash
-docker-compose -f $DOCKER_COMPOSE_FILE ps
+docker-compose -f $DOCKER_COMPOSE_FILE logs $SERVICE_NAME
 ```
 #### Check logs
-
-`docker-compose -f $DOCKER_COMPOSE_FILE logs`
 ``` bash
-
+docker-compose -f $DOCKER_COMPOSE_FILE logs
 ```
-#### tail/get  log in format log-yyy-mm-dd. The log lives in a special path in the container. Piped to `less`
-
-`docker-compose -f $DOCKER_COMPOSE_FILE exec SERVICE_NAME cat "logs/log-$(env TZ="NZT" date +%Y-%m-%d).php" | less`
+#### Tail/get log in format `log-yyy-mm-dd` The log lives in a special path inside the container. Piped to `less`
 ``` bash
-
+docker-compose -f $DOCKER_COMPOSE_FILE exec SERVICE_NAME cat "logs/log-$(env TZ="NZT" date +%Y-%m-%d).php" | less
 ```
-#### pipe contents of a supervisord.log to `less` from within the container to the host shell
-
-`docker-compose -f $DOCKER_COMPOSE_FILE exec SERVICE_NAME cat "logs/supervisord.log" | less`
+#### Pipe contents of a supervisord.log to `less` from within the container to the host shell
 ``` bash
-
+docker-compose -f $DOCKER_COMPOSE_FILE exec SERVICE_NAME cat "logs/supervisord.log" | less
 ```
 # Kubernetes K8S
 
+#### Get the client version
+``` bash
+kubectl version
+```
 ## Kubectl commands frequently used
-
-`kubectl get pods` <br>
 ``` bash
-
+kubectl get pods
 ```
-`kubectl get deployments.apps --show-*` <br>
+#### Get deployments and show all
 ``` bash
-
+kubectl get deployments.apps --show-*
 ```
-`kubectl get deployments.apps --show-labels` <br>
+#### Get deployments and show labels
 ``` bash
-
+kubectl get deployments.apps --show-labels
 ```
-`kubectl create -f wishlist-deployment.yaml` <br>
-``` bash
 
+#### Create a deployment based on a YAML file
+``` bash
+kubectl create -f wishlist-deployment.yaml
 ```
-`kubectl get rs` <br>
-``` bash
 
+#### Get Resource Set
+``` bash
+kubectl get rs
 ```
-`kubectl get deployments` <br>
-``` bash
 
-```
-`helm install --name "wishlist-chart" -f values.yaml .` <br>
+#### Install a chat with `helm`
 ``` bash
-
+helm install --name "wishlist-chart" -f values.yaml .
 ```
 
 ## Minikube
-
-`minikube version` <br>
 ``` bash
-
+minikube version
 ```
-`minikube status` <br>
+#### Check status
 ``` bash
-
+minikube status
 ```
-`minikube update-check` <br>
-``` bash
 
+##### Check for new versions
+``` bash
+minikube update-check
 ```
-`minikube update` <br>
+#### Perform minikue update step
 ``` bash
-
+minikube update
 ```
-`minikube upgrade` <br>
+#### Do the upgrade
 ``` bash
-
+minikube upgrade
 ```
-`kubectl version` <br>
-``` bash
 
-```
-`minikube start` <br>
+#### Start or stop the minikube system
 ``` bash
-
-```
-`minikube status` <br>
-``` bash
-
-```
-`minikube stop` <br>
-``` bash
-
+minikube start/stop
 ```
 
 #### Start minikube if using the Microsoft hyperV
-
-`minikube start --vm-driver=hyper`
 ``` bash
-
+minikube start --vm-driver=hyper
 ```
 ## [Image Magick](https://imagemagick.org/index.php)
 
 ### Image operations with ImageMagick
 
-#### Easily-resize-images with percentage
+#### Resize-images with percentage
 ``` bash
 # percentage
 convert -resize 50% source.png dest.jpg
 ```
 
-#### Specific resize value
+#### Resize an image with a specific value
 ``` bash
 SIZE="1024X768"
 convert -resize $SIZE source.png destination.jpg
 ```
 ---
-# Inbox
+# Inbox items to processed
 
-Os hillman website. Iframe to include in website
-
+#### Os hillman website. Iframe to include in website
 ``` html
 <iframe src="http://www.marketplaceleaders.org/a/" style="overflow:hidden" marginheight="0" marginwidth="0" frameborder="0" width="100%" height="100%"></iframe>
 Read more: http://www.marketplaceleaders.org/tgif/api/#ixzz6pzkOZ8Wi
