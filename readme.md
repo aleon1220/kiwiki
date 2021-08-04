@@ -2097,7 +2097,6 @@ git log --oneline -5 --author $git_user --before $git_date
 ```
 
 #### Create a local branch for testing
-
 ``` bash
 git checkout -b devops/ID-01-functionality
 ```
@@ -2115,19 +2114,14 @@ git log --oneline
 git shortlog
 ```
 #### Switch to previous branch
-
-`git checkout -`
 ``` bash
-
+git checkout -
 ```
 #### Add small patches to a commit
-
-`git add -p`
 ``` bash
-
+git add -p
 ```
 #### Find the last working commit by basically using binary search
-
 ``` bash
 git bisect start
 
@@ -2139,20 +2133,18 @@ git bisect bad
 ```
 
 #### Ammend a commit
-
 ``` bash
-git commit --amend
+git commit --amend COMMIT_ID
 
 git push -f
 ```
 
 #### Change a commit message that was made
-
 ``` bash
 #n is the number of commits to go back
 git rebase -i HEAD~n
 
-# best to use git cherry-pick
+# Best to use git cherry-pick
 
 ## then
 edit
@@ -2160,8 +2152,7 @@ edit
 git push -f
 ```
 
-#### List of common commands
-
+#### List of common `git` commands
 ``` bash
 git init
 git clone
@@ -2197,33 +2188,25 @@ INNER JOIN project prj ON rep.project_id = prj.id
 ORDER BY prj.name, rep.name
 ```
 - [Bitbucket Knowlege Base](https://confluence.atlassian.com/bitbucketserverkb/how-to-obtain-a-list-of-all-projects-and-repositories-from-bitbucket-database-975027747.html)
-- Get detailed info
-`git remote --verbose`
+- Get detailed info about a remote server
 ``` bash
-
+git remote --verbose
 ```
 - get extra info about remote
-
-`git remote show origin`
 ``` bash
-
+git remote show origin
 ```
 - Update the remote URL with git remote set-url using the current and new remote URLs.
-`git remote set-url origin git@bitbucket.org:tutorials/tutorials.git`
 ``` bash
-
+git remote set-url origin git@bitbucket.org:tutorials/tutorials.git
 ```
-#### see the list of git stashes
-
-`git stash list`
+#### List git stashes
 ``` bash
-
+git stash list
 ```
-#### reset the current HEAD or changes of your local branch to a specific state
-
-`git reset [FILE_PATH]`
+#### Reset the current HEAD or changes of your local branch to a specific state
 ``` bash
-
+git reset [FILE_PATH]
 ```
 # Programming Languages
 
@@ -2235,10 +2218,8 @@ ORDER BY prj.name, rep.name
 ### OpenJDK
 
 ##### update-alternative set version for Java
-
-update-alternatives --config java
 ``` bash
-
+update-alternatives --config java
 ```
 ### Oracle Java
 
@@ -2250,8 +2231,7 @@ update-alternatives --config java
 
 ## Oracle MySQL
 
-#### Connect to DB with mysql command utilities
-
+#### Connect to a DB with mysql command utilities
 ``` bash
 HOST="localhost"; USER="mysql"
 mysql -h $HOST -u $USER -p
@@ -2266,39 +2246,37 @@ SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME
 ```
 
 ## AWS RDS MySQL engine
+MySQL has a cloud behaviuour in AWS or any other cloud provider.
 
+Some specific commands will be posted here
 ## PostgreSQL
 
 #### Check this super [PostgreSQL Cheat sheet](https://www.postgresqltutorial.com/postgresql-cheat-sheet/)
 
 #### Access the PostgreSQL server from psql with a specific user
-
-`psql -U [username]`
 ``` bash
-
+psql -U [username]
 ```
-> Once in the console:
+> Once in the `psql` console
 
-#### Check version
-
-`SELECT version();`
+#### Check DB version
 ``` bash
-
+SELECT version();
 ```
-#### dump DB and create the DB in the script
+#### Dump DB and create a restore script
 ``` bash
 pg_dump -U postgres -W -C -d example_backups > ~/db_backup.sql
 ```
 #### back up my entire PostgreSQL cluster and save it in the entire_cluster.sql file
-
-`pg_dumpall -U postgres -W -f ~/Example_Dumps/Cluster_Dumps/entire_cluster.sql`
 ``` bash
-
+pg_dumpall -U postgres -W -f ~/Example_Dumps/Cluster_Dumps/entire_cluster.sql
 ```
-> avoid system asking for too many pass by using ~/`.pgpass file.`
+> Avoid system asking for the pass by using  a PostgreSQL config file at `~/.pgpass`
 
-syntax
-`hostname:port:database:username:password`
+`pgpass` Syntax
+``` bash
+hostname:port:database:username:password
+```
 
 ## Microsoft SQL Server
 
