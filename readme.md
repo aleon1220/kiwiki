@@ -949,6 +949,11 @@ sudo apt list --installed
 ``` bash
 sudo apt --fix-broken install
 ```
+
+#### Reinstall a package (better than removing or purging)
+``` bash
+sudo apt install --reinstall PACKAGE_NAME
+```
 #### Purge a package
 ``` bash
 sudo apt-get purge unattended-upgrades
@@ -2223,7 +2228,7 @@ git reset [FILE_PATH]
 
 ### OpenJDK
 
-##### update-alternative set version for Java
+##### Use `update-alternative` to set version for Java
 ``` bash
 update-alternatives --config java
 ```
