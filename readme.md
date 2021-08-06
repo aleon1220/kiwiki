@@ -953,6 +953,12 @@ sudo apt --fix-broken install
 ``` bash
 sudo apt-get purge unattended-upgrades
 ```
+
+#### Show GPG keys in the keyring
+``` bash
+apt-key list
+```
+
 #### Install a Debian Package
 ``` bash
 sudo dpkg -i $DEBIAN_PKG
