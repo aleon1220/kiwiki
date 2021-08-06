@@ -964,6 +964,15 @@ sudo apt-get purge unattended-upgrades
 apt-key list
 ```
 
+#### Remove PPA repository record
+``` bash
+sudo add-apt-repository --remove ppa:PPA_Name/ppa
+```
+
+#### Remove a PPA from the source list in the terminal
+``` bash
+sudo rm -i /etc/apt/sources.list.d/PPA_Name.list
+```
 #### Install a Debian Package
 ``` bash
 sudo dpkg -i $DEBIAN_PKG
