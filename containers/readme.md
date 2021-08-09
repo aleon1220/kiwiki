@@ -124,9 +124,14 @@ docker inspect --format \
     {{ end -}}' $CONTAINER
 ```
 
-#### Get IP of a given container
+#### Get IP of a given container name/ID
 ``` bash
 docker inspect -f ‘{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}’ $CONTAINER_NAME_OR_ID
+```
+
+#### Get the IP address of the docker host from inside a docker container
+``` bash
+/sbin/ip route|awk '/default/ { print $3 }'
 ```
 #### List commands used to create a given image
 ``` bash
