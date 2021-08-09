@@ -1,6 +1,5 @@
 # Python Language
-
-
+[PEP 8 -- Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/)
 #### Check python versions in the system
 ``` bash
 sudo apt list --installed | grep python*
