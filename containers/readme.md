@@ -91,6 +91,11 @@ docker run --restart always --name train-schedule -p 8080:8080 --detach aleon122
 docker run --name some-nginx -d -p 9080:80
 ```
 
+#### Networking tool for debugging in Debian/Ubuntu based containers
+``` bash
+apt update && apt install netcat inetutils-* net-tools iproute2 vim less --yes
+```
+
 #### List all containers that exited
 ``` bash
 docker ps --filter "status=exited"
