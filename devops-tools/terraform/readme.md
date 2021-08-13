@@ -16,10 +16,10 @@ unzip terraform_0.14.6_linux_amd64.zip
 ### Get Terraform with CLI copy/paste steps
 #### Define the version, get the binary
 ``` bash
-version="0.15.0"
+version="1.0.7"
 wget https://releases.hashicorp.com/terraform/$version/terraform_${version}_linux_amd64.zip
 ```
-#### unzip the file and install the binary
+#### Unzip and install the binary
 ``` bash
 unzip "terraform_${version}_linux_amd64.zip"
 terraform_path_UBUNTU="/usr/bin/terraform"
