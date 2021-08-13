@@ -1738,29 +1738,27 @@ ssh root@$REMOTE_HOST $COMMAND
 
 # Git
 
-System to manage and store source code. Keeps track of changes to the files. Text files only.
+System to manage and store source code. Keeps track of changes to files. Text files only.
 
 ### Git basic challenge/Demo
 
-Goal is to create a git repo at a linux location, Add changes to a source-code file, commit changes, create a develop branch with new changes and finally merge from develop --> main
+Goal is to create a git repo at a linux location, Add changes to a source-code file, commit changes, create a develop branch with new changes and finally merge from `develop --> main`
 
-#### initialize and operate a git repo at `/var/save/repo`
+#### Initialize and operate a git repo at `/var/save/repo`
 
 ``` bash
 mkdir -pv /var/save/repo | cd /var/save/repo
-git init
 
+git init
 Initialized empty Git repository in /var/save/repo/.git/
 ```
 
 #### Create a develop branch (clones main references)
-
 ``` bash
 git checkout -b develop
 ```
 
 #### Check what branches are available in the repo
-
 ``` bash
 git branch
 * master
@@ -1768,43 +1766,37 @@ git branch
 ```
 
 #### Check the log to see info about all commits
-
 ``` bash
 git log
 commit 4c569ff830048206717d62544efbd288f85005e3 (HEAD -> master, test)
 Author: hackerrank <me@hackerrank.com>
 Date:   Mon Jun 28 22:02:25 2021 +0000
-
     Added commit03
     Signed-off-by: hackerrank <me@hackerrank.com>
 
 commit cf10ff6b4ceee54c4c92ae72ba58c612d990b9cc
 Author: hackerrank <me@hackerrank.com>
 Date:   Mon Jun 28 22:02:04 2021 +0000
-
     Added commit02
     Signed-off-by: hackerrank <me@hackerrank.com>
 
 commit 360dba467b0605ab8235954a7fcde81a5645df9f
 Author: hackerrank <me@hackerrank.com>
 Date:   Mon Jun 28 22:00:58 2021 +0000
-
     Commit01 on test
     Signed-off-by: hackerrank <me@hackerrank.com>
 
 commit 3ca19596ebb32aa611a6625f184e37735a5f5156
 Author: hackerrank <me@hackerrank.com>
 Date:   Mon Jun 28 21:57:08 2021 +0000
-
     Adding initial files git repo
-    
     - code tested
     Signed-off-by: hackerrank <me@hackerrank.com>
 
 [70][22:06:12] ubuntu@taskserver:[/var/save/my-repo]
 ```
 
-#### Verifying commits in `develop`
+#### Verify commits in `develop` branch
 
 ``` bash
 git rev-list --date-order --abbrev-commit --reverse HEAD
@@ -1817,7 +1809,6 @@ cf10ff6
 ```
 
 #### Perform the merge develop --> main
-
 ``` bash
 git merge develop
 Updating 3ca1959..4c569ff
@@ -1828,7 +1819,6 @@ Fast-forward
 ```
 
 #### Verifying commits in `main`
-
 ``` bash
 git rev-list --date-order --abbrev-commit --reverse HEAD
 
@@ -1840,8 +1830,7 @@ cf10ff6
 
 ## Git Administration/Operation
 
-#### branch was created in the past and changes either had been added or removed in the destination branch `main | develop`
-
+#### Branch was created in the past and changes either had been added or removed in the destination branch `main | develop`
 ``` bash
 git fetch
 git merge origin/develop
@@ -1849,7 +1838,7 @@ git merge origin/develop
 
 - use `@` instead of `HEAD`
 
-GitOps reading from a [medium post @omar Shakari](https://medium.com/better-programming/git-commands-to-live-by-349ab1fe3139)
+GitOps reading from a [medium post @Omar Shakari](https://medium.com/better-programming/git-commands-to-live-by-349ab1fe3139)
 
 #### Delete Remote Branches
 
@@ -2282,9 +2271,9 @@ pg_dump -U postgres -W -C -d example_backups > ~/db_backup.sql
 ``` bash
 pg_dumpall -U postgres -W -f ~/Example_Dumps/Cluster_Dumps/entire_cluster.sql
 ```
-> Avoid system asking for the pass by using  a PostgreSQL config file at `~/.pgpass`
+> Avoid system asking for the password by using a PostgreSQL config file at  `$HOME/.pgpass`
 
-`pgpass` Syntax
+- `pgpass` Syntax
 ``` bash
 hostname:port:database:username:password
 ```
