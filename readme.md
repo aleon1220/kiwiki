@@ -52,7 +52,7 @@
   - [SSH Key Management](#ssh-key-management)
     - [Key generation](#key-generation)
 - [Git](#git)
-    - [Git basic challenge/Demo](#git-basic-challengedemo)
+    - [Git basic flow challenge/Demo by hackerRanx](#git-basic-flow-challengedemo-by-hackerranx)
   - [Git Administration/Operation](#git-administrationoperation)
     - [Git Analysis/Reporting](#git-analysisreporting)
   - [Git implementations: Bitbucket](#git-implementations-bitbucket)
@@ -1740,7 +1740,27 @@ ssh root@$REMOTE_HOST $COMMAND
 
 System to manage and store source code. Keeps track of changes to files. Text files only.
 
-### Git basic challenge/Demo
+#### List of common `git` commands
+``` bash
+git init
+git clone
+git branch
+git checkout
+git status
+git fetch
+git pull
+git add
+git commit
+git push
+git remote
+git merge
+git log
+git stash
+git reset
+git config
+```
+
+### Git basic flow challenge/Demo by hackerRanx
 
 Goal is to create a git repo at a linux location, Add changes to a source-code file, commit changes, create a develop branch with new changes and finally merge from `develop --> main`
 
@@ -1841,79 +1861,61 @@ git merge origin/develop
 GitOps reading from a [medium post @Omar Shakari](https://medium.com/better-programming/git-commands-to-live-by-349ab1fe3139)
 
 #### Delete Remote Branches
-
-`git push <remote> -d <branch>`
 ``` bash
-
+git push REMOTE -d BRANCH
 ```
 #### Delete remote branch (short form `:`)
-
-`git push <remote> :<branch>`
 ``` bash
-
+git push REMOTE :BRANCH
 ```
 
-`git push origin :my-awesome-feature`
+#### Push changes to remote branch `my-feature`
 ``` bash
-
+git push origin :my-feature
 ```
 #### Remove remote branches that were deleted (merged) on BitBucket
-
 ``` bash
 git config fetch.prune true 
 ```
 
 #### Change remote URL if you change your repository’s name
-
-`git remote set-url <remote> <newurl>`
 ``` bash
-
+git remote set-url REMOTE NEWURL
 ```
-`git remote set-url origin github.com/myusername/my-repo`
-``` bash
 
+#### Github set remote URL
+``` bash
+git remote set-url origin github.com/myusername/my-repo
 ```
 ##### Stash Individual Files
-
-`git stash push -- <filepath(s)>`
 ``` bash
-
+git stash push -- <filepath(s)>
+# Example
+git stash push -- src/index.js README.md
 ```
-- Example:
 
-`git stash push -- src/index.js README.md`
-``` bash
-
-```
 ##### Show Content of Most Recent Stash
-
-`git stash show -p [stash@{<n>}]`
 ``` bash
-
+git stash show -p [stash@{<n>}]
 ```
-**Explanation:**
+**Flags Explanation:**
 
-`-p` to see the actual content of the stash. Omitting it will show only the file names.
+- `-p` to see the actual content of the stash. Omitting it will show only the file names.
 
-`stash@{<n>}` allows us to specify a certain stash, denoted by `n` ( 0 being the most recent one ).
+- `stash@{<n>}` allows us to specify a certain stash, denoted by `n` ( 0 being the most recent one ).
 
-`git stash show -p stash@{1}`
-
+``` bash
+git stash show -p stash@{1}
+```
 #### Check Out File From Another Branch
-
-`git checkout <branch> -- <path(s)>`
 ``` bash
+git checkout <branch> -- <path(s)>
 
-```
-`git checkout another-branch src/file.js`
-``` bash
-
+git checkout another-branch src/file.js
 ```
 #### Working with 2 branches
-
-`git worktree add <path> <branch>`
 ``` bash
-
+git worktree add <path> <branch>
 ```
 - when you no longer need the branch:
 
@@ -1922,34 +1924,35 @@ git worktree remove [-f] PATH_TO_MODIFY
 ```
 
 **Example:**
-
 1. `git worktree add my-other-awesome-feature ../my-other-awesome-feature`
 1. `git worktree remove ../my-other-awesome-feature`
 
-**Explanation:** Creates a linked working tree (i.e., another directory on the file system associated with the repo) called `my-other-awesome-feature`, one level above your current working directory, with the specified branch checked out.
+**Explanation:**
+
+Creates a linked working tree (i.e., another directory on the file system associated with the repo) called `my-other-awesome-feature`, one level above your current working directory, with the specified branch checked out.
 
 #### Show Commit Content shows changes introduced by a commit
 ``` bash
 git show COMMIT
 ```
-Alternatively, to see the changes between two specific commits run
+- Alternatively, to see the changes between two specific commits run
 
 ``` bash
 git diff COMMIT_A COMMIT_B
 ```
 
-#### Git diff with remote HEAD
+#### Show changes-diff with remote HEAD
 ``` bash
 git diff HEAD~ HEAD
 ```
 #### Compare Files Between Branches/Commits
 ``` bash
 git diff COMMIT_A COMMIT_B -- PATH
-```
 
-``` bash
+# e.g.
 git diff 0659bdc e6c7c0d -- src/flair.py
 ```
+
 #### Reset a Single File to Most Recent Commit
 ``` bash
 git checkout [<commit>] -- <path(s)>
@@ -1966,16 +1969,17 @@ git commit --amend [-m 'MESSAGE']
 
 #### If the old commit had already been pushed, you’ll need to additionally run
 ``` bash
-git push --force-with-lease <remote> <branch>
+git push --force-with-lease REMOTE BRANCH
 ```
 **Note:** 
-- As a general rule, it’s important to be careful when making any changes to already pushed commits.
+- As a general rule, it’s important to be careful when making any changes to already pushed commits
 
 #### Change a Specific Commit Message
 ``` bash
 git rebase -i COMMIT
 ```
 
+#### Doing a Rebase
 ``` bash
 git rebase -i HEAD~3
 ```
@@ -1990,20 +1994,16 @@ git reset HEAD $PATH_OF_REPO
 #### Remove Ignored Files From Remote
 
 later decided to `.gitignore` them, the files will nevertheless persist in your remote repository.
-To remedy this
 
+To remedy this
 ``` bash
 git rm
 ```
 
-is the tool for the job.
-
 #### Clean up git cache
 ``` bash
-`git rm [-r] [-n] --cached <path(s)>`
+git rm [-r] [-n] --cached <path(s)>
 ```
-
-Then, 
 - simply add
 - commit, and push
 
@@ -2011,7 +2011,7 @@ Then,
 ``` bash
 git reset --hard
 ```
-#### show GPG signatures used in a repo
+#### Show GPG signatures used in a repo
 ``` bash
 git log --show-signature
 ```
@@ -2152,26 +2152,6 @@ edit
 git push -f
 ```
 
-#### List of common `git` commands
-``` bash
-git init
-git clone
-git branch
-git checkout
-git status
-git fetch
-git pull
-git add
-git commit
-git push
-git remote
-git merge
-git log
-git stash
-git reset
-git config
-```
-
 ## Git implementations: Bitbucket
 
  Atlassian support [docs](https://support.atlassian.com/bitbucket-cloud/docs/change-the-remote-url-to-your-repository/)
@@ -2211,7 +2191,7 @@ git reset [FILE_PATH]
 # Programming Languages
 
 ## Java
-
+Moved to [Programming-languages > Java](./programming-languages/java/readme.md)
 - todo add short details description
 - todo add main links
 
@@ -2224,7 +2204,7 @@ update-alternatives --config java
 ### Oracle Java
 
 ## Python
-
+Moved to [Programming-languages > python](./programming-languages/python/readme.md)
 # DataBases
 
 ## MariaDB (MySQL open source Fork)
