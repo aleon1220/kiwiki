@@ -233,7 +233,7 @@ df -h
 lsblk
 ```
 
-#### Get information about all of the devices attached to the instance
+#### Get information about the devices attached to the instance
 
 ``` bash
 sudo lsblk -f
@@ -244,6 +244,20 @@ sudo lsblk -f
 lsblk -io NAME,TYPE,SIZE,MOUNtPOINT,FSTYPE,MODEL
 ```
 
+#### Get `UUID` of the device (expensive command)
+``` bash
+sudo blkid $DEVICE_REPORT_PORTAL_DATA | sed -n 's/.*UUID=\"\([^\"]*\)\".*/\1/p'
+```
+#### Get `UUID` of the device
+``` bash
+DEVICE="/dev/nvme1n1"
+# short format flags
+sudo blkid -s UUID -o value $DEVICE
+
+# full format flags
+sudo blkid --match-tag UUID --output value $DEVICE
+```
+
 #### DMI table decoder
 ``` bash
 dmidecode | grep UUID
@@ -251,7 +265,8 @@ dmidecode | grep UUID
 
 #### Get/set SATA/IDE device parameters
 ``` bash
-DEVICE="/dev/nvme1n1" hdparm -tT --direct DEVICE
+DEVICE="/dev/nvme1n1"
+hdparm -tT --direct $DEVICE
 ```
 
 #### Get information about a specific device, such as its file system type.  If the output shows simply data, there is no filesystem in the device
