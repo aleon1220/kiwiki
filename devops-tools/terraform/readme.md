@@ -75,6 +75,18 @@ terraform -install-autocomplete
 #### Validate code skip backend validation
 terraform validate -backend=false
 
+### Cloud init in terraform cloud
+* data aws_ami          =  defines a filter to find the AWS AMI to be used for this instance creation. Usually, AWS EC2 Image builder creates this AMI
+* data template_file    = call a .tpl file and initializes the environment variables to be passed to the bash script
+* `.*tpl` file          = bash script that sets variables, mounts extra volumes, provisions extra software, clones repos, etc
+
+#### Cloud init logs to check in AWS EC2 instance Debian/ubuntu flavor
+``` bash
+less /var/log/cloud-init-output.log
+less /var/log/cfn-init.log
+less /var/log/cloud-init-output.log
+```
+
 ### Initialize your Terraform working directory
 #### Initialize directory, pull down providers
 ``` bash
