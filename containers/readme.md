@@ -195,6 +195,16 @@ docker-compose config
 docker-compose build
 ```
 
+#### List services part of a docker-compose file. Includes `yq`
+``` bash
+docker-compose config --services
+```
+
+#### With `yq`
+``` bash
+sudo snap install yq
+yq eval '.services | keys' docker-compose.yml
+```
 ##### Execute a docker-compose with verbosity
 ``` bash
 docker-compose --verbose up --detach

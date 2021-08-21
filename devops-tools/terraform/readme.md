@@ -84,7 +84,6 @@ terraform validate -backend=false
 ``` bash
 less /var/log/cloud-init-output.log
 less /var/log/cfn-init.log
-less /var/log/cloud-init-output.log
 ```
 
 ### Initialize your Terraform working directory
