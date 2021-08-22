@@ -253,11 +253,30 @@ sudo blkid $DEVICE_REPORT_PORTAL_DATA | sed -n 's/.*UUID=\"\([^\"]*\)\".*/\1/p'
 DEVICE="/dev/nvme1n1"
 # short format flags
 sudo blkid -s UUID -o value $DEVICE
+```
 
-# full format flags
+#### Get `UUID` of the device using long format flags
+``` bash
 sudo blkid --match-tag UUID --output value $DEVICE
 ```
 
+#### Make an USB bootable with a debian ISO
+``` bash
+USB_DRIVE="/dev/sda"
+ISO_PATH="/home/ws/01-inbox/debian/debian-11.0.0-amd64-DVD-1.iso"
+
+sudo umount $USB_DRIVE
+sudo dd bs=4M if=$ISO_PATH of=$USB_DRIVE conv=fdatasync status=progress
+```
+
+- Output of above in Ubuntu 20.04
+``` bash
+sudo dd bs=4M if=/home/ws/01-inbox/debian/debian-11.0.0-amd64-DVD-1.iso of=/dev/sda conv=fdatasync status=progress
+3946840064 bytes (3.9 GB, 3.7 GiB) copied, 328 s, 12.0 MB/s
+941+1 records in
+941+1 records out
+3947823104 bytes (3.9 GB, 3.7 GiB) copied, 596.281 s, 6.6 MB/s
+```
 #### DMI table decoder
 ``` bash
 dmidecode | grep UUID
