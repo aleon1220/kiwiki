@@ -8,9 +8,9 @@ This section contains [`.bash_functions/`](.bash_functions/bash_functions.sh) an
 - [Bash Cheat Sheet](#bash-cheat-sheet)
   - [Bash options/Flags](#bash-optionsflags)
   - [System Updates](#system-updates)
-    - [Debian / Ubuntu:](#debian-ubuntu)
+    - [Debian / Ubuntu:](#debian--ubuntu)
     - [RHEL, CentOS, Fedora](#rhel-centos-fedora)
-    - [JSON JQ in bash](#json-jqhttpswwwjsonorgjson-enhtml-in-bash)
+    - [JSON JQ in bash](#json-jq-in-bash)
     - [JQ](#jq)
     - [has() on specific object](#has-on-specific-object)
     - [Some tips](#some-tips)
@@ -111,6 +111,23 @@ ln -s lsd lsf
 ln -s lsd lsx
 ```
 
+#### Terminate an SSH session that got stuck `~?`
+``` bash
+$ ~?
+Supported escape sequences:
+ ~.   - terminate connection (and any multiplexed sessions)
+ ~B   - send a BREAK to the remote system
+ ~C   - open a command line
+ ~R   - request rekey
+ ~V/v - decrease/increase verbosity (LogLevel)
+ ~^Z  - suspend ssh
+ ~#   - list forwarded connections
+ ~&   - background ssh (when waiting for connections to terminate)
+ ~?   - this message
+ ~~   - send the escape character by typing it twice
+(Note that escapes are only recognized immediately after newline.)
+```
+
 there is a built-in command called `complete`. Example to execute the auto complete feature for AWSCLI
 `complete -C '/usr/local/bin/aws_completer' aws`
 
@@ -125,7 +142,7 @@ for that do
 #### colorize json data with jq and less
 `JSON="your.json" cat JSON | jq . --color-output | less --RAW-CONTROL-CHARS`
 `# for the impatient \ cat your.json | jq . -C | less -R`
-##### pipe json to console, find a string and colorize output
+##### Pipe json to console, find a string and colorize output
 ```bash
 cat ~/path/to/env-index.json | jq
 cat ~/path/to/env-index.json | jq -R | grep $STRING_ToFind
