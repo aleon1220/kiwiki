@@ -128,6 +128,11 @@ Supported escape sequences:
 (Note that escapes are only recognized immediately after newline.)
 ```
 
+#### Bash process substitution
+``` bash
+echo <(printf "hey thereall \n")
+```
+
 there is a built-in command called `complete`. Example to execute the auto complete feature for AWSCLI
 `complete -C '/usr/local/bin/aws_completer' aws`
 
