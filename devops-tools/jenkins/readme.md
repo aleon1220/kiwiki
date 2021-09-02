@@ -108,6 +108,11 @@ docker run --name docker-jenkins-test -p 8080:8080 -p 50000:50000 -v jenkins_hom
 jenkins-plugin-cli --plugins <List of plugins with version or just the name>
 ```
 
+#### Lists the Credentials in a specific Store
+``` bash
+java -jar jenkins-cli.jar -s http://localhost:8080/ list-credentials STORE
+```
+
 ### Jenkins Kubernetes Helm Chart
 [Helm chart for Jenkins](https://github.com/helm/charts/tree/master/stable/jenkins)
 
