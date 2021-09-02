@@ -1,0 +1,38 @@
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# Enable GPG signing. WSL with Ubuntu 18
+echo "enabling GPG capabilities"
+export GPG_TTY=$(tty)
+
+if [ ! -f ~/.gnupg/S.gpg-agent ]; then
+	    eval $( gpg-agent --daemon --options ~/.gnupg/gpg-agent.conf )
+fi
+
+export GPG_AGENT_INFO=${HOME}/.gnupg/S.gpg-agent:0:1
+
+GOPATH=$HOME/go
+function _update_ps1() {
+    PS1="$($GOPATH/bin/powerline-go -error $?)"
+}
+    
+if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+
+## RescueTime integration
+export RESCUE_TIME_API_KEY="ADD_KEY"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/rnd-dev/.sdkman"
+[[ -s "/home/rnd-dev/.sdkman/bin/sdkman-init.sh" ]] && source "/home/rnd-dev/.sdkman/bin/sdkman-init.sh"
+
+complete -C /usr/bin/terraform terraform
