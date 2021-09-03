@@ -9,6 +9,7 @@
   - [The Computer as a modern day to day tool](#the-computer-as-a-modern-day-to-day-tool)
   - [The CLI Shell](#the-cli-shell)
     - [CLI Shell keyboard shortcuts](#cli-shell-keyboard-shortcuts)
+  - [Auto Docs: image of file categories](#auto-docs-image-of-file-categories)
   - [General Info](#general-info)
   - [3. Storage](#3-storage)
     - [Process for Linux + `LVM` + `ext3`](#process-for-linux--lvm--ext3)
@@ -148,6 +149,10 @@ Type a Long command, e.g. add loops or some complex parsing logic. You need more
 
 Editors VIM(or Nano or VI etc.) opens with your command you had typed so far already in the buffer
 ```
+
+## Auto Docs: image of file categories
+#### Demo for one Java WebApp
+[Octo-repo Demo Java WebApp](https://octo-repo-visualization.vercel.app/?repo=aleon1220%2Fmulti-cloud-WebApp-Attendance)
 ## General Info
 Get quick diagnostic about a server
 
