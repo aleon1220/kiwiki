@@ -5,6 +5,7 @@
 The `.` matches any one character followed or preceded by any character in the character class.
 
 ## Tips
+
 1. break it down
 2. list what you want to achive
 3. build each list of the goals with the regex grammar
@@ -22,9 +23,44 @@ Match zero or more occurrences of (1) and (2)
 `:[0-9]*.*`
 
 #### find extensions that start after string dash at the end of line
+
 `-m[\w].$`
 
+I tested with vscode. You must use groups with parentheses `(group of regex)`
+
+#### Practical example. Replace spaces for dashes but keep the numbers or digits in each line
+
+- start with sample data
+
+```bash
+1 a text
+2 another text
+3 yet more text
+```
+
+- Do the Regex to find/Search the numerical digits and spaces. The group here will be the digits as it is surrounded in parenthesis
+
+```bash
+(\d)\s
+```
+
+- Run a replace regex ops
+
+```bash
+$1-
+```
+
+- Outputs
+
+```bash
+1-a text
+2-another text
+3-yet more text
+```
+
 ---
+
 ## References
-https://medium.com/better-programming/breaking-down-a-complex-regex-73b6c795a2be
-https://aubreeabril.wordpress.com/2018/08/23/pig-latinizer-using-regex/
+
+[breaking-down-a-complex-regex](https://medium.com/better-programming/breaking-down-a-complex-regex-73b6c795a2be)
+[pig-latinizer-using-regex](https://aubreeabril.wordpress.com/2018/08/23/pig-latinizer-using-regex/)
