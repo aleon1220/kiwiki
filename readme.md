@@ -2,7 +2,9 @@
 <h2>Information Technology Wiki</h2> <br>
 
 > <h4> work by @aleon1220. A Colombian adopted by Kiwis since 2016</h3>
+
 ---
+
 - [About KIWIKI Project](#about-kiwiki-project)
   - [Repository Categories](#repository-categories)
   - [Introduction](#introduction)
@@ -72,8 +74,11 @@
   - [Image Magick](#image-magick)
     - [Image operations with ImageMagick](#image-operations-with-imagemagick)
 - [Inbox items to processed](#inbox-items-to-processed)
+
 ---
+
 > **END of Table of contents**
+
 ---
 
 # About KIWIKI Project
@@ -85,20 +90,20 @@ The wiki is going to be divided into subcategories.
 ## Repository Categories
 
 1. [AWS](./aws/readme.md)
-1. [Azure](./azure/readme.md)
-1. devops-tools
+2. [Azure](./azure/readme.md)
+3. devops-tools
    - Jenkins
    - Terraform
-2. gradle
-3. javascript
-4. LDAP
-5. productivity-tools
+4. gradle
+5. javascript
+6. LDAP
+7. productivity-tools
    - rescueTime
    - VsCode
-6. programming-languages
-7. Regular [expressions](./regex/readme.md)
-8. Security
-9. windows
+8. programming-languages
+9. Regular [expressions](./regex/readme.md)
+10. Security
+11. windows
 
 ## Introduction
 
@@ -120,7 +125,9 @@ Don't rely on the cloud 100%. Have local copies of your digital material.
 A Computer as a tool has a CPU processor, memory RAM, storage in form of a drive, connectivity via network card or wifi, graphics visualization via a monitor. The operating system has tools to manage and interact with all the described above.
 
 The categories are:
+
 - **General Info**
+
 1. Processing
 2. Memory
 3. Storage
@@ -128,6 +135,7 @@ The categories are:
 5. Graphics
 
 ## The CLI Shell
+
 there are many: bash, fish, Zshell
 
 ### CLI Shell keyboard shortcuts
@@ -142,7 +150,7 @@ there are many: bash, fish, Zshell
 - `ctrl + l`  clear  the screen
 - `ctrl + e + x` explanation below
 
-``` bash
+```bash
 Type a Long command, e.g. add loops or some complex parsing logic. You need more editing power so you press
 
                       ctrl + e + x
@@ -151,31 +159,39 @@ Editors VIM(or Nano or VI etc.) opens with your command you had typed so far alr
 ```
 
 ## Auto Docs: image of file categories
+
 #### Demo for one Java WebApp
+
 [Octo-repo Demo Java WebApp](https://octo-repo-visualization.vercel.app/?repo=aleon1220%2Fmulti-cloud-WebApp-Attendance)
+
 ## General Info
+
 Get quick diagnostic about a server
 
 #### OS type, Local IP, hostname and Architecture type
-``` bash
+
+```bash
 lsb_release -a ; hostname -I ; hostname ; getconf LONG_BIT
 ```
-#### What are the services enabled and running?
 
+#### What are the services enabled and running?
 
 #### List of software installed from [A-Z]
 
 #### Check the hidden directories and files in the HOME dir
-``` bash
+
+```bash
 todo $HOME
 ```
 
 #### Check bash customizations in the current user
-``` bash
+
+```bash
 id
 
 less ~/.bashrc
 ```
+
 ## 3. Storage
 
 Hard drives, volumes, SSDs, mounts, filesystem, etc
@@ -187,86 +203,102 @@ LVM volume group myvg, mounted volume name `uservol1` and disk device in Linux i
 Allocate the disk to the VM. (In Amazon Management Console, Create the EBS volume, write down its ID, and allocate it to the instance)
 The EC2 instance should have some udev rules for creating the device node. So you should see a new disk in `/dev/sd*`
 
-Log in on the instance and check that the EBS volume is visible, 
-``` bash
+Log in on the instance and check that the EBS volume is visible,
+
+```bash
 fdisk -l /dev/sdf
 ```
 
 - check the partitions
-``` bash
+
+```bash
 cat /proc/partitions
 ```
 
 - Check the Block ID, Type and label of the system devices
-``` bash
+
+```bash
 blkid
 ```
 
 - Create partition table if needed:
-``` bash
+
+```bash
 fdisk /
 sfdisk
 ```
 
 - Initialize for LVM use
-``` bash
+
+```bash
 pvcreate /dev/sdf
 ```
 
 - Add the disk (physical volume) to the LVM volume group vgextend
-``` bash
+
+```bash
 myvg /dev/sdf
 ```
 
 - Grow the Volume size
-``` bash
+
+```bash
 lvextend -L +1024G /dev/myvg/uservol1
 ```
 
 - Grow the `ext3/ext4` file system
-``` bash
+
+```bash
 resize2fs /dev/myvg/uservol1`
 ```
 
 - Check system info and you should see that the mounted file system now have more space.
-``` bash
+
+```bash
 df -h
 ```
 
 #### View your available disk devices, mount points (if applicable) to help you determine the correct device name to use
-``` bash
+
+```bash
 lsblk
 ```
 
 #### Get information about the devices attached to the instance
 
-``` bash
+```bash
 sudo lsblk -f
 ```
 
 #### Get manufacturer details for the device in a given format
-``` bash
+
+```bash
 lsblk -io NAME,TYPE,SIZE,MOUNtPOINT,FSTYPE,MODEL
 ```
 
 #### Get `UUID` of the device (expensive command)
-``` bash
+
+```bash
 sudo blkid $DEVICE_REPORT_PORTAL_DATA | sed -n 's/.*UUID=\"\([^\"]*\)\".*/\1/p'
 ```
+
 #### Get `UUID` of the device
-``` bash
+
+```bash
 DEVICE="/dev/nvme1n1"
 # short format flags
 sudo blkid -s UUID -o value $DEVICE
 ```
 
 #### Get `UUID` of the device using long format flags
-``` bash
+
+```bash
 sudo blkid --match-tag UUID --output value $DEVICE
 ```
 
 #### Make an USB bootable with a debian ISO
-``` bash
+
+```bash
 USB_DRIVE="/dev/sda"
 ISO_PATH="/home/ws/01-inbox/debian/debian-11.0.0-amd64-DVD-1.iso"
 
@@ -275,42 +307,49 @@ sudo dd bs=4M if=$ISO_PATH of=$USB_DRIVE conv=fdatasync status=progress
 ```
 
 - Output of above in Ubuntu 20.04
-``` bash
+
+```bash
 sudo dd bs=4M if=/home/ws/01-inbox/debian/debian-11.0.0-amd64-DVD-1.iso of=/dev/sda conv=fdatasync status=progress
 3946840064 bytes (3.9 GB, 3.7 GiB) copied, 328 s, 12.0 MB/s
 941+1 records in
 941+1 records out
 3947823104 bytes (3.9 GB, 3.7 GiB) copied, 596.281 s, 6.6 MB/s
 ```
+
 #### DMI table decoder
-``` bash
+
+```bash
 dmidecode | grep UUID
 ```
 
 #### Get/set SATA/IDE device parameters
-``` bash
+
+```bash
 DEVICE="/dev/nvme1n1"
 hdparm -tT --direct $DEVICE
 ```
 
 #### Get information about a specific device, such as its file system type.  If the output shows simply data, there is no filesystem in the device
 
-``` bash
+```bash
 DEVICE_CHECK="/dev/xvdf"*
 sudo file -s $DEVICE_CHECK
 ```
 
 ##### Confirm mounted loop device kernel module
-``` bash
+
+```bash
 lsmod | grep loop
 ```
 
 ##### Info about mount the loop device kernel module
-``` bash
+
+```bash
 modprobe loop
 ```
 
 #### Show ID of Block devices
+
 ```bash
 sudo blkid
 
@@ -319,19 +358,22 @@ sudo lsblk -o +UUID
 ```
 
 ##### Mount an ISO file as loop device
-``` bash
+
+```bash
 mount -o loop -t iso9660 <path/to/iso/file> /media/cdrom
 ```
 
 #### Mount all filesystems
+
 The file that keeps track of mounted devices is `/etc/fstab`
 
-``` bash
+```bash
 sudo mount -a
 ```
 
 #### Check status of important services
-``` bash
+
+```bash
 timedatectl status
 sudo systemctl edit --full cron.service
 sudo systemctl status nginx supervisor php7.2-fpm
@@ -345,225 +387,308 @@ ZFS is a complex and yet powerful storage FileSystem
 ### Install [ZFS on Linux](http://download.zfsonlinux.org/epel/zfs-release.el6.noarch.rpm)
 
 ### RedHat and Fedora distros
+
 #### Install `ZFS` Packages
-``` bash
+
+```bash
 yum install kernel-devel zfs
 ```
 
 ### ZFS management
+
 #### Get statistics of All
-``` bash
+
+```bash
 zfs-stat -A
 ```
 
 #### List `ZFS` Tanks
-``` bash
+
+```bash
 zfs list | grep tank
 ```
 
 #### Check if `ZFS` package is installed
-``` bash
+
+```bash
 rpm -aq | grep zfs
 ```
 
-``` bash
+```bash
 zfs version
 ```
 
-``` bash
+```bash
 zfs list
 ```
 
-``` bash
+```bash
 cat /proc/spl/kstat/zfs/arcstats
 ```
 
-``` bash
+```bash
 zfs get all
 ```
 
-``` bash
+```bash
 dmesg | grep -i zfs
 ```
+
 #### Enable ZFS functions and obtain ZFS info
-``` bash
+
+```bash
 sudo systemctl enable zfs-import-scan.service
 zpool get cachefile fix zfs-import-cache
 ```
 
 #### ZFS service not starting run the below commands
-``` bash
+
+```bash
 zpool set cachefile=/etc/zfs/zpool.cache <pool>
 systemctl restart zfs-import-cache.service
 ```
 
 #### Make sure `ZFS` module is installed for the running Linux Kernel
-``` bash
+
+```bash
 modinfo zfs
 ```
 
 #### Ensure the ZFS module is running
-``` bash
+
+```bash
 lsmod | grep zfs
 ```
 
 ## `ZFS` **Pool Related Commands**
 
 #### Create a basic pool named `c0t0d0`
-``` bash
+
+```bash
 zpool create datapool c0t0d0
 ```
+
 #### Force the creation of a pool
-``` bash
+
+```bash
 zpool create -f datapool c0t0d0
 ```
+
 #### Create a pool with a different mount point than the default
-``` bash
+
+```bash
 zpool create -m /data datapool c0t0d0
 ```
+
 #### Create RAID-Z vdev pool todo_ADD references
-``` bash
+
+```bash
 zpool create datapool raidz c3t0d0 c3t1d0 c3t2d0
 ```
+
 #### Add RAID-Z vdev to pool datapool todo_ADD references
-``` bash
+
+```bash
 zpool add datapool raidz c4t0d0 c4t1d0 c4t2d0 
 ```
+
 #### Create RAID-Z1 pool todo_ADD references
-``` bash
+
+```bash
 zpool create datapool raidz1 c0t0d0 c0t1d0 c0t2d0 c0t3d0 c0t4d0 c0t5d0
 ```
+
 #### Create RAID-Z2 pool todo_ADD references
-``` bash
+
+```bash
 zpool create datapool raidz2 c0t0d0 c0t1d0 c0t2d0 c0t3d0 c0t4d0 c0t5d0
 ```
+
 #### Mirror c0t0d0 to c0t5d0
-``` bash
+
+```bash
 zpool create datapool mirror c0t0d0 c0t5d0
 ```
+
 #### Mirrors=Disk `c0t0d0` is mirrored with `c0t5d0` ; disk `c0t2d0` is mirrored with `c0t4d0`
-``` bash
+
+```bash
 zpool create datapool mirror c0t0d0 c0t5d0 mirror c0t2d0 c0t4d0
 ```
+
 #### Add new mirrored vdev to datapool
-``` bash
+
+```bash
 zpool add datapool mirror c3t0d0 c3t1d0
 ```
+
 #### Add spare device c1t3d0 to the datapool
-``` bash
+
+```bash
 zpool add datapool spare c1t3d0
 ```
+
 #### Do a dry run on pool creation
-``` bash
+
+```bash
 zpool create -n geekpool c1t3d0
 ```
+
 #### Show Pool Information status
-``` bash
+
+```bash
 zpool status -x
 ```
+
 #### Show individual pool status in verbose mode
-``` bash
+
+```bash
 zpool status -v datapool
 ```
+
 #### Show all the pools
-``` bash
+
+```bash
 zpool list
 ```
+
 #### Show particular properties of all the pools (name, size)
-``` bash
+
+```bash
 zpool list -o name,size
 ```
+
 #### Show all pools without headers and columns
-``` bash
+
+```bash
 zpool list -Ho name
 ```
+
 ### `ZFS` File-system/Volume related commands
 
 #### Create file-system fs1 under datapool
-``` bash
+
+```bash
 zfs create datapool/fs1
 ```
+
 #### Create 1 GB volume (Block device) in datapool
-``` bash
+
+```bash
 zfs create -V 1gb datapool/vol01
 ```
+
 #### Destroy datapool and all datasets under it
-``` bash
+
+```bash
 zfs destroy -r datapool
 ```
+
 #### Destroy file-system or volume (data) and all related snapshots
-``` bash
+
+```bash
 zfs destroy -fr datapool/data
 ```
+
 #### Set ZFS file system properties
 
 #### Set quota of 1 GB on filesystem fs1
-``` bash
+
+```bash
 zfs set quota=1G datapool/fs1
 ```
 
 #### Set Reservation of 1 GB on filesystem `fs1`
-``` bash
+
+```bash
 zfs set reservation=1G datapool/fs1
 ```
+
 #### Disable ZFS auto mounting and enable mounting through config file `/etc/vfstab`
-``` bash
+
+```bash
 zfs set mountpoint=legacy datapool/fs1
 ```
+
 #### Share fs1 as NFS
-``` bash
+
+```bash
 zfs set sharenfs=on datapool/fs1
 ```
+
 #### Enable compression on `fs1`
-``` bash
+
+```bash
 zfs set compression=on datapool/fs1
 ```
+
 ### `ZFS` File-system/Volume related commands
 
 #### Create file-system `fs1` under datapool
-``` bash
+
+```bash
 zfs create datapool/fs1
 ```
+
 #### Create 1 GB volume (Block device) in datapool
-``` bash
+
+```bash
 zfs create -V 1gb datapool/vol01
 ```
+
 #### Destroy datapool and all datasets under it
-``` bash
+
+```bash
 zfs destroy -r datapool
 ```
+
 #### Destroy file-system or volume (data) and all related snapshots
-``` bash
+
+```bash
 zfs destroy -fr datapool/data
 ```
+
 #### List all ZFS file system
-``` bash
+
+```bash
 zfs list
 ```
+
 #### List all properties of a ZFS file system
-``` bash
+
+```bash
 zfs get all datapool
 ```
+
 ### `ZFS` Mount/Umount Related Commands
 
 #### Set the mount-point of file system fs1 to /data
-``` bash
+
+```bash
 zfs set mountpoint=/data datapool/fs1
 ```
+
 #### Mount fs1 file system
-``` bash
+
+```bash
 zfs mount datapool/fs1
 ```
+
 #### Mount with options todo_Add options explanation
-``` bash
+
+```bash
 mount -t zfs /dev/xvdf /media/atl
 ```
+
 #### Unmount ZFS file system fs1
-``` bash
+
+```bash
 zfs umount datapool/fs1 
 ```
+
 #### Mount all ZFS file systems
-``` bash
+
+```bash
 zfs mount -a
 
 # Direct binary
@@ -571,126 +696,179 @@ zfs mount -a
 ```
 
 #### Mount all with arguments
-``` bash
+
+```bash
 zfs mount -O -a
 ```
 
 #### Umount all ZFS file systems
-``` bash
+
+```bash
 zfs umount -a
 ```
+
 ### `ZFS` I/O performance
 
 #### Display ZFS I/O Statistics every 2 seconds
-``` bash
+
+```bash
 zpool iostat 2
 ```
+
 #### Display detailed ZFS I/O statistics every 2 seconds
-``` bash
+
+```bash
 zpool iostat -v 2
 ```
+
 ### `ZFS` maintenance commands
 
 #### Run scrub on all file systems under data pool
-``` bash
+
+```bash
 zpool scrub datapool
 ```
+
 #### Temporarily offline a disk (until next reboot)
-``` bash
+
+```bash
 zpool offline -t datapool c0t0d0
 ```
+
 #### Online a disk to clear error count
-``` bash
+
+```bash
 zpool online
 ```
+
 #### Clear error count without a need to the disk
-``` bash
+
+```bash
 zpool clear
 ```
+
 ### `ZFS` Import/Export Commands
 
 #### List pools available for import
-``` bash
+
+```bash
 zpool import
 ```
+
 #### Imports all pools found in the search directories
-``` bash
+
+```bash
 zpool import -a
 ```
+
 #### Search for pools with block devices not located in `/dev/dsk`
-``` bash
+
+```bash
 zpool import -d
 ```
+
 #### Search for a pool with block devices created in `/zfs`
-``` bash
+
+```bash
 zpool import -d /zfs datapool
 ```
+
 #### Import a pool originally named oldpool under new name newpool
-``` bash
+
+```bash
 zpool import oldpool newpool
 ```
+
 #### Import pool using `pool_ID`
-``` bash
+
+```bash
 zpool import 3987837483
 ```
+
 #### Deport a ZFS pool named mypool
-``` bash
+
+```bash
 zpool export datapool
 ```
+
 #### Force the unmount and deport of a ZFS pool
-``` bash
+
+```bash
 zpool export -f datapool
 ```
+
 ### `ZFS` Snapshot Commands
 
 #### Create a snapshot named 12jan2014 of the fs1 filesystem
-``` bash
+
+```bash
 zfs snapshot datapool/fs1@12jan2014
 ```
+
 #### List snapshots
-``` bash
+
+```bash
 zfs list -t snapshot
 ```
+
 #### Roll back to Jan 10 2020 (recursively destroy intermediate snapshots)
-``` bash
+
+```bash
 zfs rollback -r datapool/fs1@10jan2020
 ```
+
 #### Roll back: force unmount and remount
-``` bash
+
+```bash
 zfs rollback -rf datapool/fs1@10jan2020
 ```
+
 #### Destroy snapshot created earlier
-``` bash
+
+```bash
 zfs destroy datapool/fs1@10jan2020
 ```
+
 #### Take a backup of ZFS snapshot locally
-``` bash
+
+```bash
 zfs send datapool/fs1@oct2019 &gt /geekpool/fs1/oct2019.bak
 ```
+
 #### Restore from the snapshot backup backup taken
-``` bash
+
+```bash
 zfs receive anotherpool/fs1 &lt /geekpool/fs1/oct2013.bak
 ```
+
 #### Combine the `send` and `receive` operation
-``` bash
+
+```bash
 zfs send datapool/fs1@oct2019 | zfs receive anotherpool/fs1
 ```
+
 #### Send the snapshot to a remote system `node02`
-``` bash
+
+```bash
 zfs send datapool/fs1@oct2019 | ssh node02 “zfs receive testpool/testfs”
 ```
+
 ### `ZFS` Clone Commands
 
 #### Clone an existing snapshot
-``` bash
+
+```bash
 zfs clone datapool/fs1@10jan2014 /clones/fs1
 ```
+
 #### Destroy clone
-``` bash
+
+```bash
 zfs destroy datapool/fs1@10jan2020
 ```
 
 ### ZFS References
+
 - [Solaris ZFS command line reference (Cheat sheet)](https://www.thegeekdiary.com/solaris-zfs-command-line-reference-cheat-sheet/)
 - [Solaris ZFS : How to replace a failed disk in rpool (x86)](https://www.thegeekdiary.com/solaris-zfs-how-to-replace-a-failed-disk-in-rpool-x86/)
 - [Solaris ZFS : How to Offline / Online / Detach / Replace device in a storage pool](https://www.thegeekdiary.com/solaris-zfs-how-to-offline-online-detach-replace-device-in-a-storage-pool/)
@@ -703,68 +881,79 @@ zfs destroy datapool/fs1@10jan2020
 - [How To Use ‘zpool split’ to Split rpool in solaris 11 (x86/x64)](https://www.thegeekdiary.com/how-to-use-zpool-split-to-split-rpool-in-solaris-11-x86x64/)
 - [How to mount the zfs rpool while booted from CD SPARC](https://www.thegeekdiary.com/how-to-mount-the-zfs-rpool-while-booted-from-cd-sparc/)
 
-
 ## General Linux Bash Commands
 
 #### Get info about linux version
 
-
-``` bash
+```bash
 cat /etc/os-release
 ```
+
 #### get pretty print version
 
-
-``` bash
+```bash
 less /etc/issue
 ```
+
 #### Debian/ubuntu get version
 
-``` bash
+```bash
 lsb_release -a
 hostnamectl
 ```
 
 ##### Info about system
-``` bash
+
+```bash
 uname -a
 ```
+
 ## Systemd Systemctl
 
 #### Check status of a Service
-``` bash
+
+```bash
 systemctl status APP_SERVICE
 
 # system control status nginx
 systemctl status nginx
 ```
+
 #### Check if service is Active
-``` bash
+
+```bash
 systemctl is-active nginx
 ```
+
 #### List all loaded service units
-``` bash
+
+```bash
 systemctl list-units -all | grep loaded | awk '{print $1;}'
 ```
+
 #### List all enabled units
-``` bash
+
+```bash
 systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt
 ```
 
-
 #### List all loaded services
+
 Make sure that all the services we use are in the startup script
 
-``` bash
+```bash
 systemctl list-units -all | grep service | grep loaded | awk '{print $1;}'
 ```
+
 #### List all enabled services
-``` bash
+
+```bash
 systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
 ```
+
 #### Find the list of services that are loaded but not enabled
 
-``` bash
+```bash
 systemctl list-units -all | grep service | grep loaded | awk '{print $1;}' > loaded.txt
 
 systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
@@ -774,38 +963,60 @@ diff -y loaded.txt enabled.txt
 ```
 
 #### Diff the missing services. Quick glance of missing
-``` bash
+
+```bash
 diff -y loaded.txt enabled.txt | grep '<'
 ```
 
 #### `pushd` and `popd` to jump between directories
-``` bash
+
+```bash
 pushd $DIR
 popd
 ```
 
+#### Reload system configs
+
+The settings are read from all of the following system configuration files:
+
+1. /run/sysctl.d/*.conf
+2. /etc/sysctl.d/*.conf
+3. /usr/local/lib/sysctl.d/*.conf
+4. /usr/lib/sysctl.d/*.conf
+5. /lib/sysctl.d/*.conf
+6. /etc/sysctl.conf
+
+   [source cyberciti](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl/)
+
+```bash
+sudo sysctl --system
+```
+
 #### Analyse Logs. Logs named 3 to 31.gz month. Month like Feb 2020 and print
 
-``` bash
+```bash
 zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | less
 ```
 
 #### Xclip to capture the clipboard when copying
-``` bash
+
+```bash
 cat ~/.ssh/id_rsa.pub | xclip -sel clip
 ```
 
-``` bash
+```bash
 xclip
 ```
 
 #### X windows var
-``` bash
+
+```bash
 echo $XDG_CURRENT_DESKTOP
 ```
 
 #### Check a dir with a parameter. Double check `info stat`
-``` bash
+
+```bash
 stat %A $DIR
 ```
 
@@ -813,8 +1024,7 @@ stat %A $DIR
 
 `nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
 
-
-``` bash
+```bash
 nohup $COMMAND_OR_SCRIPT > out_$(date).txt
 ```
 
@@ -822,7 +1032,7 @@ nohup $COMMAND_OR_SCRIPT > out_$(date).txt
 
 In this case the content of a `DockerFile` is echoed first then piped to `docker build` to create a docker image.
 
-``` bash
+```bash
 echo -e 'FROM busybox\nRUN echo "hello world"' | docker build -
 docker build -<<EOF
 FROM busybox
@@ -832,44 +1042,49 @@ EOF
 
 ##### Maintain symbolic links determining default commands. Show installed Apps
 
-``` bash
+```bash
 update-alternatives --get-selections
 ```
 
 ##### Get info about current user
-``` bash
+
+```bash
 id
 ```
 
 ##### Edit sudo users
-``` bash
+
+```bash
 sudo visudo
 ```
 
 ##### Move `DIR1` to `DIRDestiny`
-``` bash
+
+```bash
 sudo mv $DIR1 $DIRDestiny
 ```
 
 ##### Find where the command is installed
 
-``` bash
+```bash
 which COMMAND
 
 which pip
 ```
 
 ##### Create an alias with a command to go to a specific directory
-``` bash
+
+```bash
 alias ee='cd /home/ws/02-projects/ee/test-env/eenz' <br>
 
 ee
 ```
 
 #### Copy files from Local to Remote Server
+
 Define the local and remote paths in env vars. Perform the copy
 
-``` bash
+```bash
 scp -r $LOCAL_PATH/sftp-shim ubuntu@$REMOTE_HOST_SERVER:$REMOTE_SERVER_PATH
 echo "cd $PWD"
 ```
@@ -877,41 +1092,50 @@ echo "cd $PWD"
 ## Compression/Decompression of files
 
 #### With Tar
-``` bash
+
+```bash
 tar -czvf name-of-archive.tar.gz /path/to/directory-or-file
 ```
 
 #### With Zip
 
-``` bash
+```bash
 zip -r compressedFileName.zip file1 file2 dir1/ file3
 ```
+
 #### Create a parent directory with 2 directories inside (Single line)
-``` bash
+
+```bash
 mkdir -p $HOME/example.com/server1/{httpd,dnsqmasq}
 ```
+
 ## Find/Search operations
-``` bash
+
+```bash
 find [where to start searching] [-options] [expression]
 ```
 
 #### Search for the text ‘data’ within files that ends with md
-``` bash
+
+```bash
 find ./ -type f -name "*.md" -exec grep 'data'  {} \;
 ```
 
 #### Find the file ‘LICENSE’ in just the current directory and 1 subdirectory level
-``` bash
+
+```bash
 find . -maxdepth 2 -name LICENSE
 ```
 
 #### Find files containing specific text
-``` bash
+
+```bash
 grep -iRl "TEXT-TO-FIND" ./
 ```
+
 ##### Common Flags for `grep`
 
-``` bash
+```bash
 -i - ignore text case
 -R - recursively search files in subdirectories.
 -l - show file names instead of file contents portions.
@@ -920,31 +1144,38 @@ grep -iRl "TEXT-TO-FIND" ./
 `./` As the last parameter, the path to the folder containing files you want to search for text.
 
 You can use the full path of the folder.
-``` bash
+
+```bash
 grep -iRl "TEXT" /home/user/Documents
 ```
 
 #### Find the value of `THING_NAME` and replaces the value in a given config file
-``` bash
+
+```bash
 THING_NAME=< enter bucket Name >
 sed -i -r "s/^THING_NAME=.*/THING_NAME=$THING_NAME/" /home/ubuntu/sftp-shim.config
 ```
 
 #### Searches for ???? in the current directory
-``` bash
+
+```bash
 grep -Eri health_url .
 ```
+
 #### Find directories modified within the past 10 days
-``` bash
+
+```bash
 find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
 ```
 
-#### It should find the HTTPD user in a web server. 
+#### It should find the HTTPD user in a web server.
+
 `ps` command behaves weirdly
 
-``` bash
+```bash
 HTTPDUSER=$(ps axo "user,comm" | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
 ```
+
 ## Package Management
 
 ### APT
@@ -952,145 +1183,182 @@ HTTPDUSER=$(ps axo "user,comm" | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]
 ubuntu package manager
 
 #### Fetch packages from Repo
-``` bash
+
+```bash
 sudo apt update
 ```
+
 #### Auto remove Obsolete packages
-``` bash
+
+```bash
 sudo apt autoremove
 ```
+
 #### Upgrade packages
-``` bash
+
+```bash
 sudo apt upgrade --yes
 ```
+
 #### List a package by name. e.g. python
-``` bash
+
+```bash
 sudo apt list | grep python
 ```
+
 #### List installed packages
-``` bash
+
+```bash
 sudo apt list --installed
 ```
+
 #### Fix broken install packages
-``` bash
+
+```bash
 sudo apt --fix-broken install
 ```
 
 #### Reinstall a package (better than removing or purging)
-``` bash
+
+```bash
 sudo apt install --reinstall PACKAGE_NAME
 ```
+
 #### Purge a package
-``` bash
+
+```bash
 sudo apt-get purge unattended-upgrades
 ```
 
 #### Show GPG keys in the keyring
-``` bash
+
+```bash
 apt-key list
 ```
 
 #### Remove PPA repository record
-``` bash
+
+```bash
 sudo add-apt-repository --remove ppa:PPA_Name/ppa
 ```
 
 #### Remove a PPA from the source list in the terminal
-``` bash
+
+```bash
 sudo rm -i /etc/apt/sources.list.d/PPA_Name.list
 ```
+
 #### Install a Debian Package
-``` bash
+
+```bash
 sudo dpkg -i $DEBIAN_PKG
 ```
+
 #### Check if Periodic updates are enabled
-``` bash
+
+```bash
 cat /etc/apt/apt.conf.d/10periodic
 ```
+
 #### Get packages from repo and find given string
-``` bash
+
+```bash
 dpkg --get-selections | grep PACKAGE_TO_FIND
 ```
+
 #### list snap packages installed
-``` bash
+
+```bash
 snap list
 ```
+
 ## Debugging Linux Systems (mostly Ubuntu)
 
 A very important set of skills when something goes wrong and is important to get quick info.
 This can become a small DIY project to manage desktop and cloud servers.
 
-
-``` bash
+```bash
 ls -lth /var/log/ | sort --month-sort
 ```
 
 #### Check the system log
-``` bash
+
+```bash
 less /var/log/syslog
 ```
 
 #### Create empty file in given path
-``` bash
+
+```bash
 touch /home/user/new_empty_file.txt
 ```
 
-``` bash
+```bash
 less /etc/X11/xorg.conf
 ```
 
 #### List directory with extensions
-``` bash
+
+```bash
 ls -xl ${DIR_PATH}
 ```
 
 - Article [medium.com Troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
 
 #### lists all open files belonging to all active processes
-``` bash
+
+```bash
 lsof
 ```
 
 #### lists open files for current user
-``` bash
+
+```bash
 lsof -u $USER
 ```
 
 #### End all processes for a target user
-``` bash
+
+```bash
 kill -9 $(lsof -t -u $TARGET_USER)
 ```
 
 #### Retrieve processes running on a specified range
-``` bash
+
+```bash
 lsof -i :8090-9090
 ```
 
 ### Explore System Processes
 
 #### Find the process that consumes more CPU
-``` bash
+
+```bash
 ps -eo pid,%cpu,%mem,args --sort -%cpu
 ```
 
 #### Sort processes by memory
-``` bash
+
+```bash
 ps aux --sort=-%mem
 ```
 
 #### Unuseful view with a process tree
-``` bash
+
+```bash
 ps xfa | less
 ```
 
 #### Read from a file in a specific line e.g. 4
-``` bash
+
+```bash
 less +4 -N show-time.sh
 ```
 
 ### System Logs
 
 #### Commong logs in linux
+
 `/var/log/message`
 
 Contains global system messages, including the messages that are logged during system startup. Includes mail, cron, daemon, kern, auth, etc.
@@ -1112,59 +1380,80 @@ Crond logs
 ##### command for viewing logs collected by systemd
 
 #### Obtain Log output with admin permissions
-``` bash
+
+```bash
 sudo journalctl
 ```
+
 #### Check system logs
-``` bash
+
+```bash
 journalctl -xe
 ```
+
 #### Obtain Log output from oldest to newest
-``` bash
+
+```bash
 journalctl -r
 ```
+
 #### Monitor New Log Messages
-``` bash
+
+```bash
 journalctl -f
 ```
+
 #### Show Logs within a Time Range
-``` bash
+
+```bash
 journalctl --since "2018-08-30 14:10:10"
 journalctl --until "2018-09-02 12:05:50"
 ```
 
 #### List boots in the System
-``` bash
+
+```bash
 journalctl --list-boots
 ```
 
 #### Show Logs for a Specific Boot
-``` bash
+
+```bash
 journalctl -b
 ```
 
 #### Show Logs for a systemd Service
-``` bash
+
+```bash
 journalctl -u $SERVICE_NAME
 ```
+
 #### View Kernel Messages
-``` bash
+
+```bash
 journalctl -k
 ```
+
 #### change Output Format to json-pretty
-``` bash
+
+```bash
 journalctl -o json-pretty
 ```
+
 #### Manually Clean Up Archived Logs
 
 #### Reduce the size of your journals to 2GiB
-``` bash
+
+```bash
 journalctl --vacuum-size=2G
 ```
+
 #### Remove archived journal files with dates older than the specified relative time
-``` bash
+
+```bash
 journalctl --vacuum-time=1years
 ```
+
 ### Networking
 
 Commands and useful cheat sheet used in networking
@@ -1180,51 +1469,63 @@ Accessing a service
 `traceroute DOMAIN` = packets hop
 
 ### Network Probing
+
 Which TCP or UDP ports are open.
 
 Can i open a TCP connection to this destination?
 
 #### Port scanning TCP,UDP ports open or closed
-``` bash
+
+```bash
 nmap -sS localhost
 ```
+
 #### Sends ICMP pings. checks latency
-``` bash
+
+```bash
 ping/ping6
 ```
+
 #### Test port 80 netcat
 
-``` bash
+```bash
 nc -lvz 80
 ```
 
 `telnet` a complete protocol
-``` bash
+
+```bash
 tcdump -i eth0 icmp
 ```
 
 #### Examine the IPv4 TCP-based sockets that are listening for connections on your system
-``` bash
+
+```bash
 ss -4 -tln
 ```
 
 #### Examine the IPv6 TCP-based sockets that are listening for connections on your system
-``` bash
+
+```bash
 ss -6 -tln
 ```
 
 #### Creating Unix Domain Sockets
-``` bash
+
+```bash
 socat unix-listen:/tmp/stream.sock,fork /dev/null&
 socat unix-recvfrom:/tmp/datagram.sock,fork /dev/null&
 ```
 
 #### examine unix domain sockets
-``` bash
+
+```bash
 ss -xln
 ```
+
 #### Connect to an UNIX Socket
-``` bash
+
+```bash
 nc -U -z /tmp/stream.sock
 ```
 
@@ -1234,7 +1535,7 @@ nc -U -z /tmp/stream.sock
 
 #### Simulate traffic in IPV4 and IPV6
 
-``` bash
+```bash
 socat TCP4-LISTEN:8080,fork /dev/null&
 socat TCP6-LISTEN:8080,ipv6only=1,fork /dev/null&
 ```
@@ -1255,20 +1556,21 @@ socat TCP6-LISTEN:8080,ipv6only=1,fork /dev/null&
 
 #### Check ARP cache
 
-``` bash
+```bash
 arp -a
 ```
 
 `ip` see neighbor table. add routes
 
 - Answers questions
-what are the net interfaces, ips, subnets, broadcast address??
-how do i add routes?
+  what are the net interfaces, ips, subnets, broadcast address??
+  how do i add routes?
 
 ### Load testing
+
 `tcpreplay` replays traffic from packet capture fire
 
-``` bash
+```bash
 tcpdump -i eth0 -w traffic.pcap
 tcpreplay -i eth0 httptraffic.pcap
 ```
@@ -1277,21 +1579,25 @@ tcpreplay -i eth0 httptraffic.pcap
 
 Threads connections duration Requests
 
-``` bash
+```bash
 wrk2 -t1 -c10 -d60 -R100 -L http://$IP
 ```
 
 #### Send TCP or UDP traffic. Similar to wrk2 but allows UDP
-``` bash
+
+```bash
 iperf3
 ```
 
 #### Network performance measurement tool
-``` bash
+
+```bash
 nuttcp
 ```
+
 ### Benchmarking
-``` bash
+
+```bash
 info siege
 ```
 
@@ -1300,22 +1606,28 @@ BPF/eBPF potential for new programs
 **source:** Digital ocean talk Handy Linux networking tools
 
 #### Flush DNS by resetting the network DEBIAN based
-``` bash
+
+```bash
 sudo /etc/init.d/networking restart
 ```
+
 #### Inspect TCP socket states e.g. 443
-``` bash
+
+```bash
 ss -nta '( dport = :443 )'
 ```
 
 `netstat` is a great tool for monitoring network connections.
 
 #### Netstat statistics
-``` bash
+
+```bash
 netstat --statistics
 ```
+
 #### Find ports in use
-``` bash
+
+```bash
 netstat -tulpn
 ```
 
@@ -1326,7 +1638,8 @@ netstat -tulpn
 - The `-n` option shows numerical addresses, instead of trying to resolve host, port, or user names.
 
 #### Make sure the `firewalld` service is enabled
-``` bash
+
+```bash
 ll /usr/lib/systemd/system | grep firewalld
 
 ll /etc/systemd/system | grep firewalld
@@ -1338,86 +1651,113 @@ sudo systemctl status firewalld
 ```
 
 #### Install netcat in Fedora/Redhat
-``` bash
+
+```bash
 yum install -y nc
 ```
+
 #### CentOS Linux Open Port 8080 on the firewall
-``` bash
+
+```bash
 sudo firewall-cmd --permanent --add-port=8080/tcp
 sudo firewall-cmd --reload
 ```
 
 #### Find user behind a process
-``` bash
+
+```bash
 sudo netstat -tulpe | grep 8090
 ```
+
 #### Test connectivity to a port
-``` bash
+
+```bash
 nc -vvz $host $port
 ```
+
 #### Check server status
-``` bash
+
+```bash
 sudo netstat -tuple | grep smtp
 ```
+
 #### Check Any URL and get output in Text
-``` bash
+
+```bash
 curl -l localhost:80
 ```
+
 #### Get listening ports
-``` bash
+
+```bash
 ss -tulwn
 ```
+
 #### Get a report with nmap. install it first `sudo snap install nmap`
-``` bash
+
+```bash
 nmap -sV -p- localhost
 ```
+
 ### The `ip` command
 
 - Show / manipulate routing
-``` bash
+
+```bash
 ip route show
 ```
+
 - Show List of routes
-``` bash
+
+```bash
 ip route list
 ```
+
 - Show / manipulate devices
-``` bash
+
+```bash
 cat /etc/network/interfaces
 ```
+
 - Policy routing
 - Tunnels
 
 #### Restart Name Service Cache Process
-``` bash
+
+```bash
 sudo service nscd restart
 ```
 
 #### Create a Symbolic Link
-``` bash
+
+```bash
 SOURCE_FILE=/home/ubuntu/.local/bin/docker-compose
 SYMBOLIC_LINK_PATH=/usr/bin/docker-compose
 sudo ln --symbolic $SOURCE_FILE $SYMBOLIC_LINK_PATH
 ```
 
 ##### Check Timestamp for last updated packages in package manager apt
-``` bash
+
+```bash
 ls -l /var/lib/apt/periodic/update-stamp
 ```
 
 ##### History of commands executed in the current session
-``` bash
+
+```bash
 history
 ```
 
 ##### Create a random password
-``` bash
+
+```bash
 randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | \
 base64 | tr /= _)
 ```
 
 ##### Get stats info about a file
-``` bash
+
+```bash
 stat $FILE
 
 # Help with the command
@@ -1425,7 +1765,8 @@ stat --help
 ```
 
 #### Get text between quotes in a text file. Options
-``` bash
+
+```bash
 echo Source_File.txt | grep $REGEX_PATTERN
 grep "'.*'" -o references-get-between-quoutes.txt > result_1855.txt
 
@@ -1434,32 +1775,43 @@ grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt
 ```
 
 ##### Interactive process viewer
-``` bash
+
+```bash
 htop
 ```
 
 #### Check System Disk Usage
-``` bash
+
+```bash
 df -h
 ```
+
 ##### See who is connected and Display the load average (uptime output)
-``` bash
+
+```bash
 w -u
 ```
+
 ##### Get the user login history
-``` bash
+
+```bash
 last $USERNAME
 ```
+
 ##### Print the user name who are all currently logged in the current host
-``` bash
+
+```bash
 users
 ```
+
 #### List Users in Linux
-``` bash
+
+```bash
 sudo less /etc/passwd
 ```
 
 Each line in the file `etc/passwd` has seven fields delimited by colons that contain the following information:
+
 - User name:Encrypted password (x means that the
 - password is stored in the /etc/shadow file).
 - User ID number (UID).:User’s group ID number (GID)
@@ -1478,7 +1830,7 @@ cut -d: -f1 /etc/passwd
 
 Each user has a numeric user ID called UID. If not specified when creating a new user with the useradd command, the UID will be automatically selected from the /etc/login.defs file depending on the UID_MIN and UID_MIN values.
 
-``` bash
+```bash
 getent passwd
 getent passwd | cut -d: -f1
 ```
@@ -1490,79 +1842,102 @@ sudo passwd $USERNAME
 ```
 
 #### Set a new password for your own user
-``` bash
+
+```bash
 passwd
 ```
+
 #### Check the UID_MIN and UID_MIN values on your system, you can use the following command
-``` bash
+
+```bash
 grep -E '^UID_MIN|^UID_MAX' /etc/login.defs
 ```
 
 #### The command below will list all normal users in our Linux system
 
-``` bash
+```bash
 getent passwd {1000..60000}
 ```
 
 #### Generic info about users from a Linux system
 
-``` bash
+```bash
 eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)}
 ```
 
 #### Print only the usernames in a Linux System
-``` bash
+
+```bash
 eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1
 ```
 
 ##### Print the loggedin user name
-``` bash
+
+```bash
 id -un
 ```
+
 ##### Get the list of the usernames who are currently logged in
-``` bash
+
+```bash
 who
 ```
+
 ##### get a list of all usernames that are currently logged
-``` bash
+
+```bash
 who | cut -d' ' -f1 | sort | uniq
 ```
+
 ##### Launch file explorer Nautilus as super user admin
-``` bash
+
+```bash
 sudo nautilus
 ```
+
 ##### Scan full disk and analyze it using tool `ncdu`
-``` bash
+
+```bash
 sudo ncdu /
 ```
+
 ##### Remove directory forcefully
-``` bash
+
+```bash
 rm -rf $DIR_PATH
 ```
+
 #### Search for execution of a given command in the history
-``` bash
+
+```bash
 COMMAND=who ; history | grep $COMMAND
 ```
+
 #### Set max map count
-``` bash
+
+```bash
 sudo sysctl -w vm.max_map_count=262144
 ```
+
 ##### Show contents in tree view
-``` bash
+
+```bash
 tree $HOME
 ```
+
 #### Sho contents of a directory in a tree format with `gio` Gnome Input/Output
 
-``` bash
+```bash
 gio tree
 ```
+
 # Terminals
 
 > ## more in the [Bash Section](/devops-tools/bash)
 
 #### Most used commands in Bash History
 
-``` bash
+```bash
 history | \
 awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count\*100 "% " a;}' | \
 grep -v "./" | column -c3 -s " " -t | \
@@ -1572,28 +1947,35 @@ sort -nr | nl | head -n10
 #### Script to list files, directories, executables, and links from a given Workspace directory
 
 #### List all files in a current directory
-``` bash
+
+```bash
 find . -maxdepth 1 -type f -print
 ```
+
 #### Script usage= `lsf` lists files, `lsd` lists directories, `lsx` lists executables, `lsl` lists links
 
 #### start a process in the background
-``` bash
+
+```bash
 COMMAND="rescuetime"
 $COMMAND &
 ```
 
 #### Create a string with the current date in the format **YYYY-MM-DD_HHMM**
-``` bash
+
+```bash
 APP_VERSION="vtest-"$(date +%F_%H%M)
 ```
 
 #### Create a dir and run a command in 1 line
-``` bash
+
+```bash
 `cd $DIR1; $(COMMAND)`
 ```
+
 #### Create a file and add content to it
-``` bash
+
+```bash
 FILE_PATH=/home/ubuntu/.bash_functions
 
 sudo bash -c "cat > $FILE_PATH"<<EOF
@@ -1604,7 +1986,8 @@ EOF
 ```
 
 #### Create a function to show files in current dir
-``` bash
+
+```bash
 FILE_PATH=/home/ubuntu/.bash_functions
 sudo bash -c "cat > $FILE_PATH"<<EOF
 function cl() {
@@ -1626,110 +2009,154 @@ EOF
 - `CTRL + L`
 
 #### Exit from terminal
-``` bash
+
+```bash
 exit
 ```
+
 ##### Change permissions of a file based on permissions of other file
-``` bash
+
+```bash
 RFILE=reference_file ; sudo chmod --reference=\$RFILE
 ```
+
 ##### Change ownership of all files inside current dir to a given group
-``` bash
+
+```bash
 GROUP_NAME=common ; sudo chown :\$GROUP_NAME \*
 ```
+
 ## CURL Client URL
 
 #### Download a file and save it with a custom name
-``` bash
+
+```bash
 curl -o custom_file.tar.gz https://testdomain.com/testfile.tar.gz
 ```
+
 #### Get HTTP headers. use the `-I` or the `— head` option
-``` bash
+
+```bash
 curl -I https://www.google.com
 ```
+
 #### Ignore invalid certs `-k or --insecure`
-``` bash
+
+```bash
 curl -k https://localhost/my_test_endpoint
 ```
-#### Make a POST request. 
+
+#### Make a POST request.
+
 If using **JSON** `-H 'Content-Type: application/json'`
-``` bash
+
+```bash
 curl --data "param1=test1&param2=test2" http://test.com
 ```
+
 #### get the HTTP headers and verbose mode
-``` bash
+
+```bash
 curl --head --verbose HOST
 ```
+
 #### Simplified view
-``` bash
+
+```bash
 curl --list-only $HOST
 ```
+
 #### Specify the type of request
-``` bash
+
+```bash
 # updating the value of param2 to be test 3 on the record id
 curl -X 'PUT' -d '{"param1":"test1","param2":"test3"}' \http://test.com/1
 ```
 
 #### Include the Basic Auth
-``` bash
+
+```bash
 curl -u <user:password> https://my-test-api.com/endpoint1
 ```
+
 #### Update name resolution
-``` bash
+
+```bash
 curl --resolve www.test.com:80:localhost http://www.test.com/
 ```
+
 #### Check service health
-``` bash
+
+```bash
 curl -Is http://www.google.com
 ```
+
 #### Upload a file
 
 `curl -F @field_name=@path/to/local_file <upload_URL>`
-``` bash
+
+```bash
 
 ```
+
 #### Timing Curl connection
-``` bash
+
+```bash
 curl -w "%{time_total}\n" -o /dev/null -s www.test.com
 ```
+
 ## PDF Operations Tools
 
 ### PDF tool kit
 
 ##### Recursively find inside PDFs
-``` bash
+
+```bash
 find . -iname '*.pdf' -exec pdfgrep "Title of File to search " {} +
 ```
 
 #### Using `pdfgrep`
-``` bash
+
+```bash
 pdfgrep -r "Title of PDF to find"
 ```
+
 #### Get info about the pdf toolkit
-``` bash
+
+```bash
 info pdftk
 ```
+
 #### Find string *InfoValue* in the metadata of `PDF_FILE`
-``` bash
+
+```bash
 PDF_FILE="a_pdf_file.pdf"
 pdftk $PDF_FILE.pdf dump_data_utf8 | grep InfoValue:
 ```
+
 #### Extract a range of pages from a PDF file
-``` bash
+
+```bash
 pdftk source.pdf cat 5-10 output ExtractedOutput_p5-10.pdf
 ```
+
 #### Split specific pages from the source file, for example page 5, page 6, and page 10
-``` bash
+
+```bash
 pdftk source.pdf cat 5 6 10 output SplittedOutput.pdf
 ```
 
 ---
 
 # Windows products (micro\$oft)
+
 > ## Windows - & WinServer
+
 Use CMD or POWERSHELL
+
 - Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
-Moved to [windows/readme](./windows/readme.md)
+  Moved to [windows/readme](./windows/readme.md)
+
 ---
 
 #### VPN
@@ -1753,43 +2180,55 @@ OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/
 #### Generate SSH Key pair
 
 #### Add a SSH key to ssh-agent
-``` bash
+
+```bash
 ssh-add -k ~/.ssh/id_rsa
 ssh-keygen -t rsa
 ```
 
 #### Get content of default name of Public Key
-``` bash
+
+```bash
 cat ~/.ssh/id_rsa.pub
 ```
+
 #### Add an SSH key to a remote Server
+
 Read Public SSH key, ssh to \$REMOTE_HOST with root user and run a command to create a directory ssh and add the public key to authorized_keys file
 
-``` bash
+```bash
 COMMAND="mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
 cat ~/.ssh/id_rsa.pub | \
 ssh root@$REMOTE_HOST $COMMAND
 ```
 
 # Git
+
 Moved to [Git](./git/readme.md)
+
 # Programming Languages
 
 ## Java
-Moved to [Programming-languages > Java](./programming-languages/java/readme.md)
+
+Moved to [Programming-languages &gt; Java](./programming-languages/java/readme.md)
+
 - todo add short details description
 - todo add main links
 
 ### OpenJDK
 
 ##### Use `update-alternative` to set version for Java
-``` bash
+
+```bash
 update-alternatives --config java
 ```
+
 ### Oracle Java
 
 ## Python
-Moved to [Programming-languages > python](./programming-languages/python/readme.md)
+
+Moved to [Programming-languages &gt; python](./programming-languages/python/readme.md)
+
 # DataBases
 
 ## MariaDB (MySQL open source Fork)
@@ -1797,49 +2236,61 @@ Moved to [Programming-languages > python](./programming-languages/python/readme.
 ## Oracle MySQL
 
 #### Connect to a DB with mysql command utilities
-``` bash
+
+```bash
 HOST="localhost"; USER="mysql"
 mysql -h $HOST -u $USER -p
 ```
 
 #### Check the default character set for a particular database DB_NAME
 
-``` SQL
+```SQL
 SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME
        FROM INFORMATION_SCHEMA.SCHEMATA
        WHERE SCHEMA_NAME='DB_NAME';
 ```
 
 ## AWS RDS MySQL engine
+
 MySQL has a cloud behaviuour in AWS or any other cloud provider.
 
 Some specific commands will be posted here
+
 ## PostgreSQL
 
 #### Check this super [PostgreSQL Cheat sheet](https://www.postgresqltutorial.com/postgresql-cheat-sheet/)
 
 #### Access the PostgreSQL server from psql with a specific user
-``` bash
+
+```bash
 psql -U [username]
 ```
+
 > Once in the `psql` console
 
 #### Check DB version
-``` bash
+
+```bash
 SELECT version();
 ```
+
 #### Dump DB and create a restore script
-``` bash
+
+```bash
 pg_dump -U postgres -W -C -d example_backups > ~/db_backup.sql
 ```
+
 #### back up my entire PostgreSQL cluster and save it in the entire_cluster.sql file
-``` bash
+
+```bash
 pg_dumpall -U postgres -W -f ~/Example_Dumps/Cluster_Dumps/entire_cluster.sql
 ```
+
 > Avoid system asking for the password by using a PostgreSQL config file at  `$HOME/.pgpass`
 
 - `pgpass` Syntax
-``` bash
+
+```bash
 hostname:port:database:username:password
 ```
 
@@ -1852,67 +2303,87 @@ hostname:port:database:username:password
 ### System settings
 
 #### **Get** dimensions of Display
-``` bash
+
+```bash
 xdpyinfo | grep dim
 ```
+
 ### Nautilus operations
 
 #### Show hidden files Keyboard shortcut
-``` bash
+
+```bash
 CTRL + H
 ```
+
 #### Show Path Location Keyboard shortcut
-``` bash
+
+```bash
 CTRL + L
 ```
+
 #### Switch between the Icons and List formats
-``` bash
+
+```bash
 CTRL + 1 | CTRL + 2
 ```
+
 #### Search for files
-``` bash
+
+```bash
 CTRL + F
 ```
+
 #### Delete File(s)
-``` bash
+
+```bash
 CTRL + delete
 ```
+
 #### Permanently delete
-``` bash
+
+```bash
 Shift + Delete
 ```
+
 (Never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
 Many personal system and program configurations are stored under your home directory.)
 
 ### Tool YQ for YAML processing
 
-``` bash
+```bash
 echo 'yq() {
   docker run --rm -i -v "${PWD}":/workdir mikefarah/yq yq "$@"
 }' | tee -a ~/.bashrc && source ~/.bashrc
 ```
 
 [Docker see](./containers/readme.md)
+
 ## [Image Magick](https://imagemagick.org/index.php)
 
 ### Image operations with ImageMagick
 
 #### Resize-images with percentage
-``` bash
+
+```bash
 # percentage
 convert -resize 50% source.png dest.jpg
 ```
 
 #### Resize an image with a specific value
-``` bash
+
+```bash
 SIZE="1024X768"
 convert -resize $SIZE source.png destination.jpg
 ```
+
 ---
+
 # Inbox items to processed
 
 #### Os hillman website. Iframe to include in website
-``` html
+
+```html
 <iframe src="http://www.marketplaceleaders.org/a/" style="overflow:hidden" marginheight="0" marginwidth="0" frameborder="0" width="100%" height="100%"></iframe>
 Read more: http://www.marketplaceleaders.org/tgif/api/#ixzz6pzkOZ8Wi
 ```
