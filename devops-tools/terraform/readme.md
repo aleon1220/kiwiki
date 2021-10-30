@@ -72,8 +72,6 @@ Configuration process creates a file at `~/.aws/credentials`
 ``` bash
 terraform -install-autocomplete 
 ```
-#### Validate code skip backend validation
-terraform validate -backend=false
 
 ### Cloud init in terraform cloud
 * data aws_ami          =  defines a filter to find the AWS AMI to be used for this instance creation. Usually, AWS EC2 Image builder creates this AMI
@@ -90,6 +88,13 @@ less /var/log/cfn-init.log
 #### Initialize directory, pull down providers
 ``` bash
 terraform init
+```
+
+#### Initialize terraform dir and skip remote validation
+Very useful when working with terraform cloud
+
+``` bash
+terraform init --backend=false
 ```
 
 #### Initialize directory, do not download plugins
