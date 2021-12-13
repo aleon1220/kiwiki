@@ -2178,6 +2178,12 @@ OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/
 ### Key generation
 
 #### Generate SSH Key pair
+The key below will use 4096 encryption
+``` bash
+SSH_KEY_EMAIL="person@example.com"
+
+ssh-keygen -t rsa -b 4096 -C "$SSH_KEY_EMAIL"
+```
 
 #### Add a SSH key to ssh-agent
 
