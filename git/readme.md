@@ -290,6 +290,15 @@ git init --help
 ``` bash
 git COMMAND --help
 ```
+
+#### Clone a git repo with given private ssh key
+``` bash
+EXTRA_PRIVATE_KEY_PATH="/home/person/.ssh/id_rsa_example"
+GIT_REPO_URL="git@github.com:Organization/org-repo-name.git"
+
+git clone -c core.sshCommand="/usr/bin/ssh -i $EXTRA_PRIVATE_KEY_PATH" $GIT_REPO_URL
+```
+
 #### Clone a Git Repo
 ``` bash
 git clone git@github.com:elastic/stack-docker.git
