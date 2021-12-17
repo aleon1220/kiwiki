@@ -1,5 +1,7 @@
 # Windows= Command prompt & power shell
 
+## PowerShell
+
 ### Networking
 
 ##### Get your Public IP Address
@@ -7,6 +9,15 @@
 (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
 ```
 
+#### Restart the Hyper-v service. 
+if you encounter a WSL2 error
+``` powershell
+Restart-Service vmcompute
+```
+
+## Command Prompt 
+
+### Network commands for cmd
 #### Flush DNS and restart networking
 Open a terminal or powershell window as Admin
 ``` dotnetcli
