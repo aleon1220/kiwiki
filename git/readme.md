@@ -380,6 +380,12 @@ git diff --histogram
 ``` bash
 git log --oneline
 ```
+#### A better log displaying
+``` bash
+git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+```
+[source A better git log](coderwall.com/p/euwpig/a-better-git-log)
 #### Groups commits by user, again showing just the subject line for concision
 ``` bash
 git shortlog
