@@ -112,19 +112,16 @@ The wiki is going to be divided into subcategories.
 For years i have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, etc.
 I used a `.txt` file, then a google docs file. I managed to delete the google docs file from its google drive folder. I accidentally deleted the folder and later on I emptied the bin. I truly dislike that...
 
-I got in touch with google support to no avail. :-(
-I still hope I can recover my file (there was no way to recover the file)
-
-Don't rely on the cloud 100%. Have local copies of your digital material.
+I got in touch with google support to no avail. I waited and hoped I could recover my file (there was no way to recover the file). Don't rely on the cloud 100%. Have local copies of your digital material.
 
 - **2020-11-10=** I confirm that i lost my google docs wiki file. I should have been more careful.
 - **2021-04-07=** processing inbox category. Moved intro below About Project
 
-## The Computer as a modern day to day tool
+## The Computer as a modern Tool
 
-A Computer as a tool has a CPU processor, memory RAM, storage in form of a drive, connectivity via network card or wifi, graphics visualization via a monitor. The operating system has tools to manage and interact with all the described above.
+A Computer has a CPU processor, memory RAM, storage in form of a drive, connectivity via network card or wifi, graphics visualization via a monitor. The operating system has tools to manage and interact with all the described above.
 
-The categories are:
+Categories
 
 - **General Info**
 
@@ -228,7 +225,7 @@ fdisk /
 sfdisk
 ```
 
-- Initialize for LVM use
+- Initialize LVM
 
 ```bash
 pvcreate /dev/sdf
@@ -2178,8 +2175,10 @@ OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/
 ### Key generation
 
 #### Generate SSH Key pair
+
 The key below will use 4096 encryption
-``` bash
+
+```bash
 SSH_KEY_EMAIL="person@example.com"
 
 ssh-keygen -t rsa -b 4096 -C "$SSH_KEY_EMAIL"
