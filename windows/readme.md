@@ -1,5 +1,10 @@
 # Windows= Command prompt & power shell
 
+## Get Windows License
+``` cmd
+wmic path SoftwareLicensingService get OA3xOriginalProductKey
+```
+
 ## PowerShell
 
 ### Networking
