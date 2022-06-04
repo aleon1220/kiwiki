@@ -5,6 +5,12 @@
 wmic path SoftwareLicensingService get OA3xOriginalProductKey
 ```
 
+## WSL Windows Subsystem Linux
+### Install
+``` powershell
+wsl --install
+```
+
 ## PowerShell
 
 ### Networking
