@@ -9,3 +9,4 @@ MDN recommends using
 ``` javascript
 console.log(JSON.parse(JSON.stringify(obj)))
 ```
+[Back to top](#)

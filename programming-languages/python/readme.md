@@ -20,3 +20,4 @@ sudo update-alternatives --install /usr/bin/python3 $PYTHON_EXECUTABLE $PYTHON_E
 
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python2.7 3
 ```
+[Back to top](#)

@@ -8,7 +8,7 @@
 - [About KIWIKI Project](#about-kiwiki-project)
   - [Repository Categories](#repository-categories)
   - [Introduction](#introduction)
-  - [The Computer as a modern Tool](#the-computer-as-a-modern-tool)
+  - [The Computer, a modern Tool](#the-computer-a-modern-tool)
   - [The CLI Shell](#the-cli-shell)
     - [CLI Shell keyboard shortcuts](#cli-shell-keyboard-shortcuts)
   - [Auto Docs: image of file categories](#auto-docs-image-of-file-categories)
@@ -36,7 +36,7 @@
   - [PDF Operations Tools](#pdf-operations-tools)
     - [PDF tool kit](#pdf-tool-kit)
 - [Windows products (micro\$oft)](#windows-products-microoft)
-  - [Open SSH](#open-ssh)
+    - [Open SSH](#open-ssh)
   - [SSH Key Management](#ssh-key-management)
     - [Key generation](#key-generation)
 - [Git](#git)
@@ -58,7 +58,6 @@
     - [Tool YQ for YAML processing](#tool-yq-for-yaml-processing)
   - [Image Magick](#image-magick)
     - [Image operations with ImageMagick](#image-operations-with-imagemagick)
-- [Inbox items to processed](#inbox-items-to-processed)
 
 ---
 
@@ -1865,3 +1864,5 @@ convert -resize 50% source.png dest.jpg
 SIZE="1024X768"
 convert -resize $SIZE source.png destination.jpg
 ```
+
+[Back to top](#)
