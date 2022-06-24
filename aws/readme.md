@@ -1,4 +1,7 @@
 # AWS CLI commands
+
+[Kiwiki Home](./readme.md)
+
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
 
 <!-- code_chunk_output -->
@@ -9,19 +12,21 @@
   - [AWS EC2 Elastic Compute Cloud](#aws-ec2-elastic-compute-cloud)
     - [AWS EC2 metadata API interactions](#aws-ec2-metadata-api-interactions)
     - [Creating EC2 Instances](#creating-ec2-instances)
-    - [AWS EC2 Volumes EBS AWS CLI reference](#aws-ec2-volumes-ebs-aws-cli-referencehttpsdocsawsamazoncomclilatestreferenceec2describe-volumeshtml)
+    - [AWS EC2 Volumes EBS AWS CLI reference](#aws-ec2-volumes-ebs-aws-cli-reference)
     - [Inventory questions about EC2 instances](#inventory-questions-about-ec2-instances)
   - [AWS EC2 Elastic Load balancer](#aws-ec2-elastic-load-balancer)
   - [AWS IAM](#aws-iam)
   - [AWS VPC](#aws-vpc)
+  - [AWS Code Commit](#aws-code-commit)
   - [AWS Lambda](#aws-lambda)
   - [AWS RDS Databases](#aws-rds-databases)
   - [AWS CF Cloud Formation](#aws-cf-cloud-formation)
   - [AWS CloudWatch](#aws-cloudwatch)
-    - [CloudWatch Agent info in EC2](#cloudwatch-agent-info-in-ec2)
+    - [AWS CloudWatch Agent info in `AWS EC2`](#aws-cloudwatch-agent-info-in-aws-ec2)
     - [Cloudwatch Logs](#cloudwatch-logs)
   - [AWS CloudWatch Logs set to 30 days](#aws-cloudwatch-logs-set-to-30-days)
   - [AWS S3](#aws-s3)
+  - [AWS Secret Manager](#aws-secret-manager)
 
 <!-- /code_chunk_output -->
 
@@ -450,3 +455,5 @@ aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r '.SecretStr
 ---
 #### REFERENCES
 - https://superadmins.com/creating-ec2-inventory-with-aws-cli/
+
+[Back to top of Page](#)
