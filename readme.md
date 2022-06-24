@@ -1700,19 +1700,6 @@ Moved to [Git](./git/readme.md)
 
 Moved to [Programming-languages &gt; Java](./programming-languages/java/readme.md)
 
-- todo add short details description
-- todo add main links
-
-### OpenJDK
-
-##### Use `update-alternative` to set version for Java
-
-```bash
-update-alternatives --config java
-```
-
-### Oracle Java
-
 ## Python
 
 Moved to [Programming-languages &gt; python](./programming-languages/python/readme.md)
