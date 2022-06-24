@@ -250,3 +250,5 @@ source [opensource.com](https://opensource.com/article/20/1/linux-terminal-trick
 
 ## Readings
 - [Medium Query Bash best practices](https://medium.com/search?q=bash%20best%20practices)
+
+[Back to top](#)

@@ -8,11 +8,6 @@ details about LDAP and micro$soft Active directory.
 - [Active Directory](#active-directory)
   - [Queries examples](#queries-examples)
     - [Search Properties to validate in Active directory Studio](#search-properties-to-validate-in-active-directory-studio)
-      - [Get Users and Department](#get-users-and-department)
-      - [template](#template)
-      - [Persons with mail and department that they belong to](#persons-with-mail-and-department-that-they-belong-to)
-      - [userID, mail and department for people whame start with Alexander](#userid-mail-and-department-for-people-whame-start-with-alexander)
-      - [emailID and deparment of 2 given users](#emailid-and-deparment-of-2-given-users)
 
 # Active Directory
 implementation of LDAP by the micro$soft greed.
@@ -83,3 +78,5 @@ the queries were executed in Apache Directory Studio. It makes life easier to qu
 |-------------------------|---------------|
 | Filter                  | `(\|(objectClass=person)(mailNickname="john.doe", "another.user"))` |
 | Returning<br>Attributes | **sAMAccountName, mailNickname, department** |
+
+[Back to top](#)

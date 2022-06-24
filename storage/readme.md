@@ -502,3 +502,5 @@ zfs destroy datapool/fs1@10jan2020
 - [How to Configure iSCSI targets on Solaris 10](https://www.thegeekdiary.com/how-to-configure-iscsi-targets-on-a-solaris-10)
 - [How To Use ‘zpool split’ to Split rpool in solaris 11 (x86/x64)](https://www.thegeekdiary.com/how-to-use-zpool-split-to-split-rpool-in-solaris-11-x86x64/)
 - [How to mount the zfs rpool while booted from CD SPARC](https://www.thegeekdiary.com/how-to-mount-the-zfs-rpool-while-booted-from-cd-sparc/)
+
+[Back to top](#)
