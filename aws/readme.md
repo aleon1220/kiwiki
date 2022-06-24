@@ -1,12 +1,13 @@
 # AWS CLI commands
 
-[Kiwiki Home](./readme.md)
+### [Kiwiki Home](./../readme.md)
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
 
 <!-- code_chunk_output -->
 
 - [AWS CLI commands](#aws-cli-commands)
+    - [Kiwiki Home](#kiwiki-home)
     - [Use cases for AWS CLI](#use-cases-for-aws-cli)
   - [General AWS](#general-aws)
   - [AWS EC2 Elastic Compute Cloud](#aws-ec2-elastic-compute-cloud)
