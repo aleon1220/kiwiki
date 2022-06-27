@@ -15,7 +15,6 @@
   - [General Info](#general-info)
   - [3. Storage](#3-storage)
     - [Process for Linux + `LVM` + `ext3`](#process-for-linux--lvm--ext3)
-  - [General Linux Bash Commands](#general-linux-bash-commands)
   - [Systemd Systemctl](#systemd-systemctl)
   - [Compression/Decompression of files](#compressiondecompression-of-files)
   - [Find/Search operations](#findsearch-operations)
@@ -23,7 +22,7 @@
     - [APT](#apt)
   - [Debugging Linux Systems (mostly Ubuntu)](#debugging-linux-systems-mostly-ubuntu)
     - [Explore System Processes](#explore-system-processes)
-    - [System Logs](#system-logs)
+  - [Handling Logs](#handling-logs)
     - [Networking](#networking)
     - [Network Probing](#network-probing)
     - [Traffic capture](#traffic-capture)
@@ -35,16 +34,14 @@
   - [CURL Client URL](#curl-client-url)
   - [PDF Operations Tools](#pdf-operations-tools)
     - [PDF tool kit](#pdf-tool-kit)
-- [Windows products (micro\$oft)](#windows-products-microoft)
+- [Windows products (micro\$oft) Moved to windows/readme](#windows-products-microoft-moved-to-windowsreadme)
     - [Open SSH](#open-ssh)
   - [SSH Key Management](#ssh-key-management)
     - [Key generation](#key-generation)
-- [Git](#git)
+- [Git Moved to Git](#git-moved-to-git)
 - [Programming Languages](#programming-languages)
-  - [Java](#java)
-    - [OpenJDK](#openjdk)
-    - [Oracle Java](#oracle-java)
-  - [Python](#python)
+  - [Java Moved to Programming-languages &gt; Java](#java-moved-to-programming-languages--java)
+  - [Python Moved to Programming-languages &gt; python](#python-moved-to-programming-languages--python)
 - [DataBases](#databases)
   - [MariaDB (MySQL open source Fork)](#mariadb-mysql-open-source-fork)
   - [Oracle MySQL](#oracle-mysql)
@@ -56,6 +53,7 @@
     - [System settings](#system-settings)
     - [Nautilus operations](#nautilus-operations)
     - [Tool YQ for YAML processing](#tool-yq-for-yaml-processing)
+  - [Docker see](#docker-see)
   - [Image Magick](#image-magick)
     - [Image operations with ImageMagick](#image-operations-with-imagemagick)
 
@@ -352,7 +350,7 @@ The file that keeps track of mounted devices is `/etc/fstab`
 sudo mount -a
 ```
 
-#### Check status of important services
+#### Check status of linux services
 
 ```bash
 timedatectl status
@@ -360,8 +358,6 @@ sudo systemctl edit --full cron.service
 sudo systemctl status nginx supervisor php7.2-fpm
 sudo service jenkins status
 ```
-
-## General Linux Bash Commands
 
 #### Get info about linux version
 
@@ -375,7 +371,7 @@ cat /etc/os-release
 less /etc/issue
 ```
 
-#### Debian/ubuntu get version
+#### Debian/ubuntu get detailed info
 
 ```bash
 lsb_release -a
@@ -526,12 +522,6 @@ EOF
 update-alternatives --get-selections
 ```
 
-##### Get info about current user
-
-```bash
-id
-```
-
 ##### Edit sudo users
 
 ```bash
@@ -636,10 +626,10 @@ THING_NAME=< enter bucket Name >
 sed -i -r "s/^THING_NAME=.*/THING_NAME=$THING_NAME/" /home/ubuntu/sftp-shim.config
 ```
 
-#### Searches for ???? in the current directory
+#### Searches for (short form `-Eri`) string health_url in the current directory
 
 ```bash
-grep -Eri health_url .
+grep --extended-regexp --recursive --ignore-case "health_url" .
 ```
 
 #### Find directories modified within the past 10 days
@@ -648,10 +638,7 @@ grep -Eri health_url .
 find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
 ```
 
-#### It should find the HTTPD user in a web server.
-
-`ps` command behaves weirdly
-
+#### It should find the HTTPD user in a web server
 ```bash
 HTTPDUSER=$(ps axo "user,comm" | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
 ```
@@ -660,7 +647,7 @@ HTTPDUSER=$(ps axo "user,comm" | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]
 
 ### APT
 
-ubuntu package manager
+Ubuntu package manager
 
 #### Fetch packages from Repo
 
@@ -677,10 +664,10 @@ sudo apt autoremove
 #### Upgrade packages
 
 ```bash
-sudo apt upgrade --yes
+sudo aptupdate ; sudo apt upgrade --yes
 ```
 
-#### List a package by name. e.g. python
+#### List a package by name e.g. python
 
 ```bash
 sudo apt list | grep python
@@ -701,7 +688,7 @@ sudo apt --fix-broken install
 #### Reinstall a package (better than removing or purging)
 
 ```bash
-sudo apt install --reinstall PACKAGE_NAME
+sudo apt install --reinstall $PACKAGE_NAME
 ```
 
 #### Purge a package
@@ -797,16 +784,16 @@ lsof
 lsof -u $USER
 ```
 
+#### Retrieve processes running on a specified port range
+
+```bash
+lsof -i :8090-9090
+```
+
 #### End all processes for a target user
 
 ```bash
 kill -9 $(lsof -t -u $TARGET_USER)
-```
-
-#### Retrieve processes running on a specified range
-
-```bash
-lsof -i :8090-9090
 ```
 
 ### Explore System Processes
@@ -835,7 +822,7 @@ ps xfa | less
 less +4 -N show-time.sh
 ```
 
-### System Logs
+## Handling Logs
 
 #### Commong logs in linux
 
@@ -886,11 +873,11 @@ journalctl -f
 #### Show Logs within a Time Range
 
 ```bash
-journalctl --since "2018-08-30 14:10:10"
-journalctl --until "2018-09-02 12:05:50"
+journalctl --since "2021-08-30 14:10:10"
+journalctl --until "2022-09-02 12:05:50"
 ```
 
-#### List boots in the System
+#### List SystemBoots
 
 ```bash
 journalctl --list-boots
@@ -1181,19 +1168,19 @@ nmap -sV -p- localhost
 
 ### The `ip` command
 
-- Show / manipulate routing
+#### - Show / manipulate routing
 
 ```bash
 ip route show
 ```
 
-- Show List of routes
+#### - Show List of routes
 
 ```bash
 ip route list
 ```
 
-- Show / manipulate devices
+#### - Show / manipulate devices
 
 ```bash
 cat /etc/network/interfaces
@@ -1459,9 +1446,8 @@ APP_VERSION="vtest-"$(date +%F_%H%M)
 FILE_PATH=/home/ubuntu/.bash_functions
 
 sudo bash -c "cat > $FILE_PATH"<<EOF
-Lots of content and text
-foo
-bar
+Content and text here
+foobar
 EOF
 ```
 
@@ -1497,13 +1483,13 @@ exit
 ##### Change permissions of a file based on permissions of other file
 
 ```bash
-RFILE=reference_file ; sudo chmod --reference=\$RFILE
+REF_FILE="a_file.txt" ; sudo chmod --reference=\$REF_FILE
 ```
 
-##### Change ownership of all files inside current dir to a given group
+##### Change ownership of all files inside dir to a given linux group
 
 ```bash
-GROUP_NAME=common ; sudo chown :\$GROUP_NAME \*
+GROUP_NAME="common" ; sudo chown :\$GROUP_NAME \*
 ```
 
 ## CURL Client URL
@@ -1572,11 +1558,8 @@ curl -Is http://www.google.com
 ```
 
 #### Upload a file
-
-`curl -F @field_name=@path/to/local_file <upload_URL>`
-
 ```bash
-
+curl -F @field_name=@path/to/local_file <upload_URL>
 ```
 
 #### Timing Curl connection
@@ -1592,13 +1575,13 @@ curl -w "%{time_total}\n" -o /dev/null -s www.test.com
 ##### Recursively find inside PDFs
 
 ```bash
-find . -iname '*.pdf' -exec pdfgrep "Title of File to search " {} +
+find . -iname '*.pdf' -exec pdfgrep "PDF text content to find " {} +
 ```
 
 #### Using `pdfgrep`
 
 ```bash
-pdfgrep -r "Title of PDF to find"
+pdfgrep -r "PDF text content to find"
 ```
 
 #### Get info about the pdf toolkit
@@ -1628,15 +1611,9 @@ pdftk source.pdf cat 5 6 10 output SplittedOutput.pdf
 
 ---
 
-# Windows products (micro\$oft)
-
-> ## Windows - & WinServer
-
-Use CMD or POWERSHELL
-
-- Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18.
-  Moved to [windows/readme](./windows/readme.md)
-
+# Windows products (micro\$oft) Moved to [windows/readme](./windows/readme.md)
+> Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18
+  
 ---
 
 #### VPN
@@ -1690,19 +1667,13 @@ cat ~/.ssh/id_rsa.pub | \
 ssh root@$REMOTE_HOST $COMMAND
 ```
 
-# Git
-
-Moved to [Git](./git/readme.md)
+# Git Moved to [Git](./git/readme.md)
 
 # Programming Languages
 
-## Java
+## Java Moved to [Programming-languages &gt; Java](./programming-languages/java/readme.md)
 
-Moved to [Programming-languages &gt; Java](./programming-languages/java/readme.md)
-
-## Python
-
-Moved to [Programming-languages &gt; python](./programming-languages/python/readme.md)
+## Python Moved to [Programming-languages &gt; python](./programming-languages/python/readme.md)
 
 # DataBases
 
@@ -1727,9 +1698,7 @@ SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME
 
 ## AWS RDS MySQL engine
 
-MySQL has a cloud behaviuour in AWS or any other cloud provider.
-
-Some specific commands will be posted here
+MySQL has a cloud behaviuour in AWS or any other cloud provider
 
 ## PostgreSQL
 
@@ -1832,7 +1801,7 @@ echo 'yq() {
 }' | tee -a ~/.bashrc && source ~/.bashrc
 ```
 
-[Docker see](./containers/readme.md)
+## [Docker see](./containers/readme.md)
 
 ## [Image Magick](https://imagemagick.org/index.php)
 
