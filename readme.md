@@ -32,8 +32,11 @@
     - [The `ip` command](#the-ip-command)
 - [Terminals](#terminals)
   - [CURL Client URL](#curl-client-url)
-  - [PDF Operations Tools](#pdf-operations-tools)
-    - [PDF tool kit](#pdf-tool-kit)
+- [Operating Systems](#operating-systems)
+  - [Linux Ubuntu](#linux-ubuntu)
+    - [System settings](#system-settings)
+    - [Nautilus operations](#nautilus-operations)
+- [Docker Moved to Compute Containers Docker](#docker-moved-to-compute-containers-docker)
 - [Windows products (micro\$oft) Moved to windows/readme](#windows-products-microoft-moved-to-windowsreadme)
     - [Open SSH](#open-ssh)
   - [SSH Key Management](#ssh-key-management)
@@ -48,14 +51,12 @@
   - [AWS RDS MySQL engine](#aws-rds-mysql-engine)
   - [PostgreSQL](#postgresql)
   - [Microsoft SQL Server](#microsoft-sql-server)
-- [Operating Systems](#operating-systems)
-  - [Linux Ubuntu](#linux-ubuntu)
-    - [System settings](#system-settings)
-    - [Nautilus operations](#nautilus-operations)
-    - [Tool YQ for YAML processing](#tool-yq-for-yaml-processing)
-  - [Docker see](#docker-see)
+- [Other Tools](#other-tools)
+  - [PDF Operations Tools](#pdf-operations-tools)
+    - [PDF tool kit](#pdf-tool-kit)
   - [Image Magick](#image-magick)
     - [Image operations with ImageMagick](#image-operations-with-imagemagick)
+    - [Tool YQ for YAML processing](#tool-yq-for-yaml-processing)
 
 ---
 
@@ -1568,49 +1569,61 @@ curl -F @field_name=@path/to/local_file <upload_URL>
 curl -w "%{time_total}\n" -o /dev/null -s www.test.com
 ```
 
-## PDF Operations Tools
-
-### PDF tool kit
-
-##### Recursively find inside PDFs
-
-```bash
-find . -iname '*.pdf' -exec pdfgrep "PDF text content to find " {} +
-```
-
-#### Using `pdfgrep`
-
-```bash
-pdfgrep -r "PDF text content to find"
-```
-
-#### Get info about the pdf toolkit
-
-```bash
-info pdftk
-```
-
-#### Find string *InfoValue* in the metadata of `PDF_FILE`
-
-```bash
-PDF_FILE="a_pdf_file.pdf"
-pdftk $PDF_FILE.pdf dump_data_utf8 | grep InfoValue:
-```
-
-#### Extract a range of pages from a PDF file
-
-```bash
-pdftk source.pdf cat 5-10 output ExtractedOutput_p5-10.pdf
-```
-
-#### Split specific pages from the source file, for example page 5, page 6, and page 10
-
-```bash
-pdftk source.pdf cat 5 6 10 output SplittedOutput.pdf
-```
-
 ---
+# Operating Systems
 
+## Linux Ubuntu
+
+### System settings
+
+#### **Get** dimensions of Display
+
+```bash
+xdpyinfo | grep dim
+```
+
+### Nautilus operations
+
+#### Show hidden files Keyboard shortcut
+
+```bash
+CTRL + H
+```
+
+#### Show Path Location Keyboard shortcut
+
+```bash
+CTRL + L
+```
+
+#### Switch between the Icons and List formats
+
+```bash
+CTRL + 1 | CTRL + 2
+```
+
+#### Search for files
+
+```bash
+CTRL + F
+```
+
+#### Delete File(s)
+
+```bash
+CTRL + delete
+```
+
+#### Permanently delete
+
+```bash
+Shift + Delete
+```
+
+(Never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
+Many personal system and program configurations are stored under your home directory.)
+
+# Docker Moved to [Compute Containers Docker](./containers/readme.md)
 # Windows products (micro\$oft) Moved to [windows/readme](./windows/readme.md)
 > Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18
   
@@ -1740,74 +1753,53 @@ hostname:port:database:username:password
 
 ## Microsoft SQL Server
 
-# Operating Systems
+# Other Tools
+## PDF Operations Tools
 
-## Linux Ubuntu
+### PDF tool kit
 
-### System settings
-
-#### **Get** dimensions of Display
-
-```bash
-xdpyinfo | grep dim
-```
-
-### Nautilus operations
-
-#### Show hidden files Keyboard shortcut
+##### Recursively find inside PDFs
 
 ```bash
-CTRL + H
+find . -iname '*.pdf' -exec pdfgrep "PDF text content to find " {} +
 ```
 
-#### Show Path Location Keyboard shortcut
+#### Using `pdfgrep`
 
 ```bash
-CTRL + L
+pdfgrep -r "PDF text content to find"
 ```
 
-#### Switch between the Icons and List formats
+#### Get info about the pdf toolkit
 
 ```bash
-CTRL + 1 | CTRL + 2
+info pdftk
 ```
 
-#### Search for files
+#### Find string *InfoValue* in the metadata of `PDF_FILE`
 
 ```bash
-CTRL + F
+PDF_FILE="a_pdf_file.pdf"
+pdftk $PDF_FILE.pdf dump_data_utf8 | grep InfoValue:
 ```
 
-#### Delete File(s)
+#### Extract a range of pages from a PDF file
 
 ```bash
-CTRL + delete
+pdftk source.pdf cat 5-10 output ExtractedOutput_p5-10.pdf
 ```
 
-#### Permanently delete
+#### Split specific pages from the source file, for example page 5, page 6, and page 10
 
 ```bash
-Shift + Delete
+pdftk source.pdf cat 5 6 10 output SplittedOutput.pdf
 ```
-
-(Never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
-Many personal system and program configurations are stored under your home directory.)
-
-### Tool YQ for YAML processing
-
-```bash
-echo 'yq() {
-  docker run --rm -i -v "${PWD}":/workdir mikefarah/yq yq "$@"
-}' | tee -a ~/.bashrc && source ~/.bashrc
-```
-
-## [Docker see](./containers/readme.md)
 
 ## [Image Magick](https://imagemagick.org/index.php)
 
 ### Image operations with ImageMagick
 
-#### Resize-images with percentage
+#### Resize-images with percentage value
 
 ```bash
 # percentage
@@ -1819,6 +1811,14 @@ convert -resize 50% source.png dest.jpg
 ```bash
 SIZE="1024X768"
 convert -resize $SIZE source.png destination.jpg
+```
+
+### Tool YQ for YAML processing
+
+```bash
+echo 'yq() {
+  docker run --rm -i -v "${PWD}":/workdir mikefarah/yq yq "$@"
+}' | tee -a ~/.bashrc && source ~/.bashrc
 ```
 
 [Back to top](#)
