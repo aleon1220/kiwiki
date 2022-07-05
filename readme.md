@@ -1,10 +1,10 @@
 <h1>KIWIKI</h1> <br>
 <h2>Information Technology Wiki</h2> <br>
+><h3> work by @aleon1220. A Colombian adopted by Kiwis since 2016</h3> <br>
 
-> <h3> work by @aleon1220. A Colombian adopted by Kiwis since 2016</h3>
-
----
 <h2>Table of Contents</h2> <br>
+---
+
 - [About KIWIKI Project](#about-kiwiki-project)
   - [Introduction](#introduction)
   - [The Computer Categories](#the-computer-categories)
