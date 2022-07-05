@@ -1,8 +1,9 @@
-<h1>KIWIKI</h1> <br>
+<h1>KIWIKI</h1>
 <h2>Information Technology Wiki</h2> <br>
-><h3> work by @aleon1220. A Colombian adopted by Kiwis since 2016</h3> <br>
+> work by @aleon1220. A Colombian adopted by Kiwis since 2016
+<br> <br>
 
-<h2>Table of Contents</h2> <br>
+<h2>Table of Contents</h2>
 ---
 
 - [About KIWIKI Project](#about-kiwiki-project)
@@ -77,14 +78,14 @@ I got in touch with google support to no avail. I waited and hoped I could recov
 A Computer has a CPU processor, memory RAM, storage in form of a drive, connectivity via network card or wifi, graphics visualization via a monitor. The operating system has tools to manage and interact with all the described above.
 
 
-### 01. Processing
+### 01. [Processing](./01-processing/processing.md)
 
-### 02. Memory
+### 02. [Memory](./02-Memory/Memory.md)
 
-### 03. Storage
+### 03. [Storage](./03-storage/storage.md)
 
-### 04. Networking
-### 05. Graphics
+### 04. [Networking](./04-Networking/Networking.md)
+### 05. [Graphics](./01-Graphics/Graphics.md)
 
 ## Kiwiki Repository Categories
 
@@ -140,19 +141,14 @@ Editors VIM(or Nano or VI etc.) opens with your command you had typed so far alr
 ```
 
 ## General Server Info
-
 Get quick diagnostic about a server
 
-#### OS type, Local IP, hostname and Architecture type
+#### Get info about the linux distro
+OS type, Local IP, hostname and Architecture type
 
 ```bash
 lsb_release -a ; hostname -I ; hostname ; getconf LONG_BIT
 ```
-
-#### What are the services enabled and running?
-
-#### List of software installed from [A-Z]
-
 #### Check the hidden directories and files in the HOME dir
 
 ```bash
@@ -1021,9 +1017,6 @@ Many personal system and program configurations are stored under your home direc
 # Windows products (micro\$oft) Moved to [windows/readme](./windows/readme.md)
 > Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18
   
----
-
-
 # Git Moved to [Git](./git/readme.md)
 
 # Programming Languages
