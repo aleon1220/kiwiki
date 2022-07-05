@@ -16,3 +16,4 @@ less /etc/X11/xorg.conf
 ```bash
 xdpyinfo | grep dim
 ```
+[Back to top](#)

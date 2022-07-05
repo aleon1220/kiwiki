@@ -177,3 +177,4 @@ The file that keeps track of mounted devices is `/etc/fstab`
 ```bash
 sudo mount -a
 ```
+[Back to top](#)
