@@ -6,10 +6,24 @@
 ---
 
 - [About KIWIKI Project](#about-kiwiki-project)
-  - [Repository Categories](#repository-categories)
   - [Introduction](#introduction)
-  - [The Computer, a modern Tool](#the-computer-a-modern-tool)
-  - [The CLI Shell](#the-cli-shell)
+  - [The Computer Categories](#the-computer-categories)
+    - [01. Processing](#01-processing)
+    - [02. Memory](#02-memory)
+    - [03. Storage](#03-storage)
+    - [04. Networking](#04-networking)
+    - [05. Graphics](#05-graphics)
+  - [Kiwiki Repository Categories](#kiwiki-repository-categories)
+    - [1. Cloud Providers](#1-cloud-providers)
+    - [2. DevOps-tools](#2-devops-tools)
+    - [Software Developer Tooling](#software-developer-tooling)
+    - [5. LDAP](#5-ldap)
+    - [6. productivity-tools](#6-productivity-tools)
+    - [7. programming-languages](#7-programming-languages)
+    - [8. Regular expressions](#8-regular-expressions)
+    - [9. Security](#9-security)
+    - [10. Operating Systems](#10-operating-systems)
+  - [General Reusable Shell commands](#general-reusable-shell-commands)
     - [CLI Shell keyboard shortcuts](#cli-shell-keyboard-shortcuts)
   - [Auto Docs: image of file categories](#auto-docs-image-of-file-categories)
   - [General Info](#general-info)
@@ -66,55 +80,63 @@
 
 # About KIWIKI Project
 
-This project is a collection of CLI reusable commands.
-
-## Repository Categories
-
-1. Cloud Providers
-   1. [AWS](./aws/readme.md)
-   2. [Azure](./azure/readme.md)
-   3. [Google Cloud Engine](./gce/readme.md)
-2. devops-tools
-   - Jenkins
-   - Terraform
-3. gradle
-4. javascript
-5. LDAP
-6. productivity-tools
-   - rescueTime
-   - VsCode
-7. programming-languages
-8. Regular [expressions](./regex/readme.md)
-9. Security
-10. windows
+This project is a collection of CLI reusable commands for Linux and Windows OS
 
 ## Introduction
 
-- **2020-04-28=** I lost years of work on setting a nice Information Technology Wiki. I am starting a new one here
+- **2020-04-28=** I lost years of work on setting a nice Information Technology Wiki. I started a new one from scratch.
 
-For years i have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, etc.
-I used a `.txt` file, then a google docs file. I managed to delete the google docs file from its google drive folder. I accidentally deleted the folder and later on I emptied the bin. I truly dislike that...
+Througout my career, 12+ years I have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, windows and more
+
+I used a `.txt` file, then a google docs file. I accidentally deleted the google docs file from its google drive folder. I accidentally deleted the folder and later on I emptied the bin. I truly dislike that...
 
 I got in touch with google support to no avail. I waited and hoped I could recover my file (there was no way to recover the file). Don't rely on the cloud 100%. Have local copies of your digital material.
 
 - **2020-11-10=** I confirm that i lost my google docs wiki file. I should have been more careful.
 - **2021-04-07=** processing inbox category. Moved intro below About Project
 
-## The Computer, a modern Tool
+## The Computer Categories
+> the Personal Computer, one of the best inventions of the century?
 
 A Computer has a CPU processor, memory RAM, storage in form of a drive, connectivity via network card or wifi, graphics visualization via a monitor. The operating system has tools to manage and interact with all the described above.
 
-Categories
 
-- **General Info**
+### 01. Processing
 
-1. Processing
-2. Memory
-3. Storage
-4. Networking
-5. Graphics
+### 02. Memory
 
-## The CLI Shell
+### 03. Storage
+
+### 04. Networking
+### 05. Graphics
+
+## Kiwiki Repository Categories
+
+### 1. Cloud Providers
+   1. [AWS](./aws/readme.md)
+   2. [Azure](./azure/readme.md)
+   3. [Google Cloud Engine](./gce/readme.md)
+### 2. DevOps-tools
+#### CI Tooling
+   - Jenkins
+   - Terraform
+   - 3. gradle
+#### CD Tooling
+### Software Developer Tooling
+
+### 5. LDAP
+### 6. productivity-tools
+   - rescueTime
+   - VsCode
+### 7. programming-languages
+    1. javascript
+
+### 8. Regular [expressions](./regex/readme.md)
+### 9. Security
+### 10. Operating Systems
+    1. windows
+
+## General Reusable Shell commands
 
 there are many: bash, fish, Zshell
 
