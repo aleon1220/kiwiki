@@ -1,56 +1,51 @@
 <h1>KIWIKI</h1> <br>
 <h2>Information Technology Wiki</h2> <br>
 
-> <h4> work by @aleon1220. A Colombian adopted by Kiwis since 2016</h3>
+> <h3> work by @aleon1220. A Colombian adopted by Kiwis since 2016</h3>
 
 ---
-
+<h2>Table of Contents</h2> <br>
 - [About KIWIKI Project](#about-kiwiki-project)
-  - [Repository Categories](#repository-categories)
   - [Introduction](#introduction)
-  - [The Computer, a modern Tool](#the-computer-a-modern-tool)
-  - [The CLI Shell](#the-cli-shell)
+  - [The Computer Categories](#the-computer-categories)
+    - [01. Processing](#01-processing)
+    - [02. Memory](#02-memory)
+    - [03. Storage](#03-storage)
+    - [04. Networking](#04-networking)
+    - [05. Graphics](#05-graphics)
+  - [Kiwiki Repository Categories](#kiwiki-repository-categories)
+    - [1. Cloud Providers](#1-cloud-providers)
+    - [2. DevOps-tools](#2-devops-tools)
+    - [Software Developer Tooling](#software-developer-tooling)
+    - [5. LDAP](#5-ldap)
+    - [6. productivity-tools](#6-productivity-tools)
+    - [7. programming-languages](#7-programming-languages)
+    - [8. Regular expressions](#8-regular-expressions)
+    - [9. Security](#9-security)
+    - [10. Operating Systems](#10-operating-systems)
+  - [General Reusable Shell commands](#general-reusable-shell-commands)
     - [CLI Shell keyboard shortcuts](#cli-shell-keyboard-shortcuts)
-  - [Auto Docs: image of file categories](#auto-docs-image-of-file-categories)
-  - [General Info](#general-info)
-  - [3. Storage](#3-storage)
-    - [Process for Linux + `LVM` + `ext3`](#process-for-linux--lvm--ext3)
+  - [General Server Info](#general-server-info)
   - [Systemd Systemctl](#systemd-systemctl)
+    - [Logs](#logs)
   - [Compression/Decompression of files](#compressiondecompression-of-files)
   - [Find/Search operations](#findsearch-operations)
   - [Package Management](#package-management)
     - [APT](#apt)
   - [Debugging Linux Systems (mostly Ubuntu)](#debugging-linux-systems-mostly-ubuntu)
-    - [Explore System Processes](#explore-system-processes)
   - [Handling Logs](#handling-logs)
-    - [Networking](#networking)
-    - [Network Probing](#network-probing)
-    - [Traffic capture](#traffic-capture)
-    - [Network management](#network-management)
-    - [Load testing](#load-testing)
-    - [Benchmarking](#benchmarking)
-    - [The `ip` command](#the-ip-command)
 - [Terminals](#terminals)
-  - [CURL Client URL](#curl-client-url)
 - [Operating Systems](#operating-systems)
   - [Linux Ubuntu](#linux-ubuntu)
     - [System settings](#system-settings)
     - [Nautilus operations](#nautilus-operations)
 - [Docker Moved to Compute Containers Docker](#docker-moved-to-compute-containers-docker)
 - [Windows products (micro\$oft) Moved to windows/readme](#windows-products-microoft-moved-to-windowsreadme)
-    - [Open SSH](#open-ssh)
-  - [SSH Key Management](#ssh-key-management)
-    - [Key generation](#key-generation)
 - [Git Moved to Git](#git-moved-to-git)
 - [Programming Languages](#programming-languages)
   - [Java Moved to Programming-languages &gt; Java](#java-moved-to-programming-languages--java)
   - [Python Moved to Programming-languages &gt; python](#python-moved-to-programming-languages--python)
 - [DataBases](#databases)
-  - [MariaDB (MySQL open source Fork)](#mariadb-mysql-open-source-fork)
-  - [Oracle MySQL](#oracle-mysql)
-  - [AWS RDS MySQL engine](#aws-rds-mysql-engine)
-  - [PostgreSQL](#postgresql)
-  - [Microsoft SQL Server](#microsoft-sql-server)
 - [Other Tools](#other-tools)
   - [PDF Operations Tools](#pdf-operations-tools)
     - [PDF tool kit](#pdf-tool-kit)
@@ -59,62 +54,68 @@
     - [Tool YQ for YAML processing](#tool-yq-for-yaml-processing)
 
 ---
-
-> **END of Table of contents**
-
----
-
 # About KIWIKI Project
 
-This project is a collection of CLI reusable commands.
-
-## Repository Categories
-
-1. Cloud Providers
-   1. [AWS](./aws/readme.md)
-   2. [Azure](./azure/readme.md)
-   3. [Google Cloud Engine](./gce/readme.md)
-2. devops-tools
-   - Jenkins
-   - Terraform
-3. gradle
-4. javascript
-5. LDAP
-6. productivity-tools
-   - rescueTime
-   - VsCode
-7. programming-languages
-8. Regular [expressions](./regex/readme.md)
-9. Security
-10. windows
+This project is a collection of CLI reusable commands for Linux and Windows OS
 
 ## Introduction
 
-- **2020-04-28=** I lost years of work on setting a nice Information Technology Wiki. I am starting a new one here
+- **2020-04-28=** I lost years of work on setting a nice Information Technology Wiki. I started a new one from scratch.
 
-For years i have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, etc.
-I used a `.txt` file, then a google docs file. I managed to delete the google docs file from its google drive folder. I accidentally deleted the folder and later on I emptied the bin. I truly dislike that...
+Througout my career, 12+ years I have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, windows and more
+
+I used a `.txt` file, then a google docs file. I accidentally deleted the google docs file from its google drive folder. I accidentally deleted the folder and later on I emptied the bin. I truly dislike that...
 
 I got in touch with google support to no avail. I waited and hoped I could recover my file (there was no way to recover the file). Don't rely on the cloud 100%. Have local copies of your digital material.
 
 - **2020-11-10=** I confirm that i lost my google docs wiki file. I should have been more careful.
 - **2021-04-07=** processing inbox category. Moved intro below About Project
 
-## The Computer, a modern Tool
+## The Computer Categories
+> the Personal Computer, one of the best inventions of the century?
 
 A Computer has a CPU processor, memory RAM, storage in form of a drive, connectivity via network card or wifi, graphics visualization via a monitor. The operating system has tools to manage and interact with all the described above.
 
-Categories
 
-- **General Info**
+### 01. Processing
 
-1. Processing
-2. Memory
-3. Storage
-4. Networking
-5. Graphics
+### 02. Memory
 
-## The CLI Shell
+### 03. Storage
+
+### 04. Networking
+### 05. Graphics
+
+## Kiwiki Repository Categories
+
+### 1. Cloud Providers
+   1. [AWS](./aws/readme.md)
+   2. [Azure](./azure/readme.md)
+   3. [Google Cloud Engine](./gce/readme.md)
+### 2. DevOps-tools
+#### CI Tooling
+  1. ansible
+  2. jenkins
+  3. terraform
+  4. gradle
+  5. maven
+#### CD Tooling
+  1. spinnaker
+### Software Developer Tooling
+
+### 5. LDAP
+### 6. productivity-tools
+   - rescueTime
+   - VsCode
+### 7. programming-languages
+    1. javascript
+
+### 8. Regular [expressions](./regex/readme.md)
+### 9. Security
+### 10. Operating Systems
+    1. windows
+
+## General Reusable Shell commands
 
 there are many: bash, fish, Zshell
 
@@ -138,13 +139,7 @@ Type a Long command, e.g. add loops or some complex parsing logic. You need more
 Editors VIM(or Nano or VI etc.) opens with your command you had typed so far already in the buffer
 ```
 
-## Auto Docs: image of file categories
-
-#### Demo for one Java WebApp
-
-[Octo-repo Demo Java WebApp](https://octo-repo-visualization.vercel.app/?repo=aleon1220%2Fmulti-cloud-WebApp-Attendance)
-
-## General Info
+## General Server Info
 
 Get quick diagnostic about a server
 
@@ -170,185 +165,6 @@ todo $HOME
 id
 
 less ~/.bashrc
-```
-
-## 3. Storage
-
-Hard drives, volumes, SSDs, mounts, filesystem, etc
-
-### Process for Linux + `LVM` + `ext3`
-
-LVM volume group myvg, mounted volume name `uservol1` and disk device in Linux is `/dev/sdf`
-
-Allocate the disk to the VM. (In Amazon Management Console, Create the EBS volume, write down its ID, and allocate it to the instance)
-The EC2 instance should have some udev rules for creating the device node. So you should see a new disk in `/dev/sd*`
-
-Log in on the instance and check that the EBS volume is visible,
-
-```bash
-fdisk -l /dev/sdf
-```
-
-- check the partitions
-
-```bash
-cat /proc/partitions
-```
-
-- Check the Block ID, Type and label of the system devices
-
-```bash
-blkid
-```
-
-- Create partition table if needed:
-
-```bash
-fdisk /
-sfdisk
-```
-
-- Initialize LVM
-
-```bash
-pvcreate /dev/sdf
-```
-
-- Add the disk (physical volume) to the LVM volume group vgextend
-
-```bash
-myvg /dev/sdf
-```
-
-- Grow the Volume size
-
-```bash
-lvextend -L +1024G /dev/myvg/uservol1
-```
-
-- Grow the `ext3/ext4` file system
-
-```bash
-resize2fs /dev/myvg/uservol1`
-```
-
-- Check system info and you should see that the mounted file system now have more space.
-
-```bash
-df -h
-```
-
-#### View your available disk devices, mount points (if applicable) to help you determine the correct device name to use
-
-```bash
-lsblk
-```
-
-#### Get information about the devices attached to the instance
-
-```bash
-sudo lsblk -f
-```
-
-#### Get manufacturer details for the device in a given format
-
-```bash
-lsblk -io NAME,TYPE,SIZE,MOUNtPOINT,FSTYPE,MODEL
-```
-
-#### Get `UUID` of the device (expensive command)
-
-```bash
-sudo blkid $DEVICE_REPORT_PORTAL_DATA | sed -n 's/.*UUID=\"\([^\"]*\)\".*/\1/p'
-```
-
-#### Get `UUID` of the device
-
-```bash
-DEVICE="/dev/nvme1n1"
-# short format flags
-sudo blkid -s UUID -o value $DEVICE
-```
-
-#### Get `UUID` of the device using long format flags
-
-```bash
-sudo blkid --match-tag UUID --output value $DEVICE
-```
-
-#### Make an USB bootable with a debian ISO
-
-```bash
-USB_DRIVE="/dev/sda"
-ISO_PATH="/home/ws/01-inbox/debian/debian-11.0.0-amd64-DVD-1.iso"
-
-sudo umount $USB_DRIVE
-sudo dd bs=4M if=$ISO_PATH of=$USB_DRIVE conv=fdatasync status=progress
-```
-
-- Output of above in Ubuntu 20.04
-
-```bash
-sudo dd bs=4M if=/home/ws/01-inbox/debian/debian-11.0.0-amd64-DVD-1.iso of=/dev/sda conv=fdatasync status=progress
-3946840064 bytes (3.9 GB, 3.7 GiB) copied, 328 s, 12.0 MB/s
-941+1 records in
-941+1 records out
-3947823104 bytes (3.9 GB, 3.7 GiB) copied, 596.281 s, 6.6 MB/s
-```
-
-#### DMI table decoder
-
-```bash
-dmidecode | grep UUID
-```
-
-#### Get/set SATA/IDE device parameters
-
-```bash
-DEVICE="/dev/nvme1n1"
-hdparm -tT --direct $DEVICE
-```
-
-#### Get information about a specific device, such as its file system type.  If the output shows simply data, there is no filesystem in the device
-
-```bash
-DEVICE_CHECK="/dev/xvdf"*
-sudo file -s $DEVICE_CHECK
-```
-
-##### Confirm mounted loop device kernel module
-
-```bash
-lsmod | grep loop
-```
-
-##### Info about mount the loop device kernel module
-
-```bash
-modprobe loop
-```
-
-#### Show ID of Block devices
-
-```bash
-sudo blkid
-
-# Ubuntu
-sudo lsblk -o +UUID
-```
-
-##### Mount an ISO file as loop device
-
-```bash
-mount -o loop -t iso9660 <path/to/iso/file> /media/cdrom
-```
-
-#### Mount all filesystems
-
-The file that keeps track of mounted devices is `/etc/fstab`
-
-```bash
-sudo mount -a
 ```
 
 #### Check status of linux services
@@ -468,7 +284,7 @@ The settings are read from all of the following system configuration files:
 ```bash
 sudo sysctl --system
 ```
-
+### Logs
 #### Analyse Logs. Logs named 3 to 31.gz month. Month like Feb 2020 and print
 
 ```bash
@@ -485,36 +301,10 @@ cat ~/.ssh/id_rsa.pub | xclip -sel clip
 xclip
 ```
 
-#### X windows var
-
-```bash
-echo $XDG_CURRENT_DESKTOP
-```
-
 #### Check a dir with a parameter. Double check `info stat`
 
 ```bash
 stat %A $DIR
-```
-
-#### nohup execution
-
-`nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
-
-```bash
-nohup $COMMAND_OR_SCRIPT > out_$(date).txt
-```
-
-#### Echo a string an pipe it to a command
-
-In this case the content of a `DockerFile` is echoed first then piped to `docker build` to create a docker image.
-
-```bash
-echo -e 'FROM busybox\nRUN echo "hello world"' | docker build -
-docker build -<<EOF
-FROM busybox
-RUN echo "hello world"
-EOF
 ```
 
 ##### Maintain symbolic links determining default commands. Show installed Apps
@@ -546,7 +336,7 @@ which pip
 ##### Create an alias with a command to go to a specific directory
 
 ```bash
-alias ee='cd /home/ws/02-projects/ee/test/eenz' <br>
+alias ee='cd /home/ws/02-projects/ee/test' <br>
 
 ee
 ```
@@ -698,7 +488,7 @@ sudo apt install --reinstall $PACKAGE_NAME
 sudo apt-get purge unattended-upgrades
 ```
 
-#### Show GPG keys in the keyring
+#### Show GPG keys in the keyring for signing apps
 
 ```bash
 apt-key list
@@ -761,10 +551,6 @@ less /var/log/syslog
 touch /home/user/new_empty_file.txt
 ```
 
-```bash
-less /etc/X11/xorg.conf
-```
-
 #### List directory with extensions
 
 ```bash
@@ -772,12 +558,6 @@ ls -xl ${DIR_PATH}
 ```
 
 - Article [medium.com Troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
-
-#### lists all open files belonging to all active processes
-
-```bash
-lsof
-```
 
 #### lists open files for current user
 
@@ -795,26 +575,6 @@ lsof -i :8090-9090
 
 ```bash
 kill -9 $(lsof -t -u $TARGET_USER)
-```
-
-### Explore System Processes
-
-#### Find the process that consumes more CPU
-
-```bash
-ps -eo pid,%cpu,%mem,args --sort -%cpu
-```
-
-#### Sort processes by memory
-
-```bash
-ps aux --sort=-%mem
-```
-
-#### Unuseful view with a process tree
-
-```bash
-ps xfa | less
 ```
 
 #### Read from a file in a specific line e.g. 4
@@ -921,281 +681,6 @@ journalctl --vacuum-size=2G
 ```bash
 journalctl --vacuum-time=1years
 ```
-
-### Networking
-
-Commands and useful cheat sheet used in networking
-
-##### Check this awesome Cheat sheet
-
-[CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
-
-Accessing a service
-`whois` = servers
-`dig DOMAIN` = DNS queries and shows associated records
-`nslookup` = alternative to dig. It doesnt use the system local DNS.
-`traceroute DOMAIN` = packets hop
-
-### Network Probing
-
-Which TCP or UDP ports are open.
-
-Can i open a TCP connection to this destination?
-
-#### Port scanning TCP,UDP ports open or closed
-
-```bash
-nmap -sS localhost
-```
-
-#### Sends ICMP pings. checks latency
-
-```bash
-ping/ping6
-```
-
-#### Test port 80 netcat
-
-```bash
-nc -lvz 80
-```
-
-`telnet` a complete protocol
-
-```bash
-tcdump -i eth0 icmp
-```
-
-#### Examine the IPv4 TCP-based sockets that are listening for connections on your system
-
-```bash
-ss -4 -tln
-```
-
-#### Examine the IPv6 TCP-based sockets that are listening for connections on your system
-
-```bash
-ss -6 -tln
-```
-
-#### Creating Unix Domain Sockets
-
-```bash
-socat unix-listen:/tmp/stream.sock,fork /dev/null&
-socat unix-recvfrom:/tmp/datagram.sock,fork /dev/null&
-```
-
-#### examine unix domain sockets
-
-```bash
-ss -xln
-```
-
-#### Connect to an UNIX Socket
-
-```bash
-nc -U -z /tmp/stream.sock
-```
-
-- The `-U` tells netcat that it is connecting to a Unix Domain Socket
-- The `-z` option ensures that netcat only connects to a socket, without sending any data
-- The `/tmp/stream.sock` is the address of the socket on the filesystem
-
-#### Simulate traffic in IPV4 and IPV6
-
-```bash
-socat TCP4-LISTEN:8080,fork /dev/null&
-socat TCP6-LISTEN:8080,ipv6only=1,fork /dev/null&
-```
-
-- `socat` can listen on any available port on a system, so any port from 0 to 65535 is a valid parameter for the socket option.
-
-### Traffic capture
-
-`tcpdump` traffic capture uses bpf filters
-`tcpdump -i eth0 -vvv -d dst $IP`
-`wireshark`
-
-### Network management
-
-`ifconfig` see info about interfaces. get your IP address
-
-`route -n` routing info. Routing table
-
-#### Check ARP cache
-
-```bash
-arp -a
-```
-
-`ip` see neighbor table. add routes
-
-- Answers questions
-  what are the net interfaces, ips, subnets, broadcast address??
-  how do i add routes?
-
-### Load testing
-
-`tcpreplay` replays traffic from packet capture fire
-
-```bash
-tcpdump -i eth0 -w traffic.pcap
-tcpreplay -i eth0 httptraffic.pcap
-```
-
-`wrk2` Send Http load
-
-Threads connections duration Requests
-
-```bash
-wrk2 -t1 -c10 -d60 -R100 -L http://$IP
-```
-
-#### Send TCP or UDP traffic. Similar to wrk2 but allows UDP
-
-```bash
-iperf3
-```
-
-#### Network performance measurement tool
-
-```bash
-nuttcp
-```
-
-### Benchmarking
-
-```bash
-info siege
-```
-
-BPF/eBPF potential for new programs
-
-**source:** Digital ocean talk Handy Linux networking tools
-
-#### Flush DNS by resetting the network DEBIAN based
-
-```bash
-sudo /etc/init.d/networking restart
-```
-
-#### Inspect TCP socket states e.g. 443
-
-```bash
-ss -nta '( dport = :443 )'
-```
-
-`netstat` is a great tool for monitoring network connections.
-
-#### Netstat statistics
-
-```bash
-netstat --statistics
-```
-
-#### Find ports in use
-
-```bash
-netstat -tulpn
-```
-
-- The `-t` option checks for TCP connections.
-- The `-u` option checks for UDP connections.
-- The `-l` option tells netstat to list only LISTENING connections. If you want to see all connections, use the -a option instead.
-- The `-p` option shows the PID id of the process.
-- The `-n` option shows numerical addresses, instead of trying to resolve host, port, or user names.
-
-#### Make sure the `firewalld` service is enabled
-
-```bash
-ll /usr/lib/systemd/system | grep firewalld
-
-ll /etc/systemd/system | grep firewalld
-systemctl status firewalld
-
-sudo systemctl enable firewalld
-sudo systemctl restart firewalld
-sudo systemctl status firewalld
-```
-
-#### Install netcat in Fedora/Redhat
-
-```bash
-yum install -y nc
-```
-
-#### CentOS Linux Open Port 8080 on the firewall
-
-```bash
-sudo firewall-cmd --permanent --add-port=8080/tcp
-sudo firewall-cmd --reload
-```
-
-#### Find user behind a process
-
-```bash
-sudo netstat -tulpe | grep 8090
-```
-
-#### Test connectivity to a port
-
-```bash
-nc -vvz $host $port
-```
-
-#### Check server status
-
-```bash
-sudo netstat -tuple | grep smtp
-```
-
-#### Check Any URL and get output in Text
-
-```bash
-curl -l localhost:80
-```
-
-#### Get listening ports
-
-```bash
-ss -tulwn
-```
-
-#### Get a report with nmap. install it first `sudo snap install nmap`
-
-```bash
-nmap -sV -p- localhost
-```
-
-### The `ip` command
-
-#### - Show / manipulate routing
-
-```bash
-ip route show
-```
-
-#### - Show List of routes
-
-```bash
-ip route list
-```
-
-#### - Show / manipulate devices
-
-```bash
-cat /etc/network/interfaces
-```
-
-- Policy routing
-- Tunnels
-
-#### Restart Name Service Cache Process
-
-```bash
-sudo service nscd restart
-```
-
 #### Create a Symbolic Link
 
 ```bash
@@ -1240,12 +725,6 @@ grep "'.*'" -o references-get-between-quoutes.txt > result_1855.txt
 
 PATTERN='".*"'
 grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt
-```
-
-##### Interactive process viewer
-
-```bash
-htop
 ```
 
 #### Check System Disk Usage
@@ -1387,7 +866,7 @@ COMMAND=who ; history | grep $COMMAND
 sudo sysctl -w vm.max_map_count=262144
 ```
 
-##### Show contents in tree view
+##### Show dir contents in tree view
 
 ```bash
 tree $HOME
@@ -1407,12 +886,10 @@ gio tree
 
 ```bash
 history | \
-awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count\*100 "% " a;}' | \
+awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " "CMD[a]/count\*100 "% " a;}' | \
 grep -v "./" | column -c3 -s " " -t | \
 sort -nr | nl | head -n10
 ```
-
-#### Script to list files, directories, executables, and links from a given Workspace directory
 
 #### List all files in a current directory
 
@@ -1493,94 +970,12 @@ REF_FILE="a_file.txt" ; sudo chmod --reference=\$REF_FILE
 GROUP_NAME="common" ; sudo chown :\$GROUP_NAME \*
 ```
 
-## CURL Client URL
-
-#### Download a file and save it with a custom name
-
-```bash
-curl -o custom_file.tar.gz https://testdomain.com/testfile.tar.gz
-```
-
-#### Get HTTP headers. use the `-I` or the `— head` option
-
-```bash
-curl -I https://www.google.com
-```
-
-#### Ignore invalid certs `-k or --insecure`
-
-```bash
-curl -k https://localhost/my_test_endpoint
-```
-
-#### Make a POST request.
-
-If using **JSON** `-H 'Content-Type: application/json'`
-
-```bash
-curl --data "param1=test1&param2=test2" http://test.com
-```
-
-#### get the HTTP headers and verbose mode
-
-```bash
-curl --head --verbose HOST
-```
-
-#### Simplified view
-
-```bash
-curl --list-only $HOST
-```
-
-#### Specify the type of request
-
-```bash
-# updating the value of param2 to be test 3 on the record id
-curl -X 'PUT' -d '{"param1":"test1","param2":"test3"}' \http://test.com/1
-```
-
-#### Include the Basic Auth
-
-```bash
-curl -u <user:password> https://my-test-api.com/endpoint1
-```
-
-#### Update name resolution
-
-```bash
-curl --resolve www.test.com:80:localhost http://www.test.com/
-```
-
-#### Check service health
-
-```bash
-curl -Is http://www.google.com
-```
-
-#### Upload a file
-```bash
-curl -F @field_name=@path/to/local_file <upload_URL>
-```
-
-#### Timing Curl connection
-
-```bash
-curl -w "%{time_total}\n" -o /dev/null -s www.test.com
-```
-
 ---
 # Operating Systems
 
 ## Linux Ubuntu
 
 ### System settings
-
-#### **Get** dimensions of Display
-
-```bash
-xdpyinfo | grep dim
-```
 
 ### Nautilus operations
 
@@ -1615,7 +1010,6 @@ CTRL + delete
 ```
 
 #### Permanently delete
-
 ```bash
 Shift + Delete
 ```
@@ -1629,56 +1023,6 @@ Many personal system and program configurations are stored under your home direc
   
 ---
 
-#### VPN
-
-OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
-
-### Open SSH
-
-- [Official OpenSSH](https://www.openssh.com/)
-- [SSH Academy](https://www.ssh.com/ssh/ssh-academy)
-
-#### Great docs at [Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-configure-custom-connection-options-for-your-ssh-client#general-tweaks-and-connection-items)
-
-- Use a config `SSH` custom file to ease connectivity
-- Make sure you are clear PuTTY will create keys with a `priv.ppk` format in windows vs Linux Open SSH key `id_rsa`
-
-## SSH Key Management
-
-### Key generation
-
-#### Generate SSH Key pair
-
-The key below will use 4096 encryption
-
-```bash
-SSH_KEY_EMAIL="person@example.com"
-
-ssh-keygen -t rsa -b 4096 -C "$SSH_KEY_EMAIL"
-```
-
-#### Add a SSH key to ssh-agent
-
-```bash
-ssh-add -k ~/.ssh/id_rsa
-ssh-keygen -t rsa
-```
-
-#### Get content of default name of Public Key
-
-```bash
-cat ~/.ssh/id_rsa.pub
-```
-
-#### Add an SSH key to a remote Server
-
-Read Public SSH key, ssh to \$REMOTE_HOST with root user and run a command to create a directory ssh and add the public key to authorized_keys file
-
-```bash
-COMMAND="mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
-cat ~/.ssh/id_rsa.pub | \
-ssh root@$REMOTE_HOST $COMMAND
-```
 
 # Git Moved to [Git](./git/readme.md)
 
@@ -1689,70 +1033,6 @@ ssh root@$REMOTE_HOST $COMMAND
 ## Python Moved to [Programming-languages &gt; python](./programming-languages/python/readme.md)
 
 # DataBases
-
-## MariaDB (MySQL open source Fork)
-
-## Oracle MySQL
-
-#### Connect to a DB with mysql command utilities
-
-```bash
-HOST="localhost"; USER="mysql"
-mysql -h $HOST -u $USER -p
-```
-
-#### Check the default character set for a particular database DB_NAME
-
-```SQL
-SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME
-       FROM INFORMATION_SCHEMA.SCHEMATA
-       WHERE SCHEMA_NAME='DB_NAME';
-```
-
-## AWS RDS MySQL engine
-
-MySQL has a cloud behaviuour in AWS or any other cloud provider
-
-## PostgreSQL
-
-#### Check this super [PostgreSQL Cheat sheet](https://www.postgresqltutorial.com/postgresql-cheat-sheet/)
-
-#### Access the PostgreSQL server from psql with a specific user
-
-```bash
-psql -U [username]
-```
-
-> Once in the `psql` console
-
-#### Check DB version
-
-```bash
-SELECT version();
-```
-
-#### Dump DB and create a restore script
-
-```bash
-pg_dump -U postgres -W -C -d example_backups > ~/db_backup.sql
-```
-
-#### back up my entire PostgreSQL cluster and save it in the entire_cluster.sql file
-
-```bash
-pg_dumpall -U postgres -W -f ~/Example_Dumps/Cluster_Dumps/entire_cluster.sql
-```
-
-> Avoid system asking for the password by using a PostgreSQL config file at  `$HOME/.pgpass`
-
-- `pgpass` Syntax
-
-```bash
-hostname:port:database:username:password
-```
-
-## Microsoft SQL Server
-
 # Other Tools
 ## PDF Operations Tools
 
