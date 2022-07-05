@@ -25,6 +25,9 @@
     - [OpenSSH to GnuPG S/MIME](#openssh-to-gnupg-smime)
     - [Using GPG in Windows Subsystem Linux WSL](#using-gpg-in-windows-subsystem-linux-wsl)
     - [Certificate filename extensions](#certificate-filename-extensions)
+    - [Open SSH](#open-ssh)
+  - [SSH Key Management](#ssh-key-management)
+    - [Key generation](#key-generation)
 
 <!-- /code_chunk_output -->
 ## Security and chryptography
@@ -386,5 +389,52 @@ There are several commonly used filename extensions for X.509 certificates. Unfo
 `PKCS#7` is a standard for signing or encrypting (officially called "enveloping") data. Since the certificate is needed to verify signed data, it is possible to include them in the SignedData structure.
 
 `.P7C` file is a degenerated SignedData structure, without any data to sign. PKCS#12 evolved from the personal information exchange (PFX) standard and is used to exchange public and private objects in a single file.
+
+### Open SSH
+
+- [Official OpenSSH](https://www.openssh.com/)
+- [SSH Academy](https://www.ssh.com/ssh/ssh-academy)
+
+#### Great docs at [Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-configure-custom-connection-options-for-your-ssh-client#general-tweaks-and-connection-items)
+
+- Use a config `SSH` custom file to ease connectivity
+- Make sure you are clear PuTTY will create keys with a `priv.ppk` format in windows vs Linux Open SSH key `id_rsa`
+
+## SSH Key Management
+
+### Key generation
+
+#### Generate SSH Key pair
+
+The key below will use 4096 encryption
+
+```bash
+SSH_KEY_EMAIL="person@example.com"
+
+ssh-keygen -t rsa -b 4096 -C "$SSH_KEY_EMAIL"
+```
+
+#### Add a SSH key to ssh-agent
+
+```bash
+ssh-add -k ~/.ssh/id_rsa
+ssh-keygen -t rsa
+```
+
+#### Get content of default name of Public Key
+
+```bash
+cat ~/.ssh/id_rsa.pub
+```
+
+#### Add an SSH key to a remote Server
+
+Read Public SSH key, ssh to \$REMOTE_HOST with root user and run a command to create a directory ssh and add the public key to authorized_keys file
+
+```bash
+COMMAND="mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+cat ~/.ssh/id_rsa.pub | \
+ssh root@$REMOTE_HOST $COMMAND
+```
 
 [Back to top](#)
