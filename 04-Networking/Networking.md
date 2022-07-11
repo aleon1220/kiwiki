@@ -5,12 +5,21 @@ Commands and useful cheat sheet used in networking
 
 [CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
 
-Accessing a service
+Accessing a service, DNS
 `whois` = servers
-`dig DOMAIN` = DNS queries and shows associated records
-`nslookup` = alternative to dig. It doesnt use the system local DNS.
-`traceroute DOMAIN` = packets hop
-
+#### Query DNS
+DNS queries and shows associated records
+```bash
+dig $DOMAIN
+```
+#### Alternative to dig. It doesn't use the system local DNS.
+```bash
+nslookup $DOMAIN
+```
+#### Check packets hop and route
+```bash
+traceroute $DOMAIN
+```
 ### Network Probing
 
 Which TCP or UDP ports are open.
