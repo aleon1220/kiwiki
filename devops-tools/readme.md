@@ -35,4 +35,5 @@ At work they have provided a windows 11 laptop, my personal Linux ubuntu 2020 la
 1. azure cli
 1. google GCP cli
 1. WSL with ubuntu 20 as the instance
+1. WSL extra kernel feature with manual steps (win10) https://docs.microsoft.com/en-us/windows/wsl/install-manual
 1. windows only. terminal https://docs.microsoft.com/en-us/windows/terminal/install#installation
