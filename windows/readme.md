@@ -20,8 +20,8 @@ wsl --install
 (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
 ```
 
-#### Restart the Hyper-v service. 
-if you encounter a WSL2 error
+#### Restart the Hyper-v service
+Encounter a WSL2 error
 ``` powershell
 Restart-Service vmcompute
 ```
