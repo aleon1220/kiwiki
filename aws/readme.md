@@ -30,14 +30,13 @@
   - [AWS Secret Manager](#aws-secret-manager)
 
 <!-- /code_chunk_output -->
-
+## General AWS
 ### Use cases for AWS CLI
 source obtained from this wonderful [Medium post by circuit People](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1)
 
-#### Installing AWS CLI2
+#### Install AWS CLI2
 follow [Install AWS CLI2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html)
 
-## General AWS
 #### Get current configs
 File is usually located at `$HOME/.aws/config`
 ```bash
@@ -61,14 +60,14 @@ export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/doc
 aws ec2 describe-key-pairs | jq -r '.KeyPairs[].KeyName'
 ```
 
-#### How many instances of each type do I have, and in what states?
+#### How many instances of each type and in what states?
 ``` bash
 aws ec2 describe-instances | jq -r "[[.Reservations[].Instances[]|{ state: .State.Name, type: .InstanceType }]|group_by(.state)|.[]|{state: .[0].state, types: [.[].type]|[group_by(.)|.[]|{type: .[0], count: ([.[]]|length)}] }]"
 ```
 
 #### Find EC2 instance ID by instance Name
 ``` bash
-INSTANCE_NAME="ec2-rnd-prd-ec2-name"
+INSTANCE_NAME="ec2-rnd-prd-ec2"
 
 aws ec2 describe-instances --filters "Name=tag:Name,Values=*$INSTANCE_NAME*" \ 
     --output text --query 'Reservations[*].Instances[*].InstanceId'
@@ -89,6 +88,16 @@ curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta
 
 #### Get profile
 curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/profile
+```
+
+#### Describe instances using Tag values for keys Name and Environment
+``` bash
+ aws ec2 describe-instances \
+--output text \
+--query 'Reservations[].Instances[].[InstanceId, InstanceType, ImageId,
+KeyName, State.Name, LaunchTime, Placement.AvailabilityZone, Placement.Tenancy,
+PrivateIpAddress, PrivateDnsName, PublicDnsName, PublicIpAddress, SubnetId, VpcId,
+[Tags[?Key==Name].Value] [0][0], [Tags[?Key==Environment].Value] [0][0] ]'
 ```
 
 ### Creating EC2 Instances
@@ -152,10 +161,12 @@ for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[Regio
 ``` bash
 for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-volumes-modifications --query 'VolumesModifications[].{VolumeID:VolumeId,TargetSize:TargetSize,OriginalSize:OriginalSize,Progress:Progress,OriginalIops:OriginalIops,TargetIops:TargetIops}' --output json --filter 'Name=modification-state,Values=optimizing' --region $REGION; done
 ```
+
 #### Find all volumes not attached to any instance in all Regions
 ``` bash
 for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-volumes --filter "Name=status,Values=available" --query 'Volumes[*].{VolumeID:VolumeId,Size:Size,Type:VolumeType,AvailabilityZone:AvailabilityZone}' --region $REGION; done
 ```
+
 #### Find all volumes in the "error" state in all Regions
 ``` bash
 for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-volumes --filter "Name=status,Values=error" --query 'Volumes[*].{VolumeID:VolumeId,Size:Size,Type:VolumeType,AvailabilityZone:AvailabilityZone}' --region $REGION; done
@@ -171,7 +182,9 @@ aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[?Key==`Na
 aws ec2 describe-instances --query 'Reservations[*].Instances[*].{Name:ImageId,InstanceId:InstanceId,VolumeInfo:BlockDeviceMappings}' --output json
 ```
 
-####  List all stopped instances and associated volumes for a clean up of cloud resources and cost savings.
+####  List stopped instances and associated volumes.
+Useful for clean up of cloud resources and cost savings
+
 ``` bash
 aws ec2 describe-instances --filters "Name=instance-state-name,Values=stopped" --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value,InstanceId,BlockDeviceMappings[*].Ebs.VolumeId]' --output text
 ```
@@ -198,18 +211,9 @@ aws ec2 describe-snapshots --owner-ids self | jq '.Snapshots | [ group_by(.Volum
 
 #### Get the information: InstanceID, InstanceType and the value of the Name tag
 ``` bash
-INST_ID=""
-aws ec2 describe-instances --instance-ids $INST_ID --output text --query 'Reservations[].Instances[].[InstanceId, InstanceType, [Tags[?Key==Name].Value] [0][0] ]'
-```
-
-#### Extracting Tag values
-``` bash
- aws ec2 describe-instances \
---output text \
---query 'Reservations[].Instances[].[InstanceId, InstanceType, ImageId,
-KeyName, State.Name, LaunchTime, Placement.AvailabilityZone, Placement.Tenancy,
-PrivateIpAddress, PrivateDnsName, PublicDnsName, PublicIpAddress, SubnetId, VpcId,
-[Tags[?Key==Name].Value] [0][0], [Tags[?Key==Environment].Value] [0][0] ]'
+INSTANCE_ID=""
+aws ec2 describe-instances --instance-ids $INSTANCE_ID --output text \
+  --query 'Reservations[].Instances[].[InstanceId, InstanceType, [Tags[?Key==Name].Value] [0][0] ]'
 ```
 
 #### Describing volumes
