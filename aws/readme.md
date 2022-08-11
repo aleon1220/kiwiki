@@ -73,20 +73,31 @@ aws ec2 describe-instances --filters "Name=tag:Name,Values=*$INSTANCE_NAME*" \
     --output text --query 'Reservations[*].Instances[*].InstanceId'
 ```
 
-### AWS EC2 metadata API interactions
-
+#### Get Availability Zone, ID, Name, Private IP and Status
 ``` bash
+aws ec2 describe-instances --query \
+  'Reservations[*].Instances[*].{Name:Tags[?Key==`Name`]|[0].Value,InstanceID:InstanceId,AZ:Placement.AvailabilityZone,PrivateIP:PrivateIpAddress,Status:State.Name}' -- output table
+```
+
+### AWS EC2 metadata API interactions
 #### Get AWS EC2 metadata info
+``` bash
 TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600") && \
 curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/
+```
 
 #### Get security groups from AWS EC2
+``` bash
 curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/security-groups
+```
 
 #### Get public hostname
+``` bash
 curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/public-hostname
+```
 
 #### Get profile
+``` bash
 curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/profile
 ```
 
@@ -407,7 +418,7 @@ for group in $(aws logs describe-log-groups --query "logGroups[].[logGroupName]"
 ```
 
 ## AWS S3
-#### List objects and sort by `LastModified`
+#### List objects and sort by `LastModified` field
 ``` bash
 DATE=$(date +%Y-%m-%d)
 aws s3api list-objects-v2 --bucket "$BUCKET" --query 'Contents[?contains(LastModified, `'"$DATE"'`)]'
@@ -418,6 +429,13 @@ aws s3api list-objects-v2 --bucket "$BUCKET" --query 'Contents[?contains(LastMod
 BUCKET="your-bucket-name"
 aws s3api list-objects-v2 --bucket "$BUCKET" --output text > file.txt
 ```
+
+#### List number of S3 buckes
+``` bash
+printf "\n local servername==" ; hostname ; \
+aws s3 ls ; printf "\n Total number of S3 buckets $(aws s3 ls | wc - l) \n\n" 
+```
+
 #### Copy directories/files to S3 given bucket excuding .git files
 ``` bash
 aws s3 cp /tmp/foo s3://bucket/ --recursive --exclude ".git/*"
