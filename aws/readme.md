@@ -62,7 +62,9 @@ aws ec2 describe-key-pairs | jq -r '.KeyPairs[].KeyName'
 
 #### How many instances of each type and in what states?
 ``` bash
-aws ec2 describe-instances | jq -r "[[.Reservations[].Instances[]|{ state: .State.Name, type: .InstanceType }]|group_by(.state)|.[]|{state: .[0].state, types: [.[].type]|[group_by(.)|.[]|{type: .[0], count: ([.[]]|length)}] }]"
+aws ec2 describe-instances | \
+  jq -r \
+  "[ [.Reservations[].Instances[]|{ state: .State.Name, type: .InstanceType }] | group_by(.state)|.[]|{state: .[0].state, types: [.[].type] | [group_by(.)|.[]|{type: .[0], count: ([.[]]|length)}] }]"
 ```
 
 #### Find EC2 instance ID by instance Name
@@ -75,8 +77,8 @@ aws ec2 describe-instances --filters "Name=tag:Name,Values=*$INSTANCE_NAME*" \
 
 #### Get Availability Zone, ID, Name, Private IP and Status
 ``` bash
-aws ec2 describe-instances --query \
-  'Reservations[*].Instances[*].{Name:Tags[?Key==`Name`]|[0].Value,InstanceID:InstanceId,AZ:Placement.AvailabilityZone,PrivateIP:PrivateIpAddress,Status:State.Name}' -- output table
+aws ec2 describe-instances \
+--query 'Reservations[*].Instances[*].{Name:Tags[?Key==`Name`]|[0].Value,ID:InstanceId,AZ:Placement.AvailabilityZone,PrivIP:PrivateIpAddress,Status:State.Name}' --output table
 ```
 
 ### AWS EC2 metadata API interactions
