@@ -9,7 +9,7 @@
 - [About KIWIKI Project](#about-kiwiki-project)
   - [Introduction](#introduction)
   - [The Computer Categories](#the-computer-categories)
-    - [01. Processing](#01-processing)
+    - [01. CPU Processing](#01-cpu-processing)
     - [02. Memory](#02-memory)
     - [03. Storage](#03-storage)
     - [04. Networking](#04-networking)
@@ -28,7 +28,7 @@
     - [CLI Shell keyboard shortcuts](#cli-shell-keyboard-shortcuts)
   - [General Server Info](#general-server-info)
   - [Systemd Systemctl](#systemd-systemctl)
-    - [Logs](#logs)
+    - [Debugging Logs](#debugging-logs)
   - [Compression/Decompression of files](#compressiondecompression-of-files)
   - [Find/Search operations](#findsearch-operations)
   - [Package Management](#package-management)
@@ -61,15 +61,15 @@ This project is a collection of CLI reusable commands for Linux and Windows OS
 
 ## Introduction
 
-- **2020-04-28=** I lost years of work on setting a nice Information Technology Wiki. I started a new one from scratch.
+- **2020-04-28=** I lost years of work on an Information Technology Wiki. I started a new Wiki from scratch in 2020
 
-Througout my career, 12+ years I have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, windows and more
+Througout my career, 12+ years (2022) I have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, windows and more
 
-I used a `.txt` file, then a google docs file. I accidentally deleted the google docs file from its google drive folder. I accidentally deleted the folder and later on I emptied the bin. I truly dislike that...
+I used a `.txt` file, then a google docs file which was accidentally deleted from Google drive folder. After accidentally deleting the folder, I emptied the bin. There was no way to recover the file. I tried contacting google support to no avail
 
-I got in touch with google support to no avail. I waited and hoped I could recover my file (there was no way to recover the file). Don't rely on the cloud 100%. Have local copies of your digital material.
+> Don't rely on the cloud 100%. Have local copies of your digital material
 
-- **2020-11-10=** I confirm that i lost my google docs wiki file. I should have been more careful.
+- **2020-11-10=** lost my google docs wiki file. I should have been more careful.
 - **2021-04-07=** processing inbox category. Moved intro below About Project
 
 ## The Computer Categories
@@ -77,8 +77,7 @@ I got in touch with google support to no avail. I waited and hoped I could recov
 
 A Computer has a CPU processor, memory RAM, storage in form of a drive, connectivity via network card or wifi, graphics visualization via a monitor. The operating system has tools to manage and interact with all the described above.
 
-
-### 01. [Processing](./01-processing/processing.md)
+### 01. [CPU Processing](./01-processing/processing.md)
 
 ### 02. [Memory](./02-Memory/Memory.md)
 
@@ -101,8 +100,9 @@ A Computer has a CPU processor, memory RAM, storage in form of a drive, connecti
   4. gradle
   5. maven
 #### CD Tooling
-  1. spinnaker
+  1. Spinnaker
 ### Software Developer Tooling
+  - IDE
 
 ### 5. LDAP
 ### 6. productivity-tools
@@ -280,7 +280,7 @@ The settings are read from all of the following system configuration files:
 ```bash
 sudo sysctl --system
 ```
-### Logs
+### Debugging Logs
 #### Analyse Logs. Logs named 3 to 31.gz month. Month like Feb 2020 and print
 
 ```bash
@@ -291,10 +291,6 @@ zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | l
 
 ```bash
 cat ~/.ssh/id_rsa.pub | xclip -sel clip
-```
-
-```bash
-xclip
 ```
 
 #### Check a dir with a parameter. Double check `info stat`
@@ -315,10 +311,10 @@ update-alternatives --get-selections
 sudo visudo
 ```
 
-##### Move `DIR1` to `DIRDestiny`
+##### Move `DIR1` to `DIR_DESTINATION`
 
 ```bash
-sudo mv $DIR1 $DIRDestiny
+sudo mv $DIR1 $DIR_DESTINATION
 ```
 
 ##### Find where the command is installed
@@ -436,22 +432,16 @@ HTTPDUSER=$(ps axo "user,comm" | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]
 
 Ubuntu package manager
 
-#### Fetch packages from Repo
-
-```bash
-sudo apt update
-```
-
 #### Auto remove Obsolete packages
 
 ```bash
 sudo apt autoremove
 ```
 
-#### Upgrade packages
+#### update and then Upgrade packages
 
 ```bash
-sudo aptupdate ; sudo apt upgrade --yes
+sudo apt update ; sudo apt upgrade --yes
 ```
 
 #### List a package by name e.g. python
@@ -882,7 +872,7 @@ gio tree
 
 ```bash
 history | \
-awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " "CMD[a]/count\*100 "% " a;}' | \
+awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " "CMD[a]/count*100 "% " a;}' | \
 grep -v "./" | column -c3 -s " " -t | \
 sort -nr | nl | head -n10
 ```
@@ -951,7 +941,8 @@ EOF
 #### Exit from terminal
 
 ```bash
-exit
+exit 
+CTRL + D
 ```
 
 ##### Change permissions of a file based on permissions of other file
