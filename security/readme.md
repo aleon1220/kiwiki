@@ -168,39 +168,46 @@ done.
 SSL has now been deprecated in favor of Transport Layer Security
 
 - #### Test SSL certificate of particular URL
-``` bash
+
+```bash
 openssl s_client –showcerts -connect yoururl.com:443
 ```
 
 ### Check SSL and TLS acceptance on target URL
 
 #### Check connectivity with SSL V2
-``` bash
+
+```bash
 openssl s_client -ssl2 -connect secureurl.com:443
 ```
 
 #### Check connectivity with SSL V3
-``` bash
+
+```bash
 openssl s_client –ssl3 -connect secureurl.com:443
 ```
 
 #### Check connectivity with TLS 1.0
-``` bash
+
+```bash
 openssl s_client -connect secureurl.com:443 –tls1
 ```
 
 #### Check connectivity with TLS 1.1
-``` bash
+
+```bash
 openssl s_client -connect secureurl.com:443 –tls1_1
 ```
 
 #### Check connectivity with TLS 1.2
-``` bash
+
+```bash
 openssl s_client –tls1_2 -connect secureurl.com:443
 ```
 
 #### Verify if the particular cipher is accepted on a target URL
-``` bash
+
+```bash
 openssl s_client -cipher 'ECDHE-ECDSA-AES256-SHA' -connect secureURL:443
 ```
 
@@ -223,7 +230,7 @@ keytool -genkey -alias gdalias \
   -storepass gnudevpwd
 ```
 
-``` bash
+```bash
 openssl pkcs12 -in www_gnudeveloper_com.p12  -out www_gnudeveloper_com.pem
 ```
 
@@ -361,7 +368,7 @@ We already saw all steps. Extract key as for ssh:
 ```bash
 gpg --list-secret-keys --keyid-format short
 
-gpg --export-secret-keys 01234567 | openpgp2ssh 01234567 > myid.ke
+gpg --export-secret-keys 01234567 | openpgp2ssh 01234567 > myid.key
 ```
 
 - Convert this key to PEM format:
@@ -376,7 +383,7 @@ gpg --export-secret-keys 01234567 | openpgp2ssh 01234567 > myid.ke
 ##### Gpgsm utility can exports keys and certificate in PCSC12:
 
 ```bash
-gpgsm -o  secret-gpg-key.p12 --export-secret-key-p12 0xXXXXXXXX
+gpgsm -o secret-gpg-key.p12 --export-secret-key-p12 0xXXXXXXXX
 ```
 
 You have to extract Key and Certificates separatly:
@@ -398,15 +405,15 @@ gpgsm --import gpg-key.p12
 GnuPG S/MIME to OpenSSH
 ```
 
-- Now, chain processes:
+- Now, chain processes
 
 ```bash
-gpgsm -o  secret-gpg-key.p12 --export-secret-key-p12 0xXXXXXXXX
+gpgsm -o secret-gpg-key.p12 --export-secret-key-p12 0xXXXXXXXX
 
 openssl pkcs12 -in secret-gpg-key.p12 -nocerts -out gpg-key.pem
 ```
 
-- We need to protect key with the right permissions, else ssh will refuse it.
+- We need to protect key with the right permissions, else SSH will refuse it.
 
 ```bash
 chmod 600 gpg-key.pem
@@ -483,7 +490,6 @@ The key below will use 4096 encryption
 
 ```bash
 SSH_KEY_EMAIL="person@example.com"
-
 ssh-keygen -t rsa -b 4096 -C "$SSH_KEY_EMAIL"
 ```
 
