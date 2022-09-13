@@ -8,8 +8,8 @@
 
 - [AWS CLI commands](#aws-cli-commands)
     - [Kiwiki Home](#kiwiki-home)
-    - [Use cases for AWS CLI](#use-cases-for-aws-cli)
   - [General AWS](#general-aws)
+    - [Use cases for AWS CLI](#use-cases-for-aws-cli)
   - [AWS EC2 Elastic Compute Cloud](#aws-ec2-elastic-compute-cloud)
     - [AWS EC2 metadata API interactions](#aws-ec2-metadata-api-interactions)
     - [Creating EC2 Instances](#creating-ec2-instances)
@@ -428,14 +428,18 @@ aws s3api list-objects-v2 --bucket "$BUCKET" --query 'Contents[?contains(LastMod
 
 #### List contents of a bucket and export to a text file
 ``` bash
-BUCKET="your-bucket-name"
-aws s3api list-objects-v2 --bucket "$BUCKET" --output text > file.txt
+BUCKET="s3-bucket-name"
+aws s3api list-objects-v2 --bucket "$BUCKET" --output text > "$BUCKET-Contents.txt"
 ```
 
 #### List number of S3 buckes
 ``` bash
-printf "\n local servername==" ; hostname ; \
-aws s3 ls ; printf "\n Total number of S3 buckets $(aws s3 ls | wc - l) \n\n" 
+printf "\n EC2 server name== $(hostname) \n\n" ; aws s3api list-buckets --color on --output table ; printf "\n\t Total number of S3 Bucket objects $(aws s3 ls | wc -l) \n"
+```
+
+#### Simplififed S3 listing of buckets
+``` bash
+printf "\n local servername== $(hostname) \n" ; aws s3 ls ; printf "\n Total number of S3 buckets $(aws s3 ls | wc - l) \n\n"
 ```
 
 #### Copy directories/files to S3 given bucket excuding .git files
