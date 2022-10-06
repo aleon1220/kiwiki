@@ -1,10 +1,5 @@
 # AWS CLI commands
 
-## [Kiwiki Home](./../readme.md)
-
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
-
-
 <!-- code_chunk_output -->
 
 - [AWS CLI commands](#aws-cli-commands)
@@ -35,18 +30,24 @@
   - [AWS VPC](#aws-vpc)
 
 <!-- /code_chunk_output -->
+
 # Introduction
+
 AWS CLI commands for some AWS services. AWS service names Sorted from A-Z
 source obtained from this wonderful [Medium post by circuit People](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1)
 
 ## AWS Amazon Web services General
+
 #### How Many Services does AWS Have? JQ
 
 ```bash
 curl -s https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json | jq -r '.partitions[0].services | keys[]' | wc -l
 ```
+
 ## AWS CLI
+
 #### Install AWS CLI
+
 Amazon Web Services Command Line Interface client
 
 follow [Install AWS CLI2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html)
@@ -58,13 +59,17 @@ File is usually located at `$HOME/.aws/config`
 ```bash
 ls -lat $HOME/.aws/
 ```
+
 #### Get current AWS CLI configuration
 
 ```bash
 aws configure list
 ```
+
 ---
+
 # C
+
 ## AWS Code Commit
 
 #### How do I Create a CodeCommit Repository and Clone It?
@@ -74,7 +79,9 @@ export REPO_URL=$(aws codecommit create-repository --repository-name <name> | jq
 
 git clone $REPO_URL <name> && cd <name>
 ```
+
 ---
+
 ## AWS CF Cloud Formation
 
 Infrastructure as a configuration (not code)
@@ -100,7 +107,8 @@ for stack in $(aws cloudformation list-stacks --stack-status-filter CREATE_COMPL
 
 ## AWS CloudWatch
 
-### CloudWatch Agent 
+### CloudWatch Agent
+
 Info in `AWS EC2` instances
 
 #### cloudwatch agent Logs Location
@@ -146,7 +154,41 @@ echo STREAM: $stream; aws logs get-log-events --limit 10 --log-group-name $group
 ```bash
 for group in $(aws logs describe-log-groups --query "logGroups[].[logGroupName]" --output text --no-paginate); do aws logs put-retention-policy --log-group-name $group --retention-in-days 30; done;
 ```
+
+### Logs Insights CloudTrail
+
+The process is similar. You select your log groups and then run queries with a specific cloudwatch logs insights query syntax
+
+### Logs insights CloudTrail
+
+2022 unfortunately AWS uses different syntax styles for AWS CloudWatch Filter metric, Log groups metric filters and AWS Cloudwatch Log
+insight
+
+```bash
+{ ($.errorCode = "*UnauthorizedOperation") || ($.errorCode = "AccessDenied*") }
+```
+
+#### Run the metric filter above in cloudwatch logs insights syntax
+
+```bash
+filter errorCode LIKE /UnauthorizedOperation/ or errorCode LIKE /AccessDenied/
+| fields eventTime, errorCode, userIdentity.sessionContext.sessionIssuer.userName, eventName, eventSource, 
+userAgent, errorMessage, @message
+| limit 5000  
+```
+
+### Logs Insights EC2
+
+### Logs Insights RDS
+
+```bash
+fields @timestamp, @message
+| sort @timestamp desc
+| limit 1000
+```
+
 # E
+
 ## AWS EC2 Elastic Compute Cloud
 
 #### Get account Id and region of current EC2 instance JQ
@@ -177,7 +219,7 @@ aws ec2 describe-instances | \
   "[ [.Reservations[].Instances[]|{ state: .State.Name, type: .InstanceType }] | group_by(.state)|.[]|{state: .[0].state, types: [.[].type] | [group_by(.)|.[]|{type: .[0], count: ([.[]]|length)}] }]"
 ```
 
-#### Find EC2 instance ID by instance Name 
+#### Find EC2 instance ID by instance Name
 
 ```bash
 INSTANCE_NAME="ec2-rnd-prd-ec2"
@@ -186,7 +228,7 @@ aws ec2 describe-instances --filters "Name=tag:Name,Values=*$INSTANCE_NAME*" \
     --output text --query 'Reservations[*].Instances[*].InstanceId'
 ```
 
-#### Get Availability Zone, ID, Name, Private IP and Status 
+#### Get Availability Zone, ID, Name, Private IP and Status
 
 ```bash
 aws ec2 describe-instances \
@@ -269,7 +311,8 @@ export INSTANCE_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --ou
 ssh -i keypair.pem ec2-user@$INSTANCE_IP
 ```
 
-### EC2 EBS Volumes 
+### EC2 EBS Volumes
+
 refer to [AWS CLI reference](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html)
 
 - [AWS Premium questions](https://aws.amazon.com/premiumsupport/knowledge-center/ebs-volume-snapshot-ec2-instance/)
@@ -494,6 +537,7 @@ aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01"),End=$(date --d
 ```
 
 ---
+
 ## AWS Lambda
 
 #### Which Lambda Functions Runtimes am I Using? JQ
@@ -513,8 +557,11 @@ aws lambda list-functions | jq -r '[.Functions[] |{name: .FunctionName, env: .En
 ```bash
 aws lambda invoke --function-name <function name> --payload '{}' --log-type Tail - | jq -r '{ "StatusCode": .StatusCode, "LogResult": (.LogResult|@base64d)}'
 ```
+
 ---
+
 # R
+
 ## AWS RDS Databases
 
 #### What are my RDS Instance Endpoints? JQ
@@ -534,8 +581,11 @@ aws rds describe-db-instances
 ```bash
 aws rds describe-db-log-files --db-instance-identifier $RDS_INSTANCE
 ```
+
 ---
+
 # S
+
 ## AWS S3
 
 #### List objects and sort by `LastModified` field
@@ -610,6 +660,7 @@ aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r '.SecretStr
 ```
 
 ---
+
 # V
 
 ## AWS VPC
@@ -628,6 +679,12 @@ aws ec2 describe-security-groups | \
 ```
 
 #### REFERENCES
+
 - https://superadmins.com/creating-ec2-inventory-with-aws-cli/
+- [What is Amazon CloudWatch Logs? - Amazon CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
+- [Filter and pattern syntax - Amazon CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html)
+- [Newest &#39;amazon-cloudwatchlogs&#39; Questions - Stack Overflow](https://stackoverflow.com/questions/tagged/amazon-cloudwatchlogs)
 
 [Back to top of Page](#)
+
+## [Go Back to Kiwiki Home](./../readme.md)
