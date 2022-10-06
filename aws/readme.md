@@ -1,6 +1,6 @@
 # AWS CLI commands
 
-### [Kiwiki Home](./../readme.md)
+## [Kiwiki Home](./../readme.md)
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
 
@@ -9,59 +9,144 @@
 
 - [AWS CLI commands](#aws-cli-commands)
   - [Kiwiki Home](#kiwiki-home)
-  - [General AWS](#general-aws)
-    - [Use cases for AWS CLI](#use-cases-for-aws-cli)
-  - [AWS EC2 Elastic Compute Cloud](#aws-ec2-elastic-compute-cloud)
-    - [AWS EC2 metadata API interactions](#aws-ec2-metadata-api-interactions)
-    - [Creating EC2 Instances](#creating-ec2-instances)
-    - [AWS EC2 Volumes EBS AWS CLI reference](#aws-ec2-volumes-ebs-aws-cli-reference)
-    - [Inventory questions about EC2 instances](#inventory-questions-about-ec2-instances)
-  - [AWS EC2 Elastic Load balancer](#aws-ec2-elastic-load-balancer)
-  - [AWS IAM](#aws-iam)
-  - [AWS VPC](#aws-vpc)
+- [Introduction](#introduction)
+  - [AWS Amazon Web services General](#aws-amazon-web-services-general)
+  - [AWS CLI](#aws-cli)
+- [C](#c)
   - [AWS Code Commit](#aws-code-commit)
-  - [AWS Lambda](#aws-lambda)
-  - [AWS RDS Databases](#aws-rds-databases)
   - [AWS CF Cloud Formation](#aws-cf-cloud-formation)
   - [AWS CloudWatch](#aws-cloudwatch)
-    - [AWS CloudWatch Agent info in `AWS EC2`](#aws-cloudwatch-agent-info-in-aws-ec2)
+    - [CloudWatch Agent](#cloudwatch-agent)
     - [Cloudwatch Logs](#cloudwatch-logs)
-  - [AWS CloudWatch Logs set to 30 days](#aws-cloudwatch-logs-set-to-30-days)
+- [E](#e)
+  - [AWS EC2 Elastic Compute Cloud](#aws-ec2-elastic-compute-cloud)
+    - [Create EC2 Instances with AWS CLI](#create-ec2-instances-with-aws-cli)
+    - [EC2 EBS Volumes](#ec2-ebs-volumes)
+    - [Inventory questions about EC2 instances](#inventory-questions-about-ec2-instances)
+    - [EC2 Elastic Load balancer](#ec2-elastic-load-balancer)
+  - [AWS IAM](#aws-iam)
+  - [AWS Lambda](#aws-lambda)
+- [R](#r)
+  - [AWS RDS Databases](#aws-rds-databases)
+- [S](#s)
   - [AWS S3](#aws-s3)
   - [AWS Secret Manager](#aws-secret-manager)
+- [V](#v)
+  - [AWS VPC](#aws-vpc)
 
 <!-- /code_chunk_output -->
-
-### Use cases for AWS CLI
-
+# Introduction
+AWS CLI commands for some AWS services. AWS service names Sorted from A-Z
 source obtained from this wonderful [Medium post by circuit People](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1)
 
-### AWS CLI
+## AWS Amazon Web services General
+#### How Many Services does AWS Have? JQ
 
-#### Install AWS CLI2
+```bash
+curl -s https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json | jq -r '.partitions[0].services | keys[]' | wc -l
+```
+## AWS CLI
+#### Install AWS CLI
+Amazon Web Services Command Line Interface client
 
 follow [Install AWS CLI2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html)
 
-#### Get current configs
+#### List AWS CLI config directory
 
 File is usually located at `$HOME/.aws/config`
 
 ```bash
 ls -lat $HOME/.aws/
 ```
-
+#### Get current AWS CLI configuration
 
 ```bash
 aws configure list
-
 ```
+---
+# C
+## AWS Code Commit
 
-#### How Many Services does AWS Have? JQ
+#### How do I Create a CodeCommit Repository and Clone It?
 
 ```bash
-curl -s https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json | jq -r '.partitions[0].services | keys[]' | wc -l
+export REPO_URL=$(aws codecommit create-repository --repository-name <name> | jq -r ".repositoryMetadata.cloneUrlHttp")
+
+git clone $REPO_URL <name> && cd <name>
+```
+---
+## AWS CF Cloud Formation
+
+Infrastructure as a configuration (not code)
+
+#### How Many CloudFormation Stacks do I have in each Status? JQ
+
+```bash
+aws cloudformation list-stacks | jq  '.StackSummaries | [ group_by(.StackStatus)[] | { "status": .[0].StackStatus, "count": (. | length) }]'
 ```
 
+#### Number of cloudformation stack objects
+
+```bash
+exec env TERM='dumb' INSIDE_EMACS='26.1,tramp:2.3.3.26.1' ENV='' HISTFILE=~/.tramp_history PROMPT_COMMAND='' PS1=\#\$\  PS2='' PS3='' /bin/sh
+aws cloudformation describe-stack-events --stack-name $MY_CLOUDFORMATION_STACKNAME | jq lenght
+```
+
+#### Which EC2 Instances were created by AWS CF Stacks?
+
+```bash
+for stack in $(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE UPDATE_COMPLETE | jq -r '.StackSummaries[].StackName'); do aws cloudformation describe-stack-resources --stack-name $stack | jq -r '.StackResources[] | select (.ResourceType=="AWS::EC2::Instance")|.PhysicalResourceId'; done;
+```
+
+## AWS CloudWatch
+
+### CloudWatch Agent 
+Info in `AWS EC2` instances
+
+#### cloudwatch agent Logs Location
+
+```bash
+/opt/aws/amazon-cloudwatch-agent/etc/
+/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log
+```
+
+#### log config file
+
+```bash
+less /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.json
+```
+
+### Cloudwatch Logs
+
+#### Exploring Log Streams JQ
+
+```bash
+logs=$(aws logs describe-log-groups | jq -r '.logGroups[].logGroupName')
+```
+
+#### Get the first log stream JQ
+
+```bash
+for each
+for group in $logs; do echo $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 | \ 
+ jq -r '.logStreams[0].logStreamName + " "'); done
+```
+
+#### Loop through the groups and streams to get the last 10 messages since midnight JQ
+
+```bash
+for group in $logs; do for stream in $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 | \
+ jq -r '[ .logStreams[0].logStreamName + " "] | add'); do echo ">>>"; echo GROUP: $group; \ 
+echo STREAM: $stream; aws logs get-log-events --limit 10 --log-group-name $group --log-stream-name $stream --start-time $(date -d 'today 00:00:00' '+%s%N' | \
+ cut -b1-13) | jq -r ".events[].message"; done; done
+```
+
+#### AWS CloudWatch Logs set to 30 days
+
+```bash
+for group in $(aws logs describe-log-groups --query "logGroups[].[logGroupName]" --output text --no-paginate); do aws logs put-retention-policy --log-group-name $group --retention-in-days 30; done;
+```
+# E
 ## AWS EC2 Elastic Compute Cloud
 
 #### Get account Id and region of current EC2 instance JQ
@@ -144,7 +229,7 @@ PrivateIpAddress, PrivateDnsName, PublicDnsName, PublicIpAddress, SubnetId, VpcI
 [Tags[?Key==Name].Value] [0][0], [Tags[?Key==Environment].Value] [0][0] ]'
 ```
 
-### Creating EC2 Instances
+### Create EC2 Instances with AWS CLI
 
 Quickly create EC2 instances.
 
@@ -184,7 +269,8 @@ export INSTANCE_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --ou
 ssh -i keypair.pem ec2-user@$INSTANCE_IP
 ```
 
-### AWS EC2 EBS Volumes [AWS CLI reference](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html)
+### EC2 EBS Volumes 
+refer to [AWS CLI reference](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html)
 
 - [AWS Premium questions](https://aws.amazon.com/premiumsupport/knowledge-center/ebs-volume-snapshot-ec2-instance/)
 
@@ -256,7 +342,8 @@ aws ec2 describe-instances --query 'Reservations[*].Instances[*].{Name:ImageId,I
 Useful for clean up of cloud resources and cost savings
 
 ```bash
-aws ec2 describe-instances --filters "Name=instance-state-name,Values=stopped" --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value,InstanceId,BlockDeviceMappings[*].Ebs.VolumeId]' --output text
+aws ec2 describe-instances --filters "Name=instance-state-name,Values=stopped" \
+  --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value,InstanceId,BlockDeviceMappings[*].Ebs.VolumeId]' --output text
 ```
 
 #### How Many Gigabytes of Volumes do I have, by Status? JQ
@@ -288,7 +375,7 @@ aws ec2 describe-snapshots --owner-ids self | jq '.Snapshots | [ group_by(.Volum
 ```bash
 INSTANCE_ID=""
 aws ec2 describe-instances --instance-ids $INSTANCE_ID --output text \
-  --query 'Reservations[].Instances[].[InstanceId, InstanceType, [Tags[?Key==Name].Value] [0][0] ]'
+  --query 'Reservations[].Instances[].[InstanceId, InstanceType, [ Tags[?Key==Name].Value] [0][0] ]'
 ```
 
 #### Describing volumes
@@ -324,7 +411,7 @@ aws ec2 describe-regions --output text --query 'Regions[].[RegionName]'
 - How many instances there are with a certain Tag name and value combination?
 
 ```bash
-### ALL EC2 resources in environment Staging NZ
+# ALL EC2 resources in environment Staging NZ
 aws ec2 describe-tags --filters Name="tag:environment:staging",Values="NZ" --output table
 ```
 
@@ -332,7 +419,7 @@ aws ec2 describe-tags --filters Name="tag:environment:staging",Values="NZ" --out
 - Examine certain instance types and check if some of them, combined with a certain environment, are running -longer than expected
 - Total amount of Volumes attached to an instance and what the total volume size for each instance is.
 
-### AWS EC2 Elastic Load balancer
+### EC2 Elastic Load balancer
 
 A Load balancer has rules. The rules point to target groups.
 Target groups reference AWS EC2 instances.
@@ -348,7 +435,6 @@ aws elbv2 describe-load-balancers | jq .LoadBalancers[].LoadBalancerName
 
 ```bash
 LOAD_BALANCER_NAME="networklb-dev-internal"
-
 aws elbv2 describe-load-balancers --names $LOAD_BALANCER_NAME --query 'LoadBalancers[*].LoadBalancerArn' --output text
 ```
 
@@ -396,7 +482,9 @@ aws iam get-user | jq -r ".User.CreateDate[:4]"
 #### Which AWS Services am I using? JQ
 
 ```bash
-aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01" -d "-1 Month"),End=$(date --date="$(date +'%Y-%m-01') - 1 second" -I) --granularity MONTHLY --metrics UsageQuantity --group-by Type=DIMENSION,Key=SERVICE | jq '.ResultsByTime[].Groups[] | select(.Metrics.UsageQuantity.Amount > 0) | .Keys[0]'
+aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01" -d "-1 Month"),End=$(date --date="$(date +'%Y-%m-01') - 1 second" -I) \
+  --granularity MONTHLY --metrics UsageQuantity --group-by Type=DIMENSION,Key=SERVICE | \
+  jq '.ResultsByTime[].Groups[] | select(.Metrics.UsageQuantity.Amount > 0) | .Keys[0]'
 ```
 
 #### What is each service costing me? JQ
@@ -405,31 +493,7 @@ aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01" -d "-1 Month"),
 aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01"),End=$(date --date="$(date +'%Y-%m-01') + 1 month  - 1 second" -I) --granularity MONTHLY --metrics USAGE_QUANTITY BLENDED_COST  --group-by Type=DIMENSION,Key=SERVICE | jq '[ .ResultsByTime[].Groups[] | select(.Metrics.BlendedCost.Amount > "0") | { (.Keys[0]): .Metrics.BlendedCost } ] | sort_by(.Amount) | add'
 ```
 
-## AWS VPC
-
-#### What are my VPCs in table format
-
-```bash
-aws ec2 describe-vpcs --output table
-```
-
-#### What CIDRs have Ingress Access to which Ports? JQ
-
-```bash
-aws ec2 describe-security-groups | \
- jq '[ .SecurityGroups[].IpPermissions[] as $a | { "ports": [($a.FromPort|tostring),($a.ToPort|tostring)]|unique, "cidr": $a.IpRanges[].CidrIp } ] | [group_by(.cidr)[] | { (.[0].cidr): [.[].ports|join("-")]|unique }] | add'
-```
-
-## AWS Code Commit
-
-#### How do I Create a CodeCommit Repository and Clone It?
-
-```bash
-export REPO_URL=$(aws codecommit create-repository --repository-name <name> | jq -r ".repositoryMetadata.cloneUrlHttp")
-
-git clone $REPO_URL <name> && cd <name>
-```
-
+---
 ## AWS Lambda
 
 #### Which Lambda Functions Runtimes am I Using? JQ
@@ -449,7 +513,8 @@ aws lambda list-functions | jq -r '[.Functions[] |{name: .FunctionName, env: .En
 ```bash
 aws lambda invoke --function-name <function name> --payload '{}' --log-type Tail - | jq -r '{ "StatusCode": .StatusCode, "LogResult": (.LogResult|@base64d)}'
 ```
-
+---
+# R
 ## AWS RDS Databases
 
 #### What are my RDS Instance Endpoints? JQ
@@ -469,78 +534,8 @@ aws rds describe-db-instances
 ```bash
 aws rds describe-db-log-files --db-instance-identifier $RDS_INSTANCE
 ```
-
-## AWS CF Cloud Formation
-
-Infrastructure as a configuration (not code)
-
-#### How Many CloudFormation Stacks do I have in each Status? JQ
-
-```bash
-aws cloudformation list-stacks | jq  '.StackSummaries | [ group_by(.StackStatus)[] | { "status": .[0].StackStatus, "count": (. | length) }]'
-```
-
-#### Number of cloudformation stack objects
-
-```bash
-exec env TERM='dumb' INSIDE_EMACS='26.1,tramp:2.3.3.26.1' ENV='' HISTFILE=~/.tramp_history PROMPT_COMMAND='' PS1=\#\$\  PS2='' PS3='' /bin/sh
-aws cloudformation describe-stack-events --stack-name $MY_CLOUDFORMATION_STACKNAME | jq lenght
-```
-
-#### Which EC2 Instances were created by AWS CF Stacks?
-
-```bash
-for stack in $(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE UPDATE_COMPLETE | jq -r '.StackSummaries[].StackName'); do aws cloudformation describe-stack-resources --stack-name $stack | jq -r '.StackResources[] | select (.ResourceType=="AWS::EC2::Instance")|.PhysicalResourceId'; done;
-```
-
-## AWS CloudWatch
-
-### AWS CloudWatch Agent info in `AWS EC2`
-
-#### Log Location
-
-```bash
-/opt/aws/amazon-cloudwatch-agent/etc/
-/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log
-```
-
-#### log config file
-
-```bash
-less /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.json
-```
-
-### Cloudwatch Logs
-
-#### Exploring Log Streams?
-
-```bash
-logs=$(aws logs describe-log-groups | jq -r '.logGroups[].logGroupName')
-```
-
-#### Get the first log stream JQ
-
-```bash
-for each
-for group in $logs; do echo $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 | \ 
- jq -r '.logStreams[0].logStreamName + " "'); done
-```
-
-#### Loop through the groups and streams to get the last 10 messages since midnight JQ
-
-```bash
-for group in $logs; do for stream in $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 | \
- jq -r '[ .logStreams[0].logStreamName + " "] | add'); do echo ">>>"; echo GROUP: $group; \ 
-echo STREAM: $stream; aws logs get-log-events --limit 10 --log-group-name $group --log-stream-name $stream --start-time $(date -d 'today 00:00:00' '+%s%N' | \
- cut -b1-13) | jq -r ".events[].message"; done; done
-```
-
-## AWS CloudWatch Logs set to 30 days
-
-```bash
-for group in $(aws logs describe-log-groups --query "logGroups[].[logGroupName]" --output text --no-paginate); do aws logs put-retention-policy --log-group-name $group --retention-in-days 30; done;
-```
-
+---
+# S
 ## AWS S3
 
 #### List objects and sort by `LastModified` field
@@ -560,7 +555,8 @@ aws s3api list-objects-v2 --bucket "$BUCKET" --output text > "$BUCKET-Contents.t
 #### List number of S3 buckes
 
 ```bash
-printf "\n EC2 server name== $(hostname) \n\n" ; aws s3api list-buckets --color on --output table ; printf "\n\t Total number of S3 Bucket objects $(aws s3 ls | wc -l) \n"
+printf "\n EC2 server name== $(hostname) \n\n" ; aws s3api list-buckets --color on --output table ; \
+printf "\n\t Total number of S3 Bucket objects $(aws s3 ls | wc -l) \n"
 ```
 
 #### Simplififed S3 listing of buckets
@@ -613,12 +609,25 @@ SECRET_NAME="my-aws-secret"
 aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r '.SecretString' | jq -r 'keys[]'
 ```
 
-[Back to top](#)
-
 ---
+# V
+
+## AWS VPC
+
+#### What are my VPCs in table format
+
+```bash
+aws ec2 describe-vpcs --output table
+```
+
+#### What CIDRs have Ingress Access to which Ports? JQ
+
+```bash
+aws ec2 describe-security-groups | \
+ jq '[ .SecurityGroups[].IpPermissions[] as $a | { "ports": [($a.FromPort|tostring),($a.ToPort|tostring)]|unique, "cidr": $a.IpRanges[].CidrIp } ] | [group_by(.cidr)[] | { (.[0].cidr): [.[].ports|join("-")]|unique }] | add'
+```
 
 #### REFERENCES
-
 - https://superadmins.com/creating-ec2-inventory-with-aws-cli/
 
 [Back to top of Page](#)
