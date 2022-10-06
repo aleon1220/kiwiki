@@ -1,8 +1,10 @@
 # Regex Notes and Cheat sheet
 
-/[]/ is a character class that allows us to find any matching characters in the string. The character(s) in the character class acts as a delimiter. When a match is found, the characters in the string are divided/split.
+`/[]/` is a character class that allows us to find any matching characters in the string. The character(s) in the character class acts as a delimiter. When a match is found, the characters in the string are divided/split.
 
 The `.` matches any one character followed or preceded by any character in the character class.
+
+- Use groups with parentheses `(group of regex)`
 
 ## Tips
 
@@ -24,9 +26,9 @@ Match zero or more occurrences of (1) and (2)
 
 #### find extensions that start after string dash at the end of line
 
-`-m[\w].$`
+tested in vscode
 
-I tested with vscode. You must use groups with parentheses `(group of regex)`
+`-m[\w].$`
 
 #### Practical example. Replace spaces for dashes but keep the numbers or digits in each line
 
@@ -57,6 +59,10 @@ $1-
 2-another text
 3-yet more text
 ```
+
+#### Find markdown headers level 3
+
+`(^###)(\s)`
 
 ---
 
