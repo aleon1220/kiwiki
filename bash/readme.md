@@ -65,6 +65,11 @@ alias update='yum update'
 alias updatey='yum -y update'
 ```
 
+#### 10 Most used commands from history
+``` bash
+cat ~/.bash_history | tr "\|\;" "\n" | sed -e "s/^ //g" | cut -d " " -f 1 | sort | uniq -c | sort -n | tail -n 10
+```
+
 #### Create dirs from 1990-2020
 ``` bash
 from=1990
