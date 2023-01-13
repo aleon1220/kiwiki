@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # Set Up my required Tools
 
