@@ -3,7 +3,6 @@
 <!-- code_chunk_output -->
 
 - [AWS CLI commands](#aws-cli-commands)
-  - [Kiwiki Home](#kiwiki-home)
 - [Introduction](#introduction)
   - [AWS Amazon Web services General](#aws-amazon-web-services-general)
   - [AWS CLI](#aws-cli)
@@ -13,13 +12,19 @@
   - [AWS CloudWatch](#aws-cloudwatch)
     - [CloudWatch Agent](#cloudwatch-agent)
     - [Cloudwatch Logs](#cloudwatch-logs)
+    - [Logs Insights CloudTrail](#logs-insights-cloudtrail)
+    - [Logs insights CloudTrail](#logs-insights-cloudtrail-1)
+    - [Logs Insights EC2](#logs-insights-ec2)
+    - [Logs Insights RDS](#logs-insights-rds)
 - [E](#e)
   - [AWS EC2 Elastic Compute Cloud](#aws-ec2-elastic-compute-cloud)
     - [Create EC2 Instances with AWS CLI](#create-ec2-instances-with-aws-cli)
     - [EC2 EBS Volumes](#ec2-ebs-volumes)
     - [Inventory questions about EC2 instances](#inventory-questions-about-ec2-instances)
     - [EC2 Elastic Load balancer](#ec2-elastic-load-balancer)
+- [\[I\]](#i)
   - [AWS IAM](#aws-iam)
+- [\[L\]](#l)
   - [AWS Lambda](#aws-lambda)
 - [R](#r)
   - [AWS RDS Databases](#aws-rds-databases)
@@ -28,6 +33,7 @@
   - [AWS Secret Manager](#aws-secret-manager)
 - [V](#v)
   - [AWS VPC](#aws-vpc)
+  - [Go Back to Kiwiki Home](#go-back-to-kiwiki-home)
 
 <!-- /code_chunk_output -->
 
@@ -513,7 +519,7 @@ aws elbv2 register-targets \
     --target-group-arn $TG_ARN \
     --targets Id=$EC2_INSTANCE_ID
 ```
-
+# [I]
 ## AWS IAM
 
 #### When was my AWS user account created? JQ
@@ -537,7 +543,7 @@ aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01"),End=$(date --d
 ```
 
 ---
-
+# [L]
 ## AWS Lambda
 
 #### Which Lambda Functions Runtimes am I Using? JQ
