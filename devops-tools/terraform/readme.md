@@ -1,34 +1,42 @@
 # Terraform uses & cheat sheet
 
-## Installation
+## Installation & Set Up
 
-#### Set GPG keys and repo access
+#### Set GPG keys
 ``` bash
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+```
+
+#### Repo access
+``` bash
 sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 ```
 
-#### Get the terraform binary version 0.14.6
+#### Get the terraform binary given the version. Use the variable terraform_install_version
 ``` bash
-wget https://releases.hashicorp.com/terraform/0.14.6/terraform_0.14.6_linux_amd64.zip
-unzip terraform_0.14.6_linux_amd64.zip
-```
-### Get Terraform with CLI copy/paste steps
-#### Define the version, get the binary
-``` bash
-version="1.0.7"
-wget https://releases.hashicorp.com/terraform/$version/terraform_${version}_linux_amd64.zip
-```
-#### Unzip and install the binary
-``` bash
-unzip "terraform_${version}_linux_amd64.zip"
-terraform_path_UBUNTU="/usr/bin/terraform"
-printf "$(which terraform)\n"
-printf "$terraform_path_UBUNTU\n"
-sudo mv terraform $(which terraform) || $terraform_path_UBUNTU
+terraform_install_version="1.2"
+
+wget https://releases.hashicorp.com/terraform/$version/terraform_${terraform_install_version}_linux_amd64.zip
 ```
 
-#### Create a TerraformProject and access it
+#### Unzip the compressed file
+``` bash
+unzip terraform_*
+```
+
+`unzip "terraform_${terraform_install_version}_linux_amd64.zip"`
+
+#### Install the binary
+``` bash
+terraform_path_LINUX="/usr/bin/terraform"
+printf "Is there a terraform path already in the machine $(which terraform)\n"
+printf "Printing the variable with the suggested path $terraform_path_LINUX\n"
+sudo mv terraform $terraform_path_LINUX
+printf "terraform binary has been added to the OS \n"
+printf "To validate run the command terraform version \n"
+```
+
+#### Create a Terraform Project and access it
 ``` bash
 mkdir aTerraformProject && cd $_
 ```
