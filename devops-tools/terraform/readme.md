@@ -14,9 +14,11 @@ sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.rel
 
 #### Get the terraform binary given the version. Use the variable terraform_install_version
 ``` bash
-terraform_install_version="1.2"
+terraform_install_version="1.4.2"
 
-wget https://releases.hashicorp.com/terraform/$version/terraform_${terraform_install_version}_linux_amd64.zip
+wget https://releases.hashicorp.com/terraform/${terraform_install_version}/terraform_${terraform_install_version}_linux_amd64.zip
+
+wget https://releases.hashicorp.com/terraform/1.4.2/terraform_1.4.2_linux_amd64.zip
 ```
 
 #### Unzip the compressed file
