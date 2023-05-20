@@ -63,6 +63,18 @@ ls -lat $HOME/.aws/
 aws configure list
 ```
 
+#### use a named profile
+refer to https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html#cli-configure-files-using-profiles
+
+``` bash
+export AWS_PROFILE="user1"
+```
+
+#### give the aws cli flag
+``` bash
+aws iam get-user --profile $AWS_NAMED_PROFILE
+```
+
 ---
 
 # C
