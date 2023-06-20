@@ -1,5 +1,9 @@
 # Cloud Provider Azure
 
+## Sign In with credentials on the command line
+``` bash
+az login -u <username> -p <password>
+```
 ## Azure Portal [Home - Microsoft Azure](https://portal.azure.com/#home)
 
 ### Create a Linux Ubuntu LTS VM
@@ -13,7 +17,7 @@ az vm create \
   --generate-ssh-keys
 ```
 
-### get your VM's IP address
+### Obtain the VM's IP address
 
 ```bash
 IPADDRESS="$(az vm list-ip-addresses \
@@ -50,55 +54,55 @@ az network nsg rule list \
   --output table
 ```
 
-### todo
+### List all resource groups located in the West US region
+
+```bash
+az group list --query "[?location=='westus']"
+```
+
+### Obtain Authentication info 
+e.g. ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_SUBSCRIPTION_ID, ARM_SUBSCRIPTION_ID
+```bash
+todo1
+```
+
+### todo2
 
 ```bash
 
 ```
 
-### todo
+### todo3
 
 ```bash
 
 ```
 
-### todo
+### todo4
 
 ```bash
 
 ```
 
-### todo
+### todo5
 
 ```bash
 
 ```
 
-### todo
+### todo6
 
 ```bash
 
 ```
 
-### todo
+### todo7
 
 ```bash
 
 ```
 
-### todo
-
-```bash
-
-```
-
-### todo
-
-```bash
-
-```
-
-### todo
+### todo8
 
 ```bash
 
