@@ -121,20 +121,18 @@ A Computer has a CPU processor, memory RAM, storage in form of a drive, connecti
 there are many: bash, fish, Zshell
 
 ### CLI Shell keyboard shortcuts
-
-- `ctrl + a`  moves cursor to beginning of line (a alphabet or first letter)
-- `ctrl + e`  moves cursor to end of line (Is also kinda close to letter `a` in the US keyboard)
-- `ctrl + w`  cuts the word to the left of the cursor.
-- `alt  + d`  cuts the word to the right of the cursor.
-- `ctrl + k`  cuts everything to the right of the cursor.
+- `ctrl + l`  clear  the screen
+- `ctrl + a`  moves cursor to beginning of line (A alphabet/first letter)
+- `ctrl + e`  moves cursor to end of line (Closer to letter `a` in the US keyboard)
+- `alt  + d`  cuts the word to the right of the cursor
+- `ctrl + k`  cuts everything to the right of the cursor
+- `ctrl + w`  cuts the word to the left of the cursor
 - `ctrl + u`  cuts everything to the left of the cursor.
 - `ctrl + y`  pastes back what you have just cut.
-- `ctrl + l`  clear  the screen
-- `ctrl + e + x` explanation below
+- `ctrl + e + x` opens editor. Explanation below
 
-```bash
 Type a Long command, e.g. add loops or some complex parsing logic. You need more editing power so you press
-
+```bash
                       ctrl + e + x
 
 Editors VIM(or Nano or VI etc.) opens with your command you had typed so far already in the buffer
