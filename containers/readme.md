@@ -248,7 +248,13 @@ docker-compose -f $DOCKER_COMPOSE_FILE exec SERVICE_NAME cat "logs/log-$(env TZ=
 docker-compose -f $DOCKER_COMPOSE_FILE exec SERVICE_NAME cat "logs/supervisord.log" | less
 ```
 # Kubernetes K8S
+### YAML processing app
 
+```bash
+echo 'yq() {
+  docker run --rm -i -v "${PWD}":/workdir mikefarah/yq yq "$@"
+}' | tee -a ~/.bashrc && source ~/.bashrc
+```
 #### Get the client version
 ``` bash
 kubectl version
