@@ -17,5 +17,4 @@
 update-alternatives --config java
 ```
 
-
 [Back to top](#)
