@@ -1,5 +1,25 @@
-## General Linux Server commands
-Get quick diagnostic about a server
+# General Linux Server commands
+
+## General Reusable Shell commands
+
+there are many: bash, fish, Zshell
+
+### CLI Shell keyboard shortcuts
+- `ctrl + l`  clear  the screen
+- `ctrl + a`  moves cursor to beginning of line (A alphabet/first letter)
+- `ctrl + e`  moves cursor to end of line (Closer to letter `a` in the US keyboard)
+- `alt  + d`  cuts the word to the right of the cursor
+- `ctrl + k`  cuts everything to the right of the cursor
+- `ctrl + w`  cuts the word to the left of the cursor
+- `ctrl + u`  cuts everything to the left of the cursor.
+- `ctrl + y`  pastes back what you have just cut.
+- `ctrl + e + x` opens editor. Explanation below
+
+Type a Long command, e.g. add loops or some complex parsing logic. You need more editing power so you press
+- `ctrl + e + x` text editor
+Editors VIM(or Nano or VI etc.) opens with your command you had typed so far already in the buffer
+
+## Get quick diagnostic about a server
 
 #### Get info about the linux distro
 OS type, Local IP, hostname and Architecture type
