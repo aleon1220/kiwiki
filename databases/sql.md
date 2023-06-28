@@ -61,3 +61,6 @@ hostname:port:database:username:password
 ```
 
 ## Microsoft SQL Server
+[Back to top](#)
+
+[Kiwiki Home](/../../)

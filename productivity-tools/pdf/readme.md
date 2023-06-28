@@ -38,3 +38,4 @@ pdftk source.pdf cat 5-10 output ExtractedOutput_p5-10.pdf
 ```bash
 pdftk source.pdf cat 5 6 10 output SplittedOutput.pdf
 ```
+[Back to top](#)
