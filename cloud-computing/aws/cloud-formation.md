@@ -22,3 +22,4 @@ aws cloudformation describe-stack-events --stack-name $MY_CLOUDFORMATION_STACKNA
 for stack in $(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE UPDATE_COMPLETE | jq -r '.StackSummaries[].StackName'); do aws cloudformation describe-stack-resources --stack-name $stack | jq -r '.StackResources[] | select (.ResourceType=="AWS::EC2::Instance")|.PhysicalResourceId'; done;
 ```
 [Back to top](#)
+[Kiwiki Home](./readme.md)
