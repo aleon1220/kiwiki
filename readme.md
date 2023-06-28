@@ -14,10 +14,9 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 
 - **2021-04-07=** processing inbox category
 > work by [andres.nz](www.andres.nz) A Colombian adopted by Kiwis since 2016
-<br> <br>
+<br>
 
 # Kiwiki Categories
-
 ## Cloud Providers
   1. [AWS](./aws/readme.md)
   2. [Azure](./azure/readme.md)
@@ -30,7 +29,7 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
   4. [gradle](./devops-tools/gradle)
   5. [maven](./devops-tools/maven)
 ### CD Tooling
-  - Spinnaker
+  - [Spinnaker](./devops-tools/CD/spinnaker.md)
 ## Software Developer Tooling
   - IDEs
 ## [LDAP](./LDAP/)
@@ -46,16 +45,16 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 
 ## Regular [expressions](./regex/readme.md)
 ## [Security](./security/)
-## Operating Systems
-  - ios
-  - linux
-  - windows
+# [Operating Systems](./operating-systems/readme.md)
+## [linux](./operating-systems/linux/readme.md)
+## [ios](./operating-systems/ios/readme.md)
+## [micro\$oft windows](./operating-systems/windows/readme.md)
 
-# [Docker Compute Containers](./containers/readme.md)
-# Windows [Micro\$oft windows](./windows/readme.md)
-> Executed in Powershell 7 in windows 10 that runs as a VM inside Linux ubuntu 18
-  
+# Compute Containers
+## [Docker](./containers/readme.md)
+
 # [Git](./git/readme.md)
+# Virtual Machines
 # [DataBases](./databases/sql.md)
 
 [Back to top](#)
