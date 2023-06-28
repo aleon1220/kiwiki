@@ -1,4 +1,8 @@
-# DevOps tooling
+# DevOps
+Software Development lifecycle practices
+
+CI Continous Integration
+CD 
 I have a KVM purchased by the company. I can plug in 4 laptops/computers at the same time.
 
 the purpose of this page is to define the DevOps Principles and tooling to be used throughout my career. 
