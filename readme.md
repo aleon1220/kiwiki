@@ -1,8 +1,8 @@
 <h1>KIWIKI</h1>
+
 ## Information Technology Wiki
 This project is a collection of CLI commands and utilities
-<br>
-## Introduction
+
 - **2019-11-10=** lost my google docs wiki file. I should have been more careful.
 - **2020-04-28=** I lost years of work on an Information Technology Wiki. This markdown wiki has been started since 2020
 
@@ -14,7 +14,6 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 
 - **2021-04-07=** processing inbox category
 > work by [andres.nz](www.andres.nz) A Colombian adopted by Kiwis since 2016
-<br>
 
 # Kiwiki Categories
 ## Cloud Providers

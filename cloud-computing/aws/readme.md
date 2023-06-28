@@ -52,7 +52,6 @@
       - [What are my VPCs in table format](#what-are-my-vpcs-in-table-format)
       - [What CIDRs have Ingress Access to which Ports? JQ](#what-cidrs-have-ingress-access-to-which-ports-jq)
       - [REFERENCES](#references)
-  - [Go Back to Kiwiki Home](#go-back-to-kiwiki-home)
 
 <!-- /code_chunk_output -->
 
@@ -296,4 +295,4 @@ aws ec2 describe-security-groups | \
 - [Newest &#39;amazon-cloudwatchlogs&#39; Questions - Stack Overflow](https://stackoverflow.com/questions/tagged/amazon-cloudwatchlogs)
 
 [Back to top of Page](#)
-## [Go Back to Kiwiki Home](./../readme.md)
+[Kiwiki Home](./readme.md)

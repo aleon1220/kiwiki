@@ -81,3 +81,4 @@ fields @timestamp, @message
 | limit 1000
 ```
 [Back to top](#)
+[Kiwiki Home](./readme.md)
