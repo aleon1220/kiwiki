@@ -15,3 +15,4 @@ convert -resize 50% source.png dest.jpg
 SIZE="1024X768"
 convert -resize $SIZE source.png destination.jpg
 ```
+[Back to top](#)

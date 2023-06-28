@@ -1,4 +1,7 @@
-# Windows= Command prompt & power shell
+# Windows
+Command prompt & power shell
+> Executed in WSL, Powershell 7 windows 10
+WSL is a virtualization layer that runs Linux distros in windows 10 and windows 11
 
 ## Get Windows License
 ``` cmd
