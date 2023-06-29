@@ -323,5 +323,10 @@ aws elbv2 register-targets \
     --target-group-arn $TG_ARN \
     --targets Id=$EC2_INSTANCE_ID
 ```
+
+## References
+- [Create EC2 inventory CLI](https://superadmins.com/creating-ec2-inventory-with-aws-cli/)
+
 [Back to top](#)
-[Kiwiki Home](./readme.md)
+
+[Kiwiki Home](/../../)

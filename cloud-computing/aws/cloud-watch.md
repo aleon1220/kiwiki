@@ -68,7 +68,7 @@ insight
 filter errorCode LIKE /UnauthorizedOperation/ or errorCode LIKE /AccessDenied/
 | fields eventTime, errorCode, userIdentity.sessionContext.sessionIssuer.userName, eventName, eventSource, 
 userAgent, errorMessage, @message
-| limit 5000  
+| limit 5000
 ```
 
 ### Logs Insights EC2
@@ -80,5 +80,11 @@ fields @timestamp, @message
 | sort @timestamp desc
 | limit 1000
 ```
+## References
+- [What is CloudWatch Logs? - AWS CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
+- [Filter and pattern syntax - AWS CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html)
+- [Newest &#39;amazon-cloudwatchlogs&#39; Questions - Stack Overflow](https://stackoverflow.com/questions/tagged/amazon-cloudwatchlogs)
+
 [Back to top](#)
-[Kiwiki Home](./readme.md)
+
+[Kiwiki Home](/../../)
