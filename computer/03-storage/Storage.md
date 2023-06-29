@@ -178,3 +178,5 @@ The file that keeps track of mounted devices is `/etc/fstab`
 sudo mount -a
 ```
 [Back to top](#)
+
+[Kiwiki Home](/../../)

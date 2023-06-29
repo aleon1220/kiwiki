@@ -880,5 +880,8 @@ Shift + Delete
 ```
 
 (Never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
-Many personal system and program configurations are stored under your home directory.)
+Many personal system and program configurations are stored under your home directory)
+
 [Back to top](#)
+
+[Kiwiki Home](/../../)
