@@ -10,4 +10,5 @@ export REPO_URL=$(aws codecommit create-repository --repository-name <name> | jq
 git clone $REPO_URL <name> && cd <name>
 ```
 [Back to top](#)
-[Kiwiki Home](./readme.md)
+
+[Kiwiki Home](/../../)
