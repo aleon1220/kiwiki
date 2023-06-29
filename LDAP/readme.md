@@ -8,6 +8,12 @@ details about LDAP and micro$soft Active directory.
 - [Active Directory](#active-directory)
   - [Queries examples](#queries-examples)
     - [Search Properties to validate in Active directory Studio](#search-properties-to-validate-in-active-directory-studio)
+      - [Get Users and Department](#get-users-and-department)
+      - [template](#template)
+      - [Persons with mail and department that they belong to](#persons-with-mail-and-department-that-they-belong-to)
+      - [userID, mail and department for people whame start with Alexander](#userid-mail-and-department-for-people-whame-start-with-alexander)
+      - [emailID and department of 2 given users (can add more if needed) uses estrict matching](#emailid-and-department-of-2-given-users-can-add-more-if-needed-uses-estrict-matching)
+      - [sAMAccountName, emailID and department of 2 given users (add more users if needed) uses OR `|` matching. It will bring an empty data column if it doesnt match](#samaccountname-emailid-and-department-of-2-given-users-add-more-users-if-needed-uses-or--matching-it-will-bring-an-empty-data-column-if-it-doesnt-match)
 
 # Active Directory
 implementation of LDAP by the micro$soft greed.
@@ -68,15 +74,17 @@ the queries were executed in Apache Directory Studio. It makes life easier to qu
 | Returning<br>Attributes | **sAMAccountName, mailNickname, department** |
 
 #### emailID and department of 2 given users (can add more if needed) uses estrict matching
-|                         |               |
+|                         | 2 attributes  |
 |-------------------------|---------------|
 | Filter                  | `(\&(objectClass=person)(mailNickname="john.doe", "another.user"))` |
 | Returning<br>Attributes | **mailNickname, department** |
 
 #### sAMAccountName, emailID and department of 2 given users (add more users if needed) uses OR `|` matching. It will bring an empty data column if it doesnt match
-|                         |               |
+|     Filter              | get 3 attributes |
 |-------------------------|---------------|
 | Filter                  | `(\|(objectClass=person)(mailNickname="john.doe", "another.user"))` |
 | Returning<br>Attributes | **sAMAccountName, mailNickname, department** |
 
 [Back to top](#)
+
+[Kiwiki Home](/../../)

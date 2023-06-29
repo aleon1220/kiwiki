@@ -504,3 +504,5 @@ zfs destroy datapool/fs1@10jan2020
 - [How to mount the zfs rpool while booted from CD SPARC](https://www.thegeekdiary.com/how-to-mount-the-zfs-rpool-while-booted-from-cd-sparc/)
 
 [Back to top](#)
+
+[Kiwiki Home](/../../)

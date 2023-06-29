@@ -17,3 +17,5 @@ less /etc/X11/xorg.conf
 xdpyinfo | grep dim
 ```
 [Back to top](#)
+
+[Kiwiki Home](/../../)

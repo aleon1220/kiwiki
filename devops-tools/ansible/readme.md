@@ -27,9 +27,11 @@ ok: [thor]
 ok: [devops]
 
 PLAY RECAP ***********************************************************************************************************************************************control                    : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-devops                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-odin                       : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-thor                       : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+server00-devops                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+server01-odin                       : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+server02-thor                       : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
 [Back to top](#)
+
+[Kiwiki Home](/../../)
