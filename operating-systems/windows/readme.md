@@ -25,8 +25,22 @@ wsl --install
 
 #### Restart the Hyper-v service
 Encounter a WSL2 error
+> Logon failure: the user has not been granted the requested logon type at this computer.
+> Error code: Wsl/Service/CreateInstance/CreateVm/0x80070569
+
 ``` powershell
 Restart-Service vmcompute
+```
+
+### WSL management
+#### WSL off
+``` powershell
+wsl --shutdown
+```
+
+#### Eestarting WSL2
+``` powershell
+Restart-Service LxssManager
 ```
 
 ## Command Prompt 
