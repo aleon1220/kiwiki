@@ -29,7 +29,7 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 2. [Azure](./cloud-computing/azure/readme.md)
 3. [Google Cloud Engine](./cloud-computing/gce/readme.md)
 
-## [computer](./computer/README.md)
+## [computer](./computer/readme.md)
 
 ## Compute Containers
 
