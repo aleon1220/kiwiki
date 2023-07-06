@@ -23,13 +23,13 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 
 ## Companies
 
-## cloud-Computing
+## Cloud Computing
 
 1. [AWS](./cloud-computing/aws/readme.md)
 2. [Azure](./cloud-computing/azure/readme.md)
 3. [Google Cloud Engine](./cloud-computing/gce/readme.md)
 
-## [computer](./computer/readme.md)
+## [Computer](./computer/readme.md)
 
 ## Compute Containers
 
@@ -48,7 +48,7 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 
 ### CI Continous Integration Tooling
 
-2. [jenkins](./devops-tools/CI/jenkins/)
+2. [Jenkins](./devops-tools/CI/jenkins/)
 
 ### CD Continous Deployment/Delivery Tooling
 
@@ -58,7 +58,7 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 
 ### [Infrastructure as a Config/Code](./devops-tools/IaC/readme.md)
 
-1. [terraform](./devops-tools/IaC/terraform/readme.md)
+1. [Terraform](./devops-tools/IaC/terraform/readme.md)
 
 ### productivity-tools
 
@@ -70,7 +70,7 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 
 ## [LDAP](./LDAP/)
 
-## [multimedia](./multimedia/readme.md)
+## [Multimedia](./multimedia/readme.md)
 
 ## Networking
 
@@ -78,9 +78,9 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 
 - [Linux](./operating-systems/linux/readme.md)
 
-- [ios](./operating-systems/ios/readme.md)
+- [Ios](./operating-systems/ios/readme.md)
 
-- [micro\$oft windows](./operating-systems/windows/readme.md)
+- [Micro\$oft windows](./operating-systems/windows/readme.md)
 
 ## [Salesforce](./Salesforce/readme.md)
 
@@ -89,7 +89,7 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 ### Programming Languages
 
 - [Java](./programming-languages/java/readme.md)
-- [javascript](./programming-languages/java/readme.md)
+- [Javascript](./programming-languages/java/readme.md)
 - [Python](./programming-languages/python/readme.md)
 - [Regular expressions](./regex/readme.md)
 

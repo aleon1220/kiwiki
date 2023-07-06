@@ -1,4 +1,13 @@
-# Obboarding checklists
+- [On-boarding](#on-boarding)
+  - [New Job](#new-job)
+    - [First week at work](#first-week-at-work)
+- [On-Boarding processes](#on-boarding-processes)
+  - [Setting up dev laptop](#setting-up-dev-laptop)
+    - [Second week](#second-week)
+- [Analyze the Software Development Lifecyle and culture of a company](#analyze-the-software-development-lifecyle-and-culture-of-a-company)
+
+[Kiwiki Home](/../../)
+# On-boarding
 Useful for starting in new environments
 
 ## New Job
@@ -17,6 +26,9 @@ The first week absorv as much as you can
   - what does the culture feel like?
   - How fast paced does it feel?
   - Ask 3 questions daily
+
+# On-Boarding processes
+Tips for onboarding to a new company
 
 ## Setting up dev laptop
 - If windows get admin priveleges ASAP
