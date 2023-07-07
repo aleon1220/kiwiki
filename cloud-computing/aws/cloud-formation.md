@@ -1,4 +1,10 @@
-# AWS Cloud Formation
+- [IaC Cloud Formation](#iac-cloud-formation)
+      - [How Many CloudFormation Stacks do I have in each Status? JQ](#how-many-cloudformation-stacks-do-i-have-in-each-status-jq)
+      - [Number of cloudformation stack objects](#number-of-cloudformation-stack-objects)
+      - [Which EC2 Instances were created by AWS CF Stacks?](#which-ec2-instances-were-created-by-aws-cf-stacks)
+
+[Kiwiki Home](/../../)
+# IaC Cloud Formation
 Infrastructure as a configuration JSON or YAML
 https://docs.aws.amazon.com/cloudformation/?icmpid=docs_homepage_mgmtgov
 

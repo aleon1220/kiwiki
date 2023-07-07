@@ -1,3 +1,20 @@
+- [AWS CloudWatch](#aws-cloudwatch)
+    - [CloudWatch Agent](#cloudwatch-agent)
+      - [cloudwatch agent Logs Location](#cloudwatch-agent-logs-location)
+      - [log config file](#log-config-file)
+    - [Cloudwatch Logs](#cloudwatch-logs)
+      - [Exploring Log Streams JQ](#exploring-log-streams-jq)
+      - [Get the first log stream JQ](#get-the-first-log-stream-jq)
+      - [Loop through the groups and streams to get the last 10 messages since midnight JQ](#loop-through-the-groups-and-streams-to-get-the-last-10-messages-since-midnight-jq)
+      - [AWS CloudWatch Logs set to 30 days](#aws-cloudwatch-logs-set-to-30-days)
+    - [Logs Insights CloudTrail](#logs-insights-cloudtrail)
+    - [Logs insights CloudTrail](#logs-insights-cloudtrail-1)
+      - [Run the metric filter above in cloudwatch logs insights syntax](#run-the-metric-filter-above-in-cloudwatch-logs-insights-syntax)
+    - [Logs Insights EC2](#logs-insights-ec2)
+    - [Logs Insights RDS](#logs-insights-rds)
+  - [References](#references)
+
+[Kiwiki Home](/../../)
 # AWS CloudWatch
 Management & Governance
 https://docs.aws.amazon.com/cloudwatch/
