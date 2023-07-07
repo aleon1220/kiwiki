@@ -1,3 +1,5 @@
+[Kiwiki Home](/../../)
+
 # Computer
 
 > the Personal Computer, one of the best inventions of the century?

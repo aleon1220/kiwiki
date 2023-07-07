@@ -1,9 +1,26 @@
+- [Compute Storage](#compute-storage)
+  - [Process for Linux + `LVM` + `ext3`](#process-for-linux--lvm--ext3)
+      - [View your available disk devices, mount points (if applicable) to help you determine the correct device name to use](#view-your-available-disk-devices-mount-points-if-applicable-to-help-you-determine-the-correct-device-name-to-use)
+      - [Get information about the devices attached to the instance](#get-information-about-the-devices-attached-to-the-instance)
+      - [Get manufacturer details for the device in a given format](#get-manufacturer-details-for-the-device-in-a-given-format)
+      - [Get `UUID` of the device (expensive command)](#get-uuid-of-the-device-expensive-command)
+      - [Get `UUID` of the device](#get-uuid-of-the-device)
+      - [Get `UUID` of the device using long format flags](#get-uuid-of-the-device-using-long-format-flags)
+      - [Make an USB bootable with a debian ISO](#make-an-usb-bootable-with-a-debian-iso)
+      - [DMI table decoder](#dmi-table-decoder)
+      - [Get/set SATA/IDE device parameters](#getset-sataide-device-parameters)
+      - [Get information about a specific device, such as its file system type.  If the output shows simply data, there is no filesystem in the device](#get-information-about-a-specific-device-such-as-its-file-system-type--if-the-output-shows-simply-data-there-is-no-filesystem-in-the-device)
+        - [Confirm mounted loop device kernel module](#confirm-mounted-loop-device-kernel-module)
+        - [Info about mount the loop device kernel module](#info-about-mount-the-loop-device-kernel-module)
+      - [Show ID of Block devices](#show-id-of-block-devices)
+        - [Mount an ISO file as loop device](#mount-an-iso-file-as-loop-device)
+      - [Mount all filesystems](#mount-all-filesystems)
+
+[Kiwiki Home](/../../)
 # Compute Storage
 Hard drives, volumes, SSDs, mounts, filesystem, etc
 
-## Linux
-
-### Process for Linux + `LVM` + `ext3`
+## Process for Linux + `LVM` + `ext3`
 
 LVM volume group myvg, mounted volume name `uservol1` and disk device in Linux is `/dev/sdf`
 
