@@ -1,3 +1,9 @@
+- [Secrets Manager](#secrets-manager)
+      - [Create a secret with a binary file in this case a java keystore JKS](#create-a-secret-with-a-binary-file-in-this-case-a-java-keystore-jks)
+      - [Create a secret as a key and value format from a json file](#create-a-secret-as-a-key-and-value-format-from-a-json-file)
+      - [Obtain a secret that contains JSON data as a SecretString and list the JSON keys](#obtain-a-secret-that-contains-json-data-as-a-secretstring-and-list-the-json-keys)
+
+[Kiwiki Home](/../../)
 # Secrets Manager
 Passwords
 

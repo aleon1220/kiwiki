@@ -1,7 +1,3 @@
-# AWS CLI commands
-
-<!-- code_chunk_output -->
-
 - [AWS CLI commands](#aws-cli-commands)
 - [Introduction](#introduction)
   - [AWS Amazon Web services General](#aws-amazon-web-services-general)
@@ -34,7 +30,8 @@
   - [VPC](#vpc)
       - [References](#references)
 
-<!-- /code_chunk_output -->
+[Kiwiki Home](/../../)
+# AWS CLI commands
 
 # Introduction
 
