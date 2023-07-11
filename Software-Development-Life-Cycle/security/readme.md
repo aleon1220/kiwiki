@@ -1,9 +1,5 @@
 # Security and chryptography
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
 - [Security and chryptography](#security-and-chryptography)
   - [Security and Chryptography](#security-and-chryptography-1)
       - [2020-09-25 Security Task for Android](#2020-09-25-security-task-for-android)
@@ -64,7 +60,7 @@
       - [Get content of default name of Public Key](#get-content-of-default-name-of-public-key)
       - [Add an SSH key to a remote Server](#add-an-ssh-key-to-a-remote-server)
 
-<!-- /code_chunk_output -->
+[Kiwiki Home](/../../)
 
 ## Security and Chryptography
 
