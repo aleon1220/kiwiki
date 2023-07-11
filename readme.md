@@ -88,14 +88,14 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 
 ### Programming Languages
 
-- [Java](./programming-languages/java/readme.md)
-- [Javascript](./programming-languages/java/readme.md)
-- [Python](./programming-languages/python/readme.md)
-- [Regular expressions](./regex/readme.md)
+- [Java](./Software-Development-Life-Cycle/programming-languages/java/readme.md)
+- [Javascript](./Software-Development-Life-Cycle/programming-languages/java/readme.md)
+- [Python](./Software-Development-Life-Cycle/programming-languages/python/readme.md)
+- [Regular expressions](./Software-Development-Life-Cycle/regex/readme.md)
 
 ### [Security](./Software-Development-Life-Cycle/security/readme.md)
 
-### Testing
+### [Testing](./Software-Development-Life-Cycle/testing/readme.md)
 
 ## [Virtualization](./Virtualization/readme.md)
 
