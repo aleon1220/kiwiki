@@ -1,3 +1,25 @@
+- [Jenkins](#jenkins)
+      - [Upgrade Jenkins version in monolith servers](#upgrade-jenkins-version-in-monolith-servers)
+  - [Admin Tasks](#admin-tasks)
+      - [Get the version with the CLI](#get-the-version-with-the-cli)
+  - [Useful functions and tools](#useful-functions-and-tools)
+    - [Variables](#variables)
+    - [Validate the Jenkinsfile Pipeline](#validate-the-jenkinsfile-pipeline)
+    - [Test Groovy code](#test-groovy-code)
+    - [Use a Linter to validate Jenkins File](#use-a-linter-to-validate-jenkins-file)
+    - [Example of using startup flags](#example-of-using-startup-flags)
+  - [Jenkins Docker Container](#jenkins-docker-container)
+      - [Run Jenkins from a Docker Container and install plugins from a list](#run-jenkins-from-a-docker-container-and-install-plugins-from-a-list)
+      - [Build the Docker image](#build-the-docker-image)
+      - [Start the container based on the built image](#start-the-container-based-on-the-built-image)
+    - [Use the jenkins-plugin-cli to install](#use-the-jenkins-plugin-cli-to-install)
+      - [Lists the Credentials in a specific Store](#lists-the-credentials-in-a-specific-store)
+    - [Jenkins Kubernetes Helm Chart](#jenkins-kubernetes-helm-chart)
+    - [Jenkins Glossary](#jenkins-glossary)
+    - [Distributed Builds Terminology](#distributed-builds-terminology)
+    - [Plugins used up to this point 2020](#plugins-used-up-to-this-point-2020)
+
+[Kiwiki Home](/../../)
 # Jenkins
 www.jenkins.io
 
