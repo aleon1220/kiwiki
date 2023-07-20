@@ -1,3 +1,4 @@
+[Kiwiki Home](/../../)
 # VS Code setup for a DevOps Engineer
 This sets up VScode for a DevOps engineer
 - docker and kubernetes plugins

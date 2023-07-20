@@ -1,3 +1,9 @@
+- [DevOps](#devops)
+  - [Principles](#principles)
+  - [Tooling](#tooling)
+    - [Software tools common](#software-tools-common)
+
+[Kiwiki Home](/../../)
 # DevOps
 Software Development lifecycle practices
 
@@ -16,7 +22,6 @@ the purpose of this page is to define the DevOps Principles and tooling to be us
 1. Sometimes you just have to say yes sir or yes madam
 1. sometimes the culture will be very hesitant to change. Just accept that you can only change yourself and slowly impact the environment around you
 
-
 ## Tooling
 At work they have provided a windows 11 laptop, my personal Linux ubuntu 2020 laptop, a toshiba laptop with windows 10 and there will be a somehow powerful Computer with GPU for video games and machine learning processing.
 
@@ -32,7 +37,7 @@ At work they have provided a windows 11 laptop, my personal Linux ubuntu 2020 la
 1. git https://git-scm.com/downloads
 1. Docker desktop or replacement TODO if you need to pay
 1. calibre 64bit - E-book management with a local copy of the library from dropbox (use a windows parent father laptop. the personal one)
-1. Anaconda3
+1. Anaconda
 1. RescueTime
 1. terraform
 1. aws cli
