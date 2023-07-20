@@ -1,20 +1,16 @@
-# LDAP Implementations
-Lightweight Directory Access Protocol
-
-details about LDAP and micro$soft Active directory.
-
-
 - [LDAP Implementations](#ldap-implementations)
 - [Active Directory](#active-directory)
   - [Queries examples](#queries-examples)
     - [Search Properties to validate in Active directory Studio](#search-properties-to-validate-in-active-directory-studio)
       - [Get Users and Department](#get-users-and-department)
-      - [template](#template)
       - [Persons with mail and department that they belong to](#persons-with-mail-and-department-that-they-belong-to)
       - [userID, mail and department for people whame start with Alexander](#userid-mail-and-department-for-people-whame-start-with-alexander)
       - [emailID and department of 2 given users (can add more if needed) uses estrict matching](#emailid-and-department-of-2-given-users-can-add-more-if-needed-uses-estrict-matching)
       - [sAMAccountName, emailID and department of 2 given users (add more users if needed) uses OR `|` matching. It will bring an empty data column if it doesnt match](#samaccountname-emailid-and-department-of-2-given-users-add-more-users-if-needed-uses-or--matching-it-will-bring-an-empty-data-column-if-it-doesnt-match)
 
+[Kiwiki Home](/../../)
+# LDAP Implementations
+Lightweight Directory Access Protocol. LDAP and micro$soft Active directory
 # Active Directory
 implementation of LDAP by the micro$soft greed.
 
@@ -53,13 +49,6 @@ the queries were executed in Apache Directory Studio. It makes life easier to qu
 |     DN                  |    Department           |
 |-------------------------|---------------|
 | `"CN=User name,OU=Users,OU=Chicago,OU=USA,OU=AMERICAS,OU=MAIN,DC=EXAMPLE,DC=ORG,DC=INT"` | `"Human Resources"`|
-
-#### template
-|                         |               |
-|-------------------------|---------------|
-| Filter                  |             |
-| Returning<br>Attributes |             |
-
 
 #### Persons with mail and department that they belong to
 |                         |               |
