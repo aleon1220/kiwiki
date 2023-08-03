@@ -57,7 +57,7 @@ alias mv='mv -i'
 ```bash
 alias apt-get="sudo apt-get"
 alias updatey="sudo apt-get -y"
-alias update='sudo apt-get update && sudo apt-get upgrade'
+alias update="sudo apt-get update && sudo apt-get upgrade"
 ```
 ### RHEL, CentOS, Fedora
 ```bash
@@ -74,13 +74,14 @@ cat ~/.bash_history | tr "\|\;" "\n" | sed -e "s/^ //g" | cut -d " " -f 1 | sort
 ``` bash
 from=1990
 years=30
-for i in {0..30}; do
-      echo "mkdir $from the value of i=$i"
+
+for i in {0..$years}; do
+      echo "mkdir -pv $from the value of i=$i"
       from=$(( $from + 1 ))
 done
 ```
 
-#### Rename lots of files to trim annoying unwanted strings "ANNOYING_STRING-"
+#### Rename files to trim unwanted string "ANNOYING_STRING-"
 Use rename if you want it to operate faster
 ```bash
 for file in * ; do
@@ -88,13 +89,14 @@ for file in * ; do
 done
 ```
 
-#### Quick set up Bash Functions (included here)
+#### Quick set up Bash Functions
 - From this directory copy the resources to your $HOME/
 ```bash
 cp --recursive .bash_functions/ $HOME
 cp .bash_aliases $HOME
 ```
-- Append to the end of your .bashrc file
+- Append to the end of your `.bashrc` file
+
 ```bash
 cat <<EOF >> $HOME/.bashrc
 
@@ -116,7 +118,7 @@ ln -s lsd lsf
 ln -s lsd lsx
 ```
 
-#### Terminate an SSH session that got stuck `~?`
+#### Terminate an SSH session that got stuck
 ``` bash
 $ ~?
 Supported escape sequences:
@@ -135,7 +137,7 @@ Supported escape sequences:
 
 #### Bash process substitution
 ``` bash
-echo <(printf "hey thereall \n")
+echo <(printf "hi all \n")
 ```
 
 there is a built-in command called `complete`. Example to execute the auto complete feature for AWSCLI
@@ -247,7 +249,6 @@ zip -r "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}.upd" "${OTA_ARTIFACTS_OUT_DIR}/${BU
 - `#*` and `##*` for prefix manipulation
 - `%` and `%%` for suffix manipulation
 - `^^` for pattern substitution of previous command
-
 - `sudo !!` to run previous command with sudo privileges.
 - `grep -Ev '^#|^\$' $file` will display file content without comments or empty lines."
 
