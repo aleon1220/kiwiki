@@ -1,8 +1,118 @@
+- [General Linux Server commands](#general-linux-server-commands)
+    - [CLI Shell keyboard shortcuts](#cli-shell-keyboard-shortcuts)
+  - [Get quick diagnostic about a server](#get-quick-diagnostic-about-a-server)
+      - [Get info about the linux distro](#get-info-about-the-linux-distro)
+      - [Check the hidden directories and files in the HOME dir](#check-the-hidden-directories-and-files-in-the-home-dir)
+      - [Check bash customizations current user](#check-bash-customizations-current-user)
+      - [Check status of linux services](#check-status-of-linux-services)
+      - [Get info about linux version](#get-info-about-linux-version)
+      - [Get pretty print version](#get-pretty-print-version)
+      - [Debian/ubuntu get detailed info](#debianubuntu-get-detailed-info)
+  - [Systemd Systemctl](#systemd-systemctl)
+      - [Check status of a Service](#check-status-of-a-service)
+      - [Check if service is Active](#check-if-service-is-active)
+      - [List all loaded service units](#list-all-loaded-service-units)
+      - [List all enabled units](#list-all-enabled-units)
+      - [List loaded services](#list-loaded-services)
+      - [List enabled services](#list-enabled-services)
+      - [Services that are loaded but not enabled](#services-that-are-loaded-but-not-enabled)
+      - [Diff the missing services. Quick glance of missing](#diff-the-missing-services-quick-glance-of-missing)
+      - [`pushd` and `popd` to jump between directories](#pushd-and-popd-to-jump-between-directories)
+      - [Reload system configs](#reload-system-configs)
+    - [Debugging Logs](#debugging-logs)
+      - [Analyse Logs. Logs named 3 to 31.gz month. Month like Feb 2020 and print](#analyse-logs-logs-named-3-to-31gz-month-month-like-feb-2020-and-print)
+      - [Xclip to capture the clipboard when copying](#xclip-to-capture-the-clipboard-when-copying)
+      - [Check a dir with a parameter. Double check `info stat`](#check-a-dir-with-a-parameter-double-check-info-stat)
+      - [Copy files from Local to Remote Server](#copy-files-from-local-to-remote-server)
+  - [Compression/Decompression of files](#compressiondecompression-of-files)
+      - [Decompress with Tar](#decompress-with-tar)
+      - [Decompress with Zip](#decompress-with-zip)
+      - [batch extract all files to a specific directory](#batch-extract-all-files-to-a-specific-directory)
+      - [Create a parent directory with 2 directories inside (Single line)](#create-a-parent-directory-with-2-directories-inside-single-line)
+  - [Find/Search operations](#findsearch-operations)
+      - [Search for the text ‘data’ within files that ends with md](#search-for-the-text-data-within-files-that-ends-with-md)
+      - [Find the file ‘LICENSE’ in just the current directory and 1 subdirectory level](#find-the-file-license-in-just-the-current-directory-and-1-subdirectory-level)
+      - [Find files containing specific text](#find-files-containing-specific-text)
+      - [Find the value of `THING_NAME` and replaces the value in a given config file](#find-the-value-of-thing_name-and-replaces-the-value-in-a-given-config-file)
+      - [Searches for (short form `-Eri`) string health\_url in the current directory](#searches-for-short-form--eri-string-health_url-in-the-current-directory)
+      - [Find directories modified within the past 10 days](#find-directories-modified-within-the-past-10-days)
+      - [It should find the HTTPD user in a web server](#it-should-find-the-httpd-user-in-a-web-server)
+  - [Package Management](#package-management)
+    - [APT](#apt)
+      - [Auto remove Obsolete packages](#auto-remove-obsolete-packages)
+      - [update and then Upgrade packages](#update-and-then-upgrade-packages)
+      - [List a package by name e.g. python](#list-a-package-by-name-eg-python)
+      - [List installed packages](#list-installed-packages)
+      - [Fix broken install packages](#fix-broken-install-packages)
+      - [Reinstall a package (better than removing or purging)](#reinstall-a-package-better-than-removing-or-purging)
+      - [Purge a package](#purge-a-package)
+      - [Show GPG keys in the keyring for signing apps](#show-gpg-keys-in-the-keyring-for-signing-apps)
+      - [Remove PPA repository record](#remove-ppa-repository-record)
+      - [Remove a PPA from the source list in the terminal](#remove-a-ppa-from-the-source-list-in-the-terminal)
+      - [Install a Debian Package](#install-a-debian-package)
+      - [Check if Periodic updates are enabled](#check-if-periodic-updates-are-enabled)
+      - [Get packages from repo and find given string](#get-packages-from-repo-and-find-given-string)
+      - [list snap packages installed](#list-snap-packages-installed)
+  - [Debugging Linux Systems (mostly Ubuntu)](#debugging-linux-systems-mostly-ubuntu)
+      - [Check the system log](#check-the-system-log)
+      - [Create empty file in given path](#create-empty-file-in-given-path)
+      - [List directory with extensions](#list-directory-with-extensions)
+      - [lists open files for current user](#lists-open-files-for-current-user)
+      - [Retrieve processes running on a specified port range](#retrieve-processes-running-on-a-specified-port-range)
+      - [End all processes for a target user](#end-all-processes-for-a-target-user)
+      - [Read from a file in a specific line e.g. 4](#read-from-a-file-in-a-specific-line-eg-4)
+  - [Handling Logs](#handling-logs)
+      - [Commong logs in linux](#commong-logs-in-linux)
+      - [Check System Logs Journal Control](#check-system-logs-journal-control)
+      - [Obtain Log output with admin permissions](#obtain-log-output-with-admin-permissions)
+      - [Check system logs](#check-system-logs)
+      - [Obtain Log output from oldest to newest](#obtain-log-output-from-oldest-to-newest)
+      - [Monitor New Log Messages](#monitor-new-log-messages)
+      - [Show Logs within a Time Range](#show-logs-within-a-time-range)
+      - [List SystemBoots](#list-systemboots)
+      - [Show Logs for a Specific Boot](#show-logs-for-a-specific-boot)
+      - [Show Logs for a systemd Service](#show-logs-for-a-systemd-service)
+      - [View Kernel Messages](#view-kernel-messages)
+      - [change Output Format to json-pretty](#change-output-format-to-json-pretty)
+      - [Manually Clean Up Archived Logs](#manually-clean-up-archived-logs)
+      - [Reduce the size of your journals to 2GiB](#reduce-the-size-of-your-journals-to-2gib)
+      - [Remove archived journal files with dates older than the specified relative time](#remove-archived-journal-files-with-dates-older-than-the-specified-relative-time)
+      - [Create a Symbolic Link](#create-a-symbolic-link)
+      - [Get text between quotes in a text file. Options](#get-text-between-quotes-in-a-text-file-options)
+      - [Check System Disk Usage](#check-system-disk-usage)
+      - [List Users in Linux](#list-users-in-linux)
+      - [Display only the username](#display-only-the-username)
+      - [Get a List of all Users in a Linux System](#get-a-list-of-all-users-in-a-linux-system)
+      - [Set a new password for user `root`](#set-a-new-password-for-user-root)
+      - [Set a new password for your own user](#set-a-new-password-for-your-own-user)
+      - [Check the UID\_MIN and UID\_MIN values on your system, you can use the following command](#check-the-uid_min-and-uid_min-values-on-your-system-you-can-use-the-following-command)
+      - [The command below will list all normal users in our Linux system](#the-command-below-will-list-all-normal-users-in-our-linux-system)
+      - [Generic info about users from a Linux system](#generic-info-about-users-from-a-linux-system)
+      - [Print only the usernames in a Linux System](#print-only-the-usernames-in-a-linux-system)
+      - [Search for execution of a given command in the history](#search-for-execution-of-a-given-command-in-the-history)
+      - [Set max map count](#set-max-map-count)
+      - [Sho contents of a directory in a tree format with `gio` Gnome Input/Output](#sho-contents-of-a-directory-in-a-tree-format-with-gio-gnome-inputoutput)
+- [Terminals](#terminals)
+      - [20 Most used commands in bash history](#20-most-used-commands-in-bash-history)
+      - [10 Most used commands in Bash History](#10-most-used-commands-in-bash-history)
+      - [List all files in a current directory](#list-all-files-in-a-current-directory)
+      - [Script usage= `lsf` lists files, `lsd` lists directories, `lsx` lists executables, `lsl` lists links](#script-usage-lsf-lists-files-lsd-lists-directories-lsx-lists-executables-lsl-lists-links)
+      - [start a process in the background](#start-a-process-in-the-background)
+      - [Create a string with the current date in the format **YYYY-MM-DD\_HHMM**](#create-a-string-with-the-current-date-in-the-format-yyyy-mm-dd_hhmm)
+      - [Create a dir and run a command in 1 line](#create-a-dir-and-run-a-command-in-1-line)
+      - [Create a file and add content to it](#create-a-file-and-add-content-to-it)
+      - [Create a function to show files in current dir](#create-a-function-to-show-files-in-current-dir)
+      - [Clear Bash terminal Screen](#clear-bash-terminal-screen)
+      - [Exit from terminal](#exit-from-terminal)
+- [Operating Systems](#operating-systems)
+  - [Linux Ubuntu](#linux-ubuntu)
+    - [System settings](#system-settings)
+    - [Nautilus operation Keyboard shortcuts](#nautilus-operation-keyboard-shortcuts)
+  - [References](#references)
+
+[Kiwiki Home](/../../)
 # General Linux Server commands
-
-## General Reusable Shell commands
-
-there are many: bash, fish, Zshell
+Shells available: bash, fish, Zshell
 
 ### CLI Shell keyboard shortcuts
 - `ctrl + l`  clear  the screen
@@ -17,6 +127,7 @@ there are many: bash, fish, Zshell
 
 Type a Long command, e.g. add loops or some complex parsing logic. You need more editing power so you press
 - `ctrl + e + x` text editor
+
 Editors VIM(or Nano or VI etc.) opens with your command you had typed so far already in the buffer
 
 ## Get quick diagnostic about a server
@@ -30,10 +141,10 @@ lsb_release -a ; hostname -I ; hostname ; getconf LONG_BIT
 #### Check the hidden directories and files in the HOME dir
 
 ```bash
-todo $HOME
+ls --all $HOME
 ```
 
-#### Check bash customizations in the current user
+#### Check bash customizations current user
 
 ```bash
 id
@@ -104,34 +215,32 @@ systemctl list-units -all | grep loaded | awk '{print $1;}'
 systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt
 ```
 
-#### List all loaded services
-
-Make sure that all the services we use are in the startup script
+#### List loaded services
 
 ```bash
 systemctl list-units -all | grep service | grep loaded | awk '{print $1;}'
 ```
 
-#### List all enabled services
+#### List enabled services
 
 ```bash
 systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
 ```
 
-#### Find the list of services that are loaded but not enabled
-
+#### Services that are loaded but not enabled
+3 commands to find the diff
 ```bash
 systemctl list-units -all | grep service | grep loaded | awk '{print $1;}' > loaded.txt
 
 systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
-
-# Diff the files
-diff -y loaded.txt enabled.txt
 ```
 
 #### Diff the missing services. Quick glance of missing
 
 ```bash
+# Diff the files
+diff -y loaded.txt enabled.txt
+
 diff -y loaded.txt enabled.txt | grep '<'
 ```
 
@@ -144,7 +253,7 @@ popd
 
 #### Reload system configs
 
-The settings are read from all of the following system configuration files:
+The settings are read from all of the following system configuration files
 
 1. /run/sysctl.d/*.conf
 2. /etc/sysctl.d/*.conf
@@ -152,8 +261,6 @@ The settings are read from all of the following system configuration files:
 4. /usr/lib/sysctl.d/*.conf
 5. /lib/sysctl.d/*.conf
 6. /etc/sysctl.conf
-
-   [source cyberciti](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl/)
 
 ```bash
 sudo sysctl --system
@@ -234,6 +341,13 @@ tar -czvf name-of-archive.tar.gz /path/to/directory-or-file
 zip -r compressedFileName.zip file1 file2 dir1/ file3
 ```
 
+####  batch extract all files to a specific directory
+```bash
+for i  in  $(find . –name “*.zip”–type f)
+do
+unzip –d $i /data/www/img/
+done
+```
 #### Create a parent directory with 2 directories inside (Single line)
 
 ```bash
@@ -746,13 +860,16 @@ gio tree
 
 > ## more in the [Bash Section](/devops-tools/bash)
 
-#### Most used commands in Bash History
+#### 20 Most used commands in bash history
+```bash
+cat ~/.bash_history | grep -v ^# | awk '{print $1}' | sort | uniq -c | sort -nr | head -20
+```
+#### 10 Most used commands in Bash History
+4 columns No | procId | percentage usage | command
 
 ```bash
-history | \
-awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " "CMD[a]/count*100 "% " a;}' | \
-grep -v "./" | column -c3 -s " " -t | \
-sort -nr | nl | head -n10
+history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " "CMD[a]/count*100 "% " a;}' | \
+grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10
 ```
 
 #### List all files in a current directory
@@ -842,45 +959,47 @@ GROUP_NAME="common" ; sudo chown :\$GROUP_NAME \*
 
 ### System settings
 
-### Nautilus operations
+### Nautilus operation Keyboard shortcuts
 
-#### Show hidden files Keyboard shortcut
+- Show hidden files Keyboard shortcut
 
 ```bash
 CTRL + H
 ```
 
-#### Show Path Location Keyboard shortcut
+- Show Path Location Keyboard shortcut
 
 ```bash
 CTRL + L
 ```
 
-#### Switch between the Icons and List formats
+- Switch between the Icons and List formats
 
 ```bash
 CTRL + 1 | CTRL + 2
 ```
 
-#### Search for files
+- Search for files
 
 ```bash
 CTRL + F
 ```
 
-#### Delete File(s)
+- Delete File(s)
 
 ```bash
 CTRL + delete
 ```
 
-#### Permanently delete
+- Permanently delete
 ```bash
 Shift + Delete
 ```
-
 (Never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
 Many personal system and program configurations are stored under your home directory)
+
+## References
+- [source cyberciti](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl/)
 
 [Back to top](#)
 
