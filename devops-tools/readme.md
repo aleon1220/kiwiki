@@ -1,14 +1,17 @@
 - [DevOps](#devops)
   - [Principles](#principles)
   - [Tooling](#tooling)
-    - [Software tools common](#software-tools-common)
+  - [Software tools common Win/Linux](#software-tools-common-winlinux)
+    - [Linux Setup](#linux-setup)
+    - [Windows Enterprise Setup](#windows-enterprise-setup)
 
 [Kiwiki Home](/../../)
 # DevOps
 Software Development lifecycle practices
 
 CI Continous Integration
-CD 
+CD Continous Delivery/Deployment
+
 I have a KVM purchased by the company. I can plug in 4 laptops/computers at the same time.
 
 the purpose of this page is to define the DevOps Principles and tooling to be used throughout my career. 
@@ -16,7 +19,7 @@ the purpose of this page is to define the DevOps Principles and tooling to be us
 ## Principles
 1. Serve. Servant Leader
 1. Listen first always. When speaking keep it short and concise
-1. Never use you
+1. Never use You
 1. dont take offence. people dont have the understanding you as a professional have gathered
 1. Do your very best and God will do the rest
 1. Sometimes you just have to say yes sir or yes madam
@@ -30,11 +33,11 @@ At work they have provided a windows 11 laptop, my personal Linux ubuntu 2020 la
 1. personal laptop linux ubuntu 20 lenovo
 1. PC with good GPU and CPU Custom
 
-### Software tools common
+## Software tools common Win/Linux
 1. vscode
 1. eclipse for java
 1. 1password (subscription required)
-1. git https://git-scm.com/downloads
+1. git [CLI](https://git-scm.com/downloads)
 1. Docker desktop or replacement TODO if you need to pay
 1. calibre 64bit - E-book management with a local copy of the library from dropbox (use a windows parent father laptop. the personal one)
 1. Anaconda
@@ -46,6 +49,15 @@ At work they have provided a windows 11 laptop, my personal Linux ubuntu 2020 la
 1. WSL with ubuntu 20 as the instance
 1. WSL extra kernel feature with manual steps (win10) https://docs.microsoft.com/en-us/windows/wsl/install-manual
 1. windows only. terminal https://docs.microsoft.com/en-us/windows/terminal/install#installation
+
+### Linux Setup 
+My Ubuntu 22 set up
+
+### Windows Enterprise Setup 
+Windows11 setup at work
+
+- WSL [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/)
+- Windows Terminal [WT](https://learn.microsoft.com/en-us/windows/terminal/install#installation)
 
 [Back to top](#)
 
