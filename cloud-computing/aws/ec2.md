@@ -120,12 +120,7 @@ curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta
 #### Describe instances using Tag values for keys Name and Environment
 
 ```bash
- aws ec2 describe-instances \
---output text \
---query 'Reservations[].Instances[].[InstanceId, InstanceType, ImageId,
-KeyName, State.Name, LaunchTime, Placement.AvailabilityZone, Placement.Tenancy,
-PrivateIpAddress, PrivateDnsName, PublicDnsName, PublicIpAddress, SubnetId, VpcId,
-[Tags[?Key==Name].Value] [0][0], [Tags[?Key==Environment].Value] [0][0] ]'
+aws ec2 describe-instances --query 'Reservations[].Instances[].[InstanceId, InstanceType, ImageId,KeyName,State.Name,LaunchTime,Placement.AvailabilityZone,Placement.Tenancy,PrivateIpAddress,PrivateDnsName,PublicDnsName,PublicIpAddress,SubnetId,VpcId,[Tags[?Key==Name].Value] [0][0], [Tags[?Key==Environment].Value] [0][0] ]' --output text
 ```
 
 ### Create EC2 Instances with AWS CLI
@@ -311,8 +306,8 @@ aws ec2 describe-regions --output text --query 'Regions[].[RegionName]'
 - How many instances there are with a certain Tag name and value combination?
 
 ```bash
-# ALL EC2 resources in environment Staging NZ
-aws ec2 describe-tags --filters Name="tag:environment:staging",Values="NZ" --output table
+# ALL EC2 resources in environment test in NZ
+aws ec2 describe-tags --filters Name="tag:environment:test",Values="NZ" --output table
 ```
 
 - How many instances there are for Production, Staging or Development environments?
