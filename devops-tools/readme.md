@@ -50,14 +50,15 @@ At work they have provided a windows 11 laptop, my personal Linux ubuntu 2020 la
 1. WSL extra kernel feature with manual steps (win10) https://docs.microsoft.com/en-us/windows/wsl/install-manual
 1. windows only. terminal https://docs.microsoft.com/en-us/windows/terminal/install#installation
 
-### Linux Setup 
+### Linux Setup
 My Ubuntu 22 set up
 
-### Windows Enterprise Setup 
+### Windows Enterprise Setup
 Windows11 setup at work
 
 - WSL [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/)
 - Windows Terminal [WT](https://learn.microsoft.com/en-us/windows/terminal/install#installation)
+- Docker [Desktop](https://www.docker.com/products/docker-desktop)
 
 [Back to top](#)
 
