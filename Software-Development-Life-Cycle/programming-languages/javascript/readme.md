@@ -1,7 +1,9 @@
 # Javascript
-
+functions will be linked from this file. All the functions are the files with the `*.js` extension in this directory
 ## Debugging
 [nice guide](https://www.techiedelight.com/print-contents-object-javascript/)
+
+### Get content from table
 
 ### Extracting data from website
 you want to extract some info from a website to save it somewhere, count it or ask ChatGPT to analyze it for you
