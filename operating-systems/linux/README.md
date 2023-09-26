@@ -25,8 +25,11 @@
       - [Check a dir with a parameter. Double check `info stat`](#check-a-dir-with-a-parameter-double-check-info-stat)
       - [Copy files from Local to Remote Server](#copy-files-from-local-to-remote-server)
   - [Compression/Decompression of files](#compressiondecompression-of-files)
+    - [Tar](#tar)
       - [Decompress with Tar](#decompress-with-tar)
-      - [Decompress with Zip](#decompress-with-zip)
+    - [Zip](#zip)
+      - [Compress directories and files](#compress-directories-and-files)
+      - [Decompress to current directory](#decompress-to-current-directory)
       - [batch extract all files to a specific directory](#batch-extract-all-files-to-a-specific-directory)
       - [Create a parent directory with 2 directories inside (Single line)](#create-a-parent-directory-with-2-directories-inside-single-line)
   - [Find/Search operations](#findsearch-operations)
@@ -328,17 +331,24 @@ echo "cd $PWD"
 ```
 
 ## Compression/Decompression of files
-
+### Tar
 #### Decompress with Tar
 
 ```bash
 tar -czvf name-of-archive.tar.gz /path/to/directory-or-file
 ```
-
-#### Decompress with Zip
+### Zip
 
 ```bash
+zip  --recurse-paths work-log-years.zip directory1/ directory2/
+```
+#### Compress directories and files
+```bash
 zip -r compressedFileName.zip file1 file2 dir1/ file3
+```
+#### Decompress to current directory
+```bash
+unzip work-log-years.zip
 ```
 
 ####  batch extract all files to a specific directory
