@@ -53,6 +53,11 @@ Gradle could not start your build.
 * Get more help at https://help.gradle.org
 ```
 
+#### Dependencies & configurations
+```bash
+gradle --refresh-dependencies
+```
+
 [Back to top](#)
 
 [Kiwiki Home](/../../)
