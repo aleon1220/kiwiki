@@ -64,6 +64,20 @@ $1-
 
 `(^###)(\s)`
 
+
+### Text containing Time
+
+#### time represented minutes
+
+tested in vscode will match any string that consists of two digits, followed by a colon, followed by two digits
+
+* `23:59`
+* `00:30`
+
+```perl
+^(\d+:\d+)$
+```
+
 ---
 
 ## References
