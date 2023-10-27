@@ -68,8 +68,9 @@
 # Git
 
 System to manage and store source code. Keeps track of changes to files. Text files only.
+## Git Administration/Operation
 
-#### List of common `git` commands
+### List of common `git` commands
 ``` bash
 git init
 git clone
@@ -91,7 +92,10 @@ git config
 
 ### Git basic flow challenge/Demo by hackerRanx
 
-Goal is to create a git repo at a linux location, Add changes to a source-code file, commit changes, create a develop branch with new changes and finally merge from `develop --> main`
+Goal is to create a git repo at a linux location, Add changes to a source-code file, commit changes, create a develop branch with new changes and finally merge from 
+```bash
+develop --> main
+```
 
 #### Initialize and operate a git repo at `/var/save/repo`
 
@@ -114,25 +118,12 @@ git branch
   test
 ```
 
-#### Check the log to see info about all commits
+#### Check the log to see info about all commits `git log`
 ``` bash
-git log
 commit 4c569ff830048206717d62544efbd288f85005e3 (HEAD -> master, test)
 Author: hackerrank <me@hackerrank.com>
 Date:   Mon Jun 28 22:02:25 2021 +0000
     Added commit03
-    Signed-off-by: hackerrank <me@hackerrank.com>
-
-commit cf10ff6b4ceee54c4c92ae72ba58c612d990b9cc
-Author: hackerrank <me@hackerrank.com>
-Date:   Mon Jun 28 22:02:04 2021 +0000
-    Added commit02
-    Signed-off-by: hackerrank <me@hackerrank.com>
-
-commit 360dba467b0605ab8235954a7fcde81a5645df9f
-Author: hackerrank <me@hackerrank.com>
-Date:   Mon Jun 28 22:00:58 2021 +0000
-    Commit01 on test
     Signed-off-by: hackerrank <me@hackerrank.com>
 
 commit 3ca19596ebb32aa611a6625f184e37735a5f5156
@@ -167,27 +158,19 @@ Fast-forward
  file changed, 3 insertions(+)
 ```
 
-#### Verifying commits in `main`
-``` bash
-git rev-list --date-order --abbrev-commit --reverse HEAD
-
-3ca1959
-360dba4
-cf10ff6
-4c569ff
-```
-
-## Git Administration/Operation
-
 #### Branch was created in the past and changes either had been added or removed in the destination branch `main | develop`
 ``` bash
 git fetch
 git merge origin/develop
 ```
 
-- use `@` instead of `HEAD`
+#### Push changes to remote branch `my-feature`
+``` bash
+git push origin :my-feature
+```
 
-GitOps reading from a [medium post @Omar Shakari](https://medium.com/better-programming/git-commands-to-live-by-349ab1fe3139)
+- use `@` instead of `HEAD`
+- GitOps reading from a [medium post @Omar Shakari](https://medium.com/better-programming/git-commands-to-live-by-349ab1fe3139)
 
 #### Delete Remote Branches
 ``` bash
@@ -198,24 +181,22 @@ git push REMOTE -d BRANCH
 git push REMOTE :BRANCH
 ```
 
-#### Push changes to remote branch `my-feature`
-``` bash
-git push origin :my-feature
-```
-#### Remove remote branches that were deleted (merged) on BitBucket
+#### Remove remote branches that were deleted (merged) 
+> tested on BitBucket
 ``` bash
 git config fetch.prune true 
 ```
 
 #### Change remote URL if you change your repository’s name
 ``` bash
-git remote set-url REMOTE NEWURL
+git remote set-url REMOTE $NEWURL
 ```
 
 #### Github set remote URL
 ``` bash
 git remote set-url origin github.com/myusername/my-repo
 ```
+
 ##### Stash Individual Files
 ``` bash
 git stash push -- <filepath(s)>
@@ -231,7 +212,7 @@ git stash show -p [stash@{<n>}]
 
 - `-p` to see the actual content of the stash. Omitting it will show only the file names.
 
-- `stash@{<n>}` allows us to specify a certain stash, denoted by `n` ( 0 being the most recent one ).
+- `stash@{<n>}` allows us to specify a certain stash, denoted by `n` ( 0 being the most recent one )
 
 ``` bash
 git stash show -p stash@{1}
@@ -246,15 +227,17 @@ git checkout another-branch src/file.js
 ``` bash
 git worktree add <path> <branch>
 ```
-- when you no longer need the branch:
 
+#### when you no longer need the branch:
 ``` bash
 git worktree remove [-f] PATH_TO_MODIFY
 ```
 
-**Example:**
-1. `git worktree add my-other-awesome-feature ../my-other-awesome-feature`
-1. `git worktree remove ../my-other-awesome-feature`
+```bash
+git worktree add my-other-awesome-feature ../my-other-awesome-feature
+
+git worktree remove ../my-other-awesome-feature
+```
 
 **Explanation:**
 
@@ -294,6 +277,8 @@ git checkout -- README.md
 #### Change Last Commit Message
 ``` bash
 git commit --amend [-m 'MESSAGE']
+
+git push -f
 ```
 
 #### If the old commit had already been pushed, you’ll need to additionally run
@@ -304,6 +289,8 @@ git push --force-with-lease REMOTE BRANCH
 - As a general rule, it’s important to be careful when making any changes to already pushed commits
 
 #### Change a Specific Commit Message
+useful when you made a typo in a previous commit history
+
 ``` bash
 git rebase -i COMMIT
 ```
@@ -321,8 +308,7 @@ git reset HEAD^
 git reset HEAD $PATH_OF_REPO
 ```
 #### Remove Ignored Files From Remote
-
-later decided to `.gitignore` them, the files will nevertheless persist in your remote repository.
+Decided to `.gitignore` them, the files will nevertheless persist in your remote repository
 
 To remedy this
 ``` bash
@@ -333,8 +319,7 @@ git rm
 ``` bash
 git rm [-r] [-n] --cached <path(s)>
 ```
-- simply add
-- commit, and push
+- simply add commit, and push
 
 #### Hard reset of branch
 ``` bash
@@ -371,9 +356,6 @@ git clone -c core.sshCommand="/usr/bin/ssh -i $EXTRA_PRIVATE_KEY_PATH" $GIT_REPO
 git clone git@github.com:elastic/stack-docker.git
 ```
 
-``` bash
-git status
-```
 #### List the fetched branches for a repository
 ``` bash
 git branch
@@ -476,13 +458,6 @@ git bisect good
 git bisect bad
 ```
 
-#### Ammend a commit
-``` bash
-git commit --amend COMMIT_ID
-
-git push -f
-```
-
 #### Change a commit message that was made
 ``` bash
 #n is the number of commits to go back
@@ -520,7 +495,7 @@ git remote --verbose
 ``` bash
 git remote show origin
 ```
-- Update the remote URL with git remote set-url using the current and new remote URLs.
+- Update the remote URL with git remote set-url using the current and new remote URLs
 ``` bash
 git remote set-url origin git@bitbucket.org:tutorials/tutorials.git
 ```
