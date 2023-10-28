@@ -18,8 +18,10 @@
     - [Java 18](#java-18)
     - [Java 19](#java-19)
     - [Java 20](#java-20)
-  - [Java installation Management](#java-installation-management)
+  - [Java installation Management SDK](#java-installation-management-sdk)
     - [SDKMan](#sdkman)
+      - [Find java distro version number](#find-java-distro-version-number)
+      - [install JDK version](#install-jdk-version)
     - [Install default JDK and JRE Ubuntu](#install-default-jdk-and-jre-ubuntu)
       - [Install popular OpenJDK](#install-popular-openjdk)
       - [Use `update-alternative` to set version for Java runtime](#use-update-alternative-to-set-version-for-java-runtime)
@@ -69,12 +71,23 @@ high-level, class-based, object-oriented programming language that is designed t
 
 ### Java 20
 
-## Java installation Management
+## Java installation Management SDK
 Manage multiple version with sdkman
 
 ### [SDKMan](https://sdkman.io/)
 `curl -s "https://get.sdkman.io" | bash`
 
+#### Find java distro version number
+```bash
+sdk list java | grep "11.0"
+```
+
+#### install JDK version
+```bash
+Java_version="17.0.9-amzn"
+
+sdk install java $Java_version
+```
 
 ### Install default JDK and JRE Ubuntu
 ``` bash
