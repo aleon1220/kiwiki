@@ -65,6 +65,12 @@ this command packaged my WAR
 ```bash
 mvn verify
 ```
+
+#### generate artifacts
+in <sourceRoot> directory that you specify
+```bash
+mvn generate-sources
+```
 [Back to top](#)
 
 [Kiwiki Home](/../../)
