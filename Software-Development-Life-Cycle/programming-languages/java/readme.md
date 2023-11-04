@@ -1,6 +1,6 @@
 - [The Java Language](#the-java-language)
   - [Java Versions](#java-versions)
-    - [Java older Versions](#java-older-versions)
+    - [Older Versions](#older-versions)
       - [Java 1.3](#java-13)
       - [Java 1.4](#java-14)
       - [Java 1.5](#java-15)
@@ -36,7 +36,7 @@
 high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible
 ## Java Versions
 
-### Java older Versions
+### Older Versions
 #### Java 1.3
 
 #### Java 1.4
