@@ -58,6 +58,7 @@
       - [Add a SSH key to ssh-agent](#add-a-ssh-key-to-ssh-agent)
       - [Get content of default name of Public Key](#get-content-of-default-name-of-public-key)
       - [Add SSH key to a remote Server](#add-ssh-key-to-a-remote-server)
+      - [Leverage OpenSSH key to encrypt files](#leverage-openssh-key-to-encrypt-files)
     - [References](#references)
 
 [Kiwiki Home](/../../)
@@ -517,6 +518,17 @@ Read Public SSH key, ssh to \$REMOTE_HOST with root user. Create a hidden direct
 ```bash
 COMMAND="mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
 cat ~/.ssh/id_rsa.pub | ssh root@$REMOTE_HOST $COMMAND
+```
+#### Leverage OpenSSH key to encrypt files
+- prepare a file with content
+```bash
+DATA_FILE="~/dataFile.dat"
+printf "data content\n" > $DATA_FILE
+```
+- encrypt file to a target hidden directory
+```bash
+ENCRYPTED_DATA_FILE="~/.hidden_dir/secretFile.dat.enc"
+openssl pkeyutl -encrypt -inkey <(ssh-keygen -e -m PKCS8 -f ~/.ssh/id_rsa.pub) -pubin -in $DATA_FILE -out $ENCRYPTED_DATA_FILE
 ```
 
 ### References
