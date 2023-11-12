@@ -525,16 +525,20 @@ cat ~/.ssh/id_rsa.pub | ssh root@$REMOTE_HOST $COMMAND
 DATA_FILE="~/dataFile.dat"
 printf "data content\n" > $DATA_FILE
 ```
-- encrypt file to a target hidden directory
+- encrypt file to a target hidden directory. Tested Ubuntu 22
 ```bash
 ENCRYPTED_DATA_FILE="~/.hidden_dir/secretFile.dat.enc"
 openssl pkeyutl -encrypt -inkey <(ssh-keygen -e -m PKCS8 -f ~/.ssh/id_rsa.pub) -pubin -in $DATA_FILE -out $ENCRYPTED_DATA_FILE
 ```
+- Decrypt file and add to a variable
+```bash
+PASSWORD=$(printf "$(openssl pkeyutl -decrypt -inkey ~/.ssh/id_rsa -in $ENCRYPTED_DATA_FILE)")
+```
 
 ### References
 
-- Taken from [mkssoftware](https://www.mkssoftware.com/docs/man1/openssl_pkcs8.1.asp)
-- Digicert post on [Certificate and CA management](https://www.digicert.com/kb/ssl-support/openssl-quick-reference-guide.htm)
+- [mkssoftware OpenSSL PKCS8](https://www.mkssoftware.com/docs/man1/openssl_pkcs8.1.asp)
+- [Digicert Certificate and CA management](https://www.digicert.com/kb/ssl-support/openssl-quick-reference-guide.htm)
 - OpenSSL [FreecodeCamp CheatSheet](https://www.freecodecamp.org/news/openssl-command-cheatsheet-b441be1e8c4a/)
 - Great ssl.com [Post on conversions](https://www.ssl.com/guide/pem-der-crt-and-cer-x-509-encodings-and-conversions/)
 - Simple explanation about formats GPG, OpenSSL and OpenSSH [at](https://blog.programster.org/key-file-formats)
