@@ -1,51 +1,54 @@
 - [Git](#git)
-  - [List of common `git` commands](#list-of-common-git-commands)
-  - [Git basic flow challenge/Demo by hackerRanx](#git-basic-flow-challengedemo-by-hackerranx)
-    - [Initialize and operate a git repo at `/var/save/repo`](#initialize-and-operate-a-git-repo-at-varsaverepo)
-    - [Create a develop branch (clones main references)](#create-a-develop-branch-clones-main-references)
-    - [Check what branches are available in the repo](#check-what-branches-are-available-in-the-repo)
-    - [Check the log to see info about all commits](#check-the-log-to-see-info-about-all-commits)
-    - [Verify commits in `develop` branch](#verify-commits-in-develop-branch)
-    - [Perform the merge develop --\> main](#perform-the-merge-develop----main)
-    - [Verifying commits in `main`](#verifying-commits-in-main)
   - [Git Administration/Operation](#git-administrationoperation)
-    - [Branch was created in the past and changes either had been added or removed in the destination branch `main | develop`](#branch-was-created-in-the-past-and-changes-either-had-been-added-or-removed-in-the-destination-branch-main--develop)
-    - [Delete Remote Branches](#delete-remote-branches)
-    - [Delete remote branch (short form `:`)](#delete-remote-branch-short-form-)
-    - [Push changes to remote branch `my-feature`](#push-changes-to-remote-branch-my-feature)
-    - [Remove remote branches that were deleted (merged) on BitBucket](#remove-remote-branches-that-were-deleted-merged-on-bitbucket)
-    - [Change remote URL if you change your repository’s name](#change-remote-url-if-you-change-your-repositorys-name)
-    - [Github set remote URL](#github-set-remote-url)
-    - [Check Out File From Another Branch](#check-out-file-from-another-branch)
-    - [Working with 2 branches](#working-with-2-branches)
-    - [Show Commit Content shows changes introduced by a commit](#show-commit-content-shows-changes-introduced-by-a-commit)
-    - [Show changes-diff with remote HEAD](#show-changes-diff-with-remote-head)
-    - [Compare Files Between Branches/Commits](#compare-files-between-branchescommits)
-    - [Reset a Single File to Most Recent Commit](#reset-a-single-file-to-most-recent-commit)
-    - [Reset a single file](#reset-a-single-file)
-    - [Change Last Commit Message](#change-last-commit-message)
-    - [If the old commit had already been pushed, you’ll need to additionally run](#if-the-old-commit-had-already-been-pushed-youll-need-to-additionally-run)
-    - [Change a Specific Commit Message](#change-a-specific-commit-message)
-    - [Doing a Rebase](#doing-a-rebase)
-    - [Delete Last Commit but Keep the Changes](#delete-last-commit-but-keep-the-changes)
-    - [Unstage a File](#unstage-a-file)
-    - [Remove Ignored Files From Remote](#remove-ignored-files-from-remote)
-    - [Clean up git cache](#clean-up-git-cache)
-    - [Hard reset of branch](#hard-reset-of-branch)
-    - [Show GPG signatures used in a repo](#show-gpg-signatures-used-in-a-repo)
-    - [Find local GIT repos](#find-local-git-repos)
-    - [Get help with any git command](#get-help-with-any-git-command)
-    - [Clone a git repo with given private ssh key](#clone-a-git-repo-with-given-private-ssh-key)
-    - [Clone a Git Repo](#clone-a-git-repo)
-    - [List the fetched branches for a repository](#list-the-fetched-branches-for-a-repository)
-    - [Basic Git config set up](#basic-git-config-set-up)
-    - [Git TLS Certificates](#git-tls-certificates)
-    - [Get TLS info](#get-tls-info)
-    - [Instruct Git to use GPG2 instead of GPG as the signing program](#instruct-git-to-use-gpg2-instead-of-gpg-as-the-signing-program)
-    - [Test by signing text with `gpg` or `gpg2`](#test-by-signing-text-with-gpg-or-gpg2)
-    - [Set variable for GPG and terminal usage](#set-variable-for-gpg-and-terminal-usage)
+    - [List of common `git` commands](#list-of-common-git-commands)
+    - [Git basic flow challenge/Demo by hackerRanx](#git-basic-flow-challengedemo-by-hackerranx)
+      - [Initialize and operate a git repo at `/var/save/repo`](#initialize-and-operate-a-git-repo-at-varsaverepo)
+      - [Create a develop branch (clones main references)](#create-a-develop-branch-clones-main-references)
+      - [Check what branches are available in the repo](#check-what-branches-are-available-in-the-repo)
+      - [Check the log to see info about all commits `git log`](#check-the-log-to-see-info-about-all-commits-git-log)
+      - [Verify commits in `develop` branch](#verify-commits-in-develop-branch)
+      - [Perform the merge develop --\> main](#perform-the-merge-develop----main)
+      - [Branch was created in the past and changes either had been added or removed in the destination branch `main | develop`](#branch-was-created-in-the-past-and-changes-either-had-been-added-or-removed-in-the-destination-branch-main--develop)
+      - [Push changes to remote branch `my-feature`](#push-changes-to-remote-branch-my-feature)
+      - [Delete Remote Branches](#delete-remote-branches)
+      - [Delete remote branch (short form `:`)](#delete-remote-branch-short-form-)
+      - [Remove remote branches that were deleted (merged)](#remove-remote-branches-that-were-deleted-merged)
+      - [Change remote URL if you change your repository’s name](#change-remote-url-if-you-change-your-repositorys-name)
+      - [Github set remote URL](#github-set-remote-url)
+      - [Check Out File From Another Branch](#check-out-file-from-another-branch)
+      - [Working with 2 branches](#working-with-2-branches)
+      - [when you no longer need the branch:](#when-you-no-longer-need-the-branch)
+      - [Show Commit Content shows changes introduced by a commit](#show-commit-content-shows-changes-introduced-by-a-commit)
+      - [Show changes-diff with remote HEAD](#show-changes-diff-with-remote-head)
+      - [Compare Files Between Branches/Commits](#compare-files-between-branchescommits)
+      - [Reset a Single File to Most Recent Commit](#reset-a-single-file-to-most-recent-commit)
+      - [Reset a single file](#reset-a-single-file)
+      - [Change Last Commit Message](#change-last-commit-message)
+      - [If the old commit had already been pushed, you’ll need to additionally run](#if-the-old-commit-had-already-been-pushed-youll-need-to-additionally-run)
+      - [Change a Specific Commit Message](#change-a-specific-commit-message)
+      - [Doing a Rebase](#doing-a-rebase)
+      - [Delete Last Commit but Keep the Changes](#delete-last-commit-but-keep-the-changes)
+      - [Unstage a File](#unstage-a-file)
+      - [Remove Ignored Files From Remote](#remove-ignored-files-from-remote)
+      - [Clean up git cache](#clean-up-git-cache)
+      - [Hard reset of branch](#hard-reset-of-branch)
+      - [Show GPG signatures used in a repo](#show-gpg-signatures-used-in-a-repo)
+      - [Find local GIT repos](#find-local-git-repos)
+      - [Get help with any git command](#get-help-with-any-git-command)
+      - [Clone a git repo with given private ssh key](#clone-a-git-repo-with-given-private-ssh-key)
+      - [Clone a Git Repo](#clone-a-git-repo)
+      - [List the fetched branches for a repository](#list-the-fetched-branches-for-a-repository)
+      - [Basic Git config set up](#basic-git-config-set-up)
+      - [Git TLS Certificates](#git-tls-certificates)
+      - [Get TLS info](#get-tls-info)
+      - [Instruct Git to use GPG2 instead of GPG as the signing program](#instruct-git-to-use-gpg2-instead-of-gpg-as-the-signing-program)
+      - [Test GPG2 encrytion](#test-gpg2-encrytion)
+      - [Set variable for GPG and terminal usage](#set-variable-for-gpg-and-terminal-usage)
+    - [Sign commits SSH](#sign-commits-ssh)
+      - [Refer to Public SSH Key](#refer-to-public-ssh-key)
     - [Git Analysis/Reporting](#git-analysisreporting)
       - [Get git global info](#get-git-global-info)
+      - [Sign the Commit](#sign-the-commit)
       - [List all remote branches](#list-all-remote-branches)
       - [List remote active branches](#list-remote-active-branches)
       - [Get info about commits for a given user](#get-info-about-commits-for-a-given-user)
@@ -57,12 +60,11 @@
       - [Switch to previous branch](#switch-to-previous-branch)
       - [Add small patches to a commit](#add-small-patches-to-a-commit)
       - [Find the last working commit by basically using binary search](#find-the-last-working-commit-by-basically-using-binary-search)
-      - [Ammend a commit](#ammend-a-commit)
       - [Change a commit message that was made](#change-a-commit-message-that-was-made)
   - [Git implementations: Bitbucket](#git-implementations-bitbucket)
-    - [Run a query to obtain Project User name, User key, Repo name and Repo Slug](#run-a-query-to-obtain-project-user-name-user-key-repo-name-and-repo-slug)
-    - [List git stashes](#list-git-stashes)
-    - [Reset the current HEAD or changes of your local branch to a specific state](#reset-the-current-head-or-changes-of-your-local-branch-to-a-specific-state)
+      - [Run a query to obtain Project User name, User key, Repo name and Repo Slug](#run-a-query-to-obtain-project-user-name-user-key-repo-name-and-repo-slug)
+      - [List git stashes](#list-git-stashes)
+      - [Reset the current HEAD or changes of your local branch to a specific state](#reset-the-current-head-or-changes-of-your-local-branch-to-a-specific-state)
 
 [Kiwiki Home](/../../)
 
@@ -492,9 +494,9 @@ git config --global --list
 ```
 git commit -S -m "SSH signed commit"
 ```
+- see [stackdiary](https://stackdiary.com/tutorials/how-to-sign-your-git-commits-with-ssh-keys)
 
 #### List all remote branches
-
 ```bash
 git branch -r
 ```
@@ -535,7 +537,6 @@ git log --oneline
 
 ```bash
 git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-
 ```
 
 [source A better git log](coderwall.com/p/euwpig/a-better-git-log)
@@ -576,7 +577,7 @@ git bisect bad
 #n is the number of commits to go back
 git rebase -i HEAD~n
 
-# Best to use git cherry-pick
+# Use git cherry-pick
 
 ## then
 edit
@@ -586,7 +587,7 @@ git push -f
 
 ## Git implementations: Bitbucket
 
- Atlassian support [docs](https://support.atlassian.com/bitbucket-cloud/docs/change-the-remote-url-to-your-repository/)
+- Atlassian support [docs](https://support.atlassian.com/bitbucket-cloud/docs/change-the-remote-url-to-your-repository/)
 
 #### Run a query to obtain Project User name, User key, Repo name and Repo Slug
 
@@ -632,7 +633,7 @@ git stash list
 git reset [FILE_PATH]
 ```
 
-Bitbucket Sign commits with SSH [Sign commits and tags with SSH keys | Bitbucket Data Center and Server 8.15 | Atlassian Documentation](https://confluence.atlassian.com/bitbucketserver/sign-commits-and-tags-with-ssh-keys-1305971205.html) 
+Bitbucket Sign commits with SSH [Sign commits and tags with SSH keys | Bitbucket Data Center and Server 8.15 | Atlassian Documentation](https://confluence.atlassian.com/bitbucketserver/sign-commits-and-tags-with-ssh-keys-1305971205.html)
 
 [Back to top](#)
 
