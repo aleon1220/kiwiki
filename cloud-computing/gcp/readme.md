@@ -1,6 +1,9 @@
 - [Google Cloud Engine](#google-cloud-engine)
-  - [Run GCE CLI as a docker container](#run-gce-cli-as-a-docker-container)
+      - [Run GCE CLI as a docker container](#run-gce-cli-as-a-docker-container)
   - [Auth to Google Cloud](#auth-to-google-cloud)
+      - [local user auth](#local-user-auth)
+    - [GCP Service account credential](#gcp-service-account-credential)
+      - [obtain the project number of your current project](#obtain-the-project-number-of-your-current-project)
   - [References](#references)
 
 [Kiwiki Home](/../../)
@@ -32,9 +35,9 @@ gcloud auth application-default login
 ### GCP Service account credential
 
 * create the service account
-  ```bash
-  gcloud iam service-accounts create prod-svc
-  ```
+```bash
+gcloud iam service-accounts create prod-svc
+```
 * add the account to a project
   ```bash
   gcloud projects add-iam-policy-binding $PROJECT_ID -member="serviceAccount:prod-svc@$PROJECT_ID -roles"roles/owner"
@@ -52,11 +55,18 @@ export GOOGLE_APPLICATION_CREDENTIALS="projectID-serviceAccountID.json"
 
 * you can authenticate to GCP. e.g. run terraform commands
 
-```
+```bash
 gcloud project list
 ```
+#### obtain the project number of your current project
+```shell
+gcloud projects describe $(gcloud config get-value core/project) --format=value\(projectNumber\)
+```
 
-
+#### list service accounts in project
+```bash
+gcloud iam service-accounts list
+```
 
 ## References
 
