@@ -165,6 +165,27 @@ NEW_CERT="certificate_TLS"
 openssl s_client -showcerts -connect $DOMAIN:443 </dev/null 2>/dev/null|openssl x509 -outform PEM > NEW_CERT.pem
 ```
 
+### Encrypt text files
+with `openssl` is useful to encrypt files and is simpler than using `gpg` 
+on 2023-11-20 I tested the commands below in Win11 WSL ubuntu 2020
+
+- Create a private key with openSSL
+```bash
+openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048
+```
+- Extract the public key part of the private RSA key
+```bash
+openssl rsa -pubout -in private_key.pem -out public_key.pem
+```
+- Encrypt the file
+```bash
+openssl rsautl -encrypt -inkey public_key.pem -pubin -in dataFile.dat -out dataFile.dat.enc
+```
+- Decrypt the file
+```bash
+openssl rsautl -decrypt -inkey private_key.pem -in dataFile.dat.enc
+```
+
 ---
 #### Add Certificates to Linux OS Key store
 
