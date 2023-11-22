@@ -71,6 +71,10 @@ gcloud iam service-accounts list
 ## References
 
 - [GCE site](https://cloud.google.com/sdk/docs/downloads-docker)
+- [GCP Quotas Cloud Armor](https://cloud.google.com/armor/quotas)
+- [workload-identity-federation](https://cloud.google.com/iam/docs/workload-identity-federation)
+- [Token Exchange reference](https://datatracker.ietf.org/doc/html/rfc8693)
+- [What is OpenID Connect](https://openid.net/developers/how-connect-works/)
 
 [Back to top](#)
 
