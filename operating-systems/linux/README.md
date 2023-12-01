@@ -622,8 +622,8 @@ journalctl -f
 #### Show Logs within a Time Range
 
 ```bash
-journalctl --since "2021-08-30 14:10:10"
-journalctl --until "2022-09-02 12:05:50"
+journalctl --since "2022-01-30 15:10:10"
+journalctl --until "2022-12-24 00:05:50"
 ```
 
 #### List SystemBoots
@@ -953,7 +953,10 @@ CTRL + D
 ##### Change permissions of a file based on permissions of other file
 
 ```bash
-REF_FILE="a_file.txt" ; sudo chmod --reference=\$REF_FILE
+REFERENCEFILE="a_file.txt"
+TARGETINGFILE="a_target_file_to_copy_permissions.txt"
+
+sudo chmod --reference="$REF_FILE" "$TARGETINGFILE"
 ```
 
 ##### Change ownership of all files inside dir to a given linux group
@@ -961,7 +964,6 @@ REF_FILE="a_file.txt" ; sudo chmod --reference=\$REF_FILE
 ```bash
 GROUP_NAME="common" ; sudo chown :\$GROUP_NAME \*
 ```
-
 ---
 # Operating Systems
 
