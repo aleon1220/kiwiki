@@ -10,15 +10,22 @@
 
 # Gradle for Android and Java
 > Gradle now with Kotlin syntax
+
 ## 2021-03-05
 - closures=values are respected. values can be passed around.
 - use of groovy syntax. groovy automatically creates getters and setters
-### Building
+### Build tasks
 ```bash
 gradle clean build --console plain
 ```
-### Tasks
-#### list tasks
+
+### Build Set up tasks
+### Documentation tasks
+### Verification tasks
+```bash
+gradle check --warning-mode all
+```
+### Help tasks
 ```bash
 gradle tasks --all
 ```
@@ -29,7 +36,6 @@ task myTask {
   description ""
 }
 ```
-
 ## Debugging
 for version 7.3.3 of gradle there are some issues when running graddle commands. solution for this case is to restart the gradle process
 
