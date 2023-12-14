@@ -54,7 +54,7 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 
 - [Spinnaker](./devops-tools/CD/spinnaker.md)
 
-### [Git](./git/readme.md)
+### [Git](./devops-tools/git/readme.md)
 
 ### [Infrastructure as a Config/Code](./devops-tools/IaC/readme.md)
 
