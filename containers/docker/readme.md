@@ -57,6 +57,10 @@ docker volume ls
 ``` bash
 docker system df
 ```
+#### Access container internally
+```bash
+docker exec --interactive --tty $CONTAINER /bin/bash
+```
 
 ## Dockerfile Practices
 #### Retry `apt-get` operation if it fails
@@ -64,6 +68,7 @@ docker system df
 # Make sure apt-get retries on failures
 RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/80retries
 ```
+
 ### List the containers of an instance and show 4 attributes in table format
 ``` bash
 docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"
@@ -131,7 +136,8 @@ docker cp $FILE_HOST_PATH $CONTAINER_NAME:$CONTAINER_PATH
 
 #### Examples of running docker containers
 ``` bash
-docker run --restart always --name train-schedule -p 8080:8080 --detach aleon1220/train-schedule:9 node app.js
+CONTAINER="ID or container name"
+docker run --restart always --name $CONTAINER -p 8080:8080 --detach aleon1220/train-schedule:9 node app.js
 
 docker run --name some-nginx -d -p 9080:80
 ```
@@ -148,7 +154,7 @@ docker ps --filter "status=exited"
 
 #### Inspect Exitcode by container ID
 ``` bash
-docker inspect <container-id> --format='{{.State.ExitCode}}'
+docker inspect $CONTAINER --format='{{.State.ExitCode}}'
 ```
 
 #### Clean up Everything including volumes
@@ -162,7 +168,6 @@ docker ps --filter expose=0-65535/tcp | sort -u -k7
 ```
 #### List labels for a given docker container [source](https://gist.github.com/steve-jansen)
 ``` bash
-CONTAINER="ID or container name"
 docker inspect --format \
     '{{ range $k, $v := .Config.Labels -}}
     {{ $k }}={{ $v }}
