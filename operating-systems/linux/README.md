@@ -953,10 +953,10 @@ CTRL + D
 ##### Change permissions of a file based on permissions of other file
 
 ```bash
-REFERENCEFILE="a_file.txt"
-TARGETINGFILE="a_target_file_to_copy_permissions.txt"
+REFERENCE_FILE="a_file.txt"
+TARGETING_FILE="a_target_file_to_copy_permissions.txt"
 
-sudo chmod --reference="$REF_FILE" "$TARGETINGFILE"
+sudo chmod --reference="$REFERENCE_FILE" "$TARGETING_FILE"
 ```
 
 ##### Change ownership of all files inside dir to a given linux group
