@@ -26,7 +26,7 @@ op item list --favorite
 ```bash
 op item list --vault my-vault
 ```
-#### get my item 
+#### get one password my item 
 ```bash
 op item get "my item"
 ```
@@ -34,8 +34,15 @@ op item get "my item"
 ```bash
 op read "op://my-vault/Pluralsight Online Training/password"
 ```
-#### Ubuntu update & upgrade
-Read the admin password and send it to standard in
+
+#### read One-Time-Password
+```bash
+ONE_PASS_UUID="z1w2c3w4w5p6p7w8d9w10p11w12"
+op item get $ONE_PASS_UUID --otp
+```
+
+#### pipe password to linux sudo
+Using standard in
 ```bash
 ONE_PASS_ITEM_ID="lutbhf3cx6qvng5qhktzoljh2q"
 printf "$(op read "op://my-vault/$ONE_PASS_ITEM_ID/password")\n" | sudo --stdin apt update ; sudo apt upgrade --yes
