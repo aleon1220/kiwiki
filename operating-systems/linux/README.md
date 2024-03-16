@@ -335,7 +335,7 @@ echo "cd $PWD"
 #### Decompress with Tar
 
 ```bash
-tar -czvf name-of-archive.tar.gz /path/to/directory-or-file
+tar -zxvf archive-name.tar.gz /decompression/path/directory/
 ```
 ### Zip
 
