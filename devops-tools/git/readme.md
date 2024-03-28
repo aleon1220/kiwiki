@@ -1,109 +1,92 @@
 - [Git](#git)
+  - [Git Quick Start](#git-quick-start)
   - [Git Administration/Operation](#git-administrationoperation)
-    - [List of common `git` commands](#list-of-common-git-commands)
-    - [Git basic flow challenge/Demo by hackerRanx](#git-basic-flow-challengedemo-by-hackerranx)
-      - [Initialize and operate a git repo at `/var/save/repo`](#initialize-and-operate-a-git-repo-at-varsaverepo)
-      - [Create a develop branch (clones main references)](#create-a-develop-branch-clones-main-references)
-      - [Check what branches are available in the repo](#check-what-branches-are-available-in-the-repo)
-      - [Check the log to see info about all commits `git log`](#check-the-log-to-see-info-about-all-commits-git-log)
-      - [Verify commits in `develop` branch](#verify-commits-in-develop-branch)
-      - [Perform the merge develop --\> main](#perform-the-merge-develop----main)
-      - [Branch was created in the past and changes either had been added or removed in the destination branch `main | develop`](#branch-was-created-in-the-past-and-changes-either-had-been-added-or-removed-in-the-destination-branch-main--develop)
-      - [Push changes to remote branch `my-feature`](#push-changes-to-remote-branch-my-feature)
+      - [fetch from remote and then merge to develop](#fetch-from-remote-and-then-merge-to-develop)
       - [Delete Remote Branches](#delete-remote-branches)
       - [Delete remote branch (short form `:`)](#delete-remote-branch-short-form-)
       - [Remove remote branches that were deleted (merged)](#remove-remote-branches-that-were-deleted-merged)
       - [Change remote URL if you change your repository’s name](#change-remote-url-if-you-change-your-repositorys-name)
       - [Github set remote URL](#github-set-remote-url)
+      - [Stash Individual Files](#stash-individual-files)
+      - [Show Content of Most Recent Stash](#show-content-of-most-recent-stash)
       - [Check Out File From Another Branch](#check-out-file-from-another-branch)
-      - [Working with 2 branches](#working-with-2-branches)
+      - [Work with 2 branches](#work-with-2-branches)
       - [when you no longer need the branch:](#when-you-no-longer-need-the-branch)
-      - [Show Commit Content shows changes introduced by a commit](#show-commit-content-shows-changes-introduced-by-a-commit)
+      - [Show Commit Contents](#show-commit-contents)
       - [Show changes-diff with remote HEAD](#show-changes-diff-with-remote-head)
       - [Compare Files Between Branches/Commits](#compare-files-between-branchescommits)
-      - [Reset a Single File to Most Recent Commit](#reset-a-single-file-to-most-recent-commit)
+      - [Reset a Single File to a specific Commit](#reset-a-single-file-to-a-specific-commit)
       - [Reset a single file](#reset-a-single-file)
       - [Change Last Commit Message](#change-last-commit-message)
-      - [If the old commit had already been pushed, you’ll need to additionally run](#if-the-old-commit-had-already-been-pushed-youll-need-to-additionally-run)
+      - [If the old commit had already been pushed](#if-the-old-commit-had-already-been-pushed)
       - [Change a Specific Commit Message](#change-a-specific-commit-message)
       - [Doing a Rebase](#doing-a-rebase)
       - [Delete Last Commit but Keep the Changes](#delete-last-commit-but-keep-the-changes)
       - [Unstage a File](#unstage-a-file)
-      - [Remove Ignored Files From Remote](#remove-ignored-files-from-remote)
+    - [Remove Ignored Files Remote repo](#remove-ignored-files-remote-repo)
+      - [remove](#remove)
       - [Clean up git cache](#clean-up-git-cache)
+      - [usual add, commit](#usual-add-commit)
+      - [push with alternative SSH key](#push-with-alternative-ssh-key)
       - [Hard reset of branch](#hard-reset-of-branch)
       - [Show GPG signatures used in a repo](#show-gpg-signatures-used-in-a-repo)
       - [Find local GIT repos](#find-local-git-repos)
       - [Get help with any git command](#get-help-with-any-git-command)
-      - [Clone a git repo with given private ssh key](#clone-a-git-repo-with-given-private-ssh-key)
+      - [Clone a repo with given private ssh key](#clone-a-repo-with-given-private-ssh-key)
       - [Clone a Git Repo](#clone-a-git-repo)
       - [List the fetched branches for a repository](#list-the-fetched-branches-for-a-repository)
-      - [Basic Git config set up](#basic-git-config-set-up)
+      - [Global Settings](#global-settings)
       - [Git TLS Certificates](#git-tls-certificates)
       - [Get TLS info](#get-tls-info)
-      - [Instruct Git to use GPG2 instead of GPG as the signing program](#instruct-git-to-use-gpg2-instead-of-gpg-as-the-signing-program)
+      - [Instruct Git to use GPG2 instead of GPG2 as the signing program](#instruct-git-to-use-gpg2-instead-of-gpg2-as-the-signing-program)
       - [Test GPG2 encrytion](#test-gpg2-encrytion)
       - [Set variable for GPG and terminal usage](#set-variable-for-gpg-and-terminal-usage)
-    - [Sign commits SSH](#sign-commits-ssh)
+    - [Sign commits with SSH Key](#sign-commits-with-ssh-key)
       - [Refer to Public SSH Key](#refer-to-public-ssh-key)
     - [Git Analysis/Reporting](#git-analysisreporting)
-      - [Get git global info](#get-git-global-info)
+      - [Get global config info](#get-global-config-info)
       - [Sign the Commit](#sign-the-commit)
       - [List all remote branches](#list-all-remote-branches)
       - [List remote active branches](#list-remote-active-branches)
       - [Get info about commits for a given user](#get-info-about-commits-for-a-given-user)
       - [Create a local branch for testing](#create-a-local-branch-for-testing)
       - [Get a histogram for a gitdiff](#get-a-histogram-for-a-gitdiff)
-      - [Prints out just the subject line](#prints-out-just-the-subject-line)
-      - [A better log displaying](#a-better-log-displaying)
-      - [Groups commits by user, again showing just the subject line for concision](#groups-commits-by-user-again-showing-just-the-subject-line-for-concision)
+      - [Print out just the subject line](#print-out-just-the-subject-line)
+      - [Better log displaying](#better-log-displaying)
+      - [Groups commits by user, shows the subject line for simplicity](#groups-commits-by-user-shows-the-subject-line-for-simplicity)
       - [Switch to previous branch](#switch-to-previous-branch)
       - [Add small patches to a commit](#add-small-patches-to-a-commit)
       - [Find the last working commit by basically using binary search](#find-the-last-working-commit-by-basically-using-binary-search)
       - [Change a commit message that was made](#change-a-commit-message-that-was-made)
-  - [Git implementations: Bitbucket](#git-implementations-bitbucket)
-      - [Run a query to obtain Project User name, User key, Repo name and Repo Slug](#run-a-query-to-obtain-project-user-name-user-key-repo-name-and-repo-slug)
+      - [Check size of repo](#check-size-of-repo)
+  - [Git implementations Bitbucket](#git-implementations-bitbucket)
+      - [Report Project User name, User key, Repo name and Repo Slug](#report-project-user-name-user-key-repo-name-and-repo-slug)
+      - [Get detailed info about a remote server](#get-detailed-info-about-a-remote-server)
+      - [get extra info about remote](#get-extra-info-about-remote)
+      - [Update the remote URL using current and new remote URL](#update-the-remote-url-using-current-and-new-remote-url)
       - [List git stashes](#list-git-stashes)
       - [Reset the current HEAD or changes of your local branch to a specific state](#reset-the-current-head-or-changes-of-your-local-branch-to-a-specific-state)
+  - [Git implementations GitLab](#git-implementations-gitlab)
+  - [Git implementations Azure ADO Repos](#git-implementations-azure-ado-repos)
+  - [References](#references)
 
 [Kiwiki Home](/../../)
 
 # Git
-
 System to manage and store source code. Keeps track of changes to files. Text files only.
 
-## Git Administration/Operation
+---
 
-### List of common `git` commands
+## Git Quick Start
+Learning `git` basics by action. Flow challenge/Demo by hackerRanx
 
-```bash
-git init
-git clone
-git branch
-git checkout
-git status
-git fetch
-git pull
-git add
-git commit
-git push
-git remote
-git merge
-git log
-git stash
-git reset
-git config
-```
-
-### Git basic flow challenge/Demo by hackerRanx
-
-Goal is to create a git repo at a linux location, Add changes to a source-code file, commit changes, create a develop branch with new changes and finally merge from
+Goal is to create a git repo in linux instance: Add changes to a source-code file, commit changes, create a develop branch with new changes and finally merge from **develop branch** to **main**
 
 ```bash
 develop --> main
 ```
 
-#### Initialize and operate a git repo at `/var/save/repo`
+- Initialize and operate a git repo at `/var/save/repo`
 
 ```bash
 mkdir -pv /var/save/repo | cd /var/save/repo
@@ -111,14 +94,19 @@ mkdir -pv /var/save/repo | cd /var/save/repo
 git init
 Initialized empty Git repository in /var/save/repo/.git/
 ```
+- set local git config settings
+```bash
+git config user.email "me@hackerrank.com"
+git config user.name "hackerrank"
+```
 
-#### Create a develop branch (clones main references)
+- Create a develop branch (clones main references)
 
 ```bash
 git checkout -b develop
 ```
 
-#### Check what branches are available in the repo
+- Check available branches in the repo
 
 ```bash
 git branch
@@ -126,7 +114,12 @@ git branch
   test
 ```
 
-#### Check the log to see info about all commits `git log`
+- check git working tree status
+```bash
+git status
+```
+
+- Check the log to see info about all commits `git log`
 
 ```bash
 commit 4c569ff830048206717d62544efbd288f85005e3 (HEAD -> master, test)
@@ -145,7 +138,7 @@ Date:   Mon Jun 28 21:57:08 2021 +0000
 [70][22:06:12] ubuntu@taskserver:[/var/save/my-repo]
 ```
 
-#### Verify commits in `develop` branch
+- Verify commits in `develop` branch
 
 ```bash
 git rev-list --date-order --abbrev-commit --reverse HEAD
@@ -156,9 +149,7 @@ cf10ff6
 4c569ff
 [74][22:07:50] ubuntu@taskserver:[/var/save/repo]
 ```
-
-#### Perform the merge develop --> main
-
+- merge develop --> main
 ```bash
 git merge develop
 Updating 3ca1959..4c569ff
@@ -167,22 +158,23 @@ Fast-forward
  1 
  file changed, 3 insertions(+)
 ```
+---
 
-#### Branch was created in the past and changes either had been added or removed in the destination branch `main | develop`
+## Git Administration/Operation
+#### fetch from remote and then merge to develop
 
 ```bash
 git fetch
 git merge origin/develop
 ```
 
-#### Push changes to remote branch `my-feature`
+- Push changes to remote branch `my-feature`
 
 ```bash
 git push origin :my-feature
 ```
 
 - use `@` instead of `HEAD`
-- GitOps reading from a [medium post @Omar Shakari](https://medium.com/better-programming/git-commands-to-live-by-349ab1fe3139)
 
 #### Delete Remote Branches
 
@@ -216,7 +208,7 @@ git remote set-url REMOTE $NEWURL
 git remote set-url origin github.com/myusername/my-repo
 ```
 
-##### Stash Individual Files
+#### Stash Individual Files
 
 ```bash
 git stash push -- <filepath(s)>
@@ -224,7 +216,7 @@ git stash push -- <filepath(s)>
 git stash push -- src/index.js README.md
 ```
 
-##### Show Content of Most Recent Stash
+#### Show Content of Most Recent Stash
 
 ```bash
 git stash show -p [stash@{<n>}]
@@ -247,16 +239,10 @@ git checkout <branch> -- <path(s)>
 git checkout another-branch src/file.js
 ```
 
-#### Working with 2 branches
+#### Work with 2 branches
 
 ```bash
 git worktree add <path> <branch>
-```
-
-#### when you no longer need the branch:
-
-```bash
-git worktree remove [-f] PATH_TO_MODIFY
 ```
 
 ```bash
@@ -264,21 +250,27 @@ git worktree add my-other-awesome-feature ../my-other-awesome-feature
 
 git worktree remove ../my-other-awesome-feature
 ```
-
 **Explanation:**
 
 Creates a linked working tree (i.e., another directory on the file system associated with the repo) called `my-other-awesome-feature`, one level above your current working directory, with the specified branch checked out.
 
-#### Show Commit Content shows changes introduced by a commit
+#### when you no longer need the branch:
 
 ```bash
-git show COMMIT
+git worktree remove [-f] PATH_TO_MODIFY
+```
+
+#### Show Commit Contents
+Shows changes introduced by a commit
+
+```bash
+git show $COMMIT_ID
 ```
 
 - Alternatively, to see the changes between two specific commits run
 
 ```bash
-git diff COMMIT_A COMMIT_B
+git diff $COMMIT_A $COMMIT_B
 ```
 
 #### Show changes-diff with remote HEAD
@@ -290,22 +282,22 @@ git diff HEAD~ HEAD
 #### Compare Files Between Branches/Commits
 
 ```bash
-git diff COMMIT_A COMMIT_B -- PATH
+git diff $COMMIT_A $COMMIT_B -- PATH
 
 # e.g.
-git diff 0659bdc e6c7c0d -- src/flair.py
+git diff 0659bdc e6c7c0d -- src/automate.py
 ```
 
-#### Reset a Single File to Most Recent Commit
+#### Reset a Single File to a specific Commit
 
 ```bash
-git checkout [<commit>] -- <path(s)>
+git checkout [<$COMMIT_ID>] -- <path(s)>
 ```
 
 #### Reset a single file
 
 ```bash
-git checkout -- README.md
+git checkout -- todo.md
 ```
 
 #### Change Last Commit Message
@@ -316,18 +308,16 @@ git commit --amend [-m 'MESSAGE']
 git push -f
 ```
 
-#### If the old commit had already been pushed, you’ll need to additionally run
+#### If the old commit had already been pushed
 
 ```bash
 git push --force-with-lease REMOTE BRANCH
 ```
 
 **Note:**
-
 - As a general rule, it’s important to be careful when making any changes to already pushed commits
 
 #### Change a Specific Commit Message
-
 useful when you made a typo in a previous commit history
 
 ```bash
@@ -352,12 +342,12 @@ git reset HEAD^
 git reset HEAD $PATH_OF_REPO
 ```
 
-#### Remove Ignored Files From Remote
+### Remove Ignored Files Remote repo
 
-Decided to `.gitignore` them, the files will nevertheless persist in your remote repository
+if one `.gitignore` the files, the files will nevertheless persist in your remote repository.
 
 To remedy this
-
+#### remove
 ```bash
 git rm
 ```
@@ -368,7 +358,15 @@ git rm
 git rm [-r] [-n] --cached <path(s)>
 ```
 
-- simply add commit, and push
+#### usual add, commit
+```bash
+git add . ; git commit
+```
+
+#### push with alternative SSH key
+```bash
+git -c core.sshCommand="/usr/bin/ssh -i /home/user/.ssh/id_alternative" push
+```
 
 #### Hard reset of branch
 
@@ -391,17 +389,15 @@ sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf
 #### Get help with any git command
 
 ```bash
+git $COMMAND --help
+
 git init --help
 ```
 
-```bash
-git COMMAND --help
-```
-
-#### Clone a git repo with given private ssh key
+#### Clone a repo with given private ssh key
 
 ```bash
-EXTRA_PRIVATE_KEY_PATH="/home/person/.ssh/id_rsa_example"
+EXTRA_PRIVATE_KEY_PATH="/home/user/.ssh/id_rsa_example"
 GIT_REPO_URL="git@github.com:Organization/org-repo-name.git"
 
 git clone -c core.sshCommand="/usr/bin/ssh -i $EXTRA_PRIVATE_KEY_PATH" $GIT_REPO_URL
@@ -419,12 +415,8 @@ git clone git@github.com:elastic/stack-docker.git
 git branch
 ```
 
-```bash
-git info
-```
-
-#### Basic Git config set up
-
+#### Global Settings
+will apply to all repositories
 ```bash
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
@@ -432,7 +424,7 @@ git config --global user.name "Your Name"
 
 #### Git TLS Certificates
 
-Git uses a file named ca-bundle.crt to list all the trusted certificates. We can find that file by typing the following in a terminal window:
+Git uses a file named `ca-bundle.crt` to list all the trusted certificates. We can find that file by typing the following in a terminal window:
 
 ```bash
 git config --list --show-origin
@@ -444,7 +436,7 @@ git config --list --show-origin
 git config --global http.sslCAInfo
 ```
 
-#### Instruct Git to use GPG2 instead of GPG as the signing program
+#### Instruct Git to use GPG2 instead of GPG2 as the signing program
 
 ```bash
 git config --global gpg.program gpg2
@@ -464,7 +456,7 @@ echo "test" | gpg2 --clearsign
 export GPG_TTY=$(tty)
 ```
 
-### Sign commits SSH
+### Sign commits with SSH Key
 
 much easier but less secured
 
@@ -483,7 +475,7 @@ git config --global user.signingkey ~/.ssh/id_rsa.pub
 
 ### Git Analysis/Reporting
 
-#### Get git global info
+#### Get global config info
 
 ```bash
 git config --global --list
@@ -494,7 +486,6 @@ git config --global --list
 ```
 git commit -S -m "SSH signed commit"
 ```
-- see [stackdiary](https://stackdiary.com/tutorials/how-to-sign-your-git-commits-with-ssh-keys)
 
 #### List all remote branches
 ```bash
@@ -511,14 +502,14 @@ git ls-remote --heads origin
 
 ```bash
 git_user="git_user"
-git_date="Sat Aug 30 2021"
+git_date="Sat Aug 30 2024"
 git log --oneline -5 --author $git_user --before $git_date
 ```
 
 #### Create a local branch for testing
 
 ```bash
-git checkout -b devops/ID-01-functionality
+git checkout -b feature/ID01-functionality
 ```
 
 #### Get a histogram for a gitdiff
@@ -527,13 +518,13 @@ git checkout -b devops/ID-01-functionality
 git diff --histogram
 ```
 
-#### Prints out just the subject line
+#### Print out just the subject line
 
 ```bash
 git log --oneline
 ```
 
-#### A better log displaying
+#### Better log displaying
 
 ```bash
 git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
@@ -541,7 +532,7 @@ git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(
 
 [source A better git log](coderwall.com/p/euwpig/a-better-git-log)
 
-#### Groups commits by user, again showing just the subject line for concision
+#### Groups commits by user, shows the subject line for simplicity
 
 ```bash
 git shortlog
@@ -572,12 +563,12 @@ git bisect bad
 ```
 
 #### Change a commit message that was made
-
+**n** is the number of commits to go back
 ```bash
-#n is the number of commits to go back
 git rebase -i HEAD~n
 
-# Use git cherry-pick
+# Use
+git cherry-pick
 
 ## then
 edit
@@ -592,9 +583,8 @@ git count-objects -vH
 
 ## Git implementations Bitbucket
 
-- Atlassian support [docs](https://support.atlassian.com/bitbucket-cloud/docs/change-the-remote-url-to-your-repository/)
-
-#### Run a query to obtain Project User name, User key, Repo name and Repo Slug
+#### Report Project User name, User key, Repo name and Repo Slug
+- Run a SQL query in the PostgreSQL DB
 
 ```sql
 SELECT 
@@ -607,20 +597,18 @@ INNER JOIN project prj ON rep.project_id = prj.id
 ORDER BY prj.name, rep.name
 ```
 
-- [Bitbucket Knowlege Base](https://confluence.atlassian.com/bitbucketserverkb/how-to-obtain-a-list-of-all-projects-and-repositories-from-bitbucket-database-975027747.html)
-- Get detailed info about a remote server
 
+#### Get detailed info about a remote server
 ```bash
 git remote --verbose
 ```
 
-- get extra info about remote
-
+#### get extra info about remote
 ```bash
 git remote show origin
 ```
 
-- Update the remote URL with git remote set-url using the current and new remote URLs
+#### Update the remote URL using current and new remote URL
 
 ```bash
 git remote set-url origin git@bitbucket.org:tutorials/tutorials.git
@@ -638,11 +626,16 @@ git stash list
 git reset [FILE_PATH]
 ```
 
-Bitbucket Sign commits with SSH [Sign commits and tags with SSH keys | Bitbucket Data Center and Server 8.15 | Atlassian Documentation](https://confluence.atlassian.com/bitbucketserver/sign-commits-and-tags-with-ssh-keys-1305971205.html)
-
 ## Git implementations GitLab
 
 ## Git implementations Azure ADO Repos
+
+## References
+1. [git commands to live by @Omar Shakari](https://medium.com/better-programming/git-commands-to-live-by-349ab1fe3139)
+2. [stackdiary how-to-sign-your-git-commits-with-ssh-keys](https://stackdiary.com/tutorials/how-to-sign-your-git-commits-with-ssh-keys)
+3. [Atlassian support docs change-the-remote-url-to-your-repository](https://support.atlassian.com/bitbucket-cloud/docs/change-the-remote-url-to-your-repository)
+4. Bitbucket Sign commits with SSH [Sign commits and tags with SSH keys | Bitbucket Data Center and Server 8.15 | Atlassian Documentation](https://confluence.atlassian.com/bitbucketserver/sign-commits-and-tags-with-ssh-keys-1305971205.html)
+5. [Bitbucket Knowlege Base](https://confluence.atlassian.com/bitbucketserverkb/how-to-obtain-a-list-of-all-projects-and-repositories-from-bitbucket-database-975027747.html)
 
 [Back to top](#)
 
