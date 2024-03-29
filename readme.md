@@ -76,11 +76,11 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 
 ## [Operating Systems](./operating-systems/readme.md)
 
-- [Linux](./operating-systems/linux/readme.md)
+- [Linux](./operating-systems/linux)
 
-- [Ios](./operating-systems/ios/readme.md)
+- [Apple IOS](./operating-systems/ios)
 
-- [Micro\$oft windows](./operating-systems/windows/readme.md)
+- [microsoft Windows](./operating-systems/windows/readme.md)
 
 ## [Salesforce](./Salesforce/readme.md)
 
