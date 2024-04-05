@@ -54,6 +54,10 @@ pip list --outdated
 ```bash
 pip list --user
 ```
+#### upgrade given package
+```bash
+pip install $PACKAGE_NAME --upgrade
+```
 ---
 
 [Back to top](#)
