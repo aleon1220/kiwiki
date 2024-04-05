@@ -1,8 +1,18 @@
+- [Python Language](#python-language)
+      - [Check OS versions](#check-os-versions)
+      - [Find what is at `/usr/bin`](#find-what-is-at-usrbin)
+      - [Set the `update-alternatives` command for python](#set-the-update-alternatives-command-for-python)
+  - [Python system settings](#python-system-settings)
+  - [pip](#pip)
+
 # Python Language
 [PEP 8 -- Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/)
-#### Check python versions in the system
+
+[Kiwiki Home](/../../)
+
+#### Check OS versions
 ``` bash
-sudo apt list --installed | grep python*
+apt list --installed | grep python*
 ```
 
 #### Find what is at `/usr/bin`
@@ -18,8 +28,34 @@ PRIORITY="2"
 
 sudo update-alternatives --install /usr/bin/python3 $PYTHON_EXECUTABLE $PYTHON_EXECUTABLE_PATH $PRIORITY
 
-sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python2.7 3
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python2.7 2
 ```
+## Python system settings
+#### path installed packages
+```bash
+python -m site --user-site
+```
+#### list all user packages
+```bash
+ls $HOME/.local/lib/python3.10/site-packages
+```
+#### command to get path dist-packages
+```
+python3 -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])'
+```
+
+## pip
+pip installs packages
+
+```bash
+pip list --outdated
+```
+
+```bash
+pip list --user
+```
+---
+
 [Back to top](#)
 
 [Kiwiki Home](/../../)
