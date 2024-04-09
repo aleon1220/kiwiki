@@ -93,6 +93,7 @@
       - [Generic info about users from a Linux system](#generic-info-about-users-from-a-linux-system)
       - [Print only the usernames in a Linux System](#print-only-the-usernames-in-a-linux-system)
       - [Search for execution of a given command in the history](#search-for-execution-of-a-given-command-in-the-history)
+      - [find in history with 2 literal strings](#find-in-history-with-2-literal-strings)
       - [Set max map count](#set-max-map-count)
       - [Sho contents of a directory in a tree format with `gio` Gnome Input/Output](#sho-contents-of-a-directory-in-a-tree-format-with-gio-gnome-inputoutput)
 - [Terminals](#terminals)
@@ -846,6 +847,12 @@ rm -rf $DIR_PATH
 
 ```bash
 COMMAND=who ; history | grep $COMMAND
+```
+#### find in history with 2 literal strings
+uses regex to find 2 literal occurrances in a path.
+`.*` matches any sequence of characters to deal with the OS path.
+```bash
+history | grep 'cd.*TESTS'
 ```
 
 #### Set max map count
