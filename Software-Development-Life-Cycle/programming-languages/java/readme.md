@@ -71,6 +71,9 @@ high-level, class-based, object-oriented programming language that is designed t
 
 ### Java 20
 
+### Java 21
+LTS. Recently using [Amazon JDK](https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/downloads-list.html)
+
 ## Java installation Management SDK
 Manage multiple version with sdkman
 
@@ -79,15 +82,17 @@ Manage multiple version with sdkman
 
 #### Find java distro version number
 ```bash
-sdk list java | grep "11.0"
+sdk list java | grep "21.0"
 ```
 
-#### install JDK version
+#### Install target JDK version
 ```bash
-Java_version="17.0.9-amzn"
+SDK_MAN_JAVA_VERSION="21.0.2-amzn"
 
-sdk install java $Java_version
+sdk install java $SDK_MAN_JAVA_VERSION
 ```
+### Using Ubuntu apt
+leverage OS package manager
 
 ### Install default JDK and JRE Ubuntu
 ``` bash
@@ -110,10 +115,8 @@ update-alternatives --config java
 ```bash
 update-alternatives --config javac
 ```
+## JDKs
 
-#### Git Repo reporting Demo for one Java WebApp
-
-[Octo-repo Demo Java WebApp](https://octo-repo-visualization.vercel.app/?repo=aleon1220%2Fmulti-cloud-WebApp-Attendance)
 ### OpenJDK
 
 ### [Oracle Java](https://www.oracle.com/java/)
