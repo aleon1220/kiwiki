@@ -9,6 +9,8 @@
       - [Github set remote URL](#github-set-remote-url)
       - [Stash Individual Files](#stash-individual-files)
       - [Show Content of Most Recent Stash](#show-content-of-most-recent-stash)
+      - [List git stashes](#list-git-stashes)
+      - [Reset the current HEAD or changes of your local branch to a specific state](#reset-the-current-head-or-changes-of-your-local-branch-to-a-specific-state)
       - [Check Out File From Another Branch](#check-out-file-from-another-branch)
       - [Work with 2 branches](#work-with-2-branches)
       - [when you no longer need the branch:](#when-you-no-longer-need-the-branch)
@@ -36,22 +38,23 @@
       - [Clone a Git Repo](#clone-a-git-repo)
       - [List the fetched branches for a repository](#list-the-fetched-branches-for-a-repository)
       - [Global Settings](#global-settings)
+  - [Git Security](#git-security)
       - [Git TLS Certificates](#git-tls-certificates)
       - [Get TLS info](#get-tls-info)
       - [Instruct Git to use GPG2 instead of GPG2 as the signing program](#instruct-git-to-use-gpg2-instead-of-gpg2-as-the-signing-program)
       - [Test GPG2 encrytion](#test-gpg2-encrytion)
       - [Set variable for GPG and terminal usage](#set-variable-for-gpg-and-terminal-usage)
+      - [Sign the Commit GPG](#sign-the-commit-gpg)
     - [Sign commits with SSH Key](#sign-commits-with-ssh-key)
       - [Refer to Public SSH Key](#refer-to-public-ssh-key)
-    - [Git Analysis/Reporting](#git-analysisreporting)
+  - [Git Analysis/Reporting](#git-analysisreporting)
       - [Get global config info](#get-global-config-info)
-      - [Sign the Commit](#sign-the-commit)
       - [List all remote branches](#list-all-remote-branches)
       - [List remote active branches](#list-remote-active-branches)
       - [Get info about commits for a given user](#get-info-about-commits-for-a-given-user)
       - [Create a local branch for testing](#create-a-local-branch-for-testing)
       - [Get a histogram for a gitdiff](#get-a-histogram-for-a-gitdiff)
-      - [Print out just the subject line](#print-out-just-the-subject-line)
+      - [Print out subject line](#print-out-subject-line)
       - [Better log displaying](#better-log-displaying)
       - [Groups commits by user, shows the subject line for simplicity](#groups-commits-by-user-shows-the-subject-line-for-simplicity)
       - [Switch to previous branch](#switch-to-previous-branch)
@@ -59,13 +62,12 @@
       - [Find the last working commit by basically using binary search](#find-the-last-working-commit-by-basically-using-binary-search)
       - [Change a commit message that was made](#change-a-commit-message-that-was-made)
       - [Check size of repo](#check-size-of-repo)
-  - [Git implementations Bitbucket](#git-implementations-bitbucket)
-      - [Report Project User name, User key, Repo name and Repo Slug](#report-project-user-name-user-key-repo-name-and-repo-slug)
       - [Get detailed info about a remote server](#get-detailed-info-about-a-remote-server)
       - [get extra info about remote](#get-extra-info-about-remote)
+- [PR Pull Request Version Control Harmony](#pr-pull-request-version-control-harmony)
+  - [Git implementations Bitbucket](#git-implementations-bitbucket)
+      - [Report Project User name, User key, Repo name and Repo Slug](#report-project-user-name-user-key-repo-name-and-repo-slug)
       - [Update the remote URL using current and new remote URL](#update-the-remote-url-using-current-and-new-remote-url)
-      - [List git stashes](#list-git-stashes)
-      - [Reset the current HEAD or changes of your local branch to a specific state](#reset-the-current-head-or-changes-of-your-local-branch-to-a-specific-state)
   - [Git implementations GitLab](#git-implementations-gitlab)
   - [Git implementations Azure ADO Repos](#git-implementations-azure-ado-repos)
   - [References](#references)
@@ -229,6 +231,17 @@ git stash show -p [stash@{<n>}]
 
 ```bash
 git stash show -p stash@{1}
+```
+#### List git stashes
+
+```bash
+git stash list
+```
+
+#### Reset the current HEAD or changes of your local branch to a specific state
+
+```bash
+git reset [FILE_PATH]
 ```
 
 #### Check Out File From Another Branch
@@ -421,6 +434,8 @@ will apply to all repositories
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 ```
+## Git Security
+refers to encryption and commit signing
 
 #### Git TLS Certificates
 
@@ -456,13 +471,18 @@ echo "test" | gpg2 --clearsign
 export GPG_TTY=$(tty)
 ```
 
+#### Sign the Commit GPG
+
+```
+git commit -S -m "SSH signed commit"
+```
+
 ### Sign commits with SSH Key
 
 much easier but less secured
 
-```
+```bash
 git config --global gpg.format ssh
-
 ```
 
 #### Refer to Public SSH Key
@@ -473,18 +493,12 @@ use default values
 git config --global user.signingkey ~/.ssh/id_rsa.pub  
 ```
 
-### Git Analysis/Reporting
+## Git Analysis/Reporting
 
 #### Get global config info
 
 ```bash
 git config --global --list
-```
-
-#### Sign the Commit
-
-```
-git commit -S -m "SSH signed commit"
 ```
 
 #### List all remote branches
@@ -518,7 +532,7 @@ git checkout -b feature/ID01-functionality
 git diff --histogram
 ```
 
-#### Print out just the subject line
+#### Print out subject line
 
 ```bash
 git log --oneline
@@ -529,8 +543,6 @@ git log --oneline
 ```bash
 git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 ```
-
-[source A better git log](coderwall.com/p/euwpig/a-better-git-log)
 
 #### Groups commits by user, shows the subject line for simplicity
 
@@ -581,6 +593,30 @@ git push -f
 git count-objects -vH
 ```
 
+#### Get detailed info about a remote server
+```bash
+git remote --verbose
+```
+
+#### get extra info about remote
+```bash
+git remote show origin
+```
+
+# PR Pull Request Version Control Harmony
+Pull requests are essential for collaborating on code changes and getting feedback from others
+pull requests facilitate collaboration, code quality, and transparency. They allow others to review your work and ensure that changes are well-tested before merging.
+
+1. Create a Branch
+1. Commit Your Changes
+1. Push Your Changes
+1. Open a Pull Request
+1. Discuss and Review
+1. Rebase and Tests
+If necessary, rebase your branch to keep it up-to-date with the base branch.
+Run tests to ensure your changes don’t break anything.
+1. Merge Your Branch
+
 ## Git implementations Bitbucket
 
 #### Report Project User name, User key, Repo name and Repo Slug
@@ -597,32 +633,10 @@ INNER JOIN project prj ON rep.project_id = prj.id
 ORDER BY prj.name, rep.name
 ```
 
-#### Get detailed info about a remote server
-```bash
-git remote --verbose
-```
-
-#### get extra info about remote
-```bash
-git remote show origin
-```
-
 #### Update the remote URL using current and new remote URL
 
 ```bash
 git remote set-url origin git@bitbucket.org:tutorials/tutorials.git
-```
-
-#### List git stashes
-
-```bash
-git stash list
-```
-
-#### Reset the current HEAD or changes of your local branch to a specific state
-
-```bash
-git reset [FILE_PATH]
 ```
 
 ## Git implementations GitLab
@@ -633,8 +647,9 @@ git reset [FILE_PATH]
 1. [git commands to live by @Omar Shakari](https://medium.com/better-programming/git-commands-to-live-by-349ab1fe3139)
 2. [stackdiary how-to-sign-your-git-commits-with-ssh-keys](https://stackdiary.com/tutorials/how-to-sign-your-git-commits-with-ssh-keys)
 3. [Atlassian support docs change-the-remote-url-to-your-repository](https://support.atlassian.com/bitbucket-cloud/docs/change-the-remote-url-to-your-repository)
-4. Bitbucket Sign commits with SSH [Sign commits and tags with SSH keys | Bitbucket Data Center and Server 8.15 | Atlassian Documentation](https://confluence.atlassian.com/bitbucketserver/sign-commits-and-tags-with-ssh-keys-1305971205.html)
-5. [Bitbucket Knowlege Base](https://confluence.atlassian.com/bitbucketserverkb/how-to-obtain-a-list-of-all-projects-and-repositories-from-bitbucket-database-975027747.html)
+4.  [Atlassian Docs | Bitbucket Sign tags commits with SSH keys | Bitbucket Data Center and Server 8.15 | ](https://confluence.atlassian.com/bitbucketserver/sign-commits-and-tags-with-ssh-keys-1305971205.html)
+5. [Atlassian Docs | Bitbucket obtain list of all projects and repos from DB](https://confluence.atlassian.com/bitbucketserverkb/how-to-obtain-a-list-of-all-projects-and-repositories-from-bitbucket-database-975027747.html)
+6. [Coderwall | A better git log](coderwall.com/p/euwpig/a-better-git-log)
 
 [Back to top](#)
 
