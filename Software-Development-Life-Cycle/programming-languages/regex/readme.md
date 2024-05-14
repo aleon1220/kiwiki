@@ -39,6 +39,10 @@ tested in vscode
 2 another text
 3 yet more text
 ```
+- match lines that start with opening parenthesis ( contain digits end with a closing parenthesis )
+```cmd
+^\(\d+\)
+```
 
 - Do the Regex to find/Search the numerical digits and spaces. The group here will be the digits as it is surrounded in parenthesis
 
