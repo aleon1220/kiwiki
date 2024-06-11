@@ -40,8 +40,8 @@ At work they have provided a windows 11 laptop, my personal Linux ubuntu 2020 la
 1. git [CLI](https://git-scm.com/downloads)
 1. Docker desktop or replacement TODO if you need to pay
 1. calibre 64bit - E-book management with a local copy of the library from dropbox (use a windows parent father laptop. the personal one)
-1. Anaconda
 1. RescueTime
+1. Anaconda
 1. terraform
 1. aws cli
 1. azure cli
@@ -58,6 +58,9 @@ Windows11 setup at work
 
 - WSL [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/)
 - Windows Terminal [WT](https://learn.microsoft.com/en-us/windows/terminal/install#installation)
+- VsCode
+- IntelliJ
+- Bash functions ~/.bashrc
 - Docker [Desktop](https://www.docker.com/products/docker-desktop)
 
 [Back to top](#)
