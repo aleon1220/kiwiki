@@ -490,7 +490,14 @@ git config --global gpg.format ssh
 use default values
 
 ```
-git config --global user.signingkey ~/.ssh/id_rsa.pub  
+git config --global user.signingkey ~/.ssh/id_rsa.pub
+```
+
+#### Use an alias to add, commit and push
+```bash
+alias gacp_extrakey="git add . && git -c core.sshCommand='/usr/bin/ssh -i \$HOME/.ssh/extrakey' commit -S && git -c core.sshCommand='/usr/bin/ssh -i \$HOME/.ssh/extrakey' push"
+
+gacp_extrakey
 ```
 
 ## Git Analysis/Reporting
