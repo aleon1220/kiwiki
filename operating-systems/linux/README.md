@@ -968,7 +968,7 @@ sudo chmod --reference="$REFERENCE_FILE" "$TARGETING_FILE"
 ##### Change ownership of all files in current dir to a given group
 
 ```bash
-GROUP_NAME="common" ; sudo chown :\$GROUP_NAME \.
+GROUP_NAME="common" ; sudo --recursive "$GROUP_NAME" *
 ```
 ---
 # Operating Systems
@@ -1013,21 +1013,26 @@ CTRL + delete
 ```bash
 Shift + Delete
 ```
-Never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
+Never delete the Home directory, doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
+
 Many personal system and program configurations are stored under your home directory
 
 # Terminals
 Shells available: bash, fish, Zshell
 
 ## Bash
+#### ensure that bash is the default shell
+```bash
+TARGET_USER="newUser"
+sudo chsh -s /bin/bash $TARGET_USER
+```
 
 ## Fish
 
 ## Zshell
 
 ## References
-- [source cyberciti](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
-
+- [cyberciti reload-sysctl-conf](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
 
 [Back to top](#)
 
