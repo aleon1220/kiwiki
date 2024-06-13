@@ -1,16 +1,21 @@
 # Windows
 Command prompt & power shell
-> Executed in WSL, Powershell 7 windows 10
-WSL is a virtualization layer that runs Linux distros in windows 10 and windows 11
+> Executed in
+- WSL
+- Powershell 7
+- windows 10
+- windows 11
+
+WSL is a virtualization layer that runs Linux distros in windows 10+
 
 ## Get Windows License
-``` cmd
+```cmd
 wmic path SoftwareLicensingService get OA3xOriginalProductKey
 ```
 
 ## WSL Windows Subsystem Linux
 ### Install
-``` powershell
+```powershell
 wsl --install
 ```
 
@@ -19,7 +24,7 @@ wsl --install
 ### Networking
 
 ##### Get your Public IP Address
-``` powershell
+```powershell
 (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
 ```
 
@@ -38,7 +43,8 @@ Restart-Service vmcompute
 wsl --shutdown
 ```
 
-#### Eestarting WSL2
+#### Restarting WSL2
+- tested in Win10
 ``` powershell
 Restart-Service LxssManager
 ```
@@ -48,14 +54,14 @@ Restart-Service LxssManager
 ### Network commands for cmd
 #### Flush DNS and restart networking
 Open a terminal or powershell window as Admin
-``` dotnetcli
+```dotnetcli
 ipconfig /flushdns
 ipconfig /registerdns
 ipconfig /release
 ipconfig /renew
 netsh winsock reset
 
-echo " Restart the computer "
+echo "Restart the computer"
 ```
 
 #### network statistics. Find by Process ID
@@ -83,24 +89,27 @@ This features attempts to manage some aspects of IPv6 connectivity. To disable i
 6. check to see if the IPv6 connection now works as expected.
 
 #### Clean-up network devices
-
-`netcfg -d`
+```cmd
+netcfg -d
+``` 
 
 #### Verify that DNS name resolution is working correctly
-`nslookup "host"`
+```cmd
+nslookup host
+```
 
 #### Determine whether the router is performing slowly or dropping packets.
-``` powershell
+```powershell
 pathping  "IP"
 ```
 
 #### File Checksum Integrity Verifier (Install as plugin first)
-``` powershell
+```powershell
 fciv.exe [Commands] <Options>
 ```
 
 #### Set Configurations for files and folders
-``` powershell
+```powershell
 attrib
 ```
 
@@ -122,7 +131,7 @@ sfc /scannow
 Measure-Command { echo hi }
 ```
 
-### Windows Nice [Terminal](https://docs.microsoft.com/en-us/windows/terminal/get-started#installation)
+### Windows [Terminal](https://docs.microsoft.com/en-us/windows/terminal/get-started#installation)
 
 #### Windows terminal with vertical panes. 2nd pane is WSL
 ``` powershell
