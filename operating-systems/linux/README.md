@@ -770,13 +770,17 @@ awk -F: '{ print $1}' /etc/passwd
 cut -d: -f1 /etc/passwd
 ```
 
-#### List all Users
-
-Each user has a numeric user ID called UID. If not specified when creating a new user with the useradd command, the UID will be automatically selected from the /etc/login.defs file depending on the UID_MIN and UID_MIN values.
+#### List all Users A-Z
+Each user has a numeric user ID called UID. 
+If UID is not specified when creating a new user with the `useradd` command, the UID will be automatically selected from the `/etc/login.defs` file depending on the **UID_MIN** and **UID_MIN** values.
 
 ```bash
-getent passwd
-getent passwd | cut -d: -f1
+getent passwd | cut -d: -f1 | sort
+```
+
+#### check type of terminal
+```bash
+printf "%s\n" $TERM
 ```
 
 #### Set a new password for user `root`
@@ -961,10 +965,10 @@ TARGETING_FILE="a_target_file_to_copy_permissions.txt"
 sudo chmod --reference="$REFERENCE_FILE" "$TARGETING_FILE"
 ```
 
-##### Change ownership of all files inside dir to a given linux group
+##### Change ownership of all files in current dir to a given group
 
 ```bash
-GROUP_NAME="common" ; sudo chown :\$GROUP_NAME \*
+GROUP_NAME="common" ; sudo chown :\$GROUP_NAME \.
 ```
 ---
 # Operating Systems
