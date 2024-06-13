@@ -116,7 +116,6 @@
 
 [Kiwiki Home](/../../)
 # General Linux Server commands
-Shells available: bash, fish, Zshell
 
 ### CLI Shell keyboard shortcuts
 - `ctrl + l`  clear  the screen
@@ -519,7 +518,8 @@ dpkg --get-selections | grep PACKAGE_TO_FIND
 snap list
 ```
 
-## Debugging Linux Systems (mostly Ubuntu)
+## Debugging Linux Systems
+> mostly Ubuntu/Debian based distros
 
 A very important set of skills when something goes wrong and is important to get quick info.
 This can become a small DIY project to manage desktop and cloud servers.
@@ -728,32 +728,40 @@ df -h
 w -u
 ```
 
-##### Get the user login history
+## User Management
 
+2024-06-12 migrating Win11 laptops with WSL 
+- Migrate `~/.ssh`
+- Migrate `~/.bashrc`
+
+#### List Users in Linux
+```bash
+sudo less /etc/passwd
+```
+
+##### Create a user
+```bash
+useradd newUserName
+```
+
+##### Get the user login history
 ```bash
 last $USERNAME
 ```
 
 ##### Print the user name who are all currently logged in the current host
-
 ```bash
 users
 ```
 
-#### List Users in Linux
-
-```bash
-sudo less /etc/passwd
-```
-
 Each line in the file `etc/passwd` has seven fields delimited by colons that contain the following information:
 
-- User name:Encrypted password (x means that the
-- password is stored in the /etc/shadow file).
+- User name: 
+- password Encrypted. x means is stored in the `/etc/shadow` file
 - User ID number (UID).:User’s group ID number (GID)
 - Full name of the user (GECOS)
-- User home directory.
-- Login shell (defaults to /bin/bash).
+- User home directory
+- Login shell (defaults to /bin/bash)
 
 #### Display only the username
 
@@ -762,7 +770,7 @@ awk -F: '{ print $1}' /etc/passwd
 cut -d: -f1 /etc/passwd
 ```
 
-#### Get a List of all Users in a Linux System
+#### List all Users
 
 Each user has a numeric user ID called UID. If not specified when creating a new user with the useradd command, the UID will be automatically selected from the /etc/login.defs file depending on the UID_MIN and UID_MIN values.
 
@@ -772,24 +780,21 @@ getent passwd | cut -d: -f1
 ```
 
 #### Set a new password for user `root`
-
 ```bash
 sudo passwd $USERNAME
 ```
-
-#### Set a new password for your own user
-
+- successful output
 ```bash
-passwd
+passwd: password updated successfully
 ```
 
-#### Check the UID_MIN and UID_MIN values on your system, you can use the following command
+#### Check the UID_MIN and UID_MIN values on your system
 
 ```bash
 grep -E '^UID_MIN|^UID_MAX' /etc/login.defs
 ```
 
-#### The command below will list all normal users in our Linux system
+#### List all normal users
 
 ```bash
 getent passwd {1000..60000}
@@ -807,16 +812,10 @@ eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID
 eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1
 ```
 
-##### Print the loggedin user name
+##### Print the logged-in user
 
 ```bash
 id -un
-```
-
-##### Get the list of the usernames who are currently logged in
-
-```bash
-who
 ```
 
 ##### get a list of all usernames that are currently logged
@@ -848,7 +847,7 @@ rm -rf $DIR_PATH
 ```bash
 COMMAND=who ; history | grep $COMMAND
 ```
-#### find in history with 2 literal strings
+#### Find in history with 2 literal strings
 uses regex to find 2 literal occurrances in a path.
 `.*` matches any sequence of characters to deal with the OS path.
 ```bash
@@ -872,10 +871,6 @@ tree $HOME
 ```bash
 gio tree
 ```
-
-# Terminals
-
-> ## more in the [Bash Section](/devops-tools/bash)
 
 #### 20 Most used commands in bash history
 ```bash
@@ -1014,11 +1009,21 @@ CTRL + delete
 ```bash
 Shift + Delete
 ```
-(Never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
-Many personal system and program configurations are stored under your home directory)
+Never delete your Home directory, as doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
+Many personal system and program configurations are stored under your home directory
+
+# Terminals
+Shells available: bash, fish, Zshell
+
+## Bash
+
+## Fish
+
+## Zshell
 
 ## References
-- [source cyberciti](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl/)
+- [source cyberciti](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
+
 
 [Back to top](#)
 
