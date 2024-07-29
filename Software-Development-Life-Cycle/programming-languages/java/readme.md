@@ -78,7 +78,11 @@ LTS. Recently using [Amazon JDK](https://docs.aws.amazon.com/corretto/latest/cor
 Manage multiple version with sdkman
 
 ### [SDKMan](https://sdkman.io/)
-`curl -s "https://get.sdkman.io" | bash`
+#### Installation 
+- install SDK Man
+```bash
+curl -s "https://get.sdkman.io" | bash
+```
 
 #### Find java distro version number
 ```bash
