@@ -358,8 +358,13 @@ do
 unzip –d $i /data/www/img/
 done
 ```
-#### Create a parent directory with 2 directories inside (Single line)
+#### Create a directory YYYY-MM-DD format cd to it
+```bash
+folder_name="$(date +%F)"
+mkdir --parents --verbose $folder_name && cd $folder_name
+```
 
+#### Create a parent directory with 2 directories inside (Single line)
 ```bash
 mkdir -p $HOME/example.com/server1/{httpd,dnsqmasq}
 ```
