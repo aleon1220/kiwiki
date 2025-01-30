@@ -1,7 +1,16 @@
 # Virtualization
 
-## Vagrant
-[Vagrant documentation](https://developer.hashicorp.com/vagrant/docs/cli)
+## Vagrant General status
+#### Check Status in OS
+```bash
+vagrant global-status
+```
+#### Clean up
+```bash
+vagrant destroy ID --force
+```
+
+# References
 
 [Back to top](#)
 
