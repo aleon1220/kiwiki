@@ -1,24 +1,25 @@
-- [On-boarding](#on-boarding)
-  - [New Job](#new-job)
-    - [First week at work](#first-week-at-work)
-- [On-Boarding processes](#on-boarding-processes)
-  - [Setting up dev laptop](#setting-up-dev-laptop)
-    - [Second week](#second-week)
+- [On-boarding General Structure](#on-boarding-general-structure)
+  - [Pre-Start (One Week Before Starting)](#pre-start-one-week-before-starting)
+  - [First Week at Work](#first-week-at-work)
+    - [Setting Up Development Laptop](#setting-up-development-laptop)
+  - [Second Week](#second-week)
+  - [Additional Recommendations](#additional-recommendations)
 - [Analyze the Software Development Lifecyle and culture of a company](#analyze-the-software-development-lifecyle-and-culture-of-a-company)
 
 [Kiwiki Home](/../../)
-# On-boarding
-Useful for starting in new environments
 
-## New Job
-- 1 week before starting go to the physical workplace
-- Pray about the place. Bless the new place
-- define times for
-  - Time and cost it takes to go to the new workplace on your own vehicle = 
-  - Time and cost it takes to go to the new workplace by bus = 
-
-### First week at work
-The first week absorv as much as you can
+# On-boarding General Structure  
+The on-boarding process is divided into several stages: pre-start, first week, and second week. It includes practical steps for setting up technical tools and understanding workplace culture and processes.  
+  
+## Pre-Start (One Week Before Starting)  
+- **Visit the Workplace:** Visit the workplace a week before starting to get familiar with the commute and the environment.  
+- **Pray and Bless the New Place:** 
+- **Commute Planning:** Calculate the time and cost of commuting using different transportation methods.  
+  - Time and cost it takes to go to the new workplace using your own vehicle.  
+  - Time and cost it takes to go to the new workplace by public transport.  
+  
+## First Week at Work 
+Absorve as much info as you can
 - Make a list of the primary stake holders
   - Direct Manager
   - Manager's manager
@@ -26,25 +27,27 @@ The first week absorv as much as you can
   - what does the culture feel like?
   - How fast paced does it feel?
   - Ask 3 questions daily
+- **Absorb Information:** Focus on learning as much as possible about the workplace and its operations.  
+- **Identify Stakeholders:** Make a list of key stakeholders such as direct manager, manager’s manager, and any significant influencers ("human firewalls").  
+- **Cultural Assessment:** Evaluate the company culture and pace.  
+- **Daily Questions:** Aim to ask three questions daily to better understand the environment and processes.  
+  
+### Setting Up Development Laptop  
+- **If using Windows:** Obtain admin privileges ASAP.  
+- **Set up Essential Tools:**  
+  - [WSL](https://docs.microsoft.com/en-us/windows/wsl/install)
+  - [Docker](https://docs.docker.com/get-docker/)
+  - security and encryption tools: if using FIDO tool, [GPG](https://gnupg.org/download) key, SSH key
+    - Set your SSH key with your work email.
+    - Add GPG and SSH keys from the new laptop to sites:
+      - [Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)  
+      - [Gitlab](https://docs.gitlab.com/ee/user/ssh.html)  
+      - [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key)  
+    - Set up your git commits with GPG signatures.
+  - software [engineering Tools](https://github.com/aleon1220/kiwiki/tree/master/devops-tools)
+- **Organize Bookmarks:** Use a tool like [Toby](https://www.gettoby.com/) for bookmarks.  
 
-# On-Boarding processes
-Tips for onboarding to a new company
-
-## Setting up dev laptop
-- If windows get admin priveleges ASAP
-- Set up WSL
-- Set up Docker
-- Set up virtual box and vagrant
-- Encryption set up GPG
-- set you SSH key with your work email
-- Add GPG and SSH keys from the new laptop to sites
-  - Github
-  - Gitlab
-  - Bitbucket
-- Set up your git commits with GPG signatures
-- Set up Toby bookmarks
-
-### Second week
+## Second Week
 - begin analysing what tools they have. Make a list of the name of the tools they use
 - Friday on the last day or perhaps saturday morning spend 1 hour creating a table with
   - | tool name | tool description | tool link | ideas |
@@ -55,12 +58,32 @@ Tips for onboarding to a new company
 - Do they pay monthly or fort nightly
 - Do they have a system to see the payments and social security contributions
 - Dump lots of possibly important pages in Toby bookmarks
+- **Tool Analysis:** Start analyzing the tools used by the company. Create a list and familiarize yourself with them.  
+  - **Documentation Table:** Spend 1 hour or 2 pomodoros creating a table with:  
+    - Tool Name  
+    - Tool Description  
+    - Tool Link  
+    - Ideas  
+- **Engage with Colleagues:** Balance participation in activities based on your personality (introvert/extrovert).  
+- **Process Understanding:** Explore the company's payment process and social security contributions.  
+- **Bookmarking:** Use Toby to save important pages.  
+- **Software Development Lifecycle and Culture:**  
+  - Review wikis and ask questions to understand the company's software development lifecycle.  
+  - Seek documents that define the processes and simplify them for better understanding and clarification.  
+  
+## Additional Recommendations  
+1. **Structured Timeline:** Provide a more detailed timeline for each step to give new hires a clearer roadmap.  
+2. **Mentorship:** Suggest assigning a mentor or buddy to help new hires navigate the first few weeks.  
+3. **Feedback Loop:** Incorporate a feedback mechanism for new hires to share their onboarding experience, allowing for continuous improvement of the process.  
+4. **Resource Links:** Include links or references to resources for setting up technical tools to streamline the process further.
+5. 1 week before starting go to the physical workplace Pray about the place. Bless the new place
 
 # Analyze the Software Development Lifecyle and culture of a company
 1. check wikis
 1. ask questions
 1. try to find a document of where the process is defined
-1. Abstract the progress and make it simple to understand so that you can ask a simple question to clarify
+1. reflect on the progress and make it simple to understand by journaling and taking notes 
+1. ask yourself questions and then ask questions seeking to clarify
 
 [Back to top](#)
 
