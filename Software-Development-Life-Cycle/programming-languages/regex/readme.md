@@ -25,8 +25,7 @@ Match zero or more occurrences of (1) and (2)
 `:[0-9]*.*`
 
 #### find extensions that start after string dash at the end of line
-
-tested in vscode
+> tested in vscode
 
 `-m[\w].$`
 
