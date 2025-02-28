@@ -27,35 +27,45 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 
 1. [AWS](./cloud-computing/aws/readme.md)
 2. [Azure](./cloud-computing/azure/readme.md)
-3. [Google Cloud Engine](./cloud-computing/gce/readme.md)
+    1. [Bicep](./cloud-computing/azure/bicep/readme.md)
+3. [Google Cloud Engine](./cloud-computing/gcp/readme.md)
 
-## [Computer](./computer/readme.md)
+## [Computer](./computer/computer.md)
 
 ## Compute Containers
 
 - [Docker](./containers/readme.md)
 
 ## Software engineering Tools
-previously called devops-tools. It involves anything tech related. Call it platform engineering, SRE, DevSecDataAPIFinChefMaidOps
-
+previously called devops-tools. It involves anything tech related. Call it platform engineering, SRE, DevOps Tools.
+  
 ### IDEs
 - [VSCode](./devops-tools/productivity-tools/vscode-setup)
 
-### Automation tools
+### [Automation](./devops-tools/automation/readme.md) Tools
+1. [Ansible](./devops-tools/automation/ansible/readme.md)  
+2. [Rundeck](./devops-tools/automation/Rundeck/readme.md) 
 
-1. [Ansible](./devops-tools/automation/ansible/readme.md)
-
-### Build Tools
-
-1. [Gradle](./devops-tools/build-tools/gradle/readme.md)
-1. [Maven](./devops-tools/build-tools/maven/readme.md)
+### [Build Tools](./devops-tools/build-tools/readme.md)  
+1. [Gradle](./devops-tools/build-tools/gradle/readme.md)  
+ 2. [Maven](./devops-tools/build-tools/maven/readme.md)
 
 ### CI Continous Integration Tooling
-
-2. [Jenkins](./devops-tools/CI/jenkins/)
-
+1. [Jenkins](./devops-tools/CI/jenkins/)
+1. [CI](./devops-tools/CI/readme.md)  
+    1. [Jenkins](./devops-tools/CI/jenkins/readme.md)  
+        1. [Functions](./devops-tools/CI/jenkins/functions/readme.md)  
+        2. [Pipeline Templates](./devops-tools/CI/jenkins/pipeline-templates/readme.md)  
+5. [Git](./devops-tools/git/readme.md)  
+6. [IaC](./devops-tools/IaC/readme.md)  
+    1. [Terraform](./devops-tools/IaC/terraform/readme.md)  
+7. [Markdown](./devops-tools/markdown/readme.md)  
+8. [Productivity Tools](./devops-tools/productivity-tools/readme.md)  
+    1. [PDF](./devops-tools/productivity-tools/pdf/readme.md)  
+    2. [Rescue Time](./devops-tools/productivity-tools/rescue-time/readme.md)  
+    3. [VSCode Setup](./devops-tools/productivity-tools/vscode-setup/readme.md) 
 ### CD Continous Deployment/Delivery Tooling
-
+[CD](./devops-tools/CD/readme.md)
 - [Spinnaker](./devops-tools/CD/spinnaker.md)
 
 ### [Git](./devops-tools/git/readme.md)
@@ -68,7 +78,7 @@ previously called devops-tools. It involves anything tech related. Call it platf
 Personal selection of tools to improve productivity
 #### Mobile apps
 
-#### Online a
+#### Online apps
 
 #### Linux/windows/IOS tools
 - [PDFs](./devops-tools/productivity-tools/pdf)
@@ -81,14 +91,11 @@ Personal selection of tools to improve productivity
 ## [Multimedia](./multimedia/readme.md)
 
 ## Networking
-
-## [Operating Systems](./operating-systems/readme.md)
-
-- [Linux](./operating-systems/linux)
-
-- [Apple IOS](./operating-systems/ios)
-
-- [microsoft Windows](./operating-systems/windows/readme.md)
+## [Operating Systems](./operating-systems/readme.md) 
+1. [Bash](./operating-systems/bash/readme.md)   
+2. [iOS](./operating-systems/ios/readme.md)  
+3. [Linux](./operating-systems/linux/readme.md)  
+4. [Windows](./operating-systems/windows/readme.md)
 
 ## [Software-Development-Life-Cycle](./Software-Development-Life-Cycle/readme.md)
 
