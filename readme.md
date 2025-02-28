@@ -35,7 +35,11 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 
 - [Docker](./containers/readme.md)
 
-## devops-tools
+## Software engineering Tools
+previously called devops-tools. It involves anything tech related. Call it platform engineering, SRE, DevSecDataAPIFinChefMaidOps
+
+### IDEs
+- [VSCode](./devops-tools/productivity-tools/vscode-setup)
 
 ### Automation tools
 
@@ -61,10 +65,14 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 1. [Terraform](./devops-tools/IaC/terraform/readme.md)
 
 ### productivity-tools
+Personal selection of tools to improve productivity
+#### Mobile apps
 
-- [PDFs](./productivity-tools/pdf)
-- [RescueTime](./productivity-tools/rescue-time/)
-- [VSCode](./productivity-tools/vscode-setup/)
+#### Online a
+
+#### Linux/windows/IOS tools
+- [PDFs](./devops-tools/productivity-tools/pdf)
+- [RescueTime](./devops-tools/productivity-tools/rescue-time/)
 
 ## [DataBases](./databases/sql.md)
 
@@ -81,8 +89,6 @@ I used a `.txt` file, then a google docs file which was accidentally deleted fro
 - [Apple IOS](./operating-systems/ios)
 
 - [microsoft Windows](./operating-systems/windows/readme.md)
-
-## [Salesforce](./Salesforce/readme.md)
 
 ## [Software-Development-Life-Cycle](./Software-Development-Life-Cycle/readme.md)
 
