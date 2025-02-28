@@ -33,10 +33,16 @@ pdftk $PDF_FILE.pdf dump_data_utf8 | grep InfoValue:
 pdftk source.pdf cat 5-10 output ExtractedOutput_p5-10.pdf
 ```
 
-#### Split specific pages from the source file, for example page 5, page 6, and page 10
+#### Split specific pages from source file 3 pages
+for example page 5, page 6, and page 10
 
 ```bash
 pdftk source.pdf cat 5 6 10 output SplittedOutput.pdf
+```
+
+#### Join PDFs unify in out1.pdf
+```bash
+pdftk in1.pdf in2.pdf cat output out1.pdf verbose
 ```
 
 [Back to top](#)
