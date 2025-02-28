@@ -1,5 +1,6 @@
 # Bash Cheat Sheet
-This section contains [`.bash_functions/`](.bash_functions/bash_functions.sh) and [.bash_aliases](.bash_aliases) files. I tried adding the most commonly used actions. This is  tested and used in Linux ubuntu 18.04 and WSL Ubuntu 18.04.
+This section contains many shell and bash scripts for different purposes. 
+Tested and used in Linux ubuntu 18.04 and WSL Ubuntu 18.04, Ubuntu 22
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
 
@@ -27,19 +28,29 @@ set -o xtrace
 ```
 
 #### The alias Command
-`alias [name[=value]]`
+```bash
+alias [name[=value]]
+```
+- below is a common command. Recently i found it was an alias
+```bash
+alias ll='ls -alF'
+```
 #### Colorize Output
 #### install Colordiff
 It may not be installed by default. to install on Ubuntu systems.
-`sudo apt-get -y colordiff`
-
+```bash
+sudo apt -y colordiff
+```
+- create the aliases
 ``` bash
 alias diff='colordiff'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
-
+```
+- aliases for Date & time
+``` bash
 Date and Time Aliases
 alias d='date +%F'
 alias now='date +"%T"'
@@ -50,7 +61,6 @@ alias cp='cp -i'
 alias ln='ln -i'
 alias mv='mv -i'
 ```
-
 ## System Updates
 
 ### Debian / Ubuntu:
@@ -64,7 +74,7 @@ alias update="sudo apt-get update && sudo apt-get upgrade"
 alias update='yum update'
 alias updatey='yum -y update'
 ```
-
+### History in bash
 #### 10 Most used commands from history
 ``` bash
 cat ~/.bash_history | tr "\|\;" "\n" | sed -e "s/^ //g" | cut -d " " -f 1 | sort | uniq -c | sort -n | tail -n 10
@@ -96,7 +106,6 @@ cp --recursive .bash_functions/ $HOME
 cp .bash_aliases $HOME
 ```
 - Append to the end of your `.bashrc` file
-
 ```bash
 cat <<EOF >> $HOME/.bashrc
 
@@ -105,12 +114,14 @@ if [ -f \$home_bash_functions ]; then
       source \$home_bash_functions
 fi
 EOF
-```bash
-- source the files
+```
+
+- source the files to apply the changes
 ```bash
 source $HOME/.bash_aliases
 source $HOME/.bashrc
 ```
+
 - Create sym links
 ```bash
 ln -s lsd lsl
@@ -140,7 +151,8 @@ Supported escape sequences:
 echo <(printf "hi all \n")
 ```
 
-there is a built-in command called `complete`. Example to execute the auto complete feature for AWSCLI
+built-in command called `complete`.
+Example to execute the auto complete feature for AWSCLI
 `complete -C '/usr/local/bin/aws_completer' aws`
 
 ### [JSON JQ](https://www.json.org/json-en.html) in bash
@@ -151,7 +163,7 @@ there is a built-in command called `complete`. Example to execute the auto compl
 one of the nicest things to do is to output JSON to less and see the JSON output in nice colouring.
 for that do
 
-#### colorize json data with jq and less
+#### Colorize json data with jq and less
 `JSON="your.json" cat JSON | jq . --color-output | less --RAW-CONTROL-CHARS`
 `# for the impatient \ cat your.json | jq . -C | less -R`
 ##### Pipe json to console, find a string and colorize output
@@ -254,7 +266,7 @@ zip -r "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}.upd" "${OTA_ARTIFACTS_OUT_DIR}/${BU
 
 source [opensource.com](https://opensource.com/article/20/1/linux-terminal-trick)
 
-## Readings
+## Reference Material
 - [Medium Query Bash best practices](https://medium.com/search?q=bash%20best%20practices)
 
 [Back to top](#)
