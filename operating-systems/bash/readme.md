@@ -1,22 +1,68 @@
 # Bash Cheat Sheet
-This section contains [`.bash_functions/`](.bash_functions/bash_functions.sh) and [.bash_aliases](.bash_aliases) files. I tried adding the most commonly used actions. This is  tested and used in Linux ubuntu 18.04 and WSL Ubuntu 18.04.
+This section contains many shell and bash scripts for different purposes. 
+Tested and used in Linux ubuntu 18.04 and WSL Ubuntu 18.04, Ubuntu 22
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
 
 <!-- code_chunk_output -->
 
 - [Bash Cheat Sheet](#bash-cheat-sheet)
+  - [Some Bash Keyboard tips](#some-bash-keyboard-tips)
   - [Bash options/Flags](#bash-optionsflags)
+      - [The alias Command](#the-alias-command)
+      - [Colorize Output](#colorize-output)
+      - [install Colordiff](#install-colordiff)
   - [System Updates](#system-updates)
     - [Debian / Ubuntu:](#debian--ubuntu)
     - [RHEL, CentOS, Fedora](#rhel-centos-fedora)
+    - [History in bash](#history-in-bash)
+      - [10 Most used commands from history](#10-most-used-commands-from-history)
+      - [Create dirs from 1990-2020](#create-dirs-from-1990-2020)
+      - [Rename files to trim unwanted string "ANNOYING\_STRING-"](#rename-files-to-trim-unwanted-string-annoying_string-)
+      - [Quick set up Bash Functions](#quick-set-up-bash-functions)
+      - [Terminate an SSH session that got stuck](#terminate-an-ssh-session-that-got-stuck)
+      - [Bash process substitution](#bash-process-substitution)
     - [JSON JQ in bash](#json-jq-in-bash)
     - [JQ](#jq)
+      - [Colorize json data with jq and less](#colorize-json-data-with-jq-and-less)
+      - [Pipe json to console, find a string and colorize output](#pipe-json-to-console-find-a-string-and-colorize-output)
+      - [Extract multiple values](#extract-multiple-values)
+      - [Get values from array](#get-values-from-array)
+      - [Get specific element from array. If you know the position](#get-specific-element-from-array-if-you-know-the-position)
+        - [jq‘s delete function, del(), to delete a key:value pair](#jqs-delete-function-del-to-delete-a-keyvalue-pair)
+        - [retrieve the names of a list from the object at index position e.g. 995 through the end of the array](#retrieve-the-names-of-a-list-from-the-object-at-index-position-eg-995-through-the-end-of-the-array)
+        - [Extract the last 10 objects from the array. A “-10” instructs jq to start processing objects 10 back from the end of the array.](#extract-the-last-10-objects-from-the-array-a--10-instructs-jq-to-start-processing-objects-10-back-from-the-end-of-the-array)
+        - [Apply slicing to strings. Request the first four characters of the name of the object at array index 234](#apply-slicing-to-strings-request-the-first-four-characters-of-the-name-of-the-object-at-array-index-234)
+        - [See a specific object in its entirety](#see-a-specific-object-in-its-entirety)
+        - [see only the values, you can do the same thing without the key names](#see-only-the-values-you-can-do-the-same-thing-without-the-key-names)
+        - [Retrieve multiple values from each object, we separate them with commas](#retrieve-multiple-values-from-each-object-we-separate-them-with-commas)
+        - [Retrieve nested values, you have to identify the objects that form the “path” to them.](#retrieve-nested-values-you-have-to-identify-the-objects-that-form-the-path-to-them)
+        - [JQ length Function](#jq-length-function)
+        - [see how many key:value pairs are in the first object in the array](#see-how-many-keyvalue-pairs-are-in-the-first-object-in-the-array)
+        - [JQ keys Function](#jq-keys-function)
+      - [find Keys in ObjectName](#find-keys-in-objectname)
+      - [Find elements in ObjectName](#find-elements-in-objectname)
+      - [JQ Function](#jq-function)
     - [has() on specific object](#has-on-specific-object)
-    - [Some tips](#some-tips)
-  - [Readings](#readings)
+      - [Rename JSON Keys](#rename-json-keys)
+        - [Remove JSON Keys](#remove-json-keys)
+  - [Reference Material](#reference-material)
 
 <!-- /code_chunk_output -->
+
+## Some Bash Keyboard tips
+
+- `Up arrow` to recall previous commands
+- `Tab` completion
+- `Ctrl + A` to go to the beginning of a line
+- `Ctrl + L` to clear screen (instead of typing "clear").
+- `Ctrl + R` to reverse search through history
+- `Ctrl + U` to cancel current input
+- `#*` and `##*` for prefix manipulation
+- `%` and `%%` for suffix manipulation
+- `^^` for pattern substitution of previous command
+- `sudo !!` to run previous command with sudo privileges.
+- `grep -Ev '^#|^\$' $file` will display file content without comments or empty lines."
 
 ## Bash options/Flags
 ``` bash
@@ -27,19 +73,29 @@ set -o xtrace
 ```
 
 #### The alias Command
-`alias [name[=value]]`
+```bash
+alias [name[=value]]
+```
+- below is a common command. Recently i found it was an alias
+```bash
+alias ll='ls -alF'
+```
 #### Colorize Output
 #### install Colordiff
 It may not be installed by default. to install on Ubuntu systems.
-`sudo apt-get -y colordiff`
-
+```bash
+sudo apt -y colordiff
+```
+- create the aliases
 ``` bash
 alias diff='colordiff'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
-
+```
+- aliases for Date & time
+``` bash
 Date and Time Aliases
 alias d='date +%F'
 alias now='date +"%T"'
@@ -50,7 +106,6 @@ alias cp='cp -i'
 alias ln='ln -i'
 alias mv='mv -i'
 ```
-
 ## System Updates
 
 ### Debian / Ubuntu:
@@ -64,7 +119,7 @@ alias update="sudo apt-get update && sudo apt-get upgrade"
 alias update='yum update'
 alias updatey='yum -y update'
 ```
-
+### History in bash
 #### 10 Most used commands from history
 ``` bash
 cat ~/.bash_history | tr "\|\;" "\n" | sed -e "s/^ //g" | cut -d " " -f 1 | sort | uniq -c | sort -n | tail -n 10
@@ -96,7 +151,6 @@ cp --recursive .bash_functions/ $HOME
 cp .bash_aliases $HOME
 ```
 - Append to the end of your `.bashrc` file
-
 ```bash
 cat <<EOF >> $HOME/.bashrc
 
@@ -105,12 +159,14 @@ if [ -f \$home_bash_functions ]; then
       source \$home_bash_functions
 fi
 EOF
-```bash
-- source the files
+```
+
+- source the files to apply the changes
 ```bash
 source $HOME/.bash_aliases
 source $HOME/.bashrc
 ```
+
 - Create sym links
 ```bash
 ln -s lsd lsl
@@ -140,7 +196,8 @@ Supported escape sequences:
 echo <(printf "hi all \n")
 ```
 
-there is a built-in command called `complete`. Example to execute the auto complete feature for AWSCLI
+built-in command called `complete`.
+Example to execute the auto complete feature for AWSCLI
 `complete -C '/usr/local/bin/aws_completer' aws`
 
 ### [JSON JQ](https://www.json.org/json-en.html) in bash
@@ -151,79 +208,118 @@ there is a built-in command called `complete`. Example to execute the auto compl
 one of the nicest things to do is to output JSON to less and see the JSON output in nice colouring.
 for that do
 
-#### colorize json data with jq and less
-`JSON="your.json" cat JSON | jq . --color-output | less --RAW-CONTROL-CHARS`
-`# for the impatient \ cat your.json | jq . -C | less -R`
-##### Pipe json to console, find a string and colorize output
+#### Colorize json data with jq and less
+```bash
+JSON="your.json" cat $JSON | jq . --color-output | less --RAW-CONTROL-CHARS
+```
+- another form with short format via flags
+```bash
+cat your.json | jq . -C | less -R
+```
+
+#### Pipe json to console, find a string and colorize output
 ```bash
 cat ~/path/to/env-index.json | jq
-cat ~/path/to/env-index.json | jq -R | grep $STRING_ToFind
-cat ~/path/to/env-index.json | jq -C '.' | less -R
+cat ~/path/to/env-index.json | jq -R | grep $STRING_TOFIND
 ```
 
 #### Extract multiple values
-`jq ".$JSON_KEY1.$JSON_VALUE1, .$JSON_KEY2.$JSON_Value2, .$JSON_Key3" $FileName.json`
+```bash
+jq ".$JSON_KEY1.$JSON_VALUE1, .$JSON_KEY2.$JSON_Value2, .$JSON_Key3" $FileName.json
+```
 
 #### Get values from array
-`jq ".$Array_name[].$JSON_VALUE1" $FileName.json`
+```bash
+jq ".$Array_name[].$JSON_VALUE1" $FileName.json
+```
 
 #### Get specific element from array. If you know the position
 Remember the array uses a zero-offset
-`jq ".$Array_name[3].$JSON_VALUE1" $FileName.json`
+```bash
+jq ".$Array_name[3].$JSON_VALUE1" $FileName.json
+```
 
 #####  jq‘s delete function, del(), to delete a key:value pair
 it just removes it from the output of the command. If you need to create a new file without the message key:value pair in it, run the command, and then redirect the output into a new file.
-`jq "del(.$JSON_KEY1)" $FileName.json`
+```bash
+jq "del(.$JSON_KEY1)" $FileName.json
+```
 
 #####  retrieve the names of a list from the object at index position e.g. 995 through the end of the array
-`jq ".[995:] | .[] | .name" $FileName.json`
+```bash
+jq ".[995:] | .[] | .name" $FileName.json
+```
 
 - `.[995:]:` This tells jq to process the objects from array index 995 through the end of the array. No number after the colon ( : ) is what tells jq to continue to the end of the array.
 - `.[]:` This array iterator tells jq to process each object in the array.
 - `.name:` This filter extracts the name value.
 
 ##### Extract the last 10 objects from the array. A “-10” instructs jq to start processing objects 10 back from the end of the array.
-`jq ".[-10:] | .[] | .name" $FileName.json`
+```bash
+jq ".[-10:] | .[] | .name" $FileName.json
+```
 
 ##### Apply slicing to strings. Request the first four characters of the name of the object at array index 234
-`jq ".[234].name[0:4]" $FileName.json`
+```bash
+jq ".[234].name[0:4]" $FileName.json
+```
 
 ##### See a specific object in its entirety
-`jq ".[234]" $FileName.json`
+```bash
+jq ".[234]" $FileName.json
+```
 
 ##### see only the values, you can do the same thing without the key names
-`jq ".[234][]" $FileName.json`
+```bash
+jq ".[234][]" $FileName.json
+```
 
 ##### Retrieve multiple values from each object, we separate them with commas
-`jq ".[450:455] | .[] | .JsonValue1, .JsonValue2" $FileName.json`
+```bash
+jq ".[450:455] | .[] | .JsonValue1, .JsonValue2" $FileName.json
+```
 
 ##### Retrieve nested values, you have to identify the objects that form the “path” to them.
 Include the all-encompassing array, the nested object, and the nested array, as shown below
-`jq ".[121].Object.ArrayJson[]" $FileName.json`
+```bash
+jq ".[121].Object.ArrayJson[]" $FileName.json
+```
 
 ##### JQ length Function
-`jq ".[100:110] | .[].name | length" $FileName.json`
+```bash
+jq ".[100:110] | .[].name | length" $FileName.json
+```
 
 ##### see how many key:value pairs are in the first object in the array
-`jq ".[0] | length" $FileName.json`
+```bash
+jq ".[0] | length" $FileName.json
+```
 
 ##### JQ keys Function
 find out about the JSON you’ve got to work with. It can tell you what the names of the keys are, and how many objects there are in an array
 
 #### find Keys in ObjectName
-`jq ".ObjectName.[0] | keys"  $FileName.json`
+```bash
+jq ".ObjectName.[0] | keys"  $FileName.json
+```
 
 #### Find elements in ObjectName
 Zero-offset array elements, numbered zero to N
-`jq ".ObjectName | keys" $FileName.json`
+```bash
+jq ".ObjectName | keys" $FileName.json
+```
 
-#### JQ has() Function
+#### JQ Function
 function to interrogate the JSON and see whether an object has a particular key name. Note the key name must be wrapped in quotation marks.
-`jq '.[] | has("nametype")' $FileName.json`
+```bash
+jq '.[] | has("nametype")' $FileName.json
+```
 
 ### has() on specific object
 check a specific object, you include its index position in the array filter
-`jq '.[678] | has("nametype")' $FileName.json`
+```bash
+jq '.[678] | has("nametype")' $FileName.json
+```
 
 #### Rename JSON Keys
 ``` bash
@@ -238,23 +334,8 @@ set -xeu -o pipefail # print exec and fail exec
 zip -r "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}.upd" "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}-metadata.json" "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}.zip"
 ```
 
-### Some tips
-
-- `Up arrow` to recall previous commands
-- `Tab` completion
-- `Ctrl + A` to go to the beginning of a line
-- `Ctrl + L` to clear screen (instead of typing "clear").
-- `Ctrl + R` to reverse search through history
-- `Ctrl + U` to cancel current input
-- `#*` and `##*` for prefix manipulation
-- `%` and `%%` for suffix manipulation
-- `^^` for pattern substitution of previous command
-- `sudo !!` to run previous command with sudo privileges.
-- `grep -Ev '^#|^\$' $file` will display file content without comments or empty lines."
-
-source [opensource.com](https://opensource.com/article/20/1/linux-terminal-trick)
-
-## Readings
-- [Medium Query Bash best practices](https://medium.com/search?q=bash%20best%20practices)
+## Reference Material
+1. [Medium Query Bash best practices](https://medium.com/search?q=bash%20best%20practices)
+2. [Linux terminal trick opensource.com](https://opensource.com/article/20/1/linux-terminal-trick)
 
 [Back to top](#)
