@@ -118,7 +118,8 @@
 # General Linux Server commands
 
 ### CLI Shell keyboard shortcuts
-- `ctrl + l`  clear  the screen
+- `ctrl + L`  clears the screen
+- `CTRL + D` exit from terminal
 - `ctrl + a`  moves cursor to beginning of line (A alphabet/first letter)
 - `ctrl + e`  moves cursor to end of line (Closer to letter `a` in the US keyboard)
 - `alt  + d`  cuts the word to the right of the cursor
@@ -308,17 +309,14 @@ sudo mv $DIR1 $DIR_DESTINATION
 ##### Find where the command is installed
 
 ```bash
-which COMMAND
-
-which pip
+COMMAND="pip"
+which $COMMAND
 ```
 
-##### Create an alias with a command to go to a specific directory
+##### Create an alias `ee` with a command to go to a specific directory
 
 ```bash
-alias ee='cd /home/ws/02-projects/ee/test' <br>
-
-ee
+alias ee='cd /home/ws/02-projects/ee/test'
 ```
 
 #### Copy files from Local to Remote Server
@@ -329,9 +327,9 @@ Define the local and remote paths in env vars. Perform the copy
 scp -r "$LOCAL_PATH" ubuntu@"$REMOTE_HOST_SERVER":"$REMOTE_SERVER_PATH"
 ```
 
-## Compression/Decompression of files
+## Compression/Decompression
 ### Tar
-#### Decompress with Tar
+#### Decompress verbose
 
 ```bash
 tar -zxvf archive-name.tar.gz /decompression/path/directory/
@@ -341,6 +339,7 @@ tar -zxvf archive-name.tar.gz /decompression/path/directory/
 ```bash
 zip  --recurse-paths work-log-years.zip directory1/ directory2/
 ```
+
 #### Compress directories and files
 ```bash
 zip -r compressedFileName.zip file1 file2 dir1/ file3
@@ -357,6 +356,7 @@ do
 unzip –d $i /data/www/img/
 done
 ```
+
 #### Create a directory YYYY-MM-DD format cd to it
 ```bash
 folder_name="$(date +%F)"
@@ -374,13 +374,13 @@ mkdir -p $HOME/example.com/server1/{httpd,dnsqmasq}
 find [where to start searching] [-options] [expression]
 ```
 
-#### Search for the text ‘data’ within files that ends with md
+#### Search for the text dataToFind in markdown files
 
 ```bash
-find ./ -type f -name "*.md" -exec grep 'data'  {} \;
+find ./ -type f -name "*.md" -exec grep 'dataToFind'  {} \;
 ```
 
-#### Find the file ‘LICENSE’ in just the current directory and 1 subdirectory level
+#### Find the file LICENSE in current directory and up to subdirectory level
 
 ```bash
 find . -maxdepth 2 -name LICENSE
@@ -550,7 +550,7 @@ touch /home/user/new_empty_file.txt
 ls -xl ${DIR_PATH}
 ```
 
-- Article [medium.com Troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
+- [medium.com 5-powerful-unix-commands-for-easier-troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
 
 #### lists open files for current user
 
@@ -580,34 +580,19 @@ less +4 -N show-time.sh
 
 #### Commong logs in linux
 
-`/var/log/message`
-
+- `/var/log/message`
 Contains global system messages, including the messages that are logged during system startup. Includes mail, cron, daemon, kern, auth, etc.
 
-`/var/log/auth.log`
-
+- `/var/log/auth.log`
 Authentication logs
 
-`/var/log/kern.log`
-
+- `/var/log/kern.log`
 Kernel logs
 
-`/var/log/cron.log`
-
+- `/var/log/cron.log`
 Crond logs
 
 #### Check System Logs Journal Control
-
-##### command for viewing logs collected by systemd
-
-#### Obtain Log output with admin permissions
-
-```bash
-sudo journalctl
-```
-
-#### Check system logs
-
 ```bash
 journalctl -xe
 ```
@@ -618,12 +603,6 @@ journalctl -xe
 journalctl -r
 ```
 
-#### Monitor New Log Messages
-
-```bash
-journalctl -f
-```
-
 #### Show Logs within a Time Range
 
 ```bash
@@ -631,16 +610,10 @@ journalctl --since "2022-01-30 15:10:10"
 journalctl --until "2022-12-24 00:05:50"
 ```
 
-#### List SystemBoots
+#### List System Boots
 
 ```bash
 journalctl --list-boots
-```
-
-#### Show Logs for a Specific Boot
-
-```bash
-journalctl -b
 ```
 
 #### Show Logs for a systemd Service
@@ -661,10 +634,8 @@ journalctl -k
 journalctl -o json-pretty
 ```
 
-#### Manually Clean Up Archived Logs
-
 #### Reduce the size of your journals to 2GiB
-
+Clean Up Archived Logs
 ```bash
 journalctl --vacuum-size=2G
 ```
@@ -686,12 +657,6 @@ sudo ln --symbolic $SOURCE_FILE $SYMBOLIC_LINK_PATH
 
 ```bash
 ls -l /var/lib/apt/periodic/update-stamp
-```
-
-##### History of commands executed in the current session
-
-```bash
-history
 ```
 
 ##### Create a random password
@@ -855,6 +820,7 @@ rm -rf $DIR_PATH
 ```bash
 COMMAND=who ; history | grep $COMMAND
 ```
+
 #### Find in history with 2 literal strings
 uses regex to find 2 literal occurrances in a path.
 `.*` matches any sequence of characters to deal with the OS path.
@@ -874,22 +840,23 @@ sudo sysctl -w vm.max_map_count=262144
 tree $HOME
 ```
 
-#### Sho contents of a directory in a tree format with `gio` Gnome Input/Output
+#### Show contents of a directory in a tree format with `gio` Gnome Input/Output
 
 ```bash
 gio tree
 ```
 
-#### 20 Most used commands in bash history
+#### History top 20 commands in bash_history
 ```bash
 cat ~/.bash_history | grep -v ^# | awk '{print $1}' | sort | uniq -c | sort -nr | head -20
 ```
-#### 10 Most used commands in Bash History
-4 columns No | procId | percentage usage | command
+
+#### History 10 Most used commands
+the format used is 
+| column No | procId | percentage usage | command |
 
 ```bash
-history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " "CMD[a]/count*100 "% " a;}' | \
-grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10
+history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " "CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10
 ```
 
 #### List all files in a current directory
@@ -898,22 +865,26 @@ grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10
 find . -maxdepth 1 -type f -print
 ```
 
-#### Script usage= `lsf` lists files, `lsd` lists directories, `lsx` lists executables, `lsl` lists links
+#### Script usage
+`lsf` lists files
+`lsd` lists directories
+`lsx` lists executables
+`lsl` lists links
 
-#### start a process in the background
+#### start command in the background
 
 ```bash
 COMMAND="rescuetime"
 $COMMAND &
 ```
 
-#### Create a string with the current date in the format **YYYY-MM-DD_HHMM**
+#### Create variable formatted with current date **YYYY-MM-DD_HHMM**
 
 ```bash
-APP_VERSION="vtest-"$(date +%F_%H%M)
+APP_VERSION="Test-$(date +%F_%H%M)"
 ```
 
-#### Create a dir and run a command in 1 line
+#### one liner Create a directory and run a command
 
 ```bash
 `cd $DIR1; $(COMMAND)`
@@ -948,18 +919,6 @@ function cl() {
 EOF
 ```
 
-#### Clear Bash terminal Screen
-
-- `clear`
-- `CTRL + L`
-
-#### Exit from terminal
-
-```bash
-exit 
-CTRL + D
-```
-
 ##### Change permissions of a file based on permissions of other file
 
 ```bash
@@ -975,8 +934,6 @@ sudo chmod --reference="$REFERENCE_FILE" "$TARGETING_FILE"
 GROUP_NAME="common" ; sudo --recursive "$GROUP_NAME" *
 ```
 ---
-# Operating Systems
-
 ## Linux Ubuntu
 
 ### System settings
@@ -1017,9 +974,8 @@ CTRL + delete
 ```bash
 Shift + Delete
 ```
-Never delete the Home directory, doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
 
-Many personal system and program configurations are stored under your home directory
+- Never delete the Home directory, doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
 
 # Terminals
 Shells available: bash, fish, Zshell
@@ -1035,7 +991,7 @@ sudo chsh -s /bin/bash $TARGET_USER
 
 ## Zshell
 
-## References
+# References
 - [cyberciti reload-sysctl-conf](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
 
 [Back to top](#)
