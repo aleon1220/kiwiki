@@ -326,8 +326,7 @@ ee
 Define the local and remote paths in env vars. Perform the copy
 
 ```bash
-scp -r $LOCAL_PATH/sftp-shim ubuntu@$REMOTE_HOST_SERVER:$REMOTE_SERVER_PATH
-echo "cd $PWD"
+scp -r "$LOCAL_PATH" ubuntu@"$REMOTE_HOST_SERVER":"$REMOTE_SERVER_PATH"
 ```
 
 ## Compression/Decompression of files
