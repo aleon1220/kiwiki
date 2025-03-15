@@ -1,5 +1,5 @@
 # Windows
-Command prompt & power shell
+Command prompt cmd & powershell PowerShell
 > Executed in
 - WSL
 - Powershell 7
@@ -8,18 +8,21 @@ Command prompt & power shell
 
 WSL is a virtualization layer that runs Linux distros in windows 10+
 
+## Common CLI Actions
+#### learn more about commands and their usage
+```powershell
+Get-Help Get-ChildItem
+```
+
+#### list directories simple
+```powershell
+ls | ForEach-Object { $_.Name }
+```
+
 ## Get Windows License
 ```cmd
 wmic path SoftwareLicensingService get OA3xOriginalProductKey
 ```
-
-## WSL Windows Subsystem Linux
-### Install
-```powershell
-wsl --install
-```
-
-## PowerShell
 
 ### Networking
 
@@ -27,7 +30,12 @@ wsl --install
 ```powershell
 (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
 ```
-
+### WSL management
+WSL Windows Subsystem Linux
+### Install
+```powershell
+wsl --install
+```
 #### Restart the Hyper-v service
 Encounter a WSL2 error
 > Logon failure: the user has not been granted the requested logon type at this computer.
@@ -37,7 +45,7 @@ Encounter a WSL2 error
 Restart-Service vmcompute
 ```
 
-### WSL management
+
 #### WSL off
 ``` powershell
 wsl --shutdown
@@ -49,9 +57,7 @@ wsl --shutdown
 Restart-Service LxssManager
 ```
 
-## Command Prompt 
-
-### Network commands for cmd
+## Network
 #### Flush DNS and restart networking
 Open a terminal or powershell window as Admin
 ```dotnetcli
@@ -65,7 +71,6 @@ echo "Restart the computer"
 ```
 
 #### network statistics. Find by Process ID
-
 ``` powershell
 netstat -nao
 netsat -ano | find str "PID"
@@ -75,7 +80,6 @@ netsat -ano | find str "PID"
 ``` powershell
 netsh int ipv6 reset reset.log
 ```
-
 - Disable any active virtual private network (VPN) connection.
 - Restore the firewall defaults
 
@@ -100,10 +104,11 @@ nslookup host
 
 #### Determine whether the router is performing slowly or dropping packets.
 ```powershell
-pathping  "IP"
+pathping  $IP
 ```
 
-#### File Checksum Integrity Verifier (Install as plugin first)
+#### File Checksum Integrity Verifier 
+Install as plugin first
 ```powershell
 fciv.exe [Commands] <Options>
 ```
@@ -113,20 +118,18 @@ fciv.exe [Commands] <Options>
 attrib
 ```
 
-### Dealing with services
-#### Services command
-
+### Services
+#### delete service
 ``` powershell
-sc
 sc delete "SERVICENAME"
 ```
-
+### FileSystem
 #### Scan with System File Checker
 ``` powershell
 sfc /scannow
 ```
 
-#### Measure execution of a command aka windows form of `time`
+#### Measure execution of a command aka windows form of linux `time`
 ``` powershell
 Measure-Command { echo hi }
 ```
