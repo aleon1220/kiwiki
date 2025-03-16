@@ -8,9 +8,10 @@ This project is a collection of CLI commands and utilities
 - **2020-04-28=** I lost years of work on an Information Technology Wiki. This markdown wiki has been started since 2020
 - **2021-04-07=** processing inbox category
 
-Througout my career, 12+ years (2022) I have been collecting snippets on linux, solaris, C, Java, Docker, Kubernetes, windows and more
+I was born in Colombia and started my career in software engineering | systems engineering | computer science in 2011. 
+I realized is useful to collect code snippets for different Operating systems. My interest grew to different platforms and tooling such as complex use cases with regex, programming languages, Docker, Kubernetes, etc.
 
-I used a `.txt` file, then a google docs file which was accidentally deleted from Google drive folder. After accidentally deleting the folder, I emptied the bin. There was no way to recover the file. I tried contacting google support to no avail
+I used a `.txt` file 2012, then a google docs file which was accidentally deleted from Google drive folder 2019. After accidentally deleting the folder, I emptied the bin. There was no way to recover the file. I tried contacting google support to no avail.
 
 > Don't rely on the cloud 100%. Have local copies of your digital material
 > work done by [andres.nz](www.andres.nz) A Colombian adopted by Kiwis since 2016
