@@ -61,23 +61,23 @@
 ## Team-Working Skills  
 - **Description:** Team-working skills involve collaborating effectively with others towards a common goal.  
 - **Best Practices:**  
-  - Foster open communication.  
-  - Respect diverse perspectives.  
-  - Contribute actively to team efforts.  
+  - Foster open communication.
+  - Respect diverse perspectives.
+  - Contribute actively to team efforts.
   
-[Back to top](#)  
+[Back to top](#)
   
-## Creativity and Problem Solving Skills  
-- **Description:** Creativity and problem solving involve generating innovative solutions to challenges.  
-- **Best Practices:**  
-  - Encourage brainstorming.  
-  - Evaluate solutions critically.  
-  - Implement and test solutions.  
+## Creativity and Problem Solving Skills
+- **Description:** Creativity and problem solving involve generating innovative solutions to challenges.
+- **Best Practices:**
+  - Encourage brainstorming.
+  - Evaluate solutions critically.
+  - Implement and test solutions.
   
-[Back to top](#)  
+[Back to top](#)
   
 ## Customer Service  
-- **Description:** Customer service involves assisting and satisfying customers' needs and concerns.  
+- **Description:** Customer service involves assisting and satisfying customers' needs and concerns.
 - **Best Practices:**  
   - Listen to customer feedback.  
   - Respond promptly and courteously.  
