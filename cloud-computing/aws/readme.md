@@ -1,40 +1,8 @@
-- [AWS CLI commands](#aws-cli-commands)
-- [Introduction](#introduction)
-  - [AWS Amazon Web services General](#aws-amazon-web-services-general)
-      - [How Many Services does AWS Have? JQ](#how-many-services-does-aws-have-jq)
-      - [Which AWS Services am I using? JQ](#which-aws-services-am-i-using-jq)
-      - [What is each service costing me? JQ](#what-is-each-service-costing-me-jq)
-  - [AWS CLI](#aws-cli)
-      - [Install AWS CLI](#install-aws-cli)
-      - [List AWS CLI config directory](#list-aws-cli-config-directory)
-      - [Get current AWS CLI configuration](#get-current-aws-cli-configuration)
-      - [use a named profile](#use-a-named-profile)
-      - [give the aws cli flag](#give-the-aws-cli-flag)
-- [C](#c)
-  - [AWS Code Commit](#aws-code-commit)
-  - [Code Commit](#code-commit)
-  - [AWS CF Cloud Formation](#aws-cf-cloud-formation)
-  - [AWS CloudWatch](#aws-cloudwatch)
-- [E](#e)
-  - [AWS EC2 Elastic Compute Cloud](#aws-ec2-elastic-compute-cloud)
-- [I](#i)
-  - [IAM Identity Access Management](#iam-identity-access-management)
-- [\[L\]](#l)
-  - [Lambda](#lambda)
-- [R](#r)
-  - [RDS Databases](#rds-databases)
-- [S](#s)
-  - [S3](#s3)
-  - [Secret Manager](#secret-manager)
-- [V](#v)
-  - [VPC](#vpc)
-      - [References](#references)
-
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # AWS CLI commands
-
 # Introduction
-
 AWS CLI commands for some AWS services. AWS service names Sorted from A-Z
 source obtained from this wonderful [Medium post by circuit People](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1)
 
@@ -64,9 +32,9 @@ aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01"),End=$(date --d
 
 #### Install AWS CLI
 
-Amazon Web Services Command Line Interface client
+Amazon Web Services Command Line Interface client.
 
-follow [Install AWS CLI2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html)
+Follow [Install AWS CLI2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html)
 
 #### List AWS CLI config directory
 
