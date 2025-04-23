@@ -1,20 +1,6 @@
-- [AWS CloudWatch](#aws-cloudwatch)
-    - [CloudWatch Agent](#cloudwatch-agent)
-      - [cloudwatch agent Logs Location](#cloudwatch-agent-logs-location)
-      - [log config file](#log-config-file)
-    - [Cloudwatch Logs](#cloudwatch-logs)
-      - [Exploring Log Streams JQ](#exploring-log-streams-jq)
-      - [Get the first log stream JQ](#get-the-first-log-stream-jq)
-      - [Loop through the groups and streams to get the last 10 messages since midnight JQ](#loop-through-the-groups-and-streams-to-get-the-last-10-messages-since-midnight-jq)
-      - [AWS CloudWatch Logs set to 30 days](#aws-cloudwatch-logs-set-to-30-days)
-    - [Logs Insights CloudTrail](#logs-insights-cloudtrail)
-    - [Logs insights CloudTrail](#logs-insights-cloudtrail-1)
-      - [Run the metric filter above in cloudwatch logs insights syntax](#run-the-metric-filter-above-in-cloudwatch-logs-insights-syntax)
-    - [Logs Insights EC2](#logs-insights-ec2)
-    - [Logs Insights RDS](#logs-insights-rds)
-  - [References](#references)
-
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # AWS CloudWatch
 Management & Governance
 https://docs.aws.amazon.com/cloudwatch/
@@ -37,18 +23,17 @@ less /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.json
 
 ### Cloudwatch Logs
 
-#### Exploring Log Streams JQ
+#### List Log groups
+Exploring Log Streams JQ
+```bash
+aws logs describe-log-groups | jq -r '.logGroups[].logGroupName'
+```
+
+#### Get log streams
 
 ```bash
 logs=$(aws logs describe-log-groups | jq -r '.logGroups[].logGroupName')
-```
-
-#### Get the first log stream JQ
-
-```bash
-for each
-for group in $logs; do echo $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 | \ 
- jq -r '.logStreams[0].logStreamName + " "'); done
+for group in $logs; do echo $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 | jq -r '.logStreams[0].logStreamName + " "'); done
 ```
 
 #### Loop through the groups and streams to get the last 10 messages since midnight JQ
@@ -98,9 +83,9 @@ fields @timestamp, @message
 | limit 1000
 ```
 ## References
-- [What is CloudWatch Logs? - AWS CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
-- [Filter and pattern syntax - AWS CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html)
-- [Newest &#39;amazon-cloudwatchlogs&#39; Questions - Stack Overflow](https://stackoverflow.com/questions/tagged/amazon-cloudwatchlogs)
+- [What is AWS CloudWatch Logs?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
+- [AWS CloudWatch Logs Filter pattern syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html)
+- [Stack Overflow AWS CloudWatch Logs](https://stackoverflow.com/questions/tagged/amazon-cloudwatchlogs)
 
 [Back to top](#)
 
