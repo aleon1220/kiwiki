@@ -1,7 +1,6 @@
-- [Identiy Access Management](#identiy-access-management)
-      - [When was my AWS user created? JQ](#when-was-my-aws-user-created-jq)
-
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # Identiy Access Management
 #### When was my AWS user created? JQ
 

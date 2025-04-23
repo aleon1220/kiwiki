@@ -1,12 +1,5 @@
-- [Google Cloud Engine](#google-cloud-engine)
-      - [Run GCE CLI as a docker container](#run-gce-cli-as-a-docker-container)
-  - [Auth to Google Cloud](#auth-to-google-cloud)
-      - [local user auth](#local-user-auth)
-    - [GCP Service account credential](#gcp-service-account-credential)
-      - [obtain the project number of your current project](#obtain-the-project-number-of-your-current-project)
-  - [References](#references)
-
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
 
 # Google Cloud Engine
 
