@@ -1,21 +1,5 @@
-- [Kubernetes](#kubernetes)
-    - [YAML processing app](#yaml-processing-app)
-      - [Get the client version](#get-the-client-version)
-  - [Kubectl commands frequently used](#kubectl-commands-frequently-used)
-      - [Get deployments and show all](#get-deployments-and-show-all)
-      - [Get deployments and show labels](#get-deployments-and-show-labels)
-      - [Create a deployment based on a YAML file](#create-a-deployment-based-on-a-yaml-file)
-      - [Get Resource Set](#get-resource-set)
-      - [Install a chat with `helm`](#install-a-chat-with-helm)
-  - [Minikube](#minikube)
-      - [Check status](#check-status)
-        - [Check for new versions](#check-for-new-versions)
-      - [Perform minikue update step](#perform-minikue-update-step)
-      - [Do the upgrade](#do-the-upgrade)
-      - [Start or stop the minikube system](#start-or-stop-the-minikube-system)
-      - [Start minikube if using the Microsoft hyperV](#start-minikube-if-using-the-microsoft-hyperv)
-
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
 
 # Kubernetes
 Container orchestrator

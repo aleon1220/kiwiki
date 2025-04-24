@@ -1,3 +1,6 @@
+[Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # Regex Notes and Cheat sheet
 
 `/[]/` is a character class that allows us to find any matching characters in the string. The character(s) in the character class acts as a delimiter. When a match is found, the characters in the string are divided/split.

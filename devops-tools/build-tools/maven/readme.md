@@ -1,14 +1,6 @@
-- [Maven](#maven)
-      - [check extra help](#check-extra-help)
-      - [Check version](#check-version)
-      - [clean up resources](#clean-up-resources)
-    - [perform a build](#perform-a-build)
-      - [Validate POM.xml file](#validate-pomxml-file)
-      - [package app](#package-app)
-      - [Analyze dependencies](#analyze-dependencies)
-      - [verify](#verify)
-
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # Maven
 
 https://maven.apache.org/

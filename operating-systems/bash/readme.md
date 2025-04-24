@@ -1,54 +1,9 @@
+[Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # Bash Cheat Sheet
 This section contains many shell and bash scripts for different purposes. 
 Tested and used in Linux ubuntu 18.04 and WSL Ubuntu 18.04, Ubuntu 22
-
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-- [Bash Cheat Sheet](#bash-cheat-sheet)
-  - [Some Bash Keyboard tips](#some-bash-keyboard-tips)
-  - [Bash options/Flags](#bash-optionsflags)
-      - [The alias Command](#the-alias-command)
-      - [Colorize Output](#colorize-output)
-      - [install Colordiff](#install-colordiff)
-  - [System Updates](#system-updates)
-    - [Debian / Ubuntu:](#debian--ubuntu)
-    - [RHEL, CentOS, Fedora](#rhel-centos-fedora)
-    - [History in bash](#history-in-bash)
-      - [10 Most used commands from history](#10-most-used-commands-from-history)
-      - [Create dirs from 1990-2020](#create-dirs-from-1990-2020)
-      - [Rename files to trim unwanted string "ANNOYING\_STRING-"](#rename-files-to-trim-unwanted-string-annoying_string-)
-      - [Quick set up Bash Functions](#quick-set-up-bash-functions)
-      - [Terminate an SSH session that got stuck](#terminate-an-ssh-session-that-got-stuck)
-      - [Bash process substitution](#bash-process-substitution)
-    - [JSON JQ in bash](#json-jq-in-bash)
-    - [JQ](#jq)
-      - [Colorize json data with jq and less](#colorize-json-data-with-jq-and-less)
-      - [Pipe json to console, find a string and colorize output](#pipe-json-to-console-find-a-string-and-colorize-output)
-      - [Extract multiple values](#extract-multiple-values)
-      - [Get values from array](#get-values-from-array)
-      - [Get specific element from array. If you know the position](#get-specific-element-from-array-if-you-know-the-position)
-        - [jq‘s delete function, del(), to delete a key:value pair](#jqs-delete-function-del-to-delete-a-keyvalue-pair)
-        - [retrieve the names of a list from the object at index position e.g. 995 through the end of the array](#retrieve-the-names-of-a-list-from-the-object-at-index-position-eg-995-through-the-end-of-the-array)
-        - [Extract the last 10 objects from the array. A “-10” instructs jq to start processing objects 10 back from the end of the array.](#extract-the-last-10-objects-from-the-array-a--10-instructs-jq-to-start-processing-objects-10-back-from-the-end-of-the-array)
-        - [Apply slicing to strings. Request the first four characters of the name of the object at array index 234](#apply-slicing-to-strings-request-the-first-four-characters-of-the-name-of-the-object-at-array-index-234)
-        - [See a specific object in its entirety](#see-a-specific-object-in-its-entirety)
-        - [see only the values, you can do the same thing without the key names](#see-only-the-values-you-can-do-the-same-thing-without-the-key-names)
-        - [Retrieve multiple values from each object, we separate them with commas](#retrieve-multiple-values-from-each-object-we-separate-them-with-commas)
-        - [Retrieve nested values, you have to identify the objects that form the “path” to them.](#retrieve-nested-values-you-have-to-identify-the-objects-that-form-the-path-to-them)
-        - [JQ length Function](#jq-length-function)
-        - [see how many key:value pairs are in the first object in the array](#see-how-many-keyvalue-pairs-are-in-the-first-object-in-the-array)
-        - [JQ keys Function](#jq-keys-function)
-      - [find Keys in ObjectName](#find-keys-in-objectname)
-      - [Find elements in ObjectName](#find-elements-in-objectname)
-      - [JQ Function](#jq-function)
-    - [has() on specific object](#has-on-specific-object)
-      - [Rename JSON Keys](#rename-json-keys)
-        - [Remove JSON Keys](#remove-json-keys)
-  - [Reference Material](#reference-material)
-
-<!-- /code_chunk_output -->
 
 ## Some Bash Keyboard tips
 

@@ -1,12 +1,5 @@
-- [Gradle for Android and Java](#gradle-for-android-and-java)
-  - [2021-03-05](#2021-03-05)
-    - [Building](#building)
-    - [Tasks](#tasks)
-      - [list tasks](#list-tasks)
-  - [Debugging](#debugging)
-    - [lock file error](#lock-file-error)
-
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
 
 # Gradle for Android and Java
 > Gradle now with Kotlin syntax

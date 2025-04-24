@@ -1,3 +1,6 @@
+[Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 ## PDF Operations Tools
 
 ### PDF tool kit

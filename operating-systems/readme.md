@@ -1,3 +1,6 @@
+[Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 ## Operating systems
 [Linux](linux/)
 

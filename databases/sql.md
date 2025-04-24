@@ -1,18 +1,6 @@
-- [SQL Databases](#sql-databases)
-  - [MariaDB (MySQL open source Fork)](#mariadb-mysql-open-source-fork)
-  - [Oracle MySQL](#oracle-mysql)
-      - [Connect to a DB with mysql command utilities](#connect-to-a-db-with-mysql-command-utilities)
-      - [Check the default character set for a particular database DB\_NAME](#check-the-default-character-set-for-a-particular-database-db_name)
-  - [AWS RDS MySQL engine](#aws-rds-mysql-engine)
-  - [PostgreSQL](#postgresql)
-      - [Check this super PostgreSQL Cheat sheet](#check-this-super-postgresql-cheat-sheet)
-      - [Access the PostgreSQL server from psql with a specific user](#access-the-postgresql-server-from-psql-with-a-specific-user)
-      - [Check DB version](#check-db-version)
-      - [Dump DB and create a restore script](#dump-db-and-create-a-restore-script)
-      - [back up my entire PostgreSQL cluster and save it in the entire\_cluster.sql file](#back-up-my-entire-postgresql-cluster-and-save-it-in-the-entire_clustersql-file)
-  - [Microsoft SQL Server](#microsoft-sql-server)
-
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # SQL Databases
 ## MariaDB (MySQL open source Fork)
 
