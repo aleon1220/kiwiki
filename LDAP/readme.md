@@ -1,16 +1,18 @@
 [Kiwiki Home](/../../)
 [Back to Main Page](./readme.md)
 
-# LDAP Implementations
+# LDAP
 Lightweight Directory Access Protocol
+LDAP Implementations added.
+
 ## Active Directory
 implementation of LDAP by micro$soft
 
 ## Queries examples
-the queries were executed in [Apache Directory Studio](https://directory.apache.org/apacheds/), makes life easier to query LDAP servers
+Queries executed in [Apache Directory Studio](https://directory.apache.org/apacheds/) intuitive UI to query LDAP servers
 
-1. set the connection first > open the connection
-1. go to search or CTRL + H
+1. Set the connection first > open the connection
+1. Go to search or CTRL + H
 1. Set search parameters as indicated in the table below to search in the whole tree
 
 | Property                 | Value                            | Description                                                        |
@@ -66,12 +68,6 @@ the queries were executed in [Apache Directory Studio](https://directory.apache.
 | Filter                  | `(\|(objectClass=person)(mailNickname="john.doe", "another.user"))` |
 | Returning<br>Attributes | **sAMAccountName, mailNickname, department** |
 
-#### All objects
-_(this may cause load problems)_
-```ldap
-objectclass=*.
-```
-
 #### All user objects designated as a “person”
 ```ldap
 (&(objectclass=user)(objectcategory=person))
@@ -113,8 +109,12 @@ objectclass=*.
 ```ldap
 (&(&(objectclass=user)(objectcategory=person))(!(userAccountControl=514)))
 ```
+#### All objects
+_(this may cause load problems)_
+```ldap
+objectclass=*.
+```
 ### Active Directory LDAP
-
 #### All users
 ```ldap
 (objectClass=person)
@@ -141,7 +141,7 @@ objectclass=*.
 ```
 
 # LDAP Tools and Browsers
-Most LDAP directory servers don't provide a native way to view or modify LDAP structure directly. Therefore, consider downloading an LDAP browser. To collect information about your LDAP structure, download and install an LDAP browser. Two such browsers are listed below.
+Most LDAP directory servers don't provide a native way to view or modify LDAP structure directly. Consider downloading an LDAP browser. To collect information about your LDAP structure, download and install an LDAP browser.
 
 ## Softerra LDAP Administrator
 To download Softerra LDAP Administrator, [click here](http://www.ldapbrowser.com).
