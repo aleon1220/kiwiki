@@ -1,9 +1,11 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # EC2
 Elastic Cloud Compute
 https://docs.aws.amazon.com/ec2/
+
 #### Get account Id and region of current EC2 instance JQ
 
 ```bash
