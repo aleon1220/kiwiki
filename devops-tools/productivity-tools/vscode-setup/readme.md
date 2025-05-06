@@ -1,4 +1,6 @@
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # VS Code setup for a DevOps Engineer
 This sets up VScode for a DevOps engineer
 - docker and kubernetes plugins

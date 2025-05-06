@@ -1,11 +1,6 @@
-- [DevOps](#devops)
-  - [Principles](#principles)
-  - [Tooling](#tooling)
-  - [Software tools common Win/Linux](#software-tools-common-winlinux)
-    - [Linux Setup](#linux-setup)
-    - [Windows Enterprise Setup](#windows-enterprise-setup)
-
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # DevOps
 Software Development lifecycle practices
 

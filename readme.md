@@ -1,4 +1,4 @@
-<h1>KIWIKI</h1>
+# KIWIKI
 
 ## Introduction Information Technology Wiki
 

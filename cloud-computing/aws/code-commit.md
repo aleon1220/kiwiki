@@ -1,7 +1,6 @@
-- [AWS Code Commit](#aws-code-commit)
-      - [Create/Clone a CodeCommit Repository](#createclone-a-codecommit-repository)
-
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # AWS Code Commit
 AWS Git
 https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html

@@ -1,7 +1,11 @@
+[Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # Rundeck
 Introduction [webinar](https://www.pagerduty.com/ty/webinar/introduction-to-process-automation/)
 https://www.rundeck.com/downloads
-## Install Docker
+
+## Install Rundeck Docker
 ```bash
 docker pull rundeck/rundeck:4.16.0
 ```
