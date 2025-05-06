@@ -1,3 +1,6 @@
+[Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # Javascript
 functions will be linked from this file. All the functions are the files with the `*.js` extension in this directory
 ## Debugging

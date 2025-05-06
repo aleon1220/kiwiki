@@ -1,13 +1,6 @@
-- [Productivity tools](#productivity-tools)
-- [Rescue time](#rescue-time)
-  - [Reports](#reports)
-    - [productivity Month](#productivity-month)
-  - [Integrations](#integrations)
-      - [Set up a git post-commit to add highlights (Ubuntu)](#set-up-a-git-post-commit-to-add-highlights-ubuntu)
-  - [Forums ICT](#forums-ict)
-    - [Spinnaker Stack Overflow no answers](#spinnaker-stack-overflow-no-answers)
-
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # Productivity tools
 Includes time management, pomodoro techniques, focus tools, soft skills, news, etc.
 

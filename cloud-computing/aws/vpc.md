@@ -1,8 +1,6 @@
-- [Virtual Private Cloud](#virtual-private-cloud)
-      - [What are my VPCs in table format](#what-are-my-vpcs-in-table-format)
-      - [What CIDRs have Ingress Access to which Ports? JQ](#what-cidrs-have-ingress-access-to-which-ports-jq)
-
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # Virtual Private Cloud
 
 #### What are my VPCs in table format

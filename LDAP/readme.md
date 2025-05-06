@@ -1,9 +1,9 @@
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
 
 # LDAP
 Lightweight Directory Access Protocol
-
-Implementations are added.
+LDAP Implementations added.
 
 ## Active Directory
 implementation of LDAP by micro$soft

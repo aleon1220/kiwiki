@@ -1,13 +1,6 @@
-- [Processing CPU](#processing-cpu)
-        - [Interactive process viewer](#interactive-process-viewer)
-      - [nohup execution](#nohup-execution)
-      - [Echo a string an pipe it to a command](#echo-a-string-an-pipe-it-to-a-command)
-    - [Explore System Processes](#explore-system-processes)
-      - [Find the process that consumes more CPU](#find-the-process-that-consumes-more-cpu)
-      - [Sort processes by memory](#sort-processes-by-memory)
-      - [View with a process tree](#view-with-a-process-tree)
-
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # Processing CPU
 Section for compute related concepts in computers
 

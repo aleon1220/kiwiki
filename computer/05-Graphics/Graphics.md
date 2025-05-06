@@ -1,9 +1,6 @@
-- [Computer Graphics GUIs UIs](#computer-graphics-guis-uis)
-      - [X windows var](#x-windows-var)
-      - [Check X system settings](#check-x-system-settings)
-      - [Get dimensions of Display](#get-dimensions-of-display)
-
 [Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
+
 # Computer Graphics GUIs UIs
 
 #### X windows var

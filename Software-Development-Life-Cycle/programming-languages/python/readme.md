@@ -1,9 +1,5 @@
-- [Python Language](#python-language)
-      - [Check OS versions](#check-os-versions)
-      - [Find what is at `/usr/bin`](#find-what-is-at-usrbin)
-      - [Set the `update-alternatives` command for python](#set-the-update-alternatives-command-for-python)
-  - [Python system settings](#python-system-settings)
-  - [pip](#pip)
+[Kiwiki Home](/../../)
+[Back to Main Page](./readme.md)
 
 # Python Language
 [PEP 8 -- Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/)
