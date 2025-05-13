@@ -1,4 +1,5 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # Windows
@@ -11,6 +12,12 @@ Command prompt cmd & powershell PowerShell
 
 WSL is a virtualization layer that runs Linux distros in windows 10+
 
+# Admin tasks
+#### start a session running as Admin
+```powershell
+Start-Process powershell -Verb runAs
+```
+
 ## Common CLI Actions
 #### learn more about commands and their usage
 ```powershell
@@ -22,24 +29,24 @@ Get-Help Get-ChildItem
 ls | ForEach-Object { $_.Name }
 ```
 
-## Get Windows License
+## get Windows License
 ```cmd
 wmic path SoftwareLicensingService get OA3xOriginalProductKey
 ```
 
 ### Networking
 
-##### Get your Public IP Address
+##### get your Public IP Address
 ```powershell
 (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
 ```
 ### WSL management
 WSL Windows Subsystem Linux
-### Install
+### install WSL
 ```powershell
 wsl --install
 ```
-#### Restart the Hyper-v service
+#### restart the Hyper-v service
 Encounter a WSL2 error
 > Logon failure: the user has not been granted the requested logon type at this computer.
 > Error code: Wsl/Service/CreateInstance/CreateVm/0x80070569
@@ -48,38 +55,57 @@ Encounter a WSL2 error
 Restart-Service vmcompute
 ```
 
-
-#### WSL off
-``` powershell
-wsl --shutdown
-```
-
-#### Restarting WSL2
+#### restart WSL2
 - tested in Win10
 ``` powershell
 Restart-Service LxssManager
 ```
 
+#### shutdown WSL
+``` powershell
+wsl --shutdown
+```
+---
+
 ## Network
 #### Flush DNS and restart networking
 Open a terminal or powershell window as Admin
 ```dotnetcli
-ipconfig /flushdns
-ipconfig /registerdns
-ipconfig /release
-ipconfig /renew
-netsh winsock reset
-
 echo "Restart the computer"
+ipconfig /all
+```
+#### purges the DNS Resolver cache.
+```cmd
+ipconfig /flushdns
 ```
 
-#### network statistics. Find by Process ID
+#### refreshes all DHCP leases and re-registers DNS names
+```cmd
+ipconfig /registerdns
+```
+
+#### releases the current DHCP lease
+```cmd
+ipconfig /release
+```
+
+#### obtain new lease
+re-connect computer to network
+```cmd
+ipconfig /renew
+```
+
+#### network statistics 
 ``` powershell
 netstat -nao
+```
+
+#### netstats fby Process ID
+``` powershell
 netsat -ano | find str "PID"
 ```
 
-##### Restart Network IPV6 associated
+##### restart Network IPV6 associated
 ``` powershell
 netsh int ipv6 reset reset.log
 ```
@@ -98,53 +124,60 @@ This features attempts to manage some aspects of IPv6 connectivity. To disable i
 #### Clean-up network devices
 ```cmd
 netcfg -d
-``` 
-
-#### Verify that DNS name resolution is working correctly
-```cmd
-nslookup host
 ```
 
-#### Determine whether the router is performing slowly or dropping packets.
+#### resets Sockets (Winsock) catalog to default state
+can help resolve network connectivity issues
+```cmd
+netsh winsock reset
+```
+
+#### verify that DNS name resolution is working correctly
+```cmd
+$hostToLookUP = "andres.nz"
+nslookup $hostToLookUP
+```
+
+#### determine whether the router is performing slowly or dropping packets
 ```powershell
 pathping  $IP
 ```
 
-#### File Checksum Integrity Verifier 
-Install as plugin first
-```powershell
-fciv.exe [Commands] <Options>
-```
-
-#### Set Configurations for files and folders
+#### set Configurations for files and folders
 ```powershell
 attrib
 ```
 
-### Services
+### Service Control Manager
+#### queries the extended status for a service
+or enumerates the status for types of services.
+```cmd
+sc queryex
+```
+
 #### delete service
 ``` powershell
-sc delete "SERVICENAME"
+sc delete $SERVICENAME
 ```
+
 ### FileSystem
-#### Scan with System File Checker
+#### scan with System File Checker
 ``` powershell
 sfc /scannow
 ```
 
-#### Measure execution of a command aka windows form of linux `time`
+#### measure command time execution 
+windows form of linux `time`
 ``` powershell
 Measure-Command { echo hi }
 ```
-
+---
 ### Windows [Terminal](https://docs.microsoft.com/en-us/windows/terminal/get-started#installation)
 
-#### Windows terminal with vertical panes. 2nd pane is WSL
+#### set terminal with vertical panes 2nd pane is WSL
 ``` powershell
 wt split-pane --vertical wsl
 ```
-
----
 
 [Back to top](#)
 
