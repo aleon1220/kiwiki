@@ -97,6 +97,10 @@ Fast-forward
 ---
 
 ## Git Administration/Operation
+#### Force-switches to branch, discarding changes
+```bash
+git checkout master --force
+```
 #### fetch from remote and then merge to develop
 
 ```bash
