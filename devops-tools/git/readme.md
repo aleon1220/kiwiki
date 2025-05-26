@@ -1,10 +1,17 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # Git
-System to manage and store source code. Keeps track of changes to files. Text files only.
+System to manage and store source code. Keeps track of changes to files. Text files only
+refer to https://git-scm.com/docs/user-manual
 
 ---
+## Default Flow
+#### usual add, commit
+```bash
+git add . ; git commit ; git push
+```
 
 ## Git Quick Start
 Learning `git` basics by action. Flow challenge/Demo by hackerRanx
@@ -298,11 +305,6 @@ git rm
 git rm [-r] [-n] --cached <path(s)>
 ```
 
-#### usual add, commit
-```bash
-git add . ; git commit
-```
-
 #### push with alternative SSH key
 ```bash
 git -c core.sshCommand="/usr/bin/ssh -i /home/user/.ssh/id_alternative" push
@@ -364,6 +366,10 @@ git config --global user.name "Your Name"
 ## Git Security
 refers to encryption and commit signing
 
+### Git commit sign
+- prefer sign commits with PGP encryption
+- SSH much easier but less secured
+
 #### Git TLS Certificates
 
 Git uses a file named `ca-bundle.crt` to list all the trusted certificates. We can find that file by typing the following in a terminal window:
@@ -406,8 +412,6 @@ git commit -S -m "SSH signed commit"
 
 ### Sign commits with SSH Key
 
-much easier but less secured
-
 ```bash
 git config --global gpg.format ssh
 ```
@@ -437,7 +441,7 @@ git config --global --list
 
 #### List all remote branches
 ```bash
-git branch -r
+git branch --remotes
 ```
 
 #### List remote active branches
