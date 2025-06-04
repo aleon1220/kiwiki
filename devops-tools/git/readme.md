@@ -1,10 +1,16 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # Git
-System to manage and store source code. Keeps track of changes to files. Text files only.
+System to manage and store source code. Keeps track of changes to files. Text files only
+refer to https://git-scm.com/docs/user-manual
 
----
+## Default Flow
+#### usual add, commit, push
+```bash
+git add . ; git commit ; git push
+```
 
 ## Git Quick Start
 Learning `git` basics by action. Flow challenge/Demo by hackerRanx
@@ -87,9 +93,21 @@ Fast-forward
  1 
  file changed, 3 insertions(+)
 ```
+
 ---
 
 ## Git Administration/Operation
+#### Global Settings
+will apply to all repositories
+```bash
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+```
+
+#### Force-switches to branch, discarding changes
+```bash
+git checkout master --force
+```
 #### fetch from remote and then merge to develop
 
 ```bash
@@ -284,40 +302,24 @@ git reset HEAD $PATH_OF_REPO
 
 ### Remove Ignored Files Remote repo
 
-if one `.gitignore` the files, the files will nevertheless persist in your remote repository.
+if `.gitignore` is updated, previously created files will persist in your remote repository. To remedy this
 
-To remedy this
-#### remove
+#### remove files and clean up
 ```bash
 git rm
 ```
 
-#### Clean up git cache
+#### clean up git cache
 
 ```bash
 git rm [-r] [-n] --cached <path(s)>
 ```
 
-#### usual add, commit
-```bash
-git add . ; git commit
-```
-
-#### push with alternative SSH key
-```bash
-git -c core.sshCommand="/usr/bin/ssh -i /home/user/.ssh/id_alternative" push
-```
-
-#### Hard reset of branch
+#### reset everything to match the remote branch
 
 ```bash
-git reset --hard
-```
-
-#### Show GPG signatures used in a repo
-
-```bash
-git log --show-signature
+git fetch origin
+git reset --hard origin/master
 ```
 
 #### Find local GIT repos
@@ -355,14 +357,14 @@ git clone git@github.com:elastic/stack-docker.git
 git branch
 ```
 
-#### Global Settings
-will apply to all repositories
-```bash
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
-```
+---
+
 ## Git Security
 refers to encryption and commit signing
+
+### Git commit sign
+- prefer sign commits with PGP encryption
+- SSH much easier but less secured
 
 #### Git TLS Certificates
 
@@ -406,8 +408,6 @@ git commit -S -m "SSH signed commit"
 
 ### Sign commits with SSH Key
 
-much easier but less secured
-
 ```bash
 git config --global gpg.format ssh
 ```
@@ -427,6 +427,18 @@ alias gacp_extrakey="git add . && git -c core.sshCommand='/usr/bin/ssh -i \$HOME
 gacp_extrakey
 ```
 
+#### Show GPG signatures used in a repo
+
+```bash
+git log --show-signature
+```
+#### push with alternative SSH key
+```bash
+git -c core.sshCommand="/usr/bin/ssh -i /home/user/.ssh/id_alternative" push
+```
+
+---
+
 ## Git Analysis/Reporting
 
 #### Get global config info
@@ -437,7 +449,7 @@ git config --global --list
 
 #### List all remote branches
 ```bash
-git branch -r
+git branch --remotes
 ```
 
 #### List remote active branches
@@ -510,13 +522,14 @@ git bisect bad
 
 #### Change a commit message that was made
 **n** is the number of commits to go back
+
 ```bash
 git rebase -i HEAD~n
 
 # Use
 git cherry-pick
 
-## then
+## then edit the cherry-picked commit
 edit
 
 git push -f
@@ -550,6 +563,8 @@ pull requests facilitate collaboration, code quality, and transparency. They all
 If necessary, rebase your branch to keep it up-to-date with the base branch.
 Run tests to ensure your changes don’t break anything.
 1. Merge Your Branch
+
+---
 
 ## Git implementations Bitbucket
 
