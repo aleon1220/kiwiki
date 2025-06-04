@@ -4,24 +4,29 @@
 # AWS CloudWatch
 Management & Governance
 https://docs.aws.amazon.com/cloudwatch/
-### CloudWatch Agent
+
+## CloudWatch Agent
 
 gathers metadata in `AWS EC2` instances
 
-#### cloudwatch agent Logs Location
+### Cloudwatch agent Logs Location
 
 ```bash
 /opt/aws/amazon-cloudwatch-agent/etc/
 /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log
 ```
 
-#### log config file
+#### Agent log config file
 
 ```bash
 less /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.json
 ```
+## Cloudwatch Alarms
+```bash
+aws cloudwatch set-alarm-state --alarm-name "CriblDev-CPU-High" --state-reason "Testing AWS Cloudwatch alarm" --state-value ALARM
+```
 
-### Cloudwatch Logs
+## Cloudwatch Logs
 
 #### List Log groups
 Exploring Log Streams JQ
