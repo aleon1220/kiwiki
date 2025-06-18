@@ -451,6 +451,10 @@ lsof -u $USER
 ```bash
 lsof -i :8090-9090
 ```
+#### use sudo to change user
+```bash
+sudo su - OTHER_USER
+```
 
 #### End all processes for a target user
 
