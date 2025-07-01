@@ -243,7 +243,9 @@ unzip –d $i /data/www/img/
 done
 ```
 
-#### Create a directory YYYY-MM-DD format cd to it
+#### Create a directory YYYY-MM-DD format
+during testing is helpful to name files and directories
+
 ```bash
 folder_name="$(date +%F)"
 mkdir --parents --verbose $folder_name && cd $folder_name
@@ -260,18 +262,18 @@ mkdir -p $HOME/example.com/server1/{httpd,dnsqmasq}
 find [where to start searching] [-options] [expression]
 ```
 
-#### Search for the text dataToFind in markdown files
+#### Search for the text **dataToFind** in markdown files
 
 ```bash
 find ./ -type f -name "*.md" -exec grep 'dataToFind'  {} \;
 ```
 
-#### Find the file LICENSE in current directory and up to subdirectory level
+#### Find file named LICENSE current directory and up to subdirectory level
 
 ```bash
 find . -maxdepth 2 -name LICENSE
 ```
-
+### Grep
 #### Find files containing specific text
 
 ```bash
@@ -448,6 +450,10 @@ lsof -u $USER
 
 ```bash
 lsof -i :8090-9090
+```
+#### use sudo to change user
+```bash
+sudo su - OTHER_USER
 ```
 
 #### End all processes for a target user

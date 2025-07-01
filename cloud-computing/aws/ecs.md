@@ -5,13 +5,18 @@
 # Elastic Container Service
 https://docs.aws.amazon.com/ecs/
 
-#### Access container in a task Bash
-```bash
-ECS_TASK_ID="218911777777
+Variables that are helpful to use the commands in this page
 
-aws ecs execute-command --cluster my-ecs-cluster \
+```bash
+ECS_TASK_ID="NOT the ARN just ID number"
+MY_ECS_CLUSTER=""
+CONTAINER_NAME=""
+
+#### Access container interactively in a task
+```bash
+aws ecs execute-command --cluster $MY_ECS_CLUSTER \
 --task $ECS_TASK_ID \
---container app-operateservices \
+--container $CONTAINER_NAME \
 --command "/bin/bash" \
 --interactive
 ```
