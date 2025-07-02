@@ -11,6 +11,7 @@ Variables that are helpful to use the commands in this page
 ECS_TASK_ID="NOT the ARN just ID number"
 MY_ECS_CLUSTER=""
 CONTAINER_NAME=""
+```
 
 #### Access container interactively in a task
 ```bash
