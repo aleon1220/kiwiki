@@ -1,4 +1,5 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # AWS Lambda Functions
@@ -18,7 +19,8 @@ aws lambda list-functions | jq -r '[.Functions[] |{name: .FunctionName, env: .En
 #### What logs does my Lambda Function generate when I run it? JQ
 
 ```bash
-aws lambda invoke --function-name <function name> --payload '{}' --log-type Tail - | jq -r '{ "StatusCode": .StatusCode, "LogResult": (.LogResult|@base64d)}'
+FUNCTION_NAME="REPLACE"
+aws lambda invoke --function-name $FUNCTION_NAME --payload '{}' --log-type Tail - | jq -r '{ "StatusCode": .StatusCode, "LogResult": (.LogResult|@base64d)}'
 ```
 
 [Back to top](#)
