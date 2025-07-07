@@ -30,4 +30,4 @@ for stack in $(aws cloudformation list-stacks --stack-status-filter CREATE_COMPL
 
 [Back to top](#)
 
-[Kiwiki Home](./readme.md)
+[Kiwiki Home](/../../)
