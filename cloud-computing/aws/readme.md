@@ -65,8 +65,9 @@ aws iam get-user --profile $AWS_NAMED_PROFILE
 
 # C
 
-## AWS Code Commit
-[Code Commit](./code-commit.md)
+## AWS [Code Commit](./code-commit.md)
+Git Repos
+
 ---
 
 ## AWS CF Cloud Formation
