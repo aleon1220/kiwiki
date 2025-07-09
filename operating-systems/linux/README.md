@@ -273,6 +273,12 @@ find ./ -type f -name "*.md" -exec grep 'dataToFind'  {} \;
 ```bash
 find . -maxdepth 2 -name LICENSE
 ```
+
+#### Find directories matching a String
+```bash
+-type d -name '*myServices*'
+```
+
 ### Grep
 #### Find files containing specific text
 
