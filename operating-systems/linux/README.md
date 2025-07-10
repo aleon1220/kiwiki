@@ -4,21 +4,17 @@
 # General Linux Server commands
 
 ### CLI Shell keyboard shortcuts
+- `ctrl + W`  cuts the word to the left of the cursor
+- `ctrl + A`  moves cursor to beginning of line. A alphabet/first letter
+- `ctrl + E`  moves cursor to End of line
+- `ctrl + E + X` opens editor. Explanation below
+- `CTRL + D`  exit from terminal
+- `ctrl + Y`  Yank pastes back what you have just cut
+- `ctrl + U`  cuts everything to the left of the cursor
+- `ctrl + K`  cuts everything to the right of the cursor
 - `ctrl + L`  clears the screen
-- `CTRL + D` exit from terminal
-- `ctrl + a`  moves cursor to beginning of line (A alphabet/first letter)
-- `ctrl + e`  moves cursor to end of line (Closer to letter `a` in the US keyboard)
-- `alt  + d`  cuts the word to the right of the cursor
-- `ctrl + k`  cuts everything to the right of the cursor
-- `ctrl + w`  cuts the word to the left of the cursor
-- `ctrl + u`  cuts everything to the left of the cursor.
-- `ctrl + y`  pastes back what you have just cut.
-- `ctrl + e + x` opens editor. Explanation below
 
-Type a Long command, e.g. add loops or some complex parsing logic. You need more editing power so you press
-- `ctrl + e + x` text editor
-
-Editors VIM(or Nano or VI etc.) opens with your command you had typed so far already in the buffer
+- `alt  + D`  cuts the word to the right of the cursor
 
 ## Get quick diagnostic about a server
 
@@ -43,12 +39,18 @@ less ~/.bashrc
 ```
 
 #### Check status of linux services
+```bash
+sudo systemctl status nginx supervisor php7.2-fpm
+sudo service jenkins status
+```
 
 ```bash
 timedatectl status
+```
+#### edit a service
+
+```bash
 sudo systemctl edit --full cron.service
-sudo systemctl status nginx supervisor php7.2-fpm
-sudo service jenkins status
 ```
 
 #### Get info about linux version
@@ -78,21 +80,6 @@ uname -a
 
 ## Systemd Systemctl
 
-#### Check status of a Service
-
-```bash
-systemctl status APP_SERVICE
-
-# system control status nginx
-systemctl status nginx
-```
-
-#### Check if service is Active
-
-```bash
-systemctl is-active nginx
-```
-
 #### List all loaded service units
 
 ```bash
@@ -103,6 +90,20 @@ systemctl list-units -all | grep loaded | awk '{print $1;}'
 
 ```bash
 systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt
+```
+
+#### Check status of a Service
+
+```bash
+APP_SERVICE="nginx"
+
+systemctl status $APP_SERVICE
+```
+
+#### Check if service is Active
+
+```bash
+systemctl is-active $APP_SERVICE
 ```
 
 #### List loaded services
@@ -117,12 +118,10 @@ systemctl list-units -all | grep service | grep loaded | awk '{print $1;}'
 systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
 ```
 
-#### Services that are loaded but not enabled
+#### Services with state loaded
 3 commands to find the diff
 ```bash
 systemctl list-units -all | grep service | grep loaded | awk '{print $1;}' > loaded.txt
-
-systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
 ```
 
 #### Diff the missing services. Quick glance of missing
