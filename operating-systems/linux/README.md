@@ -4,19 +4,28 @@
 # General Linux Server commands
 
 ### CLI Shell keyboard shortcuts
-- `ctrl + W`  cuts the word to the left of the cursor
-- `ctrl + A`  moves cursor to beginning of line. A alphabet/first letter
-- `ctrl + E`  moves cursor to End of line
-- `ctrl + E + X` opens editor. Explanation below
+- `CTRL + W`  cuts the word to the left of the cursor
+- `CTRL + A`  moves cursor to beginning of line. A first letter of the alphabet
+- `CTRL + E`  moves cursor to End of line
+- Complex multiline commands
+`CTRL + E + X` opens editor. Explanation below
+
+```bash
+echo $EDITOR
+
+# beginner suggest to use nano
+export EDITOR="vim"
+```
+
 - `CTRL + D`  exit from terminal
-- `ctrl + Y`  Yank pastes back what you have just cut
-- `ctrl + U`  cuts everything to the left of the cursor
-- `ctrl + K`  cuts everything to the right of the cursor
-- `ctrl + L`  clears the screen
+- `CTRL + Y`  yank pastes back what you have just cut
+- `CTRL + U`  cuts everything to the left of the cursor
+- `CTRL + K`  cuts everything to the right of the cursor
+- `CTRL + L`  clears the screen
 
-- `alt  + D`  cuts the word to the right of the cursor
+- `Alt  + D`  cuts the word to the right of the cursor
 
-## Get quick diagnostic about a server
+## Quick diagnostic about a server
 
 #### Get info about the linux distro
 OS type, Local IP, hostname and Architecture type
@@ -36,21 +45,6 @@ ls --all $HOME
 id
 
 less ~/.bashrc
-```
-
-#### Check status of linux services
-```bash
-sudo systemctl status nginx supervisor php7.2-fpm
-sudo service jenkins status
-```
-
-```bash
-timedatectl status
-```
-#### edit a service
-
-```bash
-sudo systemctl edit --full cron.service
 ```
 
 #### Get info about linux version
@@ -86,18 +80,23 @@ uname -a
 systemctl list-units -all | grep loaded | awk '{print $1;}'
 ```
 
+#### List loaded services
+
+```bash
+systemctl list-units -all | grep service | grep loaded | awk '{print $1;}'
+```
+
 #### List all enabled units
 
 ```bash
 systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt
 ```
 
-#### Check status of a Service
-
+#### Check status of services
 ```bash
-APP_SERVICE="nginx"
-
-systemctl status $APP_SERVICE
+LIST_SERVICES="nginx supervisor php7.2-fpm"
+sudo systemctl status $LIST_SERVICES
+sudo service jenkins status
 ```
 
 #### Check if service is Active
@@ -106,13 +105,18 @@ systemctl status $APP_SERVICE
 systemctl is-active $APP_SERVICE
 ```
 
-#### List loaded services
-
+#### check date control
 ```bash
-systemctl list-units -all | grep service | grep loaded | awk '{print $1;}'
+timedatectl status
 ```
 
-#### List enabled services
+#### edit a service
+
+```bash
+sudo systemctl edit --full cron.service
+```
+
+#### List enabled services export to text file
 
 ```bash
 systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
@@ -144,16 +148,17 @@ popd
 
 The settings are read from all of the following system configuration files
 
-1. /run/sysctl.d/*.conf
-2. /etc/sysctl.d/*.conf
-3. /usr/local/lib/sysctl.d/*.conf
-4. /usr/lib/sysctl.d/*.conf
-5. /lib/sysctl.d/*.conf
-6. /etc/sysctl.conf
+1. `/run/sysctl.d/*.conf`
+2. `/etc/sysctl.d/*.conf`
+3. `/usr/local/lib/sysctl.d/*.conf`
+4. `/usr/lib/sysctl.d/*.conf`
+5. `/lib/sysctl.d/*.conf`
+6. `/etc/sysctl.conf`
 
 ```bash
 sudo sysctl --system
 ```
+
 ### Debugging Logs
 #### Analyse Logs. Logs named 3 to 31.gz month. Month like Feb 2020 and print
 
