@@ -1,4 +1,5 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # General Linux Server commands
@@ -7,12 +8,10 @@
 - `CTRL + W`  cuts the word to the left of the cursor
 - `CTRL + A`  moves cursor to beginning of line. A first letter of the alphabet
 - `CTRL + E`  moves cursor to End of line
-- Complex multiline commands
-`CTRL + E + X` opens editor. Explanation below
+- `CTRL + E + X` for Complex multiline commands opens editor. 
+check the `echo $EDITOR` variable
 
 ```bash
-echo $EDITOR
-
 # beginner suggest to use nano
 export EDITOR="vim"
 ```
@@ -28,22 +27,29 @@ export EDITOR="vim"
 ## Quick diagnostic about a server
 
 #### Get info about the linux distro
-OS type, Local IP, hostname and Architecture type
+Local IP, hostname and Architecture type
 
 ```bash
-lsb_release -a ; hostname -I ; hostname ; getconf LONG_BIT
+hostname -I ; hostname ; getconf LONG_BIT
 ```
-#### Check the hidden directories and files in the HOME dir
+#### Linux distro Debian system info
+```bash
+lsb_release -a
+```
 
+#### Check the hidden directories and files in the HOME dir
 ```bash
 ls --all $HOME
+```
+
+print user and group info
+```bash
+id
 ```
 
 #### Check bash customizations current user
 
 ```bash
-id
-
 less ~/.bashrc
 ```
 
@@ -53,7 +59,7 @@ less ~/.bashrc
 cat /etc/os-release
 ```
 
-#### Get pretty print version
+#### read system identification information message
 
 ```bash
 less /etc/issue
@@ -63,6 +69,10 @@ less /etc/issue
 
 ```bash
 lsb_release -a
+```
+
+#### Query system control settings
+```bash
 hostnamectl
 ```
 
