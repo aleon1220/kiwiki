@@ -1,58 +1,3 @@
-- [Networking](#networking)
-        - [Check this awesome Cheat sheet](#check-this-awesome-cheat-sheet)
-      - [Query DNS](#query-dns)
-      - [Alternative to dig. It doesn't use the system local DNS.](#alternative-to-dig-it-doesnt-use-the-system-local-dns)
-      - [Check packets hop and route](#check-packets-hop-and-route)
-    - [Network Probing](#network-probing)
-      - [Port scanning TCP,UDP ports open or closed](#port-scanning-tcpudp-ports-open-or-closed)
-      - [Sends ICMP pings. checks latency](#sends-icmp-pings-checks-latency)
-      - [Test port 80 netcat](#test-port-80-netcat)
-      - [Examine the IPv4 TCP-based sockets that are listening for connections on your system](#examine-the-ipv4-tcp-based-sockets-that-are-listening-for-connections-on-your-system)
-      - [Examine the IPv6 TCP-based sockets that are listening for connections on your system](#examine-the-ipv6-tcp-based-sockets-that-are-listening-for-connections-on-your-system)
-      - [Creating Unix Domain Sockets](#creating-unix-domain-sockets)
-      - [examine unix domain sockets](#examine-unix-domain-sockets)
-      - [Connect to an UNIX Socket](#connect-to-an-unix-socket)
-      - [Simulate traffic in IPV4 and IPV6](#simulate-traffic-in-ipv4-and-ipv6)
-    - [Traffic capture](#traffic-capture)
-    - [Network management](#network-management)
-      - [Check ARP cache](#check-arp-cache)
-    - [Load testing](#load-testing)
-      - [Send TCP or UDP traffic. Similar to wrk2 but allows UDP](#send-tcp-or-udp-traffic-similar-to-wrk2-but-allows-udp)
-      - [Network performance measurement tool](#network-performance-measurement-tool)
-    - [Benchmarking](#benchmarking)
-      - [Flush DNS by resetting the network DEBIAN based](#flush-dns-by-resetting-the-network-debian-based)
-      - [Inspect TCP socket states e.g. 443](#inspect-tcp-socket-states-eg-443)
-      - [Netstat statistics](#netstat-statistics)
-      - [Find ports in use](#find-ports-in-use)
-      - [Make sure the `firewalld` service is enabled](#make-sure-the-firewalld-service-is-enabled)
-      - [Install netcat in Fedora/Redhat](#install-netcat-in-fedoraredhat)
-      - [CentOS Linux Open Port 8080 on the firewall](#centos-linux-open-port-8080-on-the-firewall)
-      - [Find user behind a process](#find-user-behind-a-process)
-      - [Test connectivity to a port](#test-connectivity-to-a-port)
-      - [Check server status](#check-server-status)
-      - [Check Any URL and get output in Text](#check-any-url-and-get-output-in-text)
-      - [Get listening ports](#get-listening-ports)
-      - [Get a report with nmap. install it first `sudo snap install nmap`](#get-a-report-with-nmap-install-it-first-sudo-snap-install-nmap)
-    - [The `ip` command](#the-ip-command)
-      - [- Show / manipulate routing](#--show--manipulate-routing)
-      - [- Show List of routes](#--show-list-of-routes)
-      - [- Show / manipulate devices](#--show--manipulate-devices)
-      - [Restart Name Service Cache Process](#restart-name-service-cache-process)
-  - [CURL Client URL](#curl-client-url)
-      - [Download a file and save it with a custom name](#download-a-file-and-save-it-with-a-custom-name)
-      - [Get HTTP headers. use the `-I` or the `— head` option](#get-http-headers-use-the--i-or-the--head-option)
-      - [Ignore invalid certs `-k or --insecure`](#ignore-invalid-certs--k-or---insecure)
-      - [Make a POST request.](#make-a-post-request)
-      - [get the HTTP headers and verbose mode](#get-the-http-headers-and-verbose-mode)
-      - [Simplified view](#simplified-view)
-      - [Specify the type of request](#specify-the-type-of-request)
-      - [Include the Basic Auth](#include-the-basic-auth)
-      - [Update name resolution](#update-name-resolution)
-      - [Check service health](#check-service-health)
-      - [Upload a file](#upload-a-file)
-      - [Timing Curl connection](#timing-curl-connection)
-      - [VPN](#vpn)
-
 [Kiwiki Home](/../../)
 
 # Networking
@@ -60,7 +5,7 @@ Commands and useful cheat sheet used in networking
 
 ##### Check this awesome Cheat sheet
 
-[CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
+
 
 Accessing a service, DNS
 `whois` = servers
@@ -184,7 +129,10 @@ tcpdump -i eth0 -w traffic.pcap
 tcpreplay -i eth0 httptraffic.pcap
 ```
 
-`wrk2` Send Http load
+#### Send Http load
+```bash
+wrk2
+``` 
 
 Threads connections duration Requests
 
@@ -192,7 +140,7 @@ Threads connections duration Requests
 wrk2 -t1 -c10 -d60 -R100 -L http://$IP
 ```
 
-#### Send TCP or UDP traffic. Similar to wrk2 but allows UDP
+#### Send TCP or UDP traffic. Similar to wrk2 allows UDP
 
 ```bash
 iperf3
@@ -212,7 +160,6 @@ info siege
 
 BPF/eBPF potential for new programs
 
-**source:** Digital ocean talk Handy Linux networking tools
 
 #### Flush DNS by resetting the network DEBIAN based
 
@@ -310,13 +257,13 @@ nmap -sV -p- localhost
 
 ### The `ip` command
 
-#### - Show / manipulate routing
+#### Show operate manipulate routing
 
 ```bash
 ip route show
 ```
 
-#### - Show List of routes
+#### List routes
 
 ```bash
 ip route list
@@ -374,7 +321,7 @@ curl --head --verbose HOST
 #### Simplified view
 
 ```bash
-curl --list-only $HOST
+curl --verbose --list-only $HOST
 ```
 
 #### Specify the type of request
@@ -416,6 +363,10 @@ curl -w "%{time_total}\n" -o /dev/null -s www.test.com
 #### VPN
 
 OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
+
+# References
+- [Linux CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
+- **source:** Digital ocean talk Handy Linux networking tools
 
 [Back to top](#)
 
