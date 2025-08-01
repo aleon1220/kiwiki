@@ -32,7 +32,7 @@ docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}
 
 #### Docker Hub Search for an app or project containing given strings
 ``` bash
-docker search IMAGE_TO_SEARCH
+docker search $IMAGE_TO_SEARCH
 ```
 
 #### Example of setting credentials for another Docker registry e.g. [Artifactory.com](https://www.jfrog.com/confluence/display/JFROG/Using+Docker+V1#UsingDockerV1-3.SettingUpAuthentication)
@@ -90,17 +90,22 @@ CONTAINER_NAME="my-docker-container"
 docker cp $FILE_HOST_PATH $CONTAINER_NAME:$CONTAINER_PATH
 ```
 
-#### Examples of running docker containers
+### Examples of running docker containers
+
+#### detacched node app
 ``` bash
 CONTAINER="ID or container name"
 docker run --restart always --name $CONTAINER -p 8080:8080 --detach aleon1220/train-schedule:9 node app.js
+```
 
+#### run nginx
+``` bash
 docker run --name some-nginx -d -p 9080:80
 ```
 
 #### Networking tool for debugging in Debian/Ubuntu based containers
 ``` bash
-apt update && apt install netcat inetutils-* net-tools iproute2 vim less --yes
+apt update && apt install --yes netcat inetutils-* net-tools iproute2 vim less 
 ```
 
 #### List all containers that exited
