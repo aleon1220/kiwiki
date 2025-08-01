@@ -1,4 +1,5 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # Bash Cheat Sheet
@@ -66,13 +67,13 @@ alias mv='mv -i'
 ### Debian / Ubuntu:
 ```bash
 alias apt-get="sudo apt-get"
-alias updatey="sudo apt-get -y"
-alias update="sudo apt-get update && sudo apt-get upgrade"
+alias updateyes="sudo apt-get --yes"
+alias updgradeOS="sudo apt-get update && sudo apt-get upgrade --yes"
 ```
 ### RHEL, CentOS, Fedora
 ```bash
 alias update='yum update'
-alias updatey='yum -y update'
+alias updateyes='yum --assumeyes update'
 ```
 ### History in bash
 #### 10 Most used commands from history
