@@ -18,10 +18,10 @@ aws ec2 describe-security-groups | \
 ```
 #### find security group by name & get SecgroupID 
 ```bash
-SecGroup_QA=$(aws ec2 describe-security-groups --filters Name=group-name,Values=qual-vwise-nlb-sg --query "SecurityGroups[*].GroupId" --output text)
+SecGroup_QA=$(aws ec2 describe-security-groups --filters Name=group-name,Values=qual-nlb-sg --query "SecurityGroups[*].GroupId" --output text)
 ```
 
-#### create ingress group targetting a security groupID
+#### create ingress group in a particular security groupID
 ```bash
 SERVICE_PORT="38139"
 aws ec2 authorize-security-group-ingress --group-id "$SecGroup_QA" --protocol tcp --port $SERVICE_PORT --cidr 10.0.0.0/8

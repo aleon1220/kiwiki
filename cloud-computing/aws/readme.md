@@ -1,4 +1,5 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # AWS CLI commands
@@ -61,19 +62,16 @@ export AWS_PROFILE="user1"
 aws iam get-user --profile $AWS_NAMED_PROFILE
 ```
 
----
-
 # C
 
-## AWS Code Commit
-[Code Commit](./code-commit.md)
----
+## AWS [Code Commit](./code-commit.md)
+Git Repos
+
 
 ## AWS CF Cloud Formation
 Infrastructure as a configuration (not code)
 [Cloud Formation](./cloud-formation.md)
 
----
 ## AWS CloudWatch
 [Cloud Watch](./cloud-watch.md)
 
@@ -85,16 +83,15 @@ Infrastructure as a configuration (not code)
 # I
 ## [IAM Identity Access Management](./iam.md)
 
----
-# [L]
+# L
 ## [Lambda](./lambda.md)
----
+
 
 # R
 
 ## [RDS Databases]((./rds.md))
 
----
+
 
 # S
 
@@ -102,7 +99,6 @@ Infrastructure as a configuration (not code)
 
 ## [Secret Manager](./secrets-manager.md)
 
----
 
 # V
 

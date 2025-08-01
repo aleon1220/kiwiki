@@ -1,8 +1,9 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # Relational Databases Systems
-#### What are my RDS Instance Endpoints?
+#### list RDS Instance Endpoints?
 
 ```bash
 aws rds describe-db-instances | jq -r '.DBInstances[] | { (.DBInstanceIdentifier):(.Endpoint.Address + ":" + (.Endpoint.Port|tostring))}'
@@ -17,7 +18,8 @@ aws rds describe-db-instances
 #### Check logs for given instance
 
 ```bash
-aws rds describe-db-log-files --db-instance-identifier $RDS_INSTANCE
+RDS_INSTANCE_ID="REPLACE"
+aws rds describe-db-log-files --db-instance-identifier $RDS_INSTANCE_ID
 ```
 
 

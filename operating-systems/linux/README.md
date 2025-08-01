@@ -1,54 +1,56 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # General Linux Server commands
 
 ### CLI Shell keyboard shortcuts
-- `ctrl + L`  clears the screen
-- `CTRL + D` exit from terminal
-- `ctrl + a`  moves cursor to beginning of line (A alphabet/first letter)
-- `ctrl + e`  moves cursor to end of line (Closer to letter `a` in the US keyboard)
-- `alt  + d`  cuts the word to the right of the cursor
-- `ctrl + k`  cuts everything to the right of the cursor
-- `ctrl + w`  cuts the word to the left of the cursor
-- `ctrl + u`  cuts everything to the left of the cursor.
-- `ctrl + y`  pastes back what you have just cut.
-- `ctrl + e + x` opens editor. Explanation below
+- `CTRL + W`  cuts the word to the left of the cursor
+- `CTRL + A`  moves cursor to beginning of line. A first letter of the alphabet
+- `CTRL + E`  moves cursor to End of line
+- `CTRL + E + X` for Complex multiline commands opens editor. 
+check the `echo $EDITOR` variable
 
-Type a Long command, e.g. add loops or some complex parsing logic. You need more editing power so you press
-- `ctrl + e + x` text editor
+```bash
+# beginner suggest to use nano
+export EDITOR="vim"
+```
 
-Editors VIM(or Nano or VI etc.) opens with your command you had typed so far already in the buffer
+- `CTRL + D`  exit from terminal
+- `CTRL + Y`  yank pastes back what you have just cut
+- `CTRL + U`  cuts everything to the left of the cursor
+- `CTRL + K`  cuts everything to the right of the cursor
+- `CTRL + L`  clears the screen
 
-## Get quick diagnostic about a server
+- `Alt  + D`  cuts the word to the right of the cursor
+
+## Quick diagnostic about a server
 
 #### Get info about the linux distro
-OS type, Local IP, hostname and Architecture type
+Local IP, hostname and Architecture type
 
 ```bash
-lsb_release -a ; hostname -I ; hostname ; getconf LONG_BIT
+hostname -I ; hostname ; getconf LONG_BIT
 ```
-#### Check the hidden directories and files in the HOME dir
+#### Linux distro Debian system info
+```bash
+lsb_release -a
+```
 
+#### Check the hidden directories and files in the HOME dir
 ```bash
 ls --all $HOME
+```
+
+print user and group info
+```bash
+id
 ```
 
 #### Check bash customizations current user
 
 ```bash
-id
-
 less ~/.bashrc
-```
-
-#### Check status of linux services
-
-```bash
-timedatectl status
-sudo systemctl edit --full cron.service
-sudo systemctl status nginx supervisor php7.2-fpm
-sudo service jenkins status
 ```
 
 #### Get info about linux version
@@ -57,7 +59,7 @@ sudo service jenkins status
 cat /etc/os-release
 ```
 
-#### Get pretty print version
+#### read system identification information message
 
 ```bash
 less /etc/issue
@@ -67,6 +69,10 @@ less /etc/issue
 
 ```bash
 lsb_release -a
+```
+
+#### Query system control settings
+```bash
 hostnamectl
 ```
 
@@ -78,31 +84,10 @@ uname -a
 
 ## Systemd Systemctl
 
-#### Check status of a Service
-
-```bash
-systemctl status APP_SERVICE
-
-# system control status nginx
-systemctl status nginx
-```
-
-#### Check if service is Active
-
-```bash
-systemctl is-active nginx
-```
-
 #### List all loaded service units
 
 ```bash
 systemctl list-units -all | grep loaded | awk '{print $1;}'
-```
-
-#### List all enabled units
-
-```bash
-systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt
 ```
 
 #### List loaded services
@@ -111,18 +96,46 @@ systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt
 systemctl list-units -all | grep service | grep loaded | awk '{print $1;}'
 ```
 
-#### List enabled services
+#### List all enabled units
+
+```bash
+systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt
+```
+
+#### Check status of services
+```bash
+LIST_SERVICES="nginx supervisor php7.2-fpm"
+sudo systemctl status $LIST_SERVICES
+sudo service jenkins status
+```
+
+#### Check if service is Active
+
+```bash
+systemctl is-active $APP_SERVICE
+```
+
+#### check date control
+```bash
+timedatectl status
+```
+
+#### edit a service
+
+```bash
+sudo systemctl edit --full cron.service
+```
+
+#### List enabled services export to text file
 
 ```bash
 systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
 ```
 
-#### Services that are loaded but not enabled
+#### Services with state loaded
 3 commands to find the diff
 ```bash
 systemctl list-units -all | grep service | grep loaded | awk '{print $1;}' > loaded.txt
-
-systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
 ```
 
 #### Diff the missing services. Quick glance of missing
@@ -145,16 +158,17 @@ popd
 
 The settings are read from all of the following system configuration files
 
-1. /run/sysctl.d/*.conf
-2. /etc/sysctl.d/*.conf
-3. /usr/local/lib/sysctl.d/*.conf
-4. /usr/lib/sysctl.d/*.conf
-5. /lib/sysctl.d/*.conf
-6. /etc/sysctl.conf
+1. `/run/sysctl.d/*.conf`
+2. `/etc/sysctl.d/*.conf`
+3. `/usr/local/lib/sysctl.d/*.conf`
+4. `/usr/lib/sysctl.d/*.conf`
+5. `/lib/sysctl.d/*.conf`
+6. `/etc/sysctl.conf`
 
 ```bash
 sudo sysctl --system
 ```
+
 ### Debugging Logs
 #### Analyse Logs. Logs named 3 to 31.gz month. Month like Feb 2020 and print
 
@@ -273,6 +287,12 @@ find ./ -type f -name "*.md" -exec grep 'dataToFind'  {} \;
 ```bash
 find . -maxdepth 2 -name LICENSE
 ```
+
+#### Find directories matching a String
+```bash
+-type d -name '*myServices*'
+```
+
 ### Grep
 #### Find files containing specific text
 
