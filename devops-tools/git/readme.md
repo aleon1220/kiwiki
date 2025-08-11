@@ -24,7 +24,7 @@ develop --> main
 - Initialize and operate a git repo at `/var/save/repo`
 
 ```bash
-mkdir -pv /var/save/repo | cd /var/save/repo
+mkdir --parents --verbose /var/save/repo | cd /var/save/repo
 
 git init
 Initialized empty Git repository in /var/save/repo/.git/
