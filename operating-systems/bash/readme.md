@@ -18,7 +18,6 @@ Tested and used in Linux ubuntu 18.04 and WSL Ubuntu 18.04, Ubuntu 22
 - `%` and `%%` for suffix manipulation
 - `^^` for pattern substitution of previous command
 - `sudo !!` to run previous command with sudo privileges.
-- `grep -Ev '^#|^\$' $file` will display file content without comments or empty lines."
 
 ## Bash options/Flags
 ``` bash
@@ -27,12 +26,15 @@ set -o nounset
 set -o pipefail
 set -o xtrace
 ```
+#### display file content without comments or empty lines
+```bash
+FILE_NAME="myfile.conf"
+
+grep -Ev '^#|^\$' $FILE_NAME
+```
 
 #### The alias Command
-```bash
-alias [name[=value]]
-```
-- below is a common command. Recently i found it was an alias
+- common list alias command
 ```bash
 alias ll='ls -alF'
 ```
@@ -42,7 +44,7 @@ It may not be installed by default. to install on Ubuntu systems.
 ```bash
 sudo apt -y colordiff
 ```
-- create the aliases
+#### create the aliases
 ``` bash
 alias diff='colordiff'
 alias egrep='egrep --color=auto'
@@ -50,7 +52,7 @@ alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 ```
-- aliases for Date & time
+#### aliases for Date & time
 ``` bash
 Date and Time Aliases
 alias d='date +%F'
@@ -123,7 +125,7 @@ source $HOME/.bash_aliases
 source $HOME/.bashrc
 ```
 
-- Create sym links
+#### Create sym links
 ```bash
 ln -s lsd lsl
 ln -s lsd lsf
@@ -152,8 +154,8 @@ Supported escape sequences:
 echo <(printf "hi all \n")
 ```
 
-built-in command called `complete`.
-Example to execute the auto complete feature for AWSCLI
+#### built-in command called `complete`.
+to execute the auto complete feature for AWSCLI
 `complete -C '/usr/local/bin/aws_completer' aws`
 
 ### [JSON JQ](https://www.json.org/json-en.html) in bash
