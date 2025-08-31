@@ -1,61 +1,62 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # Docker containers
+## Container Ops
+
 ``` bash
 docker version
 ```
-#### List Docker volumes
-``` bash
-docker volume ls
-```
-#### Check Docker system disk usage
-``` bash
-docker system df
-```
+
 #### Access container internally
 ```bash
 docker exec --interactive --tty $CONTAINER /bin/bash
-```
-
-## Dockerfile Practices
-#### Retry `apt-get` operation if it fails
-``` bash
-# Make sure apt-get retries on failures
-RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/80retries
 ```
 
 ### List the containers of an instance and show 4 attributes in table format
 ``` bash
 docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"
 ```
-
-#### Docker Hub Search for an app or project containing given strings
+#### Stop All Containers quietly
 ``` bash
-docker search IMAGE_TO_SEARCH
+docker stop $(docker ps --quiet)
 ```
-
-#### Example of setting credentials for another Docker registry e.g. [Artifactory.com](https://www.jfrog.com/confluence/display/JFROG/Using+Docker+V1#UsingDockerV1-3.SettingUpAuthentication)
+#### Show containers that have an exposed port and sort
 ``` bash
-vim ~/.docker/config.json
+docker ps --filter expose=0-65535/tcp | sort -u -k7
+```
+#### List labels for a given docker container [source](https://gist.github.com/steve-jansen)
+``` bash
+docker inspect --format \
+    '{{ range $k, $v := .Config.Labels -}}
+    {{ $k }}={{ $v }}
+    {{ end -}}' $CONTAINER
 ```
 
-#### Modify the `config.json` settings
-``` json
-{
-    "auths" :{
-        "https://artprod.company.com" : {
-            "auth": "<USERNAME>:<PASSWORD> (converted to base 64)",
-                "email": "youremail@email.com"
-        },
-        "https://artdev.company.com" : {
-            "auth": "<USERNAME>:<PASSWORD> (converted to base 64)",
-                "email": "youremail@email.com"
-        }
-    }
-}
+#### Get IP of a given container name/ID
+``` bash
+docker inspect -f ‘{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}’ $CONTAINER_NAME_OR_ID
 ```
 
+#### Copy a file from host machine path to Docker container path
+``` bash
+FILE_HOST_PATH="/home/ubuntu/InternalCertificate.crt"
+CONTAINER_PATH="/var/atlassian/application-data/bitbucket/"
+CONTAINER_NAME="my-docker-container"
+docker cp $FILE_HOST_PATH $CONTAINER_NAME:$CONTAINER_PATH
+```
+
+#### List Docker volumes
+``` bash
+docker volume ls
+```
+
+#### Check Docker system disk usage
+``` bash
+docker system df
+```
+## Building Containers
 ### Building Docker Images Dockerfile
 #### Use docker cache busting
 Install latest version of a package in 1 layer
@@ -77,30 +78,56 @@ RUN apt-get update && apt-get install -y \
     package-foo=1.3.* \
 && rm -rf /var/lib/apt/lists/*
 ```
-#### Stop All Containers quietly
+
+### Dockerfile Practices
+#### Retry `apt-get` operation if it fails
 ``` bash
-docker stop $(docker ps --quiet)
+# Make sure apt-get retries on failures
+RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/80retries
 ```
 
-#### Copy a file from host machine path to Docker container path
+#### Docker Hub Search for an app or project containing given strings
 ``` bash
-FILE_HOST_PATH="/home/ubuntu/InternalCertificate.crt"
-CONTAINER_PATH="/var/atlassian/application-data/bitbucket/"
-CONTAINER_NAME="my-docker-container"
-docker cp $FILE_HOST_PATH $CONTAINER_NAME:$CONTAINER_PATH
+docker search $IMAGE_TO_SEARCH
+```
+## Docker Configs
+#### Example of setting credentials for another Docker registry e.g. [Artifactory.com](https://www.jfrog.com/confluence/display/JFROG/Using+Docker+V1#UsingDockerV1-3.SettingUpAuthentication)
+``` bash
+vim ~/.docker/config.json
 ```
 
-#### Examples of running docker containers
+#### Modify the `config.json` settings
+``` json
+{
+    "auths" :{
+        "https://artprod.company.com" : {
+            "auth": "<USERNAME>:<PASSWORD> (converted to base 64)",
+                "email": "youremail@email.com"
+        },
+        "https://artdev.company.com" : {
+            "auth": "<USERNAME>:<PASSWORD> (converted to base 64)",
+                "email": "youremail@email.com"
+        }
+    }
+}
+```
+
+### Examples of running docker containers
+
+#### detacched node app
 ``` bash
 CONTAINER="ID or container name"
 docker run --restart always --name $CONTAINER -p 8080:8080 --detach aleon1220/train-schedule:9 node app.js
+```
 
+#### run nginx
+``` bash
 docker run --name some-nginx -d -p 9080:80
 ```
 
 #### Networking tool for debugging in Debian/Ubuntu based containers
 ``` bash
-apt update && apt install netcat inetutils-* net-tools iproute2 vim less --yes
+apt update && apt install --yes netcat inetutils-* net-tools iproute2 vim less 
 ```
 
 #### List all containers that exited
@@ -118,27 +145,11 @@ docker inspect $CONTAINER --format='{{.State.ExitCode}}'
 docker system prune --all --force --volumes
 ```
 
-#### Show containers that have an exposed port and sort
-``` bash
-docker ps --filter expose=0-65535/tcp | sort -u -k7
-```
-#### List labels for a given docker container [source](https://gist.github.com/steve-jansen)
-``` bash
-docker inspect --format \
-    '{{ range $k, $v := .Config.Labels -}}
-    {{ $k }}={{ $v }}
-    {{ end -}}' $CONTAINER
-```
-
-#### Get IP of a given container name/ID
-``` bash
-docker inspect -f ‘{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}’ $CONTAINER_NAME_OR_ID
-```
-
 #### Get the IP address of the docker host from inside a docker container
 ``` bash
 /sbin/ip route|awk '/default/ { print $3 }'
 ```
+
 #### List commands used to create a given image
 ``` bash
 MY_IMG="ubuntu"
@@ -150,7 +161,7 @@ docker history $MY_IMG | awk 'NR>1 {print $1}' | xargs docker inspect --format '
 /var/log/daemon.log          = Debian distributions;
 /var/log/messages            = RHEL and Oracle Linux;
 journalctl -u docker.service = Ubuntu 16.04+ and CentOS 7/8
-/var/log/upstart/docker.log  = for Ubuntu distributions still using upstart;
+/var/log/upstart/docker.log  = Ubuntu distributions using upstart
 AppData/Local                = Windows operating systems;
 ```
 
@@ -162,6 +173,7 @@ docker logs CONTAINER --since 15m
 ``` bash
 docker logs CONTAINER --since 2021-06-15T00:00 --until 2021-06-15T00:10 | less
 ```
+
 ### Docker Exit Codes
 
 Common exit codes associated with docker containers are:
@@ -178,7 +190,7 @@ docker scan --file Dockerfile --exclude-base docker-scan:e2e
 ```
 [source](<https://docs.docker.com/engine/scan/?utm_source=docker&utm_medium=inproductad&utm_campaign=totw-docker-scan#how-to-scan-images>)
 
-## Docker-Compose
+# Docker-Compose
 
 Orchestrates docker containers.
 
@@ -254,3 +266,4 @@ docker-compose -f $DOCKER_COMPOSE_FILE exec SERVICE_NAME cat "logs/log-$(env TZ=
 docker-compose -f $DOCKER_COMPOSE_FILE exec SERVICE_NAME cat "logs/supervisord.log" | less
 ```
 [Kiwiki Home](/../../)
+
