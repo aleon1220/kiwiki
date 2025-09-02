@@ -128,6 +128,12 @@ less /etc/issue
 lsb_release -a
 ```
 
+#### Red Hat Enterprise Linux info
+
+```bash
+cat /etc/redhat-release
+```
+
 #### Query system control settings
 ```bash
 hostnamectl
