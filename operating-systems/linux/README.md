@@ -2,7 +2,12 @@
 
 [Back to Main Page](./readme.md)
 
-# Linux Basics and System Startup
+# Linux 
+TODO concise definition of OS linux
+TODO this page will be a mirror of the EDX.org Linux course
+TODO move to the different category folders the different commands found in this page
+
+## OS Basics and System Startup
 
 ### CLI Shell keyboard shortcuts
 - `CTRL + W`  cuts the word to the left of the cursor
