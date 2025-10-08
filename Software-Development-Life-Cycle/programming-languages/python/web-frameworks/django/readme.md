@@ -1,4 +1,5 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # Django
@@ -20,3 +21,7 @@ python manage.py dbshell
 python3 manage.py runserver 0.0.0.0:8000
 deactivate
 ```
+
+[Back to top](#)
+
+[Kiwiki Home](/../../)

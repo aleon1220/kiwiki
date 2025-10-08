@@ -1,4 +1,5 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # Security and chryptography
@@ -601,5 +602,7 @@ Identity added: /home/aleonrangel/.ssh/id_rsa_personal (/home/aleonrangel/.ssh/i
 - [blog Cryptography RSA Open SSL](http://www.gnudeveloper.com/groups/cyber_security/Cryptography_RSA_Key_Exchange_works_in_realtime_using_Keytool_openSSL%20.html)
 - Using GPG in Windows Subsystem Linux WSL GPG guide in Windows Subsystem for Linux [GPG in WSL by Jess Esquire](https://www.jessesquire.com/articles/2019/03/31/configure-github-activity-signing-with-wsl/)
   [Back to top](#)
+
+[Back to top](#)
 
 [Kiwiki Home](/../../)
