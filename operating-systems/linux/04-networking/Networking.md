@@ -1,34 +1,43 @@
 [Kiwiki Home](/../../)
 
+[Back to Main Page](./readme.md)
+
 # Networking
-Commands and useful cheat sheet used in networking
-
-##### Check this awesome Cheat sheet
-
-
+Commands and useful cheat sheet used in networking mostly linux systems
 
 Accessing a service, DNS
 `whois` = servers
+
 #### Query DNS
 DNS queries and shows associated records
 ```bash
+DOMAIN="airnewzealand.co.nz"
 dig $DOMAIN
 ```
+
+#### DNS Lookup force every section, include the query itself, and show statistics
+```bash
+DOMAIN="airnewzealand.co.nz"
+dig $DOMAIN ANY +qr +question +answer +authority +additional +stats +multiline
+```
+
 #### Alternative to dig. It doesn't use the system local DNS.
 ```bash
 nslookup $DOMAIN
 ```
+
 #### Check packets hop and route
 ```bash
 traceroute $DOMAIN
 ```
+
 ### Network Probing
 
 Which TCP or UDP ports are open.
 
 Can i open a TCP connection to this destination?
 
-#### Port scanning TCP,UDP ports open or closed
+#### Port scanning TCP SYN
 
 ```bash
 nmap -sS localhost
@@ -37,13 +46,14 @@ nmap -sS localhost
 #### Sends ICMP pings. checks latency
 
 ```bash
-ping/ping6
+ping $DOMAIN
+ping6 $DOMAIN
 ```
 
-#### Test port 80 netcat
+#### netcat verbose but dont send test data port 80
 
 ```bash
-nc -lvz 80
+nc -vz $DOMAIN 80
 ```
 
 `telnet` a complete protocol
@@ -53,15 +63,16 @@ tcdump -i eth0 icmp
 ```
 
 #### Examine the IPv4 TCP-based sockets that are listening for connections on your system
+don't resolve service names
 
 ```bash
-ss -4 -tln
+ss --ipv4 --listening --tcp --numeric
 ```
 
 #### Examine the IPv6 TCP-based sockets that are listening for connections on your system
 
 ```bash
-ss -6 -tln
+ss --ipv6 -tln
 ```
 
 #### Creating Unix Domain Sockets
@@ -366,7 +377,7 @@ OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/
 
 # References
 - [Linux CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
-- **source:** Digital ocean talk Handy Linux networking tools
+- [Digital ocean talk Handy Linux networking tools](https://www.digitalocean.com/community/tech-talks/handy-networking-tools-and-how-to-use-them)
 
 [Back to top](#)
 

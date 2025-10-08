@@ -297,3 +297,5 @@ zip -r "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}.upd" "${OTA_ARTIFACTS_OUT_DIR}/${BU
 2. [Linux terminal trick opensource.com](https://opensource.com/article/20/1/linux-terminal-trick)
 
 [Back to top](#)
+
+[Kiwiki Home](/../../)
