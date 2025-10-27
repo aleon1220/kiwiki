@@ -3,7 +3,8 @@
 
 ## PDF Operations Tools
 
-### PDF tool kit
+### PDF tool kit pdftk
+[pdftk page](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)
 
 ##### Recursively find inside PDFs
 
@@ -45,9 +46,10 @@ pdftk source.pdf cat 5 6 10 output SplittedOutput.pdf
 
 #### Join PDFs unify in out1.pdf
 ```bash
-pdftk in1.pdf in2.pdf cat output out1.pdf verbose
+pdftk inPDF01.pdf inPDF02.pdf cat output out01.pdf verbose
 ```
 
 [Back to top](#)
+
 
 [Kiwiki Home](/../../)
