@@ -4,13 +4,18 @@
 
 # Windows
 Command prompt cmd & powershell PowerShell
-> Executed in
-- WSL
+> Executed using windows terminal with WSL:
 - Powershell 7
 - windows 10
 - windows 11
 
 WSL is a virtualization layer that runs Linux distros in windows 10+
+
+## Handling compressed files
+#### decompress a .zip file
+```powershell
+Expand-Archive -Path .\compressedData.zip -DestinationPath .\decompressedFiles
+``` 
 
 # Admin tasks
 #### start a session running as Admin
