@@ -2,7 +2,12 @@
 
 [Back to Main Page](./readme.md)
 
-# General Linux Server commands
+# Linux 
+TODO concise definition of OS linux
+TODO this page will be a mirror of the EDX.org Linux course
+TODO move to the different category folders the different commands found in this page
+
+## OS Basics and System Startup
 
 ### CLI Shell keyboard shortcuts
 - `CTRL + W`  cuts the word to the left of the cursor
@@ -23,6 +28,63 @@ export EDITOR="vim"
 - `CTRL + L`  clears the screen
 
 - `Alt  + D`  cuts the word to the right of the cursor
+
+# Linux Graphical Interface
+
+# System Configuration
+
+# Common Applications
+
+# Command Line Operations
+
+# Processes
+#### find the HTTPD user in a web server
+```bash
+HTTPDUSER=$(ps axo "user,comm" | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
+```
+
+#### see every process forest format
+```bash
+ps -e --forest
+```
+
+#### run the command in the background and log to a text file
+`nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
+
+```bash
+nohup $COMMAND_OR_SCRIPT > out_$(date).txt
+```
+
+#### Find the process that consumes more CPU
+
+```bash
+ps -eo pid,%cpu,%mem,args --sort -%cpu
+```
+
+#### Sort processes by memory
+
+```bash
+ps aux --sort=-%mem
+```
+
+#### View with a process tree
+
+```bash
+ps xfa | less
+```
+
+# File Operations
+
+# Text Editors
+
+# User Environment
+
+# Network Operations
+
+# The Bash Shell and bash Scripting
+refer to the Bash page
+
+# Printing
 
 ## Quick diagnostic about a server
 
@@ -69,6 +131,12 @@ less /etc/issue
 
 ```bash
 lsb_release -a
+```
+
+#### Red Hat Enterprise Linux info
+
+```bash
+cat /etc/redhat-release
 ```
 
 #### Query system control settings
@@ -333,11 +401,6 @@ grep --extended-regexp --recursive --ignore-case "health_url" .
 
 ```bash
 find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
-```
-
-#### It should find the HTTPD user in a web server
-```bash
-HTTPDUSER=$(ps axo "user,comm" | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
 ```
 
 ## Package Management
@@ -905,6 +968,7 @@ sudo chsh -s /bin/bash $TARGET_USER
 
 # References
 - [cyberciti reload-sysctl-conf](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
+- taxonomy and main structure from [LinuxFoundationX: Introduction to Linux](https://www.edx.org/learn/linux/the-linux-foundation-introduction-to-linux?index=product&queryId=2929e67562a4ddf42a3271d4f3163e76)
 
 [Back to top](#)
 

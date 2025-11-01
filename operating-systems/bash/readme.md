@@ -3,7 +3,7 @@
 [Back to Main Page](./readme.md)
 
 # Bash Cheat Sheet
-This section contains many shell and bash scripts for different purposes. 
+Section contains many shell and bash scripts for different purposes. 
 Tested and used in Linux ubuntu 18.04 and WSL Ubuntu 18.04, Ubuntu 22
 
 ## Some Bash Keyboard tips
@@ -26,6 +26,24 @@ set -o nounset
 set -o pipefail
 set -o xtrace
 ```
+
+#### Terminate an SSH session that got stuck
+``` bash
+$ ~?
+Supported escape sequences:
+ ~.   - terminate connection (and any multiplexed sessions)
+ ~B   - send a BREAK to the remote system
+ ~C   - open a command line
+ ~R   - request rekey
+ ~V/v - decrease/increase verbosity (LogLevel)
+ ~^Z  - suspend ssh
+ ~#   - list forwarded connections
+ ~&   - background ssh (when waiting for connections to terminate)
+ ~?   - this message
+ ~~   - send the escape character by typing it twice
+(Note that escapes are only recognized immediately after newline.)
+```
+
 #### display file content without comments or empty lines
 ```bash
 FILE_NAME="myfile.conf"
@@ -33,17 +51,18 @@ FILE_NAME="myfile.conf"
 grep -Ev '^#|^\$' $FILE_NAME
 ```
 
-#### The alias Command
+#### alias Command
 - common list alias command
 ```bash
 alias ll='ls -alF'
 ```
 #### Colorize Output
-#### install Colordiff
+#### leverage Colordiff
 It may not be installed by default. to install on Ubuntu systems.
 ```bash
 sudo apt -y colordiff
 ```
+
 #### create the aliases
 ``` bash
 alias diff='colordiff'
@@ -52,6 +71,7 @@ alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 ```
+
 #### aliases for Date & time
 ``` bash
 Date and Time Aliases
@@ -77,7 +97,7 @@ alias updgradeOS="sudo apt-get update && sudo apt-get upgrade --yes"
 alias update='yum update'
 alias updateyes='yum --assumeyes update'
 ```
-### History in bash
+### History & Commands Usage
 #### 10 Most used commands from history
 ``` bash
 cat ~/.bash_history | tr "\|\;" "\n" | sed -e "s/^ //g" | cut -d " " -f 1 | sort | uniq -c | sort -n | tail -n 10
@@ -130,23 +150,6 @@ source $HOME/.bashrc
 ln -s lsd lsl
 ln -s lsd lsf
 ln -s lsd lsx
-```
-
-#### Terminate an SSH session that got stuck
-``` bash
-$ ~?
-Supported escape sequences:
- ~.   - terminate connection (and any multiplexed sessions)
- ~B   - send a BREAK to the remote system
- ~C   - open a command line
- ~R   - request rekey
- ~V/v - decrease/increase verbosity (LogLevel)
- ~^Z  - suspend ssh
- ~#   - list forwarded connections
- ~&   - background ssh (when waiting for connections to terminate)
- ~?   - this message
- ~~   - send the escape character by typing it twice
-(Note that escapes are only recognized immediately after newline.)
 ```
 
 #### Bash process substitution
@@ -297,3 +300,5 @@ zip -r "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}.upd" "${OTA_ARTIFACTS_OUT_DIR}/${BU
 2. [Linux terminal trick opensource.com](https://opensource.com/article/20/1/linux-terminal-trick)
 
 [Back to top](#)
+
+[Kiwiki Home](/../../)

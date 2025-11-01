@@ -4,13 +4,18 @@
 
 # Windows
 Command prompt cmd & powershell PowerShell
-> Executed in
-- WSL
+> Executed using windows terminal with WSL:
 - Powershell 7
 - windows 10
 - windows 11
 
 WSL is a virtualization layer that runs Linux distros in windows 10+
+
+## Handling compressed files
+#### decompress a .zip file
+```powershell
+Expand-Archive -Path .\compressedData.zip -DestinationPath .\decompressedFiles
+``` 
 
 # Admin tasks
 #### start a session running as Admin
@@ -74,6 +79,7 @@ Open a terminal or powershell window as Admin
 echo "Restart the computer"
 ipconfig /all
 ```
+
 #### purges the DNS Resolver cache.
 ```cmd
 ipconfig /flushdns
@@ -114,7 +120,7 @@ netsh int ipv6 reset reset.log
 
 ### Disable the IP Helper service
 This features attempts to manage some aspects of IPv6 connectivity. To disable it:
-1. Press Windows key+R, then type services.msc in the displayed window Run box, and select OK.
+1. Press `Windows key+R` type services.msc in the displayed window Run box, and select OK.
 2. A list of Windows system services will be shown.
 3. Scroll through the list and locate the service named IP Helper > right-click the service name > Properties.
 4. In the Startup type drop-down list, choose Disabled, then select OK.
@@ -177,6 +183,20 @@ Measure-Command { echo hi }
 #### set terminal with vertical panes 2nd pane is WSL
 ``` powershell
 wt split-pane --vertical wsl
+```
+
+### Supporting functions
+for the work log analysis
+
+#### create directories from January to December
+``` powershell
+$months = [System.Globalization.DateTimeFormatInfo]::InvariantInfo.MonthNames[0..11]
+
+for ($i = 0; $i -lt 12; $i++) {
+    $month = $months[$i]
+    $dirName = "{0:D2}-{1}" -f ($i + 1), $month
+    New-Item -ItemType Directory -Path $dirName -Force
+}
 ```
 
 [Back to top](#)
