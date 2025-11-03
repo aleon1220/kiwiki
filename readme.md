@@ -65,6 +65,7 @@ previously called devops-tools. It involves anything tech related. Call it platf
     1. [PDF](./devops-tools/productivity-tools/pdf/readme.md)  
     2. [Rescue Time](./devops-tools/productivity-tools/rescue-time/readme.md)  
     3. [VSCode Setup](./devops-tools/productivity-tools/vscode-setup/readme.md) 
+
 ### CD Continous Deployment/Delivery Tooling
 [CD](./devops-tools/CD/readme.md)
 - [Spinnaker](./devops-tools/CD/spinnaker.md)
