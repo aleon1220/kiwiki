@@ -33,6 +33,10 @@ Start-Process powershell -Verb runAs
 ```powershell
 Get-Help Get-ChildItem
 ```
+#### which AD groups i am part of?
+```powershell
+whoami /groups | Format-List
+```
 
 #### list directories simple
 ```powershell
@@ -61,18 +65,18 @@ Encounter a WSL2 error
 > Logon failure: the user has not been granted the requested logon type at this computer.
 > Error code: Wsl/Service/CreateInstance/CreateVm/0x80070569
 
-``` powershell
+```powershell
 Restart-Service vmcompute
 ```
 
 #### restart WSL2
 - tested in Win10
-``` powershell
+```powershell
 Restart-Service LxssManager
 ```
 
 #### shutdown WSL
-``` powershell
+```powershell
 wsl --shutdown
 ```
 ---
@@ -107,17 +111,17 @@ ipconfig /renew
 ```
 
 #### network statistics 
-``` powershell
+```powershell
 netstat -nao
 ```
 
 #### netstats fby Process ID
-``` powershell
+```powershell
 netsat -ano | find str "PID"
 ```
 
 ##### restart Network IPV6 associated
-``` powershell
+```powershell
 netsh int ipv6 reset reset.log
 ```
 - Disable any active virtual private network (VPN) connection.
@@ -167,13 +171,13 @@ sc queryex
 ```
 
 #### delete service
-``` powershell
+```powershell
 sc delete $SERVICENAME
 ```
 
 ### FileSystem
 #### scan with System File Checker
-``` powershell
+```powershell
 sfc /scannow
 ```
 
@@ -182,6 +186,7 @@ windows form of linux `time`
 ``` powershell
 Measure-Command { echo hi }
 ```
+
 ---
 ### Windows [Terminal](https://docs.microsoft.com/en-us/windows/terminal/get-started#installation)
 
