@@ -18,6 +18,11 @@ Expand-Archive -Path .\compressedData.zip -DestinationPath .\decompressedFiles
 ``` 
 
 # Admin tasks
+#### Get OS info verbose
+```powershell
+Get-ComputerInfo | Select-Object Os* | Format-List
+```
+
 #### start a session running as Admin
 ```powershell
 Start-Process powershell -Verb runAs
