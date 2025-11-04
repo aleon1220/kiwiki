@@ -1,9 +1,12 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # Ansible
-[Ansible website](www.ansible.com)
+[Ansible website](https://www.ansible.com)
+## Windows Setup
 
+## Linux Setup
 #### Add the repo and install Ubuntu
 ``` bash
 sudo add-apt-repository --yes --update ppa:ansible/ansible
