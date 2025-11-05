@@ -22,7 +22,6 @@ RDS_INSTANCE_ID="REPLACE"
 aws rds describe-db-log-files --db-instance-identifier $RDS_INSTANCE_ID
 ```
 
-
 [Back to top](#)
 
 [Kiwiki Home](/../../)
