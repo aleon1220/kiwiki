@@ -3,13 +3,31 @@
 [Back to Main Page](./readme.md)
 
 # Windows
-Command prompt cmd & powershell PowerShell
+Reusable Actions. Command prompt cmd & PowerShell
+
 > Executed using windows terminal with WSL:
 - Powershell 7
 - windows 10
 - windows 11
 
 WSL is a virtualization layer that runs Linux distros in windows 10+
+
+### Aliases
+#### create a persistent Alias
+- open a simple editor to customize the Powershell profile
+```powershell
+notepad $PROFILE
+```
+
+- create the alias required. Usually Linux commands
+```powershell
+Set-Alias ll Get-ChildItem
+```
+
+#### view existing ones
+```powershell
+Get-Alias
+```
 
 ## Handling compressed files
 #### decompress a .zip file
