@@ -28,6 +28,13 @@ git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 ```
 
+#### use nano as CLI editor
+for simplicity compared to vim`
+
+```bash
+git config --global core.editor "nano"
+```
+
 #### Force-switches to branch, discarding changes
 ```bash
 git checkout master --force
