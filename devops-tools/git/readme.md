@@ -15,7 +15,13 @@ git add . ; git commit ; git push
 ```
 
 ## Git Administration/Operation
-#### Global Settings
+### Git Global Settings
+#### Get global config info
+
+```bash
+git config --global --list
+```
+#### do basic config setup
 will apply to all repositories
 ```bash
 git config --global user.email "you@example.com"
@@ -358,12 +364,6 @@ git -c core.sshCommand="/usr/bin/ssh -i /home/user/.ssh/id_alternative" push
 ---
 
 ## Git Analysis/Reporting
-
-#### Get global config info
-
-```bash
-git config --global --list
-```
 
 #### List all remote branches
 ```bash
