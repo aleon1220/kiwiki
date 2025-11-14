@@ -1,0 +1,7 @@
+# ping.yml
+# execute with ansible-playbook playbooks/ping.yml
+---
+  - hosts: all
+    tasks:
+      - name: Ping all servers
+        action: ping

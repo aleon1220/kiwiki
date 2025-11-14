@@ -1,0 +1,10 @@
+# apt-update
+---
+  - hosts: physicalservers
+    become: true
+    tasks:
+    - name: run apt update in all physical servers. Updates if cache is if > 3600 seconds ago
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+    tags: update
