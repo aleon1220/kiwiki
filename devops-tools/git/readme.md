@@ -123,9 +123,10 @@ git reset [FILE_PATH]
 #### Check Out File From Another Branch
 
 ```bash
-git checkout <branch> -- <path(s)>
+BRANCH="main"
+PATH_TO_CHECKOUT="src/functions.py"
 
-git checkout another-branch src/file.js
+git checkout $BRANCH -- $PATH_TO_CHECKOUT
 ```
 
 #### Work with 2 branches
