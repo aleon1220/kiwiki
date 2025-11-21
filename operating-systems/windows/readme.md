@@ -12,6 +12,11 @@ Reusable Actions. Command prompt cmd & PowerShell
 
 WSL is a virtualization layer that runs Linux distros in windows 10+
 
+#### open given directory path in File Explorer
+```powershell
+Invoke-Item C:\workspace
+```
+
 ### Aliases
 #### create a persistent Alias
 - open a simple editor to customize the Powershell profile
