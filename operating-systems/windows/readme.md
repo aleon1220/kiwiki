@@ -83,25 +83,31 @@ WSL Windows Subsystem Linux
 ```powershell
 wsl --install
 ```
-#### restart the Hyper-v service
-Encounter a WSL2 error
+#### restart WSL
+restart vmcompute service and the Hyper-v service
+
+Encountering the WSL2 error. after running the commands in few seconds the WSL with a linux instance is available again
+
+tested in Win10 and win11
+
 > Logon failure: the user has not been granted the requested logon type at this computer.
 > Error code: Wsl/Service/CreateInstance/CreateVm/0x80070569
 
+
+- stop `wsl`
+```powershell
+wsl --shutdown
+```
+
+- restart the service
 ```powershell
 Restart-Service vmcompute
 ```
-
-#### restart WSL2
-- tested in Win10
+- optional: try in windows 10
 ```powershell
 Restart-Service LxssManager
 ```
 
-#### shutdown WSL
-```powershell
-wsl --shutdown
-```
 ---
 
 ## Network
