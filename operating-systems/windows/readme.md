@@ -77,6 +77,7 @@ wmic path SoftwareLicensingService get OA3xOriginalProductKey
 ```powershell
 (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
 ```
+---
 ### WSL management
 WSL Windows Subsystem Linux
 ### install WSL
@@ -93,7 +94,6 @@ tested in Win10 and win11
 > Logon failure: the user has not been granted the requested logon type at this computer.
 > Error code: Wsl/Service/CreateInstance/CreateVm/0x80070569
 
-
 - stop `wsl`
 ```powershell
 wsl --shutdown
@@ -106,6 +106,19 @@ Restart-Service vmcompute
 - optional: try in windows 10
 ```powershell
 Restart-Service LxssManager
+```
+#### list installed distros
+```powershell
+wsl --list --verbose
+```
+
+#### import OS image into WSL
+```powershell
+$DistroName="RHEL-10-custom"
+$InstallLocation=".\WSL\RHEL10custom"
+$InstallTarFile=".\Downloads\composer-api-12b-image.wsl"
+
+wsl.exe --import $DistroName $InstallLocation $InstallTarFile
 ```
 
 ---
