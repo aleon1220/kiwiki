@@ -10,8 +10,6 @@ Reusable Actions. Command prompt cmd & PowerShell
 - windows 10
 - windows 11
 
-WSL is a virtualization layer that runs Linux distros in windows 10+
-
 #### open given directory path in File Explorer
 ```powershell
 Invoke-Item C:\workspace
@@ -79,7 +77,8 @@ wmic path SoftwareLicensingService get OA3xOriginalProductKey
 ```
 ---
 ### WSL management
-WSL Windows Subsystem Linux
+WSL Windows Subsystem Linux. WSL is a virtualization layer that runs Linux distros in windows.
+
 ### install WSL
 ```powershell
 wsl --install
@@ -124,7 +123,7 @@ wsl.exe --import $DistroName $InstallLocation $InstallTarFile
 ---
 
 ## Network
-#### Flush DNS and restart networking
+#### flush DNS & restart networking
 Open a terminal or powershell window as Admin
 ```dotnetcli
 echo "Restart the computer"
@@ -169,7 +168,7 @@ netsh int ipv6 reset reset.log
 - Disable any active virtual private network (VPN) connection.
 - Restore the firewall defaults
 
-### Disable the IP Helper service
+### disable the IP Helper service
 This features attempts to manage some aspects of IPv6 connectivity. To disable it:
 1. Press `Windows key+R` type services.msc in the displayed window Run box, and select OK.
 2. A list of Windows system services will be shown.
@@ -178,7 +177,7 @@ This features attempts to manage some aspects of IPv6 connectivity. To disable i
 5. Restart your system
 6. check to see if the IPv6 connection now works as expected.
 
-#### Clean-up network devices
+#### clean-up network devices
 ```cmd
 netcfg -d
 ```
@@ -206,7 +205,7 @@ attrib
 ```
 
 ### Service Control Manager
-#### queries the extended status for a service
+#### query extended status for a service
 or enumerates the status for types of services.
 ```cmd
 sc queryex
@@ -237,7 +236,7 @@ Measure-Command { echo hi }
 wt split-pane --vertical wsl
 ```
 
-### Supporting functions
+### Powershell Supporting functions
 for the work log analysis
 
 #### create directories from January to December
