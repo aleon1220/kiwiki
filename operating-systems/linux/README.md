@@ -909,11 +909,15 @@ sudo chmod --reference="$REFERENCE_FILE" "$TARGETING_FILE"
 GROUP_NAME="common" ; sudo --recursive "$GROUP_NAME" *
 ```
 ---
-## Linux Ubuntu
+## Linux Distros
+<details> 
 
-### System settings
+<summary> Ubuntu 🐧 </summary>
 
-### Nautilus operation Keyboard shortcuts
+### System settings Nautilus 💻 🖥️💡 ⚙ 🛠️ 
+#### operation Keyboard shortcuts
+
+(Tux literal)
 
 - Show hidden files Keyboard shortcut
 
@@ -951,6 +955,8 @@ Shift + Delete
 ```
 
 - Never delete the Home directory, doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
+
+</details>
 
 # Terminals
 Shells available: bash, fish, Zshell
