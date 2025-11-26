@@ -61,10 +61,11 @@ lvextend -L +1024G /dev/myvg/uservol1
 resize2fs /dev/myvg/uservol1`
 ```
 
-- Check system info and you should see that the mounted file system now have more space.
+- Check system Disk File usage
+storage info. Confirm mounted file system now have more space.
 
 ```bash
-df -h
+df --human-readable
 ```
 
 #### View your available disk devices, mount points (if applicable) to help you determine the correct device name to use
