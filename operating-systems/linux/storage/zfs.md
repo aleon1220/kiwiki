@@ -1,4 +1,7 @@
 # ZFS File System
+## ZFS File System
+ZFS is a complex and yet powerful storage FileSystem
+
 ### Install [ZFS on Linux](http://download.zfsonlinux.org/epel/zfs-release.el6.noarch.rpm)
 
 ### RedHat and Fedora distros
