@@ -2,9 +2,12 @@
 
 [Back to Main Page](./readme.md)
 
-# Linux 
-TODO concise definition of OS linux
-TODO this page will be a mirror of the EDX.org Linux course
+# Linux
+<details>
+<summary> Linux General Intro 📝 </summary>
+Linux operating system, open-source philosophy, and the kernel.
+The Outline here is a mirror from the [Linux foundation material](https://training.linuxfoundation.org/training/introduction-to-linux), [edx.org](https://training.linuxfoundation.org/training/introduction-to-linux) and the book Modern Operating Systems by [Andrew Tanenbaum](https://www.amazon.com/stores/author/B000AQ1UBW/allbooks) 
+
 TODO move to the different category folders the different commands found in this page
 
 ## OS Basics and System Startup
@@ -28,16 +31,48 @@ export EDITOR="vim"
 - `CTRL + L`  clears the screen
 
 - `Alt  + D`  cuts the word to the right of the cursor
+</details>
+
+# Linux Filesystem Tree Layout
+<details>
+<summary> Linux General Intro 📝 </summary>
+Filesystem Hierarchy Standard (FHS), detailing the purpose of directories like `/etc`, `/var`, `/home`, `/bin`
+
+</details>
+
+#
+
+<details>
+<summary> TODO Title 📝 </summary>
+
+
+</details>
 
 # Linux Graphical Interface
+<details>
+<summary> TODO Title 📝 </summary>
 
-# System Configuration
 
-# Common Applications
+</details>
 
-# Command Line Operations
+# User Group Environment & Account Management
+Covers shell customization, environment variables, aliases, and startup scripts like .bashrc.
+
+<details>
+<summary> TODO Title 📝 </summary>
+
+
+</details>
+
+# Package Management Systems
+System Configuration overview of how software is distributed, repositories, and dependency resolution
+
 
 # Processes
+
+## Process Monitoring
+Common Applications
+
 #### find the HTTPD user in a web server
 ```bash
 HTTPDUSER=$(ps axo "user,comm" | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
@@ -47,6 +82,81 @@ HTTPDUSER=$(ps axo "user,comm" | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]
 ```bash
 ps -e --forest
 ```
+
+# Memory Monitoring, Usage & Swap
+RAM usage and managing swap space (virtual memory on disk)
+Command Line Operations
+
+# I/O Monitoring
+Monitoring input/output statistics for disks to identify performance bottlenecks.
+
+# Containers Overview
+
+# Linux Filesystems & the VFS
+How the kernel handles different filesystem types via the Virtual Filesystem Switch (VFS).
+
+##  Filesystem Features: Attributes, Creating, Checking, Usage, Mounting
+
+## EXT4 Filesystem
+the default Linux filesystem, including journaling and inodes
+
+# Disk Partitioning
+Dividing storage devices into logical sections (partitions) 
+
+## Logical Volume Management (LVM)
+Abstraction layer allowing flexible resizing and spanning of filesystems across multiple physical disks.
+
+# Kernel Services & Configuration
+Managing kernel parameters at runtime without rebooting using `sysctl`
+
+##  Kernel Modules
+Managing pieces of code (drivers) that can be loaded into or unloaded from the kernel on demand.
+`lsmod`
+
+# Devices and udev
+Linux interacts with hardware devices via the /dev directory and the udev device manager.
+#### Monitor udev events in real-time while plugging in a device.
+```bash
+udevadm monitor
+```
+
+# Networking
+## Network Addresses
+ Understanding IP addressing (IPv4/IPv6), subnets, and assigning addresses to interfaces.
+Command: Show IP addresses assigned to all interfaces.
+
+ip addr show
+
+# Network Devices Configuration
+Configuring network interfaces, gateways, and DNS using tools like NetworkManager or ip.
+Command: Bring a network interface up.
+
+sudo ip link set eth0 up
+OR
+nmcli device status
+
+## Firewalls
+
+# Booting 
+## System Init
+Managing the system startup process and services
+
+# Backup Recovery Methods
+Strategies for data archiving and synchronization using tools like tar and rsync.
+
+# Linux Security Modules
+ Mandatory Access Control (MAC) via SELinux or AppArmor.
+
+# System Rescue
+Techniques for troubleshooting unbootable systems, resetting root passwords, and using rescue disks
+#### Check and repair a filesystem
+> only run on unmounted disks
+```bash
+sudo fsck /dev/sda1
+```
+
+---
+TODO categorise all the commands below
 
 #### run the command in the background and log to a text file
 `nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
@@ -810,11 +920,12 @@ sudo sysctl -w vm.max_map_count=262144
 ```
 
 ##### Show dir contents in tree view
+> some distros dont have `tree`
 
 ```bash
-tree $HOME
+gio tree $HOME
 ```
-
+s
 #### Show contents of a directory in a tree format with `gio` Gnome Input/Output
 
 ```bash
