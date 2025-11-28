@@ -67,9 +67,67 @@ Covers shell customization, environment variables, aliases, and startup scripts 
 # Package Management Systems
 System Configuration overview of how software is distributed, repositories, and dependency resolution
 
+<details>
+<summary> Linux Package Management </summary>
+depending on the distro 
+
+* dnf
+* apt
+* zypper
+
+
+## APT
+
+Ubuntu package manager
+
+#### Auto remove Obsolete packages
+
+```bash
+sudo apt autoremove
+```
+
+#### update and then Upgrade packages
+
+```bash
+sudo apt update ; sudo apt upgrade --yes
+```
+
+#### List a package by name e.g. python
+
+```bash
+sudo apt list | grep python
+```
+
+#### List installed packages
+
+```bash
+sudo apt list --installed
+```
+
+#### Fix broken install packages
+
+```bash
+sudo apt --fix-broken install
+```
+
+#### Reinstall a package (better than removing or purging)
+
+```bash
+sudo apt install --reinstall $PACKAGE_NAME
+```
+
+#### Purge a package
+
+```bash
+sudo apt-get purge unattended-upgrades
+```
+</details>
+
+<!-- end of section Package Management -->
 
 # Processes
-
+<details>
+<summary> Linux Process </summary>
 ## Process Monitoring
 Common Applications
 
@@ -81,88 +139,6 @@ HTTPDUSER=$(ps axo "user,comm" | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]
 #### see every process forest format
 ```bash
 ps -e --forest
-```
-
-# Memory Monitoring, Usage & Swap
-RAM usage and managing swap space (virtual memory on disk)
-Command Line Operations
-
-# I/O Monitoring
-Monitoring input/output statistics for disks to identify performance bottlenecks.
-
-# Containers Overview
-
-# Linux Filesystems & the VFS
-How the kernel handles different filesystem types via the Virtual Filesystem Switch (VFS).
-
-##  Filesystem Features: Attributes, Creating, Checking, Usage, Mounting
-
-## EXT4 Filesystem
-the default Linux filesystem, including journaling and inodes
-
-# Disk Partitioning
-Dividing storage devices into logical sections (partitions) 
-
-## Logical Volume Management (LVM)
-Abstraction layer allowing flexible resizing and spanning of filesystems across multiple physical disks.
-
-# Kernel Services & Configuration
-Managing kernel parameters at runtime without rebooting using `sysctl`
-
-##  Kernel Modules
-Managing pieces of code (drivers) that can be loaded into or unloaded from the kernel on demand.
-`lsmod`
-
-# Devices and udev
-Linux interacts with hardware devices via the /dev directory and the udev device manager.
-#### Monitor udev events in real-time while plugging in a device.
-```bash
-udevadm monitor
-```
-
-# Networking
-## Network Addresses
- Understanding IP addressing (IPv4/IPv6), subnets, and assigning addresses to interfaces.
-Command: Show IP addresses assigned to all interfaces.
-
-ip addr show
-
-# Network Devices Configuration
-Configuring network interfaces, gateways, and DNS using tools like NetworkManager or ip.
-Command: Bring a network interface up.
-
-sudo ip link set eth0 up
-OR
-nmcli device status
-
-## Firewalls
-
-# Booting 
-## System Init
-Managing the system startup process and services
-
-# Backup Recovery Methods
-Strategies for data archiving and synchronization using tools like tar and rsync.
-
-# Linux Security Modules
- Mandatory Access Control (MAC) via SELinux or AppArmor.
-
-# System Rescue
-Techniques for troubleshooting unbootable systems, resetting root passwords, and using rescue disks
-#### Check and repair a filesystem
-> only run on unmounted disks
-```bash
-sudo fsck /dev/sda1
-```
-
----
-TODO categorise all the commands below
-
-#### run the command in the background and log to a text file
-`nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
-
-```bash
-nohup $COMMAND_OR_SCRIPT > out_$(date).txt
 ```
 
 #### Find the process that consumes more CPU
@@ -181,6 +157,153 @@ ps aux --sort=-%mem
 
 ```bash
 ps xfa | less
+```
+
+</details>
+
+<!-- End of Process Section -->
+
+# Memory Monitoring, Usage & Swap
+RAM usage and managing swap space (virtual memory on disk)
+Command Line Operations
+
+<details>
+
+</details>
+
+<!-- End of Memory Section -->
+
+# I/O Monitoring
+Monitoring input/output statistics for disks to identify performance bottlenecks.
+<details>
+
+</details>
+
+# Containers Overview
+
+# Linux Filesystems & the VFS
+How the kernel handles different filesystem types via the Virtual Filesystem Switch (VFS).
+<details>
+
+</details>
+
+
+##  File systems
+ Attributes, Creating, Checking, Usage, Mounting
+<details>
+
+## EXT4 Filesystem
+the default Linux filesystem, including journaling and inodes
+
+</details>
+
+# Disk Partitioning
+Dividing storage devices into logical sections (partitions) 
+<details>
+
+</details>
+
+
+## Logical Volume Management (LVM)
+Abstraction layer allowing flexible resizing and spanning of filesystems across multiple physical disks.
+<details>
+
+</details>
+
+
+# Kernel Services & Configuration
+Managing kernel parameters at runtime without rebooting using `sysctl`
+
+<details>
+
+##  Kernel Modules
+Managing pieces of code (drivers) that can be loaded into or unloaded from the kernel on demand.
+`lsmod`
+
+</details>
+
+# Devices and udev
+Linux interacts with hardware devices via the /dev directory and the udev device manager.
+<details>
+
+#### Monitor udev events in real-time while plugging in a device.
+```bash
+udevadm monitor
+```
+
+</details>
+
+# Networking
+
+<details>
+
+## Network Addresses
+Understanding IP addressing (IPv4/IPv6), subnets, and assigning addresses to interfaces.
+Command: Show IP addresses assigned to all interfaces.
+
+ip addr show
+
+## Network Devices Configuration
+Configuring network interfaces, gateways, and DNS using tools like NetworkManager or ip.
+
+```bash
+nmcli device status
+```
+
+#### Bring a network interface up.
+```bash
+sudo ip link set eth0 
+```
+
+## Firewalls
+
+
+</details>
+
+# Booting 
+
+<details>
+
+</details>
+
+
+## System Init
+Managing the system startup process and services
+
+# Backup Recovery Methods
+Strategies for data archiving and synchronization using tools like tar and rsync.
+<details>
+
+</details>
+
+# Linux Security Modules
+Mandatory Access Control (MAC) via SELinux or AppArmor.
+
+<details>
+
+</details>
+
+# System Rescue
+Techniques for troubleshooting unbootable systems, resetting root passwords, and using rescue disks
+
+<details>
+
+#### Check and repair a filesystem
+> only run on unmounted disks
+```bash
+sudo fsck /dev/sda1
+```
+
+</details>
+
+---
+TODO categorise all the commands below
+
+#### run command in the background & log to a text file
+`nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
+
+```bash
+nohup $COMMAND_OR_SCRIPT > out_$(date).txt
 ```
 
 # File Operations
@@ -316,7 +439,8 @@ systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > en
 systemctl list-units -all | grep service | grep loaded | awk '{print $1;}' > loaded.txt
 ```
 
-#### Diff the missing services. Quick glance of missing
+#### Diff ops to find missing services
+Quick glance of missing
 
 ```bash
 # Diff the files
@@ -511,54 +635,6 @@ grep --extended-regexp --recursive --ignore-case "health_url" .
 
 ```bash
 find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
-```
-
-## Package Management
-
-### APT
-
-Ubuntu package manager
-
-#### Auto remove Obsolete packages
-
-```bash
-sudo apt autoremove
-```
-
-#### update and then Upgrade packages
-
-```bash
-sudo apt update ; sudo apt upgrade --yes
-```
-
-#### List a package by name e.g. python
-
-```bash
-sudo apt list | grep python
-```
-
-#### List installed packages
-
-```bash
-sudo apt list --installed
-```
-
-#### Fix broken install packages
-
-```bash
-sudo apt --fix-broken install
-```
-
-#### Reinstall a package (better than removing or purging)
-
-```bash
-sudo apt install --reinstall $PACKAGE_NAME
-```
-
-#### Purge a package
-
-```bash
-sudo apt-get purge unattended-upgrades
 ```
 
 #### Show GPG keys in the keyring for signing apps
