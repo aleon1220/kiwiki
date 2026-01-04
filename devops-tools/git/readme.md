@@ -4,7 +4,9 @@
 
 # Git
 System to manage and store source code. Keeps track of changes to files. Text files only
-refer to https://git-scm.com/docs/user-manual
+refer to [git official manual](https://git-scm.com/docs/user-manual)
+
+See git in action with the [Git flow by example](#git-flow-by-example)
 
 ## Default Flow
 #### usual add, commit, push
@@ -12,96 +14,25 @@ refer to https://git-scm.com/docs/user-manual
 git add . ; git commit ; git push
 ```
 
-## Git Quick Start
-Learning `git` basics by action. Flow challenge/Demo by hackerRanx
-
-Goal is to create a git repo in linux instance: Add changes to a source-code file, commit changes, create a develop branch with new changes and finally merge from **develop branch** to **main**
-
-```bash
-develop --> main
-```
-
-- Initialize and operate a git repo at `/var/save/repo`
-
-```bash
-mkdir --parents --verbose /var/save/repo | cd /var/save/repo
-
-git init
-Initialized empty Git repository in /var/save/repo/.git/
-```
-- set local git config settings
-```bash
-git config user.email "me@hackerrank.com"
-git config user.name "hackerrank"
-```
-
-- Create a develop branch (clones main references)
-
-```bash
-git checkout -b develop
-```
-
-- Check available branches in the repo
-
-```bash
-git branch
-* master
-  test
-```
-
-- check git working tree status
-```bash
-git status
-```
-
-- Check the log to see info about all commits `git log`
-
-```bash
-commit 4c569ff830048206717d62544efbd288f85005e3 (HEAD -> master, test)
-Author: hackerrank <me@hackerrank.com>
-Date:   Mon Jun 28 22:02:25 2021 +0000
-    Added commit03
-    Signed-off-by: hackerrank <me@hackerrank.com>
-
-commit 3ca19596ebb32aa611a6625f184e37735a5f5156
-Author: hackerrank <me@hackerrank.com>
-Date:   Mon Jun 28 21:57:08 2021 +0000
-    Adding initial files git repo
-    - code tested
-    Signed-off-by: hackerrank <me@hackerrank.com>
-
-[70][22:06:12] ubuntu@taskserver:[/var/save/my-repo]
-```
-
-- Verify commits in `develop` branch
-
-```bash
-git rev-list --date-order --abbrev-commit --reverse HEAD
-
-3ca1959
-360dba4
-cf10ff6
-4c569ff
-[74][22:07:50] ubuntu@taskserver:[/var/save/repo]
-```
-- merge develop --> main
-```bash
-git merge develop
-Updating 3ca1959..4c569ff
-Fast-forward
- Hello.java | 3 +++
- 1 
- file changed, 3 insertions(+)
-```
-
----
-
 ## Git Administration/Operation
-#### Global Settings
+### Git Global Settings
+#### Get global config info
+
+```bash
+git config --global --list
+```
+#### do basic config setup
 will apply to all repositories
 ```bash
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
+```
+
+#### use nano as CLI editor
+for simplicity compared to vim`
+
+```bash
+git config --global core.editor "nano"
 ```
 
 #### Force-switches to branch, discarding changes
@@ -192,9 +123,10 @@ git reset [FILE_PATH]
 #### Check Out File From Another Branch
 
 ```bash
-git checkout <branch> -- <path(s)>
+BRANCH="main"
+PATH_TO_CHECKOUT="src/functions.py"
 
-git checkout another-branch src/file.js
+git checkout $BRANCH -- $PATH_TO_CHECKOUT
 ```
 
 #### Work with 2 branches
@@ -441,12 +373,6 @@ git -c core.sshCommand="/usr/bin/ssh -i /home/user/.ssh/id_alternative" push
 
 ## Git Analysis/Reporting
 
-#### Get global config info
-
-```bash
-git config --global --list
-```
-
 #### List all remote branches
 ```bash
 git branch --remotes
@@ -591,6 +517,91 @@ git remote set-url origin git@bitbucket.org:tutorials/tutorials.git
 ## Git implementations GitLab
 
 ## Git implementations Azure ADO Repos
+
+---
+## Git flow by example
+Quick Start: Learning `git` basics by example. Flow challenge/Demo by hackerRanx.
+
+Goal is to create a git repo in linux instance: Add changes to a source-code file, commit changes, create a develop branch with new changes and finally merge from **develop branch** to **main**
+
+```bash
+develop --> main
+```
+
+- Initialize and operate a git repo at `/var/save/repo`
+
+```bash
+mkdir --parents --verbose /var/save/repo | cd /var/save/repo
+
+git init
+Initialized empty Git repository in /var/save/repo/.git/
+```
+- set local git config settings
+```bash
+git config user.email "me@hackerrank.com"
+git config user.name "hackerrank"
+```
+
+- Create a develop branch (clones main references)
+
+```bash
+git checkout -b develop
+```
+
+- Check available branches in the repo
+
+```bash
+git branch
+* master
+  test
+```
+
+- check git working tree status
+```bash
+git status
+```
+
+- Check the log to see info about all commits `git log`
+
+```bash
+commit 4c569ff830048206717d62544efbd288f85005e3 (HEAD -> master, test)
+Author: hackerrank <me@hackerrank.com>
+Date:   Mon Jun 28 22:02:25 2021 +0000
+    Added commit03
+    Signed-off-by: hackerrank <me@hackerrank.com>
+
+commit 3ca19596ebb32aa611a6625f184e37735a5f5156
+Author: hackerrank <me@hackerrank.com>
+Date:   Mon Jun 28 21:57:08 2021 +0000
+    Adding initial files git repo
+    - code tested
+    Signed-off-by: hackerrank <me@hackerrank.com>
+
+[70][22:06:12] ubuntu@taskserver:[/var/save/my-repo]
+```
+
+- Verify commits in `develop` branch
+
+```bash
+git rev-list --date-order --abbrev-commit --reverse HEAD
+
+3ca1959
+360dba4
+cf10ff6
+4c569ff
+[74][22:07:50] ubuntu@taskserver:[/var/save/repo]
+```
+- merge develop --> main
+```bash
+git merge develop
+Updating 3ca1959..4c569ff
+Fast-forward
+ Hello.java | 3 +++
+ 1 
+ file changed, 3 insertions(+)
+```
+
+---
 
 ## References
 1. [git commands to live by @Omar Shakari](https://medium.com/better-programming/git-commands-to-live-by-349ab1fe3139)

@@ -1,11 +1,13 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # Productivity tools
-Includes time management, pomodoro techniques, focus tools, soft skills, news, etc.
+Includes time management, pomodoro techniques, focus tools
 
-# Rescue time
+# Time Management
 
+## Rescue time
 ## Reports
 ### productivity Month
 ```bash
@@ -27,6 +29,20 @@ export RESCUE_TIME_API_KEY="<Add your API key>"
 - Load the configs from `bashrc` file
 `source ~/.bashrc`
 - Copy the `post-commit` script to your destination git repo. It must be located in `YOUR_GIT_REPO/.git/hooks`
+
+## Pomodoro technique
+set a time for 30 mins and focus on achieving a task to get started.
+
+## focus tools
+
+## WorkLog analysis Tool
+i came up with the idea of taking notes of what i did daily. I use a markdown structure created with a java program.
+at the end of the month i upload the compiled log and let AI analyse it for me.
+
+#### merge all Markdown files
+```bash
+cat *.md > "$(date +%F)MonthAnalysis.md"
+```
 
 ## Forums ICT
 ### Spinnaker Stack Overflow no answers

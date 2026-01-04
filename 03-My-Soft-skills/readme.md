@@ -1,23 +1,3 @@
-- [General Soft Skills](#general-soft-skills)
-  - [Communication Skills](#communication-skills)
-  - [Decision Making](#decision-making)
-  - [Self Motivation](#self-motivation)
-  - [Leadership Skills](#leadership-skills)
-  - [Team-Working Skills](#team-working-skills)
-  - [Creativity and Problem Solving Skills](#creativity-and-problem-solving-skills)
-  - [Customer Service](#customer-service)
-- [Essential Soft Skills for Software Engineers](#essential-soft-skills-for-software-engineers)
-  - [1. Adaptability](#1-adaptability)
-  - [2. Time Management](#2-time-management)
-  - [3. Attention to Detail](#3-attention-to-detail)
-  - [4. Stress Management](#4-stress-management)
-  - [5. Empathy](#5-empathy)
-  - [6. Patience](#6-patience)
-  - [7. Conflict Resolution](#7-conflict-resolution)
-  - [8. Accountability](#8-accountability)
-  - [9. Networking](#9-networking)
-  - [10. Continuous Learning](#10-continuous-learning)
-  
 [Kiwiki Home](/../../)  
   
 # General Soft Skills  
@@ -28,27 +8,21 @@
   - Practice active listening.  
   - Use clear and concise language.  
   - Be aware of non-verbal cues.  
-  
-[Back to top](#)  
-  
+
 ## Decision Making  
 - **Description:** Decision making involves evaluating options and choosing the best course of action.  
 - **Best Practices:**  
   - Gather all relevant information.  
   - Consider the pros and cons.  
   - Make timely decisions.  
-  
-[Back to top](#)  
-  
+
 ## Self Motivation  
 - **Description:** Self motivation is the ability to stay focused and driven without external pressure.  
 - **Best Practices:**  
   - Set personal goals.  
   - Maintain a positive attitude.  
   - Stay organized and manage time effectively.  
-  
-[Back to top](#)  
-  
+
 ## Leadership Skills  
 - **Description:** Leadership skills involve guiding and inspiring others to achieve common goals.  
 - **Best Practices:**  
@@ -65,16 +39,12 @@
   - Respect diverse perspectives.
   - Contribute actively to team efforts.
   
-[Back to top](#)
-  
 ## Creativity and Problem Solving Skills
 - **Description:** Creativity and problem solving involve generating innovative solutions to challenges.
 - **Best Practices:**
   - Encourage brainstorming.
   - Evaluate solutions critically.
   - Implement and test solutions.
-  
-[Back to top](#)
   
 ## Customer Service  
 - **Description:** Customer service involves assisting and satisfying customers' needs and concerns.
