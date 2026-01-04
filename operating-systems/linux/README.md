@@ -2,9 +2,12 @@
 
 [Back to Main Page](./readme.md)
 
-# Linux 
-TODO concise definition of OS linux
-TODO this page will be a mirror of the EDX.org Linux course
+# Linux
+<details>
+<summary> Linux General Intro 📝 </summary>
+Linux operating system, open-source philosophy, and the kernel.
+The Outline here is a mirror from the [Linux foundation material](https://training.linuxfoundation.org/training/introduction-to-linux), [edx.org](https://training.linuxfoundation.org/training/introduction-to-linux) and the book Modern Operating Systems by [Andrew Tanenbaum](https://www.amazon.com/stores/author/B000AQ1UBW/allbooks) 
+
 TODO move to the different category folders the different commands found in this page
 
 ## OS Basics and System Startup
@@ -28,16 +31,125 @@ export EDITOR="vim"
 - `CTRL + L`  clears the screen
 
 - `Alt  + D`  cuts the word to the right of the cursor
+</details>
+
+# Linux Filesystem Tree Layout
+<details>
+<summary> Linux General Intro 📝 </summary>
+Filesystem Hierarchy Standard (FHS), detailing the purpose of directories like `/etc`, `/var`, `/home`, `/bin`
+
+</details>
+
+#
+
+<details>
+<summary> TODO Title 📝 </summary>
+
+
+</details>
 
 # Linux Graphical Interface
+<details>
+<summary> TODO Title 📝 </summary>
 
-# System Configuration
+## Computer Graphics GUIs UIs
 
-# Common Applications
+#### X windows var
 
-# Command Line Operations
+```bash
+echo $XDG_CURRENT_DESKTOP
+```
+
+#### Check X system settings
+```bash
+less /etc/X11/xorg.conf
+```
+
+#### Get dimensions of Display
+
+```bash
+xdpyinfo | grep dim
+```
+
+</details>
+
+# User Group Environment & Account Management
+Covers shell customization, environment variables, aliases, and startup scripts like .bashrc.
+
+<details>
+<summary> TODO Title 📝 </summary>
+
+
+</details>
+
+# Package Management Systems
+System Configuration overview of how software is distributed, repositories, and dependency resolution
+
+<details>
+<summary> Linux Package Management </summary>
+depending on the distro 
+
+* dnf
+* apt
+* zypper
+
+
+## APT
+
+Ubuntu package manager
+
+#### Auto remove Obsolete packages
+
+```bash
+sudo apt autoremove
+```
+
+#### update and then Upgrade packages
+
+```bash
+sudo apt update ; sudo apt upgrade --yes
+```
+
+#### List a package by name e.g. python
+
+```bash
+sudo apt list | grep python
+```
+
+#### List installed packages
+
+```bash
+sudo apt list --installed
+```
+
+#### Fix broken install packages
+
+```bash
+sudo apt --fix-broken install
+```
+
+#### Reinstall a package (better than removing or purging)
+
+```bash
+sudo apt install --reinstall $PACKAGE_NAME
+```
+
+#### Purge a package
+
+```bash
+sudo apt-get purge unattended-upgrades
+```
+</details>
+
+<!-- end of section Package Management -->
 
 # Processes
+<details>
+<summary> Linux Process </summary>
+
+## Process Monitoring
+Common Applications
+
 #### find the HTTPD user in a web server
 ```bash
 HTTPDUSER=$(ps axo "user,comm" | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
@@ -46,13 +158,6 @@ HTTPDUSER=$(ps axo "user,comm" | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]
 #### see every process forest format
 ```bash
 ps -e --forest
-```
-
-#### run the command in the background and log to a text file
-`nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
-
-```bash
-nohup $COMMAND_OR_SCRIPT > out_$(date).txt
 ```
 
 #### Find the process that consumes more CPU
@@ -71,6 +176,723 @@ ps aux --sort=-%mem
 
 ```bash
 ps xfa | less
+```
+
+##### Interactive process viewer
+
+```bash
+htop
+```
+
+#### print a line and pipe it to a command
+
+In this case the content of a `DockerFile` is echoed first then piped to `docker build` to create a docker image.
+
+```bash
+echo -e 'FROM busybox\nRUN echo "hello world"' | docker build -
+```
+
+#### run a command and append config
+```bash
+docker build -<<EOF
+FROM busybox
+RUN echo "hello world"
+EOF
+```
+
+</details>
+
+<!-- End of Process Section -->
+
+# Memory Monitoring, Usage & Swap
+RAM usage and managing swap space (virtual memory on disk)
+Command Line Operations
+
+<details>
+
+</details>
+
+<!-- End of Memory Section -->
+
+# I/O Monitoring
+Monitoring input/output statistics for disks to identify performance bottlenecks.
+<details>
+
+</details>
+
+# Containers Overview
+
+# Linux Filesystems & the VFS
+How the kernel handles different filesystem types via the Virtual Filesystem Switch (VFS).
+Hard drives, volumes, SSDs, mounts, filesystem, etc
+
+<details>
+
+##  File systems
+Attributes, Creating, Checking, Usage, Mounting
+
+### EXT4 Filesystem
+the default Linux filesystem, including journaling and inodes
+
+### Compute Storage
+
+Process for Linux + `LVM` + `ext3`
+
+LVM volume group myvg, mounted volume name `uservol1` and disk device in Linux is `/dev/sdf`
+
+Allocate the disk to the VM. (In Amazon Management Console, Create the EBS volume, write down its ID, and allocate it to the instance)
+The EC2 instance should have some udev rules for creating the device node. So you should see a new disk in `/dev/sd*`
+
+Log in on the instance and check that the EBS volume is visible,
+
+```bash
+fdisk -l /dev/sdf
+```
+
+- check the partitions
+
+```bash
+cat /proc/partitions
+```
+
+- Check the Block ID, Type and label of the system devices
+
+```bash
+blkid
+```
+
+- Create partition table if needed:
+
+```bash
+fdisk /
+sfdisk
+```
+
+- Initialize LVM
+
+```bash
+pvcreate /dev/sdf
+```
+
+- Add the disk (physical volume) to the LVM volume group vgextend
+
+```bash
+myvg /dev/sdf
+```
+
+- Grow the Volume size
+
+```bash
+lvextend -L +1024G /dev/myvg/uservol1
+```
+
+- Grow the `ext3/ext4` file system
+
+```bash
+resize2fs /dev/myvg/uservol1`
+```
+
+- Check system Disk File usage
+storage info. Confirm mounted file system now have more space.
+
+```bash
+df --human-readable
+```
+
+#### View your available disk devices, mount points (if applicable) to help you determine the correct device name to use
+
+```bash
+lsblk
+```
+
+#### Get information about the devices attached to the instance
+
+```bash
+sudo lsblk -f
+```
+
+#### Get manufacturer details for the device in a given format
+
+```bash
+lsblk -io NAME,TYPE,SIZE,MOUNtPOINT,FSTYPE,MODEL
+```
+
+#### Get `UUID` of the device (expensive command)
+
+```bash
+sudo blkid $DEVICE_REPORT_PORTAL_DATA | sed -n 's/.*UUID=\"\([^\"]*\)\".*/\1/p'
+```
+
+#### Get `UUID` of the device
+
+```bash
+DEVICE="/dev/nvme1n1"
+# short format flags
+sudo blkid -s UUID -o value $DEVICE
+```
+
+#### Get `UUID` of the device using long format flags
+
+```bash
+sudo blkid --match-tag UUID --output value $DEVICE
+```
+
+#### Make an USB bootable with a debian ISO
+
+```bash
+USB_DRIVE="/dev/sda"
+ISO_PATH="/home/ws/01-inbox/debian/debian-11.0.0-amd64-DVD-1.iso"
+
+sudo umount $USB_DRIVE
+sudo dd bs=4M if=$ISO_PATH of=$USB_DRIVE conv=fdatasync status=progress
+```
+
+- Output of above in Ubuntu 20.04
+
+```bash
+sudo dd bs=4M if=/home/ws/01-inbox/debian/debian-11.0.0-amd64-DVD-1.iso of=/dev/sda conv=fdatasync status=progress
+3946840064 bytes (3.9 GB, 3.7 GiB) copied, 328 s, 12.0 MB/s
+941+1 records in
+941+1 records out
+3947823104 bytes (3.9 GB, 3.7 GiB) copied, 596.281 s, 6.6 MB/s
+```
+
+#### DMI table decoder
+
+```bash
+dmidecode | grep UUID
+```
+
+#### Get/set SATA/IDE device parameters
+
+```bash
+DEVICE="/dev/nvme1n1"
+hdparm -tT --direct $DEVICE
+```
+
+#### Get information about a specific device, such as its file system type.  If the output shows simply data, there is no filesystem in the device
+
+```bash
+DEVICE_CHECK="/dev/xvdf"*
+sudo file -s $DEVICE_CHECK
+```
+
+##### Confirm mounted loop device kernel module
+
+```bash
+lsmod | grep loop
+```
+
+##### Info about mount the loop device kernel module
+
+```bash
+modprobe loop
+```
+
+#### Show ID of Block devices
+
+```bash
+sudo blkid
+
+# Ubuntu
+sudo lsblk -o +UUID
+```
+
+##### Mount an ISO file as loop device
+
+```bash
+mount -o loop -t iso9660 <path/to/iso/file> /media/cdrom
+```
+
+#### Mount all filesystems
+
+The file that keeps track of mounted devices is `/etc/fstab`
+
+```bash
+sudo mount -a
+```
+</details>
+
+# Disk Partitioning
+Dividing storage devices into logical sections (partitions) 
+<details>
+
+</details>
+
+
+## Logical Volume Management (LVM)
+Abstraction layer allowing flexible resizing and spanning of filesystems across multiple physical disks.
+<details>
+
+</details>
+
+
+# Kernel Services & Configuration
+Managing kernel parameters at runtime without rebooting using `sysctl`
+
+<details>
+
+##  Kernel Modules
+Managing pieces of code (drivers) that can be loaded into or unloaded from the kernel on demand.
+`lsmod`
+
+</details>
+
+# Devices and udev
+Linux interacts with hardware devices via the /dev directory and the udev device manager.
+<details>
+
+#### Monitor udev events in real-time while plugging in a device.
+```bash
+udevadm monitor
+```
+
+</details>
+
+# Networking
+
+<details>
+
+## Network Addresses
+Understanding IP addressing (IPv4/IPv6), subnets, and assigning addresses to interfaces.
+Command: Show IP addresses assigned to all interfaces.
+
+ip addr show
+
+## Network Devices Configuration
+Configuring network interfaces, gateways, and DNS using tools like NetworkManager or ip.
+
+```bash
+nmcli device status
+```
+
+#### Bring a network interface up.
+```bash
+sudo ip link set eth0 
+```
+
+Accessing a service, DNS
+`whois` = servers
+
+#### Query DNS
+DNS queries and shows associated records
+```bash
+DOMAIN="airnewzealand.co.nz"
+dig $DOMAIN
+```
+
+#### DNS Lookup force every section, include the query itself, and show statistics
+```bash
+DOMAIN="airnewzealand.co.nz"
+dig $DOMAIN ANY +qr +question +answer +authority +additional +stats +multiline
+```
+
+#### Alternative to dig. It doesn't use the system local DNS.
+```bash
+nslookup $DOMAIN
+```
+
+#### Check packets hop and route
+```bash
+traceroute $DOMAIN
+```
+
+### Network Probing
+
+Which TCP or UDP ports are open.
+
+Can i open a TCP connection to this destination?
+
+#### Port scanning TCP SYN
+
+```bash
+nmap -sS localhost
+```
+
+#### Sends ICMP pings. checks latency
+
+```bash
+ping $DOMAIN
+ping6 $DOMAIN
+```
+
+#### netcat verbose but dont send test data port 80
+
+```bash
+nc -vz $DOMAIN 80
+```
+
+`telnet` a complete protocol
+
+```bash
+tcdump -i eth0 icmp
+```
+
+#### Examine the IPv4 TCP-based sockets that are listening for connections on your system
+don't resolve service names
+
+```bash
+ss --ipv4 --listening --tcp --numeric
+```
+
+#### Examine the IPv6 TCP-based sockets that are listening for connections on your system
+
+```bash
+ss --ipv6 -tln
+```
+
+#### Creating Unix Domain Sockets
+
+```bash
+socat unix-listen:/tmp/stream.sock,fork /dev/null&
+socat unix-recvfrom:/tmp/datagram.sock,fork /dev/null&
+```
+
+#### examine unix domain sockets
+
+```bash
+ss -xln
+```
+
+#### Connect to an UNIX Socket
+
+```bash
+nc -U -z /tmp/stream.sock
+```
+
+- The `-U` tells netcat that it is connecting to a Unix Domain Socket
+- The `-z` option ensures that netcat only connects to a socket, without sending any data
+- The `/tmp/stream.sock` is the address of the socket on the filesystem
+
+#### Simulate traffic in IPV4 and IPV6
+
+```bash
+socat TCP4-LISTEN:8080,fork /dev/null&
+socat TCP6-LISTEN:8080,ipv6only=1,fork /dev/null&
+```
+
+- `socat` can listen on any available port on a system, so any port from 0 to 65535 is a valid parameter for the socket option.
+
+### Traffic capture
+
+`tcpdump` traffic capture uses bpf filters
+`tcpdump -i eth0 -vvv -d dst $IP`
+`wireshark`
+
+### Network management
+
+`ifconfig` see info about interfaces. get your IP address
+
+`route -n` routing info. Routing table
+
+#### Check ARP cache
+
+```bash
+arp -a
+```
+
+`ip` see neighbor table. add routes
+
+- Answers questions
+  what are the net interfaces, ips, subnets, broadcast address??
+  how do i add routes?
+
+### Load testing
+
+`tcpreplay` replays traffic from packet capture fire
+
+```bash
+tcpdump -i eth0 -w traffic.pcap
+tcpreplay -i eth0 httptraffic.pcap
+```
+
+#### Send Http load
+```bash
+wrk2
+``` 
+
+Threads connections duration Requests
+
+```bash
+wrk2 -t1 -c10 -d60 -R100 -L http://$IP
+```
+
+#### Send TCP or UDP traffic. Similar to wrk2 allows UDP
+
+```bash
+iperf3
+```
+
+#### Network performance measurement tool
+
+```bash
+nuttcp
+```
+
+### Benchmarking
+
+```bash
+info siege
+```
+
+BPF/eBPF potential for new programs
+
+
+#### Flush DNS by resetting the network DEBIAN based
+
+```bash
+sudo /etc/init.d/networking restart
+```
+
+#### Inspect TCP socket states e.g. 443
+
+```bash
+ss -nta '( dport = :443 )'
+```
+
+`netstat` is a great tool for monitoring network connections.
+
+#### Netstat statistics
+
+```bash
+netstat --statistics
+```
+
+#### Find ports in use
+
+```bash
+netstat -tulpn
+```
+
+- The `-t` option checks for TCP connections.
+- The `-u` option checks for UDP connections.
+- The `-l` option tells netstat to list only LISTENING connections. If you want to see all connections, use the -a option instead.
+- The `-p` option shows the PID id of the process.
+- The `-n` option shows numerical addresses, instead of trying to resolve host, port, or user names.
+
+#### Make sure the `firewalld` service is enabled
+
+```bash
+ll /usr/lib/systemd/system | grep firewalld
+
+ll /etc/systemd/system | grep firewalld
+systemctl status firewalld
+
+sudo systemctl enable firewalld
+sudo systemctl restart firewalld
+sudo systemctl status firewalld
+```
+
+#### Install netcat in Fedora/Redhat
+
+```bash
+yum install -y nc
+```
+
+#### CentOS Linux Open Port 8080 on the firewall
+
+```bash
+sudo firewall-cmd --permanent --add-port=8080/tcp
+sudo firewall-cmd --reload
+```
+
+#### Find user behind a process
+
+```bash
+sudo netstat -tulpe | grep 8090
+```
+
+#### Test connectivity to a port
+
+```bash
+nc -vvz $host $port
+```
+
+#### Check server status
+
+```bash
+sudo netstat -tuple | grep smtp
+```
+
+#### Check Any URL and get output in Text
+
+```bash
+curl -l localhost:80
+```
+
+#### Get listening ports
+
+```bash
+ss -tulwn
+```
+
+#### Get a report with nmap. install it first `sudo snap install nmap`
+
+```bash
+nmap -sV -p- localhost
+```
+
+### The `ip` command
+
+#### Show operate manipulate routing
+
+```bash
+ip route show
+```
+
+#### List routes
+
+```bash
+ip route list
+```
+
+#### - Show / manipulate devices
+
+```bash
+cat /etc/network/interfaces
+```
+
+- Policy routing
+- Tunnels
+
+#### Restart Name Service Cache Process
+
+```bash
+sudo service nscd restart
+```
+
+## CURL Client URL
+
+#### Download a file and save it with a custom name
+
+```bash
+curl -o custom_file.tar.gz https://testdomain.com/testfile.tar.gz
+```
+
+#### Get HTTP headers. use the `-I` or the `— head` option
+
+```bash
+curl -I https://www.google.com
+```
+
+#### Ignore invalid certs `-k or --insecure`
+
+```bash
+curl -k https://localhost/my_test_endpoint
+```
+
+#### Make a POST request.
+
+If using **JSON** `-H 'Content-Type: application/json'`
+
+```bash
+curl --data "param1=test1&param2=test2" http://test.com
+```
+
+#### get the HTTP headers and verbose mode
+
+```bash
+curl --head --verbose HOST
+```
+
+#### Simplified view
+
+```bash
+curl --verbose --list-only $HOST
+```
+
+#### Specify the type of request
+
+```bash
+# updating the value of param2 to be test 3 on the record id
+curl -X 'PUT' -d '{"param1":"test1","param2":"test3"}' \http://test.com/1
+```
+
+#### Include the Basic Auth
+
+```bash
+curl -u <user:password> https://my-test-api.com/endpoint1
+```
+
+#### Update name resolution
+
+```bash
+curl --resolve www.test.com:80:localhost http://www.test.com/
+```
+
+#### Check service health
+
+```bash
+curl -Is http://www.google.com
+```
+
+#### Upload a file
+```bash
+curl -F @field_name=@path/to/local_file <upload_URL>
+```
+
+#### Timing Curl connection
+
+```bash
+curl -w "%{time_total}\n" -o /dev/null -s www.test.com
+```
+
+#### VPN
+
+OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
+
+# References
+- [Linux CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
+- [Digital ocean talk Handy Linux networking tools](https://www.digitalocean.com/community/tech-talks/handy-networking-tools-and-how-to-use-them)
+
+## Firewalls
+
+</details>
+
+# Booting 
+
+<details>
+
+</details>
+
+
+## System Init
+Managing the system startup process and services
+
+# Backup Recovery Methods
+Strategies for data archiving and synchronization using tools like tar and rsync.
+<details>
+
+</details>
+
+# Linux Security Modules
+Mandatory Access Control (MAC) via SELinux or AppArmor.
+
+<details>
+
+</details>
+
+# System Rescue
+Techniques for troubleshooting unbootable systems, resetting root passwords, and using rescue disks
+
+<details>
+
+#### Check and repair a filesystem
+> only run on unmounted disks
+```bash
+sudo fsck /dev/sda1
+```
+
+</details>
+
+---
+TODO categorise all the commands below
+
+#### run command in the background & log to a text file
+`nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
+
+```bash
+nohup $COMMAND_OR_SCRIPT > out_$(date).txt
 ```
 
 # File Operations
@@ -206,7 +1028,8 @@ systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > en
 systemctl list-units -all | grep service | grep loaded | awk '{print $1;}' > loaded.txt
 ```
 
-#### Diff the missing services. Quick glance of missing
+#### Diff ops to find missing services
+Quick glance of missing
 
 ```bash
 # Diff the files
@@ -401,54 +1224,6 @@ grep --extended-regexp --recursive --ignore-case "health_url" .
 
 ```bash
 find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
-```
-
-## Package Management
-
-### APT
-
-Ubuntu package manager
-
-#### Auto remove Obsolete packages
-
-```bash
-sudo apt autoremove
-```
-
-#### update and then Upgrade packages
-
-```bash
-sudo apt update ; sudo apt upgrade --yes
-```
-
-#### List a package by name e.g. python
-
-```bash
-sudo apt list | grep python
-```
-
-#### List installed packages
-
-```bash
-sudo apt list --installed
-```
-
-#### Fix broken install packages
-
-```bash
-sudo apt --fix-broken install
-```
-
-#### Reinstall a package (better than removing or purging)
-
-```bash
-sudo apt install --reinstall $PACKAGE_NAME
-```
-
-#### Purge a package
-
-```bash
-sudo apt-get purge unattended-upgrades
 ```
 
 #### Show GPG keys in the keyring for signing apps
@@ -810,11 +1585,12 @@ sudo sysctl -w vm.max_map_count=262144
 ```
 
 ##### Show dir contents in tree view
+> some distros dont have `tree`
 
 ```bash
-tree $HOME
+gio tree $HOME
 ```
-
+s
 #### Show contents of a directory in a tree format with `gio` Gnome Input/Output
 
 ```bash
@@ -909,11 +1685,15 @@ sudo chmod --reference="$REFERENCE_FILE" "$TARGETING_FILE"
 GROUP_NAME="common" ; sudo --recursive "$GROUP_NAME" *
 ```
 ---
-## Linux Ubuntu
+## Linux Distros
+<details> 
 
-### System settings
+<summary> Ubuntu 🐧 </summary>
 
-### Nautilus operation Keyboard shortcuts
+### System settings Nautilus 💻 🖥️💡 ⚙ 🛠️ 
+#### operation Keyboard shortcuts
+
+(Tux literal)
 
 - Show hidden files Keyboard shortcut
 
@@ -951,6 +1731,8 @@ Shift + Delete
 ```
 
 - Never delete the Home directory, doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
+
+</details>
 
 # Terminals
 Shells available: bash, fish, Zshell

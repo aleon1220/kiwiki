@@ -1,4 +1,5 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 ## 1Pass CLI commands
@@ -15,6 +16,7 @@ source <(op completion bash)
 eval $(op signin --account my)
 op signin
 ```
+
 #### List vaults
 ```bash
 op vault list
@@ -33,6 +35,7 @@ op item list --vault my-vault
 ```bash
 op item get "my item"
 ```
+
 #### read a password
 ```bash
 op read "op://my-vault/Pluralsight Online Training/password"

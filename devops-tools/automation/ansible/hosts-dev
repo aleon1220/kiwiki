@@ -1,0 +1,13 @@
+# hosts Dev environment. Connect to physical machines in that marine company
+# one must be in the VPN for this to work
+
+[webservers]
+# od resolving with mar.net.int
+# thi IP
+# linux ubuntu 2018 machine IP
+od ansible_host=od.mar.net.int
+
+[loadbalancers]
+
+[local]
+control ansible_connection=local

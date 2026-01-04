@@ -1,9 +1,14 @@
 [Kiwiki Home](/../../)
+
 [Back to Main Page](./readme.md)
 
 # Ansible
-[Ansible website](www.ansible.com)
+Ansible automation.
 
+[Ansible website](https://www.ansible.com)
+## Windows Setup
+
+## Linux Setup
 #### Add the repo and install Ubuntu
 ``` bash
 sudo add-apt-repository --yes --update ppa:ansible/ansible
@@ -35,6 +40,20 @@ server01-odin                       : ok=2    changed=0    unreachable=0    fail
 server02-thor                       : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
+## Support commands
+#### Show all hosts
+``` bash
+ansible -i hosts-dev --list-hosts all
+```
+
+#### show the webservers.
+> Make sure the `ansible.cfg` has been set up
+``` bash
+ansible --list-hosts webservers
+```
+
+# References
+- A Cloud Guru [Code material](https://github.com/ACloudGuru-Resources/Course_Introduction_to_Ansible)
 [Back to top](#)
 
 [Kiwiki Home](/../../)

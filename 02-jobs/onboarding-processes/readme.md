@@ -1,11 +1,3 @@
-- [On-boarding General Structure](#on-boarding-general-structure)
-  - [Pre-Start (One Week Before Starting)](#pre-start-one-week-before-starting)
-  - [First Week at Work](#first-week-at-work)
-    - [Setting Up Development Laptop](#setting-up-development-laptop)
-  - [Second Week](#second-week)
-  - [Additional Recommendations](#additional-recommendations)
-- [Analyze the Software Development Lifecyle and culture of a company](#analyze-the-software-development-lifecyle-and-culture-of-a-company)
-
 [Kiwiki Home](/../../)
 
 # On-boarding General Structure  
@@ -51,8 +43,14 @@ Absorve as much info as you can
 
 ## Second Week
 - Analyse what tools and tech stack is available. Make a list of the name of the tools they use
-- Friday on the last day or perhaps saturday morning spend 1 hour creating a table | tool name | tool description | tool link | ideas |
-- Spend time getting familiar with the tools. Click everywhere. Skim through everything
+- Friday on the last day or saturday morning spend 1 pomodoro progressing in creating:
+  - notes
+  - Reflection on week 
+  - new tools name
+  - tool description
+  - tool link
+  - ideas to place in WaterDo for further processing
+- Spend time getting familiar with the tools. Click everywhere. Skim through everything.
 - Take things slowly. Only join different activities if the coworkers ask
 - For extroverts try to keep a low profile. For introverts try to speak up
 - Find a excuse to create a small purchase and see the process
@@ -61,7 +59,7 @@ Absorve as much info as you can
 - Do they have a system to see the payments and social security contributions
 - **Bookmarking:**
   - Toby Tabs
-  - Browswer groups 
+  - Browser groups 
 
 - **Software Development Lifecycle and Culture:**  
   - Review wikis and ask questions to understand the company's software development lifecycle.  
