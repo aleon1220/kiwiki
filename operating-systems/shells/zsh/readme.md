@@ -1,0 +1,2 @@
+# ZSH
+CLI Shell interpreter
