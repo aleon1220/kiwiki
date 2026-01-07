@@ -8,7 +8,7 @@ Tested and used in Linux ubuntu 18.04 and WSL Ubuntu 18.04, Ubuntu 22
 
 ## Some Bash Keyboard tips
 
-- `Up arrow` to recall previous commands
+- `↑ Up arrow` to recall previous commands
 - `Tab` completion
 - `Ctrl + A` to go to the beginning of a line
 - `Ctrl + L` to clear screen (instead of typing "clear").
@@ -92,6 +92,7 @@ alias apt-get="sudo apt-get"
 alias updateyes="sudo apt-get --yes"
 alias updgradeOS="sudo apt-get update && sudo apt-get upgrade --yes"
 ```
+
 ### RHEL, CentOS, Fedora
 ```bash
 alias update='yum update'
@@ -103,7 +104,7 @@ alias updateyes='yum --assumeyes update'
 cat ~/.bash_history | tr "\|\;" "\n" | sed -e "s/^ //g" | cut -d " " -f 1 | sort | uniq -c | sort -n | tail -n 10
 ```
 
-#### Create dirs from 1990-2020
+#### Create directories from 1990-2020
 ``` bash
 from=1990
 years=30

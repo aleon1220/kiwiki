@@ -15,7 +15,7 @@ Reusable Actions. Command prompt cmd & PowerShell
 Invoke-Item C:\workspace
 ```
 
-### Aliases
+## Aliases
 #### create a persistent Alias
 - open a simple editor to customize the Powershell profile
 ```powershell
@@ -38,7 +38,7 @@ Get-Alias
 Expand-Archive -Path .\compressedData.zip -DestinationPath .\decompressedFiles
 ``` 
 
-# Admin tasks
+## Admin tasks
 #### Get OS info verbose
 ```powershell
 Get-ComputerInfo | Select-Object Os* | Format-List
@@ -68,15 +68,26 @@ ls | ForEach-Object { $_.Name }
 ```cmd
 wmic path SoftwareLicensingService get OA3xOriginalProductKey
 ```
+#### batch rename by Removing "Screenshot " text
+once happy remove dry run flag `-WhatIf`
+```powershell
+$folder = "C:\workspace"
 
-### Networking
+Get-ChildItem -Path $folder -File -Filter 'Screenshot *.png' |
+  ForEach-Object {
+    $newName = $_.Name -replace '^Screenshot\s+', ''   # regex at the beginning of the line
+    Rename-Item -LiteralPath $_.FullName -NewName $newName -WhatIf
+}
+```
+
+## Networking
 
 ##### get your Public IP Address
 ```powershell
 (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
 ```
 ---
-### WSL management
+## WSL management
 WSL Windows Subsystem Linux. WSL is a virtualization layer that runs Linux distros in windows.
 
 ### install WSL
