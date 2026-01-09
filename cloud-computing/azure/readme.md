@@ -8,6 +8,7 @@
 ``` bash
 az login -u <username> -p <password>
 ```
+
 ## Azure Portal [Home - Microsoft Azure](https://portal.azure.com/#home)
 
 ### Create a Linux Ubuntu LTS VM
@@ -31,6 +32,13 @@ IPADDRESS="$(az vm list-ip-addresses \
   --output tsv)"
 ```
 
+### retrieve a list of fault domains per region
+
+```bash
+az vm list-skus --resource-type availabilitySets --query '[?name==`Aligned`].{Location:locationInfo[0].location, MaximumFaultDomainCount:capabilities[0].value}' -o Table
+```
+
+# Networking
 ### List the current network security group rules
 
 ```bash
@@ -57,6 +65,8 @@ az network nsg rule list \
   --query '[].{Name:name, Priority:priority, Port:destinationPortRange, Access:access}' \
   --output table
 ```
+
+# Resource group management
 
 ### List all resource groups located in the West US region
 
@@ -101,12 +111,6 @@ todo1
 ```
 
 ### todo7
-
-```bash
-
-```
-
-### todo8
 
 ```bash
 
