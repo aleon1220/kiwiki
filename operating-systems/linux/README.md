@@ -2,11 +2,15 @@
 
 [Back to Main Page](./readme.md)
 
-# Linux
+# Linux Introduction
 <details>
 <summary> Linux General Intro 📝 </summary>
+
 Linux operating system, open-source philosophy, and the kernel.
-The Outline here is a mirror from the [Linux foundation material](https://training.linuxfoundation.org/training/introduction-to-linux), [edx.org](https://training.linuxfoundation.org/training/introduction-to-linux) and the book Modern Operating Systems by [Andrew Tanenbaum](https://www.amazon.com/stores/author/B000AQ1UBW/allbooks) 
+
+The Outline here is a mirror from the [Linux foundation material](https://training.linuxfoundation.org/training/introduction-to-linux)
+
+[edx.org](https://training.linuxfoundation.org/training/introduction-to-linux) and the book Modern Operating Systems by [Andrew Tanenbaum](https://www.amazon.com/stores/author/B000AQ1UBW/allbooks) 
 
 TODO move to the different category folders the different commands found in this page
 
@@ -32,6 +36,7 @@ export EDITOR="vim"
 
 - `Alt  + D`  cuts the word to the right of the cursor
 </details>
+<!-- end of expand -->
 
 # Linux Filesystem Tree Layout
 <details>
@@ -39,18 +44,11 @@ export EDITOR="vim"
 Filesystem Hierarchy Standard (FHS), detailing the purpose of directories like `/etc`, `/var`, `/home`, `/bin`
 
 </details>
-
-#
-
-<details>
-<summary> TODO Title 📝 </summary>
-
-
-</details>
+<!-- end of expand -->
 
 # Linux Graphical Interface
 <details>
-<summary> TODO Title 📝 </summary>
+<summary> GUI </summary>
 
 ## Computer Graphics GUIs UIs
 
@@ -72,31 +70,131 @@ xdpyinfo | grep dim
 ```
 
 </details>
+<!-- end of expand GUI -->
 
 # User Group Environment & Account Management
 Covers shell customization, environment variables, aliases, and startup scripts like .bashrc.
 
 <details>
-<summary> TODO Title 📝 </summary>
+<summary> User Account Management </summary>
 
+2024-06-12 migrating Win11 laptops with WSL 
+- Migrate `~/.ssh`
+- Migrate `~/.bashrc`
+
+#### List Users in Linux
+```bash
+sudo less /etc/passwd
+```
+
+##### Create a user
+```bash
+useradd newUserName
+```
+
+##### Get the user login history
+```bash
+last $USERNAME
+```
+
+##### Print the user name who are all currently logged in the current host
+```bash
+users
+```
+
+Each line in the file `etc/passwd` has seven fields delimited by colons that contain the following information:
+
+- User name: 
+- password Encrypted. x means is stored in the `/etc/shadow` file
+- User ID number (UID).:User’s group ID number (GID)
+- Full name of the user (GECOS)
+- User home directory
+- Login shell (defaults to /bin/bash)
+
+#### Display only the username
+
+```bash
+awk -F: '{ print $1}' /etc/passwd
+cut -d: -f1 /etc/passwd
+```
+
+#### List all Users A-Z
+Each user has a numeric user ID called UID.
+
+If UID is not specified when creating a new user with the `useradd` command, the UID will be automatically selected from the `/etc/login.defs` file depending on the **UID_MIN** and **UID_MIN** values.
+
+```bash
+getent passwd | cut -d: -f1 | sort
+```
+
+#### check type of terminal
+```bash
+printf "%s\n" $TERM
+```
+
+#### Set a new password for user `root`
+```bash
+sudo passwd $USERNAME
+```
+- successful output
+```bash
+passwd: password updated successfully
+```
+
+#### Check the UID_MIN and UID_MIN values on your system
+
+```bash
+grep -E '^UID_MIN|^UID_MAX' /etc/login.defs
+```
+
+#### List all normal users
+
+```bash
+getent passwd {1000..60000}
+```
+
+#### Generic info about users from a Linux system
+
+```bash
+eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)}
+```
+
+#### Print only the usernames in a Linux System
+
+```bash
+eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1
+```
+
+##### Print the logged-in user
+
+```bash
+id -un
+```
+
+##### get a list of all usernames that are currently logged
+
+```bash
+who | cut -d' ' -f1 | sort | uniq
+```
 
 </details>
+<!-- end of expand -->
 
 # Package Management Systems
-System Configuration overview of how software is distributed, repositories, and dependency resolution
 
 <details>
+
 <summary> Linux Package Management </summary>
-depending on the distro 
+System Configuration overview of how software is distributed, repositories, and dependency resolution
+
+depends on the Linux distro 
 
 * dnf
 * apt
 * zypper
 
-# Linux Package management 
 ## APT
 
-<details>
 <summary> Ubuntu APT 📝 </summary>
 Ubuntu package manager
 
@@ -141,8 +239,11 @@ sudo apt install --reinstall $PACKAGE_NAME
 ```bash
 sudo apt-get purge unattended-upgrades
 ```
+
 </details>
-<!-- end of section Package Management -->
+<!-- end of expand -->
+
+---
 
 # Processes
 <details>
@@ -202,32 +303,38 @@ EOF
 ```
 
 </details>
-
-<!-- End of Process Section -->
+<!-- end of expand processes -->
 
 # Memory Monitoring, Usage & Swap
+
+<details>
+
+<summary> Memory management </summary>
+
 RAM usage and managing swap space (virtual memory on disk)
+</details>
+<!-- end of expand Memory Section -->
+
 Command Line Operations
 
-<details>
-
-</details>
-
-<!-- End of Memory Section -->
-
 # I/O Monitoring
-Monitoring input/output statistics for disks to identify performance bottlenecks.
+
 <details>
+<summary> TODO Title  </summary>
+Monitoring input/output statistics for disks to identify performance bottlenecks.
 
 </details>
+<!-- end of expand -->
 
 # Containers Overview
 
 # Linux Filesystems & the VFS
-How the kernel handles different filesystem types via the Virtual Filesystem Switch (VFS).
-Hard drives, volumes, SSDs, mounts, filesystem, etc
 
 <details>
+<summary> Linux file systems   </summary>
+
+How the kernel handles different filesystem types via the Virtual Filesystem Switch (VFS).
+Hard drives, volumes, SSDs, mounts, filesystem, etc
 
 ##  File systems
 Attributes, Creating, Checking, Usage, Mounting
@@ -394,11 +501,12 @@ modprobe loop
 
 ```bash
 sudo blkid
-
-# Ubuntu
-sudo lsblk -o +UUID
 ```
 
+#### Show ID of Block devices Debian
+```bash
+sudo lsblk -o +UUID
+```
 ##### Mount an ISO file as loop device
 
 ```bash
@@ -413,35 +521,43 @@ The file that keeps track of mounted devices is `/etc/fstab`
 sudo mount -a
 ```
 </details>
+<!-- end of expand filesystems-->
 
 # Disk Partitioning
-Dividing storage devices into logical sections (partitions) 
+
 <details>
+<summary> </summary>
+Dividing storage devices into logical sections (partitions)
 
 </details>
+<!-- end of expand Disk Partitioning -->
 
 
 ## Logical Volume Management (LVM)
-Abstraction layer allowing flexible resizing and spanning of filesystems across multiple physical disks.
+
 <details>
 
+Abstraction layer allowing flexible resizing and spanning of filesystems across multiple physical disks.
 </details>
+<!-- end of expand -->
 
 
 # Kernel Services & Configuration
-Managing kernel parameters at runtime without rebooting using `sysctl`
 
 <details>
+
+Managing kernel parameters at runtime without rebooting using `sysctl`
 
 ##  Kernel Modules
 Managing pieces of code (drivers) that can be loaded into or unloaded from the kernel on demand.
 `lsmod`
 
 </details>
+<!-- end of expand -->
 
 # Devices and udev
-Linux interacts with hardware devices via the /dev directory and the udev device manager.
 <details>
+Linux interacts with hardware devices via the /dev directory and the udev device manager.
 
 #### Monitor udev events in real-time while plugging in a device.
 ```bash
@@ -449,6 +565,7 @@ udevadm monitor
 ```
 
 </details>
+<!-- end of expand -->
 
 # Networking
 
@@ -803,13 +920,13 @@ curl --verbose --list-only $HOST
 ```
 
 #### Specify the type of request
+update the value of the key value mapping for the record id 1
 
 ```bash
-# updating the value of param2 to be test 3 on the record id
 curl -X 'PUT' -d '{"param1":"test1","param2":"test3"}' \http://test.com/1
 ```
 
-#### Include the Basic Auth
+#### call endpoint with Basic Auth
 
 ```bash
 curl -u <user:password> https://my-test-api.com/endpoint1
@@ -842,19 +959,21 @@ curl -w "%{time_total}\n" -o /dev/null -s www.test.com
 
 OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
 
-# References
+#### References
 - [Linux CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
 - [Digital ocean talk Handy Linux networking tools](https://www.digitalocean.com/community/tech-talks/handy-networking-tools-and-how-to-use-them)
 
 ## Firewalls
 
 </details>
+<!-- end of expand Networking -->
 
 # Booting 
 
 <details>
 
 </details>
+<!-- end of expand -->
 
 
 ## System Init
@@ -865,6 +984,7 @@ Strategies for data archiving and synchronization using tools like tar and rsync
 <details>
 
 </details>
+<!-- end of expand -->
 
 # Linux Security Modules
 Mandatory Access Control (MAC) via SELinux or AppArmor.
@@ -872,6 +992,7 @@ Mandatory Access Control (MAC) via SELinux or AppArmor.
 <details>
 
 </details>
+<!-- end of expand -->
 
 # System Rescue
 Techniques for troubleshooting unbootable systems, resetting root passwords, and using rescue disks
@@ -885,8 +1006,12 @@ sudo fsck /dev/sda1
 ```
 
 </details>
+<!-- end of expand -->
 
 ---
+
+<details>
+
 TODO categorise all the commands below
 
 #### run command in the background & log to a text file
@@ -1456,106 +1581,16 @@ df -h
 ```bash
 w -u
 ```
+# Section To tidy up TODO
+<details>
+<summary> TODO Title  </summary>
+
+TODO add detail
+
+</details>
+<!-- end of expand -->
 
 ## User Management
-
-2024-06-12 migrating Win11 laptops with WSL 
-- Migrate `~/.ssh`
-- Migrate `~/.bashrc`
-
-#### List Users in Linux
-```bash
-sudo less /etc/passwd
-```
-
-##### Create a user
-```bash
-useradd newUserName
-```
-
-##### Get the user login history
-```bash
-last $USERNAME
-```
-
-##### Print the user name who are all currently logged in the current host
-```bash
-users
-```
-
-Each line in the file `etc/passwd` has seven fields delimited by colons that contain the following information:
-
-- User name: 
-- password Encrypted. x means is stored in the `/etc/shadow` file
-- User ID number (UID).:User’s group ID number (GID)
-- Full name of the user (GECOS)
-- User home directory
-- Login shell (defaults to /bin/bash)
-
-#### Display only the username
-
-```bash
-awk -F: '{ print $1}' /etc/passwd
-cut -d: -f1 /etc/passwd
-```
-
-#### List all Users A-Z
-Each user has a numeric user ID called UID. 
-If UID is not specified when creating a new user with the `useradd` command, the UID will be automatically selected from the `/etc/login.defs` file depending on the **UID_MIN** and **UID_MIN** values.
-
-```bash
-getent passwd | cut -d: -f1 | sort
-```
-
-#### check type of terminal
-```bash
-printf "%s\n" $TERM
-```
-
-#### Set a new password for user `root`
-```bash
-sudo passwd $USERNAME
-```
-- successful output
-```bash
-passwd: password updated successfully
-```
-
-#### Check the UID_MIN and UID_MIN values on your system
-
-```bash
-grep -E '^UID_MIN|^UID_MAX' /etc/login.defs
-```
-
-#### List all normal users
-
-```bash
-getent passwd {1000..60000}
-```
-
-#### Generic info about users from a Linux system
-
-```bash
-eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)}
-```
-
-#### Print only the usernames in a Linux System
-
-```bash
-eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1
-```
-
-##### Print the logged-in user
-
-```bash
-id -un
-```
-
-##### get a list of all usernames that are currently logged
-
-```bash
-who | cut -d' ' -f1 | sort | uniq
-```
 
 ##### Launch file explorer Nautilus as super user admin
 
@@ -1600,7 +1635,7 @@ sudo sysctl -w vm.max_map_count=262144
 ```bash
 gio tree $HOME
 ```
-s
+
 #### Show contents of a directory in a tree format with `gio` Gnome Input/Output
 
 ```bash
@@ -1695,7 +1730,8 @@ sudo chmod --reference="$REFERENCE_FILE" "$TARGETING_FILE"
 GROUP_NAME="common" ; sudo --recursive "$GROUP_NAME" *
 ```
 ---
-## Linux Distros
+
+# Linux Distros
 <details> 
 
 <summary> Ubuntu 🐧 </summary>
@@ -1743,8 +1779,9 @@ Shift + Delete
 - Never delete the Home directory, doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
 
 </details>
+<!-- end of expand -->
 
-# Terminals
+# Terminal Shells
 Shells available: bash, fish, Zshell
 
 ## Bash
@@ -1758,9 +1795,23 @@ sudo chsh -s /bin/bash $TARGET_USER
 
 ## Zshell
 
+</details>
+<!-- end of expand -->
+
+---
+# Section
+
+<details>
+<summary> TODO Title 📝 </summary>
+TODO ADD details
+</details>
+<!-- end of expand -->
+
+---
+
 # References
 - [cyberciti reload-sysctl-conf](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
-- taxonomy and main structure from [LinuxFoundationX: Introduction to Linux](https://www.edx.org/learn/linux/the-linux-foundation-introduction-to-linux?index=product&queryId=2929e67562a4ddf42a3271d4f3163e76)
+- taxonomy and main structure from [LinuxFoundationX Introduction to Linux](https://www.edx.org/learn/linux/the-linux-foundation-introduction-to-linux?index=product&queryId=2929e67562a4ddf42a3271d4f3163e76)
 
 [Back to top](#)
 
