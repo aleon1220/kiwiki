@@ -93,9 +93,11 @@ depending on the distro
 * apt
 * zypper
 
-
+# Linux Package management 
 ## APT
 
+<details>
+<summary> Ubuntu APT 📝 </summary>
 Ubuntu package manager
 
 #### Auto remove Obsolete packages
@@ -140,7 +142,6 @@ sudo apt install --reinstall $PACKAGE_NAME
 sudo apt-get purge unattended-upgrades
 ```
 </details>
-
 <!-- end of section Package Management -->
 
 # Processes
@@ -1295,6 +1296,15 @@ touch /home/user/new_empty_file.txt
 ```bash
 ls -xl ${DIR_PATH}
 ```
+
+<!-- expand -->
+# TODO add expand section
+<details>
+<summary> TODO Title summary 📝 </summary>
+TODO adds the expand 
+
+</details>
+<!-- end of expand -->
 
 - [medium.com 5-powerful-unix-commands-for-easier-troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
 

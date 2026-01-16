@@ -68,7 +68,19 @@ ls | ForEach-Object { $_.Name }
 ```cmd
 wmic path SoftwareLicensingService get OA3xOriginalProductKey
 ```
-#### batch rename by Removing "Screenshot " text
+
+<!-- expand -->
+## file ops
+<details>
+<summary> File operations with powershell </summary>
+
+####  finds files filtering by regex return the Path
+
+```powershell
+Get-ChildItem -Path "C:\Users\" -Filter "*.doc*" -Recurse | Select-Object -ExpandProperty FullName
+```
+
+#### batch rename by Removing **Screenshot** text
 once happy remove dry run flag `-WhatIf`
 ```powershell
 $folder = "C:\workspace"
@@ -79,6 +91,9 @@ Get-ChildItem -Path $folder -File -Filter 'Screenshot *.png' |
     Rename-Item -LiteralPath $_.FullName -NewName $newName -WhatIf
 }
 ```
+
+</details>
+<!-- end of expand -->
 
 ## Networking
 
