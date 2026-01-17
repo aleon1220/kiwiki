@@ -28,8 +28,6 @@ check the `echo $EDITOR` variable
 export EDITOR="vim"
 ```
 
-- `CTRL + D`  exit from terminal
-- `CTRL + Y`  yank pastes back what you have just cut
 - `CTRL + U`  cuts everything to the left of the cursor
 - `CTRL + K`  cuts everything to the right of the cursor
 - `CTRL + L`  clears the screen
@@ -336,8 +334,6 @@ Monitoring input/output statistics for disks to identify performance bottlenecks
 How the kernel handles different filesystem types via the Virtual Filesystem Switch (VFS).
 Hard drives, volumes, SSDs, mounts, filesystem, etc
 
-##  File systems
-Attributes, Creating, Checking, Usage, Mounting
 
 ### EXT4 Filesystem
 the default Linux filesystem, including journaling and inodes
@@ -567,8 +563,7 @@ udevadm monitor
 </details>
 <!-- end of expand -->
 
-# Networking
-
+# Networ Operations
 <details>
 
 ## Network Addresses
@@ -987,17 +982,18 @@ Strategies for data archiving and synchronization using tools like tar and rsync
 <!-- end of expand -->
 
 # Linux Security Modules
-Mandatory Access Control (MAC) via SELinux or AppArmor.
 
 <details>
+Mandatory Access Control (MAC) via SELinux or AppArmor
 
 </details>
 <!-- end of expand -->
 
 # System Rescue
-Techniques for troubleshooting unbootable systems, resetting root passwords, and using rescue disks
 
 <details>
+
+Techniques for troubleshooting unbootable systems, resetting root passwords, rescue disks
 
 #### Check and repair a filesystem
 > only run on unmounted disks
@@ -1012,9 +1008,9 @@ sudo fsck /dev/sda1
 
 <details>
 
-TODO categorise all the commands below
+TODO
 
-#### run command in the background & log to a text file
+#### run command in the background & log output to a file
 `nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
 
 ```bash
@@ -1027,11 +1023,6 @@ nohup $COMMAND_OR_SCRIPT > out_$(date).txt
 
 # User Environment
 
-# Network Operations
-
-# The Bash Shell and bash Scripting
-refer to the Bash page
-
 # Printing
 
 ## Quick diagnostic about a server
@@ -1042,6 +1033,7 @@ Local IP, hostname and Architecture type
 ```bash
 hostname -I ; hostname ; getconf LONG_BIT
 ```
+
 #### Linux distro Debian system info
 ```bash
 lsb_release -a
@@ -1438,11 +1430,6 @@ TODO adds the expand
 ```bash
 lsof -u $USER
 ```
-
-#### Retrieve processes running on a specified port range
-
-```bash
-lsof -i :8090-9090
 ```
 #### use sudo to change user
 ```bash
@@ -1590,14 +1577,6 @@ TODO add detail
 </details>
 <!-- end of expand -->
 
-## User Management
-
-##### Launch file explorer Nautilus as super user admin
-
-```bash
-sudo nautilus
-```
-
 ##### Scan full disk and analyze it using tool `ncdu`
 
 ```bash
@@ -1605,12 +1584,6 @@ sudo ncdu /
 ```
 
 ##### Remove directory forcefully
-
-```bash
-rm -rf $DIR_PATH
-```
-
-#### Search for execution of a given command in the history
 
 ```bash
 COMMAND=who ; history | grep $COMMAND
@@ -1734,9 +1707,16 @@ GROUP_NAME="common" ; sudo --recursive "$GROUP_NAME" *
 # Linux Distros
 <details> 
 
-<summary> Ubuntu 🐧 </summary>
+<summary> Linux distributions🐧 </summary>
 
+## Ubuntu
 ### System settings Nautilus 💻 🖥️💡 ⚙ 🛠️ 
+#### Launch file explorer Nautilus as super user admin
+
+```bash
+sudo nautilus
+```
+
 #### operation Keyboard shortcuts
 
 (Tux literal)
@@ -1782,12 +1762,18 @@ Shift + Delete
 <!-- end of expand -->
 
 # Terminal Shells
+<details>
+<summary> Linux shells </summary>
+
 Shells available: bash, fish, Zshell
 
 ## Bash
-#### ensure that bash is the default shell
+The Bash Shell and bash Scripting
+refer to the Bash page
+
+#### set bash as default shell for **myUser**
 ```bash
-TARGET_USER="newUser"
+TARGET_USER="myUser"
 sudo chsh -s /bin/bash $TARGET_USER
 ```
 
@@ -1799,6 +1785,7 @@ sudo chsh -s /bin/bash $TARGET_USER
 <!-- end of expand -->
 
 ---
+
 # Section
 
 <details>
@@ -1811,8 +1798,6 @@ TODO ADD details
 
 # References
 - [cyberciti reload-sysctl-conf](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
-- taxonomy and main structure from [LinuxFoundationX Introduction to Linux](https://www.edx.org/learn/linux/the-linux-foundation-introduction-to-linux?index=product&queryId=2929e67562a4ddf42a3271d4f3163e76)
+- taxonomy & main structure from [LinuxFoundationX Introduction to Linux](https://www.edx.org/learn/linux/the-linux-foundation-introduction-to-linux)
 
 [Back to top](#)
-
-[Kiwiki Home](/../../)
