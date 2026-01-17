@@ -12,8 +12,6 @@ The Outline here is a mirror from the [Linux foundation material](https://traini
 
 [edx.org](https://training.linuxfoundation.org/training/introduction-to-linux) and the book Modern Operating Systems by [Andrew Tanenbaum](https://www.amazon.com/stores/author/B000AQ1UBW/allbooks) 
 
-TODO move to the different category folders the different commands found in this page
-
 ## OS Basics and System Startup
 
 ### CLI Shell keyboard shortcuts
@@ -34,9 +32,10 @@ export EDITOR="vim"
 
 - `Alt  + D`  cuts the word to the right of the cursor
 </details>
-<!-- end of expand -->
+<!-- end of expand Introduction-->
 
 # Linux Filesystem Tree Layout
+
 <details>
 <summary> Linux General Intro 📝 </summary>
 Filesystem Hierarchy Standard (FHS), detailing the purpose of directories like `/etc`, `/var`, `/home`, `/bin`
@@ -71,10 +70,14 @@ xdpyinfo | grep dim
 <!-- end of expand GUI -->
 
 # User Group Environment & Account Management
-Covers shell customization, environment variables, aliases, and startup scripts like .bashrc.
+
 
 <details>
+
 <summary> User Account Management </summary>
+Covers shell customization, environment variables, aliases, and startup scripts like .bashrc.
+
+TODO move to the different category folders the different commands found in this page
 
 2024-06-12 migrating Win11 laptops with WSL 
 - Migrate `~/.ssh`
@@ -176,7 +179,7 @@ who | cut -d' ' -f1 | sort | uniq
 ```
 
 </details>
-<!-- end of expand -->
+<!-- end of expand user management -->
 
 # Package Management Systems
 
@@ -192,9 +195,7 @@ depends on the Linux distro
 * zypper
 
 ## APT
-
-<summary> Ubuntu APT 📝 </summary>
-Ubuntu package manager
+Debian/Ubuntu package manager
 
 #### Auto remove Obsolete packages
 
@@ -244,8 +245,9 @@ sudo apt-get purge unattended-upgrades
 ---
 
 # Processes
+
 <details>
-<summary> Linux Process </summary>
+<summary> Linux Processes </summary>
 
 ## Process Monitoring
 Common Applications
@@ -310,21 +312,25 @@ EOF
 <summary> Memory management </summary>
 
 RAM usage and managing swap space (virtual memory on disk)
+
 </details>
 <!-- end of expand Memory Section -->
-
-Command Line Operations
 
 # I/O Monitoring
 
 <details>
-<summary> TODO Title  </summary>
+<summary> Input Output Ops </summary>
 Monitoring input/output statistics for disks to identify performance bottlenecks.
 
 </details>
-<!-- end of expand -->
+<!-- end of expand I/O -->
 
 # Containers Overview
+<details>
+<summary> Compute containers </summary>
+
+</details>
+<!-- end of expand Containers -->
 
 # Linux Filesystems & the VFS
 
@@ -522,7 +528,7 @@ sudo mount -a
 # Disk Partitioning
 
 <details>
-<summary> </summary>
+<summary> Disk partitioning </summary>
 Dividing storage devices into logical sections (partitions)
 
 </details>
@@ -535,7 +541,7 @@ Dividing storage devices into logical sections (partitions)
 
 Abstraction layer allowing flexible resizing and spanning of filesystems across multiple physical disks.
 </details>
-<!-- end of expand -->
+<!-- end of expand LVM -->
 
 
 # Kernel Services & Configuration
@@ -549,7 +555,7 @@ Managing pieces of code (drivers) that can be loaded into or unloaded from the k
 `lsmod`
 
 </details>
-<!-- end of expand -->
+<!-- end of expand Kernel -->
 
 # Devices and udev
 <details>
@@ -561,9 +567,9 @@ udevadm monitor
 ```
 
 </details>
-<!-- end of expand -->
+<!-- end of expand Kernel -->
 
-# Networ Operations
+# Network Operations
 <details>
 
 ## Network Addresses
@@ -950,13 +956,8 @@ curl -F @field_name=@path/to/local_file <upload_URL>
 curl -w "%{time_total}\n" -o /dev/null -s www.test.com
 ```
 
-#### VPN
-
-OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
-
-#### References
-- [Linux CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
-- [Digital ocean talk Handy Linux networking tools](https://www.digitalocean.com/community/tech-talks/handy-networking-tools-and-how-to-use-them)
+## VPN
+TODO add content
 
 ## Firewalls
 
@@ -1782,7 +1783,7 @@ sudo chsh -s /bin/bash $TARGET_USER
 ## Zshell
 
 </details>
-<!-- end of expand -->
+<!-- end of expand Shells-->
 
 ---
 
@@ -1799,5 +1800,8 @@ TODO ADD details
 # References
 - [cyberciti reload-sysctl-conf](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
 - taxonomy & main structure from [LinuxFoundationX Introduction to Linux](https://www.edx.org/learn/linux/the-linux-foundation-introduction-to-linux)
+- [Linux CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
+- [Digital ocean talk Handy Linux networking tools](https://www.digitalocean.com/community/tech-talks/handy-networking-tools-and-how-to-use-them)
+- OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
 
 [Back to top](#)
