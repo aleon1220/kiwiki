@@ -77,8 +77,6 @@ xdpyinfo | grep dim
 <summary> User Account Management </summary>
 Covers shell customization, environment variables, aliases, and startup scripts like .bashrc.
 
-TODO move to the different category folders the different commands found in this page
-
 2024-06-12 migrating Win11 laptops with WSL 
 - Migrate `~/.ssh`
 - Migrate `~/.bashrc`
@@ -300,6 +298,13 @@ docker build -<<EOF
 FROM busybox
 RUN echo "hello world"
 EOF
+```
+
+#### run command in the background & log output to a file
+`nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
+
+```bash
+nohup $COMMAND_OR_SCRIPT > out_$(date).txt
 ```
 
 </details>
@@ -957,28 +962,28 @@ curl -w "%{time_total}\n" -o /dev/null -s www.test.com
 ```
 
 ## VPN
-TODO add content
+TODO add linux VPN content
 
 ## Firewalls
 
 </details>
 <!-- end of expand Networking -->
 
-# Booting 
+# System Init
 
 <details>
+
+## Booting 
+Managing the system startup process and services
+
 
 </details>
 <!-- end of expand -->
 
-
-## System Init
-Managing the system startup process and services
-
 # Backup Recovery Methods
-Strategies for data archiving and synchronization using tools like tar and rsync.
-<details>
 
+<details>
+Strategies for data archiving and synchronization using tools like tar and rsync.
 </details>
 <!-- end of expand -->
 
@@ -1007,16 +1012,10 @@ sudo fsck /dev/sda1
 
 ---
 
+# TODO
+move to the different category folders the different commands found in this page
+
 <details>
-
-TODO
-
-#### run command in the background & log output to a file
-`nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
-
-```bash
-nohup $COMMAND_OR_SCRIPT > out_$(date).txt
-```
 
 # File Operations
 
@@ -1569,6 +1568,7 @@ df -h
 ```bash
 w -u
 ```
+
 # Section To tidy up TODO
 <details>
 <summary> TODO Title  </summary>
@@ -1719,7 +1719,7 @@ sudo nautilus
 ```
 
 #### operation Keyboard shortcuts
-
+
 (Tux literal)
 
 - Show hidden files Keyboard shortcut
