@@ -31,6 +31,139 @@ export EDITOR="vim"
 - `CTRL + L`  clears the screen
 
 - `Alt  + D`  cuts the word to the right of the cursor
+
+## System diagnostics
+info about a server
+
+#### Get info about the linux distro
+Local IP, hostname and Architecture type
+
+```bash
+hostname -I ; hostname ; getconf LONG_BIT
+```
+
+#### Linux distro Debian system info
+```bash
+lsb_release -a
+```
+
+#### Check the hidden directories and files in the HOME dir
+```bash
+ls --all $HOME
+```
+
+print user and group info
+```bash
+id
+```
+
+#### Check bash customizations current user
+
+```bash
+less ~/.bashrc
+```
+
+#### Get info about linux version
+
+```bash
+cat /etc/os-release
+```
+
+#### read system identification information message
+
+```bash
+less /etc/issue
+```
+
+#### Debian/ubuntu get detailed info
+
+```bash
+lsb_release -a
+```
+
+#### Red Hat Enterprise Linux info
+
+```bash
+cat /etc/redhat-release
+```
+
+#### Query system control settings
+```bash
+hostnamectl
+```
+
+##### Info about system
+
+```bash
+uname -a
+```
+
+## Systemd Systemctl
+
+#### List all loaded service units
+
+```bash
+systemctl list-units -all | grep loaded | awk '{print $1;}'
+```
+
+#### List loaded services
+
+```bash
+systemctl list-units -all | grep service | grep loaded | awk '{print $1;}'
+```
+
+#### List all enabled units
+
+```bash
+systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt
+```
+
+#### Check status of services
+```bash
+LIST_SERVICES="nginx supervisor php7.2-fpm"
+sudo systemctl status $LIST_SERVICES
+sudo service jenkins status
+```
+
+#### Check if service is Active
+
+```bash
+systemctl is-active $APP_SERVICE
+```
+
+#### check date control
+```bash
+timedatectl status
+```
+
+#### edit a service
+
+```bash
+sudo systemctl edit --full cron.service
+```
+
+#### List enabled services export to text file
+
+```bash
+systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
+```
+
+#### Services with state loaded
+3 commands to find the diff
+```bash
+systemctl list-units -all | grep service | grep loaded | awk '{print $1;}' > loaded.txt
+```
+
+#### Diff ops to find missing services
+Quick glance of missing
+
+```bash
+# Diff the files
+diff -y loaded.txt enabled.txt
+
+diff -y loaded.txt enabled.txt | grep '<'
+```
+
 </details>
 <!-- end of expand Introduction-->
 
@@ -47,7 +180,7 @@ Filesystem Hierarchy Standard (FHS), detailing the purpose of directories like `
 <details>
 <summary> GUI </summary>
 
-## Computer Graphics GUIs UIs
+single Graphical Interface / Desktop section, GUIs, UIs
 
 #### X windows var
 
@@ -242,13 +375,12 @@ sudo apt-get purge unattended-upgrades
 
 ---
 
-# Processes
+# Processes & Scheduling
 
 <details>
 <summary> Linux Processes </summary>
 
-## Process Monitoring
-Common Applications
+Process Monitoring, scheduling
 
 #### find the HTTPD user in a web server
 ```bash
@@ -1011,8 +1143,16 @@ sudo fsck /dev/sda1
 <!-- end of expand -->
 
 ---
+# Section To tidy up TODO
+<details>
+<summary> TODO Title  </summary>
 
-# TODO
+TODO add detail
+
+</details>
+<!-- end of expand -->
+
+# todo: prioritize
 move to the different category folders the different commands found in this page
 
 <details>
@@ -1025,136 +1165,6 @@ move to the different category folders the different commands found in this page
 
 # Printing
 
-## Quick diagnostic about a server
-
-#### Get info about the linux distro
-Local IP, hostname and Architecture type
-
-```bash
-hostname -I ; hostname ; getconf LONG_BIT
-```
-
-#### Linux distro Debian system info
-```bash
-lsb_release -a
-```
-
-#### Check the hidden directories and files in the HOME dir
-```bash
-ls --all $HOME
-```
-
-print user and group info
-```bash
-id
-```
-
-#### Check bash customizations current user
-
-```bash
-less ~/.bashrc
-```
-
-#### Get info about linux version
-
-```bash
-cat /etc/os-release
-```
-
-#### read system identification information message
-
-```bash
-less /etc/issue
-```
-
-#### Debian/ubuntu get detailed info
-
-```bash
-lsb_release -a
-```
-
-#### Red Hat Enterprise Linux info
-
-```bash
-cat /etc/redhat-release
-```
-
-#### Query system control settings
-```bash
-hostnamectl
-```
-
-##### Info about system
-
-```bash
-uname -a
-```
-
-## Systemd Systemctl
-
-#### List all loaded service units
-
-```bash
-systemctl list-units -all | grep loaded | awk '{print $1;}'
-```
-
-#### List loaded services
-
-```bash
-systemctl list-units -all | grep service | grep loaded | awk '{print $1;}'
-```
-
-#### List all enabled units
-
-```bash
-systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt
-```
-
-#### Check status of services
-```bash
-LIST_SERVICES="nginx supervisor php7.2-fpm"
-sudo systemctl status $LIST_SERVICES
-sudo service jenkins status
-```
-
-#### Check if service is Active
-
-```bash
-systemctl is-active $APP_SERVICE
-```
-
-#### check date control
-```bash
-timedatectl status
-```
-
-#### edit a service
-
-```bash
-sudo systemctl edit --full cron.service
-```
-
-#### List enabled services export to text file
-
-```bash
-systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
-```
-
-#### Services with state loaded
-3 commands to find the diff
-```bash
-systemctl list-units -all | grep service | grep loaded | awk '{print $1;}' > loaded.txt
-```
-
-#### Diff ops to find missing services
-Quick glance of missing
-
-```bash
-# Diff the files
-diff -y loaded.txt enabled.txt
-
-diff -y loaded.txt enabled.txt | grep '<'
-```
 
 #### `pushd` and `popd` to jump between directories
 
@@ -1179,6 +1189,7 @@ sudo sysctl --system
 ```
 
 ### Debugging Logs
+
 #### Analyse Logs. Logs named 3 to 31.gz month. Month like Feb 2020 and print
 
 ```bash
@@ -1569,15 +1580,6 @@ df -h
 w -u
 ```
 
-# Section To tidy up TODO
-<details>
-<summary> TODO Title  </summary>
-
-TODO add detail
-
-</details>
-<!-- end of expand -->
-
 ##### Scan full disk and analyze it using tool `ncdu`
 
 ```bash
@@ -1766,8 +1768,6 @@ Shift + Delete
 <details>
 <summary> Linux shells </summary>
 
-Shells available: bash, fish, Zshell
-
 ## Bash
 The Bash Shell and bash Scripting
 refer to the Bash page
@@ -1794,6 +1794,15 @@ sudo chsh -s /bin/bash $TARGET_USER
 TODO ADD details
 </details>
 <!-- end of expand -->
+
+
+Top-level suggestions: Introduction, System & Boot, Files & Storage, Processes & Memory, Networking, Security & Rescue, Package & System Management, Shells & UX, Distributions & References.
+
+Place related tags as children, e.g. under Files & Storage place #linux-filesystem-tree-layout, #linux-filesystems--the-vfs, #ext4-filesystem, #disk-partitioning, #logical-volume-management-lvm, #compute-storage.
+
+Create Monitoring & Performance with subtopics: #process-monitoring, #memory-monitoring-usage--swap, #io-monitoring, #traffic-capture, #load-testing, #benchmarking.
+
+Turn #todo into a living project board: #todo: prioritize, #todo: write-first-draft, #todo: needs-review rather than one catch-all tag.
 
 ---
 
