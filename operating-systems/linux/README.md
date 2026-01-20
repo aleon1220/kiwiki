@@ -442,25 +442,30 @@ nohup $COMMAND_OR_SCRIPT > out_$(date).txt
 </details>
 <!-- end of expand processes -->
 
-# Memory Monitoring, Usage & Swap
+# Monitoring & Performance
+
+
 
 <details>
 
 <summary> Memory management </summary>
 
+
+## Memory Monitoring, Usage & Swap
 RAM usage and managing swap space (virtual memory on disk)
 
-</details>
-<!-- end of expand Memory Section -->
-
-# I/O Monitoring
-
-<details>
-<summary> Input Output Ops </summary>
+## I/O Monitoring
+Input Output Ops
 Monitoring input/output statistics for disks to identify performance bottlenecks.
 
+## traffic capture
+
+## load testing
+
+## benchmarking
+
 </details>
-<!-- end of expand I/O -->
+<!-- end of expand Section -->
 
 # Containers Overview
 <details>
@@ -476,7 +481,6 @@ Monitoring input/output statistics for disks to identify performance bottlenecks
 
 How the kernel handles different filesystem types via the Virtual Filesystem Switch (VFS).
 Hard drives, volumes, SSDs, mounts, filesystem, etc
-
 
 ### EXT4 Filesystem
 the default Linux filesystem, including journaling and inodes
@@ -680,22 +684,19 @@ Abstraction layer allowing flexible resizing and spanning of filesystems across 
 </details>
 <!-- end of expand LVM -->
 
-
-# Kernel Services & Configuration
+# System & Boot
 
 <details>
 
+## Kernel Services & Configuration
 Managing kernel parameters at runtime without rebooting using `sysctl`
 
 ##  Kernel Modules
 Managing pieces of code (drivers) that can be loaded into or unloaded from the kernel on demand.
 `lsmod`
 
-</details>
-<!-- end of expand Kernel -->
+## Devices and udev
 
-# Devices and udev
-<details>
 Linux interacts with hardware devices via the /dev directory and the udev device manager.
 
 #### Monitor udev events in real-time while plugging in a device.
@@ -703,8 +704,12 @@ Linux interacts with hardware devices via the /dev directory and the udev device
 udevadm monitor
 ```
 
+## Booting
+
+## System init
+
 </details>
-<!-- end of expand Kernel -->
+<!-- end of expand System & Boot -->
 
 # Network Operations
 <details>
