@@ -1183,7 +1183,13 @@ sudo fsck /dev/sda1
 <!-- end of expand -->
 
 ---
-# Section TODO:reuse-template
+
+# todo: prioritize
+
+<details>
+move to the different category folders the different commands found in this page
+
+## Section TODO:reuse-template
 <details>
 <summary> TODO Title  </summary>
 
@@ -1191,21 +1197,20 @@ TODO add detail
 </details>
 <!-- end of expand -->
 
-><!-- expand -->
-># TODO add expand section
-><details>
-><summary> TODO Title summary 📝 </summary>
->TODO adds the expand
->
-></details>
-><!-- end of expand -->
-
-# todo: prioritize
-move to the different category folders the different commands found in this page
-
-<details>
-
 ## File Operations
+#### Move `DIR1` to `DIR_DESTINATION`
+
+```bash
+sudo mv $DIR1 $DIR_DESTINATION
+```
+
+#### Copy files from Local to Remote Server
+
+Define the local and remote paths in env vars. Perform the copy
+
+```bash
+scp -r "$LOCAL_PATH" ubuntu@"$REMOTE_HOST_SERVER":"$REMOTE_SERVER_PATH"
+```
 
 ## Text Editors
 
@@ -1228,7 +1233,7 @@ The settings are read from all of the following system configuration files
 sudo sysctl --system
 ```
 
-### Debugging Logs
+## Debugging Logs
 
 #### Analyse Logs. Logs named 3 to 31.gz month. Month like Feb 2020 and print
 
@@ -1255,12 +1260,6 @@ Show installed Apps
 update-alternatives --get-selections
 ```
 
-##### Move `DIR1` to `DIR_DESTINATION`
-
-```bash
-sudo mv $DIR1 $DIR_DESTINATION
-```
-
 ##### Find where the command is installed
 
 ```bash
@@ -1271,15 +1270,7 @@ which $COMMAND
 ##### Create an alias `ee` with a command to go to a specific directory
 
 ```bash
-alias ee='cd /home/ws/02-projects/ee/test'
-```
-
-#### Copy files from Local to Remote Server
-
-Define the local and remote paths in env vars. Perform the copy
-
-```bash
-scp -r "$LOCAL_PATH" ubuntu@"$REMOTE_HOST_SERVER":"$REMOTE_SERVER_PATH"
+alias ee='cd /home/ws/projects/ee/test'
 ```
 
 ## Compression/Decompression
