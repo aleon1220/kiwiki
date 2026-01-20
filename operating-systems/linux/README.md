@@ -1807,7 +1807,18 @@ TODO ADD details
 <!-- end of expand -->
 
 
-Top-level suggestions: Introduction, System & Boot, Files & Storage, Processes & Memory, Networking, Security & Rescue, Package & System Management, Shells & UX, Distributions & References.
+Top-level suggestions:
+
+Introduction 
+System & Boot,
+Files & Storage, 
+Processes & Memory, 
+Networking, Security & Rescue, 
+Package & System Management, 
+Shells & UX, 
+Distributions 
+
+ References [x]
 
 Place related tags as children, e.g. under Files & Storage place #linux-filesystem-tree-layout, #linux-filesystems--the-vfs, #ext4-filesystem, #disk-partitioning, #logical-volume-management-lvm, #compute-storage.
 
