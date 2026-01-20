@@ -700,10 +700,8 @@ The file that keeps track of mounted devices is `/etc/fstab`
 ```bash
 sudo mount -a
 ```
-</details>
-<!-- end of expand filesystems-->
 
-# Disk Partitioning
+## Disk Partitioning
 
 <details>
 <summary> Disk partitioning </summary>
@@ -720,6 +718,9 @@ Dividing storage devices into logical sections (partitions)
 Abstraction layer allowing flexible resizing and spanning of filesystems across multiple physical disks.
 </details>
 <!-- end of expand LVM -->
+
+</details>
+<!-- end of expand filesystems-->
 
 # System & Boot
 
@@ -742,8 +743,16 @@ udevadm monitor
 ```
 
 ## Booting
+Managing the system startup process and services
 
 ## System init
+
+<details>
+
+todo: check-visually
+
+</details>
+<!-- end of expand -->
 
 </details>
 <!-- end of expand System & Boot -->
@@ -1142,17 +1151,6 @@ TODO add linux VPN content
 
 </details>
 <!-- end of expand Networking -->
-
-# System Init
-
-<details>
-
-## Booting 
-Managing the system startup process and services
-
-
-</details>
-<!-- end of expand -->
 
 # Backup Recovery Methods
 
