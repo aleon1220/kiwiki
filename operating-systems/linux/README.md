@@ -12,7 +12,7 @@ The Outline here is a mirror from the [Linux foundation material](https://traini
 
 [edx.org](https://training.linuxfoundation.org/training/introduction-to-linux) and the book Modern Operating Systems by [Andrew Tanenbaum](https://www.amazon.com/stores/author/B000AQ1UBW/allbooks) 
 
-## OS Basics and System Startup
+## OS Basics
 
 ### CLI Shell keyboard shortcuts
 - `CTRL + W`  cuts the word to the left of the cursor
@@ -31,6 +31,37 @@ export EDITOR="vim"
 - `CTRL + L`  clears the screen
 
 - `Alt  + D`  cuts the word to the right of the cursor
+
+### Shell navigation
+#### toggle current/previous dir
+```bash
+cd -
+```
+
+#### list the directory stack
+```bash
+dirs -v
+```
+
+#### `pushd` and `popd` add & remove directories from stack
+
+```bash
+pushd $DIR
+popd
+```
+
+##### Show dir contents in tree view
+> some distros dont have `tree`
+
+```bash
+tree $HOME
+```
+
+#### Show contents of a directory in a tree format with `gio` Gnome Input/Output
+
+```bash
+gio tree
+```
 
 ## System diagnostics
 info about a server
@@ -229,14 +260,14 @@ useradd newUserName
 last $USERNAME
 ```
 
-##### Print the user name who are all currently logged in the current host
+##### Print users name currently logged in the host
 ```bash
 users
 ```
 
 Each line in the file `etc/passwd` has seven fields delimited by colons that contain the following information:
 
-- User name: 
+- User name:
 - password Encrypted. x means is stored in the `/etc/shadow` file
 - User ID number (UID).:User’s group ID number (GID)
 - Full name of the user (GECOS)
@@ -271,6 +302,12 @@ sudo passwd $USERNAME
 - successful output
 ```bash
 passwd: password updated successfully
+```
+
+##### edit sudo users
+
+```bash
+sudo visudo
 ```
 
 #### Check the UID_MIN and UID_MIN values on your system
@@ -1148,35 +1185,35 @@ sudo fsck /dev/sda1
 <!-- end of expand -->
 
 ---
-# Section To tidy up TODO
+# Section TODO:reuse-template
 <details>
 <summary> TODO Title  </summary>
 
 TODO add detail
-
 </details>
 <!-- end of expand -->
+
+><!-- expand -->
+># TODO add expand section
+><details>
+><summary> TODO Title summary 📝 </summary>
+>TODO adds the expand
+>
+></details>
+><!-- end of expand -->
 
 # todo: prioritize
 move to the different category folders the different commands found in this page
 
 <details>
 
-# File Operations
+## File Operations
 
-# Text Editors
+## Text Editors
 
-# User Environment
+## User Environment
 
-# Printing
-
-
-#### `pushd` and `popd` to jump between directories
-
-```bash
-pushd $DIR
-popd
-```
+## Printing
 
 #### Reload system configs
 
@@ -1213,16 +1250,11 @@ cat ~/.ssh/id_rsa.pub | xclip -sel clip
 stat %A $DIR
 ```
 
-##### Maintain symbolic links determining default commands. Show installed Apps
+##### Maintain symbolic links determining default commands. 
+Show installed Apps
 
 ```bash
 update-alternatives --get-selections
-```
-
-##### Edit sudo users
-
-```bash
-sudo visudo
 ```
 
 ##### Move `DIR1` to `DIR_DESTINATION`
@@ -1430,17 +1462,6 @@ touch /home/user/new_empty_file.txt
 ls -xl ${DIR_PATH}
 ```
 
-<!-- expand -->
-# TODO add expand section
-<details>
-<summary> TODO Title summary 📝 </summary>
-TODO adds the expand 
-
-</details>
-<!-- end of expand -->
-
-- [medium.com 5-powerful-unix-commands-for-easier-troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
-
 #### lists open files for current user
 
 ```bash
@@ -1464,7 +1485,7 @@ kill -9 $(lsof -t -u $TARGET_USER)
 less +4 -N show-time.sh
 ```
 
-## Handling Logs
+## Handle Logs
 
 #### Commong logs in linux
 
@@ -1597,9 +1618,9 @@ sudo ncdu /
 COMMAND=who ; history | grep $COMMAND
 ```
 
-#### Find in history with 2 literal strings
-uses regex to find 2 literal occurrances in a path.
-`.*` matches any sequence of characters to deal with the OS path.
+#### Find in history matching 2 strings
+useful when user knows the 2 stings used in a command.
+Regex `.*` matches any sequence of characters
 ```bash
 history | grep 'cd.*TESTS'
 ```
@@ -1608,19 +1629,6 @@ history | grep 'cd.*TESTS'
 
 ```bash
 sudo sysctl -w vm.max_map_count=262144
-```
-
-##### Show dir contents in tree view
-> some distros dont have `tree`
-
-```bash
-gio tree $HOME
-```
-
-#### Show contents of a directory in a tree format with `gio` Gnome Input/Output
-
-```bash
-gio tree
 ```
 
 #### History top 20 commands in bash_history
@@ -1817,5 +1825,6 @@ Turn #todo into a living project board: #todo: prioritize, #todo: write-first-dr
 - [Linux CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
 - [Digital ocean talk Handy Linux networking tools](https://www.digitalocean.com/community/tech-talks/handy-networking-tools-and-how-to-use-them)
 - OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
+- [powerful unix commands for troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
 
 [Back to top](#)
