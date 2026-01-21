@@ -195,6 +195,21 @@ diff -y loaded.txt enabled.txt
 diff -y loaded.txt enabled.txt | grep '<'
 ```
 
+## File Operations
+#### Move `DIR1` to `DIR_DESTINATION`
+
+```bash
+mv $DIR1 $DIR_DESTINATION
+```
+
+#### Copy files from Local to Remote Server
+
+Define the local and remote paths in env vars. Perform the copy
+
+```bash
+scp -r "$LOCAL_PATH" ubuntu@"$REMOTE_HOST_SERVER":"$REMOTE_SERVER_PATH"
+```
+
 </details>
 <!-- end of expand Introduction-->
 
@@ -1184,7 +1199,128 @@ sudo fsck /dev/sda1
 
 ---
 
-# todo: prioritize
+# Linux Distros
+<details> 
+
+<summary> Linux distributions🐧 </summary>
+
+## Ubuntu
+### System settings Nautilus 💻 🖥️💡 ⚙ 🛠️ 
+#### Launch file explorer Nautilus as super user admin
+
+```bash
+sudo nautilus
+```
+
+#### operation Keyboard shortcuts
+
+(Tux literal)
+
+- Show hidden files Keyboard shortcut
+
+```bash
+CTRL + H
+```
+
+- Show Path Location Keyboard shortcut
+
+```bash
+CTRL + L
+```
+
+- Switch between the Icons and List formats
+
+```bash
+CTRL + 1 | CTRL + 2
+```
+
+- Search for files
+
+```bash
+CTRL + F
+```
+
+- Delete File(s)
+
+```bash
+CTRL + delete
+```
+
+- Permanently delete
+```bash
+Shift + Delete
+```
+
+- Never delete the Home directory, doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
+
+</details>
+<!-- end of expand -->
+
+# Terminal Shells
+<details>
+<summary> Linux shells </summary>
+
+## Bash
+The Bash Shell and bash Scripting
+refer to the Bash page
+
+#### set bash as default shell for **myUser**
+```bash
+TARGET_USER="myUser"
+sudo chsh -s /bin/bash $TARGET_USER
+```
+
+## Fish
+
+## Zshell
+
+</details>
+<!-- end of expand Shells-->
+
+---
+
+# Section
+
+<details>
+<summary> TODO Title 📝 </summary>
+TODO ADD details
+</details>
+<!-- end of expand -->
+
+Top-level suggestions:
+
+Introduction 
+System & Boot,
+Files & Storage, 
+Processes & Memory, 
+Networking, Security & Rescue, 
+Package & System Management, 
+Shells & UX, 
+Distributions 
+
+ References [x]
+
+Place related tags as children, e.g. under Files & Storage place #linux-filesystem-tree-layout, #linux-filesystems--the-vfs, #ext4-filesystem, #disk-partitioning, #logical-volume-management-lvm, #compute-storage.
+
+Create Monitoring & Performance with subtopics: #process-monitoring, #memory-monitoring-usage--swap, #io-monitoring, #traffic-capture, #load-testing, #benchmarking.
+
+Turn #todo into a living project board: #todo: prioritize, #todo: write-first-draft, #todo: needs-review rather than one catch-all tag.
+
+---
+
+# References
+- [cyberciti reload-sysctl-conf](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
+- taxonomy & main structure from [LinuxFoundationX Introduction to Linux](https://www.edx.org/learn/linux/the-linux-foundation-introduction-to-linux)
+- [Linux CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
+- [Digital ocean talk Handy Linux networking tools](https://www.digitalocean.com/community/tech-talks/handy-networking-tools-and-how-to-use-them)
+- OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
+- [powerful unix commands for troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
+
+[Back to top](#)
+
+---
+
+# todo: prioritise
 
 <details>
 move to the different category folders the different commands found in this page
@@ -1197,20 +1333,7 @@ TODO add detail
 </details>
 <!-- end of expand -->
 
-## File Operations
-#### Move `DIR1` to `DIR_DESTINATION`
 
-```bash
-sudo mv $DIR1 $DIR_DESTINATION
-```
-
-#### Copy files from Local to Remote Server
-
-Define the local and remote paths in env vars. Perform the copy
-
-```bash
-scp -r "$LOCAL_PATH" ubuntu@"$REMOTE_HOST_SERVER":"$REMOTE_SERVER_PATH"
-```
 
 ## Text Editors
 
@@ -1708,122 +1831,3 @@ sudo chmod --reference="$REFERENCE_FILE" "$TARGETING_FILE"
 GROUP_NAME="common" ; sudo --recursive "$GROUP_NAME" *
 ```
 ---
-
-# Linux Distros
-<details> 
-
-<summary> Linux distributions🐧 </summary>
-
-## Ubuntu
-### System settings Nautilus 💻 🖥️💡 ⚙ 🛠️ 
-#### Launch file explorer Nautilus as super user admin
-
-```bash
-sudo nautilus
-```
-
-#### operation Keyboard shortcuts
-
-(Tux literal)
-
-- Show hidden files Keyboard shortcut
-
-```bash
-CTRL + H
-```
-
-- Show Path Location Keyboard shortcut
-
-```bash
-CTRL + L
-```
-
-- Switch between the Icons and List formats
-
-```bash
-CTRL + 1 | CTRL + 2
-```
-
-- Search for files
-
-```bash
-CTRL + F
-```
-
-- Delete File(s)
-
-```bash
-CTRL + delete
-```
-
-- Permanently delete
-```bash
-Shift + Delete
-```
-
-- Never delete the Home directory, doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
-
-</details>
-<!-- end of expand -->
-
-# Terminal Shells
-<details>
-<summary> Linux shells </summary>
-
-## Bash
-The Bash Shell and bash Scripting
-refer to the Bash page
-
-#### set bash as default shell for **myUser**
-```bash
-TARGET_USER="myUser"
-sudo chsh -s /bin/bash $TARGET_USER
-```
-
-## Fish
-
-## Zshell
-
-</details>
-<!-- end of expand Shells-->
-
----
-
-# Section
-
-<details>
-<summary> TODO Title 📝 </summary>
-TODO ADD details
-</details>
-<!-- end of expand -->
-
-Top-level suggestions:
-
-Introduction 
-System & Boot,
-Files & Storage, 
-Processes & Memory, 
-Networking, Security & Rescue, 
-Package & System Management, 
-Shells & UX, 
-Distributions 
-
- References [x]
-
-Place related tags as children, e.g. under Files & Storage place #linux-filesystem-tree-layout, #linux-filesystems--the-vfs, #ext4-filesystem, #disk-partitioning, #logical-volume-management-lvm, #compute-storage.
-
-Create Monitoring & Performance with subtopics: #process-monitoring, #memory-monitoring-usage--swap, #io-monitoring, #traffic-capture, #load-testing, #benchmarking.
-
-Turn #todo into a living project board: #todo: prioritize, #todo: write-first-draft, #todo: needs-review rather than one catch-all tag.
-
----
-
-# References
-- [cyberciti reload-sysctl-conf](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
-- taxonomy & main structure from [LinuxFoundationX Introduction to Linux](https://www.edx.org/learn/linux/the-linux-foundation-introduction-to-linux)
-- [Linux CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
-- [Digital ocean talk Handy Linux networking tools](https://www.digitalocean.com/community/tech-talks/handy-networking-tools-and-how-to-use-them)
-- OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
-- [powerful unix commands for troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
-
-[Back to top](#)
