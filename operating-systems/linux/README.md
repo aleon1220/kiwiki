@@ -210,7 +210,25 @@ Define the local and remote paths in env vars. Perform the copy
 scp -r "$LOCAL_PATH" ubuntu@"$REMOTE_HOST_SERVER":"$REMOTE_SERVER_PATH"
 ```
 
+### File Permissions & Ownership
+##### Change permissions of a file based on permissions of other file
+
+```bash
+REFERENCE_FILE="a_file.txt"
+TARGETING_FILE="a_target_file_to_copy_permissions.txt"
+
+sudo chmod --reference="$REFERENCE_FILE" "$TARGETING_FILE"
+```
+
+##### Change ownership of all files in current dir to a given group
+
+```bash
+GROUP_NAME="common" 
+sudo --recursive "$GROUP_NAME" *
+```
 </details>
+
+---
 <!-- end of expand Introduction-->
 
 # Linux Filesystem Tree Layout
@@ -1815,19 +1833,3 @@ function cl() {
 }
 EOF
 ```
-
-##### Change permissions of a file based on permissions of other file
-
-```bash
-REFERENCE_FILE="a_file.txt"
-TARGETING_FILE="a_target_file_to_copy_permissions.txt"
-
-sudo chmod --reference="$REFERENCE_FILE" "$TARGETING_FILE"
-```
-
-##### Change ownership of all files in current dir to a given group
-
-```bash
-GROUP_NAME="common" ; sudo --recursive "$GROUP_NAME" *
-```
----
