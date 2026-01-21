@@ -140,7 +140,7 @@ git worktree add my-other-awesome-feature ../my-other-awesome-feature
 
 git worktree remove ../my-other-awesome-feature
 ```
-**Explanation:**
+**Explanation**
 
 Creates a linked working tree (i.e., another directory on the file system associated with the repo) called `my-other-awesome-feature`, one level above your current working directory, with the specified branch checked out.
 
@@ -520,6 +520,9 @@ git remote set-url origin git@bitbucket.org:tutorials/tutorials.git
 
 ---
 ## Git flow by example
+<details>
+<summary> git flow example </summary>
+
 Quick Start: Learning `git` basics by example. Flow challenge/Demo by hackerRanx.
 
 Goal is to create a git repo in linux instance: Add changes to a source-code file, commit changes, create a develop branch with new changes and finally merge from **develop branch** to **main**
@@ -600,6 +603,8 @@ Fast-forward
  1 
  file changed, 3 insertions(+)
 ```
+</details>
+<!-- end of expand -->
 
 ---
 
