@@ -63,6 +63,12 @@ tree $HOME
 gio tree
 ```
 
+#### Create a directory and run a command
+
+```bash
+cd /home/ws/test ; ls -ltha
+```
+
 ## System diagnostics
 info about a server
 
@@ -209,6 +215,7 @@ Define the local and remote paths in env vars. Perform the copy
 ```bash
 scp -r "$LOCAL_PATH" ubuntu@"$REMOTE_HOST_SERVER":"$REMOTE_SERVER_PATH"
 ```
+
 #### Create a file and add content to it
 
 ```bash
@@ -277,7 +284,6 @@ xdpyinfo | grep dim
 <!-- end of expand GUI -->
 
 # User Group Environment & Account Management
-
 
 <details>
 
@@ -387,6 +393,12 @@ id -un
 
 ```bash
 who | cut -d' ' -f1 | sort | uniq
+```
+
+#### Create variable formatted with current date **YYYY-MM-DD_HHMM**
+
+```bash
+APP_VERSION="Test-$(date +%F_%H%M)"
 ```
 
 </details>
@@ -1211,11 +1223,21 @@ Mandatory Access Control (MAC) via SELinux or AppArmor
 </details>
 <!-- end of expand -->
 
-# System Rescue
+# Troubleshooting  & Diagnostics
 
 <details>
 
 Techniques for troubleshooting unbootable systems, resetting root passwords, rescue disks
+
+## Debugging Logs
+
+#### Analyse Logs. Logs named 3 to 31.gz month. Month like Feb 2020 and print
+
+```bash
+zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | less
+```
+
+## System Rescue
 
 #### Check and repair a filesystem
 > only run on unmounted disks
@@ -1383,14 +1405,6 @@ The settings are read from all of the following system configuration files
 
 ```bash
 sudo sysctl --system
-```
-
-## Debugging Logs
-
-#### Analyse Logs. Logs named 3 to 31.gz month. Month like Feb 2020 and print
-
-```bash
-zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | less
 ```
 
 #### Xclip to capture the clipboard when copying
@@ -1797,22 +1811,8 @@ find . -maxdepth 1 -type f -print
 `lsx` lists executables
 `lsl` lists links
 
-#### start command in the background
+#### start command background
 
 ```bash
-COMMAND="rescuetime"
-$COMMAND &
+rescuetime &
 ```
-
-#### Create variable formatted with current date **YYYY-MM-DD_HHMM**
-
-```bash
-APP_VERSION="Test-$(date +%F_%H%M)"
-```
-
-#### one liner Create a directory and run a command
-
-```bash
-`cd $DIR1; $(COMMAND)`
-```
-
