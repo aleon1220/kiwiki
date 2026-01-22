@@ -462,6 +462,48 @@ sudo apt install --reinstall $PACKAGE_NAME
 sudo apt-get purge unattended-upgrades
 ```
 
+#### Show GPG keys in the keyring for signing apps
+
+```bash
+apt-key list
+```
+
+#### Remove PPA repository record
+
+```bash
+sudo add-apt-repository --remove ppa:PPA_Name/ppa
+```
+
+#### Remove a PPA from the source list in the terminal
+
+```bash
+sudo rm -i /etc/apt/sources.list.d/PPA_Name.list
+```
+
+#### Install a Debian Package
+
+```bash
+sudo dpkg -i $DEBIAN_PKG
+```
+
+#### Check if Periodic updates are enabled
+
+```bash
+cat /etc/apt/apt.conf.d/10periodic
+```
+
+#### Get packages from repo and find given string
+
+```bash
+dpkg --get-selections | grep PACKAGE_TO_FIND
+```
+
+#### list snap packages installed
+
+```bash
+snap list
+```
+
 </details>
 <!-- end of expand -->
 
@@ -802,6 +844,18 @@ Abstraction layer allowing flexible resizing and spanning of filesystems across 
 
 ## Kernel Services & Configuration
 Managing kernel parameters at runtime without rebooting using `sysctl`
+
+#### show all values available
+
+```bash
+sudo sysctl --all
+```
+
+#### List System Boots
+
+```bash
+journalctl --list-boots
+```
 
 ##  Kernel Modules
 Managing pieces of code (drivers) that can be loaded into or unloaded from the kernel on demand.
@@ -1326,6 +1380,7 @@ Shift + Delete
 <!-- end of expand -->
 
 # Terminal Shells
+
 <details>
 <summary> Linux shells </summary>
 
@@ -1346,9 +1401,27 @@ sudo chsh -s /bin/bash $TARGET_USER
 </details>
 <!-- end of expand Shells-->
 
+# References
+<details>
+
+<summary> sources for this wiki 📝 </summary>
+- [cyberciti reload-sysctl-conf](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
+- taxonomy & main structure from [LinuxFoundationX Introduction to Linux](https://www.edx.org/learn/linux/the-linux-foundation-introduction-to-linux)
+- [Linux CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
+- [Digital ocean talk Handy Linux networking tools](https://www.digitalocean.com/community/tech-talks/handy-networking-tools-and-how-to-use-them)
+- OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
+- [powerful unix commands for troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
+
+</details>
+
 ---
 
-# Section
+[Back to top](#)
+
+
+---
+
+# TODO: reuse Section
 
 <details>
 <summary> TODO Title 📝 </summary>
@@ -1358,34 +1431,21 @@ TODO ADD details
 
 Top-level suggestions:
 
-Introduction 
-System & Boot,
-Files & Storage, 
-Processes & Memory, 
-Networking, Security & Rescue, 
-Package & System Management, 
-Shells & UX, 
-Distributions 
+- Introduction [x]
+- System & Boot
+- Files & Storage
+- Processes & Memory
+- Networking, Security & Rescue
+- Package & System Management
+- Shells & UX
+- Distributions
+- References [x]
 
- References [x]
+Place related tags as children subtopics, e.g. under Files & Storage place #linux-filesystem-tree-layout, #linux-filesystems--the-vfs, #ext4-filesystem, #disk-partitioning, #logical-volume-management-lvm, #compute-storage.
 
-Place related tags as children, e.g. under Files & Storage place #linux-filesystem-tree-layout, #linux-filesystems--the-vfs, #ext4-filesystem, #disk-partitioning, #logical-volume-management-lvm, #compute-storage.
-
-Create Monitoring & Performance with subtopics: #process-monitoring, #memory-monitoring-usage--swap, #io-monitoring, #traffic-capture, #load-testing, #benchmarking.
+Create Monitoring & Performance with : #process-monitoring, #memory-monitoring-usage--swap, #io-monitoring, #traffic-capture, #load-testing, #benchmarking.
 
 Turn #todo into a living project board: #todo: prioritize, #todo: write-first-draft, #todo: needs-review rather than one catch-all tag.
-
----
-
-# References
-- [cyberciti reload-sysctl-conf](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
-- taxonomy & main structure from [LinuxFoundationX Introduction to Linux](https://www.edx.org/learn/linux/the-linux-foundation-introduction-to-linux)
-- [Linux CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
-- [Digital ocean talk Handy Linux networking tools](https://www.digitalocean.com/community/tech-talks/handy-networking-tools-and-how-to-use-them)
-- OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
-- [powerful unix commands for troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
-
-[Back to top](#)
 
 ---
 
@@ -1401,8 +1461,6 @@ move to the different category folders the different commands found in this page
 TODO add detail
 </details>
 <!-- end of expand -->
-
-
 
 ## Text Editors
 
@@ -1567,48 +1625,6 @@ grep --extended-regexp --recursive --ignore-case "health_url" .
 find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
 ```
 
-#### Show GPG keys in the keyring for signing apps
-
-```bash
-apt-key list
-```
-
-#### Remove PPA repository record
-
-```bash
-sudo add-apt-repository --remove ppa:PPA_Name/ppa
-```
-
-#### Remove a PPA from the source list in the terminal
-
-```bash
-sudo rm -i /etc/apt/sources.list.d/PPA_Name.list
-```
-
-#### Install a Debian Package
-
-```bash
-sudo dpkg -i $DEBIAN_PKG
-```
-
-#### Check if Periodic updates are enabled
-
-```bash
-cat /etc/apt/apt.conf.d/10periodic
-```
-
-#### Get packages from repo and find given string
-
-```bash
-dpkg --get-selections | grep PACKAGE_TO_FIND
-```
-
-#### list snap packages installed
-
-```bash
-snap list
-```
-
 ## Debugging Linux Systems
 > mostly Ubuntu/Debian based distros
 
@@ -1642,8 +1658,8 @@ ls -xl ${DIR_PATH}
 ```bash
 lsof -u $USER
 ```
-```
-#### use sudo to change user
+
+#### change to another user
 ```bash
 sudo su - OTHER_USER
 ```
@@ -1654,7 +1670,7 @@ sudo su - OTHER_USER
 kill -9 $(lsof -t -u $TARGET_USER)
 ```
 
-#### Read from a file in a specific line e.g. 4
+#### Read from a file in a specific line 4
 
 ```bash
 less +4 -N show-time.sh
@@ -1692,12 +1708,6 @@ journalctl -r
 ```bash
 journalctl --since "2022-01-30 15:10:10"
 journalctl --until "2022-12-24 00:05:50"
-```
-
-#### List System Boots
-
-```bash
-journalctl --list-boots
 ```
 
 #### Show Logs for a systemd Service
@@ -1763,7 +1773,7 @@ stat --help
 
 ```bash
 echo Source_File.txt | grep $REGEX_PATTERN
-grep "'.*'" -o references-get-between-quoutes.txt > result_1855.txt
+grep "'.*'" -o references-get-between-quoutes.txt > result_01.txt
 
 PATTERN='".*"'
 grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt
@@ -1798,10 +1808,4 @@ useful when user knows the 2 stings used in a command.
 Regex `.*` matches any sequence of characters
 ```bash
 history | grep 'cd.*TESTS'
-```
-
-#### Set max map count
-
-```bash
-sudo sysctl -w vm.max_map_count=262144
 ```
