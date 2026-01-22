@@ -474,6 +474,12 @@ sudo apt-get purge unattended-upgrades
 
 Process Monitoring, scheduling
 
+#### start command background
+
+```bash
+rescuetime &
+```
+
 #### find the HTTPD user in a web server
 ```bash
 HTTPDUSER=$(ps axo "user,comm" | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
@@ -1803,16 +1809,4 @@ history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " "CMD[a]/co
 
 ```bash
 find . -maxdepth 1 -type f -print
-```
-
-#### Script usage
-`lsf` lists files
-`lsd` lists directories
-`lsx` lists executables
-`lsl` lists links
-
-#### start command background
-
-```bash
-rescuetime &
 ```

@@ -12,7 +12,6 @@
 #   <command_name> [switches valid for ls command] [dirname...]
 #
 # Works with names that includes spaces and that start with a hyphen.
-#
 # Created by Nick Clifton.
 # Version 1.4
 # Copyright (c) 2006, 2007 Red Hat.
