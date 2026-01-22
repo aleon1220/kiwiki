@@ -9,7 +9,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Enable GPG signing. WSL with Ubuntu 18
+# Enable GPG signing. 
+# tested in WSL Ubuntu 18
+
 echo "enabling GPG capabilities"
 export GPG_TTY=$(tty)
 
@@ -30,9 +32,3 @@ fi
 
 ## RescueTime integration
 export RESCUE_TIME_API_KEY="ADD_KEY"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/rnd-dev/.sdkman"
-[[ -s "/home/rnd-dev/.sdkman/bin/sdkman-init.sh" ]] && source "/home/rnd-dev/.sdkman/bin/sdkman-init.sh"
-
-complete -C /usr/bin/terraform terraform

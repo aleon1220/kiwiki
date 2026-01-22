@@ -209,6 +209,16 @@ Define the local and remote paths in env vars. Perform the copy
 ```bash
 scp -r "$LOCAL_PATH" ubuntu@"$REMOTE_HOST_SERVER":"$REMOTE_SERVER_PATH"
 ```
+#### Create a file and add content to it
+
+```bash
+FILE_PATH="/home/ubuntu/.bash_functions"
+
+sudo bash -c "cat > $FILE_PATH"<<EOF
+Content foobar text here
+another line foo
+EOF
+```
 
 ### File Permissions & Ownership
 ##### Change permissions of a file based on permissions of other file
@@ -494,7 +504,8 @@ In this case the content of a `DockerFile` is echoed first then piped to `docker
 echo -e 'FROM busybox\nRUN echo "hello world"' | docker build -
 ```
 
-#### run a command and append config
+#### run a command, append config file
+
 ```bash
 docker build -<<EOF
 FROM busybox
@@ -1805,31 +1816,3 @@ APP_VERSION="Test-$(date +%F_%H%M)"
 `cd $DIR1; $(COMMAND)`
 ```
 
-#### Create a file and add content to it
-
-```bash
-FILE_PATH=/home/ubuntu/.bash_functions
-
-sudo bash -c "cat > $FILE_PATH"<<EOF
-Content and text here
-foobar
-EOF
-```
-
-#### Create a function to show files in current dir
-
-```bash
-FILE_PATH=/home/ubuntu/.bash_functions
-sudo bash -c "cat > $FILE_PATH"<<EOF
-function cl() {
-    DIR="$*";
-        # if no DIR given, go home
-        if [ $# -lt 1 ]; then
-                DIR=$HOME;
-    fi;
-    builtin cd "${DIR}" && \
-    # use your preferred ls command
-        ls -F --color=auto
-}
-EOF
-```

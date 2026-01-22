@@ -1,5 +1,7 @@
+#!/bin/bash
 
 # takes the first argument and calls the appropriate utility program based on the file extension used
+
 function extract {
  if [ -z "$1" ]; then
     # display usage if no parameters given
@@ -34,4 +36,17 @@ function extract {
       fi
     done
 fi
+}
+
+# function to show files in current dir
+function listMyFiles() {
+    DIR="$*";
+        # if no DIR given, go home
+        if [ $# -lt 1 ]; then
+                DIR=$HOME;
+    fi;
+    
+    # use your preferred ls command
+    builtin cd "${DIR}" && \
+    ls --file --color=auto
 }
