@@ -474,6 +474,18 @@ sudo apt-get purge unattended-upgrades
 
 Process Monitoring, scheduling
 
+#### History top 20 commands in bash_history
+```bash
+cat ~/.bash_history | grep -v ^# | awk '{print $1}' | sort | uniq -c | sort -nr | head -20
+```
+
+#### History 10 Most used commands
+
+```bash
+printf "\n  | No | procId | usage | command | \n" ;
+history | awk '{CMD[$2]++;count++;} END { for (a in CMD) print " " CMD[a] "\t " CMD[a]/count*100 "%  " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10
+```
+
 #### start command background
 
 ```bash
@@ -1490,8 +1502,10 @@ mkdir -p $HOME/example.com/server1/{httpd,dnsqmasq}
 
 ## Find/Search operations
 
+#### List all files in a current directory
+
 ```bash
-find [where to start searching] [-options] [expression]
+find . -maxdepth 1 -type f -print
 ```
 
 #### Search for the text **dataToFind** in markdown files
@@ -1790,23 +1804,4 @@ history | grep 'cd.*TESTS'
 
 ```bash
 sudo sysctl -w vm.max_map_count=262144
-```
-
-#### History top 20 commands in bash_history
-```bash
-cat ~/.bash_history | grep -v ^# | awk '{print $1}' | sort | uniq -c | sort -nr | head -20
-```
-
-#### History 10 Most used commands
-the format used is 
-| column No | procId | percentage usage | command |
-
-```bash
-history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " "CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10
-```
-
-#### List all files in a current directory
-
-```bash
-find . -maxdepth 1 -type f -print
 ```
