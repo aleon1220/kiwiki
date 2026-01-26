@@ -857,7 +857,22 @@ sudo sysctl --all
 journalctl --list-boots
 ```
 
-##  Kernel Modules
+### Reload system configs
+
+The settings are read from all of the following system configuration files
+
+1. `/run/sysctl.d/*.conf`
+2. `/etc/sysctl.d/*.conf`
+3. `/usr/local/lib/sysctl.d/*.conf`
+4. `/usr/lib/sysctl.d/*.conf`
+5. `/lib/sysctl.d/*.conf`
+6. `/etc/sysctl.conf`
+
+```bash
+sudo sysctl --system
+```
+
+###  Kernel Modules
 Managing pieces of code (drivers) that can be loaded into or unloaded from the kernel on demand.
 `lsmod`
 
@@ -1454,34 +1469,11 @@ Turn #todo into a living project board: #todo: prioritize, #todo: write-first-dr
 <details>
 move to the different category folders the different commands found in this page
 
-## Section TODO:reuse-template
-<details>
-<summary> TODO Title  </summary>
-
-TODO add detail
-</details>
-<!-- end of expand -->
-
 ## Text Editors
 
 ## User Environment
 
 ## Printing
-
-#### Reload system configs
-
-The settings are read from all of the following system configuration files
-
-1. `/run/sysctl.d/*.conf`
-2. `/etc/sysctl.d/*.conf`
-3. `/usr/local/lib/sysctl.d/*.conf`
-4. `/usr/lib/sysctl.d/*.conf`
-5. `/lib/sysctl.d/*.conf`
-6. `/etc/sysctl.conf`
-
-```bash
-sudo sysctl --system
-```
 
 #### Xclip to capture the clipboard when copying
 
