@@ -243,6 +243,50 @@ sudo chmod --reference="$REFERENCE_FILE" "$TARGETING_FILE"
 GROUP_NAME="common" 
 sudo --recursive "$GROUP_NAME" *
 ```
+
+## Compression/Decompression
+### Tar
+#### Decompress verbose
+
+```bash
+tar -zxvf archive-name.tar.gz /decompression/path/directory/
+```
+### Zip
+
+```bash
+zip  --recurse-paths work-log-years.zip directory1/ directory2/
+```
+
+#### Compress directories and files
+```bash
+zip -r compressedFileName.zip file1 file2 dir1/ file3
+```
+#### Decompress to current directory
+```bash
+unzip work-log-years.zip
+```
+
+####  batch extract all files to a specific directory
+```bash
+for i  in  $(find . –name “*.zip”–type f)
+do
+unzip –d $i /data/www/img/
+done
+```
+
+#### Create a directory YYYY-MM-DD format
+during testing is helpful to name files and directories
+
+```bash
+folder_name="$(date +%F)"
+mkdir --parents --verbose $folder_name && cd $folder_name
+```
+
+#### Create a parent directory with 2 directories inside (Single line)
+```bash
+mkdir -p $HOME/example.com/server1/{httpd,dnsqmasq}
+```
+
 </details>
 
 ---
@@ -1420,12 +1464,13 @@ sudo chsh -s /bin/bash $TARGET_USER
 <details>
 
 <summary> sources for this wiki 📝 </summary>
-- [cyberciti reload-sysctl-conf](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
+
+- [cyberciti linux reload-sysctl config](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
 - taxonomy & main structure from [LinuxFoundationX Introduction to Linux](https://www.edx.org/learn/linux/the-linux-foundation-introduction-to-linux)
 - [Linux CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
-- [Digital ocean talk Handy Linux networking tools](https://www.digitalocean.com/community/tech-talks/handy-networking-tools-and-how-to-use-them)
-- OpenVPN [setup in ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
-- [powerful unix commands for troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
+- [Digital ocean Handy Linux networking tools](https://www.digitalocean.com/community/tech-talks/handy-networking-tools-and-how-to-use-them)
+- [setup OpenVPNin ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
+- [powerful unix commands troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
 
 </details>
 
@@ -1505,49 +1550,6 @@ which $COMMAND
 
 ```bash
 alias ee='cd /home/ws/projects/ee/test'
-```
-
-## Compression/Decompression
-### Tar
-#### Decompress verbose
-
-```bash
-tar -zxvf archive-name.tar.gz /decompression/path/directory/
-```
-### Zip
-
-```bash
-zip  --recurse-paths work-log-years.zip directory1/ directory2/
-```
-
-#### Compress directories and files
-```bash
-zip -r compressedFileName.zip file1 file2 dir1/ file3
-```
-#### Decompress to current directory
-```bash
-unzip work-log-years.zip
-```
-
-####  batch extract all files to a specific directory
-```bash
-for i  in  $(find . –name “*.zip”–type f)
-do
-unzip –d $i /data/www/img/
-done
-```
-
-#### Create a directory YYYY-MM-DD format
-during testing is helpful to name files and directories
-
-```bash
-folder_name="$(date +%F)"
-mkdir --parents --verbose $folder_name && cd $folder_name
-```
-
-#### Create a parent directory with 2 directories inside (Single line)
-```bash
-mkdir -p $HOME/example.com/server1/{httpd,dnsqmasq}
 ```
 
 ## Find/Search operations
