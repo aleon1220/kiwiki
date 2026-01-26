@@ -69,6 +69,67 @@ gio tree
 cd /home/ws/test ; ls -ltha
 ```
 
+## Find/Search operations
+
+#### Search for the text **dataToFind** in markdown files
+
+```bash
+find ./ -type f -name "*.md" -exec grep 'dataToFind'  {} \;
+```
+
+#### Find file named LICENSE current directory and up to subdirectory level
+
+```bash
+find . -maxdepth 2 -name LICENSE
+```
+
+#### Find directories matching a String
+```bash
+-type d -name '*myServices*'
+```
+
+### Grep
+#### Find files containing specific text
+
+```bash
+grep -iRl "TEXT-TO-FIND" ./
+```
+
+##### Common Flags for `grep`
+
+```bash
+-i - ignore text case
+-R - recursively search files in subdirectories.
+-l - show file names instead of file contents portions.
+```
+
+`./` As the last parameter, the path to the folder containing files you want to search for text.
+
+You can use the full path of the folder.
+
+```bash
+grep -iRl "TEXT" /home/user/Documents
+```
+
+#### Find the value of `THING_NAME` and replaces the value in a given config file
+
+```bash
+THING_NAME=< enter bucket Name >
+sed -i -r "s/^THING_NAME=.*/THING_NAME=$THING_NAME/" /home/ubuntu/sftp-shim.config
+```
+
+#### Searches for (short form `-Eri`) string health_url in the current directory
+
+```bash
+grep --extended-regexp --recursive --ignore-case "health_url" .
+```
+
+#### Find directories modified within the past 10 days
+
+```bash
+find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
+```
+
 ## System diagnostics
 info about a server
 
@@ -225,6 +286,12 @@ sudo bash -c "cat > $FILE_PATH"<<EOF
 Content foobar text here
 another line foo
 EOF
+```
+
+#### List all files in a current directory
+
+```bash
+find . -maxdepth 1 -type f -print
 ```
 
 ### File Permissions & Ownership
@@ -1550,73 +1617,6 @@ which $COMMAND
 
 ```bash
 alias ee='cd /home/ws/projects/ee/test'
-```
-
-## Find/Search operations
-
-#### List all files in a current directory
-
-```bash
-find . -maxdepth 1 -type f -print
-```
-
-#### Search for the text **dataToFind** in markdown files
-
-```bash
-find ./ -type f -name "*.md" -exec grep 'dataToFind'  {} \;
-```
-
-#### Find file named LICENSE current directory and up to subdirectory level
-
-```bash
-find . -maxdepth 2 -name LICENSE
-```
-
-#### Find directories matching a String
-```bash
--type d -name '*myServices*'
-```
-
-### Grep
-#### Find files containing specific text
-
-```bash
-grep -iRl "TEXT-TO-FIND" ./
-```
-
-##### Common Flags for `grep`
-
-```bash
--i - ignore text case
--R - recursively search files in subdirectories.
--l - show file names instead of file contents portions.
-```
-
-`./` As the last parameter, the path to the folder containing files you want to search for text.
-
-You can use the full path of the folder.
-
-```bash
-grep -iRl "TEXT" /home/user/Documents
-```
-
-#### Find the value of `THING_NAME` and replaces the value in a given config file
-
-```bash
-THING_NAME=< enter bucket Name >
-sed -i -r "s/^THING_NAME=.*/THING_NAME=$THING_NAME/" /home/ubuntu/sftp-shim.config
-```
-
-#### Searches for (short form `-Eri`) string health_url in the current directory
-
-```bash
-grep --extended-regexp --recursive --ignore-case "health_url" .
-```
-
-#### Find directories modified within the past 10 days
-
-```bash
-find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
 ```
 
 ## Debugging Linux Systems
