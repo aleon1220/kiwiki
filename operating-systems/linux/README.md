@@ -68,6 +68,14 @@ gio tree
 ```bash
 cd /home/ws/test ; ls -ltha
 ```
+### Getting help & documentation
+#### Help with a command
+```bash
+command="stat"
+$command --help
+```
+
+## Find/Search operations
 
 #### Find in history matching 2 strings
 useful when user knows the 2 stings used in a command.
@@ -76,12 +84,11 @@ Regex `.*` matches any sequence of characters
 history | grep 'cd.*TESTS'
 ```
 
-## Find/Search operations
-
 #### Search for the text **dataToFind** in markdown files
 
 ```bash
 find ./ -type f -name "*.md" -exec grep 'dataToFind'  {} \;
+
 ```
 
 #### Find file named LICENSE current directory and up to subdirectory level
@@ -1797,9 +1804,4 @@ sudo ln --symbolic $SOURCE_FILE $SYMBOLIC_LINK_PATH
 ```bash
 randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | \
 base64 | tr /= _)
-```
-#### Help with a command
-```bash
-command="stat"
-$command --help
 ```
