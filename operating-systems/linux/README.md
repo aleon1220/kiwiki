@@ -428,6 +428,7 @@ xdpyinfo | grep dim
 <details>
 
 <summary> User Account Management </summary>
+
 Covers shell customization, environment variables, aliases, and startup scripts like .bashrc.
 
 2024-06-12 migrating Win11 laptops with WSL 
@@ -462,6 +463,14 @@ Each line in the file `etc/passwd` has seven fields delimited by colons that con
 - Full name of the user (GECOS)
 - User home directory
 - Login shell (defaults to /bin/bash)
+
+##### Create a random password
+/dev/urandom (which outputs random noise), converts that noise to text (base64), and cleans up special characters (tr)
+
+```bash
+randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | \
+base64 | tr /= _)
+```
 
 #### Display only the username
 
@@ -1703,12 +1712,12 @@ sudo chsh -s /bin/bash $TARGET_USER
 
 <summary> sources for this wiki 📝 </summary>
 
-- [cyberciti linux reload-sysctl config](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
-- taxonomy & main structure from [LinuxFoundationX Introduction to Linux](https://www.edx.org/learn/linux/the-linux-foundation-introduction-to-linux)
+- [cyberciti linux reload sysctl config](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
+- [Taxonomy & main structure LinuxFoundationX Introduction to Linux](https://www.edx.org/learn/linux/the-linux-foundation-introduction-to-linux)
 - [Linux CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
 - [Digital ocean Handy Linux networking tools](https://www.digitalocean.com/community/tech-talks/handy-networking-tools-and-how-to-use-them)
-- [setup OpenVPNin ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
-- [powerful unix commands troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
+- [setup OpenVPN Ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
+- [linux commands troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
 
 </details>
 
@@ -1716,16 +1725,21 @@ sudo chsh -s /bin/bash $TARGET_USER
 
 [Back to top](#)
 
+# TODO: categorise
+
+<details>
 
 ---
 
 # TODO: reuse Section
 
 <details>
-<summary> TODO Title 📝 </summary>
+<summary> TODO add summary Title 📝 </summary>
 TODO ADD details
 </details>
 <!-- end of expand -->
+
+---
 
 Top-level suggestions:
 
@@ -1745,13 +1759,6 @@ Create Monitoring & Performance with : #process-monitoring, #memory-monitoring-u
 
 Turn #todo into a living project board: #todo: prioritize, #todo: write-first-draft, #todo: needs-review rather than one catch-all tag.
 
----
-
-# todo: categorise
-
-<details>
-
-move to the different category folders the different commands found in this page
 
 ## Text Editors
 
@@ -1798,10 +1805,4 @@ SOURCE_FILE=/home/ubuntu/.local/bin/docker-compose
 SYMBOLIC_LINK_PATH=/usr/bin/docker-compose
 sudo ln --symbolic $SOURCE_FILE $SYMBOLIC_LINK_PATH
 ```
-
-##### Create a random password
-
-```bash
-randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | \
-base64 | tr /= _)
-```
+</details>
