@@ -708,12 +708,125 @@ nohup $COMMAND_OR_SCRIPT > out_$(date).txt
 
 # Monitoring & Performance
 
-
-
 <details>
 
-<summary> Memory management </summary>
+<summary>  </summary>
 
+## Monitoring & Troubleshooting
+### Debugging Linux Systems
+> mostly Ubuntu/Debian based distros
+
+A very important set of skills when something goes wrong and is important to get quick info.
+This can become a small DIY project to manage desktop and cloud servers.
+
+```bash
+ls -lth /var/log/ | sort --month-sort
+```
+
+#### Check the system log
+
+```bash
+less /var/log/syslog
+```
+
+#### Create empty file in given path
+
+```bash
+touch /home/user/new_empty_file.txt
+```
+
+#### List directory with extensions
+
+```bash
+ls -xl ${DIR_PATH}
+```
+
+#### lists open files for current user
+
+```bash
+lsof -u $USER
+```
+
+#### change to another user
+```bash
+sudo su - OTHER_USER
+```
+
+#### End all processes for a target user
+
+```bash
+kill -9 $(lsof -t -u $TARGET_USER)
+```
+
+#### Read from a file in a specific line 4
+
+```bash
+less +4 -N show-time.sh
+```
+
+### Handle Logs
+
+#### Commong logs in linux
+
+- `/var/log/message`
+Contains global system messages, including the messages that are logged during system startup. Includes mail, cron, daemon, kern, auth, etc.
+
+- `/var/log/auth.log`
+Authentication logs
+
+- `/var/log/kern.log`
+Kernel logs
+
+- `/var/log/cron.log`
+Crond logs
+
+#### Check System Logs Journal Control
+```bash
+journalctl -xe
+```
+
+#### Obtain Log output from oldest to newest
+
+```bash
+journalctl -r
+```
+
+#### Show Logs within a Time Range
+
+```bash
+journalctl --since "2022-01-30 15:10:10"
+journalctl --until "2022-12-24 00:05:50"
+```
+
+#### Show Logs for a systemd Service
+
+```bash
+journalctl -u $SERVICE_NAME
+```
+
+#### View Kernel Messages
+
+```bash
+journalctl -k
+```
+
+#### change Output Format to json-pretty
+
+```bash
+journalctl -o json-pretty
+```
+
+#### Reduce the size of your journals to 2GiB
+Clean Up Archived Logs
+```bash
+journalctl --vacuum-size=2G
+```
+
+#### Remove archived journal files with dates older than the specified relative time
+
+```bash
+journalctl --vacuum-time=1years
+```
 
 ## Memory Monitoring, Usage & Swap
 RAM usage and managing swap space (virtual memory on disk)
@@ -727,6 +840,8 @@ Monitoring input/output statistics for disks to identify performance bottlenecks
 ## load testing
 
 ## benchmarking
+
+## Memory management
 
 </details>
 <!-- end of expand Section -->
@@ -746,12 +861,20 @@ Monitoring input/output statistics for disks to identify performance bottlenecks
 How the kernel handles different filesystem types via the Virtual Filesystem Switch (VFS).
 Hard drives, volumes, SSDs, mounts, filesystem, etc
 
+## Filesystems
+
 ### EXT4 Filesystem
 the default Linux filesystem, including journaling and inodes
 
-### Compute Storage
+## Compute Storage
 
 Process for Linux + `LVM` + `ext3`
+
+#### Check System Disk Usage
+
+```bash
+df -h
+```
 
 LVM volume group myvg, mounted volume name `uservol1` and disk device in Linux is `/dev/sdf`
 
@@ -1576,9 +1699,10 @@ Turn #todo into a living project board: #todo: prioritize, #todo: write-first-dr
 
 ---
 
-# todo: prioritise
+# todo: categorise
 
 <details>
+
 move to the different category folders the different commands found in this page
 
 ## Text Editors
@@ -1599,7 +1723,7 @@ cat ~/.ssh/id_rsa.pub | xclip -sel clip
 stat %A $DIR
 ```
 
-##### Maintain symbolic links determining default commands. 
+##### Maintain symbolic links determining default commands
 Show installed Apps
 
 ```bash
@@ -1619,120 +1743,6 @@ which $COMMAND
 alias ee='cd /home/ws/projects/ee/test'
 ```
 
-## Debugging Linux Systems
-> mostly Ubuntu/Debian based distros
-
-A very important set of skills when something goes wrong and is important to get quick info.
-This can become a small DIY project to manage desktop and cloud servers.
-
-```bash
-ls -lth /var/log/ | sort --month-sort
-```
-
-#### Check the system log
-
-```bash
-less /var/log/syslog
-```
-
-#### Create empty file in given path
-
-```bash
-touch /home/user/new_empty_file.txt
-```
-
-#### List directory with extensions
-
-```bash
-ls -xl ${DIR_PATH}
-```
-
-#### lists open files for current user
-
-```bash
-lsof -u $USER
-```
-
-#### change to another user
-```bash
-sudo su - OTHER_USER
-```
-
-#### End all processes for a target user
-
-```bash
-kill -9 $(lsof -t -u $TARGET_USER)
-```
-
-#### Read from a file in a specific line 4
-
-```bash
-less +4 -N show-time.sh
-```
-
-## Handle Logs
-
-#### Commong logs in linux
-
-- `/var/log/message`
-Contains global system messages, including the messages that are logged during system startup. Includes mail, cron, daemon, kern, auth, etc.
-
-- `/var/log/auth.log`
-Authentication logs
-
-- `/var/log/kern.log`
-Kernel logs
-
-- `/var/log/cron.log`
-Crond logs
-
-#### Check System Logs Journal Control
-```bash
-journalctl -xe
-```
-
-#### Obtain Log output from oldest to newest
-
-```bash
-journalctl -r
-```
-
-#### Show Logs within a Time Range
-
-```bash
-journalctl --since "2022-01-30 15:10:10"
-journalctl --until "2022-12-24 00:05:50"
-```
-
-#### Show Logs for a systemd Service
-
-```bash
-journalctl -u $SERVICE_NAME
-```
-
-#### View Kernel Messages
-
-```bash
-journalctl -k
-```
-
-#### change Output Format to json-pretty
-
-```bash
-journalctl -o json-pretty
-```
-
-#### Reduce the size of your journals to 2GiB
-Clean Up Archived Logs
-```bash
-journalctl --vacuum-size=2G
-```
-
-#### Remove archived journal files with dates older than the specified relative time
-
-```bash
-journalctl --vacuum-time=1years
-```
 #### Create a Symbolic Link
 
 ```bash
@@ -1763,7 +1773,7 @@ stat $FILE
 stat --help
 ```
 
-#### Get text between quotes in a text file. Options
+#### Get text between quotes to a file
 
 ```bash
 echo Source_File.txt | grep $REGEX_PATTERN
@@ -1771,12 +1781,6 @@ grep "'.*'" -o references-get-between-quoutes.txt > result_01.txt
 
 PATTERN='".*"'
 grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt
-```
-
-#### Check System Disk Usage
-
-```bash
-df -h
 ```
 
 ##### See who is connected and Display the load average (uptime output)
