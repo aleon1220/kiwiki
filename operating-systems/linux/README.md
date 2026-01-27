@@ -69,6 +69,13 @@ gio tree
 cd /home/ws/test ; ls -ltha
 ```
 
+#### Find in history matching 2 strings
+useful when user knows the 2 stings used in a command.
+Regex `.*` matches any sequence of characters
+```bash
+history | grep 'cd.*TESTS'
+```
+
 ## Find/Search operations
 
 #### Search for the text **dataToFind** in markdown files
@@ -86,6 +93,19 @@ find . -maxdepth 2 -name LICENSE
 #### Find directories matching a String
 ```bash
 -type d -name '*myServices*'
+```
+
+#### Find directories modified within the past 10 days
+
+```bash
+find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
+```
+
+#### Find the value of `THING_NAME` and replaces the value in a given config file
+
+```bash
+THING_NAME=< enter bucket Name >
+sed -i -r "s/^THING_NAME=.*/THING_NAME=$THING_NAME/" /home/ubuntu/sftp-shim.config
 ```
 
 ### Grep
@@ -111,23 +131,20 @@ You can use the full path of the folder.
 grep -iRl "TEXT" /home/user/Documents
 ```
 
-#### Find the value of `THING_NAME` and replaces the value in a given config file
-
-```bash
-THING_NAME=< enter bucket Name >
-sed -i -r "s/^THING_NAME=.*/THING_NAME=$THING_NAME/" /home/ubuntu/sftp-shim.config
-```
-
 #### Searches for (short form `-Eri`) string health_url in the current directory
 
 ```bash
 grep --extended-regexp --recursive --ignore-case "health_url" .
 ```
 
-#### Find directories modified within the past 10 days
+#### Get text between quotes to a file
 
 ```bash
-find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
+echo Source_File.txt | grep $REGEX_PATTERN
+grep "'.*'" -o references-get-between-quoutes.txt > result_01.txt
+
+PATTERN='".*"'
+grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt
 ```
 
 ## System diagnostics
@@ -450,6 +467,12 @@ If UID is not specified when creating a new user with the `useradd` command, the
 getent passwd | cut -d: -f1 | sort
 ```
 
+#### See who is connected and Display the load average (uptime output)
+
+```bash
+w -u
+```
+
 #### check type of terminal
 ```bash
 printf "%s\n" $TERM
@@ -513,7 +536,7 @@ APP_VERSION="Test-$(date +%F_%H%M)"
 ```
 
 </details>
-<!-- end of expand user management -->
+<!-- end of expand -->
 
 # Package Management Systems
 
@@ -589,6 +612,12 @@ sudo add-apt-repository --remove ppa:PPA_Name/ppa
 
 ```bash
 sudo rm -i /etc/apt/sources.list.d/PPA_Name.list
+```
+
+##### Check Timestamp for last updated packages in package manager
+
+```bash
+ls -l /var/lib/apt/periodic/update-stamp
 ```
 
 #### Install a Debian Package
@@ -834,6 +863,12 @@ RAM usage and managing swap space (virtual memory on disk)
 ## I/O Monitoring
 Input Output Ops
 Monitoring input/output statistics for disks to identify performance bottlenecks.
+
+##### Scan full disk and analyze it using tool `ncdu`
+
+```bash
+sudo ncdu /
+```
 
 ## traffic capture
 
@@ -1751,59 +1786,19 @@ SYMBOLIC_LINK_PATH=/usr/bin/docker-compose
 sudo ln --symbolic $SOURCE_FILE $SYMBOLIC_LINK_PATH
 ```
 
-##### Check Timestamp for last updated packages in package manager apt
-
-```bash
-ls -l /var/lib/apt/periodic/update-stamp
-```
-
 ##### Create a random password
 
 ```bash
 randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | \
 base64 | tr /= _)
 ```
-
-##### Get stats info about a file
-
+#### Help with a command
 ```bash
-stat $FILE
-
-# Help with the command
 stat --help
 ```
 
-#### Get text between quotes to a file
+#### Get stats info about a file
 
 ```bash
-echo Source_File.txt | grep $REGEX_PATTERN
-grep "'.*'" -o references-get-between-quoutes.txt > result_01.txt
-
-PATTERN='".*"'
-grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt
-```
-
-##### See who is connected and Display the load average (uptime output)
-
-```bash
-w -u
-```
-
-##### Scan full disk and analyze it using tool `ncdu`
-
-```bash
-sudo ncdu /
-```
-
-##### Remove directory forcefully
-
-```bash
-COMMAND=who ; history | grep $COMMAND
-```
-
-#### Find in history matching 2 strings
-useful when user knows the 2 stings used in a command.
-Regex `.*` matches any sequence of characters
-```bash
-history | grep 'cd.*TESTS'
+stat $FILE
 ```
