@@ -327,6 +327,11 @@ sudo chmod --reference="$REFERENCE_FILE" "$TARGETING_FILE"
 GROUP_NAME="common" 
 sudo --recursive "$GROUP_NAME" *
 ```
+#### Get stats info about a file
+
+```bash
+stat $FILE
+```
 
 ## Compression/Decompression
 ### Tar
@@ -972,7 +977,8 @@ storage info. Confirm mounted file system now have more space.
 df --human-readable
 ```
 
-#### View your available disk devices, mount points (if applicable) to help you determine the correct device name to use
+#### View available disk devices, mount points (if applicable)
+helps to determine the correct device name to use
 
 ```bash
 lsblk
@@ -1794,11 +1800,6 @@ base64 | tr /= _)
 ```
 #### Help with a command
 ```bash
-stat --help
-```
-
-#### Get stats info about a file
-
-```bash
-stat $FILE
+command="stat"
+$command --help
 ```
