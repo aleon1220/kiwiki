@@ -340,6 +340,14 @@ sudo --recursive "$GROUP_NAME" *
 stat $FILE
 ```
 
+#### Create a Symbolic Link
+
+```bash
+SOURCE_FILE_PATH=/home/ubuntu/.local/bin/docker-compose
+SYMBOLIC_LINK_PATH=/usr/bin/docker-compose
+sudo ln --symbolic $SOURCE_FILE_PATH $SYMBOLIC_LINK_PATH
+```
+
 ## Compression/Decompression
 ### Tar
 #### Decompress verbose
@@ -1798,11 +1806,4 @@ which $COMMAND
 alias ee='cd /home/ws/projects/ee/test'
 ```
 
-#### Create a Symbolic Link
-
-```bash
-SOURCE_FILE=/home/ubuntu/.local/bin/docker-compose
-SYMBOLIC_LINK_PATH=/usr/bin/docker-compose
-sudo ln --symbolic $SOURCE_FILE $SYMBOLIC_LINK_PATH
-```
 </details>
