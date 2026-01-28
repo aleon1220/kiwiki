@@ -419,7 +419,7 @@ Filesystem Hierarchy Standard (FHS), detailing the purpose of directories like `
 
 single Graphical Interface / Desktop section, GUIs, UIs
 
-#### X windows var
+### X windows var
 
 ```bash
 echo $XDG_CURRENT_DESKTOP
@@ -434,6 +434,13 @@ less /etc/X11/xorg.conf
 
 ```bash
 xdpyinfo | grep dim
+```
+
+### Clipboard Utilities
+#### copy & capture the clipboard
+
+```bash
+cat ~/.ssh/id_rsa.pub | xclip -sel clip
 ```
 
 </details>
@@ -1795,16 +1802,5 @@ Turn #todo into a living project board: #todo: prioritize, #todo: write-first-dr
 
 ## Printing
 
-#### Xclip to capture the clipboard when copying
-
-```bash
-cat ~/.ssh/id_rsa.pub | xclip -sel clip
-```
-
-#### Check a dir with a parameter. Double check `info stat`
-
-```bash
-stat %A $DIR
-```
 
 </details>
