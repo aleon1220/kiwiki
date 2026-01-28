@@ -88,7 +88,6 @@ history | grep 'cd.*TESTS'
 
 ```bash
 find ./ -type f -name "*.md" -exec grep 'dataToFind'  {} \;
-
 ```
 
 #### Find file named LICENSE current directory and up to subdirectory level
@@ -152,6 +151,15 @@ grep "'.*'" -o references-get-between-quoutes.txt > result_01.txt
 
 PATTERN='".*"'
 grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt
+```
+
+#### Find where the command is installed
+only in `$PATH` 
+alternative is `whereis`
+
+```bash
+COMMAND="pip"
+which $COMMAND
 ```
 
 ## System diagnostics
@@ -1797,12 +1805,4 @@ Show installed Apps
 ```bash
 update-alternatives --get-selections
 ```
-
-##### Find where the command is installed
-
-```bash
-COMMAND="pip"
-which $COMMAND
-```
-
 </details>
