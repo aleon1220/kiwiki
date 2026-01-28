@@ -593,6 +593,14 @@ depends on the Linux distro
 * apt
 * zypper
 
+## Managing Default Versions
+
+#### check different installed versions of software
+
+```bash
+update-alternatives --get-selections
+```
+
 ## APT
 Debian/Ubuntu package manager
 
@@ -1799,10 +1807,4 @@ cat ~/.ssh/id_rsa.pub | xclip -sel clip
 stat %A $DIR
 ```
 
-##### Maintain symbolic links determining default commands
-Show installed Apps
-
-```bash
-update-alternatives --get-selections
-```
 </details>
