@@ -502,6 +502,11 @@ getent passwd | cut -d: -f1 | sort
 w -u
 ```
 
+##### Create an alias `ee` to do `cd`
+```bash
+alias ee='cd /home/ws/projects/ee/test'
+```
+
 #### check type of terminal
 ```bash
 printf "%s\n" $TERM
@@ -552,7 +557,7 @@ eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID
 id -un
 ```
 
-##### get a list of all usernames that are currently logged
+##### list all usernames that are currently logged
 
 ```bash
 who | cut -d' ' -f1 | sort | uniq
@@ -1798,12 +1803,6 @@ update-alternatives --get-selections
 ```bash
 COMMAND="pip"
 which $COMMAND
-```
-
-##### Create an alias `ee` with a command to go to a specific directory
-
-```bash
-alias ee='cd /home/ws/projects/ee/test'
 ```
 
 </details>
