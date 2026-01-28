@@ -21,11 +21,6 @@ The Outline here is a mirror from the [Linux foundation material](https://traini
 - `CTRL + E + X` for Complex multiline commands opens editor. 
 check the `echo $EDITOR` variable
 
-```bash
-# beginner suggest to use nano
-export EDITOR="vim"
-```
-
 - `CTRL + U`  cuts everything to the left of the cursor
 - `CTRL + K`  cuts everything to the right of the cursor
 - `CTRL + L`  clears the screen
@@ -356,6 +351,15 @@ SYMBOLIC_LINK_PATH=/usr/bin/docker-compose
 sudo ln --symbolic $SOURCE_FILE_PATH $SYMBOLIC_LINK_PATH
 ```
 
+## Text Editors
+
+#### set default OS text editor
+beginners suggest to use nano. `vim` ok as a default in most distros.
+
+```bash
+export EDITOR="vim"
+```
+
 ## Compression/Decompression
 ### Tar
 #### Decompress verbose
@@ -583,6 +587,7 @@ who | cut -d' ' -f1 | sort | uniq
 ```bash
 APP_VERSION="Test-$(date +%F_%H%M)"
 ```
+## User Environment
 
 </details>
 <!-- end of expand -->
@@ -1211,6 +1216,8 @@ Linux interacts with hardware devices via the /dev directory and the udev device
 ```bash
 udevadm monitor
 ```
+### Printing
+CUPS
 
 ## Booting
 Managing the system startup process and services
@@ -1794,13 +1801,5 @@ Place related tags as children subtopics, e.g. under Files & Storage place #linu
 Create Monitoring & Performance with : #process-monitoring, #memory-monitoring-usage--swap, #io-monitoring, #traffic-capture, #load-testing, #benchmarking.
 
 Turn #todo into a living project board: #todo: prioritize, #todo: write-first-draft, #todo: needs-review rather than one catch-all tag.
-
-
-## Text Editors
-
-## User Environment
-
-## Printing
-
 
 </details>
