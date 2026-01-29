@@ -15,6 +15,15 @@ Azure service principal is an identity created for use with applications, hosted
 
 this is a common pattern. Documentation [create a service principal](https://www.pulumi.com/docs/iac/get-started/azure/configure/#:~:text=create%20a%20service%20principal) provides insights on how to proceed. User must have enough permissions to proceed.
 
+#### create a service principal
+fails because of permissions in EntraID
+
+```bash
+az ad sp create-for-rbac --name serv-principal-iac --role contributor --scopes /subscriptions/1d27a383-6d0b-4da7-a710-4b29d724d3f8/resourceGroups/devops-sre-platform-engineering-research
+
+Insufficient privileges to complete the operation
+```
+
 #### get info about subscription
 ```bash
 az account show | jq
@@ -116,12 +125,6 @@ todo1
 ```
 
 ### todo6
-
-```bash
-
-```
-
-### todo7
 
 ```bash
 
