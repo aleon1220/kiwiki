@@ -3,10 +3,16 @@
 [Back to Main Page](./readme.md)
 
 # Azure Cloud
+> suggest to run from cloud shell
 
-## Sign In with credentials on the command line
+#### Sign In with credentials on the command line
 ``` bash
 az login -u <username> -p <password>
+```
+
+#### get info about subscription
+```bash
+az account show | jq
 ```
 
 ## Azure Portal [Home - Microsoft Azure](https://portal.azure.com/#home)
@@ -35,7 +41,7 @@ IPADDRESS="$(az vm list-ip-addresses \
 ### retrieve a list of fault domains per region
 
 ```bash
-az vm list-skus --resource-type availabilitySets --query '[?name==`Aligned`].{Location:locationInfo[0].location, MaximumFaultDomainCount:capabilities[0].value}' -o Table
+az vm list-skus --resource-type availabilitySets --query '[?name==`Aligned`].{Location:locationInfo[0].location, MaximumFaultDomainCount:capabilities[0].value}' --output Table
 ```
 
 # Networking
