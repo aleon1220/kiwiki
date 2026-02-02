@@ -3,11 +3,32 @@
 [Back to Main Page](./readme.md)
 
 # Azure Cloud
+> suggest to run from cloud shell
 
-## Sign In with credentials on the command line
+#### Sign In with credentials on the command line
 ``` bash
 az login -u <username> -p <password>
 ```
+
+## Authenticate with a Service Principal
+Azure service principal is an identity created for use with applications, hosted services, and automated tools. 
+
+this is a common pattern. Documentation [create a service principal](https://www.pulumi.com/docs/iac/get-started/azure/configure/#:~:text=create%20a%20service%20principal) provides insights on how to proceed. User must have enough permissions to proceed.
+
+#### create a service principal
+fails because of permissions in EntraID
+
+```bash
+az ad sp create-for-rbac --name serv-principal-iac --role contributor --scopes /subscriptions/1d27a383-6d0b-4da7-a710-4b29d724d3f8/resourceGroups/devops-sre-platform-engineering-research
+
+Insufficient privileges to complete the operation
+```
+
+#### get info about subscription
+```bash
+az account show | jq
+```
+
 ## Azure Portal [Home - Microsoft Azure](https://portal.azure.com/#home)
 
 ### Create a Linux Ubuntu LTS VM
@@ -31,6 +52,13 @@ IPADDRESS="$(az vm list-ip-addresses \
   --output tsv)"
 ```
 
+### retrieve a list of fault domains per region
+
+```bash
+az vm list-skus --resource-type availabilitySets --query '[?name==`Aligned`].{Location:locationInfo[0].location, MaximumFaultDomainCount:capabilities[0].value}' --output Table
+```
+
+# Networking
 ### List the current network security group rules
 
 ```bash
@@ -57,6 +85,8 @@ az network nsg rule list \
   --query '[].{Name:name, Priority:priority, Port:destinationPortRange, Access:access}' \
   --output table
 ```
+
+# Resource group management
 
 ### List all resource groups located in the West US region
 
@@ -95,18 +125,6 @@ todo1
 ```
 
 ### todo6
-
-```bash
-
-```
-
-### todo7
-
-```bash
-
-```
-
-### todo8
 
 ```bash
 

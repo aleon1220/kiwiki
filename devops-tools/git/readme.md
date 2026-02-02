@@ -140,7 +140,7 @@ git worktree add my-other-awesome-feature ../my-other-awesome-feature
 
 git worktree remove ../my-other-awesome-feature
 ```
-**Explanation:**
+**Explanation**
 
 Creates a linked working tree (i.e., another directory on the file system associated with the repo) called `my-other-awesome-feature`, one level above your current working directory, with the specified branch checked out.
 
@@ -208,16 +208,65 @@ git push --force-with-lease REMOTE BRANCH
 - As a general rule, it’s important to be careful when making any changes to already pushed commits
 
 #### Change a Specific Commit Message
-useful when you made a typo in a previous commit history
+one commit with the wrong email address. The commit history must be updated
 
+##### List commits with author emails to find target commits
 ```bash
-git rebase -i COMMIT
+git log --all --pretty=format:"%h %an <%ae> %s" | grep "authorName@outlookcom
 ```
 
-#### Doing a Rebase
+##### could use full scan
+```bash
+git log --pretty=full
+```
+##### Start an interactive rebase that stops just before that commit
+```bash
+TARGET_COMMIT="abc1234"
+git rebase -i "$TARGET_COMMIT"^
+```
+
+##### from the text editor, choose a git rebase operation.
+Change `pick` to `edit` for that commit, save, and close.
+```bash
+pick "$TARGET_COMMIT" commit message with changes here
+```
+
+##### Amend the author on that commit
+```bash
+git commit --amend --author="Author Name <authorName@outlook.com>" --no-edit
+```
+
+##### Continue the rebase
+Git will replay multiple queued commits after this automatically.
+
+```bash
+git rebase --continue
+```
+##### Push your updated history
+```bash
+TARGET_BRANCH="your-branch"
+git push --force-with-lease origin $TARGET_BRANCH
+```
+
+##### Verify the fix
+```bash
+git log -1 --pretty=full
+```
+---
+
+#### Doing a Rebase for the previous 3 commits
 
 ```bash
 git rebase -i HEAD~3
+```
+
+### Many commits across the whole repo need re-writing
+For broad changes, consider a history rewrite tool:
+`git filter-repo` (recommended, separate install): powerful and fast for bulk author rewrites.
+
+#### using `git filter-repo`
+```bash
+git filter-repo --mailmap .mailmap
 ```
 
 #### Delete Last Commit but Keep the Changes
@@ -520,6 +569,9 @@ git remote set-url origin git@bitbucket.org:tutorials/tutorials.git
 
 ---
 ## Git flow by example
+<details>
+<summary> git flow example </summary>
+
 Quick Start: Learning `git` basics by example. Flow challenge/Demo by hackerRanx.
 
 Goal is to create a git repo in linux instance: Add changes to a source-code file, commit changes, create a develop branch with new changes and finally merge from **develop branch** to **main**
@@ -600,6 +652,8 @@ Fast-forward
  1 
  file changed, 3 insertions(+)
 ```
+</details>
+<!-- end of expand -->
 
 ---
 
