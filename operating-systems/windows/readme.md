@@ -10,6 +10,11 @@ Reusable Actions. Command prompt cmd & PowerShell
 - windows 10
 - windows 11
 
+#### find in history uses of `ssh`
+```powershell
+Get-History | Select-String "ssh "
+```
+
 #### open given directory path in File Explorer
 ```powershell
 Invoke-Item C:\workspace
@@ -68,9 +73,9 @@ ls | ForEach-Object { $_.Name }
 ```cmd
 wmic path SoftwareLicensingService get OA3xOriginalProductKey
 ```
+## file ops
 
 <!-- expand -->
-## file ops
 <details>
 <summary> File operations with powershell </summary>
 
@@ -89,6 +94,20 @@ Get-ChildItem -Path $folder -File -Filter 'Screenshot *.png' |
   ForEach-Object {
     $newName = $_.Name -replace '^Screenshot\s+', ''   # regex at the beginning of the line
     Rename-Item -LiteralPath $_.FullName -NewName $newName -WhatIf
+}
+```
+### Powershell Supporting functions
+for the work log analysis
+
+#### create directories from January to December
+``` powershell
+$months = [System.Globalization.DateTimeFormatInfo]::InvariantInfo.MonthNames[0..11]
+$year = (Get-Date).Year
+
+for ($i = 0; $i -lt 12; $i++) {
+    $month = $months[$i]
+    $dirName = "$year-{0:D2}-{1}" -f ($i + 1), $month
+    New-Item -ItemType Directory -Path $dirName -Force
 }
 ```
 
@@ -182,7 +201,7 @@ ipconfig /renew
 netstat -nao
 ```
 
-#### netstats fby Process ID
+#### netstats by Process ID
 ```powershell
 netsat -ano | find str "PID"
 ```
@@ -260,20 +279,6 @@ Measure-Command { echo hi }
 #### set terminal with vertical panes 2nd pane is WSL
 ``` powershell
 wt split-pane --vertical wsl
-```
-
-### Powershell Supporting functions
-for the work log analysis
-
-#### create directories from January to December
-``` powershell
-$months = [System.Globalization.DateTimeFormatInfo]::InvariantInfo.MonthNames[0..11]
-
-for ($i = 0; $i -lt 12; $i++) {
-    $month = $months[$i]
-    $dirName = "{0:D2}-{1}" -f ($i + 1), $month
-    New-Item -ItemType Directory -Path $dirName -Force
-}
 ```
 
 [Back to top](#)
