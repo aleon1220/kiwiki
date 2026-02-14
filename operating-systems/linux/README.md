@@ -250,10 +250,11 @@ sudo systemctl status $LIST_SERVICES
 sudo service jenkins status
 ```
 
-#### Check if service is Active
+#### Check for target service
 
 ```bash
-systemctl is-active $APP_SERVICE
+SERVICE_NAME="cloud-init"
+systemctl is-active $SERVICE_NAME
 ```
 
 #### check date control
