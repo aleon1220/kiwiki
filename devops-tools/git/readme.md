@@ -495,7 +495,7 @@ git bisect good
 git bisect bad
 ```
 
-#### Change a commit message that was made
+#### Change/Ammend commit message made long ago
 **n** is the number of commits to go back
 
 ```bash
@@ -507,7 +507,7 @@ git cherry-pick
 ## then edit the cherry-picked commit
 edit
 
-git push -f
+git push --force
 ```
 
 #### Check size of repo
@@ -525,7 +525,7 @@ git remote --verbose
 git remote show origin
 ```
 
-# PR Pull Request Version Control Harmony
+# PR Pull Request Version Control
 Pull requests are essential for collaborating on code changes and getting feedback from others
 pull requests facilitate collaboration, code quality, and transparency. They allow others to review your work and ensure that changes are well-tested before merging.
 
@@ -661,7 +661,7 @@ Fast-forward
 1. [git commands to live by @Omar Shakari](https://medium.com/better-programming/git-commands-to-live-by-349ab1fe3139)
 2. [stackdiary how-to-sign-your-git-commits-with-ssh-keys](https://stackdiary.com/tutorials/how-to-sign-your-git-commits-with-ssh-keys)
 3. [Atlassian support docs change-the-remote-url-to-your-repository](https://support.atlassian.com/bitbucket-cloud/docs/change-the-remote-url-to-your-repository)
-4.  [Atlassian Docs | Bitbucket Sign tags commits with SSH keys | Bitbucket Data Center and Server 8.15 | ](https://confluence.atlassian.com/bitbucketserver/sign-commits-and-tags-with-ssh-keys-1305971205.html)
+4. [Atlassian Docs | Bitbucket Sign tags commits with SSH keys | Bitbucket Data Center Server 8.15](https://confluence.atlassian.com/bitbucketserver/sign-commits-and-tags-with-ssh-keys-1305971205.html)
 5. [Atlassian Docs | Bitbucket obtain list of all projects and repos from DB](https://confluence.atlassian.com/bitbucketserverkb/how-to-obtain-a-list-of-all-projects-and-repositories-from-bitbucket-database-975027747.html)
 6. [Coderwall | A better git log](coderwall.com/p/euwpig/a-better-git-log)
 

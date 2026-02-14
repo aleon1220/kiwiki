@@ -20,15 +20,10 @@ I used a `.txt` file 2012, then a google docs file which was accidentally delete
 
 ## 03-My-Soft-skills
 
-## BPM
-
-## Companies
-
 ## Cloud Computing
 
 1. [AWS](./cloud-computing/aws/readme.md)
 2. [Azure](./cloud-computing/azure/readme.md)
-    1. [Bicep](./cloud-computing/azure/bicep/readme.md)
 3. [Google Cloud Engine](./cloud-computing/gcp/readme.md)
 
 ## [Computer](./computer/computer.md)
@@ -78,6 +73,7 @@ previously called devops-tools. It involves anything tech related. Call it platf
 
 ### productivity-tools
 Personal selection of tools to improve productivity
+
 #### Mobile apps
 
 #### Online apps

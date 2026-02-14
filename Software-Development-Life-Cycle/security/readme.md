@@ -346,22 +346,26 @@ In OpenSSL, there is no specific file for public key
 
 ### GnuPG to OpenSSH
 
-You need to know fingerprint of your RSA key. You can use:
-`gpg --list-secret-keys --keyid-format short`
+You need to know fingerprint of your GPG keys. Use
+```bash
+gpg2 --list-secret-keys --keyid-format short
+```
 
 use `openpgp2ssh` tool distributed in with monkeyshpere project:
 
 ```bash
-bash gpg --export-secret-keys 01234567 | openpgp2ssh 01234567 > id_rsa 
+gpg --export-secret-keys 01234567 | openpgp2ssh 01234567 > id_rsa 
 ```
 
-- A few notes are necessary:
-  01234567 must be fingerprint of a RSA key (or subkey)
-  `gpg --export-secret-keys` also accept finger print of global key (in this case, it exports all sub-keys). However, `openpgp2ssh` only accept finger print of an RSA key
+`01234567` must be fingerprint of a RSA key (or subkey)
+
+`gpg --export-secret-keys` also accept finger print of global key (in this case, it exports all sub-keys). However, `openpgp2ssh` only accept finger print of an RSA key
 
 If no arguments are provided, `openpgp2ssh` export RSA keys it find
 You can now extract ssh public key using:
-`ssh-keygen -y -f id_rsa > id_rsa.pub`
+```bash
+ssh-keygen -y -f id_rsa > id_rsa.pub
+```
 
 ### GPG GnuPG to OpenSSL
 
@@ -370,10 +374,10 @@ Extract key as for ssh
 - list GPG keys
 
 ```bash
-gpg --list-secret-keys --keyid-format short
+gpg2 --list-secret-keys --keyid-format short
 ```
 
-- convert to SSH format
+- convert to SSH format with `openpgp2ssh`
 
 ```bash
 GPG_KEY_ID="01234567"
@@ -400,7 +404,7 @@ openssl x509 -req -days 3650 -in myid.csr -signkey myid.key -out myid.crt
 
 ### GnuPG S/MIME to OpenSSL
 
-##### Gpgsm utility can exports keys and certificate in PCSC12
+##### `gpgsm` utility can exports keys & certificate in PCSC12
 
 ```bash
 gpgsm -o secret-gpg-key.p12 --export-secret-key-p12 0xXXXXXXXX
@@ -415,16 +419,19 @@ openssl pkcs12 -in secret-gpg-key.p12 -nokeys -out gpg-certs.pem
 
 You can now use it in OpenSSL. You can also do similar thing with GnuPG public keys. There will be only certificates output.
 
-### OpenSSL to GnuPG S/MIME
+### Convert OpenSSL to GnuPG S/MIME
 
-- Invert process:
+- Invert process: export a P12 key
 
 ```bash
 openssl pkcs12 -export -in gpg-certs.pem -inkey gpg-key.pem -out gpg-key.p12
+```
+- use `gpgsm` to import the P12 key
+```bash
 gpgsm --import gpg-key.p12
-GnuPG S/MIME to OpenSSH
 ```
 
+### GnuPG S/MIME to OpenSSH
 - chain processes
 
 ```bash
@@ -463,7 +470,7 @@ openssl pkcs8 -in $PRIV_KEY_NAME.pk8 -inform DER -nocrypt -out $NEW_PRIV_KEY_UNE
 openssl pkcs12 -export -in ssh-certs.pem -inkey ~/.ssh/id_rsa -out ssh-key.p12
 ```
 
-#### Import created key (`ssh-key.p12`)
+#### Import created key `ssh-key.p12`
 
 ```bash
 gpgsm --import ssh-key.p12
@@ -500,7 +507,7 @@ ssh-keygen -t rsa -b 4096 -C "$SSH_KEY_EMAIL"
 ssh-add -k ~/.ssh/id_rsa
 ```
 
-#### Get content of default name of Public Key
+#### Get content of default SSH Public Key
 
 ```bash
 cat ~/.ssh/id_rsa.pub
@@ -508,7 +515,7 @@ cat ~/.ssh/id_rsa.pub
 
 #### Add SSH key to a remote Server
 
-Read Public SSH key, ssh to \$REMOTE_HOST with root user. Create a hidden directory `.ssh` and add the public key to the `authorized_keys` file
+Read Public SSH key, ssh to the REMOTE_HOST with root user. Create a hidden directory `.ssh` and add the public key to the `authorized_keys` file
 
 ```bash
 COMMAND="mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
@@ -524,7 +531,8 @@ DATA_FILE="~/dataFile.dat"
 printf "data content\n" > $DATA_FILE
 ```
 
-- encrypt file to a target hidden directory. Tested Ubuntu 22
+- encrypt file to a target hidden directory.
+>Tested Ubuntu 22
 
 ```bash
 ENCRYPTED_DATA_FILE="~/.hidden_dir/secretFile.dat.enc"
@@ -537,7 +545,9 @@ openssl pkeyutl -encrypt -inkey <(ssh-keygen -e -m PKCS8 -f ~/.ssh/id_rsa.pub) -
 PASSWORD=$(printf "$(openssl pkeyutl -decrypt -inkey ~/.ssh/id_rsa -in $ENCRYPTED_DATA_FILE)")
 ```
 
-configure a specific SSH key for use with Git, you can follow these steps:
+### sign git commits with SSH keys
+
+configure a specific SSH key for use with git
 
 1. **Set Up a Specific SSH Key** :
 
@@ -545,26 +555,30 @@ configure a specific SSH key for use with Git, you can follow these steps:
 * Open your terminal or command prompt.
 * Navigate to the local repository where you want to configure the SSH key.
 * Run the following command, replacing `~/.ssh/my-non-default-private-key` with the path to your desired private key:
-  ```
+
+```bash
   git config --local ssh.key ~/.ssh/my-non-default-private-key
-  ```
+```
+
 * This command associates the specified private key with the repository.
 
 1. **Optional Global Fallback** :
 
 * If you want to set a global fallback key that Git will use when no specific key is configured for a repository, you can set the global `ssh.key` configuration.
 * For example, to set a default fallback key, run:
-  ```
-  git config --global ssh.key ~/.ssh/default-private-key
-  ```
+
+```shell
+git config --global ssh.key ~/.ssh/default-private-key
+```
+
 * This way, if a repository doesn’t have a specific key configured, Git will use the global fallback key.
 
 1. **Test Your Configuration** :
-
 * To verify that your SSH key is correctly configured, you can test it by connecting to GitHub:
-  ```
-  ssh -T git@github.com
-  ```
+
+```bash
+ssh -T git@github.com
+```
 
 success message is
 
@@ -581,14 +595,13 @@ ssh-add -k /home/aleonrangel/.ssh/id_rsa_personal
 Identity added: /home/aleonrangel/.ssh/id_rsa_personal (/home/aleonrangel/.ssh/id_rsa_personal)
 ```
 
-
 * Verify that the key has been added to the agent. Check Agent Status
 
-  ```
-  ssh-add -l
-  ```
+```shell
+ssh-add -l
+```
 
-### References
+## References
 
 - [mkssoftware OpenSSL PKCS8](https://www.mkssoftware.com/docs/man1/openssl_pkcs8.1.asp)
 - [Digicert Certificate and CA management](https://www.digicert.com/kb/ssl-support/openssl-quick-reference-guide.htm)
@@ -601,7 +614,6 @@ Identity added: /home/aleonrangel/.ssh/id_rsa_personal (/home/aleonrangel/.ssh/i
 - Convert [keys between GnuPG, OpenSsh and OpenSSL](http://sysmic.org/dotclear/index.php?post/2010/03/24/Convert-keys-betweens-GnuPG%2C-OpenSsh-and-OpenSSL)
 - [blog Cryptography RSA Open SSL](http://www.gnudeveloper.com/groups/cyber_security/Cryptography_RSA_Key_Exchange_works_in_realtime_using_Keytool_openSSL%20.html)
 - Using GPG in Windows Subsystem Linux WSL GPG guide in Windows Subsystem for Linux [GPG in WSL by Jess Esquire](https://www.jessesquire.com/articles/2019/03/31/configure-github-activity-signing-with-wsl/)
-  [Back to top](#)
 
 [Back to top](#)
 
