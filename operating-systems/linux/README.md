@@ -345,17 +345,23 @@ stat $FILE
 ```
 
 #### Create a Symbolic Link
-
+- set the environment variables
 ```bash
 SOURCE_FILE_PATH=/home/ubuntu/.local/bin/docker-compose
 SYMBOLIC_LINK_PATH=/usr/bin/docker-compose
+```
+
+- create the link
+```bash
 sudo ln --symbolic $SOURCE_FILE_PATH $SYMBOLIC_LINK_PATH
 ```
 
 ## Text Editors
 
 #### set default OS text editor
-beginners suggest to use nano. `vim` ok as a default in most distros.
+`nano` suggested for beginners 
+
+`vim` advanced, default in most distros
 
 ```bash
 export EDITOR="vim"
@@ -407,7 +413,7 @@ mkdir -p $HOME/example.com/server1/{httpd,dnsqmasq}
 </details>
 
 ---
-<!-- end of expand Introduction-->
+<!-- end of expand Introduction -->
 
 # Linux Filesystem Tree Layout
 
