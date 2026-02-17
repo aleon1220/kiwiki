@@ -1,4 +1,5 @@
 # Multimedia tools
+
 images, videos, etc
 
 [Kiwiki Home](/../../)
@@ -25,6 +26,7 @@ Compiler: clang (14.0.0)
 ```bash
 magick source.jpg -resize 50%  destination.jpg
 ```
+
 - older versions
 `convert -resize 50% source.png dest.jpg`
 
@@ -34,6 +36,7 @@ magick source.jpg -resize 50%  destination.jpg
 SIZE="1024X768"
 convert -resize $SIZE source.png destination.jpg
 ```
-[Back to top](#)
+
+[Back to top](#multimedia-tools)
 
 [Kiwiki Home](/../../)
