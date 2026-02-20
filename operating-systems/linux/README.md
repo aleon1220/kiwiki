@@ -148,6 +148,21 @@ PATTERN='".*"'
 grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt
 ```
 
+#### finds text in logs only shows the full path
+```bash
+sudo grep \
+  --recursive \
+  --include="*.log" \
+  --ignore-case \
+  --fixed-strings \
+  --with-filename \
+  --line-number \
+  --binary-files=without-match \
+  --color=never \
+  'TEXT_TO_FIND' \
+  "$PWD"
+```
+
 #### Find where the command is installed
 only in `$PATH` 
 alternative is `whereis`
