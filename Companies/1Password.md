@@ -4,7 +4,9 @@ Company that provides secutiry and Password manager solutions.
 
 I use 1Password in Linux and Windows
 
-(1Password CLI 1 Release Notes)[https://app-updates.agilebits.com/product_history/CLI]
+[CLI 2 Download](https://app-updates.agilebits.com/product_history/CLI2)
+
+[1Password Legacy CLI 1 Release Notes](https://app-updates.agilebits.com/product_history/CLI)
 
 ## 1Pass CLI commands
 
