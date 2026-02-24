@@ -187,7 +187,8 @@ git checkout [<$COMMIT_ID>] -- <path(s)>
 #### Reset a single file
 
 ```bash
-git checkout -- todo.md
+FILE_TO_RESET="README.md"
+git checkout -- $FILE_TO_RESET
 ```
 
 #### Change Last Commit Message
