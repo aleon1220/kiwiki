@@ -1,6 +1,49 @@
+# Productivity & Hacks
+
 [Kiwiki Home](/../../)
 
 [Back to Main Page](./readme.md)
+
+## Gmail
+### Filters
+
+#### Find unread emails without user added labels
+```
+is:unread -has:userlabels 
+```
+
+#### find unread emails
+```text
+unread  `is:unread`
+```
+#### unread emails exclude a label
+```text
+is:unread -label:"TGIF Devotional"
+```
+
+#### emails between a 3 month period
+```text
+label:email-history-2020  after:2020/1/01 before:2020/4/1
+```
+
+## Outlook
+### filter emails with no categories in Outlook
+save the view in outlook. 
+1. Open Outlook and go to your inbox.
+2. Click on the "View" tab in the ribbon at the top of the screen.
+3. Select "View Settings" (or "Current View" and then "View Settings" in some versions).
+4. In the "Advanced View Settings" dialog box, click on "Filter".
+5. In the "Filter" dialog box, go to the "Advanced" tab.
+6. Click on "Field", then choose "All Mail Fields" and select "Categories".
+7. Set the condition to "is empty"
+8. Click "Add to List" and then "OK" to apply the filter.
+
+Outlook Filter flagged items to do
+```powershell
+followupflag:followup flag category:="Client-"
+```
+
+- Find uncategorized email use `category:=[]` in the search bar
 
 # Productivity tools
 Includes time management, pomodoro techniques, focus tools
