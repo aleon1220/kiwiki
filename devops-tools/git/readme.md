@@ -172,10 +172,11 @@ git diff HEAD~ HEAD
 #### Compare Files Between Branches/Commits
 
 ```bash
-git diff $COMMIT_A $COMMIT_B -- PATH
+COMMIT_A="0659bdc"
+COMMIT_B="e6c7c0d"
+FILE_PATH_COMPARE="src/automate.py"
 
-# e.g.
-git diff 0659bdc e6c7c0d -- src/automate.py
+git diff $COMMIT_A $COMMIT_B -- $FILE_PATH_COMPARE
 ```
 
 #### Reset a Single File to a specific Commit
@@ -187,7 +188,8 @@ git checkout [<$COMMIT_ID>] -- <path(s)>
 #### Reset a single file
 
 ```bash
-git checkout -- todo.md
+FILE_TO_RESET="README.md"
+git checkout -- $FILE_TO_RESET
 ```
 
 #### Change Last Commit Message
@@ -207,6 +209,8 @@ git push --force-with-lease REMOTE BRANCH
 **Note:**
 - As a general rule, it’s important to be careful when making any changes to already pushed commits
 
+---
+### Git Rebase
 #### Change a Specific Commit Message
 one commit with the wrong email address. The commit history must be updated
 
@@ -219,6 +223,7 @@ git log --all --pretty=format:"%h %an <%ae> %s" | grep "authorName@outlookcom
 ```bash
 git log --pretty=full
 ```
+
 ##### Start an interactive rebase that stops just before that commit
 ```bash
 TARGET_COMMIT="abc1234"

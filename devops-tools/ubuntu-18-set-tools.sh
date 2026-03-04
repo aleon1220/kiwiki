@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # Set Up my required Tools
+# Automation of VScode for linux
+"fs.inotify.max_user_watches=524288" | sudo tee -a /etc/sysctl.conf
 
 # VSCode
 ## Extensions
@@ -24,6 +26,7 @@ code --install-extension $plugin_terraform  $plugin_powershell
 
 ## code Android extensions suggested
 code --install-extension naco-siren.gradle-language mathiasfrohlich.Kotlin vscjava.vscode-java-pack
+
 ### verify https://code.visualstudio.com/docs/editor/extension-gallery#_command-line-extension-management
 code --list-extensions
 
@@ -52,16 +55,20 @@ sudo apt-get install -y \
 
 ## Add Dockers PGP
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
 ## Check fingerprint 
 sudo apt-key fingerprint 0EBFCD88
+
 ## Add Repo
 sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
+
 ## Docker Engine
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
 ## Post-install settings
 sudo groupadd docker
 sudo usermod -aG docker $USER

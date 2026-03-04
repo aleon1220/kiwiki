@@ -37,6 +37,20 @@ Set-Alias ll Get-ChildItem
 Get-Alias
 ```
 
+## Environment variables
+Environment variables store data that's used by the operating system and other programs.
+[learn Microsoft](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.5)
+
+#### check content of Path variable
+```powershell
+$env:Path
+```
+
+#### Source the Profile (Similar to source ~/.bashrc)
+```powershell
+. $PROFILE
+```
+
 ## Handling compressed files
 #### decompress a .zip file
 ```powershell
