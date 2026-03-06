@@ -32,17 +32,25 @@ check the `echo $EDITOR` variable
 ```bash
 cd -
 ```
+#### add directory to the stack
+```bash
+DIR="/home/"
+pushd $DIR
+```
 
 #### list the directory stack
 ```bash
 dirs -v
 ```
 
-#### `pushd` and `popd` add & remove directories from stack
-
+#### navigate elements to 2nd in array
 ```bash
-pushd $DIR
-popd
+pushd +2
+```
+
+#### remove directories from stack
+```bash
+popd $DIR
 ```
 
 ##### Show dir contents in tree view
