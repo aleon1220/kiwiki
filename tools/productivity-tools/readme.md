@@ -1,9 +1,5 @@
 # Productivity & Hacks
 
-[Kiwiki Home](/../../)
-
-[Back to Main Page](./readme.md)
-
 ## Gmail
 ### Filters
 
