@@ -15,10 +15,16 @@ This sets up VScode for a DevOps engineer
 ```bash
 code --list-extensions
 ```
+#### check installed extensions
+```bash
+EXTENSION_ID="vscjava.vscode-gradle"
+code --install-extension $EXTENSION_ID
+```
 
 ## References
 - [Linux large files Workspace](https://code.visualstudio.com/docs/setup/linux#_visual-studio-code-is-unable-to-watch-for-file-changes-in-this-large-workspace-error-enospc)
 
 [Back to top](#)
+
 
 [Kiwiki Home](/../../)
