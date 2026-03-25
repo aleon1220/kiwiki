@@ -1,8 +1,10 @@
-# VS Code setup for a DevOps Engineer
+# VS Code setup
 
-[Kiwiki Home](/../../)
-
-[Back to Main Page](./readme.md)
+## roles include
+- DevOps Engineer
+- SRE
+- Platform engineer
+- 
 
 This sets up VScode for a DevOps engineer
 - docker and kubernetes plugins
@@ -21,10 +23,14 @@ EXTENSION_ID="vscjava.vscode-gradle"
 code --install-extension $EXTENSION_ID
 ```
 
+#### install exensions to a Profile
+```powershell
+code --profile Python --install-extension ms-python.python
+```
+
 ## References
 - [Linux large files Workspace](https://code.visualstudio.com/docs/setup/linux#_visual-studio-code-is-unable-to-watch-for-file-changes-in-this-large-workspace-error-enospc)
 
 [Back to top](#)
-
 
 [Kiwiki Home](/../../)
