@@ -33,7 +33,3 @@ code --profile "Java General" --uninstall-extension wakatime.vscode-wakatime
 ```
 ## References
 - [Linux large files Workspace](https://code.visualstudio.com/docs/setup/linux#_visual-studio-code-is-unable-to-watch-for-file-changes-in-this-large-workspace-error-enospc)
-
-[Back to top](#)
-
-[Kiwiki Home](/../../)
