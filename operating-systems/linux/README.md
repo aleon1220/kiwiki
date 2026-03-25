@@ -392,10 +392,25 @@ export EDITOR="vim"
 
 ## Compression/Decompression
 ### Tar
-#### Decompress verbose
-
+#### compress to file
 ```bash
-tar -zxvf archive-name.tar.gz /decompression/path/directory/
+tar --verbose --create --gzip --file=compressed-file.tar.gz .
+```
+
+#### Decompress verbose
+- create directory
+```bash
+DIRECTORY="/decompression/path/directory"
+mkdir -pv $DIRECTORY
+```
+- decompress file archive
+```bash
+tar --verbose --gzip --extract --file=archive-name.tar.gz --directory="$DIRECTORY"
+```
+
+- decompress short flag
+```bash
+tar -vzxf archive-name.tar.gz 
 ```
 ### Zip
 
