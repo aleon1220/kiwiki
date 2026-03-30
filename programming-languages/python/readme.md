@@ -1,10 +1,6 @@
-[Kiwiki Home](/../../)
-[Back to Main Page](./readme.md)
-
 # Python Language
-[PEP 8 -- Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/)
 
-[Kiwiki Home](/../../)
+[PEP 8 -- Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/)
 
 #### Check OS versions
 ``` bash
