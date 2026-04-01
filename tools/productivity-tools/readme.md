@@ -1,9 +1,5 @@
 # Productivity & Hacks
 
-[Kiwiki Home](/../../)
-
-[Back to Main Page](./readme.md)
-
 ## Gmail
 ### Filters
 
@@ -82,10 +78,14 @@ set a time for 30 mins and focus on achieving a task to get started.
 i came up with the idea of taking notes of what i did daily. I use a markdown structure created with a java program.
 at the end of the month i upload the compiled log and let AI analyse it for me.
 
-#### merge all Markdown files
+### Process
+1. merge all Markdown files
 ```bash
-cat *.md > "$(date +%F)MonthAnalysis.md"
+cat *.md > "$(date +%F)-MonthAnalysis.md"
 ```
+
+2. Run some prompts to extract an analysis
+3. Reflect and list action items
 
 ## Forums ICT
 ### Spinnaker Stack Overflow no answers

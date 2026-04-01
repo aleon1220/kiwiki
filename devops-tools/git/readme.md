@@ -1,21 +1,14 @@
-[Kiwiki Home](/../../)
-
-[Back to Main Page](./readme.md)
-
 # Git
 System to manage and store source code. Keeps track of changes to files. Text files only
 refer to [git official manual](https://git-scm.com/docs/user-manual)
 
-See git in action with the [Git flow by example](#git-flow-by-example)
-
-## Default Flow
-#### usual add, commit, push
-```bash
-git add . ; git commit ; git push
-```
-
 ## Git Administration/Operation
 ### Git Global Settings
+#### Get general git repo info
+```bash
+git config --list
+```
+
 #### Get global config info
 
 ```bash
@@ -35,6 +28,13 @@ for simplicity compared to vim`
 git config --global core.editor "nano"
 ```
 
+## git Default Flow
+See git in action with the [Git flow by example](#git-flow-by-example)
+
+#### usual add, commit, push
+```bash
+git add . ; git commit ; git push
+```
 #### Force-switches to branch, discarding changes
 ```bash
 git checkout master --force

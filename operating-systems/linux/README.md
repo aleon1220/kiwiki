@@ -32,17 +32,25 @@ check the `echo $EDITOR` variable
 ```bash
 cd -
 ```
+#### add directory to the stack
+```bash
+DIR="/home/"
+pushd $DIR
+```
 
 #### list the directory stack
 ```bash
 dirs -v
 ```
 
-#### `pushd` and `popd` add & remove directories from stack
-
+#### navigate elements to 2nd in array
 ```bash
-pushd $DIR
-popd
+pushd +2
+```
+
+#### remove directories from stack
+```bash
+popd $DIR
 ```
 
 ##### Show dir contents in tree view
@@ -384,10 +392,25 @@ export EDITOR="vim"
 
 ## Compression/Decompression
 ### Tar
-#### Decompress verbose
-
+#### compress to file
 ```bash
-tar -zxvf archive-name.tar.gz /decompression/path/directory/
+tar --verbose --create --gzip --file=compressed-file.tar.gz .
+```
+
+#### Decompress verbose
+- create directory
+```bash
+DIRECTORY="/decompression/path/directory"
+mkdir -pv $DIRECTORY
+```
+- decompress file archive
+```bash
+tar --verbose --gzip --extract --file=archive-name.tar.gz --directory="$DIRECTORY"
+```
+
+- decompress short flag
+```bash
+tar -vzxf archive-name.tar.gz 
 ```
 ### Zip
 

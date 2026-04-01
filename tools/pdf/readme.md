@@ -1,7 +1,6 @@
-[Kiwiki Home](/../../)
-[Back to Main Page](./readme.md)
+# PDF Operations Tools
 
-## PDF Operations Tools
+[Back to Main Page](./readme.md)
 
 ### PDF tool kit pdftk
 [pdftk page](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)
@@ -46,10 +45,11 @@ pdftk source.pdf cat 5 6 10 output SplittedOutput.pdf
 
 #### Join PDFs unify in out1.pdf
 ```bash
-pdftk inPDF01.pdf inPDF02.pdf cat output out01.pdf verbose
+pdftk filePDF01.pdf filePDF02.pdf cat output fileOut.pdf verbose
 ```
 
 [Back to top](#)
 
 
 [Kiwiki Home](/../../)
+
