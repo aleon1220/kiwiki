@@ -5,6 +5,12 @@ https://maven.apache.org/
 2023-01-31
 i started checking my Java EE Project from uni. It requires some extra maven fixes. I will be upgrading it to graddle.
 
+windows stores maven data at 
+
+```powershell
+%USERPROFILE%\.m2
+```
+
 #### check extra help
 
 ```bash
