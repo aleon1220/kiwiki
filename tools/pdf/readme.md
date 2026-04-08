@@ -76,7 +76,4 @@ No compression or uncompression being performed on output.
 Creating Output ...
    Adding page 1 XEASTX  from in.pdf
    Adding page 2 XEASTX  from in.pdf
-```bash
-
-[Kiwiki Home](/../../)
-
+```
