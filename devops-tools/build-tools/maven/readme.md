@@ -1,6 +1,3 @@
-[Kiwiki Home](/../../)
-[Back to Main Page](./readme.md)
-
 # Maven
 
 https://maven.apache.org/
@@ -17,7 +14,7 @@ mvn --help
 #### Check version
 
 ```bash
-mvn -v
+mvn --version
 ```
 
 #### clean up resources
@@ -43,6 +40,7 @@ mvn validate
 ```bash
 mvn package
 ```
+### Dependencies
 
 #### Analyze dependencies
 
@@ -50,25 +48,30 @@ mvn package
 mvn dependency:analyze
 ```
 
+#### forces Maven to fetch dependencies
+
+```bash
+mvn dependency:resolve
+```
+
 #### verify
 
-this command packaged my WAR
+this command packaged my WAR for a java webapp project
 
 ```bash
 mvn verify
 ```
 
 #### generate artifacts
-in <sourceRoot> directory that you specify
+
+in `<sourceRoot>` directory that you specify
+
 ```bash
 mvn generate-sources
 ```
 
 #### generate a Cucumber archetype
+
 ```bash
 mvn archetype:generate "-DarchetypeGroupId=io.cucumber" "-DarchetypeArtifactId=cucumber-archetype" "-DarchetypeVersion=7.12.1" "-DgroupId=bank" "-DartifactId=bank" "-Dpackage=bank" "-Dversion=1.0.0-SNAPSHOT" "-DinteractiveMode=false"
 ```
-
-[Back to top](#)
-
-[Kiwiki Home](/../../)
