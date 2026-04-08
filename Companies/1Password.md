@@ -1,4 +1,4 @@
-[# One Password
+# One Password
 
 Company that provides secutiry and Password manager solutions. 
 
