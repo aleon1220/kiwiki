@@ -1,7 +1,5 @@
 # PDF Operations Tools
 
-[Back to Main Page](./readme.md)
-
 ### PDF tool kit pdftk
 [pdftk page](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)
 
@@ -44,12 +42,41 @@ pdftk source.pdf cat 5 6 10 output SplittedOutput.pdf
 ```
 
 #### Join PDFs unify in out1.pdf
+
 ```bash
 pdftk filePDF01.pdf filePDF02.pdf cat output fileOut.pdf verbose
 ```
 
-[Back to top](#)
+#### rotate PDF 90° clockwise or **east**
 
+```bash
+pdftk in.pdf cat 1-endeast output out.pdf verbose
+```
+
+##### Success rotation
+
+```bash
+Command Line Data is valid.
+
+Input PDF Filenames & Passwords in Order
+( <filename>[, <password>] )
+   in.pdf
+
+The operation to be performed:
+   cat - Catenate given page ranges into a new PDF.
+
+The output file will be named:
+   out.pdf
+
+Output PDF encryption settings:
+   Output PDF will not be encrypted.
+
+No compression or uncompression being performed on output.
+
+Creating Output ...
+   Adding page 1 XEASTX  from in.pdf
+   Adding page 2 XEASTX  from in.pdf
+```bash
 
 [Kiwiki Home](/../../)
 
