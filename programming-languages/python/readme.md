@@ -75,8 +75,9 @@ python3.14 --version
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.14 1
 ```
 
-# python package managers
-## pip
+## python package managers
+
+### pip
 pip installs packages
 
 ```bash
@@ -92,12 +93,12 @@ pip list --user
 pip install $PACKAGE_NAME --upgrade
 ```
 
-## uv
-I learned about https://docs.astral.sh/uv/ 
-written in Rust might be nice to take a look at that.
+###  uv
+
+I learned about [uv](https://docs.astral.sh/uv/)
+
+written in Rust. Fast enough but well written and simplifies flows.
+
 ---
-
-
-[Back to top](#)
 
 [Kiwiki Home](/../../)
