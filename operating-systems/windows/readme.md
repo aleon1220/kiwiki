@@ -1,7 +1,3 @@
-[Kiwiki Home](/../../)
-
-[Back to Main Page](./readme.md)
-
 # Windows
 Reusable Actions. Command prompt cmd & PowerShell
 
@@ -136,7 +132,9 @@ for ($i = 0; $i -lt 12; $i++) {
 ```
 ---
 ## WSL management
+
 WSL Windows Subsystem Linux. WSL is a virtualization layer that runs Linux distros in windows.
+check [WSL docs](https://learn.microsoft.com/en-us/windows/wsl/) 
 
 ### install WSL
 ```powershell
