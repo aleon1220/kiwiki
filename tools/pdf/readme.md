@@ -46,6 +46,19 @@ pdftk source.pdf cat 5 6 10 output split-output.pdf verbose
 pdftk file01.pdf file02.pdf cat output out.pdf verbose
 ```
 
+### Rotate
+
+The page rotation setting can cause pdftk to rotate pages and documents.  Each option sets the page rotation as follows (in degrees): 
+left, right, and down make **relative** adjustments to a page's rotation.
+
+* 🧭 north: 0
+* ➡️ east: 90
+* ⬇️ south: 180
+* ⬅️ west: 270
+* ↩️ left: -90
+* ↪️ right: +90
+* 🔄 down: +180
+                 
 #### rotate PDF 90° clockwise or **east**
 
 ```bash
