@@ -1,7 +1,5 @@
-[Kiwiki Home](/../../)
-[Back to Main Page](./readme.md)
-
 # Kubernetes
+
 Container orchestrator
 
 ### YAML processing app
