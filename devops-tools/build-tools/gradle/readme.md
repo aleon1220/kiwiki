@@ -32,6 +32,20 @@ gradle projects
 - use of groovy syntax. groovy automatically creates getters and setters
 
 ### Build tasks
+
+#### build the wrapper
+
+- perform the build
+
+```bash
+gradle wrapper
+```
+
+- test the wrapper
+```bash
+./gradlew help
+```
+
 use [plugin shadow](https://plugins.gradle.org/plugin/com.gradleup.shadow) to generate better Fat Jars
 
 #### clean plain build
