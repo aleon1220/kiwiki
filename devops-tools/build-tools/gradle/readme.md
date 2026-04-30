@@ -60,10 +60,19 @@ gradle check --warning-mode all
 ```
 
 ### Help tasks
+
+#### show tasks
+```fish
+gradle :tasks
+```
+
+#### show All tasks
 ```bash
 gradle tasks --all
 ```
+
 - define groovy task
+
 ```groovy
 # pass a config closure
 task myTask {
