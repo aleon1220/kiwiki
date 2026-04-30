@@ -1,15 +1,27 @@
-# Gradle 
+# Gradle
 
-[Kiwiki Home](/../../)
+<https://gradle.org/>
 
-[Back to Main Page](./readme.md)
+## install
+- use [sdk](sdkman.io) and target a version
+
+  ```bash
+  graddle_target="9.3.1"
+  ```
+- install
+
+  ```bash
+  sdk install gradle $graddle_target
+  ```
 
 ## Android and Java
+
 > Gradle now with Kotlin syntax
 #### check gradle installations with sdkman.io
 ```bash
-sdkman list gradle
+sdk list gradle
 ```
+
 #### as complexity grows, check the projects
 ```bash
 gradle projects
@@ -38,8 +50,11 @@ ls -lh lib/build
 ```
 
 ### Build Set up tasks
+
 ### Documentation tasks
+
 ### Verification tasks
+
 ```bash
 gradle check --warning-mode all
 ```
@@ -57,12 +72,14 @@ task myTask {
 ```
 
 ## Debugging
-for version 7.3.3 of gradle there are some issues when running graddle commands. solution for this case is to restart the gradle process
+gradle version `7.3.3` of  there are some issues when running graddle commands. solution for this case is to restart the gradle process
 
 ```bash
 gradle --stop
 ```
+
 ### lock file error
+
 ```bash
 FAILURE: Build failed with an exception.
 
@@ -85,6 +102,7 @@ gradle --refresh-dependencies
 ```
 
 #### run the build passing arguments
+
 ```bash
 gradle run --args="--help"
 ```
@@ -93,7 +111,3 @@ gradle run --args="--help"
 ```bash
 gradle test
 ```
-
-[Back to top](#)
-
-[Kiwiki Home](/../../)
