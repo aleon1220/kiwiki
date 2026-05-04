@@ -24,37 +24,35 @@
 ## Leadership Skills  
 - **Description:** Leadership skills involve guiding and inspiring others to achieve common goals.  
 - **Best Practices:**  
-  - Lead by example.  
-  - Communicate a clear vision.  
-  - Provide support and feedback.  
-  
-[Back to top](#)  
+  - Lead by example
+  - Communicate a clear vision
+  - Provide support and feedback
   
 ## Team-Working Skills  
 - **Description:** Team-working skills involve collaborating effectively with others towards a common goal.  
 - **Best Practices:**  
-  - Foster open communication.
-  - Respect diverse perspectives.
-  - Contribute actively to team efforts.
+  - Foster open communication
+  - Respect diverse perspectives
+  - Contribute actively to team efforts
   
 ## Creativity and Problem Solving Skills
-- **Description:** Creativity and problem solving involve generating innovative solutions to challenges.
+- **Description:** Creativity and problem solving involve generating innovative solutions to challenges
 - **Best Practices:**
-  - Encourage brainstorming.
-  - Evaluate solutions critically.
-  - Implement and test solutions.
-  
+  - Encourage brainstorming
+  - Evaluate solutions critically
+  - Implement and test solutions
+
 ## Customer Service  
 - **Description:** Customer service involves assisting and satisfying customers' needs and concerns.
-- **Best Practices:**  
-  - Listen to customer feedback.  
-  - Respond promptly and courteously.  
-  - Strive to exceed customer expectations.  
+- **Best Practices:**
+  - Listen to customer feedback.
+  - Respond promptly and courteously.
+  - Strive to exceed customer expectations.
 
 # Essential Soft Skills for Software Engineers  
   
 ## 1. Adaptability  
-- The ability to quickly adjust to new technologies, methodologies, and changes in project scope or requirements.  
+- The ability to quickly adjust to new technologies, methodologies, and changes in project scope or requirements
   
 ## 2. Time Management  
 - Effectively prioritizing tasks and managing time to meet deadlines without compromising quality.  
@@ -75,10 +73,10 @@
 - Handling disagreements constructively and finding mutually acceptable solutions to conflicts that arise within the team.  
   
 ## 8. Accountability  
-- Taking responsibility for one’s actions and the outcomes of one’s work, including acknowledging mistakes and learning from them.  
+- Taking responsibility for one’s actions and the outcomes of one’s work, including acknowledging mistakes and learning from them
   
 ## 9. Networking  
-- Building and maintaining professional relationships within and outside the organization to share knowledge, resources, and opportunities.  
+- Building and maintaining professional relationships within and outside the organization to share knowledge, resources, and opportunities
   
 ## 10. Continuous Learning  
-- Staying updated with the latest trends, technologies, and best practices in the industry through ongoing education and professional development.
+- Staying updated with the latest trends, technologies, and best practices in the industry through ongoing education and professional development
