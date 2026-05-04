@@ -1,12 +1,10 @@
-[Kiwiki Home](/../../)
-
-[Back to Main Page](./readme.md)
-
-# The Java Language
+# Java Language
 high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible
+
 ## Java Versions
 
 ### Older Versions
+
 #### Java 1.3
 
 #### Java 1.4
@@ -45,10 +43,13 @@ high-level, class-based, object-oriented programming language that is designed t
 LTS. Recently using [Amazon JDK](https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/downloads-list.html)
 
 ## Java installation Management SDK
+
 Manage multiple version with sdkman
 
 ### [SDKMan](https://sdkman.io/)
-#### Installation 
+
+#### Installation
+
 - install SDK Man
 ```bash
 curl -s "https://get.sdkman.io" | bash
@@ -65,6 +66,7 @@ SDK_MAN_JAVA_VERSION="21.0.2-amzn"
 
 sdk install java $SDK_MAN_JAVA_VERSION
 ```
+
 ### Using Ubuntu apt
 leverage OS package manager
 
@@ -95,7 +97,3 @@ update-alternatives --config javac
 
 ### [Oracle Java](https://www.oracle.com/java/)
 
-
-[Back to top](#)
-
-[Kiwiki Home](/../../)

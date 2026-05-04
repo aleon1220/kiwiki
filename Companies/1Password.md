@@ -4,6 +4,9 @@ Company that provides secutiry and Password manager solutions.
 
 I use 1Password in Linux and Windows
 
+## Install
+[install-1password-cli](https://developer.1password.com/docs/cli/get-started#step-1-install-1password-cli)
+
 ## 1Pass CLI commands
 
 #### set bash auto complete
@@ -80,4 +83,4 @@ op item edit "GitLab" "2FA Recovery Codes.Code10[password]=$CODE10"
 - [1Password Secrets Automation | 1Password Developer](https://developer.1password.com/docs/secrets-automation/#comparison)
 - [Create reports in 1Password Business | 1Password Support](https://support.1password.com/reports/#create-a-usage-report-for-a-team-member-service-account-or-vault)
 - [CLI 2 Download](https://app-updates.agilebits.com/product_history/CLI2)
-- [Legacy CLI 1 Release Notes](https://app-updates.agilebits.com/product_history/CLI)
+- [Legacy CLI 1 Release Notes](https://app-updates.agilebits.com/product_history/CLI)](https://developer.1password.com/docs/cli/get-started#step-1-install-1password-cli)

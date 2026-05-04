@@ -1,8 +1,5 @@
-[Kiwiki Home](/../../)
-
-[Back to Main Page](./readme.md)
-
 # DevOps
+
 Software Development lifecycle practices
 
 CI Continous Integration
@@ -60,5 +57,3 @@ Windows11 setup at work
 - Docker [Desktop](https://www.docker.com/products/docker-desktop)
 
 [Back to top](#)
-
-[Kiwiki Home](/../../)

@@ -1,7 +1,5 @@
 # PDF Operations Tools
 
-[Back to Main Page](./readme.md)
-
 ### PDF tool kit pdftk
 [pdftk page](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)
 
@@ -23,33 +21,71 @@ pdfgrep -r "PDF text content to find"
 info pdftk
 ```
 
-#### Find string *InfoValue* in the metadata of `PDF_FILE`
+#### Find string *InfoValue* in the metadata of a pdf
 
 ```bash
-PDF_FILE="a_pdf_file.pdf"
-pdftk $PDF_FILE.pdf dump_data_utf8 | grep InfoValue:
+pdftk in_pdf_file.pdf dump_data_utf8 | grep InfoValue:
 ```
 
 #### Extract a range of pages from a PDF file
 
 ```bash
-pdftk source.pdf cat 5-10 output ExtractedOutput_p5-10.pdf
+pdftk source.pdf cat 5-10 output extracted-output_pages5-10.pdf verbose
 ```
 
 #### Split specific pages from source file 3 pages
 for example page 5, page 6, and page 10
 
 ```bash
-pdftk source.pdf cat 5 6 10 output SplittedOutput.pdf
+pdftk source.pdf cat 5 6 10 output split-output.pdf verbose
 ```
 
-#### Join PDFs unify in out1.pdf
+#### Join PDFs
+
 ```bash
-pdftk filePDF01.pdf filePDF02.pdf cat output fileOut.pdf verbose
+pdftk file01.pdf file02.pdf cat output out.pdf verbose
 ```
 
-[Back to top](#)
+### Rotate
 
+The page rotation setting can cause pdftk to rotate pages and documents.  Each option sets the page rotation as follows (in degrees): 
+left, right, and down make **relative** adjustments to a page's rotation.
 
-[Kiwiki Home](/../../)
+* 🧭 north: 0
+* ➡️ east: 90
+* ⬇️ south: 180
+* ⬅️ west: 270
+* ↩️ left: -90
+* ↪️ right: +90
+* 🔄 down: +180
+                 
+#### rotate PDF 90° clockwise or **east**
 
+```bash
+pdftk in.pdf cat 1-endeast output out.pdf verbose
+```
+
+##### Success rotation
+
+```bash
+Command Line Data is valid.
+
+Input PDF Filenames & Passwords in Order
+( <filename>[, <password>] )
+   in.pdf
+
+The operation to be performed:
+   cat - Catenate given page ranges into a new PDF.
+
+The output file will be named:
+   out.pdf
+
+Output PDF encryption settings:
+   Output PDF will not be encrypted.
+
+No compression or uncompression being performed on output.
+
+Creating Output ...
+   Adding page 1 XEASTX  from in.pdf
+   Adding page 2 XEASTX  from in.pdf
+```

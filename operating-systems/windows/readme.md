@@ -1,7 +1,3 @@
-[Kiwiki Home](/../../)
-
-[Back to Main Page](./readme.md)
-
 # Windows
 Reusable Actions. Command prompt cmd & PowerShell
 
@@ -125,6 +121,13 @@ for ($i = 0; $i -lt 12; $i++) {
 }
 ```
 
+#### windows enterprise update policies
+
+``` powershell
+gpupdate /force
+```
+
+
 </details>
 <!-- end of expand -->
 
@@ -136,7 +139,9 @@ for ($i = 0; $i -lt 12; $i++) {
 ```
 ---
 ## WSL management
+
 WSL Windows Subsystem Linux. WSL is a virtualization layer that runs Linux distros in windows.
+check [WSL docs](https://learn.microsoft.com/en-us/windows/wsl/) 
 
 ### install WSL
 ```powershell
@@ -271,6 +276,7 @@ sc queryex
 ```
 
 #### delete service
+
 ```powershell
 sc delete $SERVICENAME
 ```
@@ -288,6 +294,7 @@ Measure-Command { echo hi }
 ```
 
 ---
+
 ### Windows [Terminal](https://docs.microsoft.com/en-us/windows/terminal/get-started#installation)
 
 #### set terminal with vertical panes 2nd pane is WSL

@@ -37,7 +37,7 @@ git add . ; git commit ; git push
 ```
 #### Force-switches to branch, discarding changes
 ```bash
-git checkout master --force
+git checkout main --force
 ```
 #### fetch from remote and then merge to develop
 
@@ -305,7 +305,7 @@ git rm [-r] [-n] --cached <path(s)>
 
 ```bash
 git fetch origin
-git reset --hard origin/master
+git reset --hard origin/main
 ```
 
 #### Find local GIT repos
@@ -609,7 +609,7 @@ git checkout -b develop
 
 ```bash
 git branch
-* master
+* main
   test
 ```
 
@@ -621,7 +621,7 @@ git status
 - Check the log to see info about all commits `git log`
 
 ```bash
-commit 4c569ff830048206717d62544efbd288f85005e3 (HEAD -> master, test)
+commit 4c569ff830048206717d62544efbd288f85005e3 (HEAD -> main, test)
 Author: hackerrank <me@hackerrank.com>
 Date:   Mon Jun 28 22:02:25 2021 +0000
     Added commit03
