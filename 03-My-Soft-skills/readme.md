@@ -1,5 +1,3 @@
-[Kiwiki Home](/../../)  
-  
 # General Soft Skills  
   
 ## Communication Skills  
@@ -84,7 +82,3 @@
   
 ## 10. Continuous Learning  
 - Staying updated with the latest trends, technologies, and best practices in the industry through ongoing education and professional development.
-
-[Back to top](#)  
-  
-[Kiwiki Home](/../../)  
