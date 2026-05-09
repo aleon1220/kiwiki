@@ -1,7 +1,5 @@
-[Kiwiki Home](/../../)
-[Back to Main Page](./readme.md)
-
 # Kubernetes
+
 Container orchestrator
 
 ### YAML processing app
@@ -74,6 +72,3 @@ minikube start/stop
 ``` bash
 minikube start --vm-driver=hyper
 ```
-[Back to top](#)
-
-[Kiwiki Home](/../../)
