@@ -2,13 +2,35 @@
 
 > suggest to run from cloud shell
 
+## Azure Authentication Methods
+
+### Azure CLI
+
 #### Sign In with credentials on the command line
 
 ``` bash
-az login -u <username> -p <password>
+az login
 ```
 
-## Authenticate with a Service Principal
+> deprecated -u <username> -p <password>
+
+### Default Azure Credential
+
+- set the values
+
+```bash
+export ARM_CLIENT_ID="Application Client ID"
+export ARM_CLIENT_SECRET="Secret"
+export ARM_SUBSCRIPTION_ID="azure_subscription_id"
+```
+
+- the tenant ID can be obtained programatically. When is not possible user must login to portal.azure.com
+
+```bash
+DOMAIN_TENANT="realhandsonlabs.com" && export ARM_TENANT_ID=$(curl -s "https://login.microsoftonline.com/${DOMAIN_TENANT}/.well-known/openid-configuration" | grep -o 'https://sts.windows.net/[^/]*' | cut -d '/' -f 4) && echo $ARM_TENANT_ID
+```
+
+### Authenticate with a Service Principal
 
 Azure service principal is an identity created for use with applications, hosted services, and automated tools. 
 
