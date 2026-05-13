@@ -1,6 +1,6 @@
 # Multimedia tools
 
-images, videos, etc
+handling images, videos, etc
 
 ## Magick
 
@@ -34,6 +34,7 @@ convert -resize $SIZE source.png destination.jpg
 ```
 
 #### convert a .webp image to a .jpg
+
 ```bash
 magick 2026-ascension-day.webp 2026-ascension-day.jpg
-```bash
+```
