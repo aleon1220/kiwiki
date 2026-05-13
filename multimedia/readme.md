@@ -2,13 +2,9 @@
 
 images, videos, etc
 
-[Kiwiki Home](/../../)
-
-[Back to Main Page](./readme.md)
-
 ## Magick
 
-[Image Magick](https://imagemagick.org/index.php)
+[Image Magick](https://imagemagick.org)
 
 ```bash
 Version: ImageMagick 7.1.2-13 Q16-HDRI x86_64 2fae24192:20260118 https://imagemagick.org
@@ -37,6 +33,7 @@ SIZE="1024X768"
 convert -resize $SIZE source.png destination.jpg
 ```
 
-[Back to top](#multimedia-tools)
-
-[Kiwiki Home](/../../)
+#### convert a .webp image to a .jpg
+```bash
+magick 2026-ascension-day.webp 2026-ascension-day.jpg
+```bash
