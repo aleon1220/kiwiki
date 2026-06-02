@@ -8,6 +8,7 @@
 # 3. All commits will be automatically logged as highlight events.
 #
 
+# Git post-commit-hook
 # RESCUE_TIME_API_KEY should be in your ~/.bashrc
 API_KEY=$RESCUE_TIME_API_KEY
 

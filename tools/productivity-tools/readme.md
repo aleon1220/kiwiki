@@ -90,7 +90,3 @@ cat *.md > "$(date +%F)-MonthAnalysis.md"
 ## Forums ICT
 ### Spinnaker Stack Overflow no answers
 [StackOVerflow Spinnaker](https://stackoverflow.com/questions/tagged/spinnaker?sort=MostVotes&filters=NoAnswers&edited=true)
-
-[Back to top](#)
-
-[Kiwiki Home](/../../)
