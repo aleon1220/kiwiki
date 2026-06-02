@@ -1,12 +1,10 @@
-[Kiwiki Home](/../../)
-
 # On-boarding General Structure  
 The on-boarding process is divided into several stages: pre-start, first week, and second week. It includes practical steps for setting up technical tools and understanding workplace culture and processes.  
   
 ## Pre-Start (One Week Before Starting)  
-- **Visit the Workplace:** Visit the workplace a week before starting to get familiar with the commute and the environment.  
+- **Visit the Workplace:** Visit the workplace a week before starting to get familiar with the commute and the environment
 - **Pray and Bless the New Place:** 
-- **Commute Planning:** Calculate the time and cost of commuting using different transportation methods.  
+- **Commute Planning:** Calculate the time and cost of commuting using different transportation methods
   - Time and cost it takes to go to the new workplace using your own vehicle.  
   - Time and cost it takes to go to the new workplace by public transport.  
   
@@ -76,7 +74,3 @@ Absorve as much info as you can
 1. try to find a document of where the process is defined
 1. reflect on the progress and make it simple to understand by journaling and taking notes 
 1. ask yourself questions and then ask questions seeking to clarify
-
-[Back to top](#)
-
-[Kiwiki Home](/../../)

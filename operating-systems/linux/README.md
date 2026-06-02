@@ -1,8 +1,5 @@
-[Kiwiki Home](/../../)
+# Linux
 
-[Back to Main Page](./readme.md)
-
-# Linux Introduction
 <details>
 <summary> Linux General Intro 📝 </summary>
 
