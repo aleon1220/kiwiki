@@ -107,7 +107,7 @@ az network nsg rule list \
   --output table
 ```
 
-# Resource group management
+## Resource group management
 
 ### List all resource groups located in the West US region
 
@@ -115,11 +115,19 @@ az network nsg rule list \
 az group list --query "[?location=='westus']"
 ```
 
+#### obtain first rg name
+
+```bash
+az group list --query "[0].name" --output tsv
+```
+
 ### Obtain Authentication info 
 e.g. ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_SUBSCRIPTION_ID, ARM_SUBSCRIPTION_ID
 ```bash
 todo1
 ```
+
+---
 
 ### todo2
 
@@ -144,13 +152,3 @@ todo1
 ```bash
 
 ```
-
-### todo6
-
-```bash
-
-```
-
-[Back to top](#)
-
-[Kiwiki Home](/../../)
