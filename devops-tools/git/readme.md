@@ -21,15 +21,15 @@ git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 ```
 
-#### use nano as CLI editor
-for simplicity compared to vim`
+#### set CLI editor
+
+use nano  for simplicity compared to `vim`
 
 ```bash
 git config --global core.editor "nano"
 ```
 
 ## git Default Flow
-See git in action with the [Git flow by example](#git-flow-by-example)
 
 #### usual add, commit, push
 ```bash
@@ -574,10 +574,13 @@ git remote set-url origin git@bitbucket.org:tutorials/tutorials.git
 
 ---
 ## Git flow by example
+
 <details>
 <summary> git flow example </summary>
 
 Quick Start: Learning `git` basics by example. Flow challenge/Demo by hackerRanx.
+
+See git in action with the [Git flow by example](#git-flow-by-example)
 
 Goal is to create a git repo in linux instance: Add changes to a source-code file, commit changes, create a develop branch with new changes and finally merge from **develop branch** to **main**
 
