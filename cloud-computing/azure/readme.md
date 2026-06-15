@@ -2,9 +2,11 @@
 
 > suggest to run from cloud shell
 
-## Azure Authentication Methods
 
-### Azure CLI
+
+## Azure CLI
+
+### Azure Authentication Methods
 
 #### Sign In with credentials on the command line
 
@@ -44,13 +46,42 @@ az ad sp create-for-rbac --name serv-principal-iac --role contributor --scopes /
 
 Insufficient privileges to complete the operation
 ```
+## general commands
+
+### Resource group management
+
+### List all resource groups located in the West US region
+
+```bash
+az group list --query "[?location=='westus']"
+```
+
+#### obtain first rg name
+
+```bash
+az group list --query "[0].name" --output tsv
+```
+
+### Obtain Authentication info
+
+e.g. ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_SUBSCRIPTION_ID, ARM_TENANT_ID
+
+```bash
+todo1
+```
 
 #### get info about subscription
+
 ```bash
 az account show | jq
 ```
 
 ## Azure Portal [Home - Microsoft Azure](https://portal.azure.com/#home)
+
+## Azure Kubernetes AKS
+
+
+## Azure VM
 
 ### Create a Linux Ubuntu LTS VM
 
@@ -79,7 +110,8 @@ IPADDRESS="$(az vm list-ip-addresses \
 az vm list-skus --resource-type availabilitySets --query '[?name==`Aligned`].{Location:locationInfo[0].location, MaximumFaultDomainCount:capabilities[0].value}' --output Table
 ```
 
-# Networking
+## Azure Networking
+
 ### List the current network security group rules
 
 ```bash
@@ -105,26 +137,6 @@ az network nsg rule list \
   --nsg-name my-vmNSG \
   --query '[].{Name:name, Priority:priority, Port:destinationPortRange, Access:access}' \
   --output table
-```
-
-## Resource group management
-
-### List all resource groups located in the West US region
-
-```bash
-az group list --query "[?location=='westus']"
-```
-
-#### obtain first rg name
-
-```bash
-az group list --query "[0].name" --output tsv
-```
-
-### Obtain Authentication info 
-e.g. ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_SUBSCRIPTION_ID, ARM_SUBSCRIPTION_ID
-```bash
-todo1
 ```
 
 ---
