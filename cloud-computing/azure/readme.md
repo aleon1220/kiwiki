@@ -80,6 +80,47 @@ az account show | jq
 
 ## Azure Kubernetes AKS
 
+#### Get cluster details.
+
+```bash
+az aks show -g <ResourceGroup> -n <ClusterName> -o table
+```
+
+#### Merge credentials into kubeconfig
+
+```bash
+az aks get-credentials -g <ResourceGroup> -n <ClusterName>
+```
+
+#### uses Entra ID (Azure AD) and you need emergency admin access
+
+```bash
+az aks get-credentials -g <ResourceGroup> -n <ClusterName> --admin
+```
+
+#### List all node pools
+
+```bash
+az aks nodepool list -g <ResourceGroup> --cluster-name <ClusterName> -o table
+```
+
+#### List enabled add-ons
+
+```bash
+az aks addon list -g <ResourceGroup> -n <ClusterName> -o table
+```
+
+#### Open Kubernetes Dashboard
+
+```bash
+az aks browse -g <ResourceGroup> -n <ClusterName>
+```
+
+#### Run the AI diagnostic agent
+
+```bash
+az aks agent run
+```
 
 ## Azure VM
 
@@ -141,25 +182,7 @@ az network nsg rule list \
 
 ---
 
-### todo2
-
-```bash
-
-```
-
-### todo3
-
-```bash
-
-```
-
-### todo4
-
-```bash
-
-```
-
-### todo5
+#### todo2
 
 ```bash
 
