@@ -1,8 +1,5 @@
-[Kiwiki Home](/../../)
-
-[Back to Main Page](./readme.md)
-
 # Security and chryptography
+
 Very broad topic. Tooling used for encryption, authorization and authentication are described here
 
 #### Generate security encryption keys to sign packages
@@ -614,7 +611,3 @@ ssh-add -l
 - Convert [keys between GnuPG, OpenSsh and OpenSSL](http://sysmic.org/dotclear/index.php?post/2010/03/24/Convert-keys-betweens-GnuPG%2C-OpenSsh-and-OpenSSL)
 - [blog Cryptography RSA Open SSL](http://www.gnudeveloper.com/groups/cyber_security/Cryptography_RSA_Key_Exchange_works_in_realtime_using_Keytool_openSSL%20.html)
 - Using GPG in Windows Subsystem Linux WSL GPG guide in Windows Subsystem for Linux [GPG in WSL by Jess Esquire](https://www.jessesquire.com/articles/2019/03/31/configure-github-activity-signing-with-wsl/)
-
-[Back to top](#)
-
-[Kiwiki Home](/../../)
