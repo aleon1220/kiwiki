@@ -2,8 +2,6 @@
 
 > suggest to run from cloud shell
 
-
-
 ## Azure CLI
 
 ### Azure Authentication Methods
