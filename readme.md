@@ -58,9 +58,8 @@ Professional development, communication, leadership, and personal growth.
 ### 4.4 Development Tools & Productivity
 - [IDEs - VSCode](./devops-tools/productivity-tools/vscode-setup/readme.md)
 - [Markdown](./devops-tools/markdown/readme.md)
-- [Productivity Tools](./devops-tools/productivity-tools/readme.md)
-  - [PDF Tools](./devops-tools/productivity-tools/pdf/readme.md)
-  - [RescueTime](./devops-tools/productivity-tools/rescue-time/readme.md)
+- [Productivity Tools](./tools/productivity-tools/readme.md)
+  - [PDF Tools](./tools/pdf/readme.md)
 
 ## 5. Software Development Lifecycle
 
