@@ -1,115 +1,98 @@
 # KIWIKI
 
-## Introduction Information Technology Wiki
+## Introduction - Information Technology Wiki
 
-This project is a collection of CLI commands and utilities
+This project is a collection of CLI commands, utilities, and technical knowledge gathered over 15+ years in software engineering.
 
-- **2019-11-10=** lost my google docs wiki file. I should have been more careful.
-- **2020-04-28=** I lost years of work on an Information Technology Wiki. This markdown wiki has been started since 2020
-- **2021-04-07=** processing inbox category
+- **2019-11-10:** Lost my Google Docs wiki file. Important lesson learned.
+- **2020-04-28:** Started this markdown wiki after years of accumulated IT knowledge disappeared.
+- **2021-04-07:** Processing and reorganizing knowledge base.
 
-I was born in Colombia and started my career in software engineering | systems engineering | computer science in 2011. 
-I realized is useful to collect code snippets for different Operating systems. My interest grew to different platforms and tooling such as complex use cases with regex, programming languages, Docker, Kubernetes, etc.
+I was born in Colombia and started my career in software engineering, systems engineering, and computer science in 2011. I realized it's useful to collect code snippets for different operating systems and platforms. My interests span complex use cases with regex, programming languages, Docker, and more.
 
-I used a `.txt` file 2012, then a google docs file which was accidentally deleted from Google drive folder 2019. After accidentally deleting the folder, I emptied the bin. There was no way to recover the file. I tried contacting google support to no avail.
+**Journey:** Started with a `.txt` file (2012) → Google Docs (accidentally deleted 2019) → This markdown wiki (2020-present)
 
-> Don't rely on the cloud 100%. Have local copies of your digital material
-> work done by [andres.nz](www.andres.nz) A Colombian adopted by Kiwis since 2016
+> **Lesson Learned:** Don't rely on the cloud 100%. Maintain local copies of your digital material.
+> 
+> *Built by [andres.nz](www.andres.nz) — A Colombian adopted by Kiwis since 2016*
 
-# Kiwiki Categories
+---
 
-## 03-My-Soft-skills
+# Table of Contents
 
-## Cloud Computing
+## 1. [Soft Skills](./03-My-Soft-skills/readme.md)
+Professional development, communication, leadership, and personal growth.
 
-1. [AWS](./cloud-computing/aws/readme.md)
-2. [Azure](./cloud-computing/azure/readme.md)
-3. [Google Cloud Engine](./cloud-computing/gcp/readme.md)
+## 2. Cloud Computing
+- [AWS](./cloud-computing/aws/readme.md)
+- [Azure](./cloud-computing/azure/readme.md)
+- [Google Cloud Platform (GCP)](./cloud-computing/gcp/readme.md)
 
-## [Computer](./computer/computer.md)
-
-## Compute Containers
-
+## 3. Containers & Virtualization
 - [Docker](./containers/readme.md)
+- [Virtualization](./Virtualization/readme.md)
 
-## Software engineering Tools
-previously called devops-tools. It involves anything tech related. Call it platform engineering, SRE, DevOps Tools.
-  
-### IDEs
-- [VSCode](./devops-tools/productivity-tools/vscode-setup)
+## 4. Software Engineering & DevOps Tools
 
-### [Automation](./devops-tools/automation/readme.md) Tools
-1. [Ansible](./devops-tools/automation/ansible/readme.md)  
-2. [Rundeck](./devops-tools/automation/Rundeck/readme.md) 
+### 4.1 CI/CD Pipeline
+- [CI - Continuous Integration](./devops-tools/CI/readme.md)
+  - [Jenkins](./devops-tools/CI/jenkins/readme.md)
+    - [Functions](./devops-tools/CI/jenkins/functions/readme.md)
+    - [Pipeline Templates](./devops-tools/CI/jenkins/pipeline-templates/readme.md)
+- [CD - Continuous Deployment/Delivery](./devops-tools/CD/readme.md)
+  - [Spinnaker](./devops-tools/CD/spinnaker.md)
 
-### [Build Tools](./devops-tools/build-tools/readme.md)  
-1. [Gradle](./devops-tools/build-tools/gradle/readme.md)  
- 2. [Maven](./devops-tools/build-tools/maven/readme.md)
+### 4.2 Infrastructure & Automation
+- [Infrastructure as Code (IaC)](./devops-tools/IaC/readme.md)
+  - [Terraform](./devops-tools/IaC/terraform/readme.md)
+- [Automation Tools](./devops-tools/automation/readme.md)
+  - [Ansible](./devops-tools/automation/ansible/readme.md)
+  - [Rundeck](./devops-tools/automation/Rundeck/readme.md)
 
-### CI Continous Integration Tooling
-1. [Jenkins](./devops-tools/CI/jenkins/)
-1. [CI](./devops-tools/CI/readme.md)  
-    1. [Jenkins](./devops-tools/CI/jenkins/readme.md)  
-        1. [Functions](./devops-tools/CI/jenkins/functions/readme.md)  
-        2. [Pipeline Templates](./devops-tools/CI/jenkins/pipeline-templates/readme.md)  
-5. [Git](./devops-tools/git/readme.md)  
-6. [IaC](./devops-tools/IaC/readme.md)  
-    1. [Terraform](./devops-tools/IaC/terraform/readme.md)  
-7. [Markdown](./devops-tools/markdown/readme.md)  
-8. [Productivity Tools](./devops-tools/productivity-tools/readme.md)  
-    1. [PDF](./devops-tools/productivity-tools/pdf/readme.md)  
-    2. [Rescue Time](./devops-tools/productivity-tools/rescue-time/readme.md)  
-    3. [VSCode Setup](./devops-tools/productivity-tools/vscode-setup/readme.md) 
+### 4.3 Build & Version Control
+- [Build Tools](./devops-tools/build-tools/readme.md)
+  - [Gradle](./devops-tools/build-tools/gradle/readme.md)
+  - [Maven](./devops-tools/build-tools/maven/readme.md)
+- [Git](./devops-tools/git/readme.md)
 
-### CD Continous Deployment/Delivery Tooling
-[CD](./devops-tools/CD/readme.md)
-- [Spinnaker](./devops-tools/CD/spinnaker.md)
+### 4.4 Development Tools & Productivity
+- [IDEs - VSCode](./devops-tools/productivity-tools/vscode-setup/readme.md)
+- [Markdown](./devops-tools/markdown/readme.md)
+- [Productivity Tools](./devops-tools/productivity-tools/readme.md)
+  - [PDF Tools](./devops-tools/productivity-tools/pdf/readme.md)
+  - [RescueTime](./devops-tools/productivity-tools/rescue-time/readme.md)
 
-### [Git](./devops-tools/git/readme.md)
+## 5. Software Development Lifecycle
 
-### [Infrastructure as a Config/Code](./devops-tools/IaC/readme.md)
-
-1. [Terraform](./devops-tools/IaC/terraform/readme.md)
-
-### productivity-tools
-Personal selection of tools to improve productivity
-
-#### Mobile apps
-
-#### Online apps
-
-#### Linux/windows/IOS tools
-- [PDFs](./devops-tools/productivity-tools/pdf)
-- [RescueTime](./devops-tools/productivity-tools/rescue-time/)
-
-## [DataBases](./databases/sql.md)
-
-## [LDAP](./LDAP/)
-
-## [Multimedia](./multimedia/readme.md)
-
-## Networking
-## [Operating Systems](./operating-systems/readme.md) 
-1. [Bash](./operating-systems/bash/readme.md)   
-2. [iOS](./operating-systems/ios/readme.md)  
-3. [Linux](./operating-systems/linux/readme.md)  
-4. [Windows](./operating-systems/windows/readme.md)
-
-## [Software-Development-Life-Cycle](./Software-Development-Life-Cycle/readme.md)
-
-### Programming Languages
-
+### 5.1 Programming Languages
 - [Java](./Software-Development-Life-Cycle/programming-languages/java/readme.md)
-- [Javascript](./Software-Development-Life-Cycle/programming-languages/java/readme.md)
+- [JavaScript](./Software-Development-Life-Cycle/programming-languages/javascript/readme.md)
 - [Python](./Software-Development-Life-Cycle/programming-languages/python/readme.md)
-- [Regular expressions](./Software-Development-Life-Cycle/regex/readme.md)
 
-### [Security](./Software-Development-Life-Cycle/security/readme.md)
+### 5.2 Code Quality & Process
+- [Regular Expressions](./Software-Development-Life-Cycle/regex/readme.md)
+- [Security](./Software-Development-Life-Cycle/security/readme.md)
+- [Testing](./Software-Development-Life-Cycle/testing/readme.md)
+- [Software-Development-Life-Cycle Overview](./Software-Development-Life-Cycle/readme.md)
 
-### [Testing](./Software-Development-Life-Cycle/testing/readme.md)
+## 6. Operating Systems
+- [Bash/Shell](./operating-systems/bash/readme.md)
+- [Linux](./operating-systems/linux/readme.md)
+- [Windows](./operating-systems/windows/readme.md)
+- [iOS](./operating-systems/ios/readme.md)
 
-## [Virtualization](./Virtualization/readme.md)
+## 7. Infrastructure & Data
+- [Computer Hardware](./computer/computer.md)
+- [Databases & SQL](./databases/sql.md)
+- [LDAP](./LDAP/)
+- [Networking](./networking/readme.md)
 
-[Back to top](#)
+## 8. Enterprise Solutions
+- [Business Process Management](./Enterprise-Solutions/readme.md)
 
-[Kiwiki Home](/../../)
+## 9. Media & Content
+- [Multimedia](./multimedia/readme.md)
+
+---
+
+[Back to top](#kiwiki)
