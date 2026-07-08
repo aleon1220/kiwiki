@@ -94,4 +94,26 @@ Professional development, communication, leadership, and personal growth.
 
 ---
 
-[Back to top](#kiwiki)
+## Inbox
+
+* categorise the commands below
+
+```bash
+drawio --version
+
+drawio -x -f png --output devops-continuous-delivery-framework.png devops-continuous-delivery-framework.drawio
+
+drawio -x -f png --scale 2.5 -o devops-loop.png devops-loop.drawio
+
+drawio -x -f png --output tooling-map.png tooling-map.drawio
+
+
+```
+
+* Windows users powershell 7.6 and above
+
+```powershell
+ffmpeg -i Cultivos_2025_08_11_DCYL.avi -filter:v "select='eq(t,2)+eq(t,5)+eq(t,7)+eq(t,10)'" -fps_mode passthrough %03d-Colombia-coral-2025-08-11.png -loglevel verbose
+
+
+```
