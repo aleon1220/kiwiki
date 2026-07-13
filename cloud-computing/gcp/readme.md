@@ -2,7 +2,7 @@
 
 * [GCE](https://console.cloud.google.com/)
 
-#### Run GCE CLI as a container
+* Run GCE CLI as a container
 
 ```bash
 docker run --rm gcr.io/google.com/cloudsdktool/google-cloud-cli:latest gcloud version
@@ -17,7 +17,7 @@ gcloudcli gcloud auth login
 
 after login and save the config credentials to  **gcloud-config,** you can run commands to your account
 
-#### local user auth
+* login local user auth
 
 ```bash
 gcloud auth application-default login
@@ -30,6 +30,7 @@ gcloud auth application-default login
   ```bash
   gcloud iam service-accounts create prod-svc
   ```
+
 * add the account to a project
 
   ```bash
@@ -54,20 +55,23 @@ export GOOGLE_APPLICATION_CREDENTIALS="projectID-serviceAccountID.json"
 ```bash
 gcloud project list
 ```
-#### obtain the project number of your current project
+
+* obtain the project number of your current project
+
 ```shell
 gcloud projects describe $(gcloud config get-value core/project) --format=value\(projectNumber\)
 ```
 
-#### list service accounts in project
+* list service accounts in project
+
 ```bash
 gcloud iam service-accounts list
 ```
 
 ## References
 
-- [GCE site](https://cloud.google.com/sdk/docs/downloads-docker)
-- [GCP Quotas Cloud Armor](https://cloud.google.com/armor/quotas)
-- [workload-identity-federation](https://cloud.google.com/iam/docs/workload-identity-federation)
-- [Token Exchange reference](https://datatracker.ietf.org/doc/html/rfc8693)
-- [What is OpenID Connect](https://openid.net/developers/how-connect-works/)
+* [GCE site](https://cloud.google.com/sdk/docs/downloads-docker)
+* [GCP Quotas Cloud Armor](https://cloud.google.com/armor/quotas)
+* [workload-identity-federation](https://cloud.google.com/iam/docs/workload-identity-federation)
+* [Token Exchange reference](https://datatracker.ietf.org/doc/html/rfc8693)
+* [What is OpenID Connect](https://openid.net/developers/how-connect-works/)

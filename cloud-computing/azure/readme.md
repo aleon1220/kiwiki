@@ -6,17 +6,17 @@
 
 ### Azure Authentication Methods
 
-#### Sign In with credentials on the command line
+* Sign In with credentials on the command line
 
 ``` bash
 az login
 ```
 
-> deprecated -u <username> -p <password>
+> deprecated `-u <username> -p <password>`
 
 ### Default Azure Credential
 
-- set the values
+* set the values
 
 ```bash
 export ARM_CLIENT_ID="Application Client ID"
@@ -24,7 +24,7 @@ export ARM_CLIENT_SECRET="Secret"
 export ARM_SUBSCRIPTION_ID="azure_subscription_id"
 ```
 
-- the tenant ID can be obtained programatically. When is not possible user must login to portal.azure.com
+* the tenant ID can be obtained programatically. When is not possible user must login to portal.azure.com
 
 ```bash
 DOMAIN_TENANT="realhandsonlabs.com" && export ARM_TENANT_ID=$(curl -s "https://login.microsoftonline.com/${DOMAIN_TENANT}/.well-known/openid-configuration" | grep -o 'https://sts.windows.net/[^/]*' | cut -d '/' -f 4) && echo $ARM_TENANT_ID
@@ -36,7 +36,8 @@ Azure service principal is an identity created for use with applications, hosted
 
 this is a common pattern. Documentation [create a service principal](https://www.pulumi.com/docs/iac/get-started/azure/configure/#:~:text=create%20a%20service%20principal) provides insights on how to proceed. User must have enough permissions to proceed.
 
-#### create a service principal
+* create a service principal
+
 fails because of permissions in EntraID
 
 ```bash
@@ -44,6 +45,7 @@ az ad sp create-for-rbac --name serv-principal-iac --role contributor --scopes /
 
 Insufficient privileges to complete the operation
 ```
+
 ## general commands
 
 ### Resource group management
@@ -54,7 +56,7 @@ Insufficient privileges to complete the operation
 az group list --query "[?location=='westus']"
 ```
 
-#### obtain first rg name
+* obtain first rg name
 
 ```bash
 az group list --query "[0].name" --output tsv
@@ -68,53 +70,53 @@ e.g. ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_SUBSCRIPTION_ID, ARM_TENANT_ID
 todo1
 ```
 
-#### get info about subscription
+* get info about subscription
 
 ```bash
 az account show | jq
 ```
 
-## Azure Portal [Home - Microsoft Azure](https://portal.azure.com/#home)
+## Azure Portal [Home * Microsoft Azure](https://portal.azure.com/#home)
 
 ## Azure Kubernetes AKS
 
-#### Get cluster details.
+* Get cluster details.
 
 ```bash
 az aks show -g <ResourceGroup> -n <ClusterName> -o table
 ```
 
-#### Merge credentials into kubeconfig
+* Merge credentials into kubeconfig
 
 ```bash
 az aks get-credentials -g <ResourceGroup> -n <ClusterName>
 ```
 
-#### uses Entra ID (Azure AD) and you need emergency admin access
+* uses Entra ID (Azure AD) and you need emergency admin access
 
 ```bash
 az aks get-credentials -g <ResourceGroup> -n <ClusterName> --admin
 ```
 
-#### List all node pools
+* List all node pools
 
 ```bash
 az aks nodepool list -g <ResourceGroup> --cluster-name <ClusterName> -o table
 ```
 
-#### List enabled add-ons
+* List enabled add-ons
 
 ```bash
 az aks addon list -g <ResourceGroup> -n <ClusterName> -o table
 ```
 
-#### Open Kubernetes Dashboard
+* Open Kubernetes Dashboard
 
 ```bash
 az aks browse -g <ResourceGroup> -n <ClusterName>
 ```
 
-#### Run the AI diagnostic agent
+* Run the AI diagnostic agent
 
 ```bash
 az aks agent run
@@ -122,7 +124,7 @@ az aks agent run
 
 ## Azure VM
 
-### Create a Linux Ubuntu LTS VM
+* Create a Linux Ubuntu LTS VM
 
 ```bash
 az vm create \
@@ -133,7 +135,7 @@ az vm create \
   --generate-ssh-keys
 ```
 
-### Obtain the VM's IP address
+* Obtain the VM's IP address
 
 ```bash
 IPADDRESS="$(az vm list-ip-addresses \
@@ -143,7 +145,7 @@ IPADDRESS="$(az vm list-ip-addresses \
   --output tsv)"
 ```
 
-### retrieve a list of fault domains per region
+* retrieve a list of fault domains per region
 
 ```bash
 az vm list-skus --resource-type availabilitySets --query '[?name==`Aligned`].{Location:locationInfo[0].location, MaximumFaultDomainCount:capabilities[0].value}' --output Table
@@ -180,7 +182,7 @@ az network nsg rule list \
 
 ---
 
-#### todo2_reusable
+* todo2_reusable
 
 ```bash
 
