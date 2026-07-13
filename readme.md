@@ -101,19 +101,23 @@ Professional development, communication, leadership, and personal growth.
 ```bash
 drawio --version
 
+drawio --export --format png --recursive docs/diagrams/
+
 drawio -x -f png --output devops-continuous-delivery-framework.png devops-continuous-delivery-framework.drawio
 
 drawio -x -f png --scale 2.5 -o devops-loop.png devops-loop.drawio
 
 drawio -x -f png --output tooling-map.png tooling-map.drawio
-
-
 ```
 
-* Windows users powershell 7.6 and above
+* Windows users powershell 7.6 and above set var
 
 ```powershell
-ffmpeg -i Cultivos_2025_08_11_DCYL.avi -filter:v "select='eq(t,2)+eq(t,5)+eq(t,7)+eq(t,10)'" -fps_mode passthrough %03d-Colombia-coral-2025-08-11.png -loglevel verbose
+$video_name="2025_08_11_DCYL.avi"
+```
 
+* extract the frames
 
+```powershell
+ffmpeg -i $video_name -filter:v "select='eq(t,2)+eq(t,5)+eq(t,7)+eq(t,10)'" -fps_mode passthrough %03d-Colombia-coral-2025-08-11.png -loglevel verbose
 ```
