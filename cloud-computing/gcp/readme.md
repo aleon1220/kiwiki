@@ -53,7 +53,7 @@ export GOOGLE_APPLICATION_CREDENTIALS="projectID-serviceAccountID.json"
 * you can authenticate to GCP. e.g. run terraform commands
 
 ```bash
-gcloud project list
+gcloud projects list
 ```
 
 * obtain the project number of your current project
@@ -67,6 +67,19 @@ gcloud projects describe $(gcloud config get-value core/project) --format=value\
 ```bash
 gcloud iam service-accounts list
 ```
+
+## GCS
+
+* fetch specific files by passing a list of URIs to current dir
+
+```bash
+gcloud storage cp \
+  gs://your-bucket/file1.json \
+  gs://your-bucket/file2.json \
+  gs://your-bucket/file3.json \
+  .
+```
+
 
 ## References
 
