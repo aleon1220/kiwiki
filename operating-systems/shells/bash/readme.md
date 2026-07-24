@@ -236,7 +236,7 @@ Remember the array uses a zero-offset
 jq ".$Array_name[3].$JSON_VALUE1" $FileName.json
 ```
 
-#####  jq‘s delete function
+#####  delete function
 
 `del()` to delete a `key:value` pair
 
@@ -253,7 +253,6 @@ JSON_KEY01="OTA_URL_PREFIX"
 JSON_KEY02="REL_NOTE"
 ```
 
-
 * Remove JSON Keys `JSON_KEY01` & `JSON_KEY02`
 
 ```bash
@@ -266,6 +265,7 @@ jq "del(.$JSON_KEY1)" $FULL_JSON_FILE
 ```
 
 #####  retrieve the names of a list from the object at index position e.g. 995 through the end of the array
+
 ```bash
 jq ".[995:] | .[] | .name" $FileName.json
 ```
@@ -321,7 +321,7 @@ jq ".[100:110] | .[].name | length" $FileName.json
 ##### see how many `key:value` pairs are in the first object in the array
 
 ```bash
-jq ".[0] | length" $FileName.json
+jq ".[0] | length" "$FileName"
 ```
 
 ##### JQ keys Function
@@ -359,6 +359,22 @@ jq '.[678] | has("nametype")' $FileName.json
 ``` bash
 # ZIP_HASH to FILE_HASH & ZIP_SIZE to FILE_SIZE
 jq '[ . | .["ZIP_HASH"] = .FILE_HASH | .["ZIP_SIZE"] = .FILE_SIZE | del(.ZIP_HASH, .ZIP_SIZE)]' "${OTA_ARTIFACTS_OUT_DIR}/temp0.json" > "${TA_ARTIFACTS_OUT_DIR}/temp1.json"
+```
+
+* extract a key where an array is empty
+* set variables
+
+``` bash
+FULL_JSON_FILE="current-images.jsonl"
+FILTER_ARRAY_ELEMENT=".boundingBoxAnnotations"
+KEY_TO_FETCH=".imageGcsUri"
+NEW_OUTPUT_FILE="unlabeled_images.txt"
+```
+
+* perform the selection
+
+``` bash
+jq -r 'select( "$FILTER_ARRAY_ELEMENT" | length == 0) | "$KEY_TO_FETCH" ' "$FULL_JSON_FILE"  > "$NEW_OUTPUT_FILE"
 ```
 
 ## Reference Material
