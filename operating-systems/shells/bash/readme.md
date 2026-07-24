@@ -236,14 +236,33 @@ Remember the array uses a zero-offset
 jq ".$Array_name[3].$JSON_VALUE1" $FileName.json
 ```
 
-#####  jq‘s delete function, del(), to delete a key:value pair
+#####  jq‘s delete function
+
+`del()` to delete a `key:value` pair
 
 it just removes it from the output of the command. 
 
 If you need to create a new file without the message `key:value pair` in it, run the command, and then redirect the output into a new file.
 
+* set variables
+
+``` bash
+FULL_JSON_FILE="big-json-file.json"
+NEW_JSON_FILE="metadata.json"
+JSON_KEY01="OTA_URL_PREFIX"
+JSON_KEY02="REL_NOTE"
+```
+
+
+* Remove JSON Keys `JSON_KEY01` & `JSON_KEY02`
+
 ```bash
-jq "del(.$JSON_KEY1)" $FileName.json
+jq "del(.JSON_KEY01, .JSON_KEY02)" "$FULL_JSON_FILE" > "$NEW_JSON_FILE"
+```
+
+* delete one key and output in screen
+```bash
+jq "del(.$JSON_KEY1)" $FULL_JSON_FILE
 ```
 
 #####  retrieve the names of a list from the object at index position e.g. 995 through the end of the array
@@ -299,7 +318,7 @@ jq ".[121].Object.ArrayJson[]" $FileName.json
 jq ".[100:110] | .[].name | length" $FileName.json
 ```
 
-##### see how many key:value pairs are in the first object in the array
+##### see how many `key:value` pairs are in the first object in the array
 
 ```bash
 jq ".[0] | length" $FileName.json
@@ -340,14 +359,6 @@ jq '.[678] | has("nametype")' $FileName.json
 ``` bash
 # ZIP_HASH to FILE_HASH & ZIP_SIZE to FILE_SIZE
 jq '[ . | .["ZIP_HASH"] = .FILE_HASH | .["ZIP_SIZE"] = .FILE_SIZE | del(.ZIP_HASH, .ZIP_SIZE)]' "${OTA_ARTIFACTS_OUT_DIR}/temp0.json" > "${TA_ARTIFACTS_OUT_DIR}/temp1.json"
-```
-##### Remove JSON Keys
-
-``` bash
-# remove OTA_URL_PREFIX and REL_NOTE
-jq "del(.OTA_URL_PREFIX, .REL_NOTE)" "${OTA_ARTIFACTS_OUT_DIR}/temp1.json" > "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}-metadata.json"
-set -xeu -o pipefail # print exec and fail exec
-zip -r "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}.upd" "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}-metadata.json" "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}.zip"
 ```
 
 ## Reference Material
