@@ -73,7 +73,7 @@ todo1
 * get info about subscription
 
 ```bash
-az account show | jq
+az account show -o json
 ```
 
 ## Azure Portal [Home * Microsoft Azure](https://portal.azure.com/#home)

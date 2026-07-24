@@ -9,24 +9,26 @@ source obtained from this wonderful [Medium post by circuit People](https://medi
 
 ## AWS Amazon Web services General
 
-#### How Many Services does AWS Have? JQ
+#### How Many Services does AWS Have?
 
 ```bash
-curl -s https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json | jq -r '.partitions[0].services | keys[]' | wc -l
+curl -s https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json | python3 -c "import sys, json; print(len(json.load(sys.stdin)['partitions'][0]['services']))"
 ```
 
-#### Which AWS Services am I using? JQ
+#### Which AWS Services am I using?
 
 ```bash
 aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01" -d "-1 Month"),End=$(date --date="$(date +'%Y-%m-01') - 1 second" -I) \
-  --granularity MONTHLY --metrics UsageQuantity --group-by Type=DIMENSION,Key=SERVICE | \
-  jq '.ResultsByTime[].Groups[] | select(.Metrics.UsageQuantity.Amount > 0) | .Keys[0]'
+  --granularity MONTHLY --metrics UsageQuantity --group-by Type=DIMENSION,Key=SERVICE \
+  --query 'ResultsByTime[*].Groups[?Metrics.UsageQuantity.Amount > `0`].Keys[0]' --output text
 ```
 
-#### What is each service costing me? JQ
+#### What is each service costing me?
 
 ```bash
-aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01"),End=$(date --date="$(date +'%Y-%m-01') + 1 month  - 1 second" -I) --granularity MONTHLY --metrics USAGE_QUANTITY BLENDED_COST  --group-by Type=DIMENSION,Key=SERVICE | jq '[ .ResultsByTime[].Groups[] | select(.Metrics.BlendedCost.Amount > "0") | { (.Keys[0]): .Metrics.BlendedCost } ] | sort_by(.Amount) | add'
+aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01"),End=$(date --date="$(date +'%Y-%m-01') + 1 month - 1 second" -I) \
+  --granularity MONTHLY --metrics USAGE_QUANTITY BLENDED_COST --group-by Type=DIMENSION,Key=SERVICE \
+  --query 'ResultsByTime[*].Groups[?Metrics.BlendedCost.Amount > `0`].[Keys[0], Metrics.BlendedCost.Amount, Metrics.BlendedCost.Unit]' --output table
 ```
 
 ## AWS CLI

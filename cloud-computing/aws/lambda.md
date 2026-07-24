@@ -4,25 +4,21 @@
 
 # AWS Lambda Functions
 
-#### Which Lambda Functions Runtimes am I Using? JQ
+#### Which Lambda Functions Runtimes am I Using?
 
 ```bash
-aws lambda list-functions | jq ".Functions | group_by(.Runtime)|[.[]|{ runtime:.[0].Runtime, functions:[.[]|.FunctionName] }]"
+aws lambda list-functions --query 'Functions[*].{FunctionName: FunctionName, Runtime: Runtime}' --output table
 ```
 
-#### Are you exposing secrets in variables? Have a typo in a key? JQ
+#### Are you exposing secrets in variables? Have a typo in a key?
 
 ```bash
-aws lambda list-functions | jq -r '[.Functions[] |{name: .FunctionName, env: .Environment.Variables}] | .[] | select(.env|length > 0)'
+aws lambda list-functions --query "Functions[?Environment.Variables != \`null\`].{FunctionName: FunctionName, Environment: Environment.Variables}"
 ```
 
-#### What logs does my Lambda Function generate when I run it? JQ
+#### What logs does my Lambda Function generate when I run it?
 
 ```bash
 FUNCTION_NAME="REPLACE"
-aws lambda invoke --function-name $FUNCTION_NAME --payload '{}' --log-type Tail - | jq -r '{ "StatusCode": .StatusCode, "LogResult": (.LogResult|@base64d)}'
+aws lambda invoke --function-name $FUNCTION_NAME --payload '{}' --log-type Tail --query '{StatusCode: StatusCode, LogResult: LogResult}' response.json
 ```
-
-[Back to top](#)
-
-[Kiwiki Home](/../../)

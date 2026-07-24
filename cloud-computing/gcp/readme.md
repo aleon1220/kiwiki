@@ -80,7 +80,6 @@ gcloud storage cp \
   .
 ```
 
-
 ## References
 
 * [GCE site](https://cloud.google.com/sdk/docs/downloads-docker)

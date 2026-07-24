@@ -1,14 +1,7 @@
-[Kiwiki Home](/../../)
+# AWS Identiy Access Management
 
-[Back to Main Page](./readme.md)
-
-# Identiy Access Management
-#### When was my AWS user created? JQ
+#### When was my AWS user created?
 
 ```bash
-aws iam get-user | jq -r ".User.CreateDate[:4]"
+aws iam get-user --query 'User.CreateDate' --output text
 ```
-
-[Back to top](#)
-
-[Kiwiki Home](/../../)
