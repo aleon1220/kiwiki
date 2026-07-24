@@ -12,7 +12,7 @@ source obtained from this wonderful [Medium post by circuit People](https://medi
 #### How Many Services does AWS Have?
 
 ```bash
-curl -s https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json | python3 -c "import sys, json; print(len(json.load(sys.stdin)['partitions'][0]['services']))"
+curl -s https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json | jq -r '.partitions[0].services | keys[]' | wc -l
 ```
 
 #### Which AWS Services am I using?
