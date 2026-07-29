@@ -51,8 +51,14 @@ convert -resize $SIZE source.png destination.jpg
 magick 2026-ascension-day.webp 2026-ascension-day.jpg
 ```
 
-* compress image
+* compress image. `-strip` removes metadata
 
 ```bash
-magick $IMG_SOURCE -strip -resize "1920x1080" -quality 85 $IMG_OUT
+magick $IMG_SOURCE -resize "1920x1080" -quality 85 $IMG_OUT
+```
+
+* batch compress many images
+
+```bash
+magick mogrify -resize "1920x1080>" -quality 85 img1.jpg img2.jpg img3.jpg
 ```
