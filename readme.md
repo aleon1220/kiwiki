@@ -108,6 +108,9 @@ drawio -x -f png --output devops-continuous-delivery-framework.png devops-contin
 drawio -x -f png --scale 2.5 -o devops-loop.png devops-loop.drawio
 
 drawio -x -f png --output tooling-map.png tooling-map.drawio
+
+# verbosity
+ELECTRON_ENABLE_LOGGING=1 drawio --export --format svg --recursive --output docs/diagrams/imgs/svgs/ ./docs/diagrams/
 ```
 
 * Windows users powershell 7.6 and above set var
