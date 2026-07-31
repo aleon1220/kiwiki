@@ -4,7 +4,9 @@ System to manage and store source code. Keeps track of changes to files. Text fi
 refer to [git official manual](https://git-scm.com/docs/user-manual)
 
 ## Git Administration/Operation
+
 ### Git Global Settings
+
 #### Get general git repo info
 ```bash
 git config --list
@@ -353,6 +355,33 @@ git clone -c core.sshCommand="/usr/bin/ssh -i $EXTRA_PRIVATE_KEY_PATH" $GIT_REPO
 ```bash
 git branch
 ```
+
+## Git Conflict resolution
+
+### Give priority to dev over main
+
+You have merge conflicts and want dev to win
+
+* Ensure your local repository is up to date
+
+```bash
+git fetch origin
+```
+
+* Switch to your dev branch
+
+```bash
+git checkout dev
+git pull origin dev
+```
+
+* Merge main into dev, but force Git to keep dev's changes during conflicts
+
+```bash
+git merge origin/main -X ours
+```
+# 4. Push the resolved branch back to GitHub
+git push origin dev
 
 ---
 
