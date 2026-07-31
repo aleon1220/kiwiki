@@ -1,4 +1,5 @@
 # Git
+
 System to manage and store source code. Keeps track of changes to files. Text files only
 refer to [git official manual](https://git-scm.com/docs/user-manual)
 
@@ -331,11 +332,21 @@ GIT_REPO_URL="git@github.com:Organization/org-repo-name.git"
 git clone -c core.sshCommand="/usr/bin/ssh -i $EXTRA_PRIVATE_KEY_PATH" $GIT_REPO_URL
 ```
 
-#### Clone a Git Repo
+#### Clone a Git Repo with fine grained token
 
-```bash
-git clone git@github.com:elastic/stack-docker.git
-```
+* set variables
+
+  ```bash
+  YOUR_GITHUB_USERNAME="username"
+  YOUR_TOKEN="github_pat_key"
+  REPO_URI="github-org/github-repo-name.git"
+  ```
+
+* clone the repo
+  
+  ```bash
+  git clone "https://$YOUR_GITHUB_USERNAME:$YOUR_PAT@github.com/$REPO_URI" .
+  ```
 
 #### List the fetched branches for a repository
 
