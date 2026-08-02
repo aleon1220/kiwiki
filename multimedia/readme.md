@@ -17,19 +17,31 @@ Compiler: clang (14.0.0)
 
 ### Image operations with ImageMagick
 
+* set variable for source image 
+
+```bash
+IMG_SOURCE="input.jpg"
+```
+
+* set variable output
+```bash
+IMG_OUT="ouput.jpg"
+```
+
 #### Resize-images with percentage value
 
 ```bash
 magick source.jpg -resize 50%  destination.jpg
 ```
 
-- older versions
+* older versions
 `convert -resize 50% source.png dest.jpg`
 
 #### Resize an image with a specific value
 
 ```bash
 SIZE="1024X768"
+
 convert -resize $SIZE source.png destination.jpg
 ```
 
@@ -37,4 +49,16 @@ convert -resize $SIZE source.png destination.jpg
 
 ```bash
 magick 2026-ascension-day.webp 2026-ascension-day.jpg
+```
+
+* compress image. `-strip` removes metadata
+
+```bash
+magick $IMG_SOURCE -resize "1920x1080" -quality 85 $IMG_OUT
+```
+
+* batch compress many images
+
+```bash
+magick mogrify -resize "1920x1080>" -quality 85 img1.jpg img2.jpg img3.jpg
 ```

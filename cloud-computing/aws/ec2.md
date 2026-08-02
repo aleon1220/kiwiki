@@ -6,17 +6,17 @@
 Elastic Cloud Compute
 https://docs.aws.amazon.com/ec2/
 
-#### Get account Id and region of current EC2 instance JQ
+#### Get account Id and region of current EC2 instance
 
 ```bash
 export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
-export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r '.region')
+export AWS_REGION=$(aws ec2 describe-availability-zones --query 'AvailabilityZones[0].RegionName' --output text)
 ```
 
-#### List EC2 key pairs JQ
+#### List EC2 key pairs
 
 ```bash
-aws ec2 describe-key-pairs | jq -r '.KeyPairs[].KeyName'
+aws ec2 describe-key-pairs --query 'KeyPairs[*].KeyName' --output text
 ```
 
 #### Get EC2 KeyPairs
@@ -26,12 +26,10 @@ aws ec2 describe-key-pairs --query 'KeyPairs[].KeyName'
 
 ```
 
-#### How many instances of each type and in what states? JQ
+#### How many instances of each type and in what states?
 
 ```bash
-aws ec2 describe-instances | \
-  jq -r \
-  "[ [.Reservations[].Instances[]|{ state: .State.Name, type: .InstanceType }] | group_by(.state)|.[]|{state: .[0].state, types: [.[].type] | [group_by(.)|.[]|{type: .[0], count: ([.[]]|length)}] }]"
+aws ec2 describe-instances --query 'Reservations[*].Instances[*].{InstanceId: InstanceId, Type: InstanceType, State: State.Name}' --output table
 ```
 
 #### Find EC2 instance ID by instance Name
@@ -85,10 +83,10 @@ aws ec2 describe-instances --query 'Reservations[].Instances[].[InstanceId, Inst
 
 Quickly create EC2 instances.
 
-#### 1. Step 1: Find the right AMI JQ
+#### 1. Step 1: Find the right AMI
 
 ```bash
-export AMI_ID=$(aws ec2 describe-images --owners amazon | jq -r ".Images[] | { id: .ImageId, desc: .Description } | select(.desc?) | select(.desc | contains(\"Amazon Linux 2\")) | select(.desc | contains(\".NET Core 2.1\")) | .id")
+export AMI_ID=$(aws ec2 describe-images --owners amazon --filters "Name=description,Values=*Amazon Linux 2*" "Name=description,Values=*.NET Core 2.1*" --query 'Images[0].ImageId' --output text)
 ```
 
 #### 2. Step 2: Create a key pair, and hold on to it in a file:
@@ -103,10 +101,10 @@ aws ec2 create-key-pair --key-name aurora-test-keypair > keypair.pem
 aws ec2 run-instances --instance-type t2.micro --image-id $AMI_ID --region us-east-1 --subnet-id <your_subnet_id> --key-name keypair --count 1 > instance.json
 ```
 
-#### 4. Step 4: Grab the instance Id from the file JQ
+#### 4. Step 4: Grab the instance Id from the file
 
 ```bash
-export INSTANCE_ID=$(jq -r .Instances[].InstanceId instance.json)
+export INSTANCE_ID=$(aws ec2 describe-instances --filters "Name=key-name,Values=keypair" --query 'Reservations[0].Instances[0].InstanceId' --output text)
 ```
 
 #### 5. Step 5: Wait for the instance to spin-up, then grab its IP address and hold onto it in an environment variable
@@ -127,28 +125,26 @@ refer to [AWS CLI reference](https://docs.aws.amazon.com/cli/latest/reference/ec
 
 - [AWS Premium questions](https://aws.amazon.com/premiumsupport/knowledge-center/ebs-volume-snapshot-ec2-instance/)
 
-#### Find all snapshots over 1 month old JQ
+#### Find all snapshots over 1 month old
 
 ```bash
-aws ec2 describe-snapshots --owner self --output json | jq '.Snapshots[] | select(.StartTime < "'$(date --date='-1 month' '+%Y-%m-%d')'") | [.Description, .StartTime, .SnapshotId]'
+aws ec2 describe-snapshots --owner self --query "Snapshots[?StartTime < '$(date --date='-1 month' '+%Y-%m-%d')'].[Description, StartTime, SnapshotId]" --output table
 ```
 
-#### List snapshots over 1 month old in all Regions JQ
+#### List snapshots over 1 month old in all Regions
 
 ```bash
 for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; \
-do echo $REGION && aws ec2 describe-snapshots --owner self --region $REGION --output json | \
-jq '.Snapshots[] | select(.StartTime < "'$(date --date='-1 month' '+%Y-%m-%d')'") | \
- [.Description, .StartTime, .SnapshotId]' ; done
+do echo $REGION && aws ec2 describe-snapshots --owner self --region $REGION --query "Snapshots[?StartTime < '$(date --date='-1 month' '+%Y-%m-%d')'].[Description, StartTime, SnapshotId]" --output table ; done
 ```
 
-#### Find all publicly available snapshots in an AWS account in all Regions JQ
+#### Find all publicly available snapshots in an AWS account in all Regions
 
 ```bash
 for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo "$REGION:"; 
-  for snap in $(aws ec2 describe-snapshots --owner self --output json --region $REGION --query 'Snapshots[*].SnapshotId' | jq -r '.[]';
-   do aws ec2 describe-snapshot-attribute --snapshot-id $snap --region $REGION --output json --attribute createVolumePermission \
-   --query '[SnapshotId,CreateVolumePermissions[?Group == `all`]]' | jq -r '.[]'; \
+  for snap in $(aws ec2 describe-snapshots --owner self --region $REGION --query 'Snapshots[*].SnapshotId' --output text);
+   do aws ec2 describe-snapshot-attribute --snapshot-id $snap --region $REGION --attribute createVolumePermission \
+   --query '[SnapshotId,CreateVolumePermissions[?Group == `all`]]' --output text; \
    done; 
    echo; 
    done
@@ -199,28 +195,28 @@ aws ec2 describe-instances --filters "Name=instance-state-name,Values=stopped" \
   --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value,InstanceId,BlockDeviceMappings[*].Ebs.VolumeId]' --output text
 ```
 
-#### How Many Gigabytes of Volumes do I have, by Status? JQ
+#### How Many Gigabytes of Volumes do I have, by Status?
 
 ```bash
-aws ec2 describe-volumes | jq -r '.Volumes | [ group_by(.State)[] | { (.[0].State): ([.[].Size] | add) } ] | add'
+aws ec2 describe-volumes --query 'Volumes[*].{VolumeId: VolumeId, Size: Size, State: State}' --output table
 ```
 
-#### How many Snapshots do I have? JQ
+#### How many Snapshots do I have?
 
 ```bash
-aws ec2 describe-snapshots --owner-ids self | jq '.Snapshots | length'
+aws ec2 describe-snapshots --owner self --query 'length(Snapshots)' --output text
 ```
 
-#### How large are the snapshot in total? JQ
+#### How large are the snapshot in total?
 
 ```bash
-aws ec2 describe-snapshots --owner-ids self | jq '[.Snapshots[].VolumeSize] | add'
+aws ec2 describe-snapshots --owner self --query 'sum(Snapshots[*].VolumeSize)' --output text
 ```
 
-#### How do they breakdown by the volume used to create them? JQ
+#### How do they breakdown by the volume used to create them?
 
 ```bash
-aws ec2 describe-snapshots --owner-ids self | jq '.Snapshots | [ group_by(.VolumeId)[] | { (.[0].VolumeId): { "count": (.[] | length), "size": ([.[].VolumeSize] | add) } } ] | add'
+aws ec2 describe-snapshots --owner self --query 'Snapshots[*].{SnapshotId: SnapshotId, VolumeId: VolumeId, VolumeSize: VolumeSize}' --output table
 ```
 
 #### Get the information: InstanceID, InstanceType and the value of the Name tag
@@ -281,7 +277,7 @@ The EC2 instance has a security group / Firewall
 #### List Load balancers by name
 
 ```bash
-aws elbv2 describe-load-balancers | jq .LoadBalancers[].LoadBalancerName
+aws elbv2 describe-load-balancers --query 'LoadBalancers[*].LoadBalancerName' --output text
 ```
 
 #### Obtain the AWS ARN of a given LoadBalancer name
@@ -299,19 +295,19 @@ aws elbv2 describe-load-balancers --names $LOAD_BALANCER_NAME --query 'LoadBalan
 LB_ARN="LB ARN"
 
 aws elbv2 describe-target-groups \
-    --load-balancer-arn $LB_ARN  \
-    --query 'TargetGroups[*].TargetGroupName' | jq
+    --load-balancer-arn $LB_ARN \
+    --query 'TargetGroups[*].TargetGroupName' --output text
 
 aws elbv2 describe-target-groups \
-    --load-balancer-arn $LB_ARN | jq
+    --load-balancer-arn $LB_ARN --output table
 ```
 
 #### Get Target Groups ARNs part of a load balancer
 
 ```bash
-aws elbv2 describe-target-groups     \
---load-balancer-arn $LB_ARN      \
---query 'TargetGroups[*].TargetGroupArn' | jq
+aws elbv2 describe-target-groups \
+    --load-balancer-arn $LB_ARN \
+    --query 'TargetGroups[*].TargetGroupArn' --output text
 ```
 
 #### Register an EC2 instance in a target group

@@ -1,12 +1,8 @@
-[Kiwiki Home](/../../)
-
-[Back to Main Page](./readme.md)
-
 # Google Cloud Engine
 
-https://console.cloud.google.com/
+* [GCE](https://console.cloud.google.com/)
 
-#### Run GCE CLI as a docker container
+* Run GCE CLI as a container
 
 ```bash
 docker run --rm gcr.io/google.com/cloudsdktool/google-cloud-cli:latest gcloud version
@@ -15,12 +11,13 @@ docker run --rm gcr.io/google.com/cloudsdktool/google-cloud-cli:latest gcloud ve
 ## Auth to Google Cloud
 
 ```bash
-docker run -ti --name gcloud-config gcr.io/google.com/cloudsdktool/google-cloud-cli gcloud auth login
+alias gcloudcli docker run -ti --name gcloud-config gcr.io/google.com/cloudsdktool/google-cloud-cli
+gcloudcli gcloud auth login
 ```
 
 after login and save the config credentials to  **gcloud-config,** you can run commands to your account
 
-#### local user auth
+* login local user auth
 
 ```bash
 gcloud auth application-default login
@@ -29,18 +26,24 @@ gcloud auth application-default login
 ### GCP Service account credential
 
 * create the service account
-```bash
-gcloud iam service-accounts create prod-svc
-```
+
+  ```bash
+  gcloud iam service-accounts create prod-svc
+  ```
+
 * add the account to a project
+
   ```bash
   gcloud projects add-iam-policy-binding $PROJECT_ID -member="serviceAccount:prod-svc@$PROJECT_ID -roles"roles/owner"
   ```
+
 * Create Auth keys generate the Key as JSON file
-  ```
+
+  ```bash
   gcloud iam service-accounts keys create prod-svc-creds.json --iam-account=prod-svc@$PROJECT_ID.iam.
   gserviceaccount.com.iam.gserviceaccount.com"
   ```
+
 * Place it in a secure storage and fetch the credentials from a password manager. for terraform can be used as environment variable as below
 
 ```bash
@@ -50,26 +53,37 @@ export GOOGLE_APPLICATION_CREDENTIALS="projectID-serviceAccountID.json"
 * you can authenticate to GCP. e.g. run terraform commands
 
 ```bash
-gcloud project list
+gcloud projects list
 ```
-#### obtain the project number of your current project
+
+* obtain the project number of your current project
+
 ```shell
 gcloud projects describe $(gcloud config get-value core/project) --format=value\(projectNumber\)
 ```
 
-#### list service accounts in project
+* list service accounts in project
+
 ```bash
 gcloud iam service-accounts list
 ```
 
+## GCS
+
+* fetch specific files by passing a list of URIs to current dir
+
+```bash
+gcloud storage cp \
+  gs://your-bucket/file1.json \
+  gs://your-bucket/file2.json \
+  gs://your-bucket/file3.json \
+  .
+```
+
 ## References
 
-- [GCE site](https://cloud.google.com/sdk/docs/downloads-docker)
-- [GCP Quotas Cloud Armor](https://cloud.google.com/armor/quotas)
-- [workload-identity-federation](https://cloud.google.com/iam/docs/workload-identity-federation)
-- [Token Exchange reference](https://datatracker.ietf.org/doc/html/rfc8693)
-- [What is OpenID Connect](https://openid.net/developers/how-connect-works/)
-
-[Back to top](#)
-
-[Kiwiki Home](/../../)
+* [GCE site](https://cloud.google.com/sdk/docs/downloads-docker)
+* [GCP Quotas Cloud Armor](https://cloud.google.com/armor/quotas)
+* [workload-identity-federation](https://cloud.google.com/iam/docs/workload-identity-federation)
+* [Token Exchange reference](https://datatracker.ietf.org/doc/html/rfc8693)
+* [What is OpenID Connect](https://openid.net/developers/how-connect-works/)
