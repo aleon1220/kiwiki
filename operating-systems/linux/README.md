@@ -395,20 +395,34 @@ tar --verbose --create --gzip --file=compressed-file.tar.gz .
 ```
 
 #### Decompress verbose
-- create directory
+
+* create directory
 ```bash
 DIRECTORY="/decompression/path/directory"
 mkdir -pv $DIRECTORY
 ```
-- decompress file archive
+
+* set env var names
+
 ```bash
-tar --verbose --gzip --extract --file=archive-name.tar.gz --directory="$DIRECTORY"
+ARCHIVE_NAME="archive_name.tar.gz"
+
+echo "decompress to dir $DIRECTORY"
+echo "decompress file $ARCHIVE_NAME"
 ```
 
-- decompress short flag
+* decompress file archive
+
+```bash
+tar --verbose --gzip --extract --file="$ARCHIVE_NAME" --directory="$DIRECTORY"
+```
+
+* decompress short flag
+
 ```bash
 tar -vzxf archive-name.tar.gz 
 ```
+
 ### Zip
 
 ```bash
