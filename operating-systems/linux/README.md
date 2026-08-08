@@ -365,20 +365,24 @@ stat $FILE
 ```
 
 #### Create a Symbolic Link
-- set the environment variables
+
+* set the environment variables
+
 ```bash
-SOURCE_FILE_PATH=/home/ubuntu/.local/bin/docker-compose
-SYMBOLIC_LINK_PATH=/usr/bin/docker-compose
+SOURCE_FILE_PATH="/home/ubuntu/.local/bin/docker-compose"
+SYMBOLIC_LINK_PATH="/usr/bin/docker-compose"
 ```
 
-- create the link
+* create the link
+
 ```bash
 sudo ln --symbolic $SOURCE_FILE_PATH $SYMBOLIC_LINK_PATH
 ```
 
 ## Text Editors
 
-#### set default OS text editor
+* set default OS text editor
+
 `nano` suggested for beginners 
 
 `vim` advanced, default in most distros
@@ -388,17 +392,26 @@ export EDITOR="vim"
 ```
 
 ## Compression/Decompression
+
 ### Tar
-#### compress to file
+
+ * compress to file archive
+
 ```bash
 tar --verbose --create --gzip --file=compressed-file.tar.gz .
 ```
 
 #### Decompress verbose
 
-* create directory
+* set var for new directory
+
 ```bash
 DIRECTORY="/decompression/path/directory"
+```
+
+* create directory
+
+```bash
 mkdir -pv $DIRECTORY
 ```
 
@@ -406,8 +419,12 @@ mkdir -pv $DIRECTORY
 
 ```bash
 ARCHIVE_NAME="archive_name.tar.gz"
+```
 
-echo "decompress to dir $DIRECTORY"
+* validate ops
+
+```bash
+echo "decompress to dir $DIRECTORY" ;
 echo "decompress file $ARCHIVE_NAME"
 ```
 
@@ -420,25 +437,31 @@ tar --verbose --gzip --extract --file="$ARCHIVE_NAME" --directory="$DIRECTORY"
 * decompress short flag
 
 ```bash
-tar -vzxf archive-name.tar.gz 
+tar -vzxf "$ARCHIVE_NAME" 
 ```
 
 ### Zip
+
+* compress 2 directories in a `zip` file
 
 ```bash
 zip  --recurse-paths work-log-years.zip directory1/ directory2/
 ```
 
 #### Compress directories and files
+
 ```bash
 zip -r compressedFileName.zip file1 file2 dir1/ file3
 ```
+
 #### Decompress to current directory
+
 ```bash
 unzip work-log-years.zip
 ```
 
 ####  batch extract all files to a specific directory
+
 ```bash
 for i  in  $(find . –name “*.zip”–type f)
 do
@@ -447,6 +470,7 @@ done
 ```
 
 #### Create a directory YYYY-MM-DD format
+
 during testing is helpful to name files and directories
 
 ```bash
@@ -455,6 +479,7 @@ mkdir --parents --verbose $folder_name && cd $folder_name
 ```
 
 #### Create a parent directory with 2 directories inside (Single line)
+
 ```bash
 mkdir -p $HOME/example.com/server1/{httpd,dnsqmasq}
 ```
