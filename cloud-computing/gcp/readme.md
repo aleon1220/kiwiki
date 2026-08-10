@@ -2,6 +2,14 @@
 
 https://console.cloud.google.com/
 
+## Admin ops
+
+* list all available Google Cloud regions
+
+```bash
+gcloud compute regions list
+```
+
 #### Run GCE CLI as a docker container
 
 ```bash
@@ -16,7 +24,7 @@ docker run -ti --name gcloud-config gcr.io/google.com/cloudsdktool/google-cloud-
 
 after login and save the config credentials to  **gcloud-config,** you can run commands to your account
 
-#### local user auth
+* login auth default local user
 
 ```bash
 gcloud auth application-default login
@@ -38,7 +46,7 @@ gcloud iam service-accounts create prod-svc
   
 * Create Auth keys generate the Key as JSON file
 
-  ```
+  ```bash
   gcloud iam service-accounts keys create prod-svc-creds.json --iam-account=prod-svc@$PROJECT_ID.iam.
   gserviceaccount.com.iam.gserviceaccount.com"
   ```
@@ -82,6 +90,32 @@ gcloud iam service-accounts create prod-svc
   ```bash
   gcloud iam service-accounts list
   ```
+
+
+## Storage
+
+gcloud storage ls gs://my-bucket
+
+
+* Upload files (recursive and path preservation):
+
+gcloud storage cp -r ./local-folder/ gs://my-bucket/destination/
+
+## Cloud Build
+
+* List build history
+
+gcloud builds list --limit=10
+
+## Cloud Run
+
+List deployed Cloud Run services:
+
+```Bash
+gcloud run services list
+```
+
+## Cloud SQL
 
 ## References
 
