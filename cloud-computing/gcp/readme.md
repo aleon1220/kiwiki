@@ -1,7 +1,3 @@
-[Kiwiki Home](/../../)
-
-[Back to Main Page](./readme.md)
-
 # Google Cloud Engine
 
 https://console.cloud.google.com/
@@ -32,15 +28,18 @@ gcloud auth application-default login
 ```bash
 gcloud iam service-accounts create prod-svc
 ```
+
 * add the account to a project
   ```bash
   gcloud projects add-iam-policy-binding $PROJECT_ID -member="serviceAccount:prod-svc@$PROJECT_ID -roles"roles/owner"
   ```
+  
 * Create Auth keys generate the Key as JSON file
   ```
   gcloud iam service-accounts keys create prod-svc-creds.json --iam-account=prod-svc@$PROJECT_ID.iam.
   gserviceaccount.com.iam.gserviceaccount.com"
   ```
+  
 * Place it in a secure storage and fetch the credentials from a password manager. for terraform can be used as environment variable as below
 
 ```bash
@@ -52,6 +51,7 @@ export GOOGLE_APPLICATION_CREDENTIALS="projectID-serviceAccountID.json"
 ```bash
 gcloud project list
 ```
+
 #### obtain the project number of your current project
 ```shell
 gcloud projects describe $(gcloud config get-value core/project) --format=value\(projectNumber\)
