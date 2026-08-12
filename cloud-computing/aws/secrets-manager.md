@@ -24,9 +24,6 @@ aws secretsmanager put-secret-value --secret-id $SECRET_ID --secret-string file:
 
 ```bash
 SECRET_NAME="my-aws-secret"
-aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r '.SecretString' | jq -r 'keys[]'
+
+aws secretsmanager get-secret-value --secret-id $SECRET_NAME --query 'SecretString' --output text
 ```
-
-[Back to top](#)
-
-[Kiwiki Home](./readme.md)

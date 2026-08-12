@@ -30,25 +30,26 @@ aws cloudwatch set-alarm-state --alarm-name "CriblDev-CPU-High" --state-reason "
 ## Cloudwatch Logs
 
 #### List Log groups
+
 Exploring Log Streams JQ
+
 ```bash
-aws logs describe-log-groups | jq -r '.logGroups[].logGroupName'
+aws logs describe-log-groups --query 'logGroups[*].logGroupName' --output text
 ```
 
 #### Get log streams
 
 ```bash
-logs=$(aws logs describe-log-groups | jq -r '.logGroups[].logGroupName')
-for group in $logs; do echo $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 | jq -r '.logStreams[0].logStreamName + " "'); done
+logs=$(aws logs describe-log-groups --query 'logGroups[*].logGroupName' --output text)
+for group in $logs; do echo $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 --query 'logStreams[0].logStreamName' --output text); done
 ```
 
-#### Loop through the groups and streams to get the last 10 messages since midnight JQ
+#### get the last 10 messages since midnight
+
+Loop through the groups and streams
 
 ```bash
-for group in $logs; do for stream in $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 | \
- jq -r '[ .logStreams[0].logStreamName + " "] | add'); do echo ">>>"; echo GROUP: $group; \ 
-echo STREAM: $stream; aws logs get-log-events --limit 10 --log-group-name $group --log-stream-name $stream --start-time $(date -d 'today 00:00:00' '+%s%N' | \
- cut -b1-13) | jq -r ".events[].message"; done; done
+for group in $logs; do for stream in $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 --query 'logStreams[0].logStreamName' --output text); do echo ">>>"; echo GROUP: $group; echo STREAM: $stream; aws logs get-log-events --limit 10 --log-group-name $group --log-stream-name $stream --start-time $(date -d 'today 00:00:00' '+%s%N' | cut -b1-13) --query 'events[*].message' --output text; done; done
 ```
 
 #### AWS CloudWatch Logs set to 30 days
@@ -92,7 +93,3 @@ fields @timestamp, @message
 - [What is AWS CloudWatch Logs?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
 - [AWS CloudWatch Logs Filter pattern syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html)
 - [Stack Overflow AWS CloudWatch Logs](https://stackoverflow.com/questions/tagged/amazon-cloudwatchlogs)
-
-[Back to top](#)
-
-[Kiwiki Home](/../../)

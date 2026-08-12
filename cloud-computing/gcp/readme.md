@@ -1,6 +1,6 @@
 # Google Cloud Engine
 
-https://console.cloud.google.com/
+* [GCE](https://console.cloud.google.com/)
 
 ## Admin ops
 
@@ -10,7 +10,15 @@ https://console.cloud.google.com/
 gcloud compute regions list
 ```
 
-#### Run GCE CLI as a docker container
+## Admin ops
+
+* list all available Google Cloud regions
+
+```bash
+gcloud compute regions list
+```
+
+* Run GCE CLI as a container
 
 ```bash
 docker run --rm gcr.io/google.com/cloudsdktool/google-cloud-cli:latest gcloud version
@@ -19,7 +27,8 @@ docker run --rm gcr.io/google.com/cloudsdktool/google-cloud-cli:latest gcloud ve
 ## Auth to Google Cloud
 
 ```bash
-docker run -ti --name gcloud-config gcr.io/google.com/cloudsdktool/google-cloud-cli gcloud auth login
+alias gcloudcli docker run -ti --name gcloud-config gcr.io/google.com/cloudsdktool/google-cloud-cli
+gcloudcli gcloud auth login
 ```
 
 after login and save the config credentials to  **gcloud-config,** you can run commands to your account
@@ -34,16 +43,20 @@ gcloud auth application-default login
 
 * create the service account
 
+  
 ```bash
-gcloud iam service-accounts create prod-svc
-```
+  gcloud iam service-accounts create prod-svc
+  ```
+
 
 * add the account to a project
+
 
   ```bash
   gcloud projects add-iam-policy-binding $PROJECT_ID -member="serviceAccount:prod-svc@$PROJECT_ID -roles"roles/owner"
   ```
   
+
 * Create Auth keys generate the Key as JSON file
 
   ```bash
@@ -73,23 +86,51 @@ gcloud iam service-accounts create prod-svc
 
 * you can authenticate to GCP. e.g. run terraform commands
 
-  ```bash
-  gcloud projects list
-  ```
-
-### GCP Admin commands
+```bash
+gcloud project list
+```
 
 * obtain the project number of your current project
 
-  ```shell
-  gcloud projects describe $(gcloud config get-value core/project --format=value\(projectNumber\) )
-  ```
+```shell
+gcloud projects describe $(gcloud config get-value core/project) --format=value\(projectNumber\)
+```
 
 * list service accounts in project
 
-  ```bash
-  gcloud iam service-accounts list
-  ```
+```bash
+gcloud iam service-accounts list
+```
+
+## Storage
+
+```bash
+gcloud storage ls gs://my-bucket
+```
+
+* Upload files (recursive and path preservation):
+
+```bash
+gcloud storage cp -r ./local-folder/ gs://my-bucket/destination/
+```
+
+## Cloud Build
+
+* List build history
+
+```bash
+gcloud builds list --limit=10
+```
+
+## Cloud Run
+
+List deployed Cloud Run services:
+
+```Bash
+gcloud run services list
+```
+
+## Cloud SQL
 
 
 ## Storage

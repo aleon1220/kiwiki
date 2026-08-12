@@ -94,10 +94,13 @@ Professional development, communication, leadership, and personal growth.
 
 ---
 
+<<<<<<< HEAD
 [Back to top](#kiwiki)
 
 ---
 
+=======
+>>>>>>> origin/main
 ## Inbox
 
 * categorise the commands below
@@ -128,6 +131,7 @@ $video_name="2025_08_11_DCYL.avi"
 ```powershell
 ffmpeg -i $video_name -filter:v "select='eq(t,2)+eq(t,5)+eq(t,7)+eq(t,10)'" -fps_mode passthrough %03d-Colombia-coral-2025-08-11.png -loglevel verbose
 ```
+<<<<<<< HEAD
 
 
 > [!NOTE]  
@@ -144,3 +148,5 @@ ffmpeg -i $video_name -filter:v "select='eq(t,2)+eq(t,5)+eq(t,7)+eq(t,10)'" -fps
 
 > [!CAUTION]
 > Negative potential consequences of an action.
+=======
+>>>>>>> origin/main

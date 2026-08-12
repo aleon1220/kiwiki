@@ -7,16 +7,16 @@ Tested and used in Linux ubuntu 18.04 and WSL Ubuntu 18.04, Ubuntu 22
 
 ## Some Bash Keyboard tips
 
-- `↑ Up arrow` to recall previous commands
-- `Tab` completion
-- `Ctrl + A` to go to the beginning of a line
-- `Ctrl + L` to clear screen (instead of typing "clear").
-- `Ctrl + R` to reverse search through history
-- `Ctrl + U` to cancel current input
-- `#*` and `##*` for prefix manipulation
-- `%` and `%%` for suffix manipulation
-- `^^` for pattern substitution of previous command
-- `sudo !!` to run previous command with sudo privileges.
+* `↑ Up arrow` to recall previous commands
+* `Tab` completion
+* `Ctrl + A` to go to the beginning of a line
+* `Ctrl + L` to clear screen (instead of typing "clear").
+* `Ctrl + R` to reverse search through history
+* `Ctrl + U` to cancel current input
+* `#*` and `##*` for prefix manipulation
+* `%` and `%%` for suffix manipulation
+* `^^` for pattern substitution of previous command
+* `sudo !!` to run previous command with sudo privileges.
 
 ## Bash options/Flags
 
@@ -27,7 +27,7 @@ set -o pipefail
 set -o xtrace
 ```
 
-#### Terminate an SSH session that got stuck
+* Terminate an SSH session that got stuck
 
 ``` bash
 $ ~?
@@ -55,7 +55,7 @@ grep -Ev '^#|^\$' $FILE_NAME
 
 #### alias Command
 
-- common list alias command
+* common list alias command
 
 ```bash
 alias ll='ls -alF'
@@ -90,7 +90,8 @@ alias nowtime=now
 alias nowdate='date +"%m-%d-%Y"'
 ```
 
-- Confirmation When Copying, Linking, or Deleting
+* Confirmation When Copying, Linking, or Deleting
+
 ``` bash
 alias cp='cp -i'
 alias ln='ln -i'
@@ -113,6 +114,7 @@ alias updgradeOS="sudo apt-get update && sudo apt-get upgrade --yes"
 alias update='yum update'
 alias updateyes='yum --assumeyes update'
 ```
+
 ### History & Commands Usage
 
 #### 10 Most used commands from history
@@ -135,7 +137,8 @@ done
 
 #### Rename files to trim unwanted string "ANNOYING_STRING-"
 
-Use rename if you want it to operate faster
+* Use rename if you want it to operate faster
+
 ```bash
 for file in * ; do
     echo mv -v "$file" "${file#*ANNOYING_STRING-}"
@@ -144,14 +147,15 @@ done
 
 #### Quick set up Bash Functions
 
-- From this directory copy the resources to your `$HOME`
+* From this directory copy the resources to your `$HOME`
 
 ```bash
 cp --recursive .bash_functions/ $HOME
 cp .bash_aliases $HOME
 ```
 
-- Append to the end of your `.bashrc` file
+*-* Append to the end of your `.bashrc` file
+
 ```bash
 cat <<EOF >> $HOME/.bashrc
 
@@ -162,7 +166,7 @@ fi
 EOF
 ```
 
-- source the files to apply the changes
+* source the files to apply the changes
 
 ```bash
 source $HOME/.bash_aliases
@@ -178,6 +182,7 @@ ln -s lsd lsx
 ```
 
 #### Bash process substitution
+
 ``` bash
 echo <(printf "hi all \n")
 ```
@@ -191,8 +196,8 @@ to execute the auto complete feature for AWSCLI
 
 ### JQ
 
-- [source JQ Manual](https://stedolan.github.io/jq/manual/)
-- [source How to Geek](https://www.howtogeek.com/529219/how-to-parse-json-files-on-the-linux-command-line-with-jq/)
+* [source JQ Manual](https://stedolan.github.io/jq/manual/)
+* [source How to Geek](https://www.howtogeek.com/529219/how-to-parse-json-files-on-the-linux-command-line-with-jq/)
 
 one of the nicest things to do is to output JSON to less and see the JSON output in nice colouring.
 for that do
@@ -203,7 +208,7 @@ for that do
 JSON="your.json" cat $JSON | jq . --color-output | less --RAW-CONTROL-CHARS
 ```
 
-- another form with short format via flags
+* another form with short format via flags
 
 ```bash
 cat your.json | jq . -C | less -R
@@ -236,24 +241,44 @@ Remember the array uses a zero-offset
 jq ".$Array_name[3].$JSON_VALUE1" $FileName.json
 ```
 
-#####  jq‘s delete function, del(), to delete a key:value pair
+#####  delete function
+
+`del()` to delete a `key:value` pair
 
 it just removes it from the output of the command. 
 
 If you need to create a new file without the message `key:value pair` in it, run the command, and then redirect the output into a new file.
 
-```bash
-jq "del(.$JSON_KEY1)" $FileName.json
+* set variables
+
+``` bash
+FULL_JSON_FILE="big-json-file.json"
+NEW_JSON_FILE="metadata.json"
+JSON_KEY01="OTA_URL_PREFIX"
+JSON_KEY02="REL_NOTE"
 ```
 
-#####  retrieve the names of a list from the object at index position e.g. 995 through the end of the array
+* Remove JSON Keys `JSON_KEY01` & `JSON_KEY02`
+
+```bash
+jq "del(.JSON_KEY01, .JSON_KEY02)" "$FULL_JSON_FILE" > "$NEW_JSON_FILE"
+```
+
+* delete one key and output in screen
+
+```bash
+jq "del(.$JSON_KEY1)" $FULL_JSON_FILE
+```
+
+* retrieve the names of a list from the object at index position e.g. 995 through the end of the array
+
 ```bash
 jq ".[995:] | .[] | .name" $FileName.json
 ```
 
-- `.[995:]:` This tells jq to process the objects from array index 995 through the end of the array. No number after the colon ( : ) is what tells jq to continue to the end of the array.
-- `.[]:` This array iterator tells jq to process each object in the array.
-- `.name:` This filter extracts the name value.
+* `.[995:]:` This tells jq to process the objects from array index 995 through the end of the array. No number after the colon ( : ) is what tells jq to continue to the end of the array.
+* `.[]:` This array iterator tells jq to process each object in the array.
+* `.name:` This filter extracts the name value.
 
 ##### Extract the last 10 objects from the array. A “-10” instructs jq to start processing objects 10 back from the end of the array.
 
@@ -299,10 +324,10 @@ jq ".[121].Object.ArrayJson[]" $FileName.json
 jq ".[100:110] | .[].name | length" $FileName.json
 ```
 
-##### see how many key:value pairs are in the first object in the array
+##### see how many `key:value` pairs are in the first object in the array
 
 ```bash
-jq ".[0] | length" $FileName.json
+jq ".[0] | length" "$FileName"
 ```
 
 ##### JQ keys Function
@@ -325,12 +350,15 @@ jq ".ObjectName | keys" $FileName.json
 #### JQ Function has()
 
 function to interrogate the JSON and see whether an object has a particular key name. Note the key name must be wrapped in quotation marks.
+
 ```bash
 jq '.[] | has("nametype")' $FileName.json
 ```
 
 ### has() on specific object
+
 check a specific object, you include its index position in the array filter
+
 ```bash
 jq '.[678] | has("nametype")' $FileName.json
 ```
@@ -341,13 +369,21 @@ jq '.[678] | has("nametype")' $FileName.json
 # ZIP_HASH to FILE_HASH & ZIP_SIZE to FILE_SIZE
 jq '[ . | .["ZIP_HASH"] = .FILE_HASH | .["ZIP_SIZE"] = .FILE_SIZE | del(.ZIP_HASH, .ZIP_SIZE)]' "${OTA_ARTIFACTS_OUT_DIR}/temp0.json" > "${TA_ARTIFACTS_OUT_DIR}/temp1.json"
 ```
-##### Remove JSON Keys
+
+* extract a key where an array is empty
+* set variables
 
 ``` bash
-# remove OTA_URL_PREFIX and REL_NOTE
-jq "del(.OTA_URL_PREFIX, .REL_NOTE)" "${OTA_ARTIFACTS_OUT_DIR}/temp1.json" > "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}-metadata.json"
-set -xeu -o pipefail # print exec and fail exec
-zip -r "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}.upd" "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}-metadata.json" "${OTA_ARTIFACTS_OUT_DIR}/${BUILD_ID}.zip"
+FULL_JSON_FILE="current-images.jsonl"
+FILTER_ARRAY_ELEMENT=".boundingBoxAnnotations"
+KEY_TO_FETCH=".imageGcsUri"
+NEW_OUTPUT_FILE="unlabeled_images.txt"
+```
+
+* perform the selection
+
+``` bash
+jq -r 'select( "$FILTER_ARRAY_ELEMENT" | length == 0) | "$KEY_TO_FETCH" ' "$FULL_JSON_FILE"  > "$NEW_OUTPUT_FILE"
 ```
 
 ## Reference Material
