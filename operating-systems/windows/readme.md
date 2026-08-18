@@ -164,10 +164,10 @@ gpupdate /force
 (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
 ```
 
-* check port connectivity. set `$host=host.in`
+* check port connectivity. set `$host_to_test=host.in`
 
 ```powershell
-Test-NetConnection -ComputerName $host -Port 22 -InformationLevel Detailed
+Test-NetConnection -ComputerName $host_to_test -Port 22 -InformationLevel Detailed
 ```
 
 ---
