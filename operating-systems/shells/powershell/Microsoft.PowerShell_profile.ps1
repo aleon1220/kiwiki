@@ -9,7 +9,7 @@ function Update-Environment {
 # common across OS
 
 function onePassword {
-    cat C:\Users\aleon\.ssh\1.txt | clip.exe
+    cat C:\Users\andres.leonrangel\.ssh\1.txt | clip.exe
     echo "key in clipboard"
 }
 

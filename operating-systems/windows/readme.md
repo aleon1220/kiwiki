@@ -21,9 +21,9 @@ Invoke-Item C:\workspace
 
 ## Aliases
 
-#### create a persistent Alias
+* create persistent Aliases
 
-* open a simple editor to customize the Powershell profile
+* open a simple editor to customize the Powershell profile: use `notepad` or `code`
 
 ```powershell
 notepad $PROFILE
