@@ -45,7 +45,9 @@ Supported escape sequences:
 (Note that escapes are only recognized immediately after newline.)
 ```
 
-#### display file content without comments or empty lines
+## Bash helpful commands
+
+* display file content without comments or empty lines
 
 ```bash
 FILE_NAME="myfile.conf"
@@ -53,7 +55,7 @@ FILE_NAME="myfile.conf"
 grep -Ev '^#|^\$' $FILE_NAME
 ```
 
-#### alias Command
+### alias Command
 
 * common list alias command
 
@@ -61,17 +63,15 @@ grep -Ev '^#|^\$' $FILE_NAME
 alias ll='ls -alF'
 ```
 
-#### Colorize Output
+* Colorize Output
 
-#### leverage Colordiff
-
-It may not be installed by default. to install on Ubuntu systems.
+leverage Colordiff: It may not be installed by default. to install on Ubuntu systems.
 
 ```bash
 sudo apt -y colordiff
 ```
 
-#### create the aliases
+* create the aliases
 
 ``` bash
 alias diff='colordiff'
@@ -81,7 +81,7 @@ alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 ```
 
-#### aliases for Date & time
+* aliases for Date & time
 
 ``` bash
 alias d='date +%F'
@@ -105,7 +105,7 @@ alias mv='mv -i'
 ```bash
 alias apt get="sudo apt-get"
 alias updateyes="sudo apt-get --yes"
-alias updgradeOS="sudo apt-get update && sudo apt-get upgrade --yes"
+alias updgradeOS="sudo apt update && sudo apt-get upgrade --yes"
 ```
 
 ### RHEL, CentOS, Fedora
@@ -154,7 +154,7 @@ cp --recursive .bash_functions/ $HOME
 cp .bash_aliases $HOME
 ```
 
-*-* Append to the end of your `.bashrc` file
+* Append to the end of your `.bashrc` file
 
 ```bash
 cat <<EOF >> $HOME/.bashrc
