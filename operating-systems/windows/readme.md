@@ -227,6 +227,12 @@ $InstallTarFile=".\Downloads\composer-api-12b-image.wsl"
 wsl.exe --import $DistroName $InstallLocation $InstallTarFile
 ```
 
+* run specific distro
+
+  ```powershell
+  wsl.exe --install --no-distribution
+  ```
+
 ---
 
 ## Network
