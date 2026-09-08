@@ -91,10 +91,16 @@ git remote set-url origin github.com/myusername/my-repo
 
 #### Stash Individual Files
 
+* set var for file to stash
+
 ```bash
-git stash push -- <filepath(s)>
-# Example
-git stash push -- src/index.js README.md
+file_stash="src/index.js"
+```
+
+* add to stash
+
+```bash
+git stash push -- $file_stash
 ```
 
 #### Show Content of Most Recent Stash
@@ -716,7 +722,3 @@ Fast-forward
 4. [Atlassian Docs | Bitbucket Sign tags commits with SSH keys | Bitbucket Data Center Server 8.15](https://confluence.atlassian.com/bitbucketserver/sign-commits-and-tags-with-ssh-keys-1305971205.html)
 5. [Atlassian Docs | Bitbucket obtain list of all projects and repos from DB](https://confluence.atlassian.com/bitbucketserverkb/how-to-obtain-a-list-of-all-projects-and-repositories-from-bitbucket-database-975027747.html)
 6. [Coderwall | A better git log](coderwall.com/p/euwpig/a-better-git-log)
-
-[Back to top](#)
-
-[Kiwiki Home](/../../)

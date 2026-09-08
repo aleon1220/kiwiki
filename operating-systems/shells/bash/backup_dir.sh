@@ -10,7 +10,7 @@ MYLOG=$1
 function ctrlc {
    rm -rf /home/$USER/work_backup
    rm -f /home/$USER/$MYLOG
-   printf "\nReceived signal Ctrl+C \n"
+   printf "\n Received signal Ctrl+C \n"
    exit 255
 }
 

@@ -2,6 +2,22 @@
 
 * [GCE](https://console.cloud.google.com/)
 
+## Admin ops
+
+* list all available Google Cloud regions
+
+```bash
+gcloud compute regions list
+```
+
+## Admin ops
+
+* list all available Google Cloud regions
+
+```bash
+gcloud compute regions list
+```
+
 * Run GCE CLI as a container
 
 ```bash
@@ -17,25 +33,29 @@ gcloudcli gcloud auth login
 
 after login and save the config credentials to  **gcloud-config,** you can run commands to your account
 
-* login local user auth
+* login auth default local user
 
 ```bash
 gcloud auth application-default login
 ```
 
-### GCP Service account credential
+### GCP Authenticate Service account credential
 
 * create the service account
 
-  ```bash
+  
+```bash
   gcloud iam service-accounts create prod-svc
   ```
 
+
 * add the account to a project
+
 
   ```bash
   gcloud projects add-iam-policy-binding $PROJECT_ID -member="serviceAccount:prod-svc@$PROJECT_ID -roles"roles/owner"
   ```
+  
 
 * Create Auth keys generate the Key as JSON file
 
@@ -43,17 +63,31 @@ gcloud auth application-default login
   gcloud iam service-accounts keys create prod-svc-creds.json --iam-account=prod-svc@$PROJECT_ID.iam.
   gserviceaccount.com.iam.gserviceaccount.com"
   ```
-
+  
 * Place it in a secure storage and fetch the credentials from a password manager. for terraform can be used as environment variable as below
 
-```bash
-export GOOGLE_APPLICATION_CREDENTIALS="projectID-serviceAccountID.json"
-```
+  ```bash
+  export GOOGLE_APPLICATION_CREDENTIALS="projectID-serviceAccountID.json"
+  ```
+
+* download the `JSON` file
+
+* set the environment var
+  
+  ```bash
+  KEY_FILE_PATH="$HOME/workspace-spinnaker-install/gcp/service-accounts/sa-gcp-project.json"
+  ```
+
+* enable service account access
+
+  ```bash
+  gcloud auth activate-service-account --key-file="$KEY_FILE_PATH"
+  ```
 
 * you can authenticate to GCP. e.g. run terraform commands
 
 ```bash
-gcloud projects list
+gcloud project list
 ```
 
 * obtain the project number of your current project
@@ -68,17 +102,61 @@ gcloud projects describe $(gcloud config get-value core/project) --format=value\
 gcloud iam service-accounts list
 ```
 
-## GCS
-
-* fetch specific files by passing a list of URIs to current dir
+## Storage
 
 ```bash
-gcloud storage cp \
-  gs://your-bucket/file1.json \
-  gs://your-bucket/file2.json \
-  gs://your-bucket/file3.json \
-  .
+gcloud storage ls gs://my-bucket
 ```
+
+* Upload files (recursive and path preservation):
+
+```bash
+gcloud storage cp -r ./local-folder/ gs://my-bucket/destination/
+```
+
+## Cloud Build
+
+* List build history
+
+```bash
+gcloud builds list --limit=10
+```
+
+## Cloud Run
+
+List deployed Cloud Run services:
+
+```Bash
+gcloud run services list
+```
+
+## Cloud SQL
+
+
+## Storage
+
+gcloud storage ls gs://my-bucket
+
+
+* Upload files (recursive and path preservation):
+
+gcloud storage cp -r ./local-folder/ gs://my-bucket/destination/
+
+## Cloud Build
+
+* List build history
+
+gcloud builds list --limit=10
+
+## Cloud Run
+
+List deployed Cloud Run services:
+
+```Bash
+gcloud run services list
+```
+
+## Cloud SQL
 
 ## References
 

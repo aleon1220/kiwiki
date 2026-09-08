@@ -22,6 +22,7 @@ fi
 export GPG_AGENT_INFO=${HOME}/.gnupg/S.gpg-agent:0:1
 
 GOPATH=$HOME/go
+
 function _update_ps1() {
     PS1="$($GOPATH/bin/powerline-go -error $?)"
 }
@@ -32,3 +33,17 @@ fi
 
 ## RescueTime integration
 export RESCUE_TIME_API_KEY="ADD_KEY"
+
+# Define the path to your functions directory
+BASH_FUNCTIONS_DIR="$HOME/.bash_functions"
+
+# Check if the directory exists
+if [ -d "$BASH_FUNCTIONS_DIR" ]; then
+    # Iterate over all .sh files in the directory
+    for f in "$BASH_FUNCTIONS_DIR"/*.sh; do
+        # Check if the file is readable before trying to source it
+        if [ -r "$f" ]; then
+            source "$f"
+        fi
+    done
+fi

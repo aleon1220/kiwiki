@@ -13,7 +13,6 @@ I was born in Colombia and started my career in software engineering, systems en
 **Journey:** Started with a `.txt` file (2012) → Google Docs (accidentally deleted 2019) → This markdown wiki (2020-present)
 
 > **Lesson Learned:** Don't rely on the cloud 100%. Maintain local copies of your digital material.
-> 
 > *Built by [andres.nz](www.andres.nz) — A Colombian adopted by Kiwis since 2016*
 
 ---
@@ -90,7 +89,8 @@ Professional development, communication, leadership, and personal growth.
 - [Business Process Management](./Enterprise-Solutions/readme.md)
 
 ## 9. Media & Content
-- [Multimedia](./multimedia/readme.md)
+
+* [Multimedia](./multimedia/readme.md)
 
 ---
 
@@ -124,3 +124,18 @@ $video_name="2025_08_11_DCYL.avi"
 ```powershell
 ffmpeg -i $video_name -filter:v "select='eq(t,2)+eq(t,5)+eq(t,7)+eq(t,10)'" -fps_mode passthrough %03d-Colombia-coral-2025-08-11.png -loglevel verbose
 ```
+
+> [!NOTE]  
+> Highlights information that users should take into account, even when skimming.
+
+> [!TIP]
+> Optional information to help a user be more successful.
+
+> [!IMPORTANT]  
+> Crucial information necessary for users to succeed.
+
+> [!WARNING]  
+> Critical content demanding immediate user attention due to potential risks.
+
+> [!CAUTION]
+> Negative potential consequences of an action.

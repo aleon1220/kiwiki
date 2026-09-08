@@ -37,16 +37,3 @@ function extract {
     done
 fi
 }
-
-# function to show files in current dir
-function listMyFiles() {
-    DIR="$*";
-        # if no DIR given, go home
-        if [ $# -lt 1 ]; then
-                DIR=$HOME;
-    fi;
-    
-    # use your preferred ls command
-    builtin cd "${DIR}" && \
-    ls --file --color=auto
-}

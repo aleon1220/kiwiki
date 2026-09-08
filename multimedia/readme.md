@@ -24,6 +24,7 @@ IMG_SOURCE="input.jpg"
 ```
 
 * set variable output
+
 ```bash
 IMG_OUT="ouput.jpg"
 ```

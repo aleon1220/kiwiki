@@ -7,16 +7,16 @@ Tested and used in Linux ubuntu 18.04 and WSL Ubuntu 18.04, Ubuntu 22
 
 ## Some Bash Keyboard tips
 
-- `↑ Up arrow` to recall previous commands
-- `Tab` completion
-- `Ctrl + A` to go to the beginning of a line
-- `Ctrl + L` to clear screen (instead of typing "clear").
-- `Ctrl + R` to reverse search through history
-- `Ctrl + U` to cancel current input
-- `#*` and `##*` for prefix manipulation
-- `%` and `%%` for suffix manipulation
-- `^^` for pattern substitution of previous command
-- `sudo !!` to run previous command with sudo privileges.
+* `↑ Up arrow` to recall previous commands
+* `Tab` completion
+* `Ctrl + A` to go to the beginning of a line
+* `Ctrl + L` to clear screen (instead of typing "clear").
+* `Ctrl + R` to reverse search through history
+* `Ctrl + U` to cancel current input
+* `#*` and `##*` for prefix manipulation
+* `%` and `%%` for suffix manipulation
+* `^^` for pattern substitution of previous command
+* `sudo !!` to run previous command with sudo privileges.
 
 ## Bash options/Flags
 
@@ -27,7 +27,7 @@ set -o pipefail
 set -o xtrace
 ```
 
-#### Terminate an SSH session that got stuck
+* Terminate an SSH session that got stuck
 
 ``` bash
 $ ~?
@@ -45,7 +45,9 @@ Supported escape sequences:
 (Note that escapes are only recognized immediately after newline.)
 ```
 
-#### display file content without comments or empty lines
+## Bash helpful commands
+
+* display file content without comments or empty lines
 
 ```bash
 FILE_NAME="myfile.conf"
@@ -53,25 +55,23 @@ FILE_NAME="myfile.conf"
 grep -Ev '^#|^\$' $FILE_NAME
 ```
 
-#### alias Command
+### alias Command
 
-- common list alias command
+* common list alias command
 
 ```bash
 alias ll='ls -alF'
 ```
 
-#### Colorize Output
+* Colorize Output
 
-#### leverage Colordiff
-
-It may not be installed by default. to install on Ubuntu systems.
+leverage Colordiff: It may not be installed by default. to install on Ubuntu systems.
 
 ```bash
 sudo apt -y colordiff
 ```
 
-#### create the aliases
+* create the aliases
 
 ``` bash
 alias diff='colordiff'
@@ -81,7 +81,7 @@ alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 ```
 
-#### aliases for Date & time
+* aliases for Date & time
 
 ``` bash
 alias d='date +%F'
@@ -90,7 +90,8 @@ alias nowtime=now
 alias nowdate='date +"%m-%d-%Y"'
 ```
 
-- Confirmation When Copying, Linking, or Deleting
+* Confirmation When Copying, Linking, or Deleting
+
 ``` bash
 alias cp='cp -i'
 alias ln='ln -i'
@@ -104,7 +105,7 @@ alias mv='mv -i'
 ```bash
 alias apt get="sudo apt-get"
 alias updateyes="sudo apt-get --yes"
-alias updgradeOS="sudo apt-get update && sudo apt-get upgrade --yes"
+alias updgradeOS="sudo apt update && sudo apt-get upgrade --yes"
 ```
 
 ### RHEL, CentOS, Fedora
@@ -113,6 +114,7 @@ alias updgradeOS="sudo apt-get update && sudo apt-get upgrade --yes"
 alias update='yum update'
 alias updateyes='yum --assumeyes update'
 ```
+
 ### History & Commands Usage
 
 #### 10 Most used commands from history
@@ -135,7 +137,8 @@ done
 
 #### Rename files to trim unwanted string "ANNOYING_STRING-"
 
-Use rename if you want it to operate faster
+* Use rename if you want it to operate faster
+
 ```bash
 for file in * ; do
     echo mv -v "$file" "${file#*ANNOYING_STRING-}"
@@ -144,14 +147,15 @@ done
 
 #### Quick set up Bash Functions
 
-- From this directory copy the resources to your `$HOME`
+* From this directory copy the resources to your `$HOME`
 
 ```bash
 cp --recursive .bash_functions/ $HOME
 cp .bash_aliases $HOME
 ```
 
-- Append to the end of your `.bashrc` file
+* Append to the end of your `.bashrc` file
+
 ```bash
 cat <<EOF >> $HOME/.bashrc
 
@@ -162,7 +166,7 @@ fi
 EOF
 ```
 
-- source the files to apply the changes
+* source the files to apply the changes
 
 ```bash
 source $HOME/.bash_aliases
@@ -178,6 +182,7 @@ ln -s lsd lsx
 ```
 
 #### Bash process substitution
+
 ``` bash
 echo <(printf "hi all \n")
 ```
@@ -191,8 +196,8 @@ to execute the auto complete feature for AWSCLI
 
 ### JQ
 
-- [source JQ Manual](https://stedolan.github.io/jq/manual/)
-- [source How to Geek](https://www.howtogeek.com/529219/how-to-parse-json-files-on-the-linux-command-line-with-jq/)
+* [source JQ Manual](https://stedolan.github.io/jq/manual/)
+* [source How to Geek](https://www.howtogeek.com/529219/how-to-parse-json-files-on-the-linux-command-line-with-jq/)
 
 one of the nicest things to do is to output JSON to less and see the JSON output in nice colouring.
 for that do
@@ -203,7 +208,7 @@ for that do
 JSON="your.json" cat $JSON | jq . --color-output | less --RAW-CONTROL-CHARS
 ```
 
-- another form with short format via flags
+* another form with short format via flags
 
 ```bash
 cat your.json | jq . -C | less -R
@@ -260,19 +265,20 @@ jq "del(.JSON_KEY01, .JSON_KEY02)" "$FULL_JSON_FILE" > "$NEW_JSON_FILE"
 ```
 
 * delete one key and output in screen
+
 ```bash
 jq "del(.$JSON_KEY1)" $FULL_JSON_FILE
 ```
 
-#####  retrieve the names of a list from the object at index position e.g. 995 through the end of the array
+* retrieve the names of a list from the object at index position e.g. 995 through the end of the array
 
 ```bash
 jq ".[995:] | .[] | .name" $FileName.json
 ```
 
-- `.[995:]:` This tells jq to process the objects from array index 995 through the end of the array. No number after the colon ( : ) is what tells jq to continue to the end of the array.
-- `.[]:` This array iterator tells jq to process each object in the array.
-- `.name:` This filter extracts the name value.
+* `.[995:]:` This tells jq to process the objects from array index 995 through the end of the array. No number after the colon ( : ) is what tells jq to continue to the end of the array.
+* `.[]:` This array iterator tells jq to process each object in the array.
+* `.name:` This filter extracts the name value.
 
 ##### Extract the last 10 objects from the array. A “-10” instructs jq to start processing objects 10 back from the end of the array.
 
@@ -344,12 +350,15 @@ jq ".ObjectName | keys" $FileName.json
 #### JQ Function has()
 
 function to interrogate the JSON and see whether an object has a particular key name. Note the key name must be wrapped in quotation marks.
+
 ```bash
 jq '.[] | has("nametype")' $FileName.json
 ```
 
 ### has() on specific object
+
 check a specific object, you include its index position in the array filter
+
 ```bash
 jq '.[678] | has("nametype")' $FileName.json
 ```

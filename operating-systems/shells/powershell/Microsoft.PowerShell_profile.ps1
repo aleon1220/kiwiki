@@ -9,8 +9,10 @@ function Update-Environment {
 # common across OS
 
 function onePassword {
-    cat C:\Users\aleon\.ssh\1.txt | clip.exe
-    echo "key in clipboard"
+    # usually home path is C:\Users\user123
+    # suggest alias cat and echo. in future windows releases this will be available
+    Get-Content "$HOME\.ssh\1.txt" | clip.exe
+    Write-Output "key in clipboard"
 }
 
 function Get-DirectoryStack {
