@@ -4,34 +4,26 @@
 
 ## Admin ops
 
-* list all available Google Cloud regions
-
-```bash
-gcloud compute regions list
-```
-
-## Admin ops
-
-* list all available Google Cloud regions
-
-```bash
-gcloud compute regions list
-```
-
 * Run GCE CLI as a container
 
 ```bash
 docker run --rm gcr.io/google.com/cloudsdktool/google-cloud-cli:latest gcloud version
 ```
 
+* list all available Google Cloud regions
+
+```bash
+gcloud compute regions list
+```
+
 ## Auth to Google Cloud
 
 ```bash
-alias gcloudcli docker run -ti --name gcloud-config gcr.io/google.com/cloudsdktool/google-cloud-cli
+alias gcloudcli='docker run -ti --name gcloud-config gcr.io/google.com/cloudsdktool/google-cloud-cli'
 gcloudcli gcloud auth login
 ```
 
-after login and save the config credentials to  **gcloud-config,** you can run commands to your account
+after login and save the config credentials to  **gcloud-config** you can run commands to your account
 
 * login auth default local user
 
@@ -43,19 +35,16 @@ gcloud auth application-default login
 
 * create the service account
 
-  
-```bash
+  ```bash
   gcloud iam service-accounts create prod-svc
   ```
 
 
 * add the account to a project
 
-
   ```bash
   gcloud projects add-iam-policy-binding $PROJECT_ID -member="serviceAccount:prod-svc@$PROJECT_ID -roles"roles/owner"
   ```
-  
 
 * Create Auth keys generate the Key as JSON file
 
@@ -87,7 +76,7 @@ gcloud auth application-default login
 * you can authenticate to GCP. e.g. run terraform commands
 
 ```bash
-gcloud project list
+gcloud projects list
 ```
 
 * obtain the project number of your current project
