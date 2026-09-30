@@ -17,8 +17,10 @@ alias fhere="find . -name "
 alias df="df -Tha --total"
 alias du="du -ach | sort -h"
 alias free="free -h"
+
 # listing process table
 alias ps="ps auxf"
+
 # passing an argument
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
