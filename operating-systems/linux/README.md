@@ -12,6 +12,7 @@ The Outline here is a mirror from the [Linux foundation material](https://traini
 ## OS Basics
 
 ### CLI Shell keyboard shortcuts
+
 - `CTRL + W`  cuts the word to the left of the cursor
 - `CTRL + A`  moves cursor to beginning of line. A first letter of the alphabet
 - `CTRL + E`  moves cursor to End of line
@@ -25,32 +26,40 @@ check the `echo $EDITOR` variable
 - `Alt  + D`  cuts the word to the right of the cursor
 
 ### Shell navigation
+
 #### toggle current/previous dir
+
 ```bash
 cd -
 ```
+
 #### add directory to the stack
+
 ```bash
 DIR="/home/"
 pushd $DIR
 ```
 
 #### list the directory stack
+
 ```bash
 dirs -v
 ```
 
 #### navigate elements to 2nd in array
+
 ```bash
 pushd +2
 ```
 
 #### remove directories from stack
+
 ```bash
 popd $DIR
 ```
 
 ##### Show dir contents in tree view
+
 > some distros dont have `tree`
 
 ```bash
@@ -68,8 +77,11 @@ gio tree
 ```bash
 cd /home/ws/test ; ls -ltha
 ```
+
 ### Getting help & documentation
+
 #### Help with a command
+
 ```bash
 command="stat"
 $command --help
@@ -78,8 +90,10 @@ $command --help
 ## Find/Search operations
 
 #### Find in history matching 2 strings
+
 useful when user knows the 2 stings used in a command.
 Regex `.*` matches any sequence of characters
+
 ```bash
 history | grep 'cd.*TESTS'
 ```
@@ -97,6 +111,7 @@ find . -maxdepth 2 -name LICENSE
 ```
 
 #### Find directories matching a String
+
 ```bash
 -type d -name '*myServices*'
 ```
@@ -115,7 +130,9 @@ sed -i -r "s/^THING_NAME=.*/THING_NAME=$THING_NAME/" /home/ubuntu/sftp-shim.conf
 ```
 
 ### Grep
+
 #### Find files containing specific text
+
 
 ```bash
 grep -iRl "TEXT-TO-FIND" ./
@@ -169,8 +186,8 @@ sudo grep \
 ```
 
 #### Find where the command is installed
-only in `$PATH` 
-alternative is `whereis`
+
+only in `$PATH` alternative is `whereis`
 
 ```bash
 COMMAND="pip"
