@@ -20,19 +20,9 @@ if [ ! -f ~/.gnupg/S.gpg-agent ]; then
 fi
 
 export GPG_AGENT_INFO=${HOME}/.gnupg/S.gpg-agent:0:1
-
-GOPATH=$HOME/go
-
-function _update_ps1() {
-    PS1="$($GOPATH/bin/powerline-go -error $?)"
-}
     
-if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
-    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-fi
-
 ## RescueTime integration
-export RESCUE_TIME_API_KEY="ADD_KEY"
+export RESCUE_TIME_API_KEY="<ADD_KEY>"
 
 # Define the path to your functions directory
 BASH_FUNCTIONS_DIR="$HOME/.bash_functions"

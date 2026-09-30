@@ -5,60 +5,58 @@
 
 Linux operating system, open-source philosophy, and the kernel.
 
-The Outline here is a mirror from the [Linux foundation material](https://training.linuxfoundation.org/training/introduction-to-linux)
+The Outline here mirrors the [Linux foundation material](https://training.linuxfoundation.org/training/introduction-to-linux)
 
-[edx.org](https://training.linuxfoundation.org/training/introduction-to-linux) and the book Modern Operating Systems by [Andrew Tanenbaum](https://www.amazon.com/stores/author/B000AQ1UBW/allbooks) 
+[edx.org](https://training.linuxfoundation.org/training/introduction-to-linux) and the book Modern Operating Systems by [Andrew Tanenbaum](https://www.amazon.com/stores/author/B000AQ1UBW/allbooks)
 
 ## OS Basics
 
 ### CLI Shell keyboard shortcuts
 
-- `CTRL + W`  cuts the word to the left of the cursor
-- `CTRL + A`  moves cursor to beginning of line. A first letter of the alphabet
-- `CTRL + E`  moves cursor to End of line
-- `CTRL + E + X` for Complex multiline commands opens editor. 
-check the `echo $EDITOR` variable
-
-- `CTRL + U`  cuts everything to the left of the cursor
-- `CTRL + K`  cuts everything to the right of the cursor
-- `CTRL + L`  clears the screen
-
-- `Alt  + D`  cuts the word to the right of the cursor
+* `CTRL + W`  cuts the word to the left of the cursor
+* `CTRL + A`  moves cursor to beginning of line. A first letter of the alphabet
+* `CTRL + E`  moves cursor to End of line
+* `CTRL + E + X` for Complex multiline commands opens editor
+* check the `echo $EDITOR` variable
+* `CTRL + U`  cuts everything to the left of the cursor
+* `CTRL + K`  cuts everything to the right of the cursor
+* `CTRL + L`  clears the screen
+* `Alt  + D`  cuts the word to the right of the cursor
 
 ### Shell navigation
 
-#### toggle current/previous dir
+* toggle current/previous dir
 
 ```bash
 cd -
 ```
 
-#### add directory to the stack
+* add directory to the stack
 
 ```bash
 DIR="/home/"
 pushd $DIR
 ```
 
-#### list the directory stack
+* list the directory stack
 
 ```bash
 dirs -v
 ```
 
-#### navigate elements to 2nd in array
+* navigate elements to 2nd in array
 
 ```bash
 pushd +2
 ```
 
-#### remove directories from stack
+* remove directories from stack
 
 ```bash
 popd $DIR
 ```
 
-##### Show dir contents in tree view
+* Show dir contents in tree view
 
 > some distros dont have `tree`
 
@@ -66,13 +64,13 @@ popd $DIR
 tree $HOME
 ```
 
-#### Show contents of a directory in a tree format with `gio` Gnome Input/Output
+* Show contents of a directory in a tree format with `gio` Gnome Input/Output
 
 ```bash
 gio tree
 ```
 
-#### Create a directory and run a command
+* Create a directory and run a command
 
 ```bash
 cd /home/ws/test ; ls -ltha
@@ -80,7 +78,7 @@ cd /home/ws/test ; ls -ltha
 
 ### Getting help & documentation
 
-#### Help with a command
+* Help with a command
 
 ```bash
 command="stat"
@@ -89,7 +87,7 @@ $command --help
 
 ## Find/Search operations
 
-#### Find in history matching 2 strings
+* Find in history matching 2 strings
 
 useful when user knows the 2 stings used in a command.
 Regex `.*` matches any sequence of characters
@@ -98,31 +96,31 @@ Regex `.*` matches any sequence of characters
 history | grep 'cd.*TESTS'
 ```
 
-#### Search for the text **dataToFind** in markdown files
+* Search for the text **dataToFind** in markdown files
 
 ```bash
 find ./ -type f -name "*.md" -exec grep 'dataToFind'  {} \;
 ```
 
-#### Find file named LICENSE current directory and up to subdirectory level
+* Find file named LICENSE current directory and up to subdirectory level
 
 ```bash
 find . -maxdepth 2 -name LICENSE
 ```
 
-#### Find directories matching a String
+* Find directories matching a String
 
 ```bash
 -type d -name '*myServices*'
 ```
 
-#### Find directories modified within the past 10 days
+* Find directories modified within the past 10 days
 
 ```bash
 find . -maxdepth 1 -type d -mtime -10  -printf '%f\n'
 ```
 
-#### Find the value of `THING_NAME` and replaces the value in a given config file
+* Find the value of `THING_NAME` and replaces the value in a given config file
 
 ```bash
 THING_NAME=< enter bucket Name >
@@ -131,14 +129,13 @@ sed -i -r "s/^THING_NAME=.*/THING_NAME=$THING_NAME/" /home/ubuntu/sftp-shim.conf
 
 ### Grep
 
-#### Find files containing specific text
-
+* Find files containing specific text
 
 ```bash
 grep -iRl "TEXT-TO-FIND" ./
 ```
 
-##### Common Flags for `grep`
+* Common Flags for `grep`
 
 ```bash
 -i - ignore text case
@@ -154,13 +151,13 @@ You can use the full path of the folder.
 grep -iRl "TEXT" /home/user/Documents
 ```
 
-#### Searches for (short form `-Eri`) string health_url in the current directory
+* Searches for (short form `-Eri`) string health_url in the current directory
 
 ```bash
 grep --extended-regexp --recursive --ignore-case "health_url" .
 ```
 
-#### Get text between quotes to a file
+* Get text between quotes to a file
 
 ```bash
 echo Source_File.txt | grep $REGEX_PATTERN
@@ -170,7 +167,8 @@ PATTERN='".*"'
 grep -o $PATTERN raw_file.txt > result_file_$(date)_.txt
 ```
 
-#### finds text in logs only shows the full path
+* finds text in logs only shows the full path
+
 ```bash
 sudo grep \
   --recursive \
@@ -185,7 +183,7 @@ sudo grep \
   "$PWD"
 ```
 
-#### Find where the command is installed
+* Find where the command is installed
 
 only in `$PATH` alternative is `whereis`
 
@@ -195,66 +193,70 @@ which $COMMAND
 ```
 
 ## System diagnostics
+
 info about a server
 
-#### Get info about the linux distro
-Local IP, hostname and Architecture type
+* Get info about the linux distro: IP, hostname, Architecture type
 
 ```bash
 hostname -I ; hostname ; getconf LONG_BIT
 ```
 
-#### Linux distro Debian system info
+* Linux distro Debian system info
+
 ```bash
 lsb_release -a
 ```
 
-#### Check the hidden directories and files in the HOME dir
+* Check the hidden directories and files in the HOME dir
+
 ```bash
 ls --all $HOME
 ```
 
 print user and group info
+
 ```bash
 id
 ```
 
-#### Check bash customizations current user
+* Check bash customizations current user
 
 ```bash
 less ~/.bashrc
 ```
 
-#### Get info about linux version
+* Get info about linux version
 
 ```bash
 cat /etc/os-release
 ```
 
-#### read system identification information message
+* read system identification information message
 
 ```bash
 less /etc/issue
 ```
 
-#### Debian/ubuntu get detailed info
+* Debian/ubuntu get detailed info
 
 ```bash
 lsb_release -a
 ```
 
-#### Red Hat Enterprise Linux info
+* Red Hat Enterprise Linux info
 
 ```bash
 cat /etc/redhat-release
 ```
 
-#### Query system control settings
+* Query system control settings
+
 ```bash
 hostnamectl
 ```
 
-##### Info about system
+* Info about system
 
 ```bash
 uname -a
@@ -262,79 +264,81 @@ uname -a
 
 ## Systemd Systemctl
 
-#### List all loaded service units
+* List all loaded service units
 
 ```bash
 systemctl list-units -all | grep loaded | awk '{print $1;}'
 ```
 
-#### List loaded services
+* List loaded services
 
 ```bash
 systemctl list-units -all | grep service | grep loaded | awk '{print $1;}'
 ```
 
-#### List all enabled units
+* List all enabled units
 
 ```bash
 systemctl list-unit-files| grep enabled | awk '{print $1;}' > enabled.txt
 ```
 
-#### Check status of services
+* Check status of services
+
 ```bash
 LIST_SERVICES="nginx supervisor php7.2-fpm"
 sudo systemctl status $LIST_SERVICES
 sudo service jenkins status
 ```
 
-#### Check for target service
+* Check for target service
 
 ```bash
 SERVICE_NAME="cloud-init"
 systemctl is-active $SERVICE_NAME
 ```
 
-#### check date control
+* check date control
+
 ```bash
 timedatectl status
 ```
 
-#### edit a service
+* edit a service
 
 ```bash
 sudo systemctl edit --full cron.service
 ```
 
-#### List enabled services export to text file
+* List enabled services export to text file
 
 ```bash
 systemctl list-unit-files | grep service | grep enabled | awk '{print $1;}' > enabled.txt
 ```
 
-#### Services with state loaded
-3 commands to find the diff
+* Services with state loaded
+
 ```bash
-systemctl list-units -all | grep service | grep loaded | awk '{print $1;}' > loaded.txt
+systemctl list-units -all | grep service | grep loaded | awk '{print $1;}' > loaded-services.txt
 ```
 
-#### Diff ops to find missing services
-Quick glance of missing
+* Diff ops to find missing services
 
 ```bash
 # Diff the files
-diff -y loaded.txt enabled.txt
+diff -y loaded-services.txt enabled.txt
 
-diff -y loaded.txt enabled.txt | grep '<'
+diff -y loaded-services.txt enabled.txt | grep '<'
 ```
 
 ## File Operations
-#### Move `DIR1` to `DIR_DESTINATION`
+
+* Move `DIR1` to `DIR_DESTINATION`
 
 ```bash
 mv $DIR1 $DIR_DESTINATION
 ```
 
-#### Copy files from Local to Remote Server
+* Copy files from Local to Remote Server
 
 Define the local and remote paths in env vars. Perform the copy
 
@@ -342,7 +346,7 @@ Define the local and remote paths in env vars. Perform the copy
 scp -r "$LOCAL_PATH" ubuntu@"$REMOTE_HOST_SERVER":"$REMOTE_SERVER_PATH"
 ```
 
-#### Create a file and add content to it
+* Create a file and add content to it
 
 ```bash
 FILE_PATH="/home/ubuntu/.bash_functions"
@@ -353,35 +357,40 @@ another line foo
 EOF
 ```
 
-#### List all files in a current directory
+* List all files in a current directory
 
 ```bash
 find . -maxdepth 1 -type f -print
 ```
 
 ### File Permissions & Ownership
-##### Change permissions of a file based on permissions of other file
+
+* Change permissions of a file based on permissions of other file
 
 ```bash
 REFERENCE_FILE="a_file.txt"
 TARGETING_FILE="a_target_file_to_copy_permissions.txt"
 
+* implement the permission cloning
+
+```bash
 sudo chmod --reference="$REFERENCE_FILE" "$TARGETING_FILE"
 ```
 
-##### Change ownership of all files in current dir to a given group
+* Change ownership of all files in current dir to a given group
 
 ```bash
 GROUP_NAME="common" 
 sudo --recursive "$GROUP_NAME" *
 ```
-#### Get stats info about a file
+
+* Get stats info about a file
 
 ```bash
 stat $FILE
 ```
 
-#### Create a Symbolic Link
+* Create a Symbolic Link
 
 * set the environment variables
 
@@ -390,7 +399,7 @@ SOURCE_FILE_PATH="/home/ubuntu/.local/bin/docker-compose"
 SYMBOLIC_LINK_PATH="/usr/bin/docker-compose"
 ```
 
-* create the link
+* create the symlink
 
 ```bash
 sudo ln --symbolic $SOURCE_FILE_PATH $SYMBOLIC_LINK_PATH
@@ -399,10 +408,8 @@ sudo ln --symbolic $SOURCE_FILE_PATH $SYMBOLIC_LINK_PATH
 ## Text Editors
 
 * set default OS text editor
-
-`nano` suggested for beginners 
-
-`vim` advanced, default in most distros
+* `nano` suggested for beginners
+* `vim` advanced, default in most distros
 
 ```bash
 export EDITOR="vim"
@@ -412,13 +419,13 @@ export EDITOR="vim"
 
 ### Tar
 
- * compress to file archive
+* compress to file archive
 
 ```bash
 tar --verbose --create --gzip --file=compressed-file.tar.gz .
 ```
 
-#### Decompress verbose
+* Decompress verbose
 
 * set var for new directory
 
@@ -465,19 +472,19 @@ tar -vzxf "$ARCHIVE_NAME"
 zip  --recurse-paths work-log-years.zip directory1/ directory2/
 ```
 
-#### Compress directories and files
+* Compress directories and files
 
 ```bash
 zip -r compressedFileName.zip file1 file2 dir1/ file3
 ```
 
-#### Decompress to current directory
+* Decompress to current directory
 
 ```bash
 unzip work-log-years.zip
 ```
 
-####  batch extract all files to a specific directory
+* batch extract all files to a specific directory
 
 ```bash
 for i  in  $(find . –name “*.zip”–type f)
@@ -486,7 +493,7 @@ unzip –d $i /data/www/img/
 done
 ```
 
-#### Create a directory YYYY-MM-DD format
+* Create a directory YYYY-MM-DD format
 
 during testing is helpful to name files and directories
 
@@ -495,7 +502,7 @@ folder_name="$(date +%F)"
 mkdir --parents --verbose $folder_name && cd $folder_name
 ```
 
-#### Create a parent directory with 2 directories inside (Single line)
+* Create a parent directory with 2 directories inside (Single line)
 
 ```bash
 mkdir -p $HOME/example.com/server1/{httpd,dnsqmasq}
@@ -506,7 +513,7 @@ mkdir -p $HOME/example.com/server1/{httpd,dnsqmasq}
 ---
 <!-- end of expand Introduction -->
 
-# Linux Filesystem Tree Layout
+## Linux Filesystem Tree Layout
 
 <details>
 <summary> Linux General Intro 📝 </summary>
@@ -515,7 +522,8 @@ Filesystem Hierarchy Standard (FHS), detailing the purpose of directories like `
 </details>
 <!-- end of expand -->
 
-# Linux Graphical Interface
+## Linux Graphical Interface
+
 <details>
 <summary> GUI </summary>
 
@@ -527,19 +535,21 @@ single Graphical Interface / Desktop section, GUIs, UIs
 echo $XDG_CURRENT_DESKTOP
 ```
 
-#### Check X system settings
+* Check X system settings
+
 ```bash
 less /etc/X11/xorg.conf
 ```
 
-#### Get dimensions of Display
+* Get dimensions of Display
 
 ```bash
 xdpyinfo | grep dim
 ```
 
 ### Clipboard Utilities
-#### copy & capture the clipboard
+
+* copy & capture the clipboard
 
 ```bash
 cat ~/.ssh/id_rsa.pub | xclip -sel clip
@@ -548,7 +558,7 @@ cat ~/.ssh/id_rsa.pub | xclip -sel clip
 </details>
 <!-- end of expand GUI -->
 
-# User Group Environment & Account Management
+## User Group Environment & Account Management
 
 <details>
 
@@ -556,55 +566,61 @@ cat ~/.ssh/id_rsa.pub | xclip -sel clip
 
 Covers shell customization, environment variables, aliases, and startup scripts like .bashrc.
 
-2024-06-12 migrating Win11 laptops with WSL 
-- Migrate `~/.ssh`
-- Migrate `~/.bashrc`
+2024-06-12 migrating Win11 laptops with WSL
 
-#### List Users in Linux
+* Migrate `~/.ssh`
+* Migrate `~/.bashrc`
+
+* List Users in Linux
+
 ```bash
 sudo less /etc/passwd
 ```
 
-##### Create a user
+* Create a user
+
 ```bash
 useradd newUserName
 ```
 
-##### Get the user login history
+* Get the user login history
+
 ```bash
 last $USERNAME
 ```
 
-##### Print users name currently logged in the host
+* Print users name currently logged in the host
+
 ```bash
 users
 ```
 
 Each line in the file `etc/passwd` has seven fields delimited by colons that contain the following information:
 
-- User name:
-- password Encrypted. x means is stored in the `/etc/shadow` file
-- User ID number (UID).:User’s group ID number (GID)
-- Full name of the user (GECOS)
-- User home directory
-- Login shell (defaults to /bin/bash)
+* User name:
+* password Encrypted. x means is stored in the `/etc/shadow` file
+* User ID number (UID).:User’s group ID number (GID)
+* Full name of the user (GECOS)
+* User home directory
+* Login shell (defaults to /bin/bash)
 
-##### Create a random password
-/dev/urandom (which outputs random noise), converts that noise to text (base64), and cleans up special characters (tr)
+* Create a random password
+
+`/dev/urandom` which outputs random noise, converts that noise to text (base64), and cleans up special characters (tr)
 
 ```bash
 randompass=$(dd status=none bs=24 count=1 if=/dev/urandom | \
 base64 | tr /= _)
 ```
 
-#### Display only the username
+* Display only the username
 
 ```bash
 awk -F: '{ print $1}' /etc/passwd
 cut -d: -f1 /etc/passwd
 ```
 
-#### List all Users A-Z
+* List all Users A-Z
 Each user has a numeric user ID called UID.
 
 If UID is not specified when creating a new user with the `useradd` command, the UID will be automatically selected from the `/etc/login.defs` file depending on the **UID_MIN** and **UID_MIN** values.
@@ -613,91 +629,96 @@ If UID is not specified when creating a new user with the `useradd` command, the
 getent passwd | cut -d: -f1 | sort
 ```
 
-#### See who is connected and Display the load average (uptime output)
+* See who is connected and Display the load average (uptime output)
 
 ```bash
 w -u
 ```
 
-##### Create an alias `ee` to do `cd`
+* Create an alias `ee` to do `cd`
+
 ```bash
 alias ee='cd /home/ws/projects/ee/test'
 ```
 
-#### check type of terminal
+* check type of terminal
+
 ```bash
 printf "%s\n" $TERM
 ```
 
-#### Set a new password for user `root`
+* Set a new password for user `root`
+
 ```bash
 sudo passwd $USERNAME
 ```
-- successful output
+
+* successful output
+
 ```bash
 passwd: password updated successfully
 ```
 
-##### edit sudo users
+* edit sudo users
 
 ```bash
 sudo visudo
 ```
 
-#### Check the UID_MIN and UID_MIN values on your system
+* Check the **UID_MIN** and **UID_MIN** values on your system
 
 ```bash
 grep -E '^UID_MIN|^UID_MAX' /etc/login.defs
 ```
 
-#### List all normal users
+* List all normal users
 
 ```bash
 getent passwd {1000..60000}
 ```
 
-#### Generic info about users from a Linux system
+* Generic info about users from a Linux system
 
 ```bash
 eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)}
 ```
 
-#### Print only the usernames in a Linux System
+* Print only the usernames in a Linux System
 
 ```bash
 eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1
 ```
 
-##### Print the logged-in user
+* Print the logged-in user
 
 ```bash
 id -un
 ```
 
-##### list all usernames that are currently logged
+* list all usernames that are currently logged
 
 ```bash
 who | cut -d' ' -f1 | sort | uniq
 ```
 
-#### Create variable formatted with current date **YYYY-MM-DD_HHMM**
+* Create variable formatted with current date **YYYY-MM-DD_HHMM**
 
 ```bash
 APP_VERSION="Test-$(date +%F_%H%M)"
 ```
+
 ## User Environment
 
 </details>
 <!-- end of expand -->
 
-# Package Management Systems
+## Package Management Systems
 
 <details>
 
 <summary> Linux Package Management </summary>
-System Configuration overview of how software is distributed, repositories, and dependency resolution
 
-depends on the Linux distro 
+System Configuration overview of how software is distributed, repositories, and dependency resolution. depends on the Linux distro.
 
 * dnf
 * apt
@@ -705,100 +726,101 @@ depends on the Linux distro
 
 ## Managing Default Versions
 
-#### check different installed versions of software
+* check different installed versions of software
 
 ```bash
 update-alternatives --get-selections
 ```
 
 ## APT
+
 Debian/Ubuntu package manager
 
-#### Auto remove Obsolete packages
+* Auto remove Obsolete packages
 
 ```bash
 sudo apt autoremove
 ```
 
-#### update and then Upgrade packages
+* update and then Upgrade packages
 
 ```bash
 sudo apt update ; sudo apt upgrade --yes
 ```
 
-#### List a package by name e.g. python
+* List a package by name e.g. python
 
 ```bash
 sudo apt list | grep python
 ```
 
-#### List installed packages
+* List installed packages
 
 ```bash
 sudo apt list --installed
 ```
 
-#### Fix broken install packages
+* Fix broken install packages
 
 ```bash
 sudo apt --fix-broken install
 ```
 
-#### Reinstall a package (better than removing or purging)
+* Reinstall a package (better than removing or purging)
 
 ```bash
 sudo apt install --reinstall $PACKAGE_NAME
 ```
 
-#### Purge a package
+* Purge a package
 
 ```bash
 sudo apt-get purge unattended-upgrades
 ```
 
-#### Show GPG keys in the keyring for signing apps
+* Show GPG keys in the keyring for signing apps
 
 ```bash
 apt-key list
 ```
 
-#### Remove PPA repository record
+* Remove PPA repository record
 
 ```bash
 sudo add-apt-repository --remove ppa:PPA_Name/ppa
 ```
 
-#### Remove a PPA from the source list in the terminal
+* Remove a PPA from the source list in the terminal
 
 ```bash
 sudo rm -i /etc/apt/sources.list.d/PPA_Name.list
 ```
 
-##### Check Timestamp for last updated packages in package manager
+* Check Timestamp for last updated packages in package manager
 
 ```bash
 ls -l /var/lib/apt/periodic/update-stamp
 ```
 
-#### Install a Debian Package
+* Install a Debian Package
 
 ```bash
 sudo dpkg -i $DEBIAN_PKG
 ```
 
-#### Check if Periodic updates are enabled
+* Check if Periodic updates are enabled
 
 ```bash
 cat /etc/apt/apt.conf.d/10periodic
 ```
 
-#### Get packages from repo and find given string
+* Get packages from repo and find given string
 
 ```bash
 dpkg --get-selections | grep PACKAGE_TO_FIND
 ```
 
-#### list snap packages installed
+* list snap packages installed
 
 ```bash
 snap list
@@ -809,66 +831,69 @@ snap list
 
 ---
 
-# Processes & Scheduling
+## Processes & Scheduling
 
 <details>
 <summary> Linux Processes </summary>
 
 Process Monitoring, scheduling
 
-#### History top 20 commands in bash_history
+* History top 20 commands in bash_history
+
 ```bash
 cat ~/.bash_history | grep -v ^# | awk '{print $1}' | sort | uniq -c | sort -nr | head -20
 ```
 
-#### History 10 Most used commands
+* History 10 Most used commands
 
 ```bash
 printf "\n  | No | procId | usage | command | \n" ;
 history | awk '{CMD[$2]++;count++;} END { for (a in CMD) print " " CMD[a] "\t " CMD[a]/count*100 "%  " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10
 ```
 
-#### start command background
+* start command background
 
 ```bash
 rescuetime &
 ```
 
-#### find the HTTPD user in a web server
+* find the HTTPD user in a web server
+
 ```bash
 HTTPDUSER=$(ps axo "user,comm" | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
 ```
 
-#### see every process forest format
+* see every process forest format
+
 ```bash
 ps -e --forest
 ```
 
-#### Find the process that consumes more CPU
+* Find the process that consumes more CPU
 
 ```bash
 ps -eo pid,%cpu,%mem,args --sort -%cpu
 ```
 
-#### Sort processes by memory
+* Sort processes by memory
 
 ```bash
 ps aux --sort=-%mem
 ```
 
-#### View with a process tree
+* View with a process tree
 
 ```bash
 ps xfa | less
 ```
 
-##### Interactive process viewer
+* Interactive process viewer
 
 ```bash
 htop
 ```
 
-#### print a line and pipe it to a command
+* print a line and pipe it to a command
 
 In this case the content of a `DockerFile` is echoed first then piped to `docker build` to create a docker image.
 
@@ -876,7 +901,7 @@ In this case the content of a `DockerFile` is echoed first then piped to `docker
 echo -e 'FROM busybox\nRUN echo "hello world"' | docker build -
 ```
 
-#### run a command, append config file
+* run a command, append config file
 
 ```bash
 docker build -<<EOF
@@ -885,7 +910,7 @@ RUN echo "hello world"
 EOF
 ```
 
-#### run command in the background & log output to a file
+* run command in the background & log output to a file
 `nohup` runs the given COMMAND with hangup signals ignored, so that the command can continue running in the background after you log out.
 
 ```bash
@@ -895,14 +920,14 @@ nohup $COMMAND_OR_SCRIPT > out_$(date).txt
 </details>
 <!-- end of expand processes -->
 
-# Monitoring & Performance
+## Monitoring & Performance
 
 <details>
 
 <summary>  </summary>
 
-## Monitoring & Troubleshooting
 ### Debugging Linux Systems
+
 > mostly Ubuntu/Debian based distros
 
 A very important set of skills when something goes wrong and is important to get quick info.
@@ -912,42 +937,43 @@ This can become a small DIY project to manage desktop and cloud servers.
 ls -lth /var/log/ | sort --month-sort
 ```
 
-#### Check the system log
+* Check the system log
 
 ```bash
 less /var/log/syslog
 ```
 
-#### Create empty file in given path
+* Create empty file in given path
 
 ```bash
 touch /home/user/new_empty_file.txt
 ```
 
-#### List directory with extensions
+* List directory with extensions
 
 ```bash
 ls -xl ${DIR_PATH}
 ```
 
-#### lists open files for current user
+* lists open files for current user
 
 ```bash
 lsof -u $USER
 ```
 
-#### change to another user
+* change to another user
+
 ```bash
 sudo su - OTHER_USER
 ```
 
-#### End all processes for a target user
+* End all processes for a target user
 
 ```bash
 kill -9 $(lsof -t -u $TARGET_USER)
 ```
 
-#### Read from a file in a specific line 4
+* Read from a file in a specific line 4
 
 ```bash
 less +4 -N show-time.sh
@@ -955,76 +981,75 @@ less +4 -N show-time.sh
 
 ### Handle Logs
 
-#### Commong logs in linux
+* Commong logs in linux
 
-- `/var/log/message`
-Contains global system messages, including the messages that are logged during system startup. Includes mail, cron, daemon, kern, auth, etc.
+* `/var/log/message`: Contains global system messages, including the messages that are logged during system startup. Includes mail, cron, daemon, kern, auth, etc.
 
-- `/var/log/auth.log`
-Authentication logs
+* `/var/log/auth.log`: Authentication logs
 
-- `/var/log/kern.log`
-Kernel logs
+* `/var/log/kern.log`: Kernel logs
 
-- `/var/log/cron.log`
-Crond logs
+* `/var/log/cron.log` Crond logs
 
-#### Check System Logs Journal Control
+* Check System Logs Journal Control
+
 ```bash
 journalctl -xe
 ```
 
-#### Obtain Log output from oldest to newest
+* Obtain Log output from oldest to newest
 
 ```bash
 journalctl -r
 ```
 
-#### Show Logs within a Time Range
+* Show Logs within a Time Range
 
 ```bash
 journalctl --since "2022-01-30 15:10:10"
 journalctl --until "2022-12-24 00:05:50"
 ```
 
-#### Show Logs for a systemd Service
+* Show Logs for a systemd Service
 
 ```bash
 journalctl -u $SERVICE_NAME
 ```
 
-#### View Kernel Messages
+* View Kernel Messages
 
 ```bash
 journalctl -k
 ```
 
-#### change Output Format to json-pretty
+* change Output Format to json-pretty
 
 ```bash
 journalctl -o json-pretty
 ```
 
-#### Reduce the size of your journals to 2GiB
-Clean Up Archived Logs
+* Reduce the size of your journals to 2GiB. Clean Up Archived Logs
+
 ```bash
 journalctl --vacuum-size=2G
 ```
 
-#### Remove archived journal files with dates older than the specified relative time
+* Remove archived journal files with dates older than the specified relative time
 
 ```bash
 journalctl --vacuum-time=1years
 ```
 
 ## Memory Monitoring, Usage & Swap
+
 RAM usage and managing swap space (virtual memory on disk)
 
 ## I/O Monitoring
+
 Input Output Ops
 Monitoring input/output statistics for disks to identify performance bottlenecks.
 
-##### Scan full disk and analyze it using tool `ncdu`
+* Scan full disk and analyze it using tool `ncdu`
 
 ```bash
 sudo ncdu /
@@ -1041,14 +1066,15 @@ sudo ncdu /
 </details>
 <!-- end of expand Section -->
 
-# Containers Overview
+## Containers Overview
+
 <details>
 <summary> Compute containers </summary>
 
 </details>
 <!-- end of expand Containers -->
 
-# Linux Filesystems & the VFS
+## Linux Filesystems & the VFS
 
 <details>
 <summary> Linux file systems   </summary>
@@ -1059,13 +1085,14 @@ Hard drives, volumes, SSDs, mounts, filesystem, etc
 ## Filesystems
 
 ### EXT4 Filesystem
+
 the default Linux filesystem, including journaling and inodes
 
 ## Compute Storage
 
 Process for Linux + `LVM` + `ext3`
 
-#### Check System Disk Usage
+* Check System Disk Usage
 
 ```bash
 df -h
@@ -1082,82 +1109,82 @@ Log in on the instance and check that the EBS volume is visible,
 fdisk -l /dev/sdf
 ```
 
-- check the partitions
+* check the partitions
 
 ```bash
 cat /proc/partitions
 ```
 
-- Check the Block ID, Type and label of the system devices
+* Check the Block ID, Type and label of the system devices
 
 ```bash
 blkid
 ```
 
-- Create partition table if needed:
+* Create partition table if needed:
 
 ```bash
 fdisk /
 sfdisk
 ```
 
-- Initialize LVM
+* Initialize LVM
 
 ```bash
 pvcreate /dev/sdf
 ```
 
-- Add the disk (physical volume) to the LVM volume group vgextend
+* Add the disk (physical volume) to the LVM volume group vgextend
 
 ```bash
 myvg /dev/sdf
 ```
 
-- Grow the Volume size
+* Grow the Volume size
 
 ```bash
 lvextend -L +1024G /dev/myvg/uservol1
 ```
 
-- Grow the `ext3/ext4` file system
+* Grow the `ext3/ext4` file system
 
 ```bash
 resize2fs /dev/myvg/uservol1`
 ```
 
-- Check system Disk File usage
+* Check system Disk File usage
 storage info. Confirm mounted file system now have more space.
 
 ```bash
 df --human-readable
 ```
 
-#### View available disk devices, mount points (if applicable)
+* View available disk devices, mount points (if applicable)
 helps to determine the correct device name to use
 
 ```bash
 lsblk
 ```
 
-#### Get information about the devices attached to the instance
+* Get information about the devices attached to the instance
 
 ```bash
 sudo lsblk -f
 ```
 
-#### Get manufacturer details for the device in a given format
+* Get manufacturer details for the device in a given format
 
 ```bash
 lsblk -io NAME,TYPE,SIZE,MOUNtPOINT,FSTYPE,MODEL
 ```
 
-#### Get `UUID` of the device (expensive command)
+* Get `UUID` of the device (expensive command)
 
 ```bash
 sudo blkid $DEVICE_REPORT_PORTAL_DATA | sed -n 's/.*UUID=\"\([^\"]*\)\".*/\1/p'
 ```
 
-#### Get `UUID` of the device
+* Get `UUID` of the device
 
 ```bash
 DEVICE="/dev/nvme1n1"
@@ -1165,13 +1192,13 @@ DEVICE="/dev/nvme1n1"
 sudo blkid -s UUID -o value $DEVICE
 ```
 
-#### Get `UUID` of the device using long format flags
+* Get `UUID` of the device using long format flags
 
 ```bash
 sudo blkid --match-tag UUID --output value $DEVICE
 ```
 
-#### Make an USB bootable with a debian ISO
+* Make an USB bootable with a debian ISO
 
 ```bash
 USB_DRIVE="/dev/sda"
@@ -1181,7 +1208,7 @@ sudo umount $USB_DRIVE
 sudo dd bs=4M if=$ISO_PATH of=$USB_DRIVE conv=fdatasync status=progress
 ```
 
-- Output of above in Ubuntu 20.04
+* Output of above in Ubuntu 20.04
 
 ```bash
 sudo dd bs=4M if=/home/ws/01-inbox/debian/debian-11.0.0-amd64-DVD-1.iso of=/dev/sda conv=fdatasync status=progress
@@ -1191,55 +1218,57 @@ sudo dd bs=4M if=/home/ws/01-inbox/debian/debian-11.0.0-amd64-DVD-1.iso of=/dev/
 3947823104 bytes (3.9 GB, 3.7 GiB) copied, 596.281 s, 6.6 MB/s
 ```
 
-#### DMI table decoder
+* DMI table decoder
 
 ```bash
 dmidecode | grep UUID
 ```
 
-#### Get/set SATA/IDE device parameters
+* Get/set SATA/IDE device parameters
 
 ```bash
 DEVICE="/dev/nvme1n1"
 hdparm -tT --direct $DEVICE
 ```
 
-#### Get information about a specific device, such as its file system type.  If the output shows simply data, there is no filesystem in the device
+* Get information about a specific device, such as its file system type.  If the output shows simply data, there is no filesystem in the device
 
 ```bash
 DEVICE_CHECK="/dev/xvdf"*
 sudo file -s $DEVICE_CHECK
 ```
 
-##### Confirm mounted loop device kernel module
+* Confirm mounted loop device kernel module
 
 ```bash
 lsmod | grep loop
 ```
 
-##### Info about mount the loop device kernel module
+* Info about mount the loop device kernel module
 
 ```bash
 modprobe loop
 ```
 
-#### Show ID of Block devices
+* Show ID of Block devices
 
 ```bash
 sudo blkid
 ```
 
-#### Show ID of Block devices Debian
+* Show ID of Block devices Debian
+
 ```bash
 sudo lsblk -o +UUID
 ```
-##### Mount an ISO file as loop device
+
+* Mount an ISO file as loop device
 
 ```bash
 mount -o loop -t iso9660 <path/to/iso/file> /media/cdrom
 ```
 
-#### Mount all filesystems
+* Mount all filesystems
 
 The file that keeps track of mounted devices is `/etc/fstab`
 
@@ -1256,7 +1285,6 @@ Dividing storage devices into logical sections (partitions)
 </details>
 <!-- end of expand Disk Partitioning -->
 
-
 ## Logical Volume Management (LVM)
 
 <details>
@@ -1268,20 +1296,21 @@ Abstraction layer allowing flexible resizing and spanning of filesystems across 
 </details>
 <!-- end of expand filesystems-->
 
-# System & Boot
+## System & Boot
 
 <details>
 
 ## Kernel Services & Configuration
+
 Managing kernel parameters at runtime without rebooting using `sysctl`
 
-#### show all values available
+* show all values available
 
 ```bash
 sudo sysctl --all
 ```
 
-#### List System Boots
+* List System Boots
 
 ```bash
 journalctl --list-boots
@@ -1302,7 +1331,8 @@ The settings are read from all of the following system configuration files
 sudo sysctl --system
 ```
 
-###  Kernel Modules
+### Kernel Modules
+
 Managing pieces of code (drivers) that can be loaded into or unloaded from the kernel on demand.
 `lsmod`
 
@@ -1310,14 +1340,18 @@ Managing pieces of code (drivers) that can be loaded into or unloaded from the k
 
 Linux interacts with hardware devices via the /dev directory and the udev device manager.
 
-#### Monitor udev events in real-time while plugging in a device.
+* Monitor udev events in real-time while plugging in a device
+
 ```bash
 udevadm monitor
 ```
+
 ### Printing
+
 CUPS
 
 ## Booting
+
 Managing the system startup process and services
 
 ## System init
@@ -1332,23 +1366,27 @@ todo: check-visually
 </details>
 <!-- end of expand System & Boot -->
 
-# Network Operations
+## Network Operations
+
 <details>
 
 ## Network Addresses
+
 Understanding IP addressing (IPv4/IPv6), subnets, and assigning addresses to interfaces.
 Command: Show IP addresses assigned to all interfaces.
 
 ip addr show
 
 ## Network Devices Configuration
+
 Configuring network interfaces, gateways, and DNS using tools like NetworkManager or ip.
 
 ```bash
 nmcli device status
 ```
 
-#### Bring a network interface up.
+* Bring a network interface up
+
 ```bash
 sudo ip link set eth0 
 ```
@@ -1356,49 +1394,51 @@ sudo ip link set eth0
 Accessing a service, DNS
 `whois` = servers
 
-#### Query DNS
-DNS queries and shows associated records
+* Query DNS. DNS queries and shows associated records
+
 ```bash
-DOMAIN="airnewzealand.co.nz"
+DOMAIN="newzealand.nz"
+
 dig $DOMAIN
 ```
 
-#### DNS Lookup force every section, include the query itself, and show statistics
+* DNS Lookup force every section, include the query itself, and show statistics
+
 ```bash
 DOMAIN="airnewzealand.co.nz"
 dig $DOMAIN ANY +qr +question +answer +authority +additional +stats +multiline
 ```
 
-#### Alternative to dig. It doesn't use the system local DNS.
+* Alternative to dig. It doesn't use the system local DNS.
+
 ```bash
 nslookup $DOMAIN
 ```
 
-#### Check packets hop and route
+* Check packets hop and route
+
 ```bash
 traceroute $DOMAIN
 ```
 
 ### Network Probing
 
-Which TCP or UDP ports are open.
+Which TCP or UDP ports are open. open a TCP connection to this destination?
 
-Can i open a TCP connection to this destination?
-
-#### Port scanning TCP SYN
+* Port scanning TCP SYN
 
 ```bash
 nmap -sS localhost
 ```
 
-#### Sends ICMP pings. checks latency
+* Sends ICMP pings. checks latency
 
 ```bash
 ping $DOMAIN
 ping6 $DOMAIN
 ```
 
-#### netcat verbose but dont send test data port 80
+* netcat verbose but dont send test data port 80
 
 ```bash
 nc -vz $DOMAIN 80
@@ -1410,50 +1450,50 @@ nc -vz $DOMAIN 80
 tcdump -i eth0 icmp
 ```
 
-#### Examine the IPv4 TCP-based sockets that are listening for connections on your system
+* Examine the IPv4 TCP-based sockets that are listening for connections on your system
 don't resolve service names
 
 ```bash
 ss --ipv4 --listening --tcp --numeric
 ```
 
-#### Examine the IPv6 TCP-based sockets that are listening for connections on your system
+* Examine the IPv6 TCP-based sockets that are listening for connections on your system
 
 ```bash
 ss --ipv6 -tln
 ```
 
-#### Creating Unix Domain Sockets
+* Creating Unix Domain Sockets
 
 ```bash
 socat unix-listen:/tmp/stream.sock,fork /dev/null&
 socat unix-recvfrom:/tmp/datagram.sock,fork /dev/null&
 ```
 
-#### examine unix domain sockets
+* examine unix domain sockets
 
 ```bash
 ss -xln
 ```
 
-#### Connect to an UNIX Socket
+* Connect to an UNIX Socket
 
 ```bash
 nc -U -z /tmp/stream.sock
 ```
 
-- The `-U` tells netcat that it is connecting to a Unix Domain Socket
-- The `-z` option ensures that netcat only connects to a socket, without sending any data
-- The `/tmp/stream.sock` is the address of the socket on the filesystem
+* The `-U` tells netcat that it is connecting to a Unix Domain Socket
+* The `-z` option ensures that netcat only connects to a socket, without sending any data
+* The `/tmp/stream.sock` is the address of the socket on the filesystem
 
-#### Simulate traffic in IPV4 and IPV6
+* Simulate traffic in IPV4 and IPV6
 
 ```bash
 socat TCP4-LISTEN:8080,fork /dev/null&
 socat TCP6-LISTEN:8080,ipv6only=1,fork /dev/null&
 ```
 
-- `socat` can listen on any available port on a system, so any port from 0 to 65535 is a valid parameter for the socket option.
+* `socat` can listen on any available port on a system, so any port from 0 to 65535 is a valid parameter for the socket option.
 
 ### Traffic capture
 
@@ -1467,7 +1507,7 @@ socat TCP6-LISTEN:8080,ipv6only=1,fork /dev/null&
 
 `route -n` routing info. Routing table
 
-#### Check ARP cache
+* Check ARP cache
 
 ```bash
 arp -a
@@ -1475,7 +1515,7 @@ arp -a
 
 `ip` see neighbor table. add routes
 
-- Answers questions
+* Answers questions
   what are the net interfaces, ips, subnets, broadcast address??
   how do i add routes?
 
@@ -1488,10 +1528,11 @@ tcpdump -i eth0 -w traffic.pcap
 tcpreplay -i eth0 httptraffic.pcap
 ```
 
-#### Send Http load
+* Send Http load
+
 ```bash
 wrk2
-``` 
+```
 
 Threads connections duration Requests
 
@@ -1499,13 +1540,13 @@ Threads connections duration Requests
 wrk2 -t1 -c10 -d60 -R100 -L http://$IP
 ```
 
-#### Send TCP or UDP traffic. Similar to wrk2 allows UDP
+* Send TCP or UDP traffic. Similar to wrk2 allows UDP
 
 ```bash
 iperf3
 ```
 
-#### Network performance measurement tool
+* Network performance measurement tool
 
 ```bash
 nuttcp
@@ -1519,14 +1560,13 @@ info siege
 
 BPF/eBPF potential for new programs
 
-
-#### Flush DNS by resetting the network DEBIAN based
+* Flush DNS by resetting the network DEBIAN based
 
 ```bash
 sudo /etc/init.d/networking restart
 ```
 
-#### Inspect TCP socket states e.g. 443
+* Inspect TCP socket states e.g. 443
 
 ```bash
 ss -nta '( dport = :443 )'
@@ -1534,25 +1574,25 @@ ss -nta '( dport = :443 )'
 
 `netstat` is a great tool for monitoring network connections.
 
-#### Netstat statistics
+* Netstat statistics
 
 ```bash
 netstat --statistics
 ```
 
-#### Find ports in use
+* Find ports in use
 
 ```bash
 netstat -tulpn
 ```
 
-- The `-t` option checks for TCP connections.
-- The `-u` option checks for UDP connections.
-- The `-l` option tells netstat to list only LISTENING connections. If you want to see all connections, use the -a option instead.
-- The `-p` option shows the PID id of the process.
-- The `-n` option shows numerical addresses, instead of trying to resolve host, port, or user names.
+* The `-t` option checks for TCP connections.
+* The `-u` option checks for UDP connections.
+* The `-l` option tells netstat to list only LISTENING connections. If you want to see all connections, use the -a option instead.
+* The `-p` option shows the PID id of the process.
+* The `-n` option shows numerical addresses, instead of trying to resolve host, port, or user names.
 
-#### Make sure the `firewalld` service is enabled
+* Make sure the `firewalld` service is enabled
 
 ```bash
 ll /usr/lib/systemd/system | grep firewalld
@@ -1565,50 +1605,50 @@ sudo systemctl restart firewalld
 sudo systemctl status firewalld
 ```
 
-#### Install netcat in Fedora/Redhat
+* Install netcat in Fedora/Redhat
 
 ```bash
 yum install -y nc
 ```
 
-#### CentOS Linux Open Port 8080 on the firewall
+* CentOS Linux Open Port 8080 on the firewall
 
 ```bash
 sudo firewall-cmd --permanent --add-port=8080/tcp
 sudo firewall-cmd --reload
 ```
 
-#### Find user behind a process
+* Find user behind a process
 
 ```bash
 sudo netstat -tulpe | grep 8090
 ```
 
-#### Test connectivity to a port
+* Test connectivity to a port
 
 ```bash
 nc -vvz $host $port
 ```
 
-#### Check server status
+* Check server status
 
 ```bash
 sudo netstat -tuple | grep smtp
 ```
 
-#### Check Any URL and get output in Text
+* Check Any URL and get output in Text
 
 ```bash
 curl -l localhost:80
 ```
 
-#### Get listening ports
+* Get listening ports
 
 ```bash
 ss -tulwn
 ```
 
-#### Get a report with nmap. install it first `sudo snap install nmap`
+* Get a report with nmap. install it first `sudo snap install nmap`
 
 ```bash
 nmap -sV -p- localhost
@@ -1616,28 +1656,28 @@ nmap -sV -p- localhost
 
 ### The `ip` command
 
-#### Show operate manipulate routing
+* Show operate manipulate routing
 
 ```bash
 ip route show
 ```
 
-#### List routes
+* List routes
 
 ```bash
 ip route list
 ```
 
-#### - Show / manipulate devices
+* Show / manipulate devices
 
 ```bash
 cat /etc/network/interfaces
 ```
 
-- Policy routing
-- Tunnels
+* Policy routing
+* Tunnels
 
-#### Restart Name Service Cache Process
+* Restart Name Service Cache Process
 
 ```bash
 sudo service nscd restart
@@ -1645,25 +1685,25 @@ sudo service nscd restart
 
 ## CURL Client URL
 
-#### Download a file and save it with a custom name
+* Download a file and save it with a custom name
 
 ```bash
 curl -o custom_file.tar.gz https://testdomain.com/testfile.tar.gz
 ```
 
-#### Get HTTP headers. use the `-I` or the `— head` option
+* Get HTTP headers. use the `-I` or the `— head` option
 
 ```bash
 curl -I https://www.google.com
 ```
 
-#### Ignore invalid certs `-k or --insecure`
+* Ignore invalid certs `-k or --insecure`
 
 ```bash
 curl -k https://localhost/my_test_endpoint
 ```
 
-#### Make a POST request.
+* Make a POST request.
 
 If using **JSON** `-H 'Content-Type: application/json'`
 
@@ -1671,55 +1711,57 @@ If using **JSON** `-H 'Content-Type: application/json'`
 curl --data "param1=test1&param2=test2" http://test.com
 ```
 
-#### get the HTTP headers and verbose mode
+* get the HTTP headers and verbose mode
 
 ```bash
 curl --head --verbose HOST
 ```
 
-#### Simplified view
+* Simplified view
 
 ```bash
 curl --verbose --list-only $HOST
 ```
 
-#### Specify the type of request
+* Specify the type of request
 update the value of the key value mapping for the record id 1
 
 ```bash
 curl -X 'PUT' -d '{"param1":"test1","param2":"test3"}' \http://test.com/1
 ```
 
-#### call endpoint with Basic Auth
+* call endpoint with Basic Auth
 
 ```bash
 curl -u <user:password> https://my-test-api.com/endpoint1
 ```
 
-#### Update name resolution
+* Update name resolution
 
 ```bash
 curl --resolve www.test.com:80:localhost http://www.test.com/
 ```
 
-#### Check service health
+* Check service health
 
 ```bash
 curl -Is http://www.google.com
 ```
 
-#### Upload a file
+* Upload a file
+
 ```bash
 curl -F @field_name=@path/to/local_file <upload_URL>
 ```
 
-#### Timing Curl connection
+* Timing Curl connection
 
 ```bash
 curl -w "%{time_total}\n" -o /dev/null -s www.test.com
 ```
 
 ## VPN
+
 TODO add linux VPN content
 
 ## Firewalls
@@ -1727,14 +1769,14 @@ TODO add linux VPN content
 </details>
 <!-- end of expand Networking -->
 
-# Backup Recovery Methods
+## Backup Recovery Methods
 
 <details>
 Strategies for data archiving and synchronization using tools like tar and rsync.
 </details>
 <!-- end of expand -->
 
-# Linux Security Modules
+## Linux Security Modules
 
 <details>
 Mandatory Access Control (MAC) via SELinux or AppArmor
@@ -1742,7 +1784,7 @@ Mandatory Access Control (MAC) via SELinux or AppArmor
 </details>
 <!-- end of expand -->
 
-# Troubleshooting  & Diagnostics
+## Troubleshooting  & Diagnostics
 
 <details>
 
@@ -1750,7 +1792,7 @@ Techniques for troubleshooting unbootable systems, resetting root passwords, res
 
 ## Debugging Logs
 
-#### Analyse Logs. Logs named 3 to 31.gz month. Month like Feb 2020 and print
+* Analyse Logs. Logs named 3 to 31.gz month. Month like Feb 2020 and print
 
 ```bash
 zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | less
@@ -1758,8 +1800,10 @@ zcat access.log.{3..31}.gz | grep -E 'Feb/2020' | awk '{print $1}' | sort -u | l
 
 ## System Rescue
 
-#### Check and repair a filesystem
+* Check and repair a filesystem
+
 > only run on unmounted disks
+
 ```bash
 sudo fsck /dev/sda1
 ```
@@ -1769,73 +1813,79 @@ sudo fsck /dev/sda1
 
 ---
 
-# Linux Distros
-<details> 
+## Linux Distros
+
+<details>
 
 <summary> Linux distributions🐧 </summary>
 
 ## Ubuntu
-### System settings Nautilus 💻 🖥️💡 ⚙ 🛠️ 
-#### Launch file explorer Nautilus as super user admin
+
+### System settings Nautilus 💻 🖥️💡 ⚙ 🛠️
+
+* Launch file explorer Nautilus as super user admin
 
 ```bash
 sudo nautilus
 ```
 
-#### operation Keyboard shortcuts
+* operation Keyboard shortcuts
 
 (Tux literal)
 
-- Show hidden files Keyboard shortcut
+* Show hidden files Keyboard shortcut
 
 ```bash
 CTRL + H
 ```
 
-- Show Path Location Keyboard shortcut
+* Show Path Location Keyboard shortcut
 
 ```bash
 CTRL + L
 ```
 
-- Switch between the Icons and List formats
+* Switch between the Icons and List formats
 
 ```bash
 CTRL + 1 | CTRL + 2
 ```
 
-- Search for files
+* Search for files
 
 ```bash
 CTRL + F
 ```
 
-- Delete File(s)
+* Delete File(s)
 
 ```bash
 CTRL + delete
 ```
 
-- Permanently delete
+* Permanently delete shortcut
+
 ```bash
 Shift + Delete
 ```
 
-- Never delete the Home directory, doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
+* Never delete the Home directory, doing so will most likely erase all your GNOME configuration files and possibly prevent you from logging in.
 
 </details>
 <!-- end of expand -->
 
-# Terminal Shells
+## Terminal Shells
 
 <details>
 <summary> Linux shells </summary>
 
 ## Bash
+
 The Bash Shell and bash Scripting
 refer to the Bash page
 
-#### set bash as default shell for **myUser**
+* set bash as default shell for **myUser**
+
 ```bash
 TARGET_USER="myUser"
 sudo chsh -s /bin/bash $TARGET_USER
@@ -1848,31 +1898,24 @@ sudo chsh -s /bin/bash $TARGET_USER
 </details>
 <!-- end of expand Shells-->
 
-# References
+## References
+
 <details>
 
 <summary> sources for this wiki 📝 </summary>
 
-- [cyberciti linux reload sysctl config](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
-- [Taxonomy & main structure LinuxFoundationX Introduction to Linux](https://www.edx.org/learn/linux/the-linux-foundation-introduction-to-linux)
-- [Linux CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
-- [Digital ocean Handy Linux networking tools](https://www.digitalocean.com/community/tech-talks/handy-networking-tools-and-how-to-use-them)
-- [setup OpenVPN Ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
-- [linux commands troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
+* [cyberciti linux reload sysctl config](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl)
+* [Taxonomy & main structure LinuxFoundationX Introduction to Linux](https://www.edx.org/learn/linux/the-linux-foundation-introduction-to-linux)
+* [Linux CheatSheet](https://www.linuxtrainingacademy.com/linux-ip-command-networking-cheat-sheet/)
+* [Digital ocean Handy Linux networking tools](https://www.digitalocean.com/community/tech-talks/handy-networking-tools-and-how-to-use-them)
+* [setup OpenVPN Ubuntu](https://tecadmin.net/install-openvpn-client-on-ubuntu/)
+* [linux commands troubleshooting](https://medium.com/better-programming/5-powerful-unix-commands-for-easier-troubleshooting-dd619d5e173a)
 
 </details>
 
 ---
 
-[Back to top](#)
-
-# TODO: categorise
-
-<details>
-
----
-
-# TODO: reuse Section
+## TODO: categorise and reuse Section
 
 <details>
 <summary> TODO add summary Title 📝 </summary>
@@ -1884,20 +1927,18 @@ TODO ADD details
 
 Top-level suggestions:
 
-- Introduction [x]
-- System & Boot
-- Files & Storage
-- Processes & Memory
-- Networking, Security & Rescue
-- Package & System Management
-- Shells & UX
-- Distributions
-- References [x]
+* Introduction [x]
+* System & Boot
+* Files & Storage
+* Processes & Memory
+* Networking, Security & Rescue
+* Package & System Management
+* Shells & UX
+* Distributions
+* References [x]
 
 Place related tags as children subtopics, e.g. under Files & Storage place #linux-filesystem-tree-layout, #linux-filesystems--the-vfs, #ext4-filesystem, #disk-partitioning, #logical-volume-management-lvm, #compute-storage.
 
 Create Monitoring & Performance with : #process-monitoring, #memory-monitoring-usage--swap, #io-monitoring, #traffic-capture, #load-testing, #benchmarking.
 
 Turn #todo into a living project board: #todo: prioritize, #todo: write-first-draft, #todo: needs-review rather than one catch-all tag.
-
-</details>
