@@ -1,39 +1,38 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# takes the first argument and calls the appropriate utility program based on the file extension used
+# -----------------------------------------------------------------------------
+# Function: extract
+# Description: Extracts common archive types with appropriate utilities.
+# Accepts one or multiple archive files.
+# -----------------------------------------------------------------------------
 
-function extract {
- if [ -z "$1" ]; then
-    # display usage if no parameters given
-    echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
-    echo "       extract <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
-    return 1
- else
-    for n in $@
-    do
-      if [ -f "$n" ] ; then
-          case "${n%,}" in
-            *.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar) 
-                         tar xvf "$n"       ;;
-            *.lzma)      unlzma ./"$n"      ;;
-            *.bz2)       bunzip2 ./"$n"     ;;
-            *.rar)       unrar x -ad ./"$n" ;;
-            *.gz)        gunzip ./"$n"      ;;
-            *.zip)       unzip ./"$n"       ;;
-            *.z)         uncompress ./"$n"  ;;
-            *.7z|*.arj|*.cab|*.chm|*.deb|*.dmg|*.iso|*.lzh|*.msi|*.rpm|*.udf|*.wim|*.xar)
-                         7z x ./"$n"        ;;
-            *.xz)        unxz ./"$n"        ;;
-            *.exe)       cabextract ./"$n"  ;;
-            *)
-                         echo "extract: '$n' - unknown archive method"
-                         return 1
-                         ;;
-          esac
-      else
-          echo "'$n' - file does not exist"
-          return 1
-      fi
+extract() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: extract <archive_file> [<archive_file_2> ...]" >&2
+        return 1
+    fi
+
+    for file in "$@"; do
+        if [ -f "$file" ]; then
+            case "${file,,}" in
+                *.tar.bz2|*.tbz2)   tar -xvjf "$file" ;;
+                *.tar.gz|*.tgz)     tar -xvzf "$file" ;;
+                *.tar.xz|*.txz)     tar -xvJf "$file" ;;
+                *.tar.zst)          tar --zstd -xvf "$file" ;;
+                *.tar)              tar -xvf "$file" ;;
+                *.bz2)              bunzip2 "$file" ;;
+                *.rar)              unrar x "$file" ;;
+                *.gz)               gunzip "$file" ;;
+                *.zip)              unzip "$file" ;;
+                *.z)                uncompress "$file" ;;
+                *.7z)               7z x "$file" ;;
+                *.xz)               unxz "$file" ;;
+                *.zst)              unzstd "$file" ;;
+                *.deb)              ar -x "$file" ;;
+                *)                  echo "extract: '$file' - cannot extract (unknown archive type)" >&2 ;;
+            esac
+        else
+            echo "extract: '$file' is not a valid file" >&2
+        fi
     done
-fi
 }

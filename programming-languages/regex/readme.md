@@ -1,14 +1,12 @@
-[Kiwiki Home](/../../)
+# Regex Regular Expressions
 
-[Back to Main Page](./readme.md)
-
-# Regex Notes and Cheat sheet
+* Notes and Cheat sheet
 
 `/[]/` is a character class that allows us to find any matching characters in the string. The character(s) in the character class acts as a delimiter. When a match is found, the characters in the string are divided/split.
 
 The `.` matches any one character followed or preceded by any character in the character class.
 
-- Use groups with parentheses `(group of regex)`
+* Use groups with parentheses `(group of regex)`
 
 ## Tips
 
@@ -28,38 +26,41 @@ Match zero or more occurrences of (1) and (2)
 
 `:[0-9]*.*`
 
-#### find extensions that start after string dash at the end of line
+* find extensions that start after string dash at the end of line
+
 > tested in vscode
 
 `-m[\w].$`
 
 #### Practical example. Replace spaces for dashes but keep the numbers or digits in each line
 
-- start with sample data
+* start with sample data
 
-```bash
+```text
 1 a text
 2 another text
 3 yet more text
 ```
-- match lines that start with opening parenthesis ( contain digits end with a closing parenthesis )
+
+* match lines that start with opening parenthesis ( contain digits end with a closing parenthesis )
+
 ```cmd
 ^\(\d+\)
 ```
 
-- Do the Regex to find/Search the numerical digits and spaces. The group here will be the digits as it is surrounded in parenthesis
+* Do the Regex to find/Search the numerical digits and spaces. The group here will be the digits as it is surrounded in parenthesis
 
 ```bash
 (\d)\s
 ```
 
-- Run a replace regex ops
+* Run a replace regex ops
 
 ```bash
 $1-
 ```
 
-- Outputs
+* Outputs
 
 ```bash
 1-a text
@@ -70,7 +71,6 @@ $1-
 #### Find markdown headers level 3
 
 `(^###)(\s)`
-
 
 ### Text containing Time
 
@@ -91,7 +91,3 @@ tested in vscode will match any string that consists of two digits, followed by 
 
 [breaking-down-a-complex-regex](https://medium.com/better-programming/breaking-down-a-complex-regex-73b6c795a2be)
 [pig-latinizer-using-regex](https://aubreeabril.wordpress.com/2018/08/23/pig-latinizer-using-regex/)
-
-[Back to top](#)
-
-[Kiwiki Home](/../../)

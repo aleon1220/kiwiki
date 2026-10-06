@@ -8,10 +8,10 @@ Reusable Actions. Command prompt cmd & PowerShell
 * windows 10
 * windows 11
 
-#### find in history uses of `ssh`
+#### find in history uses of `ssh`. Use a reliable fallback to native powershell
 
 ```powershell
-Get-History | Select-String "ssh "
+$(try { history -ErrorAction Stop } catch { Get-History }) | Select-String "ssh "
 ```
 
 #### open given directory path in File Explorer
