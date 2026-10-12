@@ -4,33 +4,33 @@
 
 ### Filters
 
-#### Find unread emails without user added labels
+* Find unread emails without user added labels
 
 ```text
 is:unread -has:userlabels 
 ```
 
-#### find unread emails
+* find unread emails
 
 ```text
-unread  `is:unread`
+is:unread
 ```
 
-#### unread emails exclude a label
+* unread emails excluding a label
 
 ```text
 is:unread -label:"TGIF Devotional"
 ```
 
-#### emails between a 3 month period
+* emails between a 3 month timeframe period
 
 ```text
-label:email-history-2020  after:2020/1/01 before:2020/4/1
+label:email-history-2020 after:2020/1/01 before:2020/4/1
 ```
 
 ## Outlook
 
-### filter emails with no categories in Outlook
+* filter emails with no categories in Outlook
 
 save the view in outlook.
 
@@ -48,34 +48,33 @@ Outlook Filter flagged items to do
 ```powershell
 followupflag:followup flag category:="Client-"
 ```
-
-- Find uncategorized email use `category:=[]` in the search bar
+* Find uncategorized email use `category:=[]` in the search bar
 
 ## Productivity tools
 
 Includes time management, pomodoro techniques, focus tools
 
-## Time Management
+### Time Management
 
 ### Rescue time Reports
 
-#### productivity Month
+* productivity Month report
 
 ```bash
-Current_month=$(date +%Y-%m-01)
+current_month=$(date +%Y-%m-01)
 
 echo "https://www.rescuetime.com/browse/productivity/daily_patterns/for/the/month/of/$Current_month"
 ```
 
 [Example Month October 2020](https://www.rescuetime.com/browse/productivity/daily_patterns/for/the/month/of/2020-10-01)
 
-## Integrations
+### Git Integrations
 
 #### Set up a git post-commit to add highlights (Ubuntu)
 
-- Edit `~/.bashrc`
+* Edit `~/.bashrc`
     `vim ~/.bashrc`
-- Add the `API_KEY` secret
+* Add the `API_KEY` secret
 
     ```bash
     ## RescueTime integration
@@ -86,18 +85,18 @@ echo "https://www.rescuetime.com/browse/productivity/daily_patterns/for/the/mont
 `source ~/.bashrc`
 - Copy the `post-commit` script to your destination git repo. It must be located in `YOUR_GIT_REPO/.git/hooks`
 
-## Pomodoro technique
+### Pomodoro technique
 
 set a time for 30 mins and focus on achieving a task to get started.
 
-## focus tools
+### focus tools
 
-## WorkLog analysis Tool
+#### WorkLog analysis Tool
 
 i came up with the idea of taking notes of what i did daily. I use a markdown structure created with a java program.
 at the end of the month i upload the compiled log and let AI analyse it for me.
 
-### Process
+* Process
 
 1. merge all Markdown files
 
@@ -105,12 +104,10 @@ at the end of the month i upload the compiled log and let AI analyse it for me.
     cat *.md > "$(date +%F)-MonthAnalysis.md"
     ```
 
-2. Run some prompts to extract an analysis
+2. Run some AI prompts to extract an analysis
 3. Reflect and list action items
 4. refer to [retrospective-reflection tools](https://github.com/aleon1220/AI-prompts/tree/main/retrospectives)
 
 ## Forums ICT
 
-### Spinnaker Stack Overflow no answers
-
-[StackOVerflow Spinnaker](https://stackoverflow.com/questions/tagged/spinnaker?sort=MostVotes&filters=NoAnswers&edited=true)
+* filter no answers [StackOVerflow Spinnaker](https://stackoverflow.com/questions/tagged/spinnaker?sort=MostVotes&filters=NoAnswers&edited=true)
