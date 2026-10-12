@@ -98,10 +98,10 @@ at the end of the month i upload the compiled log and let AI analyse it for me.
 
 * Process
 
-1. merge all Markdown files
+1. merge all Markdown files into a single one for the target month analysis
 
     ```bash
-    cat *.md > "$(date +%F)-MonthAnalysis.md"
+    cat *.md > "$(date +%F)-$(date +%B)-Analysis.md"
     ```
 
 2. Run some AI prompts to extract an analysis
