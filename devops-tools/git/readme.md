@@ -8,6 +8,7 @@ refer to [git official manual](https://git-scm.com/docs/user-manual)
 ### Git Global Settings
 
 #### Get general git repo info
+
 ```bash
 git config --list
 ```
@@ -17,7 +18,9 @@ git config --list
 ```bash
 git config --global --list
 ```
+
 #### do basic config setup
+
 will apply to all repositories
 ```bash
 git config --global user.email "you@example.com"
@@ -35,10 +38,12 @@ git config --global core.editor "nano"
 ## git Default Flow
 
 #### usual add, commit, push
+
 ```bash
 git add . ; git commit ; git push
 ```
 #### Force-switches to branch, discarding changes
+
 ```bash
 git checkout main --force
 ```
@@ -49,7 +54,7 @@ git fetch
 git merge origin/develop
 ```
 
-- Push changes to remote branch `my-feature`
+* Push changes to remote branch `my-feature`
 
 ```bash
 git push origin :my-feature
@@ -111,8 +116,8 @@ git stash show -p [stash@{<n>}]
 
 **Flags Explanation:**
 
-- `-p` to see the actual content of the stash. Omitting it will show only the file names.
-- `stash@{<n>}` allows us to specify a certain stash, denoted by `n` ( 0 being the most recent one )
+* `-p` to see the actual content of the stash. Omitting it will show only the file names.
+* `stash@{<n>}` allows us to specify a certain stash, denoted by `n` ( 0 being the most recent one )
 
 ```bash
 git stash show -p stash@{1}
@@ -140,6 +145,8 @@ git checkout $BRANCH -- $PATH_TO_CHECKOUT
 
 #### Work with 2 branches
 
+* Creates a linked working tree (i.e., another directory on the file system associated with the repo) called `my-other-awesome-feature`, one level above your current working directory, with the specified branch checked out.
+
 ```bash
 git worktree add <path> <branch>
 ```
@@ -149,9 +156,6 @@ git worktree add my-other-awesome-feature ../my-other-awesome-feature
 
 git worktree remove ../my-other-awesome-feature
 ```
-**Explanation**
-
-Creates a linked working tree (i.e., another directory on the file system associated with the repo) called `my-other-awesome-feature`, one level above your current working directory, with the specified branch checked out.
 
 #### when you no longer need the branch:
 
@@ -159,14 +163,15 @@ Creates a linked working tree (i.e., another directory on the file system associ
 git worktree remove [-f] PATH_TO_MODIFY
 ```
 
-#### Show Commit Contents
+* Show Commit Contents
+
 Shows changes introduced by a commit
 
 ```bash
 git show $COMMIT_ID
 ```
 
-- Alternatively, to see the changes between two specific commits run
+* see the changes between two specific commits run
 
 ```bash
 git diff $COMMIT_A $COMMIT_B
@@ -216,53 +221,63 @@ git push --force-with-lease REMOTE BRANCH
 ```
 
 **Note:**
-- As a general rule, it’s important to be careful when making any changes to already pushed commits
+* be careful when making any changes to already pushed commits
 
 ---
 ### Git Rebase
+
 #### Change a Specific Commit Message
+
 one commit with the wrong email address. The commit history must be updated
 
 ##### List commits with author emails to find target commits
+
 ```bash
 git log --all --pretty=format:"%h %an <%ae> %s" | grep "authorName@outlookcom
 ```
 
 ##### could use full scan
+
 ```bash
 git log --pretty=full
 ```
 
 ##### Start an interactive rebase that stops just before that commit
+
 ```bash
 TARGET_COMMIT="abc1234"
 git rebase -i "$TARGET_COMMIT"^
 ```
 
-##### from the text editor, choose a git rebase operation.
+##### from the text editor, choose a git rebase operation
+
 Change `pick` to `edit` for that commit, save, and close.
 ```bash
 pick "$TARGET_COMMIT" commit message with changes here
 ```
 
 ##### Amend the author on that commit
+
 ```bash
 git commit --amend --author="Author Name <authorName@outlook.com>" --no-edit
 ```
 
 ##### Continue the rebase
+
 Git will replay multiple queued commits after this automatically.
 
 ```bash
 git rebase --continue
 ```
 ##### Push your updated history
+
 ```bash
 TARGET_BRANCH="your-branch"
 git push --force-with-lease origin $TARGET_BRANCH
 ```
 
 ##### Verify the fix
+
 ```bash
 git log -1 --pretty=full
 ```
@@ -275,10 +290,12 @@ git rebase -i HEAD~3
 ```
 
 ### Many commits across the whole repo need re-writing
+
 For broad changes, consider a history rewrite tool:
 `git filter-repo` (recommended, separate install): powerful and fast for bulk author rewrites.
 
 #### using `git filter-repo`
+
 ```bash
 git filter-repo --mailmap .mailmap
 ```
@@ -300,6 +317,7 @@ git reset HEAD $PATH_OF_REPO
 if `.gitignore` is updated, previously created files will persist in your remote repository. To remedy this
 
 #### remove files and clean up
+
 ```bash
 git rm
 ```
@@ -468,6 +486,7 @@ gacp_extrakey
 ```bash
 git log --show-signature
 ```
+
 #### push with alternative SSH key
 ```bash
 git -c core.sshCommand="/usr/bin/ssh -i /home/user/.ssh/id_alternative" push
@@ -493,6 +512,7 @@ git ls-remote --heads origin
 ```bash
 git_user="git_user"
 git_date="Sat Aug 30 2024"
+
 git log --oneline -5 --author $git_user --before $git_date
 ```
 
@@ -540,17 +560,27 @@ git add -p
 
 #### Find the last working commit by basically using binary search
 
+* begin the process
+
 ```bash
 git bisect start
+```
 
-# for a commit that you know is working correctly
+
+* Select a commit that you know is working correctly
+
+```bash
 git bisect good
+```
 
-# for a commit that you know is NOT working correctly
+* select a commit that you know is NOT working correctly
+
+```bash
 git bisect bad
 ```
 
 #### Change/Ammend commit message made long ago
+
 **n** is the number of commits to go back
 
 ```bash
@@ -566,21 +596,25 @@ git push --force
 ```
 
 #### Check size of repo
+
 ```bash
 git count-objects -vH
 ```
 
 #### Get detailed info about a remote server
+
 ```bash
 git remote --verbose
 ```
 
 #### get extra info about remote
+
 ```bash
 git remote show origin
 ```
 
-# PR Pull Request Version Control
+## PR Pull Request Version Control
+
 Pull requests are essential for collaborating on code changes and getting feedback from others
 pull requests facilitate collaboration, code quality, and transparency. They allow others to review your work and ensure that changes are well-tested before merging.
 
@@ -623,6 +657,7 @@ git remote set-url origin git@bitbucket.org:tutorials/tutorials.git
 ## Git implementations Azure ADO Repos
 
 ---
+
 ## Git flow by example
 
 <details>
