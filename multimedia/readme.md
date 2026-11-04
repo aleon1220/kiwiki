@@ -63,3 +63,19 @@ magick $IMG_SOURCE -resize "1920x1080" -quality 85 $IMG_OUT
 ```bash
 magick mogrify -resize "1920x1080>" -quality 85 img1.jpg img2.jpg img3.jpg
 ```
+
+## FFmpeg
+
+### Video operations with FFmpeg
+
+* Windows users powershell 7.6 and above set var
+
+```powershell
+$video_name="2025_08_11_DCYL.avi"
+```
+
+* extract the frames at specific timestamps
+
+```powershell
+ffmpeg -i $video_name -filter:v "select='eq(t,2)+eq(t,5)+eq(t,7)+eq(t,10)'" -fps_mode passthrough %03d-Colombia-coral-2025-08-11.png -loglevel verbose
+```

@@ -23,9 +23,9 @@ I was born in Colombia and started my career in software engineering, systems en
 Professional development, communication, leadership, and personal growth.
 
 ## 2. Cloud Computing
-- [AWS](./cloud-computing/aws/readme.md)
-- [Azure](./cloud-computing/azure/readme.md)
-- [Google Cloud Platform (GCP)](./cloud-computing/gcp/readme.md)
+* [AWS](./cloud-computing/aws/readme.md)
+* [Azure](./cloud-computing/azure/readme.md)
+* [Google Cloud Platform (GCP)](./cloud-computing/gcp/readme.md)
 
 ## 3. Containers & Virtualization
 - [Docker](./containers/readme.md)
@@ -56,8 +56,9 @@ Professional development, communication, leadership, and personal growth.
 
 ### 4.4 Development Tools & Productivity
 - [IDEs - VSCode](./devops-tools/productivity-tools/vscode-setup/readme.md)
-- [Markdown](./devops-tools/markdown/readme.md)
+- [Markdown](./Software-Development-Life-Cycle/documentation/markdown/readme.md)
 - [Productivity Tools](./tools/productivity-tools/readme.md)
+  - [Draw.io](./tools/drawio/readme.md)
   - [PDF Tools](./tools/pdf/readme.md)
 
 ## 5. Software Development Lifecycle
@@ -95,47 +96,3 @@ Professional development, communication, leadership, and personal growth.
 ---
 
 ## Inbox
-
-* categorise the commands below
-
-```bash
-drawio --version
-
-drawio --export --format png --recursive docs/diagrams/
-
-drawio -x -f png --output devops-continuous-delivery-framework.png devops-continuous-delivery-framework.drawio
-
-drawio -x -f png --scale 2.5 -o devops-loop.png devops-loop.drawio
-
-drawio -x -f png --output tooling-map.png tooling-map.drawio
-
-# verbosity
-ELECTRON_ENABLE_LOGGING=1 drawio --export --format svg --recursive --output docs/diagrams/imgs/svgs/ ./docs/diagrams/
-```
-
-* Windows users powershell 7.6 and above set var
-
-```powershell
-$video_name="2025_08_11_DCYL.avi"
-```
-
-* extract the frames
-
-```powershell
-ffmpeg -i $video_name -filter:v "select='eq(t,2)+eq(t,5)+eq(t,7)+eq(t,10)'" -fps_mode passthrough %03d-Colombia-coral-2025-08-11.png -loglevel verbose
-```
-
-> [!NOTE]  
-> Highlights information that users should take into account, even when skimming.
-
-> [!TIP]
-> Optional information to help a user be more successful.
-
-> [!IMPORTANT]  
-> Crucial information necessary for users to succeed.
-
-> [!WARNING]  
-> Critical content demanding immediate user attention due to potential risks.
-
-> [!CAUTION]
-> Negative potential consequences of an action.
