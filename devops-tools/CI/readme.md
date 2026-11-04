@@ -1,7 +1,10 @@
 [Kiwiki Home](/../../)
 [Back to Main Page](./readme.md)
 
-# Continous Integration
+# Continuous Integration
+
+* [Azure DevOps (ADO) Pipelines](../../cloud-computing/azure/ado/pipelines.md)
+* [Jenkins](./jenkins/readme.md)
 
 [Back to top](#)
 

@@ -78,6 +78,12 @@ az account show -o json
 
 ## Azure Portal [Home * Microsoft Azure](https://portal.azure.com/#home)
 
+## Azure DevOps (ADO)
+
+* [Azure DevOps (ADO) Overview & CLI](./ado/readme.md)
+* [Azure DevOps (ADO) Pipelines & Reusable YAML Snippets](./ado/pipelines.md)
+* Official Reference: [Get started with Azure DevOps documentation (Latest)](https://learn.microsoft.com/en-us/azure/devops/get-started/?view=azure-devops)
+
 ## Azure Kubernetes AKS
 
 * Get cluster details.

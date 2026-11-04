@@ -43,6 +43,8 @@ Professional development, communication, leadership, and personal growth.
   * [Secrets Manager](./cloud-computing/aws/secrets-manager.md)
   * [VPC](./cloud-computing/aws/vpc.md)
 * [Azure](./cloud-computing/azure/readme.md)
+  * [Azure DevOps (ADO)](./cloud-computing/azure/ado/readme.md)
+    * [ADO Pipelines](./cloud-computing/azure/ado/pipelines.md)
 * [Google Cloud Platform (GCP)](./cloud-computing/gcp/readme.md)
 
 ## 3. [Containers & Virtualization](./containers/readme.md)
@@ -54,6 +56,7 @@ Professional development, communication, leadership, and personal growth.
 
 ### 4.1 CI/CD Pipeline
 * [CI - Continuous Integration](./devops-tools/CI/readme.md)
+  * [Azure DevOps (ADO) Pipelines](./cloud-computing/azure/ado/pipelines.md)
   * [Jenkins](./devops-tools/CI/jenkins/readme.md)
     * [Functions](./devops-tools/CI/jenkins/functions/)
     * [Pipeline Templates](./devops-tools/CI/jenkins/pipeline-templates/)
