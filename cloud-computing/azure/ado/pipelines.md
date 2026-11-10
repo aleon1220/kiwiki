@@ -451,6 +451,11 @@ steps:
         $(Build.BuildId)
         latest
 ```
+## Tests CI
+
+```yaml
+
+```
 
 ### Publish Test Results & Code Coverage
 
@@ -661,6 +666,7 @@ stages:
                   displayName: 'Execute Deployment'
 ```
 
-[Back to top](#)
-[Kiwiki Home](/../../)
+## References
+
+* Azure Pipelines [task reference](https://learn.microsoft.com/en-au/azure/devops/pipelines/tasks/reference/?view=azure-pipelines)
 
