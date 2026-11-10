@@ -1,6 +1,3 @@
-[Kiwiki Home](/../../)
-[Back to ADO](./readme.md)
-
 # Azure DevOps (ADO) Pipelines
 
 A reference guide of reusable YAML snippets for Azure Pipelines, structured from top to bottom as they appear in an `azure-pipelines.yml` file.
@@ -453,8 +450,16 @@ steps:
 ```
 ## Tests CI
 
-```yaml
+* run dotNet test suite
 
+```yaml
+- task: VSTest@3
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*test*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
 ```
 
 ### Publish Test Results & Code Coverage
