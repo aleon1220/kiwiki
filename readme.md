@@ -75,6 +75,7 @@ Professional development, communication, leadership, and personal growth.
   * [Gradle](./devops-tools/build-tools/gradle/readme.md)
   * [Maven](./devops-tools/build-tools/maven/readme.md)
 * [Git](./devops-tools/git/readme.md)
+  * [GitHub CLI (`gh`) & Projects SDLC](./devops-tools/git/github-cli.md)
 
 ### 4.4 Development Tools & Productivity
 * [IDEs - VSCode](./devops-tools/vscode/readme.md)

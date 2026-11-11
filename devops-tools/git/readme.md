@@ -661,9 +661,220 @@ ORDER BY prj.name, rep.name
 git remote set-url origin git@bitbucket.org:tutorials/tutorials.git
 ```
 
+## Git implementations GitHub — GitHub CLI (`gh`)
+
+`gh` is the official GitHub command-line tool ([cli.github.com](https://cli.github.com/)) that integrates repositories, issues, pull requests, GitHub Projects (`/projects`), GitHub Actions workflows, and releases directly into the terminal alongside `git`.
+
+* **Standalone Deep-Dive Guide:** [GitHub CLI (`gh`) Full Guide & `/projects` Use Cases](./github-cli.md)
+* **Official Documentation:** [GitHub CLI Manual](https://cli.github.com/manual/)
+
+### 1. Authentication, Multi-Account & Token Scopes (`gh auth`)
+
+* Interactive login and automatic Git credential setup
+
+```bash
+gh auth login
+gh auth setup-git
+```
+
+* Authenticate in CI/CD or headless environments with a Fine-Grained Personal Access Token (PAT)
+
+```bash
+export GH_TOKEN="github_pat_xxxxxxxxxxxx"
+# Or via stdin:
+echo "$MY_GITHUB_PAT" | gh auth login --with-token
+```
+
+* Verify current authentication status and token scopes
+
+```bash
+gh auth status
+```
+
+* Switch between multiple authenticated GitHub accounts (e.g., work vs. personal)
+
+```bash
+gh auth switch --user <github-username>
+```
+
+* Add the `project` token scope required for managing GitHub Projects (`/projects`)
+
+```bash
+gh auth refresh -s project,read:project
+```
+
+### 2. Repository, Rulesets & Issue Management (`gh repo`, `gh issue`)
+
+* Clone a repository or create a new repository from an organization template
+
+```bash
+gh repo clone <org-or-user>/<repo-name>
+gh repo create <org-or-user>/<new-repo> --template <org-or-user>/<template-repo> --private --clone
+```
+
+* Verify active repository rulesets and branch protection on `main`
+
+```bash
+gh ruleset list
+gh ruleset check main
+```
+
+* Create an issue and immediately generate a linked feature branch (`gh issue develop`)
+
+```bash
+ISSUE_URL=$(gh issue create \
+  --title "fix(auth): handle token refresh timeout" \
+  --body "Acceptance criteria and reproduction steps..." \
+  --label "bug,priority:high" \
+  --assignee "@me")
+
+ISSUE_NUM="${ISSUE_URL##*/}"
+gh issue develop "$ISSUE_NUM" --checkout --name "fix/${ISSUE_NUM}-token-refresh-timeout"
+```
+
+### 3. Pull Request Lifecycle & CI Checks (`gh pr`, `gh run`)
+
+* Open an early Draft Pull Request to trigger CI checks before requesting human review
+
+```bash
+gh pr create \
+  --draft \
+  --base main \
+  --fill \
+  --assignee "@me" \
+  --label "work-in-progress"
+```
+
+* Watch CI checks in real time from the terminal and inspect failed step logs if a check fails
+
+```bash
+gh pr checks --watch --fail-fast
+gh run view <run-id> --log-failed
+gh run rerun <run-id> --failed
+```
+
+* Check out a teammate's PR locally, inspect the diff, and submit an approval review
+
+```bash
+gh pr checkout 145
+gh pr diff 145
+gh pr review 145 --approve --body "LGTM! Verified locally and CI checks pass."
+```
+
+* Rebase PR branch onto `main`, mark Ready for Review, and enable Squash Auto-Merge
+
+```bash
+gh pr update-branch --rebase
+gh pr ready
+gh pr merge --squash --delete-branch --auto
+```
+
+### 4. GitHub Projects (`/projects`) Module Use Cases (`gh project`)
+
+GitHub Projects (`https://github.com/orgs/<org>/projects` or `https://github.com/users/<user>/projects`) provides cross-repository planning and tracking.
+
+* **Use Case A — Board Provisioning, Template Cloning & Linking:** Create or copy a standardized project board and link it to repositories and teams
+
+```bash
+ORG="my-org"
+
+# List existing projects or create a new board
+gh project list --owner "$ORG"
+gh project create --owner "$ORG" --title "Q4 Platform Delivery"
+
+# Copy an existing organization template project (including draft issues)
+gh project copy 1 \
+  --source-owner "$ORG" \
+  --target-owner "$ORG" \
+  --title "Service Migration - Phase 2" \
+  --drafts
+
+# Link repositories and teams to project #4
+PROJECT_NUM=4
+gh project link "$PROJECT_NUM" --owner "$ORG" --repo "core-service"
+gh project link "$PROJECT_NUM" --owner "$ORG" --team "platform-team"
+```
+
+* **Use Case B — Custom Schema & Field Governance (`field-create`, `field-list`):** Define tech-stack-neutral fields (`Priority`, `Size`, `Points`, `Target Date`)
+
+```bash
+PROJECT_NUM=4
+ORG="my-org"
+
+gh project field-list "$PROJECT_NUM" --owner "$ORG"
+
+gh project field-create "$PROJECT_NUM" \
+  --owner "$ORG" \
+  --name "Priority" \
+  --data-type "SINGLE_SELECT" \
+  --single-select-options "P0-Critical,P1-High,P2-Medium,P3-Low"
+
+gh project field-create "$PROJECT_NUM" \
+  --owner "$ORG" \
+  --name "Size" \
+  --data-type "SINGLE_SELECT" \
+  --single-select-options "XS,S,M,L,XL"
+
+gh project field-create "$PROJECT_NUM" --owner "$ORG" --name "Target Date" --data-type "DATE"
+```
+
+* **Use Case C — Backlog Intake & Cross-Repository Filtering (`item-create`, `item-add`, `item-list`):** Add draft items or existing Issues/PRs and query board state
+
+```bash
+PROJECT_NUM=4
+ORG="my-org"
+
+# Create a draft architecture spike on the board before repo assignment
+gh project item-create "$PROJECT_NUM" \
+  --owner "$ORG" \
+  --title "Spike: Evaluate OpenTelemetry collector memory footprint" \
+  --body "Define benchmark criteria before creating service-specific implementation issues."
+
+# Attach an existing repository Issue or PR to the project board
+gh project item-add "$PROJECT_NUM" \
+  --owner "$ORG" \
+  --url "https://github.com/my-org/core-service/issues/142"
+
+# List open items assigned to you (excluding Done) with Status and Priority columns
+gh project item-list "$PROJECT_NUM" \
+  --owner "$ORG" \
+  --query "assignee:@me is:open -status:Done" \
+  --field "Status" \
+  --field "Priority"
+```
+
+* **Use Case D — Automated Item State Transitions & Sprint Cleanup (`item-edit`, `item-archive`):** Move items across workflow columns and archive completed items
+
+```bash
+PROJECT_NUM=4
+ORG="my-org"
+ISSUE_URL="https://github.com/my-org/core-service/issues/142"
+
+# Transition item Status and Priority by URL and field name
+gh project item-edit "$PROJECT_NUM" --owner "$ORG" --url "$ISSUE_URL" --field "Status" --value "In Progress"
+gh project item-edit "$PROJECT_NUM" --owner "$ORG" --url "$ISSUE_URL" --field "Priority" --value "P1-High"
+
+# Archive all "Done" items on the project board after release
+gh project item-list "$PROJECT_NUM" --owner "$ORG" --query "status:Done" --format json \
+  --jq -r '.items[].id' | while read -r item_id; do
+    gh project item-archive "$PROJECT_NUM" --owner "$ORG" --id "$item_id"
+done
+```
+
+### 5. Language-Neutral SDLC Patterns for Stable Flow
+
+1. **Issue-First Traceability (`gh issue develop`):** Every branch originates from a triaged issue registered on the `/projects` board.
+2. **Small Batch Sizes & Early Draft PRs (`gh pr create --draft`):** Push the first atomic commit early and open a Draft PR so stack-neutral CI checks run continuously.
+3. **Zero-Context-Switch CI Debugging (`gh pr checks --watch` + `gh run view --log-failed`):** Diagnose build, lint, or test failures directly in the terminal.
+4. **Work-in-Progress (WIP) Limits & Review-First Daily Cadence:** Prioritize unblocking teammate PRs (`gh pr list --search "is:open review-requested:@me -is:draft"`) before starting new branches.
+5. **Trunk Stability via Rebase & Auto-Merge (`gh pr update-branch --rebase` + `gh pr merge --auto`):** Keep `main` perpetually releasable and let quality gates merge PRs automatically.
+6. **Deterministic Semantic Releases (`gh release create vX.Y.Z --generate-notes --verify-tag`):** Cut immutable releases and archive completed project items.
+
 ## Git implementations GitLab
 
 ## Git implementations Azure ADO Repos
+
+* **Azure DevOps Overview & CLI (`az repos`):** [Azure DevOps (ADO)](../../cloud-computing/azure/ado/readme.md)
 
 ---
 
