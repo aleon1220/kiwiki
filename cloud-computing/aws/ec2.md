@@ -6,33 +6,33 @@
 Elastic Cloud Compute
 https://docs.aws.amazon.com/ec2/
 
-#### Get account Id and region of current EC2 instance
+* Get account Id and region of current EC2 instance
 
 ```bash
 export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
 export AWS_REGION=$(aws ec2 describe-availability-zones --query 'AvailabilityZones[0].RegionName' --output text)
 ```
 
-#### List EC2 key pairs
+* List EC2 key pairs
 
 ```bash
 aws ec2 describe-key-pairs --query 'KeyPairs[*].KeyName' --output text
 ```
 
-#### Get EC2 KeyPairs
+* Get EC2 KeyPairs
 
 ```bash
 aws ec2 describe-key-pairs --query 'KeyPairs[].KeyName'
 
 ```
 
-#### How many instances of each type and in what states?
+* How many instances of each type and in what states?
 
 ```bash
 aws ec2 describe-instances --query 'Reservations[*].Instances[*].{InstanceId: InstanceId, Type: InstanceType, State: State.Name}' --output table
 ```
 
-#### Find EC2 instance ID by instance Name
+* Find EC2 instance ID by instance Name
 
 ```bash
 INSTANCE_NAME="ec2-rnd-prd-ec2"
@@ -41,39 +41,39 @@ aws ec2 describe-instances --filters "Name=tag:Name,Values=*$INSTANCE_NAME*" \
     --output text --query 'Reservations[*].Instances[*].InstanceId'
 ```
 
-#### Get Availability Zone, ID, Name, Private IP and Status
+* Get Availability Zone, ID, Name, Private IP and Status
 
 ```bash
 aws ec2 describe-instances \
 --query 'Reservations[*].Instances[*].{Name:Tags[?Key==`Name`]|[0].Value,ID:InstanceId,AZ:Placement.AvailabilityZone,PrivIP:PrivateIpAddress,Status:State.Name}' --output table
 ```
 
-#### AWS EC2 metadata API interactions Get AWS EC2 metadata info
+* AWS EC2 metadata API interactions Get AWS EC2 metadata info
 
 ```bash
 TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600") && \
 curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/
 ```
 
-#### Get security groups from AWS EC2
+* Get security groups from AWS EC2
 
 ```bash
 curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/security-groups
 ```
 
-#### Get public hostname
+* Get public hostname
 
 ```bash
 curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/public-hostname
 ```
 
-#### Get profile
+* Get profile
 
 ```bash
 curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/profile
 ```
 
-#### Describe instances using Tag values for keys Name and Environment
+* Describe instances using Tag values for keys Name and Environment
 
 ```bash
 aws ec2 describe-instances --query 'Reservations[].Instances[].[InstanceId, InstanceType, ImageId,KeyName,State.Name,LaunchTime,Placement.AvailabilityZone,Placement.Tenancy,PrivateIpAddress,PrivateDnsName,PublicDnsName,PublicIpAddress,SubnetId,VpcId,[Tags[?Key==Name].Value] [0][0], [Tags[?Key==Environment].Value] [0][0] ]' --output text
@@ -83,37 +83,37 @@ aws ec2 describe-instances --query 'Reservations[].Instances[].[InstanceId, Inst
 
 Quickly create EC2 instances.
 
-#### 1. Step 1: Find the right AMI
+* 1. Step 1: Find the right AMI
 
 ```bash
 export AMI_ID=$(aws ec2 describe-images --owners amazon --filters "Name=description,Values=*Amazon Linux 2*" "Name=description,Values=*.NET Core 2.1*" --query 'Images[0].ImageId' --output text)
 ```
 
-#### 2. Step 2: Create a key pair, and hold on to it in a file:
+* 2. Step 2: Create a key pair, and hold on to it in a file:
 
 ```bash
 aws ec2 create-key-pair --key-name aurora-test-keypair > keypair.pem
 ```
 
-#### 3. Step 3: Create the instance using the AMI and the key pair, and hold onto the result in a file:
+* 3. Step 3: Create the instance using the AMI and the key pair, and hold onto the result in a file:
 
 ```bash
 aws ec2 run-instances --instance-type t2.micro --image-id $AMI_ID --region us-east-1 --subnet-id <your_subnet_id> --key-name keypair --count 1 > instance.json
 ```
 
-#### 4. Step 4: Grab the instance Id from the file
+* 4. Step 4: Grab the instance Id from the file
 
 ```bash
 export INSTANCE_ID=$(aws ec2 describe-instances --filters "Name=key-name,Values=keypair" --query 'Reservations[0].Instances[0].InstanceId' --output text)
 ```
 
-#### 5. Step 5: Wait for the instance to spin-up, then grab its IP address and hold onto it in an environment variable
+* 5. Step 5: Wait for the instance to spin-up, then grab its IP address and hold onto it in an environment variable
 
 ```bash
 export INSTANCE_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --output text --query 'Reservations[*].Instances[*].PublicIpAddress')
 ```
 
-#### 6. Step 6: SSH and profit AWS
+* 6. Step 6: SSH and profit AWS
 
 ```bash
 ssh -i keypair.pem ec2-user@$INSTANCE_IP
@@ -125,20 +125,20 @@ refer to [AWS CLI reference](https://docs.aws.amazon.com/cli/latest/reference/ec
 
 - [AWS Premium questions](https://aws.amazon.com/premiumsupport/knowledge-center/ebs-volume-snapshot-ec2-instance/)
 
-#### Find all snapshots over 1 month old
+* Find all snapshots over 1 month old
 
 ```bash
 aws ec2 describe-snapshots --owner self --query "Snapshots[?StartTime < '$(date --date='-1 month' '+%Y-%m-%d')'].[Description, StartTime, SnapshotId]" --output table
 ```
 
-#### List snapshots over 1 month old in all Regions
+* List snapshots over 1 month old in all Regions
 
 ```bash
 for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; \
 do echo $REGION && aws ec2 describe-snapshots --owner self --region $REGION --query "Snapshots[?StartTime < '$(date --date='-1 month' '+%Y-%m-%d')'].[Description, StartTime, SnapshotId]" --output table ; done
 ```
 
-#### Find all publicly available snapshots in an AWS account in all Regions
+* Find all publicly available snapshots in an AWS account in all Regions
 
 ```bash
 for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo "$REGION:"; 
@@ -150,7 +150,7 @@ for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[Regio
    done
 ```
 
-#### Get the status of all volumes currently in the optimizing stage (after volume modification) in all Regions
+* Get the status of all volumes currently in the optimizing stage (after volume modification) in all Regions
 
 ```bash
 for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; \
@@ -159,7 +159,7 @@ do echo $REGION && aws ec2 describe-volumes-modifications \
 --output json --filter 'Name=modification-state,Values=optimizing' --region $REGION; done
 ```
 
-#### Find all volumes not attached to any instance in all Regions
+* Find all volumes not attached to any instance in all Regions
 
 ```bash
 for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; \
@@ -168,25 +168,25 @@ for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[Regio
  --region $REGION; done
 ```
 
-#### Find all volumes in the "error" state in all Regions
+* Find all volumes in the "error" state in all Regions
 
 ```bash
 for REGION in $(aws ec2 describe-regions --output text --query 'Regions[].[RegionName]') ; do echo $REGION && aws ec2 describe-volumes --filter "Name=status,Values=error" --query 'Volumes[*].{VolumeID:VolumeId,Size:Size,Type:VolumeType,AvailabilityZone:AvailabilityZone}' --region $REGION; done
 ```
 
-#### List value associated with the 'Name' tag, Instance ID & EBS Volume ID
+* List value associated with the 'Name' tag, Instance ID & EBS Volume ID
 
 ```bash
 aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value, InstanceId, BlockDeviceMappings[*].Ebs.VolumeId]' --output text
 ```
 
-#### Details about EC2 instance and volume block
+* Details about EC2 instance and volume block
 
 ```bash
 aws ec2 describe-instances --query 'Reservations[*].Instances[*].{Name:ImageId,InstanceId:InstanceId,VolumeInfo:BlockDeviceMappings}' --output json
 ```
 
-#### List stopped instances and associated volumes.
+* List stopped instances and associated volumes.
 
 Useful for clean up of cloud resources and cost savings
 
@@ -195,31 +195,31 @@ aws ec2 describe-instances --filters "Name=instance-state-name,Values=stopped" \
   --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value,InstanceId,BlockDeviceMappings[*].Ebs.VolumeId]' --output text
 ```
 
-#### How Many Gigabytes of Volumes do I have, by Status?
+* How Many Gigabytes of Volumes do I have, by Status?
 
 ```bash
 aws ec2 describe-volumes --query 'Volumes[*].{VolumeId: VolumeId, Size: Size, State: State}' --output table
 ```
 
-#### How many Snapshots do I have?
+* How many Snapshots do I have?
 
 ```bash
 aws ec2 describe-snapshots --owner self --query 'length(Snapshots)' --output text
 ```
 
-#### How large are the snapshot in total?
+* How large are the snapshot in total?
 
 ```bash
 aws ec2 describe-snapshots --owner self --query 'sum(Snapshots[*].VolumeSize)' --output text
 ```
 
-#### How do they breakdown by the volume used to create them?
+* How do they breakdown by the volume used to create them?
 
 ```bash
 aws ec2 describe-snapshots --owner self --query 'Snapshots[*].{SnapshotId: SnapshotId, VolumeId: VolumeId, VolumeSize: VolumeSize}' --output table
 ```
 
-#### Get the information: InstanceID, InstanceType and the value of the Name tag
+* Get the information: InstanceID, InstanceType and the value of the Name tag
 
 ```bash
 INSTANCE_ID=""
@@ -227,7 +227,7 @@ aws ec2 describe-instances --instance-ids $INSTANCE_ID --output text \
   --query 'Reservations[].Instances[].[InstanceId, InstanceType, [ Tags[?Key==Name].Value] [0][0] ]'
 ```
 
-#### Describing volumes
+* Describing volumes
 
 ```bash
 aws ec2 describe-volumes \
@@ -236,7 +236,7 @@ aws ec2 describe-volumes \
 --query 'Volumes[*].[Attachments[0].InstanceId,VolumeId,Attachments[0].State,AvailabilityZone,Size,State,Iops,VolumeType]'
 ```
 
-#### Describe volumes that are attached to a specific instance in another region
+* Describe volumes that are attached to a specific instance in another region
 
 ```bash
 aws ec2 describe-volumes \
@@ -246,7 +246,7 @@ aws ec2 describe-volumes \
     Name=attachment.delete-on-termination,Values=true
 ```
 
-#### AWS Regions
+* AWS Regions
 
 Describe AWS regions where you have access
 
@@ -256,17 +256,17 @@ aws ec2 describe-regions --output text --query 'Regions[].[RegionName]'
 
 ### Inventory questions about EC2 instances
 
-- How many EC2 are running in each region?
-- How many instances there are with a certain Tag name and value combination?
+* How many EC2 are running in each region?
+* How many instances there are with a certain Tag name and value combination?
 
 ```bash
 # ALL EC2 resources in environment test in NZ
 aws ec2 describe-tags --filters Name="tag:environment:test",Values="NZ" --output table
 ```
 
-- How many instances there are for Production, Staging or Development environments?
-- Examine certain instance types and check if some of them, combined with a certain environment, are running -longer than expected
-- Total amount of Volumes attached to an instance and what the total volume size for each instance is.
+* How many instances there are for Production, Staging or Development environments?
+* Examine certain instance types and check if some of them, combined with a certain environment, are running -longer than expected
+* Total amount of Volumes attached to an instance and what the total volume size for each instance is.
 
 ### EC2 Elastic Load balancer
 
@@ -274,20 +274,20 @@ A Load balancer has rules. The rules point to target groups.
 Target groups reference AWS EC2 instances.
 The EC2 instance has a security group / Firewall
 
-#### List Load balancers by name
+* List Load balancers by name
 
 ```bash
 aws elbv2 describe-load-balancers --query 'LoadBalancers[*].LoadBalancerName' --output text
 ```
 
-#### Obtain the AWS ARN of a given LoadBalancer name
+* Obtain the AWS ARN of a given LoadBalancer name
 
 ```bash
 LOAD_BALANCER_NAME="networklb-dev-internal"
 aws elbv2 describe-load-balancers --names $LOAD_BALANCER_NAME --query 'LoadBalancers[*].LoadBalancerArn' --output text
 ```
 
-#### List target groups names that belong to a load balancer
+* List target groups names that belong to a load balancer
 
 [AWS CLI target groups docs](https://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-target-groups.html)
 
@@ -302,7 +302,7 @@ aws elbv2 describe-target-groups \
     --load-balancer-arn $LB_ARN --output table
 ```
 
-#### Get Target Groups ARNs part of a load balancer
+* Get Target Groups ARNs part of a load balancer
 
 ```bash
 aws elbv2 describe-target-groups \
@@ -310,7 +310,7 @@ aws elbv2 describe-target-groups \
     --query 'TargetGroups[*].TargetGroupArn' --output text
 ```
 
-#### Register an EC2 instance in a target group
+* Register an EC2 instance in a target group
 
 ```bash
 TG_ARN="arn:aws:elasticloadbalancing:us-east-1:1234567890:targetgroup/tg-dev-app-7999/122absljsdsd898"

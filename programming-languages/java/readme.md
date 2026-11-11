@@ -48,19 +48,20 @@ Manage multiple version with sdkman
 
 ### [SDKMan](https://sdkman.io/)
 
-#### Installation
+* install SDK Man
 
-- install SDK Man
 ```bash
 curl -s "https://get.sdkman.io" | bash
 ```
 
-#### Find java distro version number
+* Find java distro version number
+
 ```bash
 sdk list java | grep "21.0"
 ```
 
-#### Install target JDK version
+* Install target JDK version
+
 ```bash
 SDK_MAN_JAVA_VERSION="21.0.2-amzn"
 
@@ -70,23 +71,25 @@ sdk install java $SDK_MAN_JAVA_VERSION
 ### Using Ubuntu apt
 leverage OS package manager
 
-### Install default JDK and JRE Ubuntu
-``` bash
+* Install default JDK and JRE Ubuntu
+
+```bash
 sudo apt install default-jdk default-jre
 ```
 
-#### Install popular OpenJDK
+* Install popular OpenJDK
+
 ```bash
 sudo apt install openjdk-8-jdk
 ```
 
-#### Use `update-alternative` to set version for Java runtime
+* Use `update-alternative` to set version for Java runtime
 
 ```bash
 update-alternatives --config java
 ```
 
-#### Use `update-alternative` to set version for Java compiler
+* Use `update-alternative` to set version for Java compiler
 
 ```bash
 update-alternatives --config javac

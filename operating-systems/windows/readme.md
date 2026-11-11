@@ -8,13 +8,14 @@ Reusable Actions. Command prompt cmd & PowerShell
 * windows 10
 * windows 11
 
-#### find in history uses of `ssh`. Use a reliable fallback to native powershell
+* find in history uses of `ssh`. Use a reliable fallback to native powershell
 
 ```powershell
 $(try { history -ErrorAction Stop } catch { Get-History }) | Select-String "ssh "
 ```
 
-#### open given directory path in File Explorer
+* open given directory path in File Explorer
+
 ```powershell
 Invoke-Item C:\workspace
 ```
@@ -60,7 +61,7 @@ $env:Path
 
 ## Handling compressed files
 
-#### decompress a .zip file
+* decompress a .zip file
 
 ```powershell
 Expand-Archive -Path .\compressedData.zip -DestinationPath .\decompressedFiles
@@ -136,7 +137,7 @@ Get-ChildItem -Path $folder -File -Filter 'Screenshot *.png' |
 
 * for the work log analysis: create directories from January to December
 
-``` powershell
+```powershell
 $months = [System.Globalization.DateTimeFormatInfo]::InvariantInfo.MonthNames[0..11]
 $year = (Get-Date).Year
 
@@ -149,7 +150,7 @@ for ($i = 0; $i -lt 12; $i++) {
 
 * force update windows enterprise policies
 
-``` powershell
+```powershell
 gpupdate /force
 ```
 
@@ -193,7 +194,7 @@ tested in Win10 and win11
 > Logon failure: the user has not been granted the requested logon type at this computer.
 > Error code: Wsl/Service/CreateInstance/CreateVm/0x80070569
 
-*-* stop `wsl`
+* stop `wsl`
 
 ```powershell
 wsl --shutdown
@@ -229,9 +230,9 @@ wsl.exe --import $DistroName $InstallLocation $InstallTarFile
 
 * run specific distro
 
-  ```powershell
-  wsl.exe --install --no-distribution
-  ```
+```powershell
+wsl.exe --install --no-distribution
+```
 
 ---
 
@@ -256,7 +257,8 @@ ipconfig /flushdns
 ipconfig /registerdns
 ```
 
-#### releases the current DHCP lease
+* releases the current DHCP lease
+
 ```cmd
 ipconfig /release
 ```
@@ -354,7 +356,7 @@ sfc /scannow
 
 * measure command time execution: windows form of linux `time`
 
-``` powershell
+```powershell
 Measure-Command { echo hi }
 ```
 
@@ -364,6 +366,6 @@ Measure-Command { echo hi }
 
 * set terminal with vertical panes 2nd pane will be WSL
 
-``` powershell
+```powershell
 wt split-pane --vertical wsl
 ```

@@ -50,7 +50,7 @@ Insufficient privileges to complete the operation
 
 ### Resource group management
 
-### List all resource groups located in the West US region
+* List all resource groups located in the West US region
 
 ```bash
 az group list --query "[?location=='westus']"
@@ -159,7 +159,7 @@ az vm list-skus --resource-type availabilitySets --query '[?name==`Aligned`].{Lo
 
 ## Azure Networking
 
-### List the current network security group rules
+* List the current network security group rules
 
 ```bash
 az network nsg list \
@@ -168,7 +168,7 @@ az network nsg list \
   --output tsv
 ```
 
-### list the rules associated with a given NSG
+* list the rules associated with a given NSG
 
 ```bash
 az network nsg rule list \
@@ -176,7 +176,7 @@ az network nsg rule list \
   --nsg-name my-vmNSG
 ```
 
-### Retrieve NSG name, priority, affected ports, and access (Allow or Deny)
+* Retrieve NSG name, priority, affected ports, and access (Allow or Deny)
 
 ```bash
 az network nsg rule list \

@@ -5,11 +5,15 @@
 # Virtualization
 
 ## Vagrant General status
-#### Check Status in OS
+
+* Check Status in OS
+
 ```bash
 vagrant global-status
 ```
-#### Clean up
+
+* Clean up
+
 ```bash
 vagrant destroy ID --force
 ```

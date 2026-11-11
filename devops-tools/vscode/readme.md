@@ -13,21 +13,27 @@ This sets up VScode for a DevOps engineer
 - Git plugins
 - Remote terminal and editor
 
-#### check installed extensions
+* check installed extensions
+
 ```bash
 code --list-extensions
 ```
-#### check installed extensions
+
+* install extension by ID
+
 ```bash
 EXTENSION_ID="vscjava.vscode-gradle"
 code --install-extension $EXTENSION_ID
 ```
 
-#### install exensions to a Profile
+* install extensions to a Profile
+
 ```powershell
 code --profile Python --install-extension ms-python.python
 ```
-#### uninstall exensions from a Profile
+
+* uninstall extensions from a Profile
+
 ```powershell
 code --profile "Java General" --uninstall-extension wakatime.vscode-wakatime
 ```

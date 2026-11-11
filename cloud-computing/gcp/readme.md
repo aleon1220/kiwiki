@@ -93,6 +93,8 @@ gcloud iam service-accounts list
 
 ## Storage
 
+* List bucket contents
+
 ```bash
 gcloud storage ls gs://my-bucket
 ```
@@ -113,35 +115,9 @@ gcloud builds list --limit=10
 
 ## Cloud Run
 
-List deployed Cloud Run services:
+* List deployed Cloud Run services:
 
-```Bash
-gcloud run services list
-```
-
-## Cloud SQL
-
-
-## Storage
-
-gcloud storage ls gs://my-bucket
-
-
-* Upload files (recursive and path preservation):
-
-gcloud storage cp -r ./local-folder/ gs://my-bucket/destination/
-
-## Cloud Build
-
-* List build history
-
-gcloud builds list --limit=10
-
-## Cloud Run
-
-List deployed Cloud Run services:
-
-```Bash
+```bash
 gcloud run services list
 ```
 

@@ -4,19 +4,19 @@
 
 # AWS Lambda Functions
 
-#### Which Lambda Functions Runtimes am I Using?
+* Which Lambda Functions Runtimes am I Using?
 
 ```bash
 aws lambda list-functions --query 'Functions[*].{FunctionName: FunctionName, Runtime: Runtime}' --output table
 ```
 
-#### Are you exposing secrets in variables? Have a typo in a key?
+* Are you exposing secrets in variables? Have a typo in a key?
 
 ```bash
 aws lambda list-functions --query "Functions[?Environment.Variables != \`null\`].{FunctionName: FunctionName, Environment: Environment.Variables}"
 ```
 
-#### What logs does my Lambda Function generate when I run it?
+* What logs does my Lambda Function generate when I run it?
 
 ```bash
 FUNCTION_NAME="REPLACE"

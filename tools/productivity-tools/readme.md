@@ -43,11 +43,12 @@ save the view in outlook.
 7. Set the condition to "is empty"
 8. Click "Add to List" and then "OK" to apply the filter.
 
-Outlook Filter flagged items to do
+* Outlook Filter flagged items to do
 
 ```powershell
 followupflag:followup flag category:="Client-"
 ```
+
 * Find uncategorized email use `category:=[]` in the search bar
 
 ## Productivity tools
@@ -73,17 +74,25 @@ echo "https://www.rescuetime.com/browse/productivity/daily_patterns/for/the/mont
 #### Set up a git post-commit to add highlights (Ubuntu)
 
 * Edit `~/.bashrc`
-    `vim ~/.bashrc`
+
+```bash
+vim ~/.bashrc
+```
+
 * Add the `API_KEY` secret
 
-    ```bash
-    ## RescueTime integration
-    export RESCUE_TIME_API_KEY="<Add your API key>"
-    ```
+```bash
+## RescueTime integration
+export RESCUE_TIME_API_KEY="<Add your API key>"
+```
 
-- Load the configs from `bashrc` file
-`source ~/.bashrc`
-- Copy the `post-commit` script to your destination git repo. It must be located in `YOUR_GIT_REPO/.git/hooks`
+* Load the configs from `bashrc` file
+
+```bash
+source ~/.bashrc
+```
+
+* Copy the `post-commit` script to your destination git repo. It must be located in `YOUR_GIT_REPO/.git/hooks`
 
 ### Pomodoro technique
 
@@ -96,17 +105,15 @@ set a time for 30 mins and focus on achieving a task to get started.
 i came up with the idea of taking notes of what i did daily. I use a markdown structure created with a java program.
 at the end of the month i upload the compiled log and let AI analyse it for me.
 
-* Process
+* merge all Markdown files into a single one for the target month analysis
 
-1. merge all Markdown files into a single one for the target month analysis
+```bash
+cat *.md > "$(date +%F)-$(date +%B)-Analysis.md"
+```
 
-    ```bash
-    cat *.md > "$(date +%F)-$(date +%B)-Analysis.md"
-    ```
-
-2. Run some AI prompts to extract an analysis
-3. Reflect and list action items
-4. refer to [retrospective-reflection tools](https://github.com/aleon1220/AI-prompts/tree/main/retrospectives)
+* Run some AI prompts to extract an analysis
+* Reflect and list action items
+* refer to [retrospective-reflection tools](https://github.com/aleon1220/AI-prompts/tree/main/retrospectives)
 
 ## Forums ICT
 

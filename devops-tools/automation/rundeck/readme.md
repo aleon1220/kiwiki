@@ -8,16 +8,23 @@ Introduction [webinar](https://www.pagerduty.com/ty/webinar/introduction-to-proc
 https://www.rundeck.com/downloads
 
 ## Install Rundeck Docker
+
+* Pull Rundeck Docker image
+
 ```bash
 docker pull rundeck/rundeck:4.16.0
 ```
 
-## Containerised Rundeck 
-- OSS
+## Containerised Rundeck
+
+* OSS
+
 ```bash
 docker run --rm -it -p 4440:4440  rundeck/rundeck:4.16.0
 ```
-- Enterprise RunDeck
+
+* Enterprise RunDeck
+
 ```bash
 docker run --rm -it -p 4440:4440 rundeckpro/enterprise:4.16.0
 ```

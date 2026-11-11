@@ -69,74 +69,98 @@ Queries executed in [Apache Directory Studio](https://directory.apache.org/apach
 | Filter                  | `(\|(objectClass=person)(mailNickname="john.doe", "another.user"))` |
 | Returning<br>Attributes | **sAMAccountName, mailNickname, department** |
 
-#### All user objects designated as a “person”
+* All user objects designated as a “person”
+
 ```ldap
 (&(objectclass=user)(objectcategory=person))
 ```
 
-#### Distribution Lists only
+* Distribution Lists only
+
 ```ldap
 (objectcategory=group)
 ```
 
-#### Public Folders only
+* Public Folders only
+
 ```ldap
 (objectcategory=publicfolder)
 ```
-#### All user objects except for ones with primary email addresses that begin with test
+
+* All user objects except for ones with primary email addresses that begin with test
+
 ```ldap
 (&(&(objectclass=user)(objectcategory=person))(!(mail=test*)))
 ```
 
-#### All user objects except for ones with primary email addresses that end with test
+* All user objects except for ones with primary email addresses that end with test
+
 ```ldap
 (&(&(objectclass=user)(objectcategory=person))(!(mail=*test)))
 ```
 
-#### All user objects except for ones with primary email addresses that contain the word “test”
+* All user objects except for ones with primary email addresses that contain the word “test”
+
 ```ldap
 (&(&(objectclass=user)(objectcategory=person))(!(mail=*test*)))
 ```
 
-#### All user objects (users and aliases) that are designated as a “person” and all group objects (distribution lists)
+* All user objects (users and aliases) that are designated as a “person” and all group objects (distribution lists)
+
 ```ldap
 (|(&(objectclass=user)(objectcategory=person))(objectcategory=group))
 ```
-#### All user objects that are designated as a “person”, all group objects and all contacts, except those with any value defined for extensionAttribute9
+
+* All user objects that are designated as a “person”, all group objects and all contacts, except those with any value defined for extensionAttribute9
+
 ```ldap
 (&(|(|(&(objectclass=user)(objectcategory=person))(objectcategory=group))(objectclass=contact))(!(extensionAttribute9=*)))
 ```
-#### All users, but exclude disabled users
+
+* All users, but exclude disabled users
+
 ```ldap
 (&(&(objectclass=user)(objectcategory=person))(!(userAccountControl=514)))
 ```
-#### All objects
-_(this may cause load problems)_
+
+* All objects _(this may cause load problems)_
+
 ```ldap
 objectclass=*.
 ```
+
 ### Active Directory LDAP
-#### All users
+
+* All users
+
 ```ldap
 (objectClass=person)
 ```
-#### All email users (alternate)
+
+* All email users (alternate)
+
 ```ldap
 (&(objectclass=user)(objectcategory=person))
 ```
+
 ### OpenLDAP
-#### All users
+
+* All users
+
 ```ldap
 (objectClass=inetOrgPerson)
 ```
 
 ### Lotus Domino LDAP
-#### All users
+
+* All users
+
 ```ldap
 (objectClass=dominoPerson)
 ```
 
-#### All objects with a mail address defined that are designated as a “person “or “group”:
+* All objects with a mail address defined that are designated as a “person “or “group”:
+
 ```ldap
 (&(|(objectclass=dominoPerson)(objectclass=dominoGroup)(objectclass=dominoServerMailInDatabase))(mail=*))
 ```

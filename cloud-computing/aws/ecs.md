@@ -13,7 +13,8 @@ MY_ECS_CLUSTER=""
 CONTAINER_NAME=""
 ```
 
-#### Access container interactively in a task
+* Access container interactively in a task
+
 ```bash
 aws ecs execute-command --cluster $MY_ECS_CLUSTER \
 --task $ECS_TASK_ID \

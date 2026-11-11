@@ -1,6 +1,6 @@
-# AWS Identiy Access Management
+# AWS Identity Access Management
 
-#### When was my AWS user created?
+* When was my AWS user created?
 
 ```bash
 aws iam get-user --query 'User.CreateDate' --output text

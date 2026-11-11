@@ -9,13 +9,13 @@ source obtained from this wonderful [Medium post by circuit People](https://medi
 
 ## AWS Amazon Web services General
 
-#### How Many Services does AWS Have?
+* How Many Services does AWS Have?
 
 ```bash
 curl -s https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json | jq -r '.partitions[0].services | keys[]' | wc -l
 ```
 
-#### Which AWS Services am I using?
+* Which AWS Services am I using?
 
 ```bash
 aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01" -d "-1 Month"),End=$(date --date="$(date +'%Y-%m-01') - 1 second" -I) \
@@ -23,7 +23,7 @@ aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01" -d "-1 Month"),
   --query 'ResultsByTime[*].Groups[?Metrics.UsageQuantity.Amount > `0`].Keys[0]' --output text
 ```
 
-#### What is each service costing me?
+* What is each service costing me?
 
 ```bash
 aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01"),End=$(date --date="$(date +'%Y-%m-01') + 1 month - 1 second" -I) \
@@ -33,13 +33,13 @@ aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01"),End=$(date --d
 
 ## AWS CLI
 
-#### Install AWS CLI
+* Install AWS CLI
 
 Amazon Web Services Command Line Interface client.
 
 Follow [Install AWS CLI2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html)
 
-#### List AWS CLI config directory
+* List AWS CLI config directory
 
 File is usually located at `$HOME/.aws/config`
 
@@ -47,20 +47,21 @@ File is usually located at `$HOME/.aws/config`
 ls -lat $HOME/.aws/
 ```
 
-#### Get current AWS CLI configuration
+* Get current AWS CLI configuration
 
 ```bash
 aws configure list
 ```
 
-#### use a named profile
+* use a named profile
 
-``` bash
+```bash
 export AWS_PROFILE="user1"
 ```
 
-#### give the aws cli flag
-``` bash
+* give the aws cli flag
+
+```bash
 aws iam get-user --profile $AWS_NAMED_PROFILE
 ```
 
@@ -91,7 +92,7 @@ Infrastructure as a configuration (not code)
 
 # R
 
-## [RDS Databases]((./rds.md))
+## [RDS Databases](./rds.md)
 
 
 

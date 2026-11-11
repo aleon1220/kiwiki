@@ -13,7 +13,8 @@ functions will be linked from this file. All the functions are the files with th
 you want to extract some info from a website to save it somewhere, count it or ask ChatGPT to analyze it for you
 in this example i filtered by glassdoor Australia reviews
 
-- Select all elements with the specified class names
+* Select all elements with the specified class names
+
 ```javascript
 const employeeElements = document.querySelectorAll('.review-details__review-details-module__employee');
 const contentElements = document.querySelectorAll('.contentContainer');
@@ -21,7 +22,8 @@ const contentElements = document.querySelectorAll('.contentContainer');
 const data = [];
 ```
 
-#### Loop through elements and extract content
+* Loop through elements and extract content
+
 ```javascript
 for (let i = 0; i < employeeElements.length && i < contentElements.length; i++) {
     const employee = employeeElements[i].textContent;
@@ -38,7 +40,8 @@ for (let i = 0; i < employeeElements.length && i < contentElements.length; i++) 
 }
 ```
 
-#### Format data
+* Format data
+
 ```javascript
 //  array to JSON
 const jsonData = JSON.stringify(data, null, 2);
@@ -46,11 +49,9 @@ const jsonData = JSON.stringify(data, null, 2);
 console.log(jsonData);
 ```
 
+* Printing objects in the console: MDN recommends using
 
-#### Printing objects in the console
-MDN recommends using
-
-``` javascript
+```javascript
 console.log(JSON.parse(JSON.stringify(obj)))
 ```
 

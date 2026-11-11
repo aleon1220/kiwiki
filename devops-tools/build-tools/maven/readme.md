@@ -5,62 +5,63 @@ https://maven.apache.org/
 2023-01-31
 i started checking my Java EE Project from uni. It requires some extra maven fixes. I will be upgrading it to graddle.
 
-windows stores maven data at 
+* windows stores maven data at
 
 ```powershell
 %USERPROFILE%\.m2
 ```
 
-#### check extra help
+* check extra help
 
 ```bash
 mvn --help
 ```
 
-#### Check version
+* Check version
 
 ```bash
 mvn --version
 ```
 
-#### clean up resources
+* clean up resources
 
 ```bash
 mvn clean
 ```
 
-### perform a build
+* perform a build
 
 ```bash
 mvn build
 ```
 
-#### Validate POM.xml file
+* Validate POM.xml file
 
 ```bash
 mvn validate
 ```
 
-#### package app
+* package app
 
 ```bash
 mvn package
 ```
+
 ### Dependencies
 
-#### Analyze dependencies
+* Analyze dependencies
 
 ```bash
 mvn dependency:analyze
 ```
 
-#### forces Maven to fetch dependencies
+* forces Maven to fetch dependencies
 
 ```bash
 mvn dependency:resolve
 ```
 
-#### verify
+* verify
 
 this command packaged my WAR for a java webapp project
 
@@ -68,7 +69,7 @@ this command packaged my WAR for a java webapp project
 mvn verify
 ```
 
-#### generate artifacts
+* generate artifacts
 
 in `<sourceRoot>` directory that you specify
 
@@ -76,7 +77,7 @@ in `<sourceRoot>` directory that you specify
 mvn generate-sources
 ```
 
-#### generate a Cucumber archetype
+* generate a Cucumber archetype
 
 ```bash
 mvn archetype:generate "-DarchetypeGroupId=io.cucumber" "-DarchetypeArtifactId=cucumber-archetype" "-DarchetypeVersion=7.12.1" "-DgroupId=bank" "-DartifactId=bank" "-Dpackage=bank" "-Dversion=1.0.0-SNAPSHOT" "-DinteractiveMode=false"

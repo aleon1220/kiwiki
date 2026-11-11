@@ -3,62 +3,71 @@
 <https://gradle.org/>
 
 ## install
-- use [sdk](sdkman.io) and target a version
 
-  ```bash
-  graddle_target="9.3.1"
-  ```
-- install
+* use [sdk](sdkman.io) and target a version
 
-  ```bash
-  sdk install gradle $graddle_target
-  ```
+```bash
+graddle_target="9.3.1"
+```
+
+* install
+
+```bash
+sdk install gradle $graddle_target
+```
 
 ## Android and Java
 
 > Gradle now with Kotlin syntax
-#### check gradle installations with sdkman.io
+
+* check gradle installations with sdkman.io
+
 ```bash
 sdk list gradle
 ```
 
-#### as complexity grows, check the projects
+* as complexity grows, check the projects
+
 ```bash
 gradle projects
 ```
 
 ## 2021-03-05
-- closures=values are respected. values can be passed around.
-- use of groovy syntax. groovy automatically creates getters and setters
+* closures=values are respected. values can be passed around.
+* use of groovy syntax. groovy automatically creates getters and setters
 
 ### Build tasks
 
 #### build the wrapper
 
-- perform the build
+* perform the build
 
 ```bash
 gradle wrapper
 ```
 
-- test the wrapper
+* test the wrapper
+
 ```bash
 ./gradlew help
 ```
 
 use [plugin shadow](https://plugins.gradle.org/plugin/com.gradleup.shadow) to generate better Fat Jars
 
-#### clean plain build
+* clean plain build
+
 ```bash
 gradle clean build --console plain
 ```
 
-#### fresh gradle build stderr and stdout into unified viewing
+* fresh gradle build stderr and stdout into unified viewing
+
 ```bash
 gradle clean build 2>&1
 ```
 
-#### check build outcome
+* check build outcome
+
 ```bash
 ls -lh lib/build
 ```
@@ -69,23 +78,27 @@ ls -lh lib/build
 
 ### Verification tasks
 
+* run verification checks with all warnings
+
 ```bash
 gradle check --warning-mode all
 ```
 
 ### Help tasks
 
-#### show tasks
+* show tasks
+
 ```fish
 gradle :tasks
 ```
 
-#### show All tasks
+* show All tasks
+
 ```bash
 gradle tasks --all
 ```
 
-- define groovy task
+* define groovy task
 
 ```groovy
 # pass a config closure
@@ -96,6 +109,8 @@ task myTask {
 
 ## Debugging
 gradle version `7.3.3` of  there are some issues when running graddle commands. solution for this case is to restart the gradle process
+
+* stop gradle daemon
 
 ```bash
 gradle --stop
@@ -119,18 +134,20 @@ Gradle could not start your build.
 * Get more help at https://help.gradle.org
 ```
 
-#### Dependencies & configurations
+* Dependencies & configurations
+
 ```bash
 gradle --refresh-dependencies
 ```
 
-#### run the build passing arguments
+* run the build passing arguments
 
 ```bash
 gradle run --args="--help"
 ```
 
-#### run test suite
+* run test suite
+
 ```bash
 gradle test
 ```

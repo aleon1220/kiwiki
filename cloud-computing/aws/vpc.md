@@ -4,25 +4,25 @@
 
 # Virtual Private Cloud
 
-#### What are my VPCs in table format
+* What are my VPCs in table format
 
 ```bash
 aws ec2 describe-vpcs --output table
 ```
 
-#### What CIDRs have Ingress Access to which Ports?
+* What CIDRs have Ingress Access to which Ports?
 
 ```bash
 aws ec2 describe-security-groups --query 'SecurityGroups[*].IpPermissions[*].{FromPort: FromPort, ToPort: ToPort, IpRanges: IpRanges[*].CidrIp}' --output table
 ```
 
-#### find security group by name & get SecgroupID
+* find security group by name & get SecgroupID
 
 ```bash
 SecGroup_QA=$(aws ec2 describe-security-groups --filters Name=group-name,Values=qual-nlb-sg --query "SecurityGroups[*].GroupId" --output text)
 ```
 
-#### create ingress group in a particular security groupID
+* create ingress group in a particular security groupID
 
 ```bash
 SERVICE_PORT="38139"

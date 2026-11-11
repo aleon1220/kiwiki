@@ -17,19 +17,23 @@ gathers metadata in `AWS EC2` instances
 /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log
 ```
 
-#### Agent log config file
+* Agent log config file
 
 ```bash
 less /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.json
 ```
+
 ## Cloudwatch Alarms
+
+* Set alarm state for testing
+
 ```bash
 aws cloudwatch set-alarm-state --alarm-name "CriblDev-CPU-High" --state-reason "Testing AWS Cloudwatch alarm" --state-value ALARM
 ```
 
 ## Cloudwatch Logs
 
-#### List Log groups
+* List Log groups
 
 Exploring Log Streams JQ
 
@@ -37,14 +41,14 @@ Exploring Log Streams JQ
 aws logs describe-log-groups --query 'logGroups[*].logGroupName' --output text
 ```
 
-#### Get log streams
+* Get log streams
 
 ```bash
 logs=$(aws logs describe-log-groups --query 'logGroups[*].logGroupName' --output text)
 for group in $logs; do echo $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 --query 'logStreams[0].logStreamName' --output text); done
 ```
 
-#### get the last 10 messages since midnight
+* get the last 10 messages since midnight
 
 Loop through the groups and streams
 
@@ -52,7 +56,7 @@ Loop through the groups and streams
 for group in $logs; do for stream in $(aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --max-items 1 --query 'logStreams[0].logStreamName' --output text); do echo ">>>"; echo GROUP: $group; echo STREAM: $stream; aws logs get-log-events --limit 10 --log-group-name $group --log-stream-name $stream --start-time $(date -d 'today 00:00:00' '+%s%N' | cut -b1-13) --query 'events[*].message' --output text; done; done
 ```
 
-#### AWS CloudWatch Logs set to 30 days
+* AWS CloudWatch Logs set to 30 days
 
 ```bash
 for group in $(aws logs describe-log-groups --query "logGroups[].[logGroupName]" --output text --no-paginate); do aws logs put-retention-policy --log-group-name $group --retention-in-days 30; done;
@@ -71,7 +75,7 @@ insight
 { ($.errorCode = "*UnauthorizedOperation") || ($.errorCode = "AccessDenied*") }
 ```
 
-#### Run the metric filter above in cloudwatch logs insights syntax
+* Run the metric filter above in cloudwatch logs insights syntax
 
 ```bash
 filter errorCode LIKE /UnauthorizedOperation/ or errorCode LIKE /AccessDenied/

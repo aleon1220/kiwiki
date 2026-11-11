@@ -4,71 +4,98 @@ Container orchestrator
 
 ### YAML processing app
 
+* Add `yq` helper function to `~/.bashrc`
+
 ```bash
 echo 'yq() {
   docker run --rm -i -v "${PWD}":/workdir mikefarah/yq yq "$@"
 }' | tee -a ~/.bashrc && source ~/.bashrc
 ```
-#### Get the client version
-``` bash
+
+* Get the client version
+
+```bash
 kubectl version
 ```
+
 ## Kubectl commands frequently used
-``` bash
+
+* Get pods
+
+```bash
 kubectl get pods
 ```
-#### Get deployments and show all
-``` bash
+
+* Get deployments and show all
+
+```bash
 kubectl get deployments.apps --show-*
 ```
-#### Get deployments and show labels
-``` bash
+
+* Get deployments and show labels
+
+```bash
 kubectl get deployments.apps --show-labels
 ```
 
-#### Create a deployment based on a YAML file
-``` bash
+* Create a deployment based on a YAML file
+
+```bash
 kubectl create -f wishlist-deployment.yaml
 ```
 
-#### Get Resource Set
-``` bash
+* Get Resource Set
+
+```bash
 kubectl get rs
 ```
 
-#### Install a chat with `helm`
-``` bash
+* Install a chart with `helm`
+
+```bash
 helm install --name "wishlist-chart" -f values.yaml .
 ```
 
 ## Minikube
-``` bash
+
+* Check Minikube version
+
+```bash
 minikube version
 ```
-#### Check status
-``` bash
+
+* Check status
+
+```bash
 minikube status
 ```
 
-##### Check for new versions
-``` bash
+* Check for new versions
+
+```bash
 minikube update-check
 ```
-#### Perform minikue update step
-``` bash
+
+* Perform minikube update step
+
+```bash
 minikube update
 ```
-#### Do the upgrade
-``` bash
+
+* Do the upgrade
+
+```bash
 minikube upgrade
 ```
 
-#### Start or stop the minikube system
-``` bash
+* Start or stop the minikube system
+
+```bash
 minikube start/stop
 ```
 
-#### Start minikube if using the Microsoft hyperV
-``` bash
+* Start minikube if using the Microsoft hyperV
+
+```bash
 minikube start --vm-driver=hyper
 ```

@@ -9,7 +9,8 @@ flowchart LR
  
 
 ## Table Templates
-#### table 2 columns
+
+* table 2 columns
 
 |       header 01         |  header 02    |
 |-------------------------|---------------|

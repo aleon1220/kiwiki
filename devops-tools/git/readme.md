@@ -7,27 +7,28 @@ refer to [git official manual](https://git-scm.com/docs/user-manual)
 
 ### Git Global Settings
 
-#### Get general git repo info
+* Get general git repo info
 
 ```bash
 git config --list
 ```
 
-#### Get global config info
+* Get global config info
 
 ```bash
 git config --global --list
 ```
 
-#### do basic config setup
+* do basic config setup
 
 will apply to all repositories
+
 ```bash
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 ```
 
-#### set CLI editor
+* set CLI editor
 
 use nano  for simplicity compared to `vim`
 
@@ -37,17 +38,19 @@ git config --global core.editor "nano"
 
 ## git Default Flow
 
-#### usual add, commit, push
+* usual add, commit, push
 
 ```bash
 git add . ; git commit ; git push
 ```
-#### Force-switches to branch, discarding changes
+
+* Force-switches to branch, discarding changes
 
 ```bash
 git checkout main --force
 ```
-#### fetch from remote and then merge to develop
+
+* fetch from remote and then merge to develop
 
 ```bash
 git fetch
@@ -60,21 +63,21 @@ git merge origin/develop
 git push origin :my-feature
 ```
 
-- use `@` instead of `HEAD`
+* use `@` instead of `HEAD`
 
-#### Delete Remote Branches
+* Delete Remote Branches
 
 ```bash
 git push REMOTE -d BRANCH
 ```
 
-#### Delete remote branch (short form `:`)
+* Delete remote branch (short form `:`)
 
 ```bash
 git push REMOTE :BRANCH
 ```
 
-#### Remove remote branches that were deleted (merged)
+* Remove remote branches that were deleted (merged)
 
 > tested on BitBucket
 
@@ -82,19 +85,19 @@ git push REMOTE :BRANCH
 git config fetch.prune true 
 ```
 
-#### Change remote URL if you change your repository’s name
+* Change remote URL if you change your repository’s name
 
 ```bash
 git remote set-url REMOTE $NEWURL
 ```
 
-#### Github set remote URL
+* Github set remote URL
 
 ```bash
 git remote set-url origin github.com/myusername/my-repo
 ```
 
-#### Stash Individual Files
+### Stash Individual Files
 
 * set var for file to stash
 
@@ -108,7 +111,7 @@ file_stash="src/index.js"
 git stash push -- $file_stash
 ```
 
-#### Show Content of Most Recent Stash
+* Show Content of Most Recent Stash
 
 ```bash
 git stash show -p [stash@{<n>}]
@@ -122,19 +125,20 @@ git stash show -p [stash@{<n>}]
 ```bash
 git stash show -p stash@{1}
 ```
-#### List git stashes
+
+* List git stashes
 
 ```bash
 git stash list
 ```
 
-#### Reset the current HEAD or changes of your local branch to a specific state
+* Reset the current HEAD or changes of your local branch to a specific state
 
 ```bash
 git reset [FILE_PATH]
 ```
 
-#### Check Out File From Another Branch
+* Check Out File From Another Branch
 
 ```bash
 BRANCH="main"
@@ -143,7 +147,7 @@ PATH_TO_CHECKOUT="src/functions.py"
 git checkout $BRANCH -- $PATH_TO_CHECKOUT
 ```
 
-#### Work with 2 branches
+### Work with 2 branches
 
 * Creates a linked working tree (i.e., another directory on the file system associated with the repo) called `my-other-awesome-feature`, one level above your current working directory, with the specified branch checked out.
 
@@ -157,7 +161,7 @@ git worktree add my-other-awesome-feature ../my-other-awesome-feature
 git worktree remove ../my-other-awesome-feature
 ```
 
-#### when you no longer need the branch:
+* when you no longer need the branch:
 
 ```bash
 git worktree remove [-f] PATH_TO_MODIFY
@@ -177,13 +181,13 @@ git show $COMMIT_ID
 git diff $COMMIT_A $COMMIT_B
 ```
 
-#### Show changes-diff with remote HEAD
+* Show changes-diff with remote HEAD
 
 ```bash
 git diff HEAD~ HEAD
 ```
 
-#### Compare Files Between Branches/Commits
+* Compare Files Between Branches/Commits
 
 ```bash
 COMMIT_A="0659bdc"
@@ -193,20 +197,20 @@ FILE_PATH_COMPARE="src/automate.py"
 git diff $COMMIT_A $COMMIT_B -- $FILE_PATH_COMPARE
 ```
 
-#### Reset a Single File to a specific Commit
+* Reset a Single File to a specific Commit
 
 ```bash
 git checkout [<$COMMIT_ID>] -- <path(s)>
 ```
 
-#### Reset a single file
+* Reset a single file
 
 ```bash
 FILE_TO_RESET="README.md"
 git checkout -- $FILE_TO_RESET
 ```
 
-#### Change Last Commit Message
+* Change Last Commit Message
 
 ```bash
 git commit --amend [-m 'MESSAGE']
@@ -214,7 +218,7 @@ git commit --amend [-m 'MESSAGE']
 git push -f
 ```
 
-#### If the old commit had already been pushed
+* If the old commit had already been pushed
 
 ```bash
 git push --force-with-lease REMOTE BRANCH
@@ -230,60 +234,62 @@ git push --force-with-lease REMOTE BRANCH
 
 one commit with the wrong email address. The commit history must be updated
 
-##### List commits with author emails to find target commits
+* List commits with author emails to find target commits
 
 ```bash
 git log --all --pretty=format:"%h %an <%ae> %s" | grep "authorName@outlookcom
 ```
 
-##### could use full scan
+* could use full scan
 
 ```bash
 git log --pretty=full
 ```
 
-##### Start an interactive rebase that stops just before that commit
+* Start an interactive rebase that stops just before that commit
 
 ```bash
 TARGET_COMMIT="abc1234"
 git rebase -i "$TARGET_COMMIT"^
 ```
 
-##### from the text editor, choose a git rebase operation
+* from the text editor, choose a git rebase operation
 
 Change `pick` to `edit` for that commit, save, and close.
+
 ```bash
 pick "$TARGET_COMMIT" commit message with changes here
 ```
 
-##### Amend the author on that commit
+* Amend the author on that commit
 
 ```bash
 git commit --amend --author="Author Name <authorName@outlook.com>" --no-edit
 ```
 
-##### Continue the rebase
+* Continue the rebase
 
 Git will replay multiple queued commits after this automatically.
 
 ```bash
 git rebase --continue
 ```
-##### Push your updated history
+
+* Push your updated history
 
 ```bash
 TARGET_BRANCH="your-branch"
 git push --force-with-lease origin $TARGET_BRANCH
 ```
 
-##### Verify the fix
+* Verify the fix
 
 ```bash
 git log -1 --pretty=full
 ```
 ---
 
-#### Doing a Rebase for the previous 3 commits
+* Doing a Rebase for the previous 3 commits
 
 ```bash
 git rebase -i HEAD~3
@@ -294,19 +300,19 @@ git rebase -i HEAD~3
 For broad changes, consider a history rewrite tool:
 `git filter-repo` (recommended, separate install): powerful and fast for bulk author rewrites.
 
-#### using `git filter-repo`
+* using `git filter-repo`
 
 ```bash
 git filter-repo --mailmap .mailmap
 ```
 
-#### Delete Last Commit but Keep the Changes
+* Delete Last Commit but Keep the Changes
 
 ```bash
 git reset HEAD^
 ```
 
-#### Unstage a File
+* Unstage a File
 
 ```bash
 git reset HEAD $PATH_OF_REPO
@@ -316,32 +322,32 @@ git reset HEAD $PATH_OF_REPO
 
 if `.gitignore` is updated, previously created files will persist in your remote repository. To remedy this
 
-#### remove files and clean up
+* remove files and clean up
 
 ```bash
 git rm
 ```
 
-#### clean up git cache
+* clean up git cache
 
 ```bash
 git rm [-r] [-n] --cached <path(s)>
 ```
 
-#### reset everything to match the remote branch
+* reset everything to match the remote branch
 
 ```bash
 git fetch origin
 git reset --hard origin/main
 ```
 
-#### Find local GIT repos
+* Find local GIT repos
 
 ```bash
 sudo find -name HEAD -execdir test -e refs -a -e objects -a -e config \; -printf %h\\n
 ```
 
-#### Get help with any git command
+* Get help with any git command
 
 ```bash
 git $COMMAND --help
@@ -349,7 +355,7 @@ git $COMMAND --help
 git init --help
 ```
 
-#### Clone a repo with given private ssh key
+* Clone a repo with given private ssh key
 
 ```bash
 EXTRA_PRIVATE_KEY_PATH="/home/user/.ssh/id_rsa_example"
@@ -358,23 +364,23 @@ GIT_REPO_URL="git@github.com:Organization/org-repo-name.git"
 git clone -c core.sshCommand="/usr/bin/ssh -i $EXTRA_PRIVATE_KEY_PATH" $GIT_REPO_URL
 ```
 
-#### Clone a Git Repo with fine grained token
+### Clone a Git Repo with fine grained token
 
 * set variables
 
-  ```bash
-  YOUR_GITHUB_USERNAME="username"
-  YOUR_TOKEN="github_pat_key"
-  REPO_URI="github-org/github-repo-name.git"
-  ```
+```bash
+YOUR_GITHUB_USERNAME="username"
+YOUR_TOKEN="github_pat_key"
+REPO_URI="github-org/github-repo-name.git"
+```
 
 * clone the repo
-  
-  ```bash
-  git clone "https://$YOUR_GITHUB_USERNAME:$YOUR_PAT@github.com/$REPO_URI" .
-  ```
 
-#### List the fetched branches for a repository
+```bash
+git clone "https://$YOUR_GITHUB_USERNAME:$YOUR_PAT@github.com/$REPO_URI" .
+```
+
+* List the fetched branches for a repository
 
 ```bash
 git branch
@@ -394,22 +400,22 @@ git fetch origin
 
 * Switch to your dev branch
 
-  ```bash
-  git checkout dev
-  git pull origin dev
-  ```
+```bash
+git checkout dev
+git pull origin dev
+```
 
 * Merge main into dev, but force Git to keep dev's changes during conflicts
 
-  ```bash
-  git merge origin/main -X ours
-  ```
+```bash
+git merge origin/main -X ours
+```
 
 * Push the resolved branch back to GitHub
 
-  ```bash
-  git push origin dev
-  ```
+```bash
+git push origin dev
+```
 
 ---
 
@@ -417,10 +423,10 @@ git fetch origin
 refers to encryption and commit signing
 
 ### Git commit sign
-- prefer sign commits with PGP encryption
-- SSH much easier but less secured
+* prefer sign commits with PGP encryption
+* SSH much easier but less secured
 
-#### Git TLS Certificates
+* Git TLS Certificates
 
 Git uses a file named `ca-bundle.crt` to list all the trusted certificates. We can find that file by typing the following in a terminal window:
 
@@ -428,19 +434,19 @@ Git uses a file named `ca-bundle.crt` to list all the trusted certificates. We c
 git config --list --show-origin
 ```
 
-#### Get TLS info
+* Get TLS info
 
 ```bash
 git config --global http.sslCAInfo
 ```
 
-#### Instruct Git to use GPG2 instead of GPG2 as the signing program
+* Instruct Git to use GPG2 instead of GPG2 as the signing program
 
 ```bash
 git config --global gpg.program gpg2
 ```
 
-#### Test GPG2 encrytion
+* Test GPG2 encrytion
 
 signing text with `gpg` or `gpg2`
 
@@ -448,46 +454,50 @@ signing text with `gpg` or `gpg2`
 echo "test" | gpg2 --clearsign
 ```
 
-#### Set variable for GPG and terminal usage
+* Set variable for GPG and terminal usage
 
 ```bash
 export GPG_TTY=$(tty)
 ```
 
-#### Sign the Commit GPG
+* Sign the Commit GPG
 
-```
+```bash
 git commit -S -m "SSH signed commit"
 ```
 
 ### Sign commits with SSH Key
 
+* Configure Git to use SSH for commit signing
+
 ```bash
 git config --global gpg.format ssh
 ```
 
-#### Refer to Public SSH Key
+* Refer to Public SSH Key
 
 use default values
 
-```
+```bash
 git config --global user.signingkey ~/.ssh/id_rsa.pub
 ```
 
-#### Use an alias to add, commit and push
+* Use an alias to add, commit and push
+
 ```bash
 alias gacp_extrakey="git add . && git -c core.sshCommand='/usr/bin/ssh -i \$HOME/.ssh/extrakey' commit -S && git -c core.sshCommand='/usr/bin/ssh -i \$HOME/.ssh/extrakey' push"
 
 gacp_extrakey
 ```
 
-#### Show GPG signatures used in a repo
+* Show GPG signatures used in a repo
 
 ```bash
 git log --show-signature
 ```
 
-#### push with alternative SSH key
+* push with alternative SSH key
+
 ```bash
 git -c core.sshCommand="/usr/bin/ssh -i /home/user/.ssh/id_alternative" push
 ```
@@ -496,18 +506,19 @@ git -c core.sshCommand="/usr/bin/ssh -i /home/user/.ssh/id_alternative" push
 
 ## Git Analysis/Reporting
 
-#### List all remote branches
+* List all remote branches
+
 ```bash
 git branch --remotes
 ```
 
-#### List remote active branches
+* List remote active branches
 
 ```bash
 git ls-remote --heads origin
 ```
 
-#### Get info about commits for a given user
+* Get info about commits for a given user
 
 ```bash
 git_user="git_user"
@@ -516,56 +527,55 @@ git_date="Sat Aug 30 2024"
 git log --oneline -5 --author $git_user --before $git_date
 ```
 
-#### Create a local branch for testing
+* Create a local branch for testing
 
 ```bash
 git checkout -b feature/ID01-functionality
 ```
 
-#### Get a histogram for a gitdiff
+* Get a histogram for a gitdiff
 
 ```bash
 git diff --histogram
 ```
 
-#### Print out subject line
+* Print out subject line
 
 ```bash
 git log --oneline
 ```
 
-#### Better log displaying
+* Better log displaying
 
 ```bash
 git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 ```
 
-#### Groups commits by user, shows the subject line for simplicity
+* Groups commits by user, shows the subject line for simplicity
 
 ```bash
 git shortlog
 ```
 
-#### Switch to previous branch
+* Switch to previous branch
 
 ```bash
 git checkout -
 ```
 
-#### Add small patches to a commit
+* Add small patches to a commit
 
 ```bash
 git add -p
 ```
 
-#### Find the last working commit by basically using binary search
+### Find the last working commit by basically using binary search
 
 * begin the process
 
 ```bash
 git bisect start
 ```
-
 
 * Select a commit that you know is working correctly
 
@@ -579,7 +589,7 @@ git bisect good
 git bisect bad
 ```
 
-#### Change/Ammend commit message made long ago
+* Change/Ammend commit message made long ago
 
 **n** is the number of commits to go back
 
@@ -595,19 +605,19 @@ edit
 git push --force
 ```
 
-#### Check size of repo
+* Check size of repo
 
 ```bash
 git count-objects -vH
 ```
 
-#### Get detailed info about a remote server
+* Get detailed info about a remote server
 
 ```bash
 git remote --verbose
 ```
 
-#### get extra info about remote
+* get extra info about remote
 
 ```bash
 git remote show origin
@@ -632,8 +642,7 @@ Run tests to ensure your changes don’t break anything.
 
 ## Git implementations Bitbucket
 
-#### Report Project User name, User key, Repo name and Repo Slug
-- Run a SQL query in the PostgreSQL DB
+* Report Project User name, User key, Repo name and Repo Slug: run a SQL query in the PostgreSQL DB
 
 ```sql
 SELECT 
@@ -646,7 +655,7 @@ INNER JOIN project prj ON rep.project_id = prj.id
 ORDER BY prj.name, rep.name
 ```
 
-#### Update the remote URL using current and new remote URL
+* Update the remote URL using current and new remote URL
 
 ```bash
 git remote set-url origin git@bitbucket.org:tutorials/tutorials.git

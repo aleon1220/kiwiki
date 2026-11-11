@@ -4,33 +4,42 @@
 # Jenkins
 www.jenkins.io
 
-#### Upgrade Jenkins version in monolith servers
-- Get the latest stable version
-``` bash
+### Upgrade Jenkins version in monolith servers
+
+* Get the latest stable version
+
+```bash
 cd $HOME
 wget https://get.jenkins.io/war-stable/latest/jenkins.war
 ```
 
-- Back up previous WAR file
-``` bash
+* Back up previous WAR file
+
+```bash
 cp /usr/lib/jenkins/jenkins.war $HOME/jenkins.war.previous.version
 ```
 
-- Copy new WAR to Jenkins location
-``` bash
+* Copy new WAR to Jenkins location
+
+```bash
 sudo cp $HOME/jenkins.war /usr/lib/jenkins/
 ```
 
-- Restart services
-``` bash
+* Restart services
+
+```bash
 sudo systemctl restart jenkins
 ```
+
 ## Admin Tasks
-#### Get the version with the CLI
-``` bash
+
+* Get the version with the CLI
+
+```bash
 JENKINS_URL="http://myjenkins.local:8080/"
 java -jar jenkins-cli.jar -s  $JENKINS_URL version
 ```
+
 ## Useful functions and tools
 ### Variables
 Using env-vars.html
@@ -38,15 +47,18 @@ open `${YOUR_JENKINS_HOST}/env-vars.html` page on your Jenkins master server to 
 
 ### Validate the Jenkinsfile Pipeline
 If using vscode there is a nice linter/validator plugin
-- get the plugin
-``` bash
+
+* get the plugin
+
+```bash
 janjoerke.jenkins-pipeline-linter-connector
 ```
-- within the Jenkinsfile do `CTRL + P`
-- Type `Validate Jenkinsfile`
-- Enter the Jenkins File validation URL
 
-``` bash
+* within the Jenkinsfile do `CTRL + P`
+* Type `Validate Jenkinsfile`
+* Enter the Jenkins File validation URL
+
+```bash
 https://JENKINS_URL/pipeline-model-converter/validate
 ```
 
@@ -57,8 +69,9 @@ use the following URL to test groovy snippets
 ### Use a Linter to validate Jenkins File
 [linter for Jenkins](https://www.jenkins.io/doc/book/pipeline/development/#linter)
 
-### Example of using startup flags
-```
+* Example of using startup flags
+
+```bash
 java -Dhudson.footerURL=http://example.org -jar jenkins.war \
 --httpPort=8083 --prefix=/ci --httpListenAddress=127.0.0.1
 ```
@@ -78,17 +91,19 @@ Jenkins home directory = `/var/lib/jenkins`
 Jenkins log file       = `/var/log/jenkins`
 
 ## Jenkins Docker Container
-- [Docker Hub for jenkins:lts](https://hub.docker.com/r/jenkins/jenkins/)
-- [Run Jenkins in Docker Container](https://www.jenkins.io/doc/book/installing/#downloading-and-running-jenkins-in-docker)
-- [Jenkins project readme in Github](https://github.com/jenkinsci/docker/blob/master/README.md)
+* [Docker Hub for jenkins:lts](https://hub.docker.com/r/jenkins/jenkins/)
+* [Run Jenkins in Docker Container](https://www.jenkins.io/doc/book/installing/#downloading-and-running-jenkins-in-docker)
+* [Jenkins project readme in Github](https://github.com/jenkinsci/docker/blob/master/README.md)
 
-``` bash
+* Run Jenkins LTS container
+
+```bash
 docker run --name docker-jenkins-test --detach -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
 ```
 
-#### Run Jenkins from a Docker Container and install plugins from a list
+* Run Jenkins from a Docker Container and install plugins from a list
 
-``` bash
+```bash
 # create docker file
 sudo bash -c "cat > $PWD/Dockerfile" 
 <<EOF
@@ -98,21 +113,27 @@ RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 EOF
 ```
 
-#### Build the Docker image
-`docker build --tag jenkins-lts:neon-plugins .`
+* Build the Docker image
 
-#### Start the container based on the built image
-``` bash
+```bash
+docker build --tag jenkins-lts:neon-plugins .
+```
+
+* Start the container based on the built image
+
+```bash
 docker run --name docker-jenkins-test -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins-lts:neon-plugins
 ```
 
-### Use the jenkins-plugin-cli to install
-``` bash
+* Use the `jenkins-plugin-cli` to install
+
+```bash
 jenkins-plugin-cli --plugins <List of plugins with version or just the name>
 ```
 
-#### Lists the Credentials in a specific Store
-``` bash
+* Lists the Credentials in a specific Store
+
+```bash
 java -jar jenkins-cli.jar -s http://localhost:8080/ list-credentials STORE
 ```
 

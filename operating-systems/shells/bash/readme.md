@@ -358,15 +358,15 @@ alias updateyes='yum --assumeyes update'
 
 ### History & Commands Usage
 
-#### 10 Most used commands from history
+* 10 Most used commands from history
 
-``` bash
+```bash
 cat ~/.bash_history | tr "\|\;" "\n" | sed -e "s/^ //g" | cut -d " " -f 1 | sort | uniq -c | sort -n | tail -n 10
 ```
 
-#### Create directories from 1990-2020
+* Create directories from 1990-2020
 
-``` bash
+```bash
 from=1990
 years=30
 
@@ -376,9 +376,7 @@ for i in {0..$years}; do
 done
 ```
 
-#### Rename files to trim unwanted string "ANNOYING_STRING-"
-
-* Use rename if you want it to operate faster
+* Rename files to trim unwanted string "ANNOYING_STRING-" (use rename if you want it to operate faster)
 
 ```bash
 for file in * ; do
@@ -386,7 +384,7 @@ for file in * ; do
 done
 ```
 
-#### Quick set up Bash Functions
+### Quick set up Bash Functions
 
 * From this directory copy the resources to your `$HOME`
 
@@ -414,7 +412,7 @@ source $HOME/.bash_aliases
 source $HOME/.bashrc
 ```
 
-#### Create symbolic links
+* Create symbolic links
 
 ```bash
 ln -s lsd lsl
@@ -422,16 +420,17 @@ ln -s lsd lsf
 ln -s lsd lsx
 ```
 
-#### Bash process substitution
+* Bash process substitution
 
-``` bash
+```bash
 echo <(printf "hi all \n")
 ```
 
-#### built-in command called `complete`
+* built-in command called `complete`: to execute the auto complete feature for AWSCLI
 
-to execute the auto complete feature for AWSCLI
-`complete -C '/usr/local/bin/aws_completer' aws`
+```bash
+complete -C '/usr/local/bin/aws_completer' aws
+```
 
 ### [JSON JQ](https://www.json.org/json-en.html) in bash
 
@@ -443,7 +442,7 @@ to execute the auto complete feature for AWSCLI
 one of the nicest things to do is to output JSON to less and see the JSON output in nice colouring.
 for that do
 
-#### Colorize json data with `jq` and less
+* Colorize json data with `jq` and less
 
 ```bash
 JSON="your.json" cat $JSON | jq . --color-output | less --RAW-CONTROL-CHARS
@@ -455,26 +454,26 @@ JSON="your.json" cat $JSON | jq . --color-output | less --RAW-CONTROL-CHARS
 cat your.json | jq . -C | less -R
 ```
 
-#### Pipe json to console, find a string and colorize output
+* Pipe json to console, find a string and colorize output
 
 ```bash
 cat ~/path/to/env-index.json | jq
 cat ~/path/to/env-index.json | jq -R | grep $STRING_TOFIND
 ```
 
-#### Extract multiple values
+* Extract multiple values
 
 ```bash
 jq ".$JSON_KEY1.$JSON_VALUE1, .$JSON_KEY2.$JSON_Value2, .$JSON_Key3" $FileName.json
 ```
 
-#### Get values from array
+* Get values from array
 
 ```bash
 jq ".$Array_name[].$JSON_VALUE1" $FileName.json
 ```
 
-#### Get specific element from array. If you know the position
+* Get specific element from array. If you know the position
 
 Remember the array uses a zero-offset
 
@@ -482,7 +481,7 @@ Remember the array uses a zero-offset
 jq ".$Array_name[3].$JSON_VALUE1" $FileName.json
 ```
 
-##### JQ delete function
+#### JQ delete function
 
 `del()` to delete a `key:value` pair
 
@@ -492,7 +491,7 @@ If you need to create a new file without the message `key:value pair` in it, run
 
 * set variables
 
-``` bash
+```bash
 FULL_JSON_FILE="big-json-file.json"
 NEW_JSON_FILE="metadata.json"
 JSON_KEY01="OTA_URL_PREFIX"
@@ -521,31 +520,31 @@ jq ".[995:] | .[] | .name" $FileName.json
 * `.[]:` This array iterator tells jq to process each object in the array.
 * `.name:` This filter extracts the name value.
 
-##### Extract the last 10 objects from the array. A “-10” instructs jq to start processing objects 10 back from the end of the array
+* Extract the last 10 objects from the array. A “-10” instructs jq to start processing objects 10 back from the end of the array
 
 ```bash
 jq ".[-10:] | .[] | .name" $FileName.json
 ```
 
-##### Apply slicing to strings. Request the first four characters of the name of the object at array index 234
+* Apply slicing to strings. Request the first four characters of the name of the object at array index 234
 
 ```bash
 jq ".[234].name[0:4]" $FileName.json
 ```
 
-##### See a specific object in its entirety
+* See a specific object in its entirety
 
 ```bash
 jq ".[234]" $FileName.json
 ```
 
-##### see only the values, you can do the same thing without the key names
+* see only the values, you can do the same thing without the key names
 
 ```bash
 jq ".[234][]" $FileName.json
 ```
 
-##### Retrieve multiple values from each object, we separate them with commas
+* Retrieve multiple values from each object, we separate them with commas
 
 ```bash
 jq ".[450:455] | .[] | .JsonValue1, .JsonValue2" $FileName.json
@@ -559,23 +558,23 @@ Include the all-encompassing array, the nested object, and the nested array, as 
 jq ".[121].Object.ArrayJson[]" $FileName.json
 ```
 
-##### JQ length Function
+* JQ length Function
 
 ```bash
 jq ".[100:110] | .[].name | length" $FileName.json
 ```
 
-##### see how many `key:value` pairs are in the first object in the array
+* see how many `key:value` pairs are in the first object in the array
 
 ```bash
 jq ".[0] | length" "$FileName"
 ```
 
-##### JQ keys Function
+#### JQ keys Function
 
 find out about the JSON you’ve got to work with. It can tell you what the names of the keys are, and how many objects there are in an array
 
-#### find Keys in ObjectName
+* find Keys in ObjectName
 
 ```bash
 jq ".ObjectName.[0] | keys"  $FileName.json
@@ -589,25 +588,21 @@ Zero-offset array elements, numbered zero to N
 jq ".ObjectName | keys" $FileName.json
 ```
 
-#### JQ Function has()
-
-function to interrogate the JSON and see whether an object has a particular key name. Note the key name must be wrapped in quotation marks.
+* JQ Function `has()`: function to interrogate the JSON and see whether an object has a particular key name. Note the key name must be wrapped in quotation marks.
 
 ```bash
 jq '.[] | has("nametype")' $FileName.json
 ```
 
-### has() on specific object
-
-check a specific object, you include its index position in the array filter
+* `has()` on specific object: check a specific object, you include its index position in the array filter
 
 ```bash
 jq '.[678] | has("nametype")' $FileName.json
 ```
 
-#### Rename JSON Keys
+* Rename JSON Keys
 
-``` bash
+```bash
 # ZIP_HASH to FILE_HASH & ZIP_SIZE to FILE_SIZE
 jq '[ . | .["ZIP_HASH"] = .FILE_HASH | .["ZIP_SIZE"] = .FILE_SIZE | del(.ZIP_HASH, .ZIP_SIZE)]' "${OTA_ARTIFACTS_OUT_DIR}/temp0.json" > "${TA_ARTIFACTS_OUT_DIR}/temp1.json"
 ```

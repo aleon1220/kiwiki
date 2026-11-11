@@ -1,5 +1,5 @@
 # Operating systems
 
-* [Linux](linux/README)
-* [Apple IoS](ios/readme.md)
-* [Windows](windows/readme.md)
+* [Linux](./linux/readme.md)
+* [Apple iOS](./ios/readme.md)
+* [Windows](./windows/readme.md)

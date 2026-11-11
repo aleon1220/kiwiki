@@ -29,16 +29,19 @@ IMG_SOURCE="input.jpg"
 IMG_OUT="ouput.jpg"
 ```
 
-#### Resize-images with percentage value
+* Resize-images with percentage value
 
 ```bash
 magick source.jpg -resize 50%  destination.jpg
 ```
 
 * older versions
-`convert -resize 50% source.png dest.jpg`
 
-#### Resize an image with a specific value
+```bash
+convert -resize 50% source.png dest.jpg
+```
+
+* Resize an image with a specific value
 
 ```bash
 SIZE="1024X768"
@@ -46,7 +49,7 @@ SIZE="1024X768"
 convert -resize $SIZE source.png destination.jpg
 ```
 
-#### convert a .webp image to a .jpg
+* convert a .webp image to a .jpg
 
 ```bash
 magick 2026-ascension-day.webp 2026-ascension-day.jpg

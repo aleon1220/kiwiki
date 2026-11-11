@@ -22,17 +22,21 @@ Match zero or more occurrences of (1) and (2)
 
 ### Regular expresion
 
-#### find after `:` symbol all the numbers until the end of the line
+* find after `:` symbol all the numbers until the end of the line
 
-`:[0-9]*.*`
+```regex
+:[0-9]*.*
+```
 
 * find extensions that start after string dash at the end of line
 
 > tested in vscode
 
-`-m[\w].$`
+```regex
+-m[\w].$
+```
 
-#### Practical example. Replace spaces for dashes but keep the numbers or digits in each line
+### Practical example. Replace spaces for dashes but keep the numbers or digits in each line
 
 * start with sample data
 
@@ -68,18 +72,15 @@ $1-
 3-yet more text
 ```
 
-#### Find markdown headers level 3
+* Find markdown headers level 3
 
-`(^###)(\s)`
+```regex
+(^###)(\s)
+```
 
 ### Text containing Time
 
-#### time represented minutes
-
-tested in vscode will match any string that consists of two digits, followed by a colon, followed by two digits
-
-* `23:59`
-* `00:30`
+* time represented minutes: tested in vscode will match any string that consists of two digits, followed by a colon, followed by two digits (`23:59`, `00:30`)
 
 ```perl
 ^(\d+:\d+)$
