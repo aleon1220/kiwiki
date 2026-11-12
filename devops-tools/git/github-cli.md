@@ -1,6 +1,3 @@
-[Kiwiki Home](/../../)
-[Back to Git](./readme.md)
-
 # GitHub CLI (`gh`)
 
 `gh` is the official GitHub command-line tool that brings pull requests, issues, GitHub Projects (`/projects`), GitHub Actions workflows, releases, and API operations directly to the terminal next to `git`.
