@@ -900,20 +900,23 @@ mkdir --parents --verbose /var/save/repo | cd /var/save/repo
 
 git init
 Initialized empty Git repository in /var/save/repo/.git/
+
 ```
-- set local git config settings
+
+* set local git config settings
+
 ```bash
 git config user.email "me@hackerrank.com"
 git config user.name "hackerrank"
 ```
 
-- Create a develop branch (clones main references)
+* Create a develop branch (clones main references)
 
 ```bash
 git checkout -b develop
 ```
 
-- Check available branches in the repo
+* Check available branches in the repo
 
 ```bash
 git branch
@@ -921,12 +924,13 @@ git branch
   test
 ```
 
-- check git working tree status
+* check git working tree status
+
 ```bash
 git status
 ```
 
-- Check the log to see info about all commits `git log`
+* Check the log to see info about all commits `git log`
 
 ```bash
 commit 4c569ff830048206717d62544efbd288f85005e3 (HEAD -> main, test)
@@ -945,7 +949,7 @@ Date:   Mon Jun 28 21:57:08 2021 +0000
 [70][22:06:12] ubuntu@taskserver:[/var/save/my-repo]
 ```
 
-- Verify commits in `develop` branch
+* Verify commits in `develop` branch
 
 ```bash
 git rev-list --date-order --abbrev-commit --reverse HEAD
@@ -956,7 +960,9 @@ cf10ff6
 4c569ff
 [74][22:07:50] ubuntu@taskserver:[/var/save/repo]
 ```
-- merge develop --> main
+
+* merge develop --> main
+
 ```bash
 git merge develop
 Updating 3ca1959..4c569ff
