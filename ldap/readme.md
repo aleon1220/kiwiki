@@ -9,6 +9,8 @@ LDAP Implementations added.
 ## Active Directory
 implementation of LDAP by micro$soft
 
+* For PowerShell automation and ADWS queries against Active Directory, see [PowerShell Active Directory Module (`ActiveDirectory`)](../operating-systems/shells/powershell/active-directory.md).
+
 ## Queries examples
 Queries executed in [Apache Directory Studio](https://directory.apache.org/apacheds/) intuitive UI to query LDAP servers
 

@@ -4,6 +4,7 @@ PowerShell automation guides, profile customizations, and enterprise module refe
 
 ## Modules & Guides
 
+* [PowerShell Active Directory Module (`ActiveDirectory`)](./active-directory.md)
 * [PowerShell SecretManagement (`Microsoft.PowerShell.SecretManagement`)](./secret-management.md)
 * [Windows & PowerShell CLI Operations](../../windows/readme.md)
 

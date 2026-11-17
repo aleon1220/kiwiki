@@ -370,3 +370,10 @@ Measure-Command { echo hi }
 ```powershell
 wt split-pane --vertical wsl
 ```
+
+---
+
+## Related PowerShell Guides
+
+* [PowerShell Active Directory Module (`ActiveDirectory`)](../shells/powershell/active-directory.md)
+* [PowerShell Index & Guides](../shells/powershell/readme.md)

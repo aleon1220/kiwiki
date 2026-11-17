@@ -102,6 +102,7 @@ Professional development, communication, leadership, and personal growth.
 * [Bash/Shell](./operating-systems/shells/bash/readme.md)
 * [Zsh](./operating-systems/shells/zsh/readme.md)
 * [PowerShell](./operating-systems/shells/powershell/readme.md)
+  * [Active Directory Module (`ActiveDirectory`)](./operating-systems/shells/powershell/active-directory.md)
   * [SecretManagement (`Microsoft.PowerShell.SecretManagement`)](./operating-systems/shells/powershell/secret-management.md)
 * [Linux](./operating-systems/linux/readme.md)
   * [ZFS Storage](./operating-systems/linux/storage/zfs.md)
