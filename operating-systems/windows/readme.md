@@ -238,10 +238,11 @@ wsl.exe --install --no-distribution
 
 ## Network
 
-* flush DNS & restart networking: runa terminal window as Admin
+### flush DNS & restart networking
+
+* run terminal window as Admin
 
 ```dotnetcli
-echo "Restart the computer"
 ipconfig /all
 ```
 
@@ -263,7 +264,7 @@ ipconfig /registerdns
 ipconfig /release
 ```
 
-* obtain new lease: re-connect computer to network
+* obtain new DHCP lease: re-connect computer to network
 
 ```cmd
 ipconfig /renew
